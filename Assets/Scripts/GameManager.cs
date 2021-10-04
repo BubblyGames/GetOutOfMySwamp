@@ -4,6 +4,8 @@ using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 
+/*This manager inicialice the game */
+//TODO: SPLIT MAP GENERATION AND PATH GENERATION INTO COMPONENTS 
 public class GameManager : MonoBehaviour
 {
     public int size = 20;
@@ -96,7 +98,7 @@ public class GameManager : MonoBehaviour
             floor[x, y].GetComponent<MeshRenderer>().material = materials[0];
             floor[x, y].transform.position = new Vector3(x, y, 0);
 
-            Nodo p = GeneratePaths(nPaths, cells[x, y], cells[endX, endY]);
+            Node p = GeneratePaths(nPaths, cells[x, y], cells[endX, endY]);
             if (p != null)
             {
                 List<CellInfo> pathCells = new List<CellInfo>();
@@ -115,17 +117,17 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    Nodo GeneratePaths(int nPaths, CellInfo start, CellInfo end)
+    Node GeneratePaths(int nPaths, CellInfo start, CellInfo end)
     {
-        Nodo current;
-        Nodo firstNodo;
+        Node current;
+        Node firstNodo;
 
-        List<Nodo> openList = new List<Nodo>();
-        List<Nodo> closedList = new List<Nodo>();
+        List<Node> openList = new List<Node>();
+        List<Node> closedList = new List<Node>();
 
-        firstNodo = new Nodo(start);
+        firstNodo = new Node(start);
 
-        //Primer nodo la posición incial con padre null
+        //Primer nodo la posiciï¿½n incial con padre null
         firstNodo.ComputeHScore(end.x, end.y);
         firstNodo.Parent = null;
         openList.Add(firstNodo);
@@ -151,7 +153,7 @@ public class GameManager : MonoBehaviour
             }
             else
             {
-                //Expande vecinos (calcula coste de cada uno, etc)y los añade en la lista
+                //Expande vecinos (calcula coste de cada uno, etc)y los aï¿½ade en la lista
                 CellInfo[] neighbours = WalkableNeighbours(current.cell);
                 foreach (CellInfo neighbour in neighbours)
                 {
@@ -159,7 +161,7 @@ public class GameManager : MonoBehaviour
                     {
                         //if neighbour no esta en open
                         bool IsInOpen = false;
-                        foreach (Nodo nf in openList)
+                        foreach (Node nf in openList)
                         {
                             if (nf.cell.id == neighbour.id)
                             {
@@ -169,7 +171,7 @@ public class GameManager : MonoBehaviour
                         }
 
                         bool IsInClosed = false;
-                        foreach (Nodo nf in closedList)
+                        foreach (Node nf in closedList)
                         {
                             if (nf.cell.id == neighbour.id)
                             {
@@ -180,7 +182,7 @@ public class GameManager : MonoBehaviour
 
                         if (!IsInOpen && !IsInClosed)
                         {
-                            Nodo n = new Nodo(neighbour);
+                            Node n = new Node(neighbour);
                             n.ComputeHScore(end.x, end.y);
                             n.Parent = current;
                             n.cell = cells[n.x, n.y];
@@ -270,41 +272,8 @@ public class GameManager : MonoBehaviour
     }
 }
 
-public class CellInfo
-{
-    public int x, y, z, face;
-    public int id { get { return x + (1000 * y); } }
-    public int state = 0;
-    public CellInfo(int x, int y)
-    {
-        this.x = x;
-        this.y = y;
-    }
-}
 
-public class Path
-{
-    CellInfo[] cells;
-    float spawnWait = 1f;
-    float nextSpawnTime = 0;
-    public float Length { get { return cells.Length; } }
 
-    public Path(CellInfo[] cellInfos)
-    {
-        cells = cellInfos;
-    }
-    public Vector3 GetStep(int idx) { return new Vector3(cells[idx].x, cells[idx].y, -1); }
-
-    public bool CheckSpawn()
-    {
-        if (Time.time > nextSpawnTime)
-        {
-            nextSpawnTime = Time.time + spawnWait;
-            return true;
-        }
-        return false;
-    }
-}
 
 
 

@@ -2,21 +2,28 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/*Basic Weapon Class, all kind of weapons from towers to land mines, etc etc, wille inherit from this*/
 public abstract class WeaponBehaviour : MonoBehaviour
 {
-    public float waitTime = 1f;
-    protected float nextTime = 0;
+    //How many attacks are shot each second
+    public float attackSpeed = 1f;
+    
+    //Time when the next shot will be shot
+    protected float nextAttackTime = 0;
 
+    //Damage an attack will deal
     protected int damage = 1;
-    public LayerMask lm;
+
+    //This layer will be used to check for enemys
+    public LayerMask enemyLayerMask;
 
     protected abstract void Attack();
 
     protected void Update()
     {
-        if (Time.time > nextTime)
+        if (Time.time > nextAttackTime)
         {
-            nextTime = Time.time + waitTime;
+            nextAttackTime = Time.time + attackSpeed;
             Attack();
         }
     }
