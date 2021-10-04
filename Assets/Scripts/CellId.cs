@@ -4,6 +4,6 @@ using UnityEngine;
 
 public class CellId : MonoBehaviour
 {
-    internal int x;
-    internal int y;
+    public int x;
+    public int y;
 }

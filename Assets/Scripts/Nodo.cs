@@ -8,12 +8,6 @@ public class Nodo
     public Nodo Parent;
     public CellInfo cell;
 
-    /*public Nodo(int x, int y)
-    {
-        this.x = x;
-        this.y = y;
-    }*/
-
     public Nodo(CellInfo cell)
     {
         this.cell = cell;
@@ -25,6 +19,4 @@ public class Nodo
     {
         h = Math.Abs(targetX - x) + Math.Abs(targetY - y);
     }
-
-
 }
