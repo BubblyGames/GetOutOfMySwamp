@@ -6,11 +6,15 @@ using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
-    int size = 20;
+    public int size = 20;
     CellInfo[,] cells; //0 walkable //1 can build //2 can't build //3 target
     GameObject[,] floor;
     Path[] paths;
-    int nPaths = 4;
+    public int nPaths = 4;
+    [Range(0.0f, 1.0f)]
+    public float wallDensity = 0.3f;
+    public float rockSize = 3f;
+    public float seed = 0f;
 
     public GameObject floorPrefab;
     public GameObject weaponPrefab;
@@ -21,13 +25,22 @@ public class GameManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        if (seed == 0f)
+            seed = Random.value * 10;
+        Debug.Log("Seed: " + seed.ToString());
+
+        int endX = size - 1;
+        int endY = size - 1;
+
         cells = new CellInfo[size, size];
         floor = new GameObject[size, size];
+
+        float diagonal = Mathf.Sqrt(2 * (size * size));
         for (int i = 0; i < size; i++)
         {
             for (int j = 0; j < size; j++)
             {
-                GameObject cell = GameObject.Instantiate(floorPrefab, new Vector3(i, j, -Random.Range(0, .15f)), Quaternion.identity);
+                GameObject cell = GameObject.Instantiate(floorPrefab, new Vector3(i, j, -0.5f * Mathf.PerlinNoise(seed + (i / 3f), seed + (j / 3f))), Quaternion.identity);
                 cell.GetComponent<CellId>().x = i;
                 cell.GetComponent<CellId>().y = j;
 
@@ -36,10 +49,17 @@ public class GameManager : MonoBehaviour
                 cells[i, j] = new CellInfo(i, j);
                 floor[i, j].name = "Floor_" + cells[i, j].id.ToString();
 
-                if (Random.value > .99f || (i == j && i < size - 1))//i == 0 || j == 0 || i == size - 1 || j == size - 1 ||
+                float alpha = 1;
+                float dist = Mathf.Sqrt(size * size + size * size) - Mathf.Sqrt(Mathf.Pow(endX - i, 2f) + Mathf.Pow(endY - j, 2f));
+                if (dist > diagonal * 0.9f || i == 0 || j == 0)//|| diagonal - dist > size
+                    alpha = 0;
+
+
+
+                if (Mathf.PerlinNoise(seed + (i / rockSize), seed + (j / rockSize)) > (1 - (wallDensity * alpha)) || (i == j && i < size - 1))//i == 0 || j == 0 || i == size - 1 || j == size - 1 ||//
                 {
                     cells[i, j].state = 2;
-                    floor[i, j].transform.Translate(-Vector3.forward * 0.5f);
+                    floor[i, j].transform.position = new Vector3(i, j, -1);
                     cell.GetComponent<MeshRenderer>().material = materials[2];
                 }
                 else
@@ -52,8 +72,6 @@ public class GameManager : MonoBehaviour
         }
 
         paths = new Path[nPaths];
-        int endX = size - 1;
-        int endY = size - 1;
         floor[endX, endY].transform.Translate(-Vector3.forward);
 
         for (int i = 0; i < nPaths; i++)
@@ -61,13 +79,16 @@ public class GameManager : MonoBehaviour
             int x = 0;
             int y = 0;
 
-            if (i < nPaths / 2)
+            while (cells[x, y].state == 0 || cells[x, y].state == 2)
             {
-                x = Random.Range(1, size - 1);
-            }
-            else
-            {
-                y = Random.Range(1, size - 1);
+                if (i < nPaths / 2)
+                {
+                    x = Random.Range(1, size - 1);
+                }
+                else
+                {
+                    y = Random.Range(1, size - 1);
+                }
             }
 
             cells[x, y].state = 0;
@@ -98,15 +119,17 @@ public class GameManager : MonoBehaviour
         Nodo current;
         Nodo firstNodo;
 
-        List<Nodo> openList;
+        List<Nodo> openList = new List<Nodo>();
+        List<Nodo> closedList = new List<Nodo>();
 
         firstNodo = new Nodo(start);
-        openList = new List<Nodo>();
 
         //Primer nodo la posición incial con padre null
         firstNodo.ComputeHScore(end.x, end.y);
         firstNodo.Parent = null;
         openList.Add(firstNodo);
+
+
 
         int count = 0;
         while (openList.Count > 0 && count < 1000)
@@ -117,12 +140,12 @@ public class GameManager : MonoBehaviour
 
             //Mira el primer nodo de la lista
             current = openList[0];
-
-
+            closedList.Add(current);
             openList.Remove(current);
             //Si el primer nodo es goal, returns current node
             if (current.x == end.x && current.y == end.y)
             {
+                Debug.Log("Success: " + count.ToString());
                 return current;
             }
             else
@@ -144,53 +167,55 @@ public class GameManager : MonoBehaviour
                             }
                         }
 
-                        if (!IsInOpen)
+                        bool IsInClosed = false;
+                        foreach (Nodo nf in closedList)
+                        {
+                            if (nf.cell.id == neighbour.id)
+                            {
+                                IsInClosed = true;
+                                break;
+                            }
+                        }
+
+                        if (!IsInOpen && !IsInClosed)
                         {
                             Nodo n = new Nodo(neighbour);
                             n.ComputeHScore(end.x, end.y);
                             n.Parent = current;
                             n.cell = cells[n.x, n.y];
 
-                            if (n.h < current.h)
+                            if (true)//n.h < current.h
                             {
                                 openList.Add(n);
+                                //floor[n.x, n.y].transform.position = new Vector3(n.x, n.y,-count/200f);
+                                //floor[n.x, n.y].transform.Translate(-Vector3.forward);
                             }
                         }
                     }
                 }
             }
         }
-        Debug.Log("Fail");
+        Debug.Log("Fail: " + count.ToString());
         return null;
     }
 
     private CellInfo[] WalkableNeighbours(CellInfo current)
     {
         List<CellInfo> result = new List<CellInfo>();
-        /*for (int i = -1; i < 2; i++)
-        {
-            for (int j = -1; j < 2; j++)
-            {
-                int x = current.x + i;
-                int y = current.y + j;
-                if (x >= 0 && x < size && y >= 0 && y < size)
-                {
-                    result.Add(cells[x, y]);
-                }
-            }
-        }*/
 
-        int[,] neighbous = new int[,] { { 0, -1 }, { 1, 0 }, { 0, 1 }, { -1, 0 } };
+        int[,] neighbours = new int[,] { { 0, -1 }, { 1, 0 }, { 0, 1 }, { -1, 0 },
+                                        { -1, -1 }, { -1, 1 }, { 1, 1 }, { 1, -1 }};
 
-        for (int i = 0; i < 4; i++)
+        for (int i = 0; i < neighbours.Length / 2; i++)
         {
-            int x = current.x + neighbous[i, 0];
-            int y = current.y + neighbous[i, 1];
+            int x = current.x + neighbours[i, 0];
+            int y = current.y + neighbours[i, 1];
             if (x >= 0 && x < size && y >= 0 && y < size && (cells[x, y].state == 1 || cells[x, y].state == 0))
             {
                 result.Add(cells[x, y]);
             }
         }
+
 
         return result.ToArray();
     }
@@ -207,7 +232,7 @@ public class GameManager : MonoBehaviour
 
         for (int i = 0; i < nPaths; i++)
         {
-            if (paths[i].CheckSpawn())
+            if (paths[i] != null && paths[i].CheckSpawn())
             {
                 GameObject.Instantiate(enemyPrefab, paths[i].GetStep(0), Quaternion.identity).GetComponent<EnemyBehaviour>().SetPath(paths[i]);
             }

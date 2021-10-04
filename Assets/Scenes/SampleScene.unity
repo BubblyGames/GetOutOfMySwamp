@@ -268,8 +268,8 @@ Camera:
   near clip plane: 0.3
   far clip plane: 1000
   field of view: 60
-  orthographic: 0
-  orthographic size: 5
+  orthographic: 1
+  orthographic size: 14
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -292,13 +292,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 963194225}
-  m_LocalRotation: {x: -0.32712913, y: 0.13550131, z: -0.35789102, w: 0.8640255}
-  m_LocalPosition: {x: -2.83, y: -2.83, z: -14.3}
+  m_LocalRotation: {x: -0.4230815, y: 0.1771668, z: -0.34090188, w: 0.8206095}
+  m_LocalPosition: {x: -2, y: -2, z: -18}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: -27.924, y: 32.007, z: -53.158}
+  m_LocalEulerAnglesHint: {x: -35, y: 45, z: -60}
 --- !u!1 &1317912947
 GameObject:
   m_ObjectHideFlags: 0
@@ -573,6 +573,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ed4c9917d9219d2408719abcb2b6c7cb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  size: 100
+  nPaths: 10
+  wallDensity: 0.35
+  resolution: 4
+  seed: 0
   floorPrefab: {fileID: 2572662768049255877, guid: f01c20303a3a8784a8e20934f68685c7, type: 3}
   weaponPrefab: {fileID: 8305915707849881324, guid: df406671fc6064a4c978095ef361ebfd, type: 3}
   enemyPrefab: {fileID: 5803062399679311112, guid: edbebc9645c93bc47b4257b361fcc5b1, type: 3}

@@ -17,14 +17,12 @@ public class WeaponBehaviour : MonoBehaviour
         {
             nextTime = Time.time + waitTime;
             RaycastHit[] hits = Physics.SphereCastAll(transform.position, radious, transform.forward, radious, lm);
-            Debug.Log(hits.Length);
 
             for (int i = 0; i < hits.Length; i++)
             {
                 EnemyBehaviour eb;
                 if (hits[i].collider.TryGetComponent<EnemyBehaviour>(out eb))
                 {
-                    Debug.Log(hits[i].collider.name);
                     eb.Hurt(damage);
                 }
             }
