@@ -11,12 +11,6 @@ public class EnemyBehaviour : MonoBehaviour
     public float speed = 1f;
     int health = 10;
 
-    void Start()
-    {
-
-    }
-
-    // Update is called once per frame
     void Update()
     {
         if (path == null)

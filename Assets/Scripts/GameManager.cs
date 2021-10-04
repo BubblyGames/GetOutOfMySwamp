@@ -49,14 +49,13 @@ public class GameManager : MonoBehaviour
                 cells[i, j] = new CellInfo(i, j);
                 floor[i, j].name = "Floor_" + cells[i, j].id.ToString();
 
+                //Rock generation
                 float alpha = 1;
                 float dist = Mathf.Sqrt(size * size + size * size) - Mathf.Sqrt(Mathf.Pow(endX - i, 2f) + Mathf.Pow(endY - j, 2f));
                 if (dist > diagonal * 0.9f || i == 0 || j == 0)//|| diagonal - dist > size
                     alpha = 0;
 
-
-
-                if (Mathf.PerlinNoise(seed + (i / rockSize), seed + (j / rockSize)) > (1 - (wallDensity * alpha)) || (i == j && i < size - 1))//i == 0 || j == 0 || i == size - 1 || j == size - 1 ||//
+                if (Mathf.PerlinNoise(seed + (i / rockSize), seed + (j / rockSize)) > (1 - (wallDensity * alpha)))//i == 0 || j == 0 || i == size - 1 || j == size - 1 ||//|| (i == j && i < size - 1)
                 {
                     cells[i, j].state = 2;
                     floor[i, j].transform.position = new Vector3(i, j, -1);
@@ -79,7 +78,8 @@ public class GameManager : MonoBehaviour
             int x = 0;
             int y = 0;
 
-            while (cells[x, y].state == 0 || cells[x, y].state == 2)
+            int count = 0;
+            while ((cells[x, y].state == 0 || cells[x, y].state == 2) && count <100)
             {
                 if (i < nPaths / 2)
                 {
@@ -89,6 +89,7 @@ public class GameManager : MonoBehaviour
                 {
                     y = Random.Range(1, size - 1);
                 }
+                count++;
             }
 
             cells[x, y].state = 0;
@@ -203,10 +204,10 @@ public class GameManager : MonoBehaviour
     {
         List<CellInfo> result = new List<CellInfo>();
 
-        int[,] neighbours = new int[,] { { 0, -1 }, { 1, 0 }, { 0, 1 }, { -1, 0 },
-                                        { -1, -1 }, { -1, 1 }, { 1, 1 }, { 1, -1 }};
+        int[,] neighbours = new int[,] { { 0, -1 }, { 1, 0 }, { 0, 1 }, { -1, 0 } 
+                                        ,{ -1, -1 }, { -1, 1 }, { 1, 1 }, { 1, -1 }};
 
-        for (int i = 0; i < neighbours.Length / 2; i++)
+        for (int i = 0; i < 4; i++)
         {
             int x = current.x + neighbours[i, 0];
             int y = current.y + neighbours[i, 1];
@@ -248,15 +249,10 @@ public class GameManager : MonoBehaviour
             CellId cell;
             if (obj.TryGetComponent<CellId>(out cell))
             {
-                CellInfo oppositeCell = cells[cell.y, cell.x];//First simmetry axis
-                //CellInfo oppositeCell = cells[size - 1 - cell.y, size - 1 - cell.x];//Second simmetry axis
-
-                if (cells[cell.x, cell.y].state == 1 && oppositeCell.state == 1)
+                if (cells[cell.x, cell.y].state == 1)
                 {
                     GameObject.Instantiate(weaponPrefab, obj.transform.position - Vector3.forward, Quaternion.identity);
-                    GameObject.Instantiate(weaponPrefab, floor[oppositeCell.x, oppositeCell.y].transform.position - Vector3.forward, Quaternion.identity);
                     cells[cell.x, cell.y].state = 2;
-                    oppositeCell.state = 2;
                 }
             }
         }
@@ -276,7 +272,7 @@ public class GameManager : MonoBehaviour
 
 public class CellInfo
 {
-    public int x, y;
+    public int x, y, z, face;
     public int id { get { return x + (1000 * y); } }
     public int state = 0;
     public CellInfo(int x, int y)

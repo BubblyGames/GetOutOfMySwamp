@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class WeaponBehaviour : MonoBehaviour
+public class AreaWeaponBehaviour : MonoBehaviour
 {
     public float waitTime = 1f;
     float nextTime = 0;
