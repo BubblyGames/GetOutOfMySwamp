@@ -227,6 +227,7 @@ GameObject:
   - component: {fileID: 963194228}
   - component: {fileID: 963194227}
   - component: {fileID: 963194226}
+  - component: {fileID: 963194229}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -299,6 +300,19 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: -35, y: 45, z: -60}
+--- !u!114 &963194229
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 963194225}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3b91442963841c347a2261f51d7fad35, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 10
 --- !u!1 &1317912947
 GameObject:
   m_ObjectHideFlags: 0
@@ -576,7 +590,7 @@ MonoBehaviour:
   size: 100
   nPaths: 10
   wallDensity: 0.35
-  resolution: 4
+  rockSize: 3
   seed: 0
   floorPrefab: {fileID: 2572662768049255877, guid: f01c20303a3a8784a8e20934f68685c7, type: 3}
   weaponPrefab: {fileID: 8305915707849881324, guid: df406671fc6064a4c978095ef361ebfd, type: 3}
