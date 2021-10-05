@@ -51,7 +51,7 @@ public abstract class EnemyBehaviour : MonoBehaviour
         health -= damage;
         if(health < 0)
         {
-            Destroy(this);
+            Destroy(gameObject);
             return true;
         }
 
