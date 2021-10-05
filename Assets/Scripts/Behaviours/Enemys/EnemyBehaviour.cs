@@ -2,31 +2,39 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyBehaviour : MonoBehaviour
+/*Basic Enemy Class, all kind of enemys  will inherit from this*/
+public abstract class EnemyBehaviour : MonoBehaviour
 {
-    // Start is called before the first frame update
+
+    [SerializeField]
+    private float speed = 1f;
+    
+    [SerializeField]
+    private int health = 10;
+    //Path the enmy will follow
     private Path path;
-    private int idx = 1;
-    float delta = 0;
-    public float speed = 1f;
-    int health = 10;
+    
+    private int nextIndexPath = 1;
+
+    private float lerpProgression = 0;
+
 
     void Update()
     {
         if (path == null)
             return;
 
-        transform.position = Vector3.Lerp(path.GetStep(idx - 1), path.GetStep(idx), delta);
-        if (delta < 1)
+        transform.position = Vector3.Lerp(path.GetStep(nextIndexPath - 1), path.GetStep(nextIndexPath), lerpProgression);
+        if (lerpProgression < 1)
         {
-            delta += Time.deltaTime * speed;
+            lerpProgression += Time.deltaTime * speed;
         }
         else
         {
-            if (idx < path.Length - 1)
+            if (nextIndexPath < path.Length - 1)
             {
-                idx++;
-                delta = 0;
+                nextIndexPath++;
+                lerpProgression = 0;
             }
             else
             {
