@@ -8,8 +8,9 @@ public class DBulletBehaviour : MonoBehaviour
 
     Vector3 direction;
     Rigidbody rb;
-
-    float speed = 50;
+    Vector3 moveQuantity;
+    float speed=0.002f;
+  
     bool shooted = false;
 
     void Awake()
@@ -20,17 +21,20 @@ public class DBulletBehaviour : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        
         if (!shooted)
         {
             rotateBullet();
-            rb.AddForce(direction * speed);   
             shooted = true;
         }
+        gameObject.transform.position = gameObject.transform.position+moveQuantity;
     }
 
     public void SetBulletBehaviour(Vector3 d)
     {
         direction = d;
+        moveQuantity = d * speed;
+        
     }
     void rotateBullet()
     {
@@ -42,6 +46,11 @@ public class DBulletBehaviour : MonoBehaviour
         if (collision.collider.gameObject.CompareTag("Enemy"))
         {
             collision.collider.gameObject.GetComponent<EnemyBehaviour>().Hurt(damage);
+            Destroy(gameObject);
+        }
+
+        if (collision.collider.gameObject.CompareTag("Bullet"))
+        {
             Destroy(gameObject);
         }
 
