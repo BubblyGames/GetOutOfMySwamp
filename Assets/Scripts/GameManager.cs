@@ -17,8 +17,12 @@ public class GameManager : MonoBehaviour
     private WorldGenerator world2;
     public GameObject worldGeneratorPrefab2;
 
+    
     public Text text;
     public LayerMask floorLayer;
+
+    [Header("Control")]
+    public bool spawnEnemys= true;
     // Start is called before the first frame update
 
     private void Awake()
@@ -41,12 +45,15 @@ public class GameManager : MonoBehaviour
         {
             SpawnWeapon();
         }
-
-        for (int i = 0; i < world.nPaths; i++)
+        if (spawnEnemys)
         {
-            if (world.paths[i] != null && world.paths[i].CheckSpawn())
+
+            for (int i = 0; i < world.nPaths; i++)
             {
-                GameObject.Instantiate(enemyPrefab, world.paths[i].GetStep(0), Quaternion.identity).GetComponent<EnemyBehaviour>().SetPath(world.paths[i]);
+                if (world.paths[i] != null && world.paths[i].CheckSpawn())
+                {
+                    GameObject.Instantiate(enemyPrefab, world.paths[i].GetStep(0), Quaternion.identity).GetComponent<EnemyBehaviour>().SetPath(world.paths[i]);
+                }
             }
         }
     }
