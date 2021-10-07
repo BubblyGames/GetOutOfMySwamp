@@ -7,17 +7,17 @@ public abstract class EnemyBehaviour : MonoBehaviour
 {
 
     [SerializeField]
-    private float speed = 1f;
+    protected float speed = 1f;
     
     [SerializeField]
-    private int health = 10;
+    protected int health = 10;
 
     //Path the enemy will follow
-    private Path path;
-    
-    private int nextIndexPath = 1;
+    protected Path path;
 
-    private float lerpProgression = 0;
+    protected int nextIndexPath = 1;
+
+    protected float lerpProgression = 0;
 
 
     void Update()
@@ -47,7 +47,7 @@ public abstract class EnemyBehaviour : MonoBehaviour
 
     public void SetPath(Path path) { this.path = path; }
 
-    public bool Hurt(int damage)
+    public virtual bool Hurt(int damage)
     {
         health -= damage;
         if(health < 0)
