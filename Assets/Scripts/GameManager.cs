@@ -13,6 +13,9 @@ public class GameManager : MonoBehaviour
     public GameObject enemyPrefab;
 
     private WorldGenerator world;
+    public GameObject worldGeneratorPrefab;
+    private WorldGenerator world2;
+    public GameObject worldGeneratorPrefab2;
 
     public Text text;
     public LayerMask floorLayer;
@@ -20,7 +23,13 @@ public class GameManager : MonoBehaviour
 
     private void Awake()
     {
-        world = GetComponent<WorldGenerator>();
+
+    }
+    
+    void Start()
+    {
+        world = Instantiate(worldGeneratorPrefab).GetComponent<WorldGenerator>();
+
     }
 
     private void Update()

@@ -11,7 +11,8 @@ public abstract class EnemyBehaviour : MonoBehaviour
     
     [SerializeField]
     private int health = 10;
-    //Path the enmy will follow
+
+    //Path the enemy will follow
     private Path path;
     
     private int nextIndexPath = 1;
