@@ -4,16 +4,12 @@ using UnityEngine;
 
 public class DBulletBehaviour : MonoBehaviour
 {
-    int damage = 3;
-    GameObject target;
-    Transform initialPos;
-    Transform finalPos;
+    int damage = 1;
+
+    Vector3 direction;
     Rigidbody rb;
 
-    Vector3 movement;
     float speed = 50;
-    float delta = 0;
-
     bool shooted = false;
 
     void Awake()
@@ -24,45 +20,31 @@ public class DBulletBehaviour : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (target == null)
+        if (!shooted)
         {
-            Destroy(gameObject);
-
-        }
-        else
-        {
-            if (!shooted)
-            {
-                rotateBullet();
-                Vector3 forceD = finalPos.position - initialPos.position;
-                rb.AddForce(forceD*speed);
-                shooted = true;
-            }
+            rotateBullet();
+            rb.AddForce(direction * speed);   
+            shooted = true;
         }
     }
 
-    public void SetBulletBehaviour(GameObject t, Transform pos)
+    public void SetBulletBehaviour(Vector3 d)
     {
-        if (t == null) return;
-        target = t;
-        initialPos = pos;
-        finalPos = target.transform;
-        rb.MovePosition(initialPos.position);
-
+        direction = d;
     }
     void rotateBullet()
     {
-        Vector3 direction = finalPos.transform.position - gameObject.transform.position;
         rb.MoveRotation(Quaternion.LookRotation(direction));
     }
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.collider.gameObject == target)
+        if (collision.collider.gameObject.CompareTag("Enemy"))
         {
-            target.GetComponent<EnemyBehaviour>().Hurt(damage);
+            collision.collider.gameObject.GetComponent<EnemyBehaviour>().Hurt(damage);
             Destroy(gameObject);
         }
+
     }
 
 }

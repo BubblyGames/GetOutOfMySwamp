@@ -4,44 +4,114 @@ using UnityEngine;
 
 public class SingleWeaponBehaviour : WeaponBehaviour
 {
-    public float waitTime = 0.5f;
+    public float waitTime = 0f;
     public float radious = 4f;
 
+    public GameObject[] shotPositions; //0 front, 1 back, 2 right, 3 left
     public GameObject bulletType;
-    float targetDistance;
-    GameObject enermyTargeted;
+    Transform bulletPos;
 
+    //Follow bullets settings
+    GameObject enemy;
+
+
+    //DBullet settings
+    bool directionSet;
+    Vector3 direction;
+
+    private void Start()
+    {
+        directionSet = false;
+    }
     void Update()
     {
+
         RaycastHit[] hits = Physics.SphereCastAll(transform.position, radious, transform.forward, radious, enemyLayerMask);
         if (hits.Length > 0)
         {
-            enermyTargeted = hits[0].collider.gameObject;
-            targetDistance = (enermyTargeted.transform.position - gameObject.transform.position).magnitude;
             if (Time.time > nextAttackTime)
             {
                 nextAttackTime = Time.time + waitTime;
 
                 {
-                    GameObject enemy = hits[0].collider.gameObject;
+
+                    enemy = hits[0].collider.gameObject;
+
+
+                    if (directionSet == false)
+                    {
+
+                        direction = enemy.transform.position-gameObject.transform.position;
+                        directionSet = true;
+                        bulletPos = chooseBulletPos();
+          
+                    }
+
+                    if (bulletType.name != "DBullet")
+                    {
+                        bulletPos = chooseBulletPos();
+                    }
+
+
                     if (enemy != null)
                     {
-                        GameObject bullet = Instantiate(bulletType, gameObject.transform.position, Quaternion.identity);
 
+                        GameObject bullet = Instantiate(bulletType, bulletPos.position, Quaternion.identity);
                         if (bulletType.name == "Bullet")
-                        { 
-                            bullet.GetComponent<BulletBehaviour>().SetBulletBehaviour(enemy, gameObject.transform);
-                        }else if(bulletType.name == "DBullet")
                         {
-                            bullet.GetComponent<DBulletBehaviour>().SetBulletBehaviour(enemy, gameObject.transform);
+                            bullet.GetComponent<BulletBehaviour>().SetBulletBehaviour(enemy, bulletPos);
                         }
+                        else if (bulletType.name == "DBullet")
+                        {
 
-
-
+                            bullet.GetComponent<DBulletBehaviour>().SetBulletBehaviour(direction);
+                        }
                     }
+
                 }
 
             }
         }
     }
+
+    Transform chooseBulletPos()
+    {
+        Vector3 enemyVector = enemy.transform.position - gameObject.transform.position;
+        float angle = Mathf.Atan2(enemyVector.x, enemyVector.y) * Mathf.Rad2Deg;
+        Transform finalShotPos;
+        if (angle > 0)
+        {
+            if (angle <= 45)
+            {
+                finalShotPos = shotPositions[0].transform;
+            }
+            else if (angle >= 135)
+            {
+                finalShotPos = shotPositions[1].transform;
+            }
+            else
+            {
+                finalShotPos = shotPositions[2].transform;
+            }
+
+        }
+        else
+        {
+            if (angle >= -45)
+            {
+                finalShotPos = shotPositions[0].transform;
+            }
+            else if (angle <= -135)
+            {
+                finalShotPos = shotPositions[1].transform;
+            }
+            else
+            {
+                finalShotPos = shotPositions[3].transform;
+            }
+
+        }
+        return finalShotPos;
+    }
+
 }

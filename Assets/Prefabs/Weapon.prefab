@@ -108,7 +108,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 12e87762d23baa84c84dab88576c54bc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  waitTime: 1
-  lm:
+  attackSpeed: 1
+  enemyLayerMask:
     serializedVersion: 2
     m_Bits: 64

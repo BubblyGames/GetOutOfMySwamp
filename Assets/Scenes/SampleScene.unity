@@ -593,7 +593,7 @@ MonoBehaviour:
   rockSize: 3
   seed: 0
   floorPrefab: {fileID: 2572662768049255877, guid: f01c20303a3a8784a8e20934f68685c7, type: 3}
-  weaponPrefab: {fileID: 1307091816601134330, guid: 4ad8be9ec7b4767459383f235c3498ec, type: 3}
+  weaponPrefab: {fileID: 7137880238603071797, guid: e1fa9704af9f5114992d5229e61c2040, type: 3}
   enemyPrefab: {fileID: 5803062399679311112, guid: edbebc9645c93bc47b4257b361fcc5b1, type: 3}
   materials:
   - {fileID: 2100000, guid: 7020b9607b3ab3948b759129d827f890, type: 2}
