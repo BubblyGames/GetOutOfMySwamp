@@ -40,14 +40,12 @@ public class SingleWeaponBehaviour : WeaponBehaviour
 
                     if (directionSet == false)
                     {
-
-                        direction = enemy.transform.position-gameObject.transform.position;
                         directionSet = true;
+                        direction = enemy.transform.position-gameObject.transform.position;  
                         bulletPos = chooseBulletPos();
           
                     }
-
-                    if (bulletType.name != "DBullet")
+                    else if (bulletType.name != "DBullet")
                     {
                         bulletPos = chooseBulletPos();
                     }
