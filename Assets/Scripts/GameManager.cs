@@ -42,6 +42,7 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    //TODO: move tower spawn to Level manager
     private void SpawnWeapon()
     {
         GameObject obj = CastRay();
