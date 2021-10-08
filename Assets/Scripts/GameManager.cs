@@ -6,9 +6,10 @@ using UnityEngine.UI;
 
 [RequireComponent(typeof(WorldGenerator))]
 /*This manager inicialice the game */
-//TODO: SPLIT MAP GENERATION AND PATH GENERATION INTO COMPONENTS 
 public class GameManager : MonoBehaviour
 {
+    public static GameManager instance;
+
     public GameObject weaponPrefab;
     public GameObject enemyPrefab;
 
@@ -27,7 +28,7 @@ public class GameManager : MonoBehaviour
 
     private void Awake()
     {
-
+        instance = this;
     }
     
     void Start()

@@ -10,14 +10,14 @@ public class EnemyTest : EnemyBehaviour
     {
         if (!invencible)
         {
-            this.health -= damage;
-            if (health < 0)
+            this.healthPoints -= damage;
+            if (healthPoints < 0)
             {
                 Destroy(gameObject);
                 return true;
             }
 
-            transform.localScale = Vector3.one * ((float)health / 10f);
+            transform.localScale = Vector3.one * ((float)healthPoints / 10f);
 
             return false;
         }

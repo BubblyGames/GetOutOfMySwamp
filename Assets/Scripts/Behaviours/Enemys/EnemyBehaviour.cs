@@ -6,11 +6,12 @@ using UnityEngine;
 public abstract class EnemyBehaviour : MonoBehaviour
 {
 
+    [SerializeField] protected int startHealth;
+    [SerializeField] protected int healthPoints;
+
     [SerializeField]
     protected float speed = 1f;
-    
-    [SerializeField]
-    protected int health = 10;
+   
 
     //Path the enemy will follow
     protected Path path;
@@ -19,6 +20,11 @@ public abstract class EnemyBehaviour : MonoBehaviour
 
     protected float lerpProgression = 0;
 
+
+    private void Start()
+    {
+        healthPoints = startHealth;
+    }
 
     void Update()
     {
@@ -49,16 +55,20 @@ public abstract class EnemyBehaviour : MonoBehaviour
 
     public virtual bool Hurt(int damage)
     {
-        health -= damage;
-        if(health < 0)
+        healthPoints -= damage;
+        if(healthPoints < 0)
         {
             Destroy(gameObject);
             return true;
         }
 
-        transform.localScale = Vector3.one * ((float)health / 10f);
+        transform.localScale = Vector3.one * ((float)healthPoints / 10f);
 
         return false;
     }
 
+    public virtual void Die()
+    {
+        LevelManager.levelInstance.currentMoney +=
+    }
 }
