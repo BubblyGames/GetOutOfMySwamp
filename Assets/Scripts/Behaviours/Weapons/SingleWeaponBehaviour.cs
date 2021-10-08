@@ -23,6 +23,7 @@ public class SingleWeaponBehaviour : WeaponBehaviour
     {
         directionSet = false;
     }
+
     void Update()
     {
 

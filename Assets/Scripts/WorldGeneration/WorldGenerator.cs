@@ -61,11 +61,11 @@ public class WorldGenerator : MonoBehaviour
                 {
                     cells[i, j].state = 1;//Should use perlin noise?
                     cell.GetComponent<MeshRenderer>().material = materials[1];
-
+                    
                 }
             }
         }
-
+        
         paths = new Path[nPaths];
         floor[endX, endY].transform.Translate(-Vector3.forward);
         cells[endX, endX].state = 3;
