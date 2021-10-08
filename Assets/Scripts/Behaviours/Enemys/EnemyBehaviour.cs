@@ -8,7 +8,8 @@ public abstract class EnemyBehaviour : MonoBehaviour
 
     [SerializeField] protected int startHealth;
     [SerializeField] protected int healthPoints;
-
+    [SerializeField] protected int moneyValue;
+    [SerializeField] protected int scoreValue;
     [SerializeField]
     protected float speed = 1f;
    
@@ -58,7 +59,7 @@ public abstract class EnemyBehaviour : MonoBehaviour
         healthPoints -= damage;
         if(healthPoints < 0)
         {
-            Destroy(gameObject);
+            Die();
             return true;
         }
 
@@ -69,6 +70,11 @@ public abstract class EnemyBehaviour : MonoBehaviour
 
     public virtual void Die()
     {
-        LevelManager.levelInstance.currentMoney +=
+        LevelManager.levelInstance.addMoney(moneyValue);
+        RoundController.roundControllerInstance.activeEnemies.Remove(this);
+
+        //Particles and sound
+
+        Destroy(gameObject);
     }
 }

@@ -15,6 +15,7 @@ public class LevelManager : MonoBehaviour
 
 
     public event Action OnGameStarted, OnGameLost, OnScoreIncremented;
+    //TODO: increment score when kkilling enemys.
 
     private WorldGenerator world;
     public GameObject worldGeneratorPrefab;
@@ -29,20 +30,27 @@ public class LevelManager : MonoBehaviour
     }
     private void Start()
     {
-        
+        OnGameStarted?.Invoke();
     }
 
     public void addMoney(int quantity) 
     {
         currentMoney += quantity;
     }
+
     public void dealDamageToBase(int damageDealt)
     {
 
         currentBaseHealthPoints -= damageDealt;
         if (currentBaseHealthPoints <= 0)
         {
+            //Game Over
             OnGameLost?.Invoke();
+            
+            // Show Game Over Screen
+            //Go to menu
+
+            
         }
     }
 }
