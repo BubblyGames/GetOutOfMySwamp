@@ -590,13 +590,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   weaponPrefab: {fileID: 7137880238603071797, guid: e1fa9704af9f5114992d5229e61c2040, type: 3}
   enemyPrefab: {fileID: 5803062399679311112, guid: edbebc9645c93bc47b4257b361fcc5b1, type: 3}
-  worldGeneratorPrefab: {fileID: 8716154488972221668, guid: 997de629de8ee094c831f422ee498e1f, type: 3}
-  worldGeneratorPrefab2: {fileID: 8716154488972221668, guid: 997de629de8ee094c831f422ee498e1f, type: 3}
   text: {fileID: 1583022576}
   floorLayer:
     serializedVersion: 2
     m_Bits: 128
-  spawnEnemys: 1
 --- !u!4 &1903685283
 Transform:
   m_ObjectHideFlags: 0
@@ -618,7 +615,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1903685281}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: cbf00c284a4ed8c48a7b0ce2dc3753cc, type: 3}
   m_Name: 
