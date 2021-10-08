@@ -6,35 +6,21 @@ using UnityEngine.UI;
 
 [RequireComponent(typeof(WorldGenerator))]
 /*This manager inicialice the game */
+//TODO: SPLIT MAP GENERATION AND PATH GENERATION INTO COMPONENTS 
 public class GameManager : MonoBehaviour
 {
-    public static GameManager instance;
-
     public GameObject weaponPrefab;
     public GameObject enemyPrefab;
 
     private WorldGenerator world;
-    public GameObject worldGeneratorPrefab;
-    private WorldGenerator world2;
-    public GameObject worldGeneratorPrefab2;
 
-    
     public Text text;
     public LayerMask floorLayer;
-
-    [Header("Control")]
-    public bool spawnEnemys= true;
     // Start is called before the first frame update
 
     private void Awake()
     {
-        instance = this;
-    }
-    
-    void Start()
-    {
-        world = Instantiate(worldGeneratorPrefab).GetComponent<WorldGenerator>();
-
+        world = GetComponent<WorldGenerator>();
     }
 
     private void Update()
@@ -46,15 +32,12 @@ public class GameManager : MonoBehaviour
         {
             SpawnWeapon();
         }
-        if (spawnEnemys)
-        {
 
-            for (int i = 0; i < world.nPaths; i++)
+        for (int i = 0; i < world.nPaths; i++)
+        {
+            if (world.paths[i] != null && world.paths[i].CheckSpawn())
             {
-                if (world.paths[i] != null && world.paths[i].CheckSpawn())
-                {
-                    GameObject.Instantiate(enemyPrefab, world.paths[i].GetStep(0), Quaternion.identity).GetComponent<EnemyBehaviour>().SetPath(world.paths[i]);
-                }
+                GameObject.Instantiate(enemyPrefab, world.paths[i].GetStep(0), Quaternion.identity).GetComponent<EnemyBehaviour>().SetPath(world.paths[i]);
             }
         }
     }
