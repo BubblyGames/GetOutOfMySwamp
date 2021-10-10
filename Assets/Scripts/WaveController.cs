@@ -2,15 +2,19 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 
 //TODO: End wave system
-public class RoundController : MonoBehaviour
+[RequireComponent(typeof(EnemySpawner))]
+public class WaveController : MonoBehaviour
 {
-    public static RoundController roundControllerInstance;
+    public static WaveController waveControllerInstance;
 
 
-    public List<EnemyBehaviour> activeEnemies;
+    public int activeEnemies;
+
+    public Wave[] waves;
 
     public float timeBetweenWaves = 5f;
     public float timeBeforeRoundStarts = 3f ;
@@ -20,29 +24,33 @@ public class RoundController : MonoBehaviour
     public bool isBetweenWaves;
     public bool isRoundStart;
 
-    public int wave;
+    public int waveCount; // Wave its being played
+
+    public Text waveText;
 
     EnemySpawner enemySpawner;
 
-    public RoundController()
+    private void Awake()
+    {
+        waveControllerInstance = this;
+    }
+
+
+
+    public void Start()
     {
         isRoundActive = false;
         isBetweenWaves = false;
         isRoundStart = true;
 
-        wave = 1;
+        waveCount = 0;
 
         timeVariable = Time.time + timeBeforeRoundStarts;
 
-        enemySpawner = new EnemySpawner();
+        enemySpawner = GetComponent<EnemySpawner>();
     }
 
-    public void AddToActiveEnemies(EnemyBehaviour enemy)
-    {
-        activeEnemies.Add(enemy);
-    }
 
-    // Update is called once per frame
     void Update()
     {
         if (isRoundStart)
@@ -51,7 +59,7 @@ public class RoundController : MonoBehaviour
             {
                 isRoundStart = false;
                 isRoundActive = true;
-                enemySpawner.StartSpawning();
+                StartCoroutine(SpawnWave());
                 return;
             }
         }
@@ -61,20 +69,42 @@ public class RoundController : MonoBehaviour
             {
                 isBetweenWaves = false;
                 isRoundActive = true;
-                enemySpawner.StartSpawning();
+                StartCoroutine(SpawnWave());
                 return;
             }
         }
         else if (isRoundActive)
         {
-            if (activeEnemies.Count <= 0)
+            if (activeEnemies <= 0)
             { 
                 isBetweenWaves = true;
                 isRoundActive = false;
 
                 timeVariable = Time.time + timeBetweenWaves;
-                wave++;
+                waveCount++;
             }
+        }
+    }
+
+    public void AddToActiveEnemies()
+    {
+        activeEnemies++; ;
+    }
+
+    IEnumerator SpawnWave()
+    {
+        Wave currentWave = waves[waveCount];
+
+        for (int i = 0; i < currentWave.enemyAmount; i++)
+        {
+            enemySpawner.SpawnEnemy(currentWave.enemyPrefab, WorldGenerator.worldGeneratorInstance.enemySpawnPoint);
+            yield return new WaitForSeconds(1f / currentWave.spawnRate);
+        }
+
+        if (waveCount == waves.Length)
+        {
+            //After the last wave show end
+            //TODO: add end of level
         }
     }
 }

@@ -1,18 +1,35 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 
-[RequireComponent(typeof(WorldGenerator))]
 /*This manager inicialice the game */
-//TODO: SPLIT MAP GENERATION AND PATH GENERATION INTO COMPONENTS 
+//DONE: SPLIT MAP GENERATION AND PATH GENERATION INTO COMPONENTS 
+[RequireComponent(typeof(WorldGenerator))]
+[RequireComponent(typeof(WaveController))]
+
 public class GameManager : MonoBehaviour
 {
-    public GameObject weaponPrefab;
-    public GameObject enemyPrefab;
 
+    public static GameManager gameInstance;
+
+    [SerializeField] private int startBaseHealthPoints; //Starting Health points the defenders base have
+    [SerializeField] private int currentBaseHealthPoints; //Current Health points the defenders base have
+    [SerializeField] private int currentMoney = 0; //Amount of money the player can spend
+
+    public GameObject weaponPrefab;
+    //public GameObject enemyPrefab;
+
+    //References
     private WorldGenerator world;
+    private ScoreSystem scoreSystem;
+    private WaveController waveController;
+
+    //Actions
+    public event Action OnGameStarted, OnGameLost, OnScoreIncremented;
+    //TODO: increment score when killing enemys.
 
     public Text text;
     public LayerMask floorLayer;
@@ -20,7 +37,16 @@ public class GameManager : MonoBehaviour
 
     private void Awake()
     {
+        gameInstance = this;
         world = GetComponent<WorldGenerator>();
+        waveController = GetComponent<WaveController>();
+        scoreSystem = GetComponent<ScoreSystem>();
+        currentBaseHealthPoints = startBaseHealthPoints;
+    }
+
+    private void Start()
+    {
+        OnGameStarted?.Invoke();
     }
 
     private void Update()
@@ -33,16 +59,36 @@ public class GameManager : MonoBehaviour
             SpawnWeapon();
         }
 
-        for (int i = 0; i < world.nPaths; i++)
+        //for (int i = 0; i < world.nPaths; i++)
+        //{
+        //    if (world.paths[i] != null && world.paths[i].CheckSpawn())
+        //    {
+        //        GameObject.Instantiate(enemyPrefab, world.paths[i].GetStep(0), Quaternion.identity).GetComponent<EnemyBehaviour>().SetPath(world.paths[i]);
+        //    }
+        //}
+    }
+
+    public void addMoney(int quantity)
+    {
+        currentMoney += quantity;
+    }
+
+    public void dealDamageToBase(int damageDealt)
+    {
+
+        currentBaseHealthPoints -= damageDealt;
+        if (currentBaseHealthPoints <= 0)
         {
-            if (world.paths[i] != null && world.paths[i].CheckSpawn())
-            {
-                GameObject.Instantiate(enemyPrefab, world.paths[i].GetStep(0), Quaternion.identity).GetComponent<EnemyBehaviour>().SetPath(world.paths[i]);
-            }
+            //Game Over
+            OnGameLost?.Invoke();
+
+            // Show Game Over Screen
+            //Go to menu
+
+
         }
     }
 
-    //TODO: move tower spawn to Level manager
     private void SpawnWeapon()
     {
         GameObject obj = CastRay();
@@ -73,6 +119,9 @@ public class GameManager : MonoBehaviour
         }
         return null;
     }
+
+
+
 }
 
 

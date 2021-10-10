@@ -6,14 +6,18 @@ public class ScoreSystem : MonoBehaviour
 {
     public static ScoreSystem scoreSystemInstance;
     public int score { get; private set; } = 0;
-    Text scoreText;
+    public Text scoreText;
 
+    private void Awake()
+    {
+        scoreSystemInstance = this;
+    }
 
     private void Start()
     {
         scoreText = GetComponent<Text>();
         //LevelManager.levelInstance.OnScoreIncremented += IncrementScore; //TODO: pass how much the score will increment
-        LevelManager.levelInstance.OnGameStarted += ResetScore;
+        GameManager.gameInstance.OnGameStarted += ResetScore;
     }
 
     void IncrementScore(int quantity)

@@ -12,6 +12,8 @@ public abstract class EnemyBehaviour : MonoBehaviour
     [SerializeField] protected int scoreValue;
     [SerializeField]
     private float speed = 1f;
+
+    private int damage = 10;
     
     [SerializeField]
     private int health = 10;
@@ -43,6 +45,7 @@ public abstract class EnemyBehaviour : MonoBehaviour
             else
             {
                 //Damage
+                GameManager.gameInstance.dealDamageToBase(this.damage);
                 Destroy(this.gameObject);
             }
         }
@@ -66,8 +69,8 @@ public abstract class EnemyBehaviour : MonoBehaviour
 
     public virtual void Die()
     {
-        LevelManager.levelInstance.addMoney(moneyValue);
-        RoundController.roundControllerInstance.activeEnemies.Remove(this);
+        GameManager.gameInstance.addMoney(moneyValue);
+        WaveController.waveControllerInstance.activeEnemies--;
 
         //Particles and sound
 
