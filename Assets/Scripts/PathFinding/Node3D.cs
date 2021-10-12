@@ -5,9 +5,9 @@ public class Node3D
     public int x, y, z;
     public int h;
     public Node3D Parent;
-    public CellInfo3D cell;
+    public CellInfo cell;
 
-    public Node3D(CellInfo3D cell)
+    public Node3D(CellInfo cell)
     {
         this.cell = cell;
         x = cell.x;

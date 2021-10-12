@@ -6,13 +6,13 @@ using UnityEngine.UI;
 
 public class Path
 {
-    CellInfo3D[] cells3D;
+    CellInfo[] cells3D;
     float spawnWait = 1f;
     float nextSpawnTime = 0;
     public float Length { get { return cells3D.Length; } }
 
 
-    public Path(CellInfo3D[] cellInfos)
+    public Path(CellInfo[] cellInfos)
     {
         cells3D = cellInfos;
     }

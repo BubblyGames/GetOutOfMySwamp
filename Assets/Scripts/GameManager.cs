@@ -35,10 +35,10 @@ public class GameManager : MonoBehaviour
 
         for (int i = 0; i < world.nPaths; i++)
         {
-            /*if (world.paths[i] != null && world.paths[i].CheckSpawn())
+            if (world.paths[i] != null && world.paths[i].CheckSpawn())
             {
                 GameObject.Instantiate(enemyPrefab, world.paths[i].GetStep(0), Quaternion.identity).GetComponent<EnemyBehaviour>().SetPath(world.paths[i]);
-            }*/
+            }
         }
     }
 

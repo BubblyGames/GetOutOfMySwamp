@@ -6,7 +6,7 @@ public class MeshData
 {
     public List<Vector3> vertices = new List<Vector3>();
     public List<int> triangles = new List<int>();
-    public List<Vector2> uv = new List<Vector2>();
+    public List<Vector2> uvs = new List<Vector2>();
 
     public List<Vector3> colliderVertices = new List<Vector3>();
     public List<int> colliderTriangles = new List<int>();
@@ -27,7 +27,7 @@ public class MeshData
     {
         if (blockType == BlockType.Swamp && isMainMesh)
         {
-           waterMesh.AddFace(direction, x, y, z, blockType);
+            waterMesh.AddFace(direction, x, y, z, blockType);
         }
 
         switch (direction)
@@ -72,6 +72,38 @@ public class MeshData
                 break;
         }
 
+        float u = 0;
+        float v = 0;
+
+        switch (blockType)
+        {
+            case BlockType.Air:
+                break;
+            case BlockType.Path:
+                u = 0;
+                v = .5f;
+                break;
+            case BlockType.Grass:
+                u = .5f;
+                v = .5f;
+                break;
+            case BlockType.Rock:
+                u = 0;
+                v = 0;
+                break;
+            case BlockType.Swamp:
+                u = .5f;
+                v = 0;
+                break;
+            default:
+                break;
+        }
+
+        AddUV(new Vector2(u, v));
+        AddUV(new Vector2(u, v + .5f));
+        AddUV(new Vector2(u + .5f, v + .5f));
+        AddUV(new Vector2(u + .5f, v));
+
         AddQuadTriangles();
     }
 
@@ -79,6 +111,12 @@ public class MeshData
     {
         vertices.Add(vertex);
     }
+
+    public void AddUV(Vector2 uv)
+    {
+        uvs.Add(uv);
+    }
+
 
     public void AddQuadTriangles()
     {

@@ -26,7 +26,7 @@ public class VoxelRenderer : MonoBehaviour
         mesh.SetTriangles(meshData.triangles.ToArray(), 0);
         mesh.SetTriangles(meshData.waterMesh.triangles.Select(val => val + meshData.vertices.Count).ToArray(), 1);
 
-        mesh.uv = meshData.uv.Concat(meshData.waterMesh.uv).ToArray();
+        mesh.uv = meshData.uvs.Concat(meshData.waterMesh.uvs).ToArray();
         mesh.RecalculateNormals();
     }
 }

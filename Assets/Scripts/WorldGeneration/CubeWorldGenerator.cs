@@ -7,7 +7,7 @@ using UnityEngine;
 public class CubeWorldGenerator : MonoBehaviour
 {
     public int size = 20;
-    internal CellInfo3D[,,] cells; //0 walkable //1 can build //2 can't build //3 target
+    internal CellInfo[,,] cells; //0 walkable //1 can build //2 can't build //3 target
 
     internal Path[] paths;
     public int nPaths = 4;
@@ -33,11 +33,11 @@ public class CubeWorldGenerator : MonoBehaviour
             seed = Random.value * 10;
         Debug.Log("Seed: " + seed.ToString());
 
-        int endX = size - 1;
+        int endX = size / 2;
         int endY = size - 1;
-        int endZ = size - 1;
+        int endZ = size / 2;
 
-        cells = new CellInfo3D[size, size, size];
+        cells = new CellInfo[size, size, size];
         MeshData meshData = new MeshData(true);
 
         for (int i = 0; i < size; i++)
@@ -46,7 +46,7 @@ public class CubeWorldGenerator : MonoBehaviour
             {
                 for (int k = 0; k < size; k++)
                 {
-                    CellInfo3D cell = new CellInfo3D(i, j, k);
+                    CellInfo cell = new CellInfo(i, j, k);
 
                     //Rock generation
                     float alpha = 1;
@@ -69,6 +69,10 @@ public class CubeWorldGenerator : MonoBehaviour
             }
         }
 
+        GenerateSwamp(endX, endY, endZ);
+        GeneratePaths(endX, endY, endZ);
+
+        //Add geomtry
         for (int i = 0; i < size; i++)
         {
             for (int j = 0; j < size; j++)
@@ -98,13 +102,25 @@ public class CubeWorldGenerator : MonoBehaviour
                 }
             }
         }
-
-        //GeneratePaths(endX, endY, endZ);
-        cells[endX, endY, endZ].blockType = BlockType.Swamp;
         voxelRenderer.RenderMesh(meshData);
     }
 
-    bool CheckIfSurface(CellInfo3D cell)
+    private void GenerateSwamp(int endX, int endY, int endZ)
+    {
+        int radius = 3;
+
+        for (int i = -radius; i < radius; i++)
+        {
+            for (int k = -radius; k < radius; k++)
+            {
+                cells[endX + i, size - 1, endZ + k].blockType = BlockType.Air;
+                cells[endX + i, size - 2, endZ + k].blockType = BlockType.Air;
+                cells[endX + i, size - 3, endZ + k].blockType = BlockType.Swamp;
+            }
+        }
+    }
+
+    bool CheckIfSurface(CellInfo cell)
     {
         return cell.x == 0 || cell.x == size - 1 ||
             cell.y == 0 || cell.y == size - 1 ||
@@ -116,33 +132,34 @@ public class CubeWorldGenerator : MonoBehaviour
         paths = new Path[nPaths];
         for (int i = 0; i < nPaths; i++)
         {
-            int x = 0;
+            int x = Random.Range(2, size - 3);
             int y = 0;
-            int z = 0;
+            int z = Random.Range(2, size - 3);
 
             int count = 0;
             while ((cells[x, y, z].blockType == BlockType.Path || cells[x, y, z].blockType == BlockType.Rock) && count < 100)
             {
                 if (i < nPaths / 2)
                 {
-                    x = Random.Range(1, size - 1);
+                    x = Random.Range(2, size - 3);
                 }
                 else
                 {
-                    y = Random.Range(1, size - 1);
+                    z = Random.Range(2, size - 3);
                 }
                 count++;
             }
 
-            cells[x, y, z].blockType = BlockType.Path;
+            cells[x, y + 1, z].blockType = BlockType.Path;
 
             Node3D p = FindPath(nPaths, cells[x, y, z], cells[endX, endY, endZ]);
             if (p != null)
             {
-                List<CellInfo3D> pathCells = new List<CellInfo3D>();
+                List<CellInfo> pathCells = new List<CellInfo>();
                 while (p != null)
                 {
-                    cells[p.x, p.y, p.z].blockType = BlockType.Path; ;
+                    Vector3Int normal = GetNormal(cells[p.x, p.y, p.z]);
+                    cells[p.x - normal.x, p.y - normal.y, p.z - normal.z].blockType = BlockType.Path;
                     pathCells.Add(cells[p.x, p.y, p.z]);
                     //floor[p.x, p.y].transform.Translate(-Vector3.forward * 0.1f);
                     p = p.Parent;
@@ -153,9 +170,30 @@ public class CubeWorldGenerator : MonoBehaviour
         }
     }
 
+    private Vector3Int GetNormal(CellInfo cellInfo)
+    {
+        if (cellInfo.x == 0)
+            return Vector3Int.left;
 
+        if (cellInfo.x == size - 1)
+            return Vector3Int.right;
 
-    Node3D FindPath(int nPaths, CellInfo3D start, CellInfo3D end)
+        if (cellInfo.y == 0)
+            return Vector3Int.down;
+
+        if (cellInfo.y == size - 1)
+            return Vector3Int.up;
+
+        if (cellInfo.z == 0)
+            return Vector3Int.back;
+
+        if (cellInfo.z == size - 1)
+            return Vector3Int.forward;
+
+        return Vector3Int.zero;
+    }
+
+    Node3D FindPath(int nPaths, CellInfo start, CellInfo end)
     {
         Node3D current;
         Node3D firstNodo;
@@ -192,8 +230,8 @@ public class CubeWorldGenerator : MonoBehaviour
             else
             {
                 //Expande vecinos (calcula coste de cada uno, etc)y los a�ade en la lista
-                CellInfo3D[] neighbours = WalkableNeighbours(current.cell);
-                foreach (CellInfo3D neighbour in neighbours)
+                CellInfo[] neighbours = WalkableNeighbours(current.cell);
+                foreach (CellInfo neighbour in neighbours)
                 {
                     if (neighbour != null)
                     {
@@ -240,25 +278,28 @@ public class CubeWorldGenerator : MonoBehaviour
         return null;
     }
 
-    private CellInfo3D[] WalkableNeighbours(CellInfo3D current)
+    private CellInfo[] WalkableNeighbours(CellInfo current)
     {
-        List<CellInfo3D> result = new List<CellInfo3D>();
+        List<CellInfo> result = new List<CellInfo>();
 
-        int[,] neighbours = new int[,] { { 0, -1 }, { 1, 0 }, { 0, 1 }, { -1, 0 }
-                                        ,{ -1, -1 }, { -1, 1 }, { 1, 1 }, { 1, -1 }};
-
-        for (int i = 0; i < 4; i++)
+        for (int i = -1; i <= 1; i++)
         {
-            int x = current.x + neighbours[i, 0];
-            int y = current.y + neighbours[i, 1];
-            int z = current.z + neighbours[i, 2];
-
-            if (x >= 0 && x < size && y >= 0 && y < size && (cells[x, y, z].blockType != BlockType.Rock))
+            for (int j = -1; j <= 1; j++)
             {
-                result.Add(cells[x, y, z]);
+                for (int k = -1; k <= 1; k++)
+                {
+                    int x = current.x + i;
+                    int y = current.y + j;
+                    int z = current.z + k;
+
+                    if (x >= 0 && x < size && y >= 0 && y < size && z >= 0 && z < size && (cells[x, y, z].blockType == BlockType.Air || cells[x, y, z].blockType == BlockType.Swamp))
+                    {
+                        result.Add(cells[x, y, z]);
+                        cells[x, y, z].explored = true;
+                    }
+                }
             }
         }
-
 
         return result.ToArray();
     }
@@ -268,9 +309,10 @@ public class CubeWorldGenerator : MonoBehaviour
     {
         if (!Application.isPlaying) return;
 
-        foreach (CellInfo3D cell in cells)
+        foreach (CellInfo cell in cells)
         {
-            Handles.Label(new Vector3(cell.x, cell.y, cell.z), cell.blockType.ToString());
+            if (CheckIfSurface(cell) && cell.explored)
+                Handles.Label(new Vector3(cell.x, cell.y, cell.z), cell.blockType.ToString());
         }
     }
 #endif
