@@ -5,29 +5,15 @@ using UnityEngine;
 
 public class EnemySpawner : MonoBehaviour
 {
-    [SerializeField] GameObject enemy;//TODO: select which enemy is going to be spawned
-    Coroutine spawnCoroutine;
+
     public EnemySpawner()
     {
 
     }
 
-    public void StopSpawning()
+    public void SpawnEnemy(GameObject enemyprefab, GameObject spawnPoint)
     {
-        if (spawnCoroutine != null)
-        {
-            StopCoroutine(spawnCoroutine);
-        }
-    }
-
-    public void StartSpawning()
-    {
-        spawnCoroutine = StartCoroutine(SpawnEnemies());
-    }
-
-    IEnumerator SpawnEnemies()
-    {
-        RoundController.roundControllerInstance.AddToActiveEnemies(enemy.GetComponent<EnemyBehaviour>()); // 
-        yield return new WaitForSeconds(3f);
+        WaveController.waveControllerInstance.AddToActiveEnemies();
+        Instantiate(enemyprefab, spawnPoint.transform.position, spawnPoint.transform.rotation);
     }
 }

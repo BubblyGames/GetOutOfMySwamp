@@ -6,6 +6,8 @@ using UnityEngine;
 
 public class WorldGenerator : MonoBehaviour
 {
+    public static WorldGenerator worldGeneratorInstance;
+
     public int size = 20;
     internal CellInfo[,] cells; //0 walkable //1 can build //2 can't build //3 target
     internal GameObject[,] floor;
@@ -18,6 +20,13 @@ public class WorldGenerator : MonoBehaviour
 
     public GameObject floorPrefab;
     public Material[] materials;
+
+    public GameObject enemySpawnPoint;
+
+    private void Awake()
+    {
+        worldGeneratorInstance = this;
+    }
 
     void Start()
     {
@@ -194,6 +203,7 @@ public class WorldGenerator : MonoBehaviour
             }
         }
         Debug.Log("Fail: " + count.ToString());
+
         return null;
     }
 
