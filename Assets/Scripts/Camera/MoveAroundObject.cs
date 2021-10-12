@@ -28,11 +28,15 @@ public class MoveAroundObject : MonoBehaviour
 
     void Update()
     {
+        
+
         float mouseX = Input.GetAxis("Mouse X") * _mouseSensitivity;
         float mouseY = Input.GetAxis("Mouse Y") * _mouseSensitivity;
 
-        _rotationY += mouseX;
-        _rotationX += mouseY;
+        if (Input.GetButton("Fire1")) {
+            _rotationY += mouseX;
+            _rotationX -= mouseY;
+        }
 
         // Apply clamping for x rotation 
         _rotationX = Mathf.Clamp(_rotationX, _rotationXMinMax.x, _rotationXMinMax.y);

@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DBulletBehaviour : MonoBehaviour
+public class Bullet : MonoBehaviour
 {
     int damage = 1;
 

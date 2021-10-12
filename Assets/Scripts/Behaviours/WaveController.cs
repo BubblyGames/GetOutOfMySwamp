@@ -12,73 +12,62 @@ public class WaveController : MonoBehaviour
     public static WaveController waveControllerInstance;
 
 
-    public int activeEnemies;
+    public int activeEnemies = 0;
 
     public Wave[] waves;
 
     public float timeBetweenWaves = 5f;
-    public float timeBeforeRoundStarts = 3f ;
+    public float timeBeforeRoundStarts = 3f;
     public float timeVariable;
 
-    public bool isRoundActive;
+    public bool isWaveActive;
     public bool isBetweenWaves;
-    public bool isRoundStart;
+
 
     public int waveCount; // Wave its being played
 
-    public Text waveText;
+    ///public Text waveText;
 
     EnemySpawner enemySpawner;
 
     private void Awake()
     {
         waveControllerInstance = this;
+        enemySpawner = GetComponent<EnemySpawner>();
     }
 
 
 
     public void Start()
     {
-        isRoundActive = false;
-        isBetweenWaves = false;
-        isRoundStart = true;
+        isWaveActive = false;
+        isBetweenWaves = true;
 
         waveCount = 0;
 
-        timeVariable = Time.time + timeBeforeRoundStarts;
+        timeVariable = Time.time + (.5f * timeBeforeRoundStarts);
 
-        enemySpawner = GetComponent<EnemySpawner>();
     }
 
 
     void Update()
     {
-        if (isRoundStart)
-        {
-            if (Time.time >= timeVariable)
-            {
-                isRoundStart = false;
-                isRoundActive = true;
-                StartCoroutine(SpawnWave());
-                return;
-            }
-        }
-        else if (isBetweenWaves)
+        if (isBetweenWaves)
         {
             if (Time.time >= timeVariable)
             {
                 isBetweenWaves = false;
-                isRoundActive = true;
+                isWaveActive = true;
                 StartCoroutine(SpawnWave());
                 return;
             }
         }
-        else if (isRoundActive)
+        else if (isWaveActive)
         {
             if (activeEnemies <= 0)
-            { 
+            {
                 isBetweenWaves = true;
-                isRoundActive = false;
+                isWaveActive = false;
 
                 timeVariable = Time.time + timeBetweenWaves;
                 waveCount++;
@@ -88,7 +77,7 @@ public class WaveController : MonoBehaviour
 
     public void AddToActiveEnemies()
     {
-        activeEnemies++; ;
+        activeEnemies++;
     }
 
     IEnumerator SpawnWave()
@@ -97,7 +86,8 @@ public class WaveController : MonoBehaviour
 
         for (int i = 0; i < currentWave.enemyAmount; i++)
         {
-            enemySpawner.SpawnEnemy(currentWave.enemyPrefab, WorldGenerator.worldGeneratorInstance.enemySpawnPoint);
+            int pathId = UnityEngine.Random.Range(0, CubeWorldGenerator.worldGeneratorInstance.nPaths);
+            enemySpawner.SpawnEnemy(currentWave.enemyPrefab, CubeWorldGenerator.worldGeneratorInstance.paths[pathId]);
             yield return new WaitForSeconds(1f / currentWave.spawnRate);
         }
 

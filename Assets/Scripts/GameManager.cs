@@ -6,11 +6,10 @@ using UnityEngine;
 using UnityEngine.UI;
 
 
-[RequireComponent(typeof(CubeWorldGenerator))]
 
 /*This manager inicialice the game */
 //DONE: SPLIT MAP GENERATION AND PATH GENERATION INTO COMPONENTS 
-[RequireComponent(typeof(WorldGenerator))]
+[RequireComponent(typeof(CubeWorldGenerator))]
 [RequireComponent(typeof(WaveController))]
 
 public class GameManager : MonoBehaviour
@@ -25,9 +24,8 @@ public class GameManager : MonoBehaviour
     public GameObject weaponPrefab;
     //public GameObject enemyPrefab;
 
-    private CubeWorldGenerator world;
     //References
-    private WorldGenerator world;
+    private CubeWorldGenerator world;
     private ScoreSystem scoreSystem;
     private WaveController waveController;
 
@@ -44,6 +42,7 @@ public class GameManager : MonoBehaviour
     {
         world = GetComponent<CubeWorldGenerator>();
         center.transform.position = Vector3.one * (world.size / 2);
+
         gameInstance = this;
         waveController = GetComponent<WaveController>();
         scoreSystem = GetComponent<ScoreSystem>();
@@ -64,14 +63,6 @@ public class GameManager : MonoBehaviour
         {
             SpawnWeapon();
         }
-
-        //for (int i = 0; i < world.nPaths; i++)
-        //{
-        //    if (world.paths[i] != null && world.paths[i].CheckSpawn())
-        //    {
-        //        GameObject.Instantiate(enemyPrefab, world.paths[i].GetStep(0), Quaternion.identity).GetComponent<EnemyBehaviour>().SetPath(world.paths[i]);
-        //    }
-        //}
     }
 
     public void addMoney(int quantity)
@@ -104,7 +95,6 @@ public class GameManager : MonoBehaviour
 
         if (Physics.Raycast(ray, out hit))
         {
-            Debug.Log(hit.point);
             Vector3Int pos = new Vector3Int(Mathf.RoundToInt(hit.point.x), Mathf.RoundToInt(hit.point.y), Mathf.RoundToInt(hit.point.z));
 
             CellInfo cell = world.GetCell(pos);
@@ -115,7 +105,6 @@ public class GameManager : MonoBehaviour
             float x = Mathf.Abs(rayNormal.x);
             float y = Mathf.Abs(rayNormal.y);
             float z = Mathf.Abs(rayNormal.z);
-
 
             if (x >= y && x >= z)
             {
@@ -149,8 +138,6 @@ public class GameManager : MonoBehaviour
                 }
             }
 
-            
-
             if (cell.blockType == BlockType.Grass)
             {
                 pos += normal;
@@ -165,9 +152,6 @@ public class GameManager : MonoBehaviour
             GameObject.Instantiate(weaponPrefab, pos, Quaternion.identity);
         }
     }
-
-
-
 }
 
 

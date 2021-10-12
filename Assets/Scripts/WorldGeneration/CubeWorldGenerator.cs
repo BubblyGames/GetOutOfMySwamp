@@ -20,14 +20,14 @@ public class CubeWorldGenerator : MonoBehaviour
     public float rockSize = 3f;
     public float seed = 0f;
 
-    public GameObject floorPrefab;
-    public Material[] materials;
-
     VoxelRenderer voxelRenderer;
     BoxCollider boxCollider;
 
+    public static CubeWorldGenerator worldGeneratorInstance;
+
     private void Awake()
     {
+        worldGeneratorInstance = this;
         voxelRenderer = GetComponent<VoxelRenderer>();
         boxCollider = GetComponent<BoxCollider>();
         boxCollider.size = new Vector3(size - 2, size - 2, size - 2);
