@@ -99,10 +99,12 @@ public class MeshData
                 break;
         }
 
-        AddUV(new Vector2(u, v));
-        AddUV(new Vector2(u, v + .5f));
-        AddUV(new Vector2(u + .5f, v + .5f));
-        AddUV(new Vector2(u + .5f, v));
+        float offset = 0.063f;
+
+        AddUV(new Vector2(u + offset, v + offset));
+        AddUV(new Vector2(u + offset, v + .5f - offset));
+        AddUV(new Vector2(u + .5f - offset, v + .5f - offset));
+        AddUV(new Vector2(u + .5f - offset, v + offset));
 
         AddQuadTriangles();
     }

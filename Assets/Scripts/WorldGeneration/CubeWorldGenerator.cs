@@ -62,7 +62,7 @@ public class CubeWorldGenerator : MonoBehaviour
                     float horizontalNoise = Mathf.PerlinNoise(seed + (i / rockSize), seed + (j / rockSize));
                     float verticalNoise = Mathf.PerlinNoise(seed + (i / rockSize), seed + (k / rockSize));
 
-                    if ((horizontalNoise + verticalNoise) / 2 > (1 - (wallDensity * alpha)))//i == 0 || j == 0 || i == size - 1 || j == size - 1 ||//|| (i == j && i < size - 1)
+                    if (CheckIfSurface(cell) && (horizontalNoise + verticalNoise) / 2 > (1 - (wallDensity * alpha)))//i == 0 || j == 0 || i == size - 1 || j == size - 1 ||//|| (i == j && i < size - 1)
                     {
                         cell.blockType = BlockType.Rock;
                     }
@@ -169,11 +169,28 @@ public class CubeWorldGenerator : MonoBehaviour
                 while (p != null)
                 {
                     Vector3Int normal = GetNormal(cells[p.x, p.y, p.z]);
-                    cells[p.x - normal.x, p.y - normal.y, p.z - normal.z].blockType = BlockType.Path;
-                    pathCells.Add(cells[p.x, p.y, p.z]);
+
+                    CellInfo cellUnder = cells[p.x - normal.x, p.y - normal.y, p.z - normal.z];
+
+                    if (cellUnder.blockType == BlockType.Air)
+                    {
+                        pathCells.Add(cellUnder);
+                    }
+                    else if (cellUnder.blockType == BlockType.Swamp)
+                    {
+                        pathCells.Add(cellUnder);
+                        
+                    }
+                    else
+                    {
+                        cellUnder.blockType = BlockType.Path;
+                        pathCells.Add(cells[p.x, p.y, p.z]);
+                    }
+
                     //floor[p.x, p.y].transform.Translate(-Vector3.forward * 0.1f);
                     p = p.Parent;
                 }
+
                 pathCells.Reverse();
                 paths[i] = new Path(pathCells.ToArray());
             }
