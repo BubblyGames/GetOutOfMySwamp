@@ -4,7 +4,7 @@ using System.Linq;
 using UnityEditor;
 using UnityEngine;
 
-public class WorldGenerator : MonoBehaviour
+/*public class WorldGenerator : MonoBehaviour
 {
     public static WorldGenerator worldGeneratorInstance;
 
@@ -239,4 +239,4 @@ public class WorldGenerator : MonoBehaviour
         }
     }
 #endif
-}
+}*/
