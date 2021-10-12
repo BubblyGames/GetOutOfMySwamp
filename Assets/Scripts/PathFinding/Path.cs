@@ -6,16 +6,18 @@ using UnityEngine.UI;
 
 public class Path
 {
-    CellInfo[] cells;
+    CellInfo3D[] cells3D;
     float spawnWait = 1f;
     float nextSpawnTime = 0;
-    public float Length { get { return cells.Length; } }
+    public float Length { get { return cells3D.Length; } }
 
-    public Path(CellInfo[] cellInfos)
+
+    public Path(CellInfo3D[] cellInfos)
     {
-        cells = cellInfos;
+        cells3D = cellInfos;
     }
-    public Vector3 GetStep(int idx) { return new Vector3(cells[idx].x, cells[idx].y, -1); }
+
+    public Vector3 GetStep(int idx) { return new Vector3(cells3D[idx].x, cells3D[idx].y, cells3D[idx].z); }
 
     public bool CheckSpawn()
     {

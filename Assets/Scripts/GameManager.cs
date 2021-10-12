@@ -4,7 +4,7 @@ using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 
-[RequireComponent(typeof(WorldGenerator))]
+[RequireComponent(typeof(CubeWorldGenerator))]
 /*This manager inicialice the game */
 //TODO: SPLIT MAP GENERATION AND PATH GENERATION INTO COMPONENTS 
 public class GameManager : MonoBehaviour
@@ -12,7 +12,7 @@ public class GameManager : MonoBehaviour
     public GameObject weaponPrefab;
     public GameObject enemyPrefab;
 
-    private WorldGenerator world;
+    private CubeWorldGenerator world;
 
     public Text text;
     public LayerMask floorLayer;
@@ -20,7 +20,7 @@ public class GameManager : MonoBehaviour
 
     private void Awake()
     {
-        world = GetComponent<WorldGenerator>();
+        world = GetComponent<CubeWorldGenerator>();
     }
 
     private void Update()
@@ -35,10 +35,10 @@ public class GameManager : MonoBehaviour
 
         for (int i = 0; i < world.nPaths; i++)
         {
-            if (world.paths[i] != null && world.paths[i].CheckSpawn())
+            /*if (world.paths[i] != null && world.paths[i].CheckSpawn())
             {
                 GameObject.Instantiate(enemyPrefab, world.paths[i].GetStep(0), Quaternion.identity).GetComponent<EnemyBehaviour>().SetPath(world.paths[i]);
-            }
+            }*/
         }
     }
 
@@ -53,11 +53,11 @@ public class GameManager : MonoBehaviour
             Debug.Log(x);
             Debug.Log(y);
 
-            if (world.cells[x, y].state == 1)
+            /*if (world.cells[x, y].state == 1)
             {
                 GameObject.Instantiate(weaponPrefab, obj.transform.position - Vector3.forward, Quaternion.identity);
                 world.cells[x, y].state = 2;
-            }
+            }*/
 
         }
     }
