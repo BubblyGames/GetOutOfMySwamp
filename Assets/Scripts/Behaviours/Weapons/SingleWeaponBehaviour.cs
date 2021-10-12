@@ -2,45 +2,114 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SingleWeaponBehaviour : MonoBehaviour
+public class SingleWeaponBehaviour : WeaponBehaviour
 {
-    public float waitTime = 0.5f;
-    float nextTime = 0;
-    float radious = 4f;
-    public LayerMask lm;
+    public float waitTime = 0f;
+    public float radious = 4f;
 
+    public GameObject[] shotPositions; //0 front, 1 back, 2 right, 3 left
     public GameObject bulletType;
-    float targetDistance;
-    GameObject enermyTargeted;
-    // Start is called before the first frame update
-    void Start()
+    Transform bulletPos;
+
+    //Follow bullets settings
+    GameObject enemy;
+
+
+    //DBullet settings
+    bool directionSet;
+    Vector3 direction;
+
+    private void Start()
     {
-
+        directionSet = false;
     }
-
-    // Update is called once per frame
     void Update()
     {
-        RaycastHit[] hits = Physics.SphereCastAll(transform.position, radious, transform.forward, radious, lm);
+
+        RaycastHit[] hits = Physics.SphereCastAll(transform.position, radious, transform.forward, radious, enemyLayerMask);
         if (hits.Length > 0)
         {
-            enermyTargeted = hits[0].collider.gameObject;
-            targetDistance = (enermyTargeted.transform.position - gameObject.transform.position).magnitude;
-            if (Time.time > nextTime)
+            if (Time.time > nextAttackTime)
             {
-                nextTime = Time.time + waitTime;
+                nextAttackTime = Time.time + waitTime;
 
                 {
-                    GameObject enemy = hits[0].collider.gameObject;
+
+                    enemy = hits[0].collider.gameObject;
+
+
+                    if (directionSet == false)
+                    {
+                        directionSet = true;
+                        direction = enemy.transform.position-gameObject.transform.position;  
+                        bulletPos = chooseBulletPos();
+          
+                    }
+                    else if (bulletType.name != "DBullet")
+                    {
+                        bulletPos = chooseBulletPos();
+                    }
+
+
                     if (enemy != null)
                     {
-                        GameObject bullet = Instantiate(bulletType, gameObject.transform.position, Quaternion.identity);
-                        bullet.GetComponent<BulletBehaviour>().SetBulletBehaviour(enemy, gameObject.transform);
 
+                        GameObject bullet = Instantiate(bulletType, bulletPos.position, Quaternion.identity);
+                        if (bulletType.name == "Bullet")
+                        {
+                            bullet.GetComponent<BulletBehaviour>().SetBulletBehaviour(enemy, bulletPos);
+                        }
+                        else if (bulletType.name == "DBullet")
+                        {
+
+                            bullet.GetComponent<DBulletBehaviour>().SetBulletBehaviour(direction);
+                        }
                     }
+
                 }
 
             }
         }
     }
+
+    Transform chooseBulletPos()
+    {
+        Vector3 enemyVector = enemy.transform.position - gameObject.transform.position;
+        float angle = Mathf.Atan2(enemyVector.x, enemyVector.y) * Mathf.Rad2Deg;
+        Transform finalShotPos;
+        if (angle > 0)
+        {
+            if (angle <= 45)
+            {
+                finalShotPos = shotPositions[0].transform;
+            }
+            else if (angle >= 135)
+            {
+                finalShotPos = shotPositions[1].transform;
+            }
+            else
+            {
+                finalShotPos = shotPositions[2].transform;
+            }
+
+        }
+        else
+        {
+            if (angle >= -45)
+            {
+                finalShotPos = shotPositions[0].transform;
+            }
+            else if (angle <= -135)
+            {
+                finalShotPos = shotPositions[1].transform;
+            }
+            else
+            {
+                finalShotPos = shotPositions[3].transform;
+            }
+
+        }
+        return finalShotPos;
+    }
+
 }

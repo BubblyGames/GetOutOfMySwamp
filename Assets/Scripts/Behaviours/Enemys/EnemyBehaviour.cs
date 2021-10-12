@@ -6,8 +6,14 @@ using UnityEngine;
 public abstract class EnemyBehaviour : MonoBehaviour
 {
 
+    [SerializeField] protected int startHealth;
+    [SerializeField] protected int healthPoints;
+    [SerializeField] protected int moneyValue;
+    [SerializeField] protected int scoreValue;
     [SerializeField]
     private float speed = 1f;
+
+    private int damage = 10;
     
     [SerializeField]
     private int health = 10;
@@ -39,6 +45,7 @@ public abstract class EnemyBehaviour : MonoBehaviour
             else
             {
                 //Damage
+                GameManager.gameInstance.dealDamageToBase(this.damage);
                 Destroy(this.gameObject);
             }
         }
@@ -51,7 +58,7 @@ public abstract class EnemyBehaviour : MonoBehaviour
         health -= damage;
         if(health < 0)
         {
-            Destroy(gameObject);
+            Die();
             return true;
         }
 
@@ -60,4 +67,13 @@ public abstract class EnemyBehaviour : MonoBehaviour
         return false;
     }
 
+    public virtual void Die()
+    {
+        GameManager.gameInstance.addMoney(moneyValue);
+        WaveController.waveControllerInstance.activeEnemies--;
+
+        //Particles and sound
+
+        Destroy(gameObject);
+    }
 }

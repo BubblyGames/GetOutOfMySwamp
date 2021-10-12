@@ -17,7 +17,7 @@ public abstract class WeaponBehaviour : MonoBehaviour
     //This layer will be used to check for enemys
     public LayerMask enemyLayerMask;
 
-    protected abstract void Attack();
+    protected virtual void Attack() { }
 
     protected void Update()
     {
