@@ -39,7 +39,7 @@ public class GameManager : MonoBehaviour
         {
             if (world.paths[i] != null && world.paths[i].CheckSpawn())
             {
-                //GameObject.Instantiate(enemyPrefab, world.paths[i].GetStep(0), Quaternion.identity).GetComponent<EnemyBehaviour>().SetPath(world.paths[i]);
+                GameObject.Instantiate(enemyPrefab, world.paths[i].GetStep(0), Quaternion.identity).GetComponent<EnemyBehaviour>().SetPath(world.paths[i]);
             }
         }
     }
