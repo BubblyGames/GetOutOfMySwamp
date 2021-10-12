@@ -4,6 +4,9 @@ using System.Linq;
 using UnityEditor;
 using UnityEngine;
 
+//https://www.youtube.com/watch?v=s5mAf-VMgCM&list=PLcRSafycjWFdYej0h_9sMD6rEUCpa7hDH&index=30
+
+[RequireComponent(typeof(BoxCollider))]
 public class CubeWorldGenerator : MonoBehaviour
 {
     public int size = 20;
@@ -21,10 +24,14 @@ public class CubeWorldGenerator : MonoBehaviour
     public Material[] materials;
 
     VoxelRenderer voxelRenderer;
+    BoxCollider boxCollider;
 
     private void Awake()
     {
         voxelRenderer = GetComponent<VoxelRenderer>();
+        boxCollider = GetComponent<BoxCollider>();
+        boxCollider.size = new Vector3(size - 2, size - 2, size - 2);
+        boxCollider.center = new Vector3((size - 1) / 2f, (size - 1) / 2f, (size - 1) / 2f);
     }
 
     void Start()
@@ -120,12 +127,15 @@ public class CubeWorldGenerator : MonoBehaviour
         }
     }
 
-    bool CheckIfSurface(CellInfo cell)
+    public bool CheckIfSurface(CellInfo cell)
     {
         return cell.x == 0 || cell.x == size - 1 ||
             cell.y == 0 || cell.y == size - 1 ||
             cell.z == 0 || cell.z == size - 1;
     }
+
+    public CellInfo GetCell(int x, int y, int z) { return cells[x, y, z]; }
+    public CellInfo GetCell(Vector3Int p) { return cells[p.x, p.y, p.z]; }
 
     private void GeneratePaths(int endX, int endY, int endZ)
     {
@@ -152,7 +162,7 @@ public class CubeWorldGenerator : MonoBehaviour
 
             cells[x, y + 1, z].blockType = BlockType.Path;
 
-            Node3D p = FindPath(nPaths, cells[x, y, z], cells[endX, endY, endZ]);
+            Node p = FindPath(nPaths, cells[x, y, z], cells[endX, endY, endZ]);
             if (p != null)
             {
                 List<CellInfo> pathCells = new List<CellInfo>();
@@ -170,38 +180,45 @@ public class CubeWorldGenerator : MonoBehaviour
         }
     }
 
-    private Vector3Int GetNormal(CellInfo cellInfo)
+    public Vector3Int GetNormal(CellInfo cellInfo)
     {
+        Vector3Int result = Vector3Int.zero;
+
         if (cellInfo.x == 0)
-            return Vector3Int.left;
+            result += Vector3Int.left;
 
         if (cellInfo.x == size - 1)
-            return Vector3Int.right;
+            result += Vector3Int.right;
 
         if (cellInfo.y == 0)
-            return Vector3Int.down;
+            result += Vector3Int.down;
 
         if (cellInfo.y == size - 1)
-            return Vector3Int.up;
+            result += Vector3Int.up;
 
         if (cellInfo.z == 0)
-            return Vector3Int.back;
+            result += Vector3Int.back;
 
         if (cellInfo.z == size - 1)
-            return Vector3Int.forward;
+            result += Vector3Int.forward;
 
-        return Vector3Int.zero;
+        return result;
     }
 
-    Node3D FindPath(int nPaths, CellInfo start, CellInfo end)
+    public BlockType CheckBlockType(int x, int y, int z)
     {
-        Node3D current;
-        Node3D firstNodo;
+        return cells[x, y, z].blockType;
+    }
 
-        List<Node3D> openList = new List<Node3D>();
-        List<Node3D> closedList = new List<Node3D>();
+    Node FindPath(int nPaths, CellInfo start, CellInfo end)
+    {
+        Node current;
+        Node firstNodo;
 
-        firstNodo = new Node3D(start);
+        List<Node> openList = new List<Node>();
+        List<Node> closedList = new List<Node>();
+
+        firstNodo = new Node(start);
 
         //Primer nodo la posici�n incial con padre null
         firstNodo.ComputeHScore(end.x, end.y, end.z);
@@ -237,7 +254,7 @@ public class CubeWorldGenerator : MonoBehaviour
                     {
                         //if neighbour no esta en open
                         bool IsInOpen = false;
-                        foreach (Node3D nf in openList)
+                        foreach (Node nf in openList)
                         {
                             if (nf.cell.id == neighbour.id)
                             {
@@ -247,7 +264,7 @@ public class CubeWorldGenerator : MonoBehaviour
                         }
 
                         bool IsInClosed = false;
-                        foreach (Node3D nf in closedList)
+                        foreach (Node nf in closedList)
                         {
                             if (nf.cell.id == neighbour.id)
                             {
@@ -258,7 +275,7 @@ public class CubeWorldGenerator : MonoBehaviour
 
                         if (!IsInOpen && !IsInClosed)
                         {
-                            Node3D n = new Node3D(neighbour);
+                            Node n = new Node(neighbour);
                             n.ComputeHScore(end.x, end.y, end.z);
                             n.Parent = current;
                             n.cell = cells[n.x, n.y, n.z];
@@ -288,6 +305,9 @@ public class CubeWorldGenerator : MonoBehaviour
             {
                 for (int k = -1; k <= 1; k++)
                 {
+                    if (Mathf.Abs(i) + Mathf.Abs(j) + Mathf.Abs(k) > 1)
+                        continue;
+
                     int x = current.x + i;
                     int y = current.y + j;
                     int z = current.z + k;

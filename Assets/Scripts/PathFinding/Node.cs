@@ -1,13 +1,13 @@
 ﻿using System;
 
-public class Node3D
+public class Node
 {
     public int x, y, z;
     public int h;
-    public Node3D Parent;
+    public Node Parent;
     public CellInfo cell;
 
-    public Node3D(CellInfo cell)
+    public Node(CellInfo cell)
     {
         this.cell = cell;
         x = cell.x;
