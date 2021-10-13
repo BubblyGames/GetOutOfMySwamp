@@ -28,5 +28,6 @@ public class VoxelRenderer : MonoBehaviour
 
         mesh.uv = meshData.uvs.Concat(meshData.waterMesh.uvs).ToArray();
         mesh.RecalculateNormals();
+        mesh.RecalculateTangents();
     }
 }
