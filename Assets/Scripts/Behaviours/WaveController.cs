@@ -63,7 +63,7 @@ public class WaveController : MonoBehaviour
         {
             isBetweenWaves = false;
             isWaveActive = false;
-        
+
         }
         else if (isBetweenWaves)
         {
@@ -101,29 +101,30 @@ public class WaveController : MonoBehaviour
 
     IEnumerator SpawnWave()
     {
-        Wave currentWave = new Wave() ;
+        Wave currentWave = new Wave();
         if (waveCount >= waves.Length)
         {
             GameManager.gameInstance.levelCompleted();
         }
         else
         {
-            currentWave = waves[waveCount];        
+            currentWave = waves[waveCount];
         }
-        
+
 
         for (int i = 0; i < currentWave.enemyAmount; i++)
         {
             int pathId = UnityEngine.Random.Range(0, CubeWorldGenerator.worldGeneratorInstance.nPaths);
-            while (CubeWorldGenerator.worldGeneratorInstance.paths[pathId] == null)
+            /*while (CubeWorldGenerator.worldGeneratorInstance.paths[pathId] == null)
             {
-                pathId = UnityEngine.Random.Range(0, CubeWorldGenerator.worldGeneratorInstance.nPaths);
-            }
+                //Might get trapped if there are no paths
+                pathId = UnityEngine.Random.Range(0, CubeWorldGenerator.worldGeneratorInstance.nPaths); 
+            }*/
             enemySpawner.SpawnEnemy(currentWave.enemyPrefab, CubeWorldGenerator.worldGeneratorInstance.paths[pathId]);
             yield return new WaitForSeconds(1f / currentWave.spawnRate);
         }
 
-       
+
     }
 
     void StopWave()
