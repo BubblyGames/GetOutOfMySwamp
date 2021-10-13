@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BulletBehaviour : MonoBehaviour
+public class SmartBulletBehaviour : MonoBehaviour
 {
     int damage=3;
     GameObject target;

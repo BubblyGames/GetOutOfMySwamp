@@ -23,7 +23,7 @@ public class SingleWeaponBehaviour : WeaponBehaviour
     {
         directionSet = false;
     }
-    void Update()
+    new void Update()
     {
 
         RaycastHit[] hits = Physics.SphereCastAll(transform.position, radious, transform.forward, radious, enemyLayerMask);
@@ -57,12 +57,12 @@ public class SingleWeaponBehaviour : WeaponBehaviour
                         GameObject bullet = Instantiate(bulletType, bulletPos.position, Quaternion.identity);
                         if (bulletType.name == "Bullet")
                         {
-                            bullet.GetComponent<BulletBehaviour>().SetBulletBehaviour(enemy, bulletPos);
+                            bullet.GetComponent<SmartBulletBehaviour>().SetBulletBehaviour(enemy, bulletPos);
                         }
                         else if (bulletType.name == "DBullet")
                         {
 
-                            bullet.GetComponent<DBulletBehaviour>().SetBulletBehaviour(direction);
+                            bullet.GetComponent<Bullet>().SetBulletBehaviour(direction);
                         }
                     }
 
