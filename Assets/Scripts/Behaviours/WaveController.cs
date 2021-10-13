@@ -36,8 +36,6 @@ public class WaveController : MonoBehaviour
         enemySpawner = GetComponent<EnemySpawner>();
     }
 
-
-
     public void Start()
     {
         isWaveActive = false;
@@ -78,6 +76,11 @@ public class WaveController : MonoBehaviour
     public void AddToActiveEnemies()
     {
         activeEnemies++;
+    }
+
+    public void ReduceActiveEnemies()
+    {
+        activeEnemies--;
     }
 
     IEnumerator SpawnWave()

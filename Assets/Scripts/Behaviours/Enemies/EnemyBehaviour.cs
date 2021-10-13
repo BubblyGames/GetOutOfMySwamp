@@ -47,6 +47,7 @@ public abstract class EnemyBehaviour : MonoBehaviour
                 //Damage
                 GameManager.gameInstance.dealDamageToBase(this.damage);
                 Destroy(this.gameObject);
+                WaveController.waveControllerInstance.ReduceActiveEnemies();
             }
         }
     }
@@ -70,7 +71,7 @@ public abstract class EnemyBehaviour : MonoBehaviour
     public virtual void Die()
     {
         GameManager.gameInstance.addMoney(moneyValue);
-        WaveController.waveControllerInstance.activeEnemies--;
+        WaveController.waveControllerInstance.ReduceActiveEnemies();
 
         //Particles and sound
 
