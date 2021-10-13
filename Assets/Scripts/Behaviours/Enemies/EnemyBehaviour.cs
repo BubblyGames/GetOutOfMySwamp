@@ -71,7 +71,8 @@ public abstract class EnemyBehaviour : MonoBehaviour
 
     public virtual void Die()
     {
-        GameManager.gameInstance.addMoney(moneyValue);
+
+        LevelStats.levelStatsInstance.EarnMoney(moneyValue);
         WaveController.waveControllerInstance.ReduceActiveEnemies();
 
         //Particles and sound

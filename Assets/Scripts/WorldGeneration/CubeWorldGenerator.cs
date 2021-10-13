@@ -348,9 +348,12 @@ public class CubeWorldGenerator : MonoBehaviour
                     int y = current.y + j;
                     int z = current.z + k;
 
-                    if isPosInBounds(x,y,z))
+                    if (isPosInBounds(x,y,z))
                     {
-                        if (cells[x, y, z].blockType != BlockType.Air && cells[x, y, z].blockType != BlockType.Swamp)
+                        if (cells[x, y, z].blockType == BlockType.Path)
+                            continue;
+                        
+                        if ((cells[x, y, z].blockType != BlockType.Air && cells[x, y, z].blockType != BlockType.Swamp ))
                             continue;
 
                         result.Add(cells[x, y, z]);
