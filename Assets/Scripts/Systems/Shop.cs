@@ -19,7 +19,7 @@ public class Shop : MonoBehaviour
     {
         if (shopIndex >= 0 && shopIndex <structureBlueprints.Count)
         {
-            //BuildManager.buildManagerInstance.setStructureToBuild(BuildManager.buildManagerInstance.structures[shopIndex]);
+           
             BuildManager.buildManagerInstance.SelectStructureToBuild(selectedStructureBlueprint);
         }
     }
