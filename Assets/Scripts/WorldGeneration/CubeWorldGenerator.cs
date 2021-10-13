@@ -203,6 +203,12 @@ public class CubeWorldGenerator : MonoBehaviour
                 }
 
                 pathCells.Reverse();
+
+                for (int idx = 0; idx < pathCells.Count-5; idx++)
+                {
+                    pathCells[idx].isPath = true;
+                }
+
                 paths[i] = new Path(pathCells.ToArray());
             }
         }
@@ -347,7 +353,7 @@ public class CubeWorldGenerator : MonoBehaviour
 
                     if (x >= 0 && x < size && y >= 0 && y < size && z >= 0 && z < size)
                     {
-                        if (cells[x, y, z].blockType != BlockType.Air && cells[x, y, z].blockType != BlockType.Swamp)
+                        if (cells[x, y, z].isPath || (cells[x, y, z].blockType != BlockType.Air && cells[x, y, z].blockType != BlockType.Swamp))
                             continue;
 
                         result.Add(cells[x, y, z]);
@@ -367,8 +373,8 @@ public class CubeWorldGenerator : MonoBehaviour
 
         foreach (CellInfo cell in cells)
         {
-            if (CheckIfSurface(cell) && cell.explored)
-                Handles.Label(new Vector3(cell.x, cell.y, cell.z), cell.blockType.ToString());
+            if (cell.isPath)
+                Handles.Label(new Vector3(cell.x, cell.y, cell.z), "a");
         }
     }
 #endif
