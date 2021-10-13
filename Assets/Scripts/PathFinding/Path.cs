@@ -9,7 +9,7 @@ public class Path
     CellInfo[] cells3D;
     float spawnWait = 1f;
     float nextSpawnTime = 0;
-    public float Length { get { return cells3D.Length; } }
+    public int Length { get { return cells3D.Length; } }
 
 
     public Path(CellInfo[] cellInfos)

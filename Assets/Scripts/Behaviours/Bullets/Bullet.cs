@@ -10,11 +10,9 @@ public class Bullet : MonoBehaviour
     Rigidbody rb;
     Vector3 moveQuantity;
     float speed=0.002f;
+  
     bool shooted = false;
 
-    //Radius of effect
-    float radious = 5f;
-    public LayerMask enemyLayerMask;
     void Awake()
     {
         rb = gameObject.GetComponent<Rigidbody>();
@@ -47,12 +45,7 @@ public class Bullet : MonoBehaviour
     {
         if (collision.collider.gameObject.CompareTag("Enemy"))
         {
-            RaycastHit[] hits = Physics.SphereCastAll(transform.position, radious, transform.forward, radious, enemyLayerMask);
-            for (int i = 0; i < hits.Length; i++)
-            {
-                collision.collider.gameObject.GetComponent<EnemyBehaviour>().Hurt(damage);
-            }
-           
+            collision.collider.gameObject.GetComponent<EnemyBehaviour>().Hurt(damage);
             Destroy(gameObject);
         }
 

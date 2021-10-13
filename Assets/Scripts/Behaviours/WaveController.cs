@@ -36,8 +36,6 @@ public class WaveController : MonoBehaviour
         enemySpawner = GetComponent<EnemySpawner>();
     }
 
-
-
     public void Start()
     {
         isWaveActive = false;
@@ -80,6 +78,11 @@ public class WaveController : MonoBehaviour
         activeEnemies++;
     }
 
+    public void ReduceActiveEnemies()
+    {
+        activeEnemies--;
+    }
+
     IEnumerator SpawnWave()
     {
         Wave currentWave = waves[waveCount];
@@ -87,6 +90,10 @@ public class WaveController : MonoBehaviour
         for (int i = 0; i < currentWave.enemyAmount; i++)
         {
             int pathId = UnityEngine.Random.Range(0, CubeWorldGenerator.worldGeneratorInstance.nPaths);
+            while (CubeWorldGenerator.worldGeneratorInstance.paths[pathId] == null)
+            {
+                pathId = UnityEngine.Random.Range(0, CubeWorldGenerator.worldGeneratorInstance.nPaths);
+            }
             enemySpawner.SpawnEnemy(currentWave.enemyPrefab, CubeWorldGenerator.worldGeneratorInstance.paths[pathId]);
             yield return new WaitForSeconds(1f / currentWave.spawnRate);
         }
