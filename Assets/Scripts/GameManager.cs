@@ -40,13 +40,13 @@ public class GameManager : MonoBehaviour
 
     private void Awake()
     {
-        world = GetComponent<CubeWorldGenerator>();
-        center.transform.position = Vector3.one * (world.size / 2);
-
         gameInstance = this;
+        world = GetComponent<CubeWorldGenerator>();
         waveController = GetComponent<WaveController>();
         scoreSystem = GetComponent<ScoreSystem>();
-        currentBaseHealthPoints = startBaseHealthPoints;
+
+        center.transform.position = Vector3.one * (world.size / 2); //set center tu middle of the cube
+        currentBaseHealthPoints = startBaseHealthPoints; // initialzing 
     }
 
     private void Start()
@@ -57,7 +57,8 @@ public class GameManager : MonoBehaviour
     private void Update()
     {
         //transform.Rotate(Vector3.forward,Time.deltaTime*10);
-        text.text = (1 / Time.deltaTime).ToString();
+
+        text.text = (1 / Time.deltaTime).ToString(); //FpS text
 
         if (Input.GetMouseButtonDown(0))
         {
@@ -78,6 +79,7 @@ public class GameManager : MonoBehaviour
         {
             //Game Over
             OnGameLost?.Invoke();
+            Debug.Log("Game Over");
 
             // Show Game Over Screen
             //Go to menu

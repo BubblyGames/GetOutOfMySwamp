@@ -5,23 +5,23 @@ using UnityEngine;
 /*Basic Enemy Class, all kind of enemys  will inherit from this*/
 public abstract class EnemyBehaviour : MonoBehaviour
 {
-
+    [Header("Stats")]
     [SerializeField] protected int startHealth;
     [SerializeField] protected int healthPoints;
+    [SerializeField] protected float speed = 1f;
+
+    [Header("Rewards")]
     [SerializeField] protected int moneyValue;
     [SerializeField] protected int scoreValue;
-    [SerializeField]
-    private float speed = 1f;
 
-    private int damage = 10;
     
-    [SerializeField]
-    private int health = 10;
-    //Path the enmy will follow
+    [Space]
+    public int damage = 10;
+    
+
+    //Path the enemy will follow
     private Path path;
-    
     private int nextIndexPath = 1;
-
     private float lerpProgression = 0;
 
 
@@ -42,6 +42,7 @@ public abstract class EnemyBehaviour : MonoBehaviour
                 nextIndexPath++;
                 lerpProgression = 0;
             }
+            //if the enemy reach the end of the path deal damge to base
             else
             {
                 //Damage
@@ -55,14 +56,14 @@ public abstract class EnemyBehaviour : MonoBehaviour
 
     public bool Hurt(int damage)
     {
-        health -= damage;
-        if(health < 0)
+        healthPoints -= damage;
+        if(healthPoints < 0)
         {
             Die();
             return true;
         }
 
-        transform.localScale = Vector3.one * ((float)health / 10f);
+        transform.localScale = Vector3.one * ((float)healthPoints / 10f);
 
         return false;
     }

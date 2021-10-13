@@ -23,6 +23,7 @@ public class WaveController : MonoBehaviour
     public bool isWaveActive;
     public bool isBetweenWaves;
 
+    IEnumerator spawnCoroutine;
 
     public int waveCount; // Wave its being played
 
@@ -46,6 +47,8 @@ public class WaveController : MonoBehaviour
         waveCount = 0;
 
         timeVariable = Time.time + (.5f * timeBeforeRoundStarts);
+        GameManager.gameInstance.OnGameLost += StopWave;
+        spawnCoroutine = SpawnWave();
 
     }
 
@@ -58,7 +61,7 @@ public class WaveController : MonoBehaviour
             {
                 isBetweenWaves = false;
                 isWaveActive = true;
-                StartCoroutine(SpawnWave());
+                StartCoroutine(spawnCoroutine);
                 return;
             }
         }
@@ -96,5 +99,10 @@ public class WaveController : MonoBehaviour
             //After the last wave show end
             //TODO: add end of level
         }
+    }
+
+    void StopWave()
+    {
+        StopCoroutine(spawnCoroutine);
     }
 }
