@@ -10,7 +10,6 @@ public class CellInfo
     public int id { get { return x + (1000 * y) + (1000000 * z); } }
     public BlockType blockType = BlockType.Air;
     public bool explored = false;
-    public bool isPath = false;
 
     public CellInfo(int x, int y, int z)
 
