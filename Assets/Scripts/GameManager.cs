@@ -17,36 +17,35 @@ public class GameManager : MonoBehaviour
 
     public static GameManager gameInstance;
 
-    [SerializeField] private int startBaseHealthPoints; //Starting Health points the defenders base have
-    [SerializeField] private int currentBaseHealthPoints; //Current Health points the defenders base have
-    [SerializeField] private int currentMoney = 0; //Amount of money the player can spend
-
-    public GameObject weaponPrefab;
-    //public GameObject enemyPrefab;
 
     //References
     private CubeWorldGenerator world;
     private ScoreSystem scoreSystem;
     private WaveController waveController;
+    private LevelStats levelStats;
+    private BuildManager buildManager;
+    private Shop shop;
 
     //Actions
-    public event Action OnGameStarted, OnGameLost, OnScoreIncremented;
+    public event Action OnGameStarted, OnGameLost, OnGameCompleted, OnDamageTaken, OnScoreIncremented;
     //TODO: increment score when killing enemys.
 
     public Text text;
     public LayerMask floorLayer;
     public Transform center;
-    // Start is called before the first frame update
+    
 
     private void Awake()
     {
-        world = GetComponent<CubeWorldGenerator>();
-        center.transform.position = Vector3.one * (world.size / 2);
-
         gameInstance = this;
+        world = GetComponent<CubeWorldGenerator>();
         waveController = GetComponent<WaveController>();
         scoreSystem = GetComponent<ScoreSystem>();
-        currentBaseHealthPoints = startBaseHealthPoints;
+        levelStats = GetComponent<LevelStats>();
+        buildManager = GetComponent<BuildManager>();
+        shop = GetComponent<Shop>();
+
+        center.transform.position = Vector3.one * (world.size / 2); //set center tu middle of the cube
     }
 
     private void Start()
@@ -57,7 +56,8 @@ public class GameManager : MonoBehaviour
     private void Update()
     {
         //transform.Rotate(Vector3.forward,Time.deltaTime*10);
-        text.text = (1 / Time.deltaTime).ToString();
+
+        text.text = (1 / Time.deltaTime).ToString(); //FpS text
 
         if (Input.GetMouseButtonDown(0))
         {
@@ -65,25 +65,31 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    public void addMoney(int quantity)
-    {
-        currentMoney += quantity;
-    }
 
-    public void dealDamageToBase(int damageDealt)
+    public void dealDamageToBase(int damageTaken)
     {
-
-        currentBaseHealthPoints -= damageDealt;
-        if (currentBaseHealthPoints <= 0)
+        if (!LevelStats.levelStatsInstance.infinteHP)
+        {
+            LevelStats.levelStatsInstance.ReceiveDamage(damageTaken);
+        }
+        if (LevelStats.levelStatsInstance.currentBaseHealthPoints <= 0)
         {
             //Game Over
             OnGameLost?.Invoke();
+            Debug.Log("Game Over");
 
             // Show Game Over Screen
             //Go to menu
 
 
         }
+    }
+
+    public void levelCompleted()
+    {
+        Debug.Log("levelCompleted");
+        OnGameCompleted?.Invoke();
+
     }
 
     private void SpawnWeapon()
@@ -149,7 +155,12 @@ public class GameManager : MonoBehaviour
                 pos += normal;
             }
 
-            GameObject.Instantiate(weaponPrefab, pos, Quaternion.identity);
+
+            if (!BuildManager.buildManagerInstance.canBuild)
+                return;
+
+            BuildManager.buildManagerInstance.BuildStructureOn(pos);
+            
         }
     }
 }

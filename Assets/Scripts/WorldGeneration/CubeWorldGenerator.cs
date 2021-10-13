@@ -62,8 +62,9 @@ public class CubeWorldGenerator : MonoBehaviour
                     float horizontalNoise = Mathf.PerlinNoise(seed + (i / rockSize), seed + (j / rockSize));
                     float verticalNoise = Mathf.PerlinNoise(seed + (i / rockSize), seed + (k / rockSize));
 
-                    //Remove edges
-                    if (CheckIfSurface(cell) && Mathf.Sqrt(horizontalNoise * verticalNoise) > (1 - (wallDensity * alpha)))//i == 0 || j == 0 || i == size - 1 || j == size - 1 ||//|| (i == j && i < size - 1)
+                    float perlin = Perlin3D((seed + (i / rockSize)), (seed + (j / rockSize)), (seed + (k / rockSize)));
+
+                    if (CheckIfSurface(cell) && perlin > (1 - (wallDensity * alpha))) //i == 0 || j == 0 || i == size - 1 || j == size - 1 ||//|| (i == j && i < size - 1)
                     {
                         cell.blockType = BlockType.Rock;
                     }
@@ -80,7 +81,7 @@ public class CubeWorldGenerator : MonoBehaviour
         GenerateSwamp(endX, endY, endZ);
         GeneratePaths(endX, endY, endZ);
 
-        //Add geomtry
+        //Add geometry
         for (int i = 0; i < size; i++)
         {
             for (int j = 0; j < size; j++)
@@ -141,6 +142,7 @@ public class CubeWorldGenerator : MonoBehaviour
     private void GeneratePaths(int endX, int endY, int endZ)
     {
         paths = new Path[nPaths];
+
         for (int i = 0; i < nPaths; i++)
         {
             int x = Random.Range(2, size - 3);
@@ -252,17 +254,17 @@ public class CubeWorldGenerator : MonoBehaviour
     Node FindPath(int nPaths, CellInfo start, CellInfo end)
     {
         Node current;
-        Node firstNodo;
+        Node firstNode;
 
         List<Node> openList = new List<Node>();
         List<Node> closedList = new List<Node>();
 
-        firstNodo = new Node(start);
+        firstNode = new Node(start);
 
-        //Primer nodo la posici�n incial con padre null
-        firstNodo.ComputeHScore(end.x, end.y, end.z);
-        firstNodo.Parent = null;
-        openList.Add(firstNodo);
+        //First node, with starting position and null parent
+        firstNode.ComputeHScore(end.x, end.y, end.z);
+        firstNode.Parent = null;
+        openList.Add(firstNode);
 
 
 
@@ -270,14 +272,15 @@ public class CubeWorldGenerator : MonoBehaviour
         while (openList.Count > 0 && count < 1000)
         {
             count++;
-            //Ordenar la lista en orden ascendente de h
+            //Sorting the list in "h" in increasing order
             openList = openList.OrderBy(o => o.h).ToList();
 
-            //Mira el primer nodo de la lista
+            //Check lists's first node
             current = openList[0];
             closedList.Add(current);
             openList.Remove(current);
-            //Si el primer nodo es goal, returns current Node3D
+
+            //If first node is goal,returns current Node3D
             if (current.cell.blockType == BlockType.Swamp)
             {
                 Debug.Log("Success: " + count.ToString());
@@ -285,7 +288,7 @@ public class CubeWorldGenerator : MonoBehaviour
             }
             else
             {
-                //Expande vecinos (calcula coste de cada uno, etc)y los a�ade en la lista
+                //Expands neightbors, (compute cost of each one) and add them to the list
                 CellInfo[] neighbours = WalkableNeighbours(current.cell);
                 foreach (CellInfo neighbour in neighbours)
                 {
@@ -351,7 +354,7 @@ public class CubeWorldGenerator : MonoBehaviour
                     int y = current.y + j;
                     int z = current.z + k;
 
-                    if (x >= 0 && x < size && y >= 0 && y < size && z >= 0 && z < size)
+                    if (isPosInBounds(x,y,z))
                     {
                         if (cells[x, y, z].isPath || (cells[x, y, z].blockType != BlockType.Air && cells[x, y, z].blockType != BlockType.Swamp))
                             continue;
@@ -364,6 +367,27 @@ public class CubeWorldGenerator : MonoBehaviour
         }
 
         return result.ToArray();
+    }
+
+    public float Perlin3D(float x, float y, float z)
+    {
+        //Get all three Permutations of noise for X, Y and Z
+        float XY = Mathf.PerlinNoise(x, y);
+        float YZ = Mathf.PerlinNoise(y, z);
+        float XZ = Mathf.PerlinNoise(x, z);
+
+        //And their reverses
+        float YX = Mathf.PerlinNoise(y, x);
+        float ZY = Mathf.PerlinNoise(z, y);
+        float ZX = Mathf.PerlinNoise(z, x);
+
+        float XYZ = XY + YZ + XZ + YX + ZY + ZX;
+        return XYZ / 6;
+    }
+
+    public bool isPosInBounds(int coordX, int coordY, int coordZ)
+    {
+        return coordX >= 0 && coordX < size && coordY >= 0 && coordY < size && coordZ >= 0 && coordZ < size;
     }
 
 #if UNITY_EDITOR

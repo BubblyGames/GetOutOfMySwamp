@@ -22,7 +22,7 @@ public class WaveController : MonoBehaviour
 
     public bool isWaveActive;
     public bool isBetweenWaves;
-
+    public bool allWavesCleared;
 
     public int waveCount; // Wave its being played
 
@@ -44,19 +44,34 @@ public class WaveController : MonoBehaviour
         waveCount = 0;
 
         timeVariable = Time.time + (.5f * timeBeforeRoundStarts);
+        GameManager.gameInstance.OnGameLost += StopWave;
+        GameManager.gameInstance.OnGameLost += LevelCompleted;
 
     }
 
+    private void LevelCompleted()
+    {
+        if (LevelStats.levelStatsInstance.currentBaseHealthPoints > 0)
+        {
+            allWavesCleared = true;
+        }
+    }
 
     void Update()
     {
-        if (isBetweenWaves)
+        if (allWavesCleared)
+        {
+            isBetweenWaves = false;
+            isWaveActive = false;
+        
+        }
+        else if (isBetweenWaves)
         {
             if (Time.time >= timeVariable)
             {
                 isBetweenWaves = false;
                 isWaveActive = true;
-                StartCoroutine(SpawnWave());
+                StartCoroutine("SpawnWave");
                 return;
             }
         }
@@ -71,6 +86,7 @@ public class WaveController : MonoBehaviour
                 waveCount++;
             }
         }
+
     }
 
     public void AddToActiveEnemies()
@@ -85,7 +101,16 @@ public class WaveController : MonoBehaviour
 
     IEnumerator SpawnWave()
     {
-        Wave currentWave = waves[waveCount];
+        Wave currentWave = new Wave() ;
+        if (waveCount >= waves.Length)
+        {
+            GameManager.gameInstance.levelCompleted();
+        }
+        else
+        {
+            currentWave = waves[waveCount];        
+        }
+        
 
         for (int i = 0; i < currentWave.enemyAmount; i++)
         {
@@ -98,10 +123,11 @@ public class WaveController : MonoBehaviour
             yield return new WaitForSeconds(1f / currentWave.spawnRate);
         }
 
-        if (waveCount == waves.Length)
-        {
-            //After the last wave show end
-            //TODO: add end of level
-        }
+       
+    }
+
+    void StopWave()
+    {
+        StopCoroutine("SpawnWave");
     }
 }
