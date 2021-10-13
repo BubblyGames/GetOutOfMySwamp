@@ -884,7 +884,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   size: 20
-  nPaths: 3
+  nPaths: 1
   wallDensity: 0.45
   rockSize: 3
   seed: 0
