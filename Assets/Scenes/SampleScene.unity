@@ -956,7 +956,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 14
+  orthographic size: 20
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -1664,7 +1664,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1750140362}
   - component: {fileID: 1750140361}
-  - component: {fileID: 1750140360}
   m_Layer: 0
   m_Name: Camera
   m_TagString: Untagged
@@ -1672,14 +1671,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!81 &1750140360
-AudioListener:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1750140359}
-  m_Enabled: 1
 --- !u!20 &1750140361
 Camera:
   m_ObjectHideFlags: 0
@@ -1706,8 +1697,8 @@ Camera:
   near clip plane: 0.3
   far clip plane: 1000
   field of view: 60
-  orthographic: 0
-  orthographic size: 5
+  orthographic: 1
+  orthographic size: 20
   m_Depth: 0
   m_CullingMask:
     serializedVersion: 2
