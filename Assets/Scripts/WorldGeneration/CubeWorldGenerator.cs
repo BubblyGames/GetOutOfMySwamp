@@ -62,7 +62,8 @@ public class CubeWorldGenerator : MonoBehaviour
                     float horizontalNoise = Mathf.PerlinNoise(seed + (i / rockSize), seed + (j / rockSize));
                     float verticalNoise = Mathf.PerlinNoise(seed + (i / rockSize), seed + (k / rockSize));
 
-                    if ((horizontalNoise + verticalNoise) / 2 > (1 - (wallDensity * alpha)))//i == 0 || j == 0 || i == size - 1 || j == size - 1 ||//|| (i == j && i < size - 1)
+                    //Remove edges
+                    if (CheckIfSurface(cell) && Mathf.Sqrt(horizontalNoise * verticalNoise) > (1 - (wallDensity * alpha)))//i == 0 || j == 0 || i == size - 1 || j == size - 1 ||//|| (i == j && i < size - 1)
                     {
                         cell.blockType = BlockType.Rock;
                     }
@@ -169,11 +170,38 @@ public class CubeWorldGenerator : MonoBehaviour
                 while (p != null)
                 {
                     Vector3Int normal = GetNormal(cells[p.x, p.y, p.z]);
-                    cells[p.x - normal.x, p.y - normal.y, p.z - normal.z].blockType = BlockType.Path;
-                    pathCells.Add(cells[p.x, p.y, p.z]);
+                    CellInfo cell = cells[p.x, p.y, p.z];
+                    CellInfo cellUnder = cells[p.x - normal.x, p.y - normal.y, p.z - normal.z];
+
+                    if (cellUnder.blockType != BlockType.Swamp && cellUnder.blockType != BlockType.Air)
+                    {
+                        cellUnder.blockType = BlockType.Path;
+                        cell = cells[p.x, p.y, p.z];
+                    }
+                    else
+                    {
+                        if (cellUnder.blockType == BlockType.Air)
+                        {
+                            int c = 0;
+                            while (cellUnder.blockType == BlockType.Air && c<100)
+                            {
+                                cell = cellUnder;
+                                cellUnder = cells[cell.x - normal.x, cell.y - normal.y, cell.z - normal.z];
+                                c++;
+                            }
+                        }
+
+                        if (cellUnder.blockType == BlockType.Swamp)
+                        {
+                            cell = cellUnder;
+                        }
+                    }
+
                     //floor[p.x, p.y].transform.Translate(-Vector3.forward * 0.1f);
+                    pathCells.Add(cell);
                     p = p.Parent;
                 }
+
                 pathCells.Reverse();
                 paths[i] = new Path(pathCells.ToArray());
             }
@@ -201,6 +229,11 @@ public class CubeWorldGenerator : MonoBehaviour
 
         if (cellInfo.z == size - 1)
             result += Vector3Int.forward;
+
+        if (result == Vector3Int.zero)
+        {
+            result = Vector3Int.up;
+        }
 
         return result;
     }
@@ -312,8 +345,11 @@ public class CubeWorldGenerator : MonoBehaviour
                     int y = current.y + j;
                     int z = current.z + k;
 
-                    if (x >= 0 && x < size && y >= 0 && y < size && z >= 0 && z < size && (cells[x, y, z].blockType == BlockType.Air || cells[x, y, z].blockType == BlockType.Swamp))
+                    if (x >= 0 && x < size && y >= 0 && y < size && z >= 0 && z < size)
                     {
+                        if (cells[x, y, z].blockType != BlockType.Air && cells[x, y, z].blockType != BlockType.Swamp)
+                            continue;
+
                         result.Add(cells[x, y, z]);
                         cells[x, y, z].explored = true;
                     }
