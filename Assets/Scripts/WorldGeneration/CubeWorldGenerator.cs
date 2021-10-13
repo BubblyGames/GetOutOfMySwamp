@@ -246,6 +246,36 @@ public class CubeWorldGenerator : MonoBehaviour
         return result;
     }
 
+    public Vector3 GetNormal(int x, int y, int z)
+    {
+        Vector3Int result = Vector3Int.zero;
+
+        if ( x == 0)
+            result += Vector3Int.left;
+
+        if ( x == size - 1)
+            result += Vector3Int.right;
+
+        if ( y == 0)
+            result += Vector3Int.down;
+
+        if ( y == size - 1)
+            result += Vector3Int.up;
+
+        if ( z == 0)
+            result += Vector3Int.back;
+
+        if ( z == size - 1)
+            result += Vector3Int.forward;
+
+        if (result == Vector3Int.zero)
+        {
+            result = Vector3Int.up;
+        }
+
+        return result;
+    }
+
     public BlockType CheckBlockType(int x, int y, int z)
     {
         return cells[x, y, z].blockType;

@@ -14,10 +14,10 @@ public abstract class EnemyBehaviour : MonoBehaviour
     [SerializeField] protected int moneyValue;
     [SerializeField] protected int scoreValue;
 
-    
+
     [Space]
     public int damage = 10;
-    
+
 
     //Path the enemy will follow
     private Path path;
@@ -51,6 +51,9 @@ public abstract class EnemyBehaviour : MonoBehaviour
                 WaveController.waveControllerInstance.ReduceActiveEnemies();
             }
         }
+
+        Vector3 target = path.GetStep(nextIndexPath);
+        transform.LookAt(target, CubeWorldGenerator.worldGeneratorInstance.GetNormal((int)target.x, (int)target.y, (int)target.z));
     }
 
     public void SetPath(Path path) { this.path = path; }
@@ -58,7 +61,7 @@ public abstract class EnemyBehaviour : MonoBehaviour
     public bool Hurt(int damage)
     {
         healthPoints -= damage;
-        if(healthPoints < 0)
+        if (healthPoints < 0)
         {
             Die();
             return true;
