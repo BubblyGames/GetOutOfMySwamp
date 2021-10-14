@@ -30,11 +30,11 @@ public class CameraPointsCreator : MonoBehaviour
 
     private void createPositions()
     {
+   
         for (int i = 0; i < 8; i++)
         {
             GameObject _nPos = new GameObject("cameraPosition" + i);
             positions.Add(_nPos);
-            Debug.Log("CREATED");
         }
 
         //set global positions acording to the center and the size
@@ -54,6 +54,7 @@ public class CameraPointsCreator : MonoBehaviour
         {
             positions[i].transform.LookAt(center);
             positions[i].transform.Translate(0, 0, -distanceFromCube);
+            positions[i].transform.position = new Vector3((int)positions[i].transform.position.x, (int)positions[i].transform.position.y, (int)positions[i].transform.position.z);
         }
 
         GameObject.Find("Main Camera").GetComponent<UICameraMovement>().startCamera(positions);
