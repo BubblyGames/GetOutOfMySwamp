@@ -36,30 +36,19 @@ public class SingleWeaponBehaviour : WeaponBehaviour
                 {
 
                     enemy = hits[0].collider.gameObject;
-
-
-                    if (directionSet == false)
-                    {
-                        directionSet = true;
-                        direction = enemy.transform.position-gameObject.transform.position;  
-                        bulletPos = chooseBulletPos();
-          
-                    }
-                    else if (bulletType.name != "DBullet")
-                    {
-                        bulletPos = chooseBulletPos();
-                    }
+                    direction = enemy.transform.position - gameObject.transform.position;
+                    bulletPos = chooseBulletPos();
 
 
                     if (enemy != null)
                     {
 
                         GameObject bullet = Instantiate(bulletType, bulletPos.position, Quaternion.identity);
-                        if (bulletType.name == "Bullet")
+                        if (bulletType.name == "DBullet")
                         {
                             bullet.GetComponent<SmartBulletBehaviour>().SetBulletBehaviour(enemy, bulletPos);
                         }
-                        else if (bulletType.name == "DBullet")
+                        else if (bulletType.name == "Bullet")
                         {
 
                             bullet.GetComponent<Bullet>().SetBulletBehaviour(direction);

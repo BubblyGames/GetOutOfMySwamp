@@ -9,7 +9,7 @@ public class Bullet : MonoBehaviour
     Vector3 direction;
     Rigidbody rb;
     Vector3 moveQuantity;
-    float speed=0.002f;
+    float speed=0.01f;
   
     bool shooted = false;
 
