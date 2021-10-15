@@ -18,6 +18,7 @@ public abstract class EnemyBehaviour : MonoBehaviour
     [Space]
     public int damage = 10;
 
+    public HealthBarController healthBar;
 
     //Path the enemy will follow
     private Path path;
@@ -58,7 +59,17 @@ public abstract class EnemyBehaviour : MonoBehaviour
 
     public void SetPath(Path path) { this.path = path; }
 
-    public bool Hurt(int damage)
+    public void SetInitialState(Path path)
+    {
+        this.path = path;
+        SetInitialHealth();
+    }
+    public void SetInitialHealth()
+    {
+        healthBar.setMaxHealth(startHealth);
+    }
+
+    public virtual bool Hurt(int damage)
     {
         healthPoints -= damage;
         if (healthPoints < 0)
@@ -67,6 +78,7 @@ public abstract class EnemyBehaviour : MonoBehaviour
             return true;
         }
 
+        healthBar.setHealth(healthPoints);
         transform.localScale = Vector3.one * ((float)healthPoints / 10f);
 
         return false;
