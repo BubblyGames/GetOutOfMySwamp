@@ -14,6 +14,6 @@ public class EnemySpawner : MonoBehaviour
     public void SpawnEnemy(GameObject enemyprefab, Path path)
     {
         WaveController.waveControllerInstance.AddToActiveEnemies();
-        Instantiate(enemyprefab, path.GetStep(0), Quaternion.identity).GetComponent<EnemyBehaviour>().SetPath(path);
+        Instantiate(enemyprefab, path.GetStep(0), Quaternion.identity).GetComponent<EnemyBehaviour>().SetInitialState(path);
     }
 }
