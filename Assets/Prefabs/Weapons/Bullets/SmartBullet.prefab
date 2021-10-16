@@ -94,7 +94,7 @@ GameObject:
   - component: {fileID: 4551782581881023399}
   - component: {fileID: 8087154963004144522}
   m_Layer: 0
-  m_Name: DBullet
+  m_Name: SmartBullet
   m_TagString: Bullet
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

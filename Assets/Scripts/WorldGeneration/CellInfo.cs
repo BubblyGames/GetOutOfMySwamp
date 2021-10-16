@@ -11,9 +11,10 @@ public class CellInfo
     public BlockType blockType = BlockType.Air;
     public bool explored = false;
     public bool isPath = false;
+    public Vector3 normal;
+    public Vector3Int normalInt;
 
     public CellInfo(int x, int y, int z)
-
     {
         this.x = x;
         this.y = y;

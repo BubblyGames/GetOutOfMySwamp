@@ -104,7 +104,7 @@ GameObject:
   - component: {fileID: 8006414575844936844}
   - component: {fileID: 6388906839533808407}
   m_Layer: 0
-  m_Name: SingleWeapon
+  m_Name: SingleSmartWeapon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -202,18 +202,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7630ea344ea4b5b42a8eb9ffe52e2038, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attackSpeed: 1
+  attackWait: 1
+  damage: 1
+  bulletSpeed: 10
+  detectionRange: 5
   enemyLayerMask:
     serializedVersion: 2
     m_Bits: 64
-  waitTime: 0.5
-  radious: 4
   shotPositions:
   - {fileID: 8505893711344014288}
   - {fileID: 3750956573505812924}
   - {fileID: 6336329921247584562}
   - {fileID: 1867438092549480447}
-  bulletType: {fileID: 6002255402025451531, guid: b1c47069d5e3185409bff9c2183e8e8f, type: 3}
+  bulletType: {fileID: 4067383769571425247, guid: 22095a00db534e34a8b4121737457093, type: 3}
 --- !u!1 &8505893711344014288
 GameObject:
   m_ObjectHideFlags: 0

@@ -6,13 +6,13 @@ using UnityEngine;
 public abstract class EnemyBehaviour : MonoBehaviour
 {
     [Header("Stats")]
-    [SerializeField] protected int startHealth;
-    [SerializeField] protected int healthPoints;
+    [SerializeField] protected int startHealth = 10;
+    [SerializeField] protected int healthPoints = 10;
     [SerializeField] protected float speed = 1f;
 
     [Header("Rewards")]
-    [SerializeField] protected int moneyValue;
-    [SerializeField] protected int scoreValue;
+    [SerializeField] protected int moneyValue = 1;
+    [SerializeField] protected int scoreValue = 1;
 
 
     [Space]
@@ -66,6 +66,7 @@ public abstract class EnemyBehaviour : MonoBehaviour
     }
     public void SetInitialHealth()
     {
+        healthPoints = startHealth;
         healthBar.setMaxHealth(startHealth);
     }
 
@@ -79,7 +80,7 @@ public abstract class EnemyBehaviour : MonoBehaviour
         }
 
         healthBar.setHealth(healthPoints);
-        transform.localScale = Vector3.one * ((float)healthPoints / 10f);
+        //transform.localScale = Vector3.one * ((float)healthPoints / 10f);
 
         return false;
     }

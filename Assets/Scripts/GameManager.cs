@@ -33,7 +33,7 @@ public class GameManager : MonoBehaviour
     public Text text;
     public LayerMask floorLayer;
     public Transform center;
-    
+
 
     private void Awake()
     {
@@ -55,9 +55,7 @@ public class GameManager : MonoBehaviour
 
     private void Update()
     {
-        //transform.Rotate(Vector3.forward,Time.deltaTime*10);
-
-        text.text = (1 / Time.deltaTime).ToString(); //FpS text
+        text.text = Mathf.Round((1 / Time.deltaTime)).ToString(); //FpS text
 
         if (Input.GetMouseButtonDown(0))
         {
@@ -114,9 +112,11 @@ public class GameManager : MonoBehaviour
 
             if (x >= y && x >= z)
             {
-                if(rayNormal.x > 0) {
+                if (rayNormal.x > 0)
+                {
                     normal.x = 1;
-                } else
+                }
+                else
                 {
                     normal.x = -1;
                 }
@@ -160,7 +160,7 @@ public class GameManager : MonoBehaviour
                 return;
 
             BuildManager.buildManagerInstance.BuildStructureOn(pos);
-            
+
         }
     }
 }

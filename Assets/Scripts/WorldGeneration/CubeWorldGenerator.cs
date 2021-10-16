@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEditor;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 //https://www.youtube.com/watch?v=s5mAf-VMgCM&list=PLcRSafycjWFdYej0h_9sMD6rEUCpa7hDH&index=30
 
@@ -12,7 +13,7 @@ public class CubeWorldGenerator : MonoBehaviour
     public int size = 20;
     internal CellInfo[,,] cells; //0 walkable //1 can build //2 can't build //3 target
 
-    internal Path[] paths;
+    internal List<Path> paths;
     public int nPaths = 4;
 
     [Range(0.0f, 1.0f)]
@@ -36,16 +37,61 @@ public class CubeWorldGenerator : MonoBehaviour
 
     void Start()
     {
+        bool success = false;
+        int count = 0;
         if (seed == 0f)
             seed = Random.value * 10;
-        Debug.Log("Seed: " + seed.ToString());
 
+        while (!success && count < 100)
+        {
+            Debug.Log("Attempt: " + count + " Seed: " + seed.ToString());
+            success = GenerateWorld();
+            seed = Random.value * 10;
+            count++;
+        }
+
+
+        //Add geometry
+        MeshData meshData = new MeshData(true);
+        for (int i = 0; i < size; i++)
+        {
+            for (int j = 0; j < size; j++)
+            {
+                for (int k = 0; k < size; k++)
+                {
+                    if (cells[i, j, k].blockType != BlockType.Air)
+                    {
+                        if (j + 1 >= size - 1 || (j + 1 < size - 1 && cells[i, j + 1, k].blockType == BlockType.Air))
+                            meshData.AddFace(Direction.Up, i, j, k, cells[i, j, k].blockType);
+
+                        if (j - 1 <= 0 || (j - 1 > 0 && cells[i, j - 1, k].blockType == BlockType.Air))
+                            meshData.AddFace(Direction.Down, i, j, k, cells[i, j, k].blockType);
+
+                        if (i + 1 >= size - 1 || (i + 1 < size - 1 && cells[i + 1, j, k].blockType == BlockType.Air))
+                            meshData.AddFace(Direction.Right, i, j, k, cells[i, j, k].blockType);
+
+                        if (i - 1 <= 0 || (i - 1 > 0 && cells[i - 1, j, k].blockType == BlockType.Air))
+                            meshData.AddFace(Direction.Left, i, j, k, cells[i, j, k].blockType);
+
+                        if (k + 1 >= size - 1 || (k + 1 < size - 1 && cells[i, j, k + 1].blockType == BlockType.Air))
+                            meshData.AddFace(Direction.Front, i, j, k, cells[i, j, k].blockType);
+
+                        if (k - 1 <= 0 || (k - 1 > 0 && cells[i, j, k - 1].blockType == BlockType.Air))
+                            meshData.AddFace(Direction.Back, i, j, k, cells[i, j, k].blockType);
+                    }
+                }
+            }
+        }
+        voxelRenderer.RenderMesh(meshData);
+    }
+
+    private bool GenerateWorld()
+    {
         int endX = size / 2;
         int endY = size - 1;
         int endZ = size / 2;
 
         cells = new CellInfo[size, size, size];
-        MeshData meshData = new MeshData(true);
 
         for (int i = 0; i < size; i++)
         {
@@ -79,39 +125,7 @@ public class CubeWorldGenerator : MonoBehaviour
         }
 
         GenerateSwamp(endX, endY, endZ);
-        GeneratePaths(endX, endY, endZ);
-
-        //Add geometry
-        for (int i = 0; i < size; i++)
-        {
-            for (int j = 0; j < size; j++)
-            {
-                for (int k = 0; k < size; k++)
-                {
-                    if (cells[i, j, k].blockType != BlockType.Air)
-                    {
-                        if (j + 1 >= size - 1 || (j + 1 < size - 1 && cells[i, j + 1, k].blockType == BlockType.Air))
-                            meshData.AddFace(Direction.Up, i, j, k, cells[i, j, k].blockType);
-
-                        if (j - 1 <= 0 || (j - 1 > 0 && cells[i, j - 1, k].blockType == BlockType.Air))
-                            meshData.AddFace(Direction.Down, i, j, k, cells[i, j, k].blockType);
-
-                        if (i + 1 >= size - 1 || (i + 1 < size - 1 && cells[i + 1, j, k].blockType == BlockType.Air))
-                            meshData.AddFace(Direction.Right, i, j, k, cells[i, j, k].blockType);
-
-                        if (i - 1 <= 0 || (i - 1 > 0 && cells[i - 1, j, k].blockType == BlockType.Air))
-                            meshData.AddFace(Direction.Left, i, j, k, cells[i, j, k].blockType);
-
-                        if (k + 1 >= size - 1 || (k + 1 < size - 1 && cells[i, j, k + 1].blockType == BlockType.Air))
-                            meshData.AddFace(Direction.Front, i, j, k, cells[i, j, k].blockType);
-
-                        if (k - 1 <= 0 || (k - 1 > 0 && cells[i, j, k - 1].blockType == BlockType.Air))
-                            meshData.AddFace(Direction.Back, i, j, k, cells[i, j, k].blockType);
-                    }
-                }
-            }
-        }
-        voxelRenderer.RenderMesh(meshData);
+        return GeneratePaths(endX, endY, endZ);
     }
 
     private void GenerateSwamp(int endX, int endY, int endZ)
@@ -139,9 +153,9 @@ public class CubeWorldGenerator : MonoBehaviour
     public CellInfo GetCell(int x, int y, int z) { return cells[x, y, z]; }
     public CellInfo GetCell(Vector3Int p) { return cells[p.x, p.y, p.z]; }
 
-    private void GeneratePaths(int endX, int endY, int endZ)
+    private bool GeneratePaths(int endX, int endY, int endZ)
     {
-        paths = new Path[nPaths];
+        paths = new List<Path>();
 
         for (int i = 0; i < nPaths; i++)
         {
@@ -185,7 +199,7 @@ public class CubeWorldGenerator : MonoBehaviour
                         if (cellUnder.blockType == BlockType.Air)
                         {
                             int c = 0;
-                            while (cellUnder.blockType == BlockType.Air && c<100)
+                            while (cellUnder.blockType == BlockType.Air && c < 100)
                             {
                                 cell = cellUnder;
                                 cellUnder = cells[cell.x - normal.x, cell.y - normal.y, cell.z - normal.z];
@@ -206,14 +220,16 @@ public class CubeWorldGenerator : MonoBehaviour
 
                 pathCells.Reverse();
 
-                for (int idx = 0; idx < pathCells.Count-5; idx++)
+                for (int idx = 0; idx < pathCells.Count - 5; idx++)
                 {
                     pathCells[idx].isPath = true;
                 }
 
-                paths[i] = new Path(pathCells.ToArray());
+                paths.Add(new Path(pathCells.ToArray()));
             }
         }
+
+        return paths.Count == nPaths;
     }
 
     public Vector3Int GetNormal(CellInfo cellInfo)
@@ -250,22 +266,22 @@ public class CubeWorldGenerator : MonoBehaviour
     {
         Vector3Int result = Vector3Int.zero;
 
-        if ( x == 0)
+        if (x == 0)
             result += Vector3Int.left;
 
-        if ( x == size - 1)
+        if (x == size - 1)
             result += Vector3Int.right;
 
-        if ( y == 0)
+        if (y == 0)
             result += Vector3Int.down;
 
-        if ( y == size - 1)
+        if (y == size - 1)
             result += Vector3Int.up;
 
-        if ( z == 0)
+        if (z == 0)
             result += Vector3Int.back;
 
-        if ( z == size - 1)
+        if (z == size - 1)
             result += Vector3Int.forward;
 
         if (result == Vector3Int.zero)
@@ -313,7 +329,7 @@ public class CubeWorldGenerator : MonoBehaviour
             //If first node is goal,returns current Node3D
             if (current.cell.blockType == BlockType.Swamp)
             {
-                Debug.Log("Success: " + count.ToString());
+                //Debug.Log("Success: " + count.ToString());
                 return current;
             }
             else
@@ -363,7 +379,7 @@ public class CubeWorldGenerator : MonoBehaviour
                 }
             }
         }
-        Debug.Log("Fail: " + count.ToString());
+        //Debug.Log("Fail: " + count.ToString());
         return null;
     }
 
@@ -384,7 +400,7 @@ public class CubeWorldGenerator : MonoBehaviour
                     int y = current.y + j;
                     int z = current.z + k;
 
-                    if (isPosInBounds(x,y,z))
+                    if (isPosInBounds(x, y, z))
                     {
                         if (cells[x, y, z].isPath || (cells[x, y, z].blockType != BlockType.Air && cells[x, y, z].blockType != BlockType.Swamp))
                             continue;
