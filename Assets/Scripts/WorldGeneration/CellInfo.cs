@@ -11,8 +11,8 @@ public class CellInfo
     public BlockType blockType = BlockType.Air;
     public bool explored = false;
     public bool isPath = false;
-    public Vector3 normal;
-    public Vector3Int normalInt;
+    public Vector3Int normalInt = Vector3Int.zero;
+    internal bool isSurface;
 
     public CellInfo(int x, int y, int z)
     {

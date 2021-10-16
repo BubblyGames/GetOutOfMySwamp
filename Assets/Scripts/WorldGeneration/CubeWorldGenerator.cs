@@ -7,7 +7,7 @@ using UnityEngine.SceneManagement;
 
 //https://www.youtube.com/watch?v=s5mAf-VMgCM&list=PLcRSafycjWFdYej0h_9sMD6rEUCpa7hDH&index=30
 
-[RequireComponent(typeof(BoxCollider))]
+[RequireComponent(typeof(MeshCollider))]
 public class CubeWorldGenerator : MonoBehaviour
 {
     public int size = 20;
@@ -22,7 +22,7 @@ public class CubeWorldGenerator : MonoBehaviour
     public float seed = 0f;
 
     VoxelRenderer voxelRenderer;
-    BoxCollider boxCollider;
+    MeshCollider meshCollider;
 
     public static CubeWorldGenerator worldGeneratorInstance;
 
@@ -30,9 +30,7 @@ public class CubeWorldGenerator : MonoBehaviour
     {
         worldGeneratorInstance = this;
         voxelRenderer = GetComponent<VoxelRenderer>();
-        boxCollider = GetComponent<BoxCollider>();
-        boxCollider.size = new Vector3(size - 2, size - 2, size - 2);
-        boxCollider.center = new Vector3((size - 1) / 2f, (size - 1) / 2f, (size - 1) / 2f);
+        meshCollider = GetComponent<MeshCollider>();
     }
 
     void Start()
@@ -50,7 +48,6 @@ public class CubeWorldGenerator : MonoBehaviour
             count++;
         }
 
-
         //Add geometry
         MeshData meshData = new MeshData(true);
         for (int i = 0; i < size; i++)
@@ -61,23 +58,43 @@ public class CubeWorldGenerator : MonoBehaviour
                 {
                     if (cells[i, j, k].blockType != BlockType.Air)
                     {
+                        cells[i, j, k].normalInt = Vector3Int.zero;
+
                         if (j + 1 >= size - 1 || (j + 1 < size - 1 && cells[i, j + 1, k].blockType == BlockType.Air))
+                        {
                             meshData.AddFace(Direction.Up, i, j, k, cells[i, j, k].blockType);
+                            cells[i, j, k].normalInt += Vector3Int.up;
+                        }
 
                         if (j - 1 <= 0 || (j - 1 > 0 && cells[i, j - 1, k].blockType == BlockType.Air))
+                        {
                             meshData.AddFace(Direction.Down, i, j, k, cells[i, j, k].blockType);
+                            cells[i, j, k].normalInt += Vector3Int.down;
+                        }
 
                         if (i + 1 >= size - 1 || (i + 1 < size - 1 && cells[i + 1, j, k].blockType == BlockType.Air))
+                        {
                             meshData.AddFace(Direction.Right, i, j, k, cells[i, j, k].blockType);
+                            cells[i, j, k].normalInt += Vector3Int.right;
+                        }
 
                         if (i - 1 <= 0 || (i - 1 > 0 && cells[i - 1, j, k].blockType == BlockType.Air))
+                        {
                             meshData.AddFace(Direction.Left, i, j, k, cells[i, j, k].blockType);
+                            cells[i, j, k].normalInt += Vector3Int.left;
+                        }
 
                         if (k + 1 >= size - 1 || (k + 1 < size - 1 && cells[i, j, k + 1].blockType == BlockType.Air))
+                        {
                             meshData.AddFace(Direction.Front, i, j, k, cells[i, j, k].blockType);
+                            cells[i, j, k].normalInt += Vector3Int.forward;
+                        }
 
                         if (k - 1 <= 0 || (k - 1 > 0 && cells[i, j, k - 1].blockType == BlockType.Air))
+                        {
                             meshData.AddFace(Direction.Back, i, j, k, cells[i, j, k].blockType);
+                            cells[i, j, k].normalInt += Vector3Int.back;
+                        }
                     }
                 }
             }
@@ -100,6 +117,9 @@ public class CubeWorldGenerator : MonoBehaviour
                 for (int k = 0; k < size; k++)
                 {
                     CellInfo cell = new CellInfo(i, j, k);
+                    cell.isSurface = CheckIfIsInSurface(cell);
+                    if (cell.isSurface)
+                        cell.normalInt = GetFaceNormal(cell);
 
                     //Rock generation
                     float alpha = 1;
@@ -110,11 +130,11 @@ public class CubeWorldGenerator : MonoBehaviour
 
                     float perlin = Perlin3D((seed + (i / rockSize)), (seed + (j / rockSize)), (seed + (k / rockSize)));
 
-                    if (CheckIfSurface(cell) && perlin > (1 - (wallDensity * alpha))) //i == 0 || j == 0 || i == size - 1 || j == size - 1 ||//|| (i == j && i < size - 1)
+                    if (cell.isSurface && cell.normalInt.magnitude <= 1 && perlin > (1 - (wallDensity * alpha))) //i == 0 || j == 0 || i == size - 1 || j == size - 1 ||//|| (i == j && i < size - 1)
                     {
                         cell.blockType = BlockType.Rock;
                     }
-                    else if (!CheckIfSurface(cell))
+                    else if (!cell.isSurface)
                     {
                         cell.blockType = BlockType.Grass;
                     }
@@ -143,7 +163,7 @@ public class CubeWorldGenerator : MonoBehaviour
         }
     }
 
-    public bool CheckIfSurface(CellInfo cell)
+    public bool CheckIfIsInSurface(CellInfo cell)
     {
         return cell.x == 0 || cell.x == size - 1 ||
             cell.y == 0 || cell.y == size - 1 ||
@@ -151,6 +171,7 @@ public class CubeWorldGenerator : MonoBehaviour
     }
 
     public CellInfo GetCell(int x, int y, int z) { return cells[x, y, z]; }
+
     public CellInfo GetCell(Vector3Int p) { return cells[p.x, p.y, p.z]; }
 
     private bool GeneratePaths(int endX, int endY, int endZ)
@@ -185,8 +206,8 @@ public class CubeWorldGenerator : MonoBehaviour
                 List<CellInfo> pathCells = new List<CellInfo>();
                 while (p != null)
                 {
-                    Vector3Int normal = GetNormal(cells[p.x, p.y, p.z]);
                     CellInfo cell = cells[p.x, p.y, p.z];
+                    Vector3Int normal = cell.normalInt;
                     CellInfo cellUnder = cells[p.x - normal.x, p.y - normal.y, p.z - normal.z];
 
                     if (cellUnder.blockType != BlockType.Swamp && cellUnder.blockType != BlockType.Air)
@@ -225,6 +246,8 @@ public class CubeWorldGenerator : MonoBehaviour
                     pathCells[idx].isPath = true;
                 }
 
+                pathCells.RemoveAt(pathCells.Count - 1);
+                pathCells.RemoveAt(pathCells.Count - 1);
                 paths.Add(new Path(pathCells.ToArray()));
             }
         }
@@ -232,7 +255,7 @@ public class CubeWorldGenerator : MonoBehaviour
         return paths.Count == nPaths;
     }
 
-    public Vector3Int GetNormal(CellInfo cellInfo)
+    public Vector3Int GetFaceNormal(CellInfo cellInfo)
     {
         Vector3Int result = Vector3Int.zero;
 
@@ -256,40 +279,15 @@ public class CubeWorldGenerator : MonoBehaviour
 
         if (result == Vector3Int.zero)
         {
-            result = Vector3Int.up;
+            result = Vector3Int.zero;
         }
 
         return result;
     }
 
-    public Vector3 GetNormal(int x, int y, int z)
+    public Vector3 GetFaceNormal(int x, int y, int z)
     {
-        Vector3Int result = Vector3Int.zero;
-
-        if (x == 0)
-            result += Vector3Int.left;
-
-        if (x == size - 1)
-            result += Vector3Int.right;
-
-        if (y == 0)
-            result += Vector3Int.down;
-
-        if (y == size - 1)
-            result += Vector3Int.up;
-
-        if (z == 0)
-            result += Vector3Int.back;
-
-        if (z == size - 1)
-            result += Vector3Int.forward;
-
-        if (result == Vector3Int.zero)
-        {
-            result = Vector3Int.up;
-        }
-
-        return result;
+        return GetFaceNormal(cells[x, y, z]);
     }
 
     public BlockType CheckBlockType(int x, int y, int z)
@@ -335,7 +333,7 @@ public class CubeWorldGenerator : MonoBehaviour
             else
             {
                 //Expands neightbors, (compute cost of each one) and add them to the list
-                CellInfo[] neighbours = WalkableNeighbours(current.cell);
+                CellInfo[] neighbours = GetWalkableNeighbours(current.cell);
                 foreach (CellInfo neighbour in neighbours)
                 {
                     if (neighbour != null)
@@ -383,7 +381,7 @@ public class CubeWorldGenerator : MonoBehaviour
         return null;
     }
 
-    private CellInfo[] WalkableNeighbours(CellInfo current)
+    private CellInfo[] GetWalkableNeighbours(CellInfo current)
     {
         List<CellInfo> result = new List<CellInfo>();
 
@@ -415,20 +413,22 @@ public class CubeWorldGenerator : MonoBehaviour
         return result.ToArray();
     }
 
-    public float Perlin3D(float x, float y, float z)
+    //https://answers.unity.com/questions/938178/3d-perlin-noise.html
+    public static float Perlin3D(float x, float y, float z)
     {
-        //Get all three Permutations of noise for X, Y and Z
-        float XY = Mathf.PerlinNoise(x, y);
-        float YZ = Mathf.PerlinNoise(y, z);
-        float XZ = Mathf.PerlinNoise(x, z);
-
-        //And their reverses
-        float YX = Mathf.PerlinNoise(y, x);
-        float ZY = Mathf.PerlinNoise(z, y);
-        float ZX = Mathf.PerlinNoise(z, x);
-
-        float XYZ = XY + YZ + XZ + YX + ZY + ZX;
-        return XYZ / 6;
+        y += 1;
+        z += 2;
+        float xy = _perlin3DFixed(x, y);
+        float xz = _perlin3DFixed(x, z);
+        float yz = _perlin3DFixed(y, z);
+        float yx = _perlin3DFixed(y, x);
+        float zx = _perlin3DFixed(z, x);
+        float zy = _perlin3DFixed(z, y);
+        return xy * xz * yz * yx * zx * zy;
+    }
+    static float _perlin3DFixed(float a, float b)
+    {
+        return Mathf.Sin(Mathf.PI * Mathf.PerlinNoise(a, b));
     }
 
     public bool isPosInBounds(int coordX, int coordY, int coordZ)
@@ -443,8 +443,8 @@ public class CubeWorldGenerator : MonoBehaviour
 
         foreach (CellInfo cell in cells)
         {
-            if (cell.isPath)
-                Handles.Label(new Vector3(cell.x, cell.y, cell.z), "a");
+            if (cell.isSurface)
+                Handles.Label(new Vector3(cell.x, cell.y, cell.z), cell.normalInt.magnitude.ToString());
         }
     }
 #endif
