@@ -11,7 +11,6 @@ public class WaveController : MonoBehaviour
 {
     public static WaveController waveControllerInstance;
 
-
     public int activeEnemies = 0;
 
     public Wave[] waves;
@@ -44,8 +43,8 @@ public class WaveController : MonoBehaviour
         waveCount = 0;
 
         timeVariable = Time.time + (.5f * timeBeforeRoundStarts);
-        GameManager.gameInstance.OnGameLost += StopWave;
-        GameManager.gameInstance.OnGameLost += LevelCompleted;
+        GameManager.instance.OnGameLost += StopWave;
+        GameManager.instance.OnGameLost += LevelCompleted;
 
     }
 
@@ -104,7 +103,7 @@ public class WaveController : MonoBehaviour
         Wave currentWave = new Wave();
         if (waveCount >= waves.Length)
         {
-            GameManager.gameInstance.levelCompleted();
+            GameManager.instance.levelCompleted();
         }
         else
         {
@@ -115,7 +114,7 @@ public class WaveController : MonoBehaviour
         for (int i = 0; i < currentWave.enemyAmount; i++)
         {
             int pathId = UnityEngine.Random.Range(0, CubeWorldGenerator.worldGeneratorInstance.nPaths-1);
-            enemySpawner.SpawnEnemy(currentWave.enemyPrefab, CubeWorldGenerator.worldGeneratorInstance.paths[pathId]);
+            enemySpawner.SpawnEnemy(currentWave.enemyId, CubeWorldGenerator.worldGeneratorInstance.paths[pathId]);
             yield return new WaitForSeconds(1f / currentWave.spawnRate);
         }
 

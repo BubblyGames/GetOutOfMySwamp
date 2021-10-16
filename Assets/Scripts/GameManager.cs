@@ -8,15 +8,19 @@ using UnityEngine.UI;
 
 
 /*This manager inicialice the game */
-//DONE: SPLIT MAP GENERATION AND PATH GENERATION INTO COMPONENTS 
+//TODO: RENAME TO LEVEL MANAGER
 [RequireComponent(typeof(CubeWorldGenerator))]
 [RequireComponent(typeof(WaveController))]
 
 public class GameManager : MonoBehaviour
 {
 
-    public static GameManager gameInstance;
+    public static GameManager instance;
 
+
+    //THINGS TO MOVE TO FUUTRE GAMEMANAGER
+    [SerializeField]
+    public EnemyLibrary enemyLibrary;
 
     //References
     private CubeWorldGenerator world;
@@ -37,13 +41,23 @@ public class GameManager : MonoBehaviour
 
     private void Awake()
     {
-        gameInstance = this;
+        if (instance == null)
+        {
+            instance = this;
+        }
+        else
+        {
+            Destroy(this);
+        }
+
         world = GetComponent<CubeWorldGenerator>();
         waveController = GetComponent<WaveController>();
         scoreSystem = GetComponent<ScoreSystem>();
         levelStats = GetComponent<LevelStats>();
         buildManager = GetComponent<BuildManager>();
         shop = GetComponent<Shop>();
+
+        //enemyLibrary = GetComponent<EnemyLibrary>();
 
         center.transform.position = Vector3.one * (world.size / 2); //set center tu middle of the cube
     }

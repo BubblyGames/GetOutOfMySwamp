@@ -110,7 +110,7 @@ public class CubeWorldGenerator : MonoBehaviour
 
                     float perlin = Perlin3D((seed + (i / rockSize)), (seed + (j / rockSize)), (seed + (k / rockSize)));
 
-                    if (CheckIfSurface(cell) && perlin > (1 - (wallDensity * alpha))) //i == 0 || j == 0 || i == size - 1 || j == size - 1 ||//|| (i == j && i < size - 1)
+                    if (CheckIfSurface(cell) && Mathf.Sqrt(perlin) > (1 - (wallDensity * alpha))) //i == 0 || j == 0 || i == size - 1 || j == size - 1 ||//|| (i == j && i < size - 1)
                     {
                         cell.blockType = BlockType.Rock;
                     }
@@ -417,6 +417,7 @@ public class CubeWorldGenerator : MonoBehaviour
 
     public float Perlin3D(float x, float y, float z)
     {
+
         //Get all three Permutations of noise for X, Y and Z
         float XY = Mathf.PerlinNoise(x, y);
         float YZ = Mathf.PerlinNoise(y, z);

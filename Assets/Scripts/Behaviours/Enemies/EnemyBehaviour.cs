@@ -47,7 +47,7 @@ public abstract class EnemyBehaviour : MonoBehaviour
             else
             {
                 //Damage
-                GameManager.gameInstance.dealDamageToBase(this.damage);
+                GameManager.instance.dealDamageToBase(this.damage);
                 Destroy(this.gameObject);
                 WaveController.waveControllerInstance.ReduceActiveEnemies();
             }
