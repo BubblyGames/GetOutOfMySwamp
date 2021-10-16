@@ -210,7 +210,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Texture: {fileID: 8400000, guid: 37548e13df7aa1c4681b6e8169c1e985, type: 2}
+  m_Texture: {fileID: 0}
   m_UVRect:
     serializedVersion: 2
     x: 0
@@ -261,7 +261,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: 0, y: 50.02179}
+  m_AnchoredPosition: {x: 0, y: 50.02173}
   m_SizeDelta: {x: 0, y: 100.04358}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &316150466
@@ -1569,7 +1569,7 @@ MonoBehaviour:
       m_Calls: []
   m_FontData:
     m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    m_FontSize: 60
+    m_FontSize: 16
     m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 0
@@ -1665,13 +1665,27 @@ GameObject:
   m_Component:
   - component: {fileID: 1750140362}
   - component: {fileID: 1750140361}
+  - component: {fileID: 1750140360}
   m_Layer: 0
-  m_Name: Camera
+  m_Name: LowResCamera
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &1750140360
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1750140359}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c6a00efdc2c414743ada199fcc1290f6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  image: {fileID: 54399819}
 --- !u!20 &1750140361
 Camera:
   m_ObjectHideFlags: 0
@@ -1705,7 +1719,7 @@ Camera:
     serializedVersion: 2
     m_Bits: 4294967295
   m_RenderingPath: -1
-  m_TargetTexture: {fileID: 8400000, guid: 37548e13df7aa1c4681b6e8169c1e985, type: 2}
+  m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0
   m_TargetEye: 3
   m_HDR: 1
@@ -1773,6 +1787,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 128
   center: {fileID: 1904408}
+  waterSplashPrefab: {fileID: 4964779859338955144, guid: da9a63bd877faf74db2fb8f6f899c1ca, type: 3}
 --- !u!4 &1903685283
 Transform:
   m_ObjectHideFlags: 0
@@ -1864,7 +1879,7 @@ MonoBehaviour:
   size: 20
   nPaths: 4
   wallDensity: 0.417
-  rockSize: 3.96
+  rockSize: 5
   seed: 0
 --- !u!114 &1903685289
 MonoBehaviour:

@@ -24,7 +24,7 @@ public class CameraPointsCreator : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        center = GameObject.Find("Center").transform;
+        center = GameManager.gameInstance.center;
         positions = new List<GameObject>();
         createPositions();
 
