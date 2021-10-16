@@ -170,7 +170,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &54399818
 RectTransform:
   m_ObjectHideFlags: 0
@@ -955,7 +955,7 @@ Camera:
   near clip plane: 0.3
   far clip plane: 1000
   field of view: 60
-  orthographic: 1
+  orthographic: 0
   orthographic size: 20
   m_Depth: -1
   m_CullingMask:
@@ -995,7 +995,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 963194225}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a6247ce4e5974454d8565d464f43420b, type: 3}
   m_Name: 
@@ -1012,7 +1012,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 963194225}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c91b3c7cf8895c146b9a370c65fc23a0, type: 3}
   m_Name: 
@@ -1948,7 +1948,7 @@ MonoBehaviour:
   structureBlueprints:
   - structurePrefab: {fileID: 7137880238603071797, guid: e1fa9704af9f5114992d5229e61c2040, type: 3}
     cost: 100
-  - structurePrefab: {fileID: 7137880238603071797, guid: e1fa9704af9f5114992d5229e61c2040, type: 3}
+  - structurePrefab: {fileID: 7137880238603071797, guid: 5efad9e9da4ec7b4cad2173135e166c1, type: 3}
     cost: 200
   selectedStructureBlueprint:
     structurePrefab: {fileID: 0}
@@ -1967,7 +1967,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   startBaseHealthPoints: 100
   currentBaseHealthPoints: 0
-  startMoney: 400
+  startMoney: 800
   currentMoney: 0
   currentScore: 0
   infinteMoney: 0

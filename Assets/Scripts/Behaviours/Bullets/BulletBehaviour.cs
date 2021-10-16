@@ -15,7 +15,7 @@ public class BulletBehaviour : MonoBehaviour
         //gameObject.transform.position += Time.fixedDeltaTime * velocity;
         transform.Translate(Time.fixedDeltaTime*speed*Vector3.forward);
     }
-    public void SetBulletBehaviour(Transform target, int damage, float speed)
+    virtual public void SetBulletBehaviour(Transform target, int damage, float speed)
     {
         this.damage = damage;
         this.speed = speed;
@@ -34,16 +34,16 @@ public class BulletBehaviour : MonoBehaviour
         }
     }
 
-    private void OnCollisionEnter(Collision collision)
+    /*private void OnCollisionEnter(Collision collision)
     {
         if (collision.collider.gameObject.CompareTag("Enemy"))
         {
             collision.collider.gameObject.GetComponent<EnemyBehaviour>().Hurt(damage);
             Destroy(gameObject);
         }
-        /*else if (collision.collider.gameObject.CompareTag("Bullet"))
+        else if (collision.collider.gameObject.CompareTag("Bullet"))
         {
             Destroy(gameObject);
-        }*/
-    }
+        }
+    }*/
 }

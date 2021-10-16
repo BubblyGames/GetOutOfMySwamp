@@ -12,7 +12,7 @@ public class HealthBarController : MonoBehaviour
 
     public void setMaxHealth(float h)
     {
-        slider.maxValue =h;
+        slider.maxValue = h;
         slider.value = h;
         fill.color = gradient.Evaluate(1.0f);
     }

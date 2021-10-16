@@ -38,12 +38,15 @@ public class CubeWorldGenerator : MonoBehaviour
     void Start()
     {
         bool success = false;
-
         int count = 0;
+        if (seed == 0f)
+            seed = Random.value * 10;
+
         while (!success && count < 100)
         {
-            Debug.Log("Attempt: " + count);
+            Debug.Log("Attempt: " + count + " Seed: " + seed.ToString());
             success = GenerateWorld();
+            seed = Random.value * 10;
             count++;
         }
 
@@ -84,10 +87,6 @@ public class CubeWorldGenerator : MonoBehaviour
 
     private bool GenerateWorld()
     {
-        if (seed == 0f)
-            seed = Random.value * 10;
-        Debug.Log("Seed: " + seed.ToString());
-
         int endX = size / 2;
         int endY = size - 1;
         int endZ = size / 2;

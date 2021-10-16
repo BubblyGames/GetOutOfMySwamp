@@ -4,12 +4,9 @@ using UnityEngine;
 
 public class SmartBulletBehaviour : BulletBehaviour
 {
-    Transform target;
     Vector3 initialPos;
-
     float delta = 0;
 
-    // Update is called once per frame
     void FixedUpdate()
     {
         if (target == null)
@@ -22,20 +19,23 @@ public class SmartBulletBehaviour : BulletBehaviour
             if (delta < 1)
             {
                 delta += Time.fixedDeltaTime * speed;
+                rotateBullet();
             }
             else
             {
-                delta = 0;
+                target.gameObject.GetComponent<EnemyBehaviour>().Hurt(damage);
+                Destroy(gameObject);
             }
-            rotateBullet();
         }
     }
 
-    new public void SetBulletBehaviour(Transform target, int damage, float speed)
+    override public void SetBulletBehaviour(Transform target, int damage, float speed)
     {
+        Debug.Log("aaa");
         this.target = target;
         this.damage = damage;
-        this.speed = speed;
+        this.speed = speed / Vector3.Distance(target.position, transform.position);
+        Debug.Log(this.speed);
         initialPos = transform.position;
         rotateBullet();
     }
@@ -43,14 +43,5 @@ public class SmartBulletBehaviour : BulletBehaviour
     void rotateBullet()
     {
         transform.LookAt(target.transform, Vector3.up);
-    }
-
-    private void OnCollisionEnter(Collision collision)
-    {
-        if (collision.collider.gameObject.CompareTag("Enemy"))
-        {
-            collision.collider.gameObject.GetComponent<EnemyBehaviour>().Hurt(damage);
-            Destroy(gameObject);
-        }
     }
 }
