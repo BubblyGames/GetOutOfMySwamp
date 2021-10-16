@@ -4,68 +4,40 @@ using UnityEngine;
 
 public class SingleWeaponBehaviour : WeaponBehaviour
 {
-    public float waitTime = 0f;
-    public float radious = 4f;
-
     public GameObject[] shotPositions; //0 front, 1 back, 2 right, 3 left
     public GameObject bulletType;
-    Transform bulletPos;
 
-    //Follow bullets settings
-    GameObject enemy;
+    GameObject enemyTarget;
 
-
-    //DBullet settings
-    bool directionSet;
-    Vector3 direction;
-
-    private void Start()
-    {
-        directionSet = false;
-    }
     new void Update()
     {
-
-        RaycastHit[] hits = Physics.SphereCastAll(transform.position, radious, transform.forward, radious, enemyLayerMask);
+        RaycastHit[] hits = Physics.SphereCastAll(transform.position, detectionRange, transform.forward, detectionRange, enemyLayerMask);
         if (hits.Length > 0)
         {
             if (Time.time > nextAttackTime)
             {
-                nextAttackTime = Time.time + waitTime;
-
+                nextAttackTime = Time.time + attackWait;
                 {
-
-                    enemy = hits[0].collider.gameObject;
-                    direction = enemy.transform.position - gameObject.transform.position;
-                    bulletPos = chooseBulletPos();
-
-
-                    if (enemy != null)
+                    enemyTarget = hits[0].collider.gameObject;
+                    EnemyBehaviour eb;
+                    if (enemyTarget != null && enemyTarget.TryGetComponent<EnemyBehaviour>(out eb))
                     {
-
-                        GameObject bullet = Instantiate(bulletType, bulletPos.position, Quaternion.identity);
-                        if (bulletType.name == "DBullet")
-                        {
-                            bullet.GetComponent<SmartBulletBehaviour>().SetBulletBehaviour(enemy, bulletPos);
-                        }
-                        else if (bulletType.name == "Bullet")
-                        {
-
-                            bullet.GetComponent<Bullet>().SetBulletBehaviour(direction);
-                        }
+                        Vector3 bulletPos = chooseBulletPos();
+                        GameObject bullet = Instantiate(bulletType, bulletPos, Quaternion.identity);
+                        BulletBehaviour b = bullet.GetComponent<BulletBehaviour>();
+                        b.SetBulletBehaviour(enemyTarget.transform, damage, bulletSpeed);
                     }
-
                 }
-
             }
         }
     }
 
-    Transform chooseBulletPos()
+    Vector3 chooseBulletPos()
     {
-        Vector3 enemyVector = enemy.transform.position - gameObject.transform.position;
+        Vector3 enemyVector = enemyTarget.transform.position - gameObject.transform.position;
         float angle = Mathf.Atan2(enemyVector.x, enemyVector.y) * Mathf.Rad2Deg;
         Transform finalShotPos;
+
         if (angle > 0)
         {
             if (angle <= 45)
@@ -80,7 +52,6 @@ public class SingleWeaponBehaviour : WeaponBehaviour
             {
                 finalShotPos = shotPositions[2].transform;
             }
-
         }
         else
         {
@@ -96,9 +67,7 @@ public class SingleWeaponBehaviour : WeaponBehaviour
             {
                 finalShotPos = shotPositions[3].transform;
             }
-
         }
-        return finalShotPos;
+        return finalShotPos.position;
     }
-
 }

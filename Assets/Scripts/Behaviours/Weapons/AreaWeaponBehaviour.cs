@@ -5,12 +5,9 @@ using UnityEngine;
 /*This tower deals damage in all enemys inside its radius of effect */
 public class AreaWeaponBehaviour : WeaponBehaviour
 {
-    //Radius of effect
-    float radious = 5f;
-
     protected override void Attack()
     {
-        RaycastHit[] hits = Physics.SphereCastAll(transform.position, radious, transform.forward, radious, enemyLayerMask);
+        RaycastHit[] hits = Physics.SphereCastAll(transform.position, detectionRange, transform.forward, detectionRange, enemyLayerMask);
 
         for (int i = 0; i < hits.Length; i++)
         {

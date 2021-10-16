@@ -114,12 +114,7 @@ public class WaveController : MonoBehaviour
 
         for (int i = 0; i < currentWave.enemyAmount; i++)
         {
-            int pathId = UnityEngine.Random.Range(0, CubeWorldGenerator.worldGeneratorInstance.nPaths);
-            /*while (CubeWorldGenerator.worldGeneratorInstance.paths[pathId] == null)
-            {
-                //Might get trapped if there are no paths
-                pathId = UnityEngine.Random.Range(0, CubeWorldGenerator.worldGeneratorInstance.nPaths); 
-            }*/
+            int pathId = UnityEngine.Random.Range(0, CubeWorldGenerator.worldGeneratorInstance.nPaths-1);
             enemySpawner.SpawnEnemy(currentWave.enemyPrefab, CubeWorldGenerator.worldGeneratorInstance.paths[pathId]);
             yield return new WaitForSeconds(1f / currentWave.spawnRate);
         }
