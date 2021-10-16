@@ -20,6 +20,7 @@ public class CubeWorldGenerator : MonoBehaviour
     public float wallDensity = 0.3f;
     public float rockSize = 3f;
     public float seed = 0f;
+    internal Vector3 end;
 
     VoxelRenderer voxelRenderer;
     MeshCollider meshCollider;
@@ -107,6 +108,7 @@ public class CubeWorldGenerator : MonoBehaviour
         int endX = size / 2;
         int endY = size - 1;
         int endZ = size / 2;
+        end = new Vector3(endX, endY, endZ);
 
         cells = new CellInfo[size, size, size];
 

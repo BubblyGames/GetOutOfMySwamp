@@ -1773,6 +1773,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 128
   center: {fileID: 1904408}
+  waterSplashPrefab: {fileID: 4964779859338955144, guid: da9a63bd877faf74db2fb8f6f899c1ca, type: 3}
 --- !u!4 &1903685283
 Transform:
   m_ObjectHideFlags: 0
