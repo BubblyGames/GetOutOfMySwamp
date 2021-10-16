@@ -45,7 +45,7 @@ public class GameManager : MonoBehaviour
         buildManager = GetComponent<BuildManager>();
         shop = GetComponent<Shop>();
 
-        center.transform.position = Vector3.one * (world.size / 2); //set center tu middle of the cube
+        center.transform.position = Vector3.one * ((world.size-1) / 2f); //set center tu middle of the cube
     }
 
     private void Start()
@@ -91,8 +91,6 @@ public class GameManager : MonoBehaviour
 
             // Show Game Over Screen
             //Go to menu
-
-
         }
     }
 

@@ -32,6 +32,7 @@ public class CameraPointsCreator : MonoBehaviour
         foreach (Camera camera in Camera.allCameras)
         {
             camera.orthographic = true;
+
         }
     }
 
@@ -64,7 +65,7 @@ public class CameraPointsCreator : MonoBehaviour
             positions[i].transform.position = new Vector3((int)positions[i].transform.position.x, (int)positions[i].transform.position.y, (int)positions[i].transform.position.z);
         }
 
-        GameObject.Find("Main Camera").GetComponent<UICameraMovement>().startCamera(positions);
+        Camera.main.GetComponent<UICameraMovement>().startCamera(positions);
     }
 
     Vector3 GetCenterPos()
