@@ -14,7 +14,6 @@ public abstract class EnemyBehaviour : MonoBehaviour
     [SerializeField] protected int moneyValue = 1;
     [SerializeField] protected int scoreValue = 1;
 
-
     [Space]
     public int damage = 10;
 
@@ -42,6 +41,7 @@ public abstract class EnemyBehaviour : MonoBehaviour
             {
                 nextIndexPath++;
                 lerpProgression = 0;
+                transform.LookAt(path.GetStep(nextIndexPath), path.GetCell(nextIndexPath).normalInt);
             }
             //if the enemy reach the end of the path deal damge to base
             else
@@ -52,9 +52,6 @@ public abstract class EnemyBehaviour : MonoBehaviour
                 WaveController.waveControllerInstance.ReduceActiveEnemies();
             }
         }
-
-        Vector3 target = path.GetStep(nextIndexPath);
-        transform.LookAt(target, CubeWorldGenerator.worldGeneratorInstance.GetNormal((int)target.x, (int)target.y, (int)target.z));
     }
 
     public void SetPath(Path path) { this.path = path; }

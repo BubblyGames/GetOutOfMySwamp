@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -27,5 +28,10 @@ public class Path
             return true;
         }
         return false;
+    }
+
+    internal CellInfo GetCell(int idx)
+    {
+        return cells3D[idx];
     }
 }

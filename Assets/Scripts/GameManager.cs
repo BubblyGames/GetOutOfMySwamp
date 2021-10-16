@@ -57,9 +57,7 @@ public class GameManager : MonoBehaviour
         buildManager = GetComponent<BuildManager>();
         shop = GetComponent<Shop>();
 
-        //enemyLibrary = GetComponent<EnemyLibrary>();
-
-        center.transform.position = Vector3.one * (world.size / 2); //set center tu middle of the cube
+        center.transform.position = Vector3.one * ((world.size-1) / 2f); //set center tu middle of the cube
     }
 
     private void Start()
@@ -73,7 +71,20 @@ public class GameManager : MonoBehaviour
 
         if (Input.GetMouseButtonDown(0))
         {
-            SpawnWeapon();
+            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+
+            RaycastHit hit = new RaycastHit();
+
+            if (Physics.Raycast(ray, out hit))
+            {
+                if (hit.collider.tag == "World") {
+                    SpawnWeapon(hit);
+                }
+                else
+                {
+                    //Interact with existing weapons
+                }
+            }
         }
     }
 
@@ -92,8 +103,6 @@ public class GameManager : MonoBehaviour
 
             // Show Game Over Screen
             //Go to menu
-
-
         }
     }
 
@@ -104,78 +113,76 @@ public class GameManager : MonoBehaviour
 
     }
 
-    private void SpawnWeapon()
+    private void SpawnWeapon(RaycastHit hit)
     {
+        Vector3 pos = hit.point;
+        pos -= hit.normal / 2;
 
-        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        Vector3Int intPos = new Vector3Int(Mathf.RoundToInt(pos.x), Mathf.RoundToInt(pos.y), Mathf.RoundToInt(pos.z));
 
-        RaycastHit hit = new RaycastHit();
+        CellInfo cell = world.GetCell(intPos);
 
-        if (Physics.Raycast(ray, out hit))
+        if (cell.blockType == BlockType.Swamp) return;
+
+        Vector3 rayNormal = hit.normal;
+        Vector3Int normal = new Vector3Int();
+
+        float x = Mathf.Abs(rayNormal.x);
+        float y = Mathf.Abs(rayNormal.y);
+        float z = Mathf.Abs(rayNormal.z);
+
+        if (x >= y && x >= z)
         {
-            Vector3Int pos = new Vector3Int(Mathf.RoundToInt(hit.point.x), Mathf.RoundToInt(hit.point.y), Mathf.RoundToInt(hit.point.z));
-
-            CellInfo cell = world.GetCell(pos);
-
-            Vector3 rayNormal = hit.normal;
-            Vector3Int normal = new Vector3Int();
-
-            float x = Mathf.Abs(rayNormal.x);
-            float y = Mathf.Abs(rayNormal.y);
-            float z = Mathf.Abs(rayNormal.z);
-
-            if (x >= y && x >= z)
+            if (rayNormal.x > 0)
             {
-                if (rayNormal.x > 0)
-                {
-                    normal.x = 1;
-                }
-                else
-                {
-                    normal.x = -1;
-                }
-            }
-            else if (y >= x && y >= z)
-            {
-                if (rayNormal.y > 0)
-                {
-                    normal.y = 1;
-                }
-                else
-                {
-                    normal.y = -1;
-                }
+                normal.x = 1;
             }
             else
             {
-                if (rayNormal.z > 0)
-                {
-                    normal.z = 1;
-                }
-                else
-                {
-                    normal.z = -1;
-                }
+                normal.x = -1;
             }
-
-            if (cell.blockType == BlockType.Grass)
-            {
-                pos += normal;
-                cell = world.GetCell(pos);
-            }
-
-            if (cell.blockType == BlockType.Rock)
-            {
-                pos += normal;
-            }
-
-
-            if (!BuildManager.buildManagerInstance.canBuild)
-                return;
-
-            BuildManager.buildManagerInstance.BuildStructureOn(pos);
-
         }
+        else if (y >= x && y >= z)
+        {
+            if (rayNormal.y > 0)
+            {
+                normal.y = 1;
+            }
+            else
+            {
+                normal.y = -1;
+            }
+        }
+        else
+        {
+            if (rayNormal.z > 0)
+            {
+                normal.z = 1;
+            }
+            else
+            {
+                normal.z = -1;
+            }
+        }
+
+        if (cell.blockType == BlockType.Grass)
+        {
+            pos += normal;
+            cell = world.GetCell(intPos);
+        }
+
+        if (cell.blockType == BlockType.Rock)
+        {
+            pos += normal;
+        }
+
+        intPos += normal;
+
+        if (!BuildManager.buildManagerInstance.canBuild)
+            return;
+
+        BuildManager.buildManagerInstance.BuildStructureOn(intPos);
+
     }
 }
 
