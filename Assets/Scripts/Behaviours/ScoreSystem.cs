@@ -17,7 +17,7 @@ public class ScoreSystem : MonoBehaviour
     {
         scoreText = GetComponent<Text>();
         //LevelManager.levelInstance.OnScoreIncremented += IncrementScore; //TODO: pass how much the score will increment
-        GameManager.instance.OnGameStarted += ResetScore;
+        LevelManager.instance.OnGameStarted += ResetScore;
     }
 
     void IncrementScore(int quantity)

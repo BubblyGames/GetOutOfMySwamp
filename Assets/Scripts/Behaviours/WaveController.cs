@@ -43,8 +43,8 @@ public class WaveController : MonoBehaviour
         waveCount = 0;
 
         timeVariable = Time.time + (.5f * timeBeforeRoundStarts);
-        GameManager.instance.OnGameLost += StopWave;
-        GameManager.instance.OnGameLost += LevelCompleted;
+        LevelManager.instance.OnGameLost += StopWave;
+        LevelManager.instance.OnGameLost += LevelCompleted;
 
     }
 
@@ -103,7 +103,7 @@ public class WaveController : MonoBehaviour
         Wave currentWave = new Wave();
         if (waveCount >= waves.Length)
         {
-            GameManager.instance.levelCompleted();
+            LevelManager.instance.levelCompleted();
         }
         else
         {

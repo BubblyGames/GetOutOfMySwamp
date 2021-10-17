@@ -5,7 +5,6 @@ using UnityEngine;
 [System.Serializable]
 public class EnemyLibrary
 {
-    [Header ("MOVE TO GAME MANAGER")]
     [SerializeField]
     public EnemyEntry[] enemyPrefabs;
 
