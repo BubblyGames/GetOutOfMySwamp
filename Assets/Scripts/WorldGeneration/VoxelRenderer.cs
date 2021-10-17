@@ -40,6 +40,5 @@ public class VoxelRenderer : MonoBehaviour
         collisionMesh.RecalculateNormals();
 
         meshCollider.sharedMesh = collisionMesh;
-        meshCollider.skinWidth = 1f;
     }
 }

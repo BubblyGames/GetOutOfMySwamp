@@ -37,6 +37,7 @@ public class GameManager : MonoBehaviour
     public Text text;
     public LayerMask floorLayer;
     public Transform center;
+    public GameObject waterSplashPrefab;
 
 
     private void Awake()
@@ -91,6 +92,7 @@ public class GameManager : MonoBehaviour
 
     public void dealDamageToBase(int damageTaken)
     {
+        GameObject.Instantiate(waterSplashPrefab).transform.position = world.end;
         if (!LevelStats.levelStatsInstance.infinteHP)
         {
             LevelStats.levelStatsInstance.ReceiveDamage(damageTaken);
