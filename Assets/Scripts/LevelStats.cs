@@ -47,4 +47,9 @@ public class LevelStats : MonoBehaviour
     {
         currentMoney -= quantity;
     }
+
+    private void OnValidate()
+    {
+        
+    }
 }
