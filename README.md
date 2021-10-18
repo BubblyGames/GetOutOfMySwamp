@@ -114,7 +114,12 @@ El juego comienza con una cantidad determinada de monedas_(Moneda por decidir.)_
 
 Existen dos tipos de defensas, las torres y las trampas. Las torres tienen vida, alcance, daño, velocidad de ataque y éstos pueden ser individuales o en área y tener efectos de estado sobre los enemigos. Solo se pueden construir adyacentes al camino de los enemigos u otra torre previamente construida._Algunas torres tienen bonificación de adyacencia (BETA?)_. Además, tienen dos niveles de mejoras para aumentar sus estadísticas. Luego están las trampas, las cuales se colocan en el camino del enemigo. Tienen daño, durabilidad y pueden tener efecto_(ralentizar)_.
 
-Por otro lado están los enemigos, con características de vida, velocidad de movimiento y opcionales como la capacidad de volar o dañar las torres. Aparecen por oleadas y aumentan en número conforme avanzas en la partida. Tienen diferentes roles en función de sus estadísticas: Base, unidad más común, estadísticas medias, carne de cañón; Tanque, una gran cantidad de vida y velocidad de movimiento reducida; Voladora, como su nombre indica, no van por el suelo ergo no son susceptibles a ciertos tipo de torres o trampas_y siguen una ruta diferente a la meta (POR VER)_; Horda, aparecen en mucha cantidad, con una velocidad de movimiento alta y vida bastante baja; Por último, especialista, tiene habilidades únicas como dañar a las torres.
+Por otro lado están los enemigos, con características de vida, velocidad de movimiento y opcionales como la capacidad de volar o dañar las torres. Aparecen por oleadas y aumentan en número conforme avanzas en la partida. Tienen diferentes roles en función de sus estadísticas: 
+- Base, unidad más común, estadísticas medias, carne de cañón
+- Tanque, una gran cantidad de vida y velocidad de movimiento reducida
+- Voladora, como su nombre indica, no van por el suelo ergo no son susceptibles a ciertos tipo de torres o trampas_y siguen una ruta diferente a la meta (POR VER)_
+- Horda, aparecen en mucha cantidad, con una velocidad de movimiento alta y vida bastante baja
+- _Por último, especialista, tiene habilidades únicas como dañar a las torres.
 
 
 ### 4.3 Controles
