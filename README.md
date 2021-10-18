@@ -1,88 +1,12 @@
-# GetOutOfMySwamp
 
-****
+
+### Get out of my swamp!
+
+
 
 Versión 0.1
 
-****
 
-**Plantilla de GDD por Alberto Blanco, Cosmic Works Studios.**
-## Índice
-**1. Introducción**
-
-1.1 Descripción breve del concepto
-
-1.2 Descripción breve de la historia y personajes
-
-1.3 Propósito, público objetivo y plataformas
-
-**2. Monetización**
-
-2.1 Tipo de modelo de monetización3
-
-2.2 Tablas de productos y precios
-
-**3. Planificación y Costes**
-
-3.1 El equipo humano
-
-3.2 Estimación temporal del desarrollo
-
-3.3 Costes asociados
-
-**4. Mecánicas de Juego y Elementos de Juego (Añadir esquemas o tablas para tener un acceso mucho más rápido a la información en caso de necesitarlo)**
-
-4.1 Descripción detallada del concepto de juego
-
-4.2 Descripción detallada de las mecánicas de juego
-
-4.2.1 Victoria y derrota
-
-4.2.2 Mapa
-
-4.2.3 Economía
-
-4.2.4 Defensas y enemigos (Añadir referencias del mismo documento al apartado de Torres y el apartado de Enemigos)
-
-4.3 Controles
-
-4.4 Niveles y misiones
-
-4.5 Objetos, armas y power ups
-
-**5. Trasfondo**
-
-5.1 Descripción detallada de la historia y la trama7
-
-5.2 Personajes
-
-5.3 Entornos y lugares
-
-**6. Arte**
-
-6.1 Estética general del juego
-
-6.2 Apartado visual
-
-6.3 Música
-
-6.4 Ambiente sonoro
-
-**7. Interfaz**
-
-7.1 Diseños básicos de los menús
-
-7.2 Diagrama de flujo
-
-**8. Hoja de ruta del desarrollo**
-
-8.1 Hito 1
-
-8.2 Hito 2
-
-8.3 Hito 3
-
-8.4 Fecha de lanzamiento
 
 
 ## 1. Introducción
@@ -112,15 +36,15 @@ El modelo de monetización dependerá del desempeño económico del producto una
 
 - Optimista:
 
-![](https://lh4.googleusercontent.com/bZtJR_5wFWo95Jj2SNQHg1z70lLJYph_hNC_96vKlRIqLW9aP44abqC0_F7qhth9f5hgLZCeifcUV3ZMHV0iCK_nGUpzL4pI2qNO7ty-ZgTXmM8M5kFdt5gMqZnlzODuhUa3_qPO=s0)
+![](https://lh3.googleusercontent.com/NDok-owYDmq-nwNgygDbRXiC_imSoQfDmGG--ZBRdhj06D-Gra9gRHcpBK-UgUpN9wqcpNrYbVjkmJv8gvRJvbv_m8-sO3VaA3N30WNo2yMRoYWLCQ1BDHIchIngL1WyXdZhekcp=s0)
 
 - Normal:
 
-![](https://lh4.googleusercontent.com/t3yIc6O7j61sZziG2poeLyu8YsySm_kntm2V6tHmowgcX5UGfXVDDTN6PGoCbENVKVQaDUg7FSE_ZOQ8hHr-jl_BIJ78ZpAESByYCtk47TxrMqnAjdu_37mQzqp04Dnwbe4SKQdp=s0)
+![](https://lh5.googleusercontent.com/yLeVvIKrbgzTepkci_sdpZwFOD4xHR-sfVYYtzEeKjQ6LuV9q3_To2p_3tYslYGGOk1IOkCN2wDLkIdDePRQswpZftIUGr7SQZNl6p8MkT2oxJ1U8Ec13ciUD6yZvwZeUkitSFc6=s0)
 
 - Pesimista:
 
-![](https://lh6.googleusercontent.com/1WAqe4m6KS4GdxHbfRkX7zBCtUg40YOBxMsRZXtXkBSgJYV-RGQqiFPoz8udCF81wsMrpHi94YIqlfUuV-i9zwg_Jp7YyjQ_7H7qv4Ya6pAw8UXWacac8JDuNOei9ET188PUD7Nq=s0)
+![](https://lh6.googleusercontent.com/qtqYHgtjQsrfuDW2jzYMS6uORjEzjM1dH7jmhMES1awgUNY3AevEl5UOzc_10r92SlEo8O1f5x5UMYijkVQKC_15Q1pSoWWwYCZl0PBZe-dqzdw0vG6RoCIt5AK4DzaX2rLJqLVC=s0)
 
 
 ### 2.2 Tablas de productos y precios
@@ -139,7 +63,7 @@ Marta Vidal: Artista
 
 Alberto Garcia: Diseñador
 
-Daniel Marti, Jose Márquez y Adrian Ramirez: Programadores
+Daniel Marti,Jose Márquez y Adrian Ramirez: Programadores
 
 
 ### 3.2 Estimación temporal del desarrollo
@@ -155,8 +79,10 @@ El tiempo de desarrollo para las distintas etapas del proyecto se estima en:
 
 ### 3.3 Costes asociados
 
+\*\*\*\*Todo lo que está en cursiva son apuntes o propuestas\*\*\*\*
 
-## 4. Mecánicas de Juego y Elementos de Juego
+
+## 4. Mecánicas de Juego y Elementos de Juego_(Añadir esquemas o tablas para tener un acceso mucho más rápido a la información en caso de necesitarlo)_
 
 
 ### 4.1 Descripción detallada del concepto de juego
@@ -167,32 +93,35 @@ Es un tower defense 3D con vista isométrica en un mapa cúbico. El origen de lo
 ### 4.2 Descripción detallada de las mecánicas de juego
 
 
-#### 4.2.1  Victoria y derrota
+#### 4.2.1 Victoria y derrota
 
 Para ganar la partida se ha de defender un número determinado de oleadas y con la vida igual o superior a 1. El número de oleadas defendidas y por defender estará en pantalla al inicio de cada ronda. Si llegan a la meta un número de enemigos igual a la cantidad de vidas la partida se acaba.
 
 
-#### 4.2.2  Mapa
+#### 4.2.2 Mapa
 
 El mapa tiene forma de cubo, con sus 6 caras siendo terreno jugable. Las caras visibles serán de 1 a 3, dependiendo de la rotación del cubo que elija el jugador. El cubo se puede rotar en cualquier momento de la partida menos en el menú de construcción.
 
-En el mapa hay tres tipos de casillas: Casillas de camino, por las que los enemigos transitan y se pueden poner trampas; Casillas de terreno construible, donde se podrá poner cualquier tipo de torre; Y casillas obstáculo, en las que no puede haber camino ni estructuras.
+En el mapa hay tres tipos de casillas_(cuatro si al final añadimos la casilla económica)_: Casillas de camino, por las que los enemigos transitan y se pueden poner trampas; Casillas de terreno construible, donde se podrá poner cualquier tipo de torre; Y casillas obstáculo, en las que no puede haber camino ni estructuras.
 
 
-#### 4.2.3  Economía
+#### 4.2.3 Economía
 
-El juego comienza con una cantidad determinada de monedas para poner las torres iniciales. Una vez iniciada la partida, la fuente de ingresos será la derrota de los enemigos. El dinero conseguido se puede gastar en construir más defensas o mejorar las ya existentes.
+El juego comienza con una cantidad determinada de monedas_(Moneda por decidir.)_para poner las torres iniciales. Una vez iniciada la partida, la fuente de ingresos será la derrota de los enemigos. El dinero conseguido se puede gastar en construir más defensas o mejorar las ya existentes._Podría haber una torre que genere recursos de manera pasiva, habría que decidir qué recurso sería y podría estar en sitios específicos del mapa, como casillas de recurso en el que solo se puede construir si tienes conexión directa._
 
-#### 4.2.4  Defensas y enemigos
 
-Existen dos tipos de defensas, las torres y las trampas. Las torres tienen vida, alcance, daño, velocidad de ataque y éstos pueden ser individuales o en área y tener efectos de estado sobre los enemigos. Solo se pueden construir adyacentes al camino de los enemigos u otra torre previamente construida. Además, tienen dos niveles de mejoras para aumentar sus estadísticas. Luego están las trampas, las cuales se colocan en el camino del enemigo. Tienen daño, durabilidad y pueden tener efecto de estado.
+#### 4.2.4 Defensas y enemigos_(Añadir referencias del mismo documento al apartado de Torres y el apartado de Enemigos)_
 
-Por otro lado están los enemigos, con características de vida, velocidad de movimiento y opcionales como la capacidad de volar o dañar las torres. Aparecen por oleadas y aumentan en número conforme avanzas en la partida. Tienen diferentes roles en función de sus estadísticas: Base, unidad más común, estadísticas medias, carne de cañón; Tanque, una gran cantidad de vida y velocidad de movimiento reducida; Voladora, como su nombre indica, no van por el suelo ergo no son susceptibles a ciertos tipo de torres o trampas; Horda, aparecen en mucha cantidad, con una velocidad de movimiento alta y vida bastante baja; Por último, especialista, tiene habilidades únicas como dañar a las torres.
+Existen dos tipos de defensas, las torres y las trampas. Las torres tienen vida, alcance, daño, velocidad de ataque y éstos pueden ser individuales o en área y tener efectos de estado sobre los enemigos. Solo se pueden construir adyacentes al camino de los enemigos u otra torre previamente construida._Algunas torres tienen bonificación de adyacencia (BETA?)_. Además, tienen dos niveles de mejoras para aumentar sus estadísticas. Luego están las trampas, las cuales se colocan en el camino del enemigo. Tienen daño, durabilidad y pueden tener efecto_(ralentizar)_.
+
+Por otro lado están los enemigos, con características de vida, velocidad de movimiento y opcionales como la capacidad de volar o dañar las torres. Aparecen por oleadas y aumentan en número conforme avanzas en la partida. Tienen diferentes roles en función de sus estadísticas: Base, unidad más común, estadísticas medias, carne de cañón; Tanque, una gran cantidad de vida y velocidad de movimiento reducida; Voladora, como su nombre indica, no van por el suelo ergo no son susceptibles a ciertos tipo de torres o trampas_y siguen una ruta diferente a la meta (POR VER)_; Horda, aparecen en mucha cantidad, con una velocidad de movimiento alta y vida bastante baja; Por último, especialista, tiene habilidades únicas como dañar a las torres.
 
 
 ### 4.3 Controles
 
-El jugador durante la partida tendrá dos tareas principales, vigilar el mapa para saber el estado de la partida y colocar defensas. Para vigilar el mapa podrá rotarlo con click (pulsar en el caso de móvil) y arrastrar. Luego para poner las torres será exactamente el mismo input, click y arrastrar desde la tarjeta de la torre hasta la posición en la que desee ponerla. Cambios sujetos a testeo.
+El jugador durante la partida tendrá dos tareas principales, vigilar el mapa para saber el estado de la partida y colocar defensas. Para vigilar el mapa podrá rotarlo con click (pulsar en el caso de móvil) y arrastrar_(Rotación en coordenadas globales y fijas para hacerlo bastante sencillo de usar)._Luego para poner las torres será exactamente el mismo input, click y arrastrar desde la tarjeta de la torre hasta la posición en la que desee ponerla.
+
+_Propuestas: doble click/tap en una cara para centrar la vista en ésta. Con un click/tap aparece la info de la defensa seleccionada a la izquierda de la pantalla_
 
 
 ### 4.4 Niveles y misiones
@@ -202,20 +131,36 @@ El juego cuenta con 2 niveles por el momento. La misión en ambos niveles es def
 Los niveles se conforman de grids y hay distintas variantes de las celdas. Los niveles son semi procedurales: los niveles se crean mediante seed, pero a medida que se progresa su dificultad va aumentando.
 
 
-### 4.5 Torres y trampas
+### 4.5 Objetos, armas y power ups
 
-| **TORRES**     | ALCANCE   | DAÑO    | OBJETIVO          | VELOCIDAD DE ATAQUE | EFECTO               |
-| -------------- | --------- | ------- | ----------------- | ------------------- | -------------------- |
-| TORRE PESADA   | Largo     | Elevado | ÁreaTT\*          |        Lento        | \-                   |
-| TORRE BÁSICA   | Medio     | Medio   | IndividualTA-TT\* |        Medio        | \-                   |
-| TORRE PSÍQUICA | Corto     | Bajo    | IndividualTA-TT\* |        Medio        | El enemigo retrocede |
-| TORRE ACUÁTICA | Medio     | Bajo    | ÁreaTA-TT\*       |        Rápido       | \-                   |
-| **TRAMPAS**    |           |         |                   |                     |                      |
-| TRAMPA PANTANO | 1 Casilla | \-      | ÁreaTT\*          | \-                  | Ralentiza            |
+El jugador cuenta con 4 tipos de torres distintas:
 
-TT: Ataques desde Tierra a objetivos Terrestres.
+- Torre pesada:
 
-TA: Ataques desde Tierra a objetivos Aéreos.
+  - Alcance: amplio
+  - Daño: elevado y en área
+  - Ritmo de disparo: lento
+
+- Torre básica:
+
+  - Alcance: medio
+  - Daño: medio-bajo, de manera individual
+  - Ritmo de disparo: alto
+  - Miscelánea: prioriza el ataque a enemigos aéreos
+
+- Torre elemental:
+
+  - Alcance: medio
+  - Daño: bajo, individual
+  - Ritmo de disparo: medio
+  - Miscelanea: los enemigos afectados por su ataque se dan la vuelta por un lapso de tiempo
+
+- Torre acuática:
+
+  - Alcance: medio
+  - Daño: medio, multiobjetivo
+  - Ritmo de disparo: rápido
+  - Miscelánea: ralentizan a los enemigos
 
 
 ## 5. Trasfondo
@@ -241,7 +186,43 @@ Al haber 3 niveles jugables hay 3 entornos o biomas: pantano, nieve y ciudad.
 - Ciudad: el estanque de las ranas limpias se encuentra en un parque, con bancos y papeleras; mientras que las ranas sucias vienen de las alcantarillas.
 - Nieve: tanto el estanque de las ranas limpias como el de las ranas sucias son estanques normales en una montaña o un bosque, pero el de las ranas sucias es más oscuro.
 
-## 6-7. Arte e interfaz en proceso
+
+## 
+
+
+## 6. Arte
+
+
+### 6.1 Estética general del juego
+
+El apartado visual consistirá en modelos voxel, tanto para el escenario como para las torres y los enemigos.
+
+
+### 6.2 Apartado visual
+
+Existen distintos climas/biomas para los niveles.
+
+
+### 6.3 Música
+
+
+### 6.4 Ambiente sonoro
+
+
+## 
+
+
+## 7. Interfaz
+
+
+### 7.1 Diseños básicos de los menús
+
+
+### 7.2 Diagrama de flujo
+
+
+## 
+
 
 ## 8. Hoja de ruta del desarrollo
 
@@ -262,3 +243,5 @@ Al haber 3 niveles jugables hay 3 entornos o biomas: pantano, nieve y ciudad.
 
 
 ### 8.4 Fecha de lanzamiento
+
+  
