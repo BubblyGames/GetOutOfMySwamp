@@ -53,7 +53,7 @@ public class LevelManager : MonoBehaviour
         buildManager = GetComponent<BuildManager>();
         shop = GetComponent<Shop>();
 
-        center.transform.position = Vector3.one * ((world.size-1) / 2f); //set center tu middle of the cube
+        center.transform.position = Vector3.one * ((world.size - 1) / 2f); //set center tu middle of the cube
     }
 
     private void Start()
@@ -73,7 +73,8 @@ public class LevelManager : MonoBehaviour
 
             if (Physics.Raycast(ray, out hit))
             {
-                if (hit.collider.tag == "World") {
+                if (hit.collider.tag == "World")
+                {
                     SpawnWeapon(hit);
                 }
                 else
@@ -119,8 +120,6 @@ public class LevelManager : MonoBehaviour
 
         CellInfo cell = world.GetCell(intPos);
 
-        if (cell.blockType == BlockType.Swamp) return;
-
         Vector3 rayNormal = hit.normal;
         Vector3Int normal = new Vector3Int();
 
@@ -162,18 +161,23 @@ public class LevelManager : MonoBehaviour
             }
         }
 
-        if (cell.blockType == BlockType.Grass)
+        switch (cell.blockType)
         {
-            pos += normal;
-            cell = world.GetCell(intPos);
-        }
-
-        if (cell.blockType == BlockType.Rock)
-        {
-            pos += normal;
-        }
-
+            case BlockType.Air:
+                break;
+            case BlockType.Path:
+            case BlockType.Grass:
         intPos += normal;
+                break;
+            case BlockType.Rock:
+        intPos += world.GetFaceNormal(cell);
+                break;
+            case BlockType.Swamp:
+                return;
+            default:
+                break;
+        }
+
 
         if (!BuildManager.buildManagerInstance.canBuild)
             return;
