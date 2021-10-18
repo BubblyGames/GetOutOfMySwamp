@@ -22,7 +22,12 @@ public class EnemySpawner : MonoBehaviour
     public void SpawnEnemy(string enemyId, Path path)
     {
         WaveController.waveControllerInstance.AddToActiveEnemies();
-        GameObject enemyPrefab = GameManager.instance.enemyLibrary.GetPrefabByIdentificator(enemyId);
+
+        //TODO (FINAL BUILD): swap commented line to get prefabs from game manager
+
+        GameObject enemyPrefab = TemporalLibrary.instance.enemyLibrary.GetPrefabByIdentificator(enemyId);
+        //GameObject enemyPrefab = GameManager.instance.enemyLibrary.GetPrefabByIdentificator(enemyId);
+
         Instantiate(enemyPrefab, path.GetStep(0), Quaternion.identity).GetComponent<EnemyBehaviour>().SetInitialState(path);
     }
 }
