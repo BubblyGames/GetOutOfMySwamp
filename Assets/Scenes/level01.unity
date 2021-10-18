@@ -609,6 +609,53 @@ Transform:
   m_Father: {fileID: 963194228}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 30, y: 48, z: 0}
+--- !u!1 &742249780
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 742249782}
+  - component: {fileID: 742249781}
+  m_Layer: 0
+  m_Name: TemporalLibrary
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &742249781
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 742249780}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eb37f7c51b050d84baff284dc05b1e42, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enemyLibrary:
+    enemyPrefabs:
+    - enemyId: BasicEnemy
+      enemyPrefab: {fileID: 5803062399679311112, guid: edbebc9645c93bc47b4257b361fcc5b1, type: 3}
+--- !u!4 &742249782
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 742249780}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 31.96146, y: 24.740639, z: -302.88983}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &744425022
 GameObject:
   m_ObjectHideFlags: 0
@@ -1764,7 +1811,7 @@ GameObject:
   - component: {fileID: 1903685285}
   - component: {fileID: 1903685294}
   m_Layer: 0
-  m_Name: GameManager
+  m_Name: LevelManager
   m_TagString: World
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1782,8 +1829,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a2e84d8d11f308f47860aa152f3a36e7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyLibrary:
-    enemyPrefabs: []
   text: {fileID: 1583022576}
   floorLayer:
     serializedVersion: 2
