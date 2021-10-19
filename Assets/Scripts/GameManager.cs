@@ -20,7 +20,13 @@ public class GameManager : MonoBehaviour
         {
             Destroy(this);
         }
+
         DontDestroyOnLoad(instance);
 
+    }
+
+    void Start() 
+    {
+        AudioManager.instance.Play("mainMenuSong");
     }
 }
