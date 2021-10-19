@@ -6,21 +6,21 @@ public class Shop : MonoBehaviour
 {
     [SerializeField] private int shopIndex = -1;
 
-    public List<DefenseBlueprint> defenseBlueprints;
-    public DefenseBlueprint selectedDefenseBlueprint;
+    public List<StructureBlueprint> structureBlueprints;
+    public StructureBlueprint selectedStructureBlueprint;
     public void setShopIndex(int newIndex)
     {
         shopIndex = newIndex;
-        selectedDefenseBlueprint = defenseBlueprints[shopIndex];
-        purchaseDefense();
+        selectedStructureBlueprint = structureBlueprints[shopIndex];
+        purchaseStructure();
     }
 
-    public void purchaseDefense()
+    public void purchaseStructure()
     {
-        if (shopIndex >= 0 && shopIndex <defenseBlueprints.Count)
+        if (shopIndex >= 0 && shopIndex <structureBlueprints.Count)
         {
            
-            BuildManager.instance.SelectDefenseToBuild(selectedDefenseBlueprint);
+            BuildManager.buildManagerInstance.SelectStructureToBuild(selectedStructureBlueprint);
         }
     }
 }

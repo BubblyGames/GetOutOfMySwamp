@@ -70,7 +70,7 @@ public abstract class EnemyBehaviour : MonoBehaviour
                 //Damage
                 LevelManager.instance.dealDamageToBase(this.damage);
                 Destroy(this.gameObject);
-                WaveController.instance.ReduceActiveEnemies();
+                WaveController.waveControllerInstance.ReduceActiveEnemies();
             }
         }
     }
@@ -115,8 +115,8 @@ public abstract class EnemyBehaviour : MonoBehaviour
     public virtual void Die()
     {
 
-        LevelStats.instance.EarnMoney(moneyValue);
-        WaveController.instance.ReduceActiveEnemies();
+        LevelStats.levelStatsInstance.EarnMoney(moneyValue);
+        WaveController.waveControllerInstance.ReduceActiveEnemies();
 
         //Particles and sound
 

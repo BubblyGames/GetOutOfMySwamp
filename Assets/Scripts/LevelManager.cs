@@ -26,8 +26,7 @@ public class LevelManager : MonoBehaviour
     private Shop shop;
 
     //Actions
-    public event Action OnGameStarted, OnGameLost, OnGameCompleted, OnScoreIncremented;
-    public event Action<int> OnDamageTaken;
+    public event Action OnGameStarted, OnGameLost, OnGameCompleted, OnDamageTaken, OnScoreIncremented;
     //TODO: increment score when killing enemys.
 
     public Text text;
@@ -76,11 +75,11 @@ public class LevelManager : MonoBehaviour
             {
                 if (hit.collider.tag == "World")
                 {
-                    checkWorldCoordinates(hit);
+                    SpawnWeapon(hit);
                 }
                 else
                 {
-                    //Interact with existing defenses
+                    //Interact with existing weapons
                 }
             }
         }
@@ -90,12 +89,11 @@ public class LevelManager : MonoBehaviour
     public void dealDamageToBase(int damageTaken)
     {
         GameObject.Instantiate(waterSplashPrefab).transform.position = world.end;
-        if (!LevelStats.instance.infinteHP)
+        if (!LevelStats.levelStatsInstance.infinteHP)
         {
-            //LevelStats.levelStatsInstance.ReceiveDamage(damageTaken);
-            OnDamageTaken?.Invoke(damageTaken);
+            LevelStats.levelStatsInstance.ReceiveDamage(damageTaken);
         }
-        if (LevelStats.instance.currentBaseHealthPoints <= 0)
+        if (LevelStats.levelStatsInstance.currentBaseHealthPoints <= 0)
         {
             //Game Over
             OnGameLost?.Invoke();
@@ -113,8 +111,7 @@ public class LevelManager : MonoBehaviour
 
     }
 
-    //old SpawnWeapon
-    private void checkWorldCoordinates(RaycastHit hit)
+    private void SpawnWeapon(RaycastHit hit)
     {
         Vector3 pos = hit.point;
         pos -= hit.normal / 2;
@@ -182,10 +179,10 @@ public class LevelManager : MonoBehaviour
         }
 
 
-        if (!BuildManager.instance.canBuild)
+        if (!BuildManager.buildManagerInstance.canBuild)
             return;
 
-        BuildManager.instance.BuildDefenseOn(intPos);
+        BuildManager.buildManagerInstance.BuildStructureOn(intPos);
 
     }
 }

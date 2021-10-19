@@ -21,7 +21,7 @@ public class EnemySpawner : MonoBehaviour
 
     public void SpawnEnemy(string enemyId, Path path)
     {
-        WaveController.instance.AddToActiveEnemies();
+        WaveController.waveControllerInstance.AddToActiveEnemies();
 
         //TODO (FINAL BUILD): swap commented line to get prefabs from game manager
 

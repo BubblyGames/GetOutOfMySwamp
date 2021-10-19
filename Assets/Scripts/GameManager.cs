@@ -8,7 +8,7 @@ public class GameManager : MonoBehaviour
 
     [SerializeField]
     public EnemyLibrary enemyLibrary;
-    public AudioManager audioManager;
+
 
     private void Awake()
     {
@@ -20,13 +20,6 @@ public class GameManager : MonoBehaviour
         {
             Destroy(this);
         }
-
         DontDestroyOnLoad(instance);
-
-    }
-
-    void Start() 
-    {
-        AudioManager.instance.Play("mainMenuSong");
     }
 }

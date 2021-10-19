@@ -4,36 +4,33 @@ using UnityEngine;
 
 public class BuildManager : MonoBehaviour
 {
-    public static BuildManager instance;
+    public static BuildManager buildManagerInstance;
 
-    public DefenseBlueprint defenseToBuild = null; //Defense is going to be built
+    public StructureBlueprint structureToBuild = null; //Structure is going to be built
     
-    public bool canBuild { get { return defenseToBuild.defensePrefab != null; } }//Checks if a defense is selected to be built
+    public bool canBuild { get { return structureToBuild.structurePrefab != null; } }//Checks if a structure is selected to be built
 
     private void Awake()
     {
-        if (instance == null)
+        if (buildManagerInstance != null)
         {
-            instance = this;
+            return;
         }
-        else
-        {
-            Destroy(this);
-        }
+        buildManagerInstance = this;
     }
 
-    public void SelectDefenseToBuild(DefenseBlueprint defense)
+    public void SelectStructureToBuild(StructureBlueprint structure)
     {
-        defenseToBuild = defense;
+        structureToBuild = structure;
     }
 
-    public void BuildDefenseOn(Vector3 position)
+    public void BuildStructureOn(Vector3 position)
     {
-        if (LevelStats.instance.currentMoney >= defenseToBuild.cost )
+        if (LevelStats.levelStatsInstance.currentMoney >= structureToBuild.cost )
         {
-            Instantiate(defenseToBuild.defensePrefab, position, Quaternion.identity);
-            if (!LevelStats.instance.infinteMoney) {
-                LevelStats.instance.SpendMoney(defenseToBuild.cost);            
+            Instantiate(structureToBuild.structurePrefab, position, Quaternion.identity);
+            if (!LevelStats.levelStatsInstance.infinteMoney) {
+                LevelStats.levelStatsInstance.SpendMoney(structureToBuild.cost);            
             }
         }
         else
