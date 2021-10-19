@@ -33,40 +33,40 @@ public class MeshData
         switch (direction)
         {
             case Direction.Back:
-                AddVertex(new Vector3(x - 0.5f, y - 0.5f, z - 0.5f));
-                AddVertex(new Vector3(x - 0.5f, y + 0.5f, z - 0.5f));
-                AddVertex(new Vector3(x + 0.5f, y + 0.5f, z - 0.5f));
-                AddVertex(new Vector3(x + 0.5f, y - 0.5f, z - 0.5f));
+                AddVertex(new Vector3(x - 0.5f, y - 0.5f, z - 0.5f), isMainMesh);
+                AddVertex(new Vector3(x - 0.5f, y + 0.5f, z - 0.5f), isMainMesh);
+                AddVertex(new Vector3(x + 0.5f, y + 0.5f, z - 0.5f), isMainMesh);
+                AddVertex(new Vector3(x + 0.5f, y - 0.5f, z - 0.5f), isMainMesh);
                 break;
             case Direction.Front:
-                AddVertex(new Vector3(x + 0.5f, y - 0.5f, z + 0.5f));
-                AddVertex(new Vector3(x + 0.5f, y + 0.5f, z + 0.5f));
-                AddVertex(new Vector3(x - 0.5f, y + 0.5f, z + 0.5f));
-                AddVertex(new Vector3(x - 0.5f, y - 0.5f, z + 0.5f));
+                AddVertex(new Vector3(x + 0.5f, y - 0.5f, z + 0.5f), isMainMesh);
+                AddVertex(new Vector3(x + 0.5f, y + 0.5f, z + 0.5f), isMainMesh);
+                AddVertex(new Vector3(x - 0.5f, y + 0.5f, z + 0.5f), isMainMesh);
+                AddVertex(new Vector3(x - 0.5f, y - 0.5f, z + 0.5f), isMainMesh);
                 break;
             case Direction.Left:
-                AddVertex(new Vector3(x - 0.5f, y - 0.5f, z + 0.5f));
-                AddVertex(new Vector3(x - 0.5f, y + 0.5f, z + 0.5f));
-                AddVertex(new Vector3(x - 0.5f, y + 0.5f, z - 0.5f));
-                AddVertex(new Vector3(x - 0.5f, y - 0.5f, z - 0.5f));
+                AddVertex(new Vector3(x - 0.5f, y - 0.5f, z + 0.5f), isMainMesh);
+                AddVertex(new Vector3(x - 0.5f, y + 0.5f, z + 0.5f), isMainMesh);
+                AddVertex(new Vector3(x - 0.5f, y + 0.5f, z - 0.5f), isMainMesh);
+                AddVertex(new Vector3(x - 0.5f, y - 0.5f, z - 0.5f), isMainMesh);
                 break;
             case Direction.Right:
-                AddVertex(new Vector3(x + 0.5f, y - 0.5f, z - 0.5f));
-                AddVertex(new Vector3(x + 0.5f, y + 0.5f, z - 0.5f));
-                AddVertex(new Vector3(x + 0.5f, y + 0.5f, z + 0.5f));
-                AddVertex(new Vector3(x + 0.5f, y - 0.5f, z + 0.5f));
+                AddVertex(new Vector3(x + 0.5f, y - 0.5f, z - 0.5f), isMainMesh);
+                AddVertex(new Vector3(x + 0.5f, y + 0.5f, z - 0.5f), isMainMesh);
+                AddVertex(new Vector3(x + 0.5f, y + 0.5f, z + 0.5f), isMainMesh);
+                AddVertex(new Vector3(x + 0.5f, y - 0.5f, z + 0.5f), isMainMesh);
                 break;
             case Direction.Down:
-                AddVertex(new Vector3(x - 0.5f, y - 0.5f, z - 0.5f));
-                AddVertex(new Vector3(x + 0.5f, y - 0.5f, z - 0.5f));
-                AddVertex(new Vector3(x + 0.5f, y - 0.5f, z + 0.5f));
-                AddVertex(new Vector3(x - 0.5f, y - 0.5f, z + 0.5f));
+                AddVertex(new Vector3(x - 0.5f, y - 0.5f, z - 0.5f), isMainMesh);
+                AddVertex(new Vector3(x + 0.5f, y - 0.5f, z - 0.5f), isMainMesh);
+                AddVertex(new Vector3(x + 0.5f, y - 0.5f, z + 0.5f), isMainMesh);
+                AddVertex(new Vector3(x - 0.5f, y - 0.5f, z + 0.5f), isMainMesh);
                 break;
             case Direction.Up:
-                AddVertex(new Vector3(x - 0.5f, y + 0.5f, z + 0.5f));
-                AddVertex(new Vector3(x + 0.5f, y + 0.5f, z + 0.5f));
-                AddVertex(new Vector3(x + 0.5f, y + 0.5f, z - 0.5f));
-                AddVertex(new Vector3(x - 0.5f, y + 0.5f, z - 0.5f));
+                AddVertex(new Vector3(x - 0.5f, y + 0.5f, z + 0.5f), isMainMesh);
+                AddVertex(new Vector3(x + 0.5f, y + 0.5f, z + 0.5f), isMainMesh);
+                AddVertex(new Vector3(x + 0.5f, y + 0.5f, z - 0.5f), isMainMesh);
+                AddVertex(new Vector3(x - 0.5f, y + 0.5f, z - 0.5f), isMainMesh);
                 break;
             default:
                 break;
@@ -106,12 +106,16 @@ public class MeshData
         AddUV(new Vector2(u + .5f - offset, v + .5f - offset));
         AddUV(new Vector2(u + .5f - offset, v + offset));
 
-        AddQuadTriangles();
+        AddQuadTriangles(isMainMesh);
     }
 
-    public void AddVertex(Vector3 vertex)
+    public void AddVertex(Vector3 vertex, bool isCollider)
     {
         vertices.Add(vertex);
+        if (isCollider)
+        {
+            colliderVertices.Add(vertex);
+        }
     }
 
     public void AddUV(Vector2 uv)
@@ -120,7 +124,7 @@ public class MeshData
     }
 
 
-    public void AddQuadTriangles()
+    public void AddQuadTriangles(bool isCollider)
     {
         triangles.Add(vertices.Count - 4);
         triangles.Add(vertices.Count - 3);
@@ -129,5 +133,15 @@ public class MeshData
         triangles.Add(vertices.Count - 4);
         triangles.Add(vertices.Count - 2);
         triangles.Add(vertices.Count - 1);
+
+        if (isCollider)
+        {
+            colliderTriangles.Add(colliderVertices.Count - 4);
+            colliderTriangles.Add(colliderVertices.Count - 3);
+            colliderTriangles.Add(colliderVertices.Count - 2);
+            colliderTriangles.Add(colliderVertices.Count - 4);
+            colliderTriangles.Add(colliderVertices.Count - 2);
+            colliderTriangles.Add(colliderVertices.Count - 1);
+        }
     }
 }

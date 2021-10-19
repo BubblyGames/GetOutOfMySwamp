@@ -62,19 +62,17 @@ public abstract class EnemyBehaviour : MonoBehaviour
             {
                 nextIndexPath++;
                 lerpProgression = 0;
+                transform.LookAt(path.GetStep(nextIndexPath), path.GetCell(nextIndexPath).normalInt);
             }
             //if the enemy reach the end of the path deal damge to base
             else
             {
                 //Damage
-                GameManager.gameInstance.dealDamageToBase(this.damage);
+                LevelManager.instance.dealDamageToBase(this.damage);
                 Destroy(this.gameObject);
                 WaveController.waveControllerInstance.ReduceActiveEnemies();
             }
         }
-
-        Vector3 target = path.GetStep(nextIndexPath);
-        transform.LookAt(target, CubeWorldGenerator.worldGeneratorInstance.GetNormal((int)target.x, (int)target.y, (int)target.z));
     }
 
     public void SetPath(Path path) { this.path = path; }

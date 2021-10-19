@@ -3,17 +3,20 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-    [RequireComponent(typeof(MeshFilter))]
-    [RequireComponent(typeof(MeshRenderer))]
+[RequireComponent(typeof(MeshFilter))]
+[RequireComponent(typeof(MeshRenderer))]
+[RequireComponent(typeof(MeshCollider))]
 public class VoxelRenderer : MonoBehaviour
 {
     Mesh mesh;
     MeshFilter meshFilter;
+    MeshCollider meshCollider;
 
     private void Awake()
     {
         meshFilter = GetComponent<MeshFilter>();
         mesh = meshFilter.mesh;
+        meshCollider = GetComponent<MeshCollider>();
     }
 
     public void RenderMesh(MeshData meshData)
@@ -29,5 +32,13 @@ public class VoxelRenderer : MonoBehaviour
         mesh.uv = meshData.uvs.Concat(meshData.waterMesh.uvs).ToArray();
         mesh.RecalculateNormals();
         mesh.RecalculateTangents();
+
+        meshCollider.sharedMesh = null;
+        Mesh collisionMesh = new Mesh();
+        collisionMesh.vertices = meshData.colliderVertices.ToArray();
+        collisionMesh.triangles = meshData.colliderTriangles.ToArray();
+        collisionMesh.RecalculateNormals();
+
+        meshCollider.sharedMesh = collisionMesh;
     }
 }
