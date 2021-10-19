@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [System.Serializable]
-public class StructureBlueprint
+public class DefenseBlueprint
 {
-    public GameObject structurePrefab;
+    public GameObject defensePrefab;
     public int cost;
 }

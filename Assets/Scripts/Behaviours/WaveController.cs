@@ -9,7 +9,7 @@ using UnityEngine.UI;
 [RequireComponent(typeof(EnemySpawner))]
 public class WaveController : MonoBehaviour
 {
-    public static WaveController waveControllerInstance;
+    public static WaveController instance;
 
     public int activeEnemies = 0;
 
@@ -31,7 +31,14 @@ public class WaveController : MonoBehaviour
 
     private void Awake()
     {
-        waveControllerInstance = this;
+        if (instance == null)
+        {
+            instance = this;
+        }
+        else
+        {
+            Destroy(this);
+        }
         enemySpawner = GetComponent<EnemySpawner>();
     }
 
@@ -50,7 +57,7 @@ public class WaveController : MonoBehaviour
 
     private void LevelCompleted()
     {
-        if (LevelStats.levelStatsInstance.currentBaseHealthPoints > 0)
+        if (LevelStats.instance.currentBaseHealthPoints > 0)
         {
             allWavesCleared = true;
         }

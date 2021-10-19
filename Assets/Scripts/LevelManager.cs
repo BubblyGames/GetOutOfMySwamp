@@ -26,7 +26,8 @@ public class LevelManager : MonoBehaviour
     private Shop shop;
 
     //Actions
-    public event Action OnGameStarted, OnGameLost, OnGameCompleted, OnDamageTaken, OnScoreIncremented;
+    public event Action OnGameStarted, OnGameLost, OnGameCompleted, OnScoreIncremented;
+    public event Action<int> OnDamageTaken;
     //TODO: increment score when killing enemys.
 
     public Text text;
@@ -79,7 +80,7 @@ public class LevelManager : MonoBehaviour
                 }
                 else
                 {
-                    //Interact with existing weapons
+                    //Interact with existing defenses
                 }
             }
         }
@@ -89,12 +90,12 @@ public class LevelManager : MonoBehaviour
     public void dealDamageToBase(int damageTaken)
     {
         GameObject.Instantiate(waterSplashPrefab).transform.position = world.end;
-        if (!LevelStats.levelStatsInstance.infinteHP)
+        if (!LevelStats.instance.infinteHP)
         {
-            LevelStats.levelStatsInstance.ReceiveDamage(damageTaken);
-            OnDamageTaken?.Invoke();
+            //LevelStats.levelStatsInstance.ReceiveDamage(damageTaken);
+            OnDamageTaken?.Invoke(damageTaken);
         }
-        if (LevelStats.levelStatsInstance.currentBaseHealthPoints <= 0)
+        if (LevelStats.instance.currentBaseHealthPoints <= 0)
         {
             //Game Over
             OnGameLost?.Invoke();
@@ -181,10 +182,10 @@ public class LevelManager : MonoBehaviour
         }
 
 
-        if (!BuildManager.buildManagerInstance.canBuild)
+        if (!BuildManager.instance.canBuild)
             return;
 
-        BuildManager.buildManagerInstance.BuildStructureOn(intPos);
+        BuildManager.instance.BuildDefenseOn(intPos);
 
     }
 }

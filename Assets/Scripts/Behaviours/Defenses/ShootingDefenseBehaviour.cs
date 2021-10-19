@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SingleWeaponBehaviour : WeaponBehaviour
+public class ShootingDefenseBehaviour : DefenseBehaviour
 {
     public GameObject[] shotPositions; //0 front, 1 back, 2 right, 3 left
     public GameObject bulletType;

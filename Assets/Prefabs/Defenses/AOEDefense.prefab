@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 9175571547001359189}
   - component: {fileID: 5158198115540063936}
   m_Layer: 0
-  m_Name: Weapon
+  m_Name: AOEDefense
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -105,10 +105,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 8305915707849881324}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 12e87762d23baa84c84dab88576c54bc, type: 3}
+  m_Script: {fileID: 11500000, guid: c4a98b5cd3b201140920ba4c2508e89e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attackSpeed: 1
+  attackWait: 1
+  damage: 3
+  bulletSpeed: 1
+  detectionRange: 5
   enemyLayerMask:
     serializedVersion: 2
     m_Bits: 64

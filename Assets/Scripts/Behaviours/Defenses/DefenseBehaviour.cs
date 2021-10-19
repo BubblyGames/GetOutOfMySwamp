@@ -2,8 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-/*Basic Weapon Class, all kind of weapons from towers to land mines, etc etc, wille inherit from this*/
-public abstract class WeaponBehaviour : MonoBehaviour
+/*Basic Defense Class, all kind of defenses from towers to land mines, etc etc, wille inherit from this*/
+public abstract class DefenseBehaviour : MonoBehaviour
 {
     //How much time does it take to reaload between shots
     public float attackWait = 1f;
@@ -17,7 +17,7 @@ public abstract class WeaponBehaviour : MonoBehaviour
     //Speed of the bullet
     public float bulletSpeed = 1f;
 
-    //The radius of the sphere in which the weapon detects an enemy
+    //The radius of the sphere in which the defense detects an enemy
     public float detectionRange = 5f;
 
     //This layer will be used to check for enemys

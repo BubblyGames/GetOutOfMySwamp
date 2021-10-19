@@ -104,7 +104,7 @@ GameObject:
   - component: {fileID: 8006414575844936844}
   - component: {fileID: 6388906839533808407}
   m_Layer: 0
-  m_Name: SingleWeapon
+  m_Name: ShootingDefense
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -199,12 +199,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 7137880238603071797}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7630ea344ea4b5b42a8eb9ffe52e2038, type: 3}
+  m_Script: {fileID: 11500000, guid: 3890934ac96f66841abdff0c0a54e5b5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   attackWait: 1
-  damage: 1
-  bulletSpeed: 10
+  damage: 3
+  bulletSpeed: 1
   detectionRange: 5
   enemyLayerMask:
     serializedVersion: 2
