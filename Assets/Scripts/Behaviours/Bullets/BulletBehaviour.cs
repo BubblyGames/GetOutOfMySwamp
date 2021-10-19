@@ -7,18 +7,18 @@ public class BulletBehaviour : MonoBehaviour
     protected int damage;
     protected float speed;
     protected Transform target;
-    [SerializeField] Vector3 velocity;
+    //[SerializeField] Vector3 velocity;
 
 
     [Header("Bullet Effects")]
     [SerializeField] protected int actualEffect;
     //enum effects {Recoil}; //special effects of bullets
 
-    void FixedUpdate()
+    void Update()
     {
         //gameObject.transform.Translate(Time.fixedDeltaTime * speed * velocity);
         //gameObject.transform.position += Time.fixedDeltaTime * velocity;
-        transform.Translate(Time.fixedDeltaTime*speed*Vector3.forward);
+        transform.Translate(Time.deltaTime*speed*Vector3.forward);
     }
     virtual public void SetBulletBehaviour(Transform target, int damage, float speed, int effect)
     {
@@ -26,7 +26,7 @@ public class BulletBehaviour : MonoBehaviour
         this.speed = speed;
         this.target = target;
         transform.LookAt(target.position);
-        velocity = speed * (target.position - transform.position).normalized;
+        //velocity = speed * (target.position - transform.position).normalized;
         actualEffect = effect;
         //GetComponent<Rigidbody>().velocity = velocity;
     }
