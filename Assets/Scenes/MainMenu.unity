@@ -2826,10 +2826,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sounds:
-  - name: MainMenuSong
-    clip: {fileID: 0}
+  - name: mainMenuSong
+    clip: {fileID: 8300000, guid: 5639561cdad16a446b1cc1a01548f807, type: 3}
     volume: 0.675
-    pitch: 1.09
+    pitch: 1
     source: {fileID: 0}
 --- !u!1 &1481585998
 GameObject:

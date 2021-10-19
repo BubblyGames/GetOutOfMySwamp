@@ -75,7 +75,7 @@ public class LevelManager : MonoBehaviour
             {
                 if (hit.collider.tag == "World")
                 {
-                    SpawnWeapon(hit);
+                    checkWorldCoordinates(hit);
                 }
                 else
                 {
@@ -92,6 +92,7 @@ public class LevelManager : MonoBehaviour
         if (!LevelStats.levelStatsInstance.infinteHP)
         {
             LevelStats.levelStatsInstance.ReceiveDamage(damageTaken);
+            OnDamageTaken?.Invoke();
         }
         if (LevelStats.levelStatsInstance.currentBaseHealthPoints <= 0)
         {
@@ -111,7 +112,8 @@ public class LevelManager : MonoBehaviour
 
     }
 
-    private void SpawnWeapon(RaycastHit hit)
+    //old SpawnWeapon
+    private void checkWorldCoordinates(RaycastHit hit)
     {
         Vector3 pos = hit.point;
         pos -= hit.normal / 2;

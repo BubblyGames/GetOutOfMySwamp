@@ -95,6 +95,7 @@ public class WaveController : MonoBehaviour
 
     public void ReduceActiveEnemies()
     {
+
         activeEnemies--;
     }
 
