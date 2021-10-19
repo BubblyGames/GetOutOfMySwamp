@@ -14,6 +14,9 @@ public abstract class EnemyBehaviour : MonoBehaviour
     [SerializeField] protected int moneyValue = 1;
     [SerializeField] protected int scoreValue = 1;
 
+    [Header("Special Enemy States")]
+    [SerializeField] protected int recoilQuantity = 2;
+    [SerializeField] protected float recoilTime = 2;
 
     [Space]
     public int damage = 10;
@@ -25,6 +28,9 @@ public abstract class EnemyBehaviour : MonoBehaviour
     private int nextIndexPath = 1;
     private float lerpProgression = 0;
 
+    //Recoil State variables 
+    bool isRecoiling;
+    float actualRecoilTime;
 
     void Update()
     {
@@ -34,7 +40,21 @@ public abstract class EnemyBehaviour : MonoBehaviour
         transform.position = Vector3.Lerp(path.GetStep(nextIndexPath - 1), path.GetStep(nextIndexPath), lerpProgression);
         if (lerpProgression < 1)
         {
-            lerpProgression += Time.deltaTime * speed;
+            if (actualRecoilTime >= recoilTime)
+            {
+                isRecoiling = false;
+                actualRecoilTime = 0;
+            }
+
+            if (isRecoiling)
+            {
+                lerpProgression += Time.deltaTime * speed / recoilQuantity;
+                actualRecoilTime += Time.deltaTime;
+            }
+            else
+            {
+                lerpProgression += Time.deltaTime * speed;
+            }
         }
         else
         {
@@ -83,6 +103,15 @@ public abstract class EnemyBehaviour : MonoBehaviour
         //transform.localScale = Vector3.one * ((float)healthPoints / 10f);
 
         return false;
+    }
+
+    //function called when a bullet has the recoil effect
+    public void RecoilHurt(int damage) {
+        Hurt(damage);
+        if (!isRecoiling)
+        {
+            isRecoiling = true;
+        }
     }
 
     public virtual void Die()
