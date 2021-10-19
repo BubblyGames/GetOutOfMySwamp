@@ -8,6 +8,8 @@ public class SingleWeaponBehaviour : WeaponBehaviour
     public GameObject bulletType;
 
     GameObject enemyTarget;
+    [Header("Bullet Effects")]
+    [SerializeField] protected int actualEffect;
 
     new void Update()
     {
@@ -25,7 +27,7 @@ public class SingleWeaponBehaviour : WeaponBehaviour
                         Vector3 bulletPos = chooseBulletPos();
                         GameObject bullet = Instantiate(bulletType, bulletPos, Quaternion.identity);
                         BulletBehaviour b = bullet.GetComponent<BulletBehaviour>();
-                        b.SetBulletBehaviour(enemyTarget.transform, damage, bulletSpeed);
+                        b.SetBulletBehaviour(enemyTarget.transform, damage, bulletSpeed, actualEffect);
                     }
                 }
             }
