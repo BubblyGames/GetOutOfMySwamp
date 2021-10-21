@@ -7,21 +7,27 @@ public class BulletBehaviour : MonoBehaviour
     protected int damage;
     protected float speed;
     protected Transform target;
-    [SerializeField] Vector3 velocity;
+    //[SerializeField] Vector3 velocity;
 
-    void FixedUpdate()
+
+    [Header("Bullet Effects")]
+    [SerializeField] protected int actualEffect;
+    //enum effects {Recoil}; //special effects of bullets
+
+    void Update()
     {
         //gameObject.transform.Translate(Time.fixedDeltaTime * speed * velocity);
         //gameObject.transform.position += Time.fixedDeltaTime * velocity;
-        transform.Translate(Time.fixedDeltaTime*speed*Vector3.forward);
+        transform.Translate(Time.deltaTime*speed*Vector3.forward);
     }
-    virtual public void SetBulletBehaviour(Transform target, int damage, float speed)
+    virtual public void SetBulletBehaviour(Transform target, int damage, float speed, int effect)
     {
         this.damage = damage;
         this.speed = speed;
         this.target = target;
         transform.LookAt(target.position);
-        velocity = speed * (target.position - transform.position).normalized;
+        //velocity = speed * (target.position - transform.position).normalized;
+        actualEffect = effect;
         //GetComponent<Rigidbody>().velocity = velocity;
     }
 
@@ -29,8 +35,19 @@ public class BulletBehaviour : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Enemy"))
         {
-            other.gameObject.GetComponent<EnemyBehaviour>().Hurt(damage);
-            Destroy(gameObject);
+
+            switch (actualEffect)
+            {
+                case 0:
+                    other.gameObject.GetComponent<EnemyBehaviour>().RecoilHurt(damage);
+                    Destroy(gameObject);
+                    break;
+                default:
+                    other.gameObject.GetComponent<EnemyBehaviour>().Hurt(damage);
+                    Destroy(gameObject);
+                    break;   
+            }
+            
         }
     }
 

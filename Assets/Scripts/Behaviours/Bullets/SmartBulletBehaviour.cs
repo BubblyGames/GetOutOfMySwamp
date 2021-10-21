@@ -29,7 +29,7 @@ public class SmartBulletBehaviour : BulletBehaviour
         }
     }
 
-    override public void SetBulletBehaviour(Transform target, int damage, float speed)
+    public void SetBulletBehaviour(Transform target, int damage, float speed)
     {
         Debug.Log("aaa");
         this.target = target;
