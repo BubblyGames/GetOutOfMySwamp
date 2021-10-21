@@ -7,6 +7,8 @@ public class MoveAroundObject : MonoBehaviour
 {
     [SerializeField]
     private float _mouseSensitivity = 3.0f;
+    [SerializeField]
+    private float _scrollSensitivity = 15.0f;
 
     private float _rotationY;
     private float _rotationX;
@@ -28,12 +30,11 @@ public class MoveAroundObject : MonoBehaviour
 
     void Update()
     {
-        
-
         float mouseX = Input.GetAxis("Mouse X") * _mouseSensitivity;
         float mouseY = Input.GetAxis("Mouse Y") * _mouseSensitivity;
 
-        if (Input.GetButton("Fire1")) {
+        if (Input.GetButton("Fire1"))
+        {
             _rotationY += mouseX;
             _rotationX -= mouseY;
         }
@@ -49,5 +50,7 @@ public class MoveAroundObject : MonoBehaviour
 
         // Substract forward vector of the GameObject to point its forward vector to the target
         transform.position = _target.position - transform.forward * _distanceFromTarget;
+
+        _distanceFromTarget += -_scrollSensitivity * Input.mouseScrollDelta.y;
     }
 }
