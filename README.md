@@ -145,7 +145,7 @@ Los niveles se conforman de grids y hay distintas variantes de las celdas. Los n
 \*TT: Ataques desde Tierra a objetivos Terrestres.
 TA: Ataques desde Tierra a objetivos Aéreos.
 
-### 4.6Enemigos
+### 4.6 Enemigos
 
 | **ENEMIGOS**(PONER NOMBRES) | VIDA | VELOCIDAD DE MOVIMIENTO | TIPO                 |
 | --------------------------- | ---- | ----------------------- | -------------------- |
