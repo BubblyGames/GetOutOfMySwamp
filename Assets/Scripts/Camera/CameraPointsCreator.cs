@@ -13,7 +13,7 @@ public class CameraPointsCreator : MonoBehaviour
     public int distanceFromCube;
 
     bool finished = false;
-    public bool forceOrtographic = true;
+
     private void Awake()
     {
         size = gameManager.GetComponent<CubeWorldGenerator>().size;
@@ -27,13 +27,6 @@ public class CameraPointsCreator : MonoBehaviour
         center = LevelManager.instance.center;
         positions = new List<GameObject>();
         createPositions();
-
-        if (!forceOrtographic) return;
-        foreach (Camera camera in Camera.allCameras)
-        {
-            camera.orthographic = true;
-
-        }
     }
 
     private void createPositions()
