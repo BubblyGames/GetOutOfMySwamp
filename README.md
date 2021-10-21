@@ -131,7 +131,7 @@ El juego cuenta con 2 niveles por el momento. La misión en ambos niveles es def
 Los niveles se conforman de grids y hay distintas variantes de las celdas. Los niveles son semi procedurales: los niveles se crean mediante seed, pero a medida que se progresa su dificultad va aumentando.
 
 
-### 4.5Torres y trampas
+### 4.5 Torres y trampas
 
 | **TORRES**     | ALCANCE   | DAÑO    | OBJETIVO          | VELOCIDAD DE ATAQUE | EFECTO                            |
 | -------------- | --------- | ------- | ----------------- | ------------------- | --------------------------------- |
