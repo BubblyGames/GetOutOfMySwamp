@@ -27,7 +27,7 @@ public class ShootingDefenseBehaviour : DefenseBehaviour
                         Vector3 bulletPos = chooseBulletPos();
                         GameObject bullet = Instantiate(bulletType, bulletPos, Quaternion.identity);
                         BulletBehaviour b = bullet.GetComponent<BulletBehaviour>();
-                        b.SetBulletBehaviour(enemyTarget.transform, damage, bulletSpeed, actualEffect);
+                        b.SetBulletBehaviour(enemyTarget.transform, damage, bulletSpeed, actualEffect, detectionRange);
                     }
                 }
             }

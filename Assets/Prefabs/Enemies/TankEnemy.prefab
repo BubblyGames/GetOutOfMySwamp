@@ -436,14 +436,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b72c36df0c0980e41afc25113c5359e3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  startHealth: 20
+  startHealth: 70
   healthPoints: 0
-  speed: 1
+  speed: 2
   moneyValue: 50
   scoreValue: 150
   recoilQuantity: 2
   recoilTime: 2
-  damage: 15
+  damage: 20
   healthBar: {fileID: 4659864551201660309}
 --- !u!135 &553707481313467082
 SphereCollider:
