@@ -39,13 +39,13 @@ public class CubeWorldGenerator : MonoBehaviour
         bool success = false;
         int count = 0;
         if (seed == 0f)
-            seed = Random.value * 10;
+            seed = Mathf.RoundToInt(Random.value * 10000);
 
         while (!success && count < 100)
         {
             Debug.Log("Attempt: " + count + " Seed: " + seed.ToString());
             success = GenerateWorld();
-            seed = Random.value * 10;
+            seed = Mathf.RoundToInt(Random.value * 10000);
             count++;
         }
 
@@ -132,7 +132,7 @@ public class CubeWorldGenerator : MonoBehaviour
 
                     float perlin = Perlin3D((seed + (i / rockSize)), (seed + (j / rockSize)), (seed + (k / rockSize)));
 
-                    if (cell.isSurface && cell.normalInt.magnitude <= 1 && perlin > (1 - (wallDensity * alpha))) //i == 0 || j == 0 || i == size - 1 || j == size - 1 ||//|| (i == j && i < size - 1)
+                    if (cell.isSurface && cell.normalInt.magnitude <= 2 && perlin > (1 - (wallDensity * alpha))) //i == 0 || j == 0 || i == size - 1 || j == size - 1 ||//|| (i == j && i < size - 1)
                     {
                         cell.blockType = BlockType.Rock;
                     }
@@ -202,7 +202,7 @@ public class CubeWorldGenerator : MonoBehaviour
 
             cells[x, y + 1, z].blockType = BlockType.Path;
 
-            Node p = FindPath(nPaths, cells[x, y, z], cells[endX, endY, endZ]);
+            Node p = FindPathAstarWithMidpoints(cells[x, y, z], cells[endX, endY, endZ]);
             if (p != null)
             {
                 List<CellInfo> pathCells = new List<CellInfo>();
@@ -248,8 +248,14 @@ public class CubeWorldGenerator : MonoBehaviour
                     pathCells[idx].isPath = true;
                 }
 
-                pathCells.RemoveAt(pathCells.Count - 1);
-                pathCells.RemoveAt(pathCells.Count - 1);
+                /*for (int idx = 0; i < 2; idx++)
+                {
+                    if (pathCells.Count > 0)
+                    {
+                        pathCells.RemoveAt(pathCells.Count - 1);
+                    }
+                }*/
+
                 paths.Add(new Path(pathCells.ToArray()));
             }
         }
@@ -297,7 +303,59 @@ public class CubeWorldGenerator : MonoBehaviour
         return cells[x, y, z].blockType;
     }
 
-    Node FindPath(int nPaths, CellInfo start, CellInfo end)
+    Node FindPathRandom(CellInfo start, CellInfo end)
+    {
+        Node current;
+        Node firstNode;
+
+        List<Node> openList = new List<Node>();
+
+        firstNode = new Node(start);
+        firstNode.Parent = null;
+        openList.Add(firstNode);
+
+        current = firstNode;
+
+        int count = 0;
+        while (current.cell.blockType != BlockType.Swamp && count < 1000000)
+        {
+            //Expands neightbors, (compute cost of each one) and add them to the list
+            CellInfo[] neighbours = GetWalkableNeighbours(current.cell);
+            foreach (CellInfo neighbour in neighbours)
+            {
+                if (neighbour != null)
+                {
+                    //if neighbour no esta en open
+                    bool IsInOpen = false;
+                    foreach (Node nf in openList)
+                    {
+                        if (nf.cell.id == neighbour.id)
+                        {
+                            IsInOpen = true;
+                            break;
+                        }
+                    }
+
+                    if (!IsInOpen)
+                    {
+                        Node n = new Node(neighbour);
+                        n.Parent = current;
+                        n.cell = cells[n.x, n.y, n.z];
+
+                        openList.Add(n);
+                    }
+                }
+            }
+            current = openList[Mathf.RoundToInt(Random.Range(0, openList.Count))];
+            count++;
+        }
+
+        Debug.Log(count);
+
+        return current;
+    }
+
+    Node FindPathAstar(CellInfo start, CellInfo end)
     {
         Node current;
         Node firstNode;
@@ -308,18 +366,17 @@ public class CubeWorldGenerator : MonoBehaviour
         firstNode = new Node(start);
 
         //First node, with starting position and null parent
-        firstNode.ComputeHScore(end.x, end.y, end.z);
         firstNode.Parent = null;
+        firstNode.g = 0;
+        firstNode.ComputeFScore(end.x, end.y, end.z);
         openList.Add(firstNode);
 
-
-
         int count = 0;
-        while (openList.Count > 0 && count < 1000)
+        while (openList.Count > 0 && count < 100000)
         {
             count++;
             //Sorting the list in "h" in increasing order
-            openList = openList.OrderBy(o => o.h).ToList();
+            openList = openList.OrderBy(o => o.f).ToList();
 
             //Check lists's first node
             current = openList[0];
@@ -364,7 +421,7 @@ public class CubeWorldGenerator : MonoBehaviour
                         if (!IsInOpen && !IsInClosed)
                         {
                             Node n = new Node(neighbour);
-                            n.ComputeHScore(end.x, end.y, end.z);
+                            n.ComputeFScore(end.x, end.y, end.z);
                             n.Parent = current;
                             n.cell = cells[n.x, n.y, n.z];
 
@@ -382,6 +439,154 @@ public class CubeWorldGenerator : MonoBehaviour
         //Debug.Log("Fail: " + count.ToString());
         return null;
     }
+
+    bool a = true;
+    CellInfo GetRandomCell(Node current)
+    {
+        int x = 1;
+        int y = 1;
+        int z = 1;
+
+        CellInfo cell = cells[x, y, z];
+
+        //Big ñapa
+        while (!CheckIfIsInSurface(cell) || cell.blockType != BlockType.Air)
+        {
+            if (a)
+            {
+                x = (size - 1) * Mathf.RoundToInt(Random.value);
+                z = Random.Range(current.y, size - 1);
+            }
+            else
+            {
+                x = Random.Range(current.y, size - 1);
+                z = (size - 1) * Mathf.RoundToInt(Random.value);
+            }
+
+            y = Random.Range(current.y, size - 1);
+
+            cell = cells[x, y, z];
+        }
+
+        a = !a;
+        return cell;
+    }
+
+    public int nMidpoints = 1;
+    Node FindPathAstarWithMidpoints(CellInfo start, CellInfo end)
+    {
+        Node current = new Node(start);
+        current.ComputeFScore(end.x, end.y, end.z);
+
+        CellInfo midpoint;
+
+        for (int i = 0; i < nMidpoints; i++)
+        {
+            midpoint = GetRandomCell(current);
+            Node result = FindNextStep(current, midpoint);
+            int count = 0;
+            while (result != null && count < 100)
+            {
+                midpoint = GetRandomCell(current);
+                result = FindNextStep(current, midpoint);
+                count++;
+            }
+
+            GameObject.CreatePrimitive(PrimitiveType.Sphere).transform.position = new Vector3(result.x, result.y, result.z);
+            current = result;
+        }
+
+        //Final step is finding the actual end
+        current = FindNextStep(current, end);
+
+        return current;
+    }
+
+
+    Node FindNextStep(Node firstNode, CellInfo end)
+    {
+        Node current;
+
+        List<Node> openList = new List<Node>();
+        List<Node> closedList = new List<Node>();
+
+        openList = new List<Node>();
+        closedList = new List<Node>();
+
+        //First node, with starting position and null parent
+        firstNode.ComputeFScore(end.x, end.y, end.z);
+        openList.Add(firstNode);
+
+        int count = 0;
+        while (openList.Count > 0 && count < 100000)
+        {
+            count++;
+            //Sorting the list in "h" in increasing order
+            openList = openList.OrderBy(o => o.f).ToList();
+
+            //Check lists's first node
+            current = openList[0];
+            closedList.Add(current);
+            openList.Remove(current);
+
+            if (current.cell == end)//If first node is goal,returns current Node3D
+            {
+                //Debug.Log("Success: " + count.ToString());
+                return current;
+            }
+            else
+            {
+                //Expands neightbors, (compute cost of each one) and add them to the list
+                CellInfo[] neighbours = GetWalkableNeighbours(current.cell);
+                foreach (CellInfo neighbour in neighbours)
+                {
+                    if (neighbour != null)
+                    {
+                        //if neighbour no esta en open
+                        bool IsInOpen = false;
+                        foreach (Node nf in openList)
+                        {
+                            if (nf.cell.id == neighbour.id)
+                            {
+                                IsInOpen = true;
+                                break;
+                            }
+                        }
+
+                        bool IsInClosed = false;
+                        foreach (Node nf in closedList)
+                        {
+                            if (nf.cell.id == neighbour.id)
+                            {
+                                IsInClosed = true;
+                                break;
+                            }
+                        }
+
+                        if (!IsInOpen && !IsInClosed)
+                        {
+                            Node n = new Node(neighbour);
+                            n.ComputeFScore(end.x, end.y, end.z);
+                            n.Parent = current;
+                            n.cell = cells[n.x, n.y, n.z];
+
+                            if (true)//n.h < current.h
+                            {
+                                openList.Add(n);
+                                //floor[n.x, n.y].transform.position = new Vector3(n.x, n.y,-count/200f);
+                                //floor[n.x, n.y].transform.Translate(-Vector3.forward);
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        //Debug.Log("Fail: " + count.ToString());
+
+        return firstNode;
+    }
+
+
 
     private CellInfo[] GetWalkableNeighbours(CellInfo current)
     {
@@ -402,6 +607,7 @@ public class CubeWorldGenerator : MonoBehaviour
 
                     if (isPosInBounds(x, y, z))
                     {
+
                         if (cells[x, y, z].isPath || (cells[x, y, z].blockType != BlockType.Air && cells[x, y, z].blockType != BlockType.Swamp))
                             continue;
 
@@ -445,8 +651,8 @@ public class CubeWorldGenerator : MonoBehaviour
 
         foreach (CellInfo cell in cells)
         {
-            if (cell.isSurface)
-                Handles.Label(new Vector3(cell.x, cell.y, cell.z), cell.normalInt.magnitude.ToString());
+            if (cell.explored)
+                Handles.Label(new Vector3(cell.x, cell.y, cell.z), "a");
         }
     }
 #endif

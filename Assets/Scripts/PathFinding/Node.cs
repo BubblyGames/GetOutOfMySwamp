@@ -3,7 +3,7 @@
 public class Node
 {
     public int x, y, z;
-    public int h;
+    public int f, h, g;
     public Node Parent;
     public CellInfo cell;
 
@@ -15,8 +15,13 @@ public class Node
         z = cell.z;
     }
 
-    public void ComputeHScore(int targetX, int targetY, int targetZ)
+    public void ComputeFScore(int targetX, int targetY, int targetZ)
     {
         h = Math.Abs(targetX - x) + Math.Abs(targetY - y) + Math.Abs(targetX - z);
+        if (Parent != null)
+            g = Parent.g + 10;
+        f = h;
     }
+
+
 }
