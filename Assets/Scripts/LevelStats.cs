@@ -39,7 +39,16 @@ public class LevelStats : MonoBehaviour
         }
 
 
-        LevelManager.instance.OnDamageTaken += ReceiveDamage;
+        LevelManager.instance.OnDamageTaken += receiveDamage;
+        LevelManager.instance.OnEnemyKilled += getEnemyRewards;
+    }
+
+    public void getEnemyRewards(int moneyReward, int scoreReward)
+    {
+        currentMoney += moneyReward;
+        currentScore += scoreReward;
+        scoreText.text = "Score:" + currentScore.ToString();
+        moneyText.text = "Money:" + currentMoney.ToString();
     }
 
     private void Start()
@@ -52,17 +61,12 @@ public class LevelStats : MonoBehaviour
 
     }
 
-    public void ReceiveDamage(int damageTaken)
+    public void receiveDamage(int damageTaken)
     {
         currentBaseHealthPoints -= damageTaken;
         hpText.text = "Health: " + currentBaseHealthPoints.ToString();
     }
 
-    public void EarnMoney(int quantity)
-    {
-        currentMoney += quantity;
-        moneyText.text = "Money:" + currentMoney.ToString();
-    }
 
     public void SpendMoney(int quantity)
     {

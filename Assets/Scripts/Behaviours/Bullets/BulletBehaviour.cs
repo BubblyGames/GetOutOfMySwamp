@@ -14,11 +14,11 @@ public class BulletBehaviour : MonoBehaviour
     [SerializeField] protected int actualEffect;
     //enum effects {Recoil}; //special effects of bullets
 
-    void Update()
+    void FixedUpdate()
     {
         //gameObject.transform.Translate(Time.fixedDeltaTime * speed * velocity);
         //gameObject.transform.position += Time.fixedDeltaTime * velocity;
-        transform.Translate(Time.deltaTime*speed*Vector3.forward);
+        transform.Translate(Time.fixedDeltaTime*speed*Vector3.forward);
     }
     virtual public void SetBulletBehaviour(Transform target, int damage, float speed, int effect)
     {

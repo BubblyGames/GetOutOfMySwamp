@@ -26,8 +26,10 @@ public class LevelManager : MonoBehaviour
     private Shop shop;
 
     //Actions
-    public event Action OnGameStarted, OnGameLost, OnGameCompleted, OnScoreIncremented;
+    public event Action OnGameStarted, OnGameLost, OnGameCompleted;
     public event Action<int> OnDamageTaken;
+    public event Action<int, int> OnEnemyKilled;
+
     //TODO: increment score when killing enemys.
 
     public Text text;
