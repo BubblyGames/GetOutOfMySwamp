@@ -108,8 +108,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c4a98b5cd3b201140920ba4c2508e89e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attackWait: 1
-  damage: 3
+  attackWait: 3
+  damage: 20
   bulletSpeed: 1
   detectionRange: 5
   enemyLayerMask:

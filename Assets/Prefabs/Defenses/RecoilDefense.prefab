@@ -173,7 +173,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   attackWait: 1
-  damage: 5
+  damage: 8
   bulletSpeed: 20
   detectionRange: 5
   enemyLayerMask:

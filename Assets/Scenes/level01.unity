@@ -342,7 +342,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &54399818
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1011,6 +1011,10 @@ MonoBehaviour:
     enemyPrefabs:
     - enemyId: BasicEnemy
       enemyPrefab: {fileID: 5803062399679311112, guid: edbebc9645c93bc47b4257b361fcc5b1, type: 3}
+    - enemyId: HordeEnemy
+      enemyPrefab: {fileID: 2261941344971277516, guid: f4ca4a2b775f94b4187494af4829186e, type: 3}
+    - enemyId: TankEnemy
+      enemyPrefab: {fileID: 7991666902177097144, guid: 3e08db26345a218428538443214b6dd8, type: 3}
 --- !u!4 &742249782
 Transform:
   m_ObjectHideFlags: 0
@@ -2471,13 +2475,13 @@ MonoBehaviour:
   waves:
   - enemyId: BasicEnemy
     enemyAmount: 10
-    spawnRate: 0.5
-  - enemyId: TankEnemy
-    enemyAmount: 10
     spawnRate: 1
-  - enemyId: HordeEnemy
-    enemyAmount: 10
+  - enemyId: TankEnemy
+    enemyAmount: 5
     spawnRate: 0.5
+  - enemyId: HordeEnemy
+    enemyAmount: 20
+    spawnRate: 4
   timeBetweenWaves: 5
   timeBeforeRoundStarts: 3
   timeVariable: 0
