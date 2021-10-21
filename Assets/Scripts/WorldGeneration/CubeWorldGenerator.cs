@@ -132,7 +132,7 @@ public class CubeWorldGenerator : MonoBehaviour
 
                     float perlin = Perlin3D((seed + (i / rockSize)), (seed + (j / rockSize)), (seed + (k / rockSize)));
 
-                    if (cell.isSurface && cell.normalInt.magnitude <= 2 && perlin > (1 - (wallDensity * alpha))) //i == 0 || j == 0 || i == size - 1 || j == size - 1 ||//|| (i == j && i < size - 1)
+                    if (cell.isSurface && perlin > (1 - (wallDensity * alpha))) //i == 0 || j == 0 || i == size - 1 || j == size - 1 ||//|| (i == j && i < size - 1)
                     {
                         cell.blockType = BlockType.Rock;
                     }
@@ -372,7 +372,7 @@ public class CubeWorldGenerator : MonoBehaviour
         openList.Add(firstNode);
 
         int count = 0;
-        while (openList.Count > 0 && count < 100000)
+        while (openList.Count > 0 && count < 10000)
         {
             count++;
             //Sorting the list in "h" in increasing order
@@ -649,11 +649,11 @@ public class CubeWorldGenerator : MonoBehaviour
     {
         if (!Application.isPlaying) return;
 
-        foreach (CellInfo cell in cells)
+        /*foreach (CellInfo cell in cells)
         {
-            if (cell.explored)
-                Handles.Label(new Vector3(cell.x, cell.y, cell.z), "a");
-        }
+            if (cell.isSurface)
+                Handles.Label(new Vector3(cell.x, cell.y, cell.z), cell.normalInt.magnitude.ToString());
+        }*/
     }
 #endif
 }
