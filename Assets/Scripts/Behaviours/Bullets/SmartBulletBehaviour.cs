@@ -35,7 +35,6 @@ public class SmartBulletBehaviour : BulletBehaviour
         this.target = target;
         this.damage = damage;
         this.speed = speed / Vector3.Distance(target.position, transform.position);
-        Debug.Log(this.speed);
         initialPos = transform.position;
         rotateBullet();
     }
