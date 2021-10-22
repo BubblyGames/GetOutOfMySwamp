@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 249970941561672557}
   - component: {fileID: 4400613936864065838}
   - component: {fileID: 2830652515697065864}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: MoneyFarming
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -108,17 +108,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 27a82e5c496e09447a1e9f8ebcc66a0d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 0
-  canLoseHealth: 0
-  cellWhereIsPlaced:
-    x: 0
-    y: 0
-    z: 0
-    blockType: 0
-    explored: 0
-    isPath: 0
-    normalInt: {x: 0, y: 0, z: 0}
-    structure: {fileID: 0}
+  health: 100
+  canLoseHealth: 1
   resourceGatheredEachCicle: 10
   timeToGatherResource: 5
   timerToGetResource: 0

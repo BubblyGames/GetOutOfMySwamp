@@ -113,7 +113,7 @@ public class BuildManager : MonoBehaviour
                 intPos += normal;
                 break;
             case BlockType.Rock:
-                intPos += LevelManager.instance.world.GetFaceNormal(cell);
+                //intPos += LevelManager.instance.world.GetFaceNormal(cell);
                 break;
             case BlockType.Swamp:
                 return;
