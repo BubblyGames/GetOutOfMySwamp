@@ -18,8 +18,9 @@ public class CellInfo
     public bool isPath = false;
     [HideInInspector]
     public Vector3Int normalInt = Vector3Int.zero;
-    [HideInInspector]
-    internal bool isSurface;
+    internal bool isSurface = false;
+    internal bool canWalk = false;
+    internal bool endZone = false;
 
     public Structure structure;
 
