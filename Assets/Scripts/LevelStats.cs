@@ -15,10 +15,10 @@ public class LevelStats : MonoBehaviour
 
     [Header("Level Stats")]
     [SerializeField] private int startBaseHealthPoints = 100; //Starting Health points the defenders base have
-    [SerializeField] public int currentBaseHealthPoints; //Current Health points the defenders base have
+    [SerializeField] private int currentBaseHealthPoints; //Current Health points the defenders base have
 
     [SerializeField] private int startMoney = 400; // Starting money the player have
-    [SerializeField] public int currentMoney; //Amount of money the player can spend
+    [SerializeField] private int currentMoney; //Amount of money the player can spend
     
     [SerializeField] public int currentScore; //Score the player has
 
@@ -26,6 +26,9 @@ public class LevelStats : MonoBehaviour
     [Header("God Mode control")]
     [SerializeField] public bool infinteMoney;
     [SerializeField] public bool infinteHP;
+
+    public int CurrentMoney { get => currentMoney; set => currentMoney = value; }
+    public int CurrentBaseHealthPoints { get => currentBaseHealthPoints; set => currentBaseHealthPoints = value; }
 
     private void Awake()
     {
@@ -43,13 +46,6 @@ public class LevelStats : MonoBehaviour
         LevelManager.instance.OnEnemyKilled += getEnemyRewards;
     }
 
-    public void getEnemyRewards(int moneyReward, int scoreReward)
-    {
-        currentMoney += moneyReward;
-        currentScore += scoreReward;
-        scoreText.text = "Score:" + currentScore.ToString();
-        moneyText.text = "Money:" + currentMoney.ToString();
-    }
 
     private void Start()
     {
@@ -61,12 +57,30 @@ public class LevelStats : MonoBehaviour
 
     }
 
+    public void getEnemyRewards(int moneyReward, int scoreReward)
+    {
+        currentMoney += moneyReward;
+        moneyText.text = "Money:" + currentMoney.ToString();
+        currentScore += scoreReward;
+        scoreText.text = "Score:" + currentScore.ToString();
+    }
+
+    public void getResource(int resourceId, int amount)
+    {
+        switch (resourceId)
+        {
+            case 0:
+                currentMoney += amount;
+                moneyText.text = "Money:" + currentMoney.ToString();
+                break;
+        }
+    }
+
     public void receiveDamage(int damageTaken)
     {
         currentBaseHealthPoints -= damageTaken;
         hpText.text = "Health: " + currentBaseHealthPoints.ToString();
     }
-
 
     public void SpendMoney(int quantity)
     {

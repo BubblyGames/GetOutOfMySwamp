@@ -13,9 +13,9 @@ GameObject:
   - component: {fileID: 2383629000739744123}
   - component: {fileID: 9175571547001359189}
   - component: {fileID: 5158198115540063936}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: AOEDefense
-  m_TagString: Untagged
+  m_TagString: Structure
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

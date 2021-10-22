@@ -108,5 +108,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 27a82e5c496e09447a1e9f8ebcc66a0d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moneyGiven: 10
-  timeTakingToSpawnResource: 1
+  health: 0
+  canLoseHealth: 0
+  cellWhereIsPlaced:
+    x: 0
+    y: 0
+    z: 0
+    blockType: 0
+    explored: 0
+    isPath: 0
+    normalInt: {x: 0, y: 0, z: 0}
+    structure: {fileID: 0}
+  resourceGatheredEachCicle: 10
+  timeToGatherResource: 5
+  timerToGetResource: 0

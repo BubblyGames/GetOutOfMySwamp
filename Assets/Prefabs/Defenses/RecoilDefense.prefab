@@ -73,9 +73,9 @@ GameObject:
   - component: {fileID: 8036199878342071106}
   - component: {fileID: 3586032372229222764}
   - component: {fileID: 464343800173598455}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: RecoilDefense
-  m_TagString: Untagged
+  m_TagString: Structure
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

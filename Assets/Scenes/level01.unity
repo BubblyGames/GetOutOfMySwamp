@@ -2556,7 +2556,7 @@ GameObject:
   - component: {fileID: 1903685286}
   - component: {fileID: 1903685285}
   - component: {fileID: 1903685294}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: LevelManager
   m_TagString: World
   m_Icon: {fileID: 0}
@@ -2575,6 +2575,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a2e84d8d11f308f47860aa152f3a36e7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  world: {fileID: 0}
   text: {fileID: 1583022576}
   floorLayer:
     serializedVersion: 2
@@ -2731,6 +2732,15 @@ MonoBehaviour:
   defenseToBuild:
     defensePrefab: {fileID: 0}
     cost: 0
+  selectedCell:
+    x: 0
+    y: 0
+    z: 0
+    blockType: -1
+    explored: 0
+    isPath: 0
+    normalInt: {x: 0, y: 0, z: 0}
+    structure: {fileID: 0}
 --- !u!114 &1903685292
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2776,7 +2786,7 @@ MonoBehaviour:
   startMoney: 800
   currentMoney: 0
   currentScore: 0
-  infinteMoney: 0
+  infinteMoney: 1
   infinteHP: 0
 --- !u!64 &1903685294
 MeshCollider:

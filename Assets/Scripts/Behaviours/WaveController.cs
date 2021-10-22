@@ -57,7 +57,7 @@ public class WaveController : MonoBehaviour
 
     private void LevelCompleted()
     {
-        if (LevelStats.instance.currentBaseHealthPoints > 0)
+        if (LevelStats.instance.CurrentBaseHealthPoints > 0)
         {
             allWavesCleared = true;
         }

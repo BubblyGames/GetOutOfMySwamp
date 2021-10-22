@@ -91,7 +91,7 @@ public abstract class EnemyBehaviour : MonoBehaviour
     public virtual bool Hurt(int damage)
     {
         healthPoints -= damage;
-        if (healthPoints < 0)
+        if (healthPoints <= 0)
         {
             Die();
             return true;

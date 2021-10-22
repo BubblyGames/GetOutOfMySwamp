@@ -103,9 +103,9 @@ GameObject:
   - component: {fileID: 3557293831074655906}
   - component: {fileID: 8006414575844936844}
   - component: {fileID: 6388906839533808407}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: ShootingDefense
-  m_TagString: Untagged
+  m_TagString: Structure
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
