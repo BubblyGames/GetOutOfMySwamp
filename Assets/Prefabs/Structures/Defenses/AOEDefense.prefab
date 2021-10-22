@@ -13,9 +13,9 @@ GameObject:
   - component: {fileID: 2383629000739744123}
   - component: {fileID: 9175571547001359189}
   - component: {fileID: 5158198115540063936}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: AOEDefense
-  m_TagString: Untagged
+  m_TagString: Structure
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -108,8 +108,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c4a98b5cd3b201140920ba4c2508e89e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attackWait: 1
-  damage: 3
+  attackWait: 3
+  damage: 20
   bulletSpeed: 1
   detectionRange: 5
   enemyLayerMask:

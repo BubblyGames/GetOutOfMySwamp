@@ -475,7 +475,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &54399818
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1436,6 +1436,10 @@ MonoBehaviour:
     enemyPrefabs:
     - enemyId: BasicEnemy
       enemyPrefab: {fileID: 5803062399679311112, guid: edbebc9645c93bc47b4257b361fcc5b1, type: 3}
+    - enemyId: HordeEnemy
+      enemyPrefab: {fileID: 2261941344971277516, guid: f4ca4a2b775f94b4187494af4829186e, type: 3}
+    - enemyId: TankEnemy
+      enemyPrefab: {fileID: 7991666902177097144, guid: 3e08db26345a218428538443214b6dd8, type: 3}
 --- !u!4 &742249782
 Transform:
   m_ObjectHideFlags: 0
@@ -3150,7 +3154,7 @@ GameObject:
   - component: {fileID: 1903685286}
   - component: {fileID: 1903685285}
   - component: {fileID: 1903685294}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: LevelManager
   m_TagString: World
   m_Icon: {fileID: 0}
@@ -3169,6 +3173,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a2e84d8d11f308f47860aa152f3a36e7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  world: {fileID: 0}
   text: {fileID: 1583022576}
   floorLayer:
     serializedVersion: 2
@@ -3289,13 +3294,13 @@ MonoBehaviour:
   waves:
   - enemyId: BasicEnemy
     enemyAmount: 10
-    spawnRate: 0.5
-  - enemyId: TankEnemy
-    enemyAmount: 10
     spawnRate: 1
-  - enemyId: HordeEnemy
-    enemyAmount: 10
+  - enemyId: TankEnemy
+    enemyAmount: 5
     spawnRate: 0.5
+  - enemyId: HordeEnemy
+    enemyAmount: 20
+    spawnRate: 4
   timeBetweenWaves: 5
   timeBeforeRoundStarts: 3
   timeVariable: 0
@@ -3330,6 +3335,15 @@ MonoBehaviour:
   defenseToBuild:
     defensePrefab: {fileID: 0}
     cost: 0
+  selectedCell:
+    x: 0
+    y: 0
+    z: 0
+    blockType: -1
+    explored: 0
+    isPath: 0
+    normalInt: {x: 0, y: 0, z: 0}
+    structure: {fileID: 0}
 --- !u!114 &1903685292
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3375,7 +3389,7 @@ MonoBehaviour:
   startMoney: 800
   currentMoney: 0
   currentScore: 0
-  infinteMoney: 0
+  infinteMoney: 1
   infinteHP: 0
 --- !u!64 &1903685294
 MeshCollider:

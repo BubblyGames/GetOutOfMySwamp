@@ -91,7 +91,7 @@ public abstract class EnemyBehaviour : MonoBehaviour
     public virtual bool Hurt(int damage)
     {
         healthPoints -= damage;
-        if (healthPoints < 0)
+        if (healthPoints <= 0)
         {
             Die();
             return true;
@@ -114,10 +114,8 @@ public abstract class EnemyBehaviour : MonoBehaviour
 
     public virtual void Die()
     {
-
-        LevelStats.instance.EarnMoney(moneyValue);
         WaveController.instance.ReduceActiveEnemies();
-
+        LevelStats.instance.getEnemyRewards(this.moneyValue, this.scoreValue);
         //Particles and sound
 
         Destroy(gameObject);
