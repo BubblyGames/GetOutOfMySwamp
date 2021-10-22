@@ -17,14 +17,12 @@ public class MoneyFarming : MonoBehaviour
         currentLevelMoney = GameObject.Find("LevelManager").GetComponent<LevelStats>();
     }
 
-    // Update is called once per frame
     void Update()
     {
         timeFromLastResource += Time.deltaTime;
    
         if (timeFromLastResource >= timeTakingToSpawnResource)
         {
-            //Debug.Log(currentLevelMoney.currentMoney);
             currentLevelMoney.currentMoney += moneyGiven;
             timeFromLastResource = 0;
             currentLevelMoney.moneyText.text= "Money: "+currentLevelMoney.currentMoney.ToString();
