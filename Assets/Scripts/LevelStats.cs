@@ -18,7 +18,7 @@ public class LevelStats : MonoBehaviour
     [SerializeField] private int currentBaseHealthPoints; //Current Health points the defenders base have
 
     [SerializeField] private int startMoney = 400; // Starting money the player have
-    [SerializeField] private int currentMoney; //Amount of money the player can spend
+    [SerializeField] public int currentMoney; //Amount of money the player can spend
     
     [SerializeField] public int currentScore; //Score the player has
 
