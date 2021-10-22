@@ -34,15 +34,9 @@ Se desarrolla para navegadores web y móviles y es para todos los públicos. El 
 
 El modelo de monetización dependerá del desempeño económico del producto una vez lanzado al mercado. Se han estructurado 3 posibles casos: ruta optimista, ruta normal, ruta pesimista.
 
-- Optimista:
-
 ![](https://lh3.googleusercontent.com/NDok-owYDmq-nwNgygDbRXiC_imSoQfDmGG--ZBRdhj06D-Gra9gRHcpBK-UgUpN9wqcpNrYbVjkmJv8gvRJvbv_m8-sO3VaA3N30WNo2yMRoYWLCQ1BDHIchIngL1WyXdZhekcp=s0)
 
-- Normal:
-
 ![](https://lh5.googleusercontent.com/yLeVvIKrbgzTepkci_sdpZwFOD4xHR-sfVYYtzEeKjQ6LuV9q3_To2p_3tYslYGGOk1IOkCN2wDLkIdDePRQswpZftIUGr7SQZNl6p8MkT2oxJ1U8Ec13ciUD6yZvwZeUkitSFc6=s0)
-
-- Pesimista:
 
 ![](https://lh6.googleusercontent.com/qtqYHgtjQsrfuDW2jzYMS6uORjEzjM1dH7jmhMES1awgUNY3AevEl5UOzc_10r92SlEo8O1f5x5UMYijkVQKC_15Q1pSoWWwYCZl0PBZe-dqzdw0vG6RoCIt5AK4DzaX2rLJqLVC=s0)
 
@@ -100,6 +94,7 @@ Es un tower defense 3D con vista isométrica en un mapa cúbico. El origen de lo
 
 ### 4.2 Descripción detallada de las mecánicas de juego
 
+![](https://lh4.googleusercontent.com/7_tib0ycPSkRPNOmPVR7lpDnccMY1CH9RyNUzCjInd67h-6ZX0qLFfUIJddRScMD8ORfV0BSEqDi8Iqpj8Wfii9Jr68iM_2h8t9bEcG8d3XK19vl0DOSLOA-FJglhf44LmBII0In=s1600)
 
 #### 4.2.1 Victoria y derrota
 
@@ -117,16 +112,17 @@ En el mapa hay tres tipos de casillas: Casillas de camino, por las que los enemi
 
 El juego comienza con una cantidad determinada de monedas para poner las torres iniciales. Una vez iniciada la partida, la fuente de ingresos será la derrota de los enemigos. El dinero conseguido se puede gastar en construir más defensas o mejorar las ya existentes.
 
+
 #### 4.2.4 Defensas y enemigos
 
 Existen dos tipos de defensas, las torres y las trampas. Las torres tienen vida, alcance, daño, velocidad de ataque y éstos pueden ser individuales o en área y tener efectos de estado sobre los enemigos. Solo se pueden construir adyacentes al camino de los enemigos u otra torre previamente construida. Además, tienen dos niveles de mejoras para aumentar sus estadísticas. Luego están las trampas, las cuales se colocan en el camino del enemigo. Tienen daño, durabilidad y pueden tener efecto.
 
-Por otro lado están los enemigos, con características de vida, velocidad de movimiento y opcionales como la capacidad de volar o dañar las torres. Aparecen por oleadas y aumentan en número conforme avanzas en la partida. Tienen diferentes roles en función de sus estadísticas: 
-- Base, unidad más común, estadísticas medias, carne de cañón
-- Tanque, una gran cantidad de vida y velocidad de movimiento reducida
-- Voladora, como su nombre indica, no van por el suelo ergo no son susceptibles a ciertos tipo de torres o trampas_y siguen una ruta diferente a la meta
-- Horda, aparecen en mucha cantidad, con una velocidad de movimiento alta y vida bastante baja
-- Por último, especialista, tiene habilidades únicas como dañar a las torres.
+Por otro lado están los enemigos, con características de vida, velocidad de movimiento y opcionales como la capacidad de volar o dañar las torres. Aparecen por oleadas y aumentan en número conforme avanzas en la partida. Tienen diferentes roles en función de sus estadísticas, siendo los roles unicad básica, ligera, tanque, horda, especialista y voladora, explicadas más adelante en el apartado Enemigos.
+
+
+![](https://lh6.googleusercontent.com/XyZfstCSw-DLWgamwydXli8vhxtgT-UwKJedln-d8n8b128AX2uwMAu_ZfEi14CkXv6f0j37Y27lFRzzMlJHlza6lMVwx9gM2rYwonhWBWuMDhGatPP_NvB05I83jCBoDTnug5R2=s1600)
+
+
 
 
 ### 4.3 Controles
