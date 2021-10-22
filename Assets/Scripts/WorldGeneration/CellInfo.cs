@@ -12,7 +12,9 @@ public class CellInfo
     public bool explored = false;
     public bool isPath = false;
     public Vector3Int normalInt = Vector3Int.zero;
-    internal bool isSurface;
+    internal bool isSurface = false;
+    internal bool canWalk = false;
+    internal bool endZone = false;
 
     public CellInfo(int x, int y, int z)
     {

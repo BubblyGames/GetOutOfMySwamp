@@ -2236,10 +2236,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   size: 30
-  nPaths: 4
-  wallDensity: 0.55
+  nPaths: 3
+  wallDensity: 0.5
+  rocksVisualReduction: 0.9
   rockSize: 10
   seed: 0
+  pathMetod: 1
+  nMidpoints: 2
+  debugMidpoints: 0
+  lineRendererPrefab: {fileID: 3920875017051324963, guid: ffef0eddca5eb324f94bad8de9cc038b, type: 3}
 --- !u!114 &1903685289
 MonoBehaviour:
   m_ObjectHideFlags: 0
