@@ -31,7 +31,7 @@ public class Shop : MonoBehaviour
 
     public void purchaseDefense()
     {
-        if (shopIndex >= 0 && shopIndex <defenseBlueprints.Count)
+        if (shopIndex >= 0 && shopIndex < defenseBlueprints.Count)
         {
             BuildManager.instance.SelectDefenseToBuild(selectedDefenseBlueprint);
         }

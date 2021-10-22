@@ -136,7 +136,8 @@ public class BuildManager : MonoBehaviour
 
     public void ResetDefenseToBuild()
     {
-        defenseToBuild = null;
+        defenseToBuild = new DefenseBlueprint();
+        //TODO: FIX
     }
 
 
@@ -145,6 +146,10 @@ public class BuildManager : MonoBehaviour
         if (LevelStats.instance.CurrentMoney >= defenseToBuild.cost )
         {
             Structure structure = Instantiate(defenseToBuild.defensePrefab, position, Quaternion.identity).GetComponent<Structure>();
+            if (selectedCell.GetStructure() != null)
+            {
+                Destroy(selectedCell.GetStructure());
+            }
             selectedCell.SetStructure(structure);
             ResetDefenseToBuild(); // after building an structure you hace to select another one to be able to place it
             if (!LevelStats.instance.infinteMoney) {
