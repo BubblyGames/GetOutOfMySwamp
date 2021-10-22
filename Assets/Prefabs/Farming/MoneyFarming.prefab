@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 4400613936864065838}
   - component: {fileID: 2830652515697065864}
   m_Layer: 0
-  m_Name: MoneyResource
+  m_Name: MoneyFarming
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
