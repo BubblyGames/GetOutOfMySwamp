@@ -9,8 +9,8 @@ public class BuildManager : MonoBehaviour
     public DefenseBlueprint defenseToBuild = null; //Defense is going to be built
 
     public CellInfo selectedCell;
-    
-    public bool canBuild { get { return defenseToBuild.defensePrefab != null; } }//Checks if a defense is selected to be built
+
+    public bool canBuild;//Checks if a defense is selected to be built
 
     private void Awake()
     {
@@ -132,11 +132,12 @@ public class BuildManager : MonoBehaviour
     public void SelectDefenseToBuild(DefenseBlueprint defense)
     {
         defenseToBuild = defense;
+        canBuild = true;
     }
 
     public void ResetDefenseToBuild()
     {
-        defenseToBuild = null;
+        canBuild = false;
     }
 
 
@@ -146,7 +147,7 @@ public class BuildManager : MonoBehaviour
         {
             Structure structure = Instantiate(defenseToBuild.defensePrefab, position, Quaternion.identity).GetComponent<Structure>();
             selectedCell.SetStructure(structure);
-            ResetDefenseToBuild(); // after building an structure you hace to select another one to be able to place it
+            ResetDefenseToBuild(); // after building an structure you have to select another one to be able to place it
             if (!LevelStats.instance.infinteMoney) {
                 LevelStats.instance.SpendMoney(defenseToBuild.cost);            
             }
