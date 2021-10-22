@@ -58,4 +58,12 @@ public class BulletBehaviour : MonoBehaviour
             
         }
     }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.collider.gameObject.CompareTag("World"))
+        {
+            Destroy(gameObject);
+        }
+    }
 }
