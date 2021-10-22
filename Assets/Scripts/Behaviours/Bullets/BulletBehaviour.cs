@@ -27,7 +27,7 @@ public class BulletBehaviour : MonoBehaviour
             transform.Translate(Time.deltaTime * speed * Vector3.forward);
             distanceTravelled += Time.deltaTime * speed;
         }
- 
+
     }
     virtual public void SetBulletBehaviour(Transform target, int damage, float speed, int effect, float detectionRange)
     {
@@ -43,7 +43,6 @@ public class BulletBehaviour : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Enemy"))
         {
-
             switch (actualEffect)
             {
                 case 1:
@@ -53,15 +52,10 @@ public class BulletBehaviour : MonoBehaviour
                 default:
                     other.gameObject.GetComponent<EnemyBehaviour>().Hurt(damage);
                     Destroy(gameObject);
-                    break;   
+                    break;
             }
-            
         }
-    }
-
-    private void OnCollisionEnter(Collision collision)
-    {
-        if (collision.collider.gameObject.CompareTag("World"))
+        else if (other.gameObject.CompareTag("World"))
         {
             Destroy(gameObject);
         }

@@ -10,8 +10,8 @@ public class MoveAroundObject : MonoBehaviour
     [SerializeField]
     private float _scrollSensitivity = 15.0f;
 
-    private float _rotationY;
-    private float _rotationX;
+    private float _rotationY = 45f;
+    private float _rotationX = 45f;
 
     [SerializeField]
     private Transform _target;
@@ -28,12 +28,15 @@ public class MoveAroundObject : MonoBehaviour
     [SerializeField]
     private Vector2 _rotationXMinMax = new Vector2(-40, 40);
 
+    [SerializeField]
+    private bool freeMovement = true;
+
     void Update()
     {
         float mouseX = Input.GetAxis("Mouse X") * _mouseSensitivity;
         float mouseY = Input.GetAxis("Mouse Y") * _mouseSensitivity;
 
-        if (Input.GetButton("Fire1"))
+        if (freeMovement && Input.GetButton("Fire1"))
         {
             _rotationY += mouseX;
             _rotationX -= mouseY;
@@ -52,5 +55,25 @@ public class MoveAroundObject : MonoBehaviour
         transform.position = _target.position - transform.forward * _distanceFromTarget;
 
         _distanceFromTarget += -_scrollSensitivity * Input.mouseScrollDelta.y;
+    }
+
+    public void RotateRight()
+    {
+        _rotationY -= 90;
+    }
+
+    public void RotateLeft()
+    {
+        _rotationY += 90;
+    }
+
+    public void RotateUp()
+    {
+        _rotationX += 180;
+    }
+
+    public void RotateDown()
+    {
+        _rotationX -= 180;
     }
 }
