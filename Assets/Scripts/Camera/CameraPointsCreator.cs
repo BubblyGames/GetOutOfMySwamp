@@ -54,7 +54,7 @@ public class CameraPointsCreator : MonoBehaviour
         for (int i = 0; i < 8; i++)
         {
             positions[i].transform.LookAt(center);
-            positions[i].transform.Translate(0, 0, -distanceFromCube);
+            positions[i].transform.Translate(0, 0, -distanceFromCube*size/3);
             positions[i].transform.position = new Vector3((int)positions[i].transform.position.x, (int)positions[i].transform.position.y, (int)positions[i].transform.position.z);
         }
 
