@@ -57,7 +57,7 @@ Marta Vidal: Artista
 
 Alberto Garcia: Diseñador
 
-Daniel Marti,Jose Márquez y Adrian Ramirez: Programadores
+Daniel Marti, Jose Márquez y Adrian Ramirez: Programadores
 
 
 ### 3.2 Estimación temporal del desarrollo
@@ -77,8 +77,8 @@ El tiempo de desarrollo para las distintas etapas del proyecto se estima en:
 
 La campaña de publicidad se va a desarrollar en 4 plataformas distintas: Twitter, Reddit, Itch.io y YouTube.
 La estrategia general consiste en captar a gente a través de Reddit y Twitter para redirigirles a Itch.io, donde encontrarán más información sobre el juego. Mientras YouTube actúa como plataforma dedicada a mostrar de manera extensa el juego.
-- Twitter: subir fotos de elementos de arte, videos gameplay y más elementos del juego, incluyendo en el mensaje un enlace a la página de Itch.io. Se aprovecharán hastags del mundo indie (#ScreenshotSaturday) para conseguir más alcance en el público adecuado.
-- Reddit: lo mismo que en Twitter, pero se subirán a subreddits del mundo indie para tener más alcance.
+- Twitter: subir fotos de elementos de arte, videos gameplay y más elementos del juego, incluyendo en el mensaje un enlace a la página de Itch.io. Se aprovecharán hastags del mundo indie (#ScreenshotSaturday, #indiegame, #indiedev y #indiesp) para conseguir más alcance en el público adecuado.
+- Reddit: lo mismo que en Twitter, pero se subirán a subreddits del mundo indie para tener más alcance. En este caso se subirán contenidos a r/IndieGaming y a r/indiegames.
 - YouTube: subir versiones extendidas de los vídeos publicados en el resto de redes. Indicar tipo de contenido mostrado en el vídeo.
 - Itch.io: subir DevBlogs hablando del desarrollo del juego en cada etapa. Comentar los aspectos más relevantes de cada equipo.
 
@@ -151,7 +151,7 @@ Los niveles se conforman de grids y hay distintas variantes de las celdas. Los n
 \*TT: Ataques desde Tierra a objetivos Terrestres.
 TA: Ataques desde Tierra a objetivos Aéreos.
 
-### 4.6Enemigos
+### 4.6 Enemigos
 
 | **ENEMIGOS**(PONER NOMBRES) | VIDA | VELOCIDAD DE MOVIMIENTO | TIPO                 |
 | --------------------------- | ---- | ----------------------- | -------------------- |

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class MoneyResource : MonoBehaviour
+public class MoneyFarming : MonoBehaviour
 {
 
     [Header("MoneyResrouce Settings")]
@@ -27,7 +27,7 @@ public class MoneyResource : MonoBehaviour
             //Debug.Log(currentLevelMoney.currentMoney);
             currentLevelMoney.currentMoney += moneyGiven;
             timeFromLastResource = 0;
-            currentLevelMoney.moneyText.text= currentLevelMoney.currentMoney.ToString();
+            currentLevelMoney.moneyText.text= "Money: "+currentLevelMoney.currentMoney.ToString();
         }
     }
 
