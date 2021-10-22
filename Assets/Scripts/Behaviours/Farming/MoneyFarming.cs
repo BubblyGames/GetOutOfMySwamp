@@ -24,7 +24,7 @@ public class MoneyFarming : MonoBehaviour
    
         if (timeFromLastResource >= timeTakingToSpawnResource)
         {
-            Debug.Log(currentLevelMoney.currentMoney);
+            //Debug.Log(currentLevelMoney.currentMoney);
             currentLevelMoney.currentMoney += moneyGiven;
             timeFromLastResource = 0;
             currentLevelMoney.moneyText.text= "Money: "+currentLevelMoney.currentMoney.ToString();
