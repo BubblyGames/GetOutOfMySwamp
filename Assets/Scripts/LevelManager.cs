@@ -18,7 +18,8 @@ public class LevelManager : MonoBehaviour
     public static LevelManager instance;
 
     //References
-    private CubeWorldGenerator world;
+    [HideInInspector]
+    public CubeWorldGenerator world;
     private ScoreSystem scoreSystem;
     private WaveController waveController;
     private LevelStats levelStats;
@@ -26,8 +27,10 @@ public class LevelManager : MonoBehaviour
     private Shop shop;
 
     //Actions
-    public event Action OnGameStarted, OnGameLost, OnGameCompleted, OnScoreIncremented;
+    public event Action OnGameStarted, OnGameLost, OnGameCompleted;
     public event Action<int> OnDamageTaken;
+    public event Action<int, int> OnEnemyKilled;
+
     //TODO: increment score when killing enemys.
 
     public Text text;
@@ -66,24 +69,24 @@ public class LevelManager : MonoBehaviour
     {
         text.text = Mathf.Round((1 / Time.deltaTime)).ToString(); //FpS text
 
-        if (Input.GetMouseButtonDown(0))
-        {
-            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        //if (Input.GetMouseButtonDown(0))
+        //{
+        //    Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 
-            RaycastHit hit = new RaycastHit();
+        //    RaycastHit hit = new RaycastHit();
 
-            if (Physics.Raycast(ray, out hit))
-            {
-                if (hit.collider.tag == "World")
-                {
-                    checkWorldCoordinates(hit);
-                }
-                else
-                {
-                    //Interact with existing defenses
-                }
-            }
-        }
+        //    if (Physics.Raycast(ray, out hit))
+        //    {
+        //        if (hit.collider.tag == "World")
+        //        {
+        //            checkWorldCoordinates(hit);
+        //        }
+        //        else
+        //        {
+        //            //Interact with existing defenses
+        //        }
+        //    }
+        //}
     }
 
 
@@ -95,7 +98,7 @@ public class LevelManager : MonoBehaviour
             //LevelStats.levelStatsInstance.ReceiveDamage(damageTaken);
             OnDamageTaken?.Invoke(damageTaken);
         }
-        if (LevelStats.instance.currentBaseHealthPoints <= 0)
+        if (LevelStats.instance.CurrentBaseHealthPoints <= 0)
         {
             //Game Over
             OnGameLost?.Invoke();
@@ -113,81 +116,7 @@ public class LevelManager : MonoBehaviour
 
     }
 
-    //old SpawnWeapon
-    private void checkWorldCoordinates(RaycastHit hit)
-    {
-        Vector3 pos = hit.point;
-        pos -= hit.normal / 2;
-
-        Vector3Int intPos = new Vector3Int(Mathf.RoundToInt(pos.x), Mathf.RoundToInt(pos.y), Mathf.RoundToInt(pos.z));
-
-        CellInfo cell = world.GetCell(intPos);
-
-        Vector3 rayNormal = hit.normal;
-        Vector3Int normal = new Vector3Int();
-
-        float x = Mathf.Abs(rayNormal.x);
-        float y = Mathf.Abs(rayNormal.y);
-        float z = Mathf.Abs(rayNormal.z);
-
-        if (x >= y && x >= z)
-        {
-            if (rayNormal.x > 0)
-            {
-                normal.x = 1;
-            }
-            else
-            {
-                normal.x = -1;
-            }
-        }
-        else if (y >= x && y >= z)
-        {
-            if (rayNormal.y > 0)
-            {
-                normal.y = 1;
-            }
-            else
-            {
-                normal.y = -1;
-            }
-        }
-        else
-        {
-            if (rayNormal.z > 0)
-            {
-                normal.z = 1;
-            }
-            else
-            {
-                normal.z = -1;
-            }
-        }
-
-        switch (cell.blockType)
-        {
-            case BlockType.Air:
-                break;
-            case BlockType.Path:
-            case BlockType.Grass:
-        intPos += normal;
-                break;
-            case BlockType.Rock:
-        intPos += world.GetFaceNormal(cell);
-                break;
-            case BlockType.Swamp:
-                return;
-            default:
-                break;
-        }
-
-
-        if (!BuildManager.instance.canBuild)
-            return;
-
-        BuildManager.instance.BuildDefenseOn(intPos);
-
-    }
+    
 }
 
 

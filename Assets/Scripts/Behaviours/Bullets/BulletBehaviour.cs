@@ -16,7 +16,7 @@ public class BulletBehaviour : MonoBehaviour
     [Header("Bullet Effects")]
     [SerializeField] protected int actualEffect;
 
-    void Update()
+    void FixedUpdate()
     {
         if (distanceTravelled >= radius)
         {
