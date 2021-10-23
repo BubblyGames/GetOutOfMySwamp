@@ -262,11 +262,11 @@ Flujo de juego:
 
 ### 8.1 Hito 1: Alfa
 
-- Motor Voxel que genere de manera procedural el cubo, los caminos y los obstáculos.
-- Funcionalidades básicas de juego (IA, vida y ataque).
-- Juego responsive.
-- Torres y enemigos definidos, con concepts y algún modelo de ellos.
-- Campaña de marketing iniciada (redes sociales preparadas).
+- Motor Voxel que genere de manera procedural el cubo, los caminos y los obstáculos:
+- Funcionalidades básicas de juego (IA, vida y ataque):
+- Juego responsive: 18 de Octubre de 2021.
+- Torres y enemigos definidos, con concepts y algún modelo de ellos:
+- Campaña de marketing iniciada (redes sociales preparadas): 11 de Octubre de 2021
 
 
 ### 8.2 Hito 2: Beta
