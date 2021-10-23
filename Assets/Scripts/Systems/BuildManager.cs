@@ -6,11 +6,11 @@ public class BuildManager : MonoBehaviour
 {
     public static BuildManager instance;
 
-    public DefenseBlueprint defenseToBuild = null; //Defense is going to be built
+    private StructureBlueprint structureToBuild = null; //Defense is going to be built
 
     public CellInfo selectedCell;
 
-    public bool canBuild;//Checks if a defense is selected to be built
+    public bool canBuild;//Checks if a structure is selected to be built
 
     private void Awake()
     {
@@ -26,32 +26,56 @@ public class BuildManager : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetMouseButtonDown(0))
+        //if (Input.GetMouseButtonDown(0))
+        //{
+        //    Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+
+        //    RaycastHit hit = new RaycastHit();
+
+        //    // Bit shift the index of the layer (8: Structures) to get a bit mask
+        //    int layerMask = 1 << 8;
+        //    // But instead we want to collide against everything except layer 8.The ~ operator does this, it inverts a bitmask.
+        //    layerMask = ~layerMask;
+
+        //    if (Physics.Raycast(ray, out hit, Mathf.Infinity, layerMask))
+        //    {
+        //        if (hit.collider.tag == "World")
+        //        {
+        //            checkWorldCoordinates(hit);
+        //        }
+        //        else if(hit.collider.tag == "Structure")
+        //        {
+        //            //Interact with existing defenses
+        //            selectedCell = hit.collider.gameObject.GetComponent<CellInfo>();
+        //        }
+        //    }
+        //}
+    }
+
+    private void OnMouseDown()
+    {
+        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+
+        RaycastHit hit = new RaycastHit();
+
+        // Bit shift the index of the layer (8: Structures) to get a bit mask
+        int layerMask = 1 << 8;
+        // But instead we want to collide against everything except layer 8.The ~ operator does this, it inverts a bitmask.
+        layerMask = ~layerMask;
+
+        if (Physics.Raycast(ray, out hit, Mathf.Infinity, layerMask))
         {
-            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-
-            RaycastHit hit = new RaycastHit();
-
-            // Bit shift the index of the layer (8: Structures) to get a bit mask
-            int layerMask = 1 << 8;
-            // But instead we want to collide against everything except layer 8.The ~ operator does this, it inverts a bitmask.
-            layerMask = ~layerMask;
-
-            if (Physics.Raycast(ray, out hit, Mathf.Infinity, layerMask))
+            if (hit.collider.tag == "World")
             {
-                if (hit.collider.tag == "World")
-                {
-                    checkWorldCoordinates(hit);
-                }
-                else if(hit.collider.tag == "Structure")
-                {
-                    //Interact with existing defenses
-                    selectedCell = hit.collider.gameObject.GetComponent<CellInfo>();
-                }
+                checkWorldCoordinates(hit);
+            }
+            else if (hit.collider.tag == "Structure")
+            {
+                //Interact with existing defenses
+                //selectedCell = hit.collider.gameObject.GetComponent<CellInfo>();
             }
         }
     }
-
     //old SpawnWeapon
     private void checkWorldCoordinates(RaycastHit hit)
     {
@@ -125,37 +149,66 @@ public class BuildManager : MonoBehaviour
         if (!canBuild)
             return;
 
-        BuildDefenseOn(intPos);
+        BuildStructure(intPos);
 
     }
 
-    public void SelectDefenseToBuild(DefenseBlueprint defense)
+    public void SelectStructureToBuild(StructureBlueprint defense)
     {
-        defenseToBuild = defense;
+        structureToBuild = defense;
         canBuild = true;
     }
 
-    public void ResetDefenseToBuild()
+    public void ResetCanBuild()
     {
-        defenseToBuild = new DefenseBlueprint();
-        //TODO: FIX
+        canBuild = false;
     }
 
 
-    public void BuildDefenseOn(Vector3 position)
+    public void BuildStructure(Vector3 position)
     {
-        if (LevelStats.instance.CurrentMoney >= defenseToBuild.cost )
+        if (LevelStats.instance.infinteMoney)
         {
-            Structure structure = Instantiate(defenseToBuild.defensePrefab, position, Quaternion.identity).GetComponent<Structure>();
-            if (selectedCell.GetStructure() != null)
-            {
-                Destroy(selectedCell.GetStructure());
-            }
-            selectedCell.SetStructure(structure);
-            ResetDefenseToBuild(); // after building an structure you have to select another one to be able to place it
-            if (!LevelStats.instance.infinteMoney) {
-                LevelStats.instance.SpendMoney(defenseToBuild.cost);            
-            }
+            CreateTowerOnCell(position);
+            ResetCanBuild(); // after building an structure you have to select another one to be able to place it
+        }
+        else if (LevelStats.instance.CurrentMoney >= structureToBuild.creationCost )
+        {
+
+            CreateTowerOnCell(position);
+            LevelStats.instance.SpendMoney(structureToBuild.creationCost);
+            ResetCanBuild(); // after building an structure you have to select another one to be able to place it
+        }
+        else
+        {
+            Debug.Log("Not enough Money");
+            //TODO: Show on screen there is not enough money
+        }
+    }
+
+    public void CreateTowerOnCell(Vector3 position)
+    {
+        Structure structure = Instantiate(structureToBuild.structurePrefab, position, Quaternion.identity).GetComponent<Structure>();
+
+        //Not working
+        if (selectedCell.GetStructure() != null)
+        {
+            Destroy(selectedCell.GetStructure());
+        }
+        selectedCell.SetStructure(structure);
+    }
+
+    public void UpgradeStructureOn()
+    {
+        if (LevelStats.instance.infinteMoney)
+        {
+            selectedCell.structure.UpgradeStrucrure();
+        }
+        if (LevelStats.instance.CurrentMoney >= structureToBuild.creationCost * Mathf.Pow(structureToBuild.upgradeMultiplicator, selectedCell.structure.GetLevel()))
+        {
+            selectedCell.structure.UpgradeStrucrure();
+            LevelStats.instance.SpendMoney(structureToBuild.creationCost);
+            
         }
         else
         {
