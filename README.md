@@ -143,7 +143,7 @@ Los niveles se conforman de grids y hay distintas variantes de las celdas. Los n
 | -------------- | --------- | ------- | ----------------- | ------------------- | --------------------------------- |
 | TORRE PESADA   | Largo     | Elevado | ÁreaTT\*          | Lento               | \-                                |
 | TORRE BÁSICA   | Medio     | Medio   | IndividualTA-TT\* | Medio               | \-                                |
-| TORRE PSÍQUICA | Corto     | Bajo    | IndividualTT\*    | Medio               | El enemigo retrocede              |
+| TORRE PSÍQUICA | Corto     | Bajo    | IndividualTT\*    | Medio               | El enemigo se ralentiza           |
 | TORRE ACUÁTICA | Medio     | Bajo    | ÁreaTA-TT\*       | Rápido              | Prioriza ataque a enemigos aéreos |
 | **TRAMPAS**    |           |         |                   |                     |                                   |
 | TRAMPA PANTANO | 1 Casilla | \-      | ÁreaTT\*          | \-                  | Ralentiza                         |
@@ -158,7 +158,7 @@ TA: Ataques desde Tierra a objetivos Aéreos.
 | NORMAL                      |      | Media                   | Terrestre - Normal   |
 | LIGERA                      |      | Rápida                  | Terrestre - Ligera   |
 | TANQUE                      |      | Lenta                   | Terrestre - Pesada   |
-| HORDA                       |      | Normal                  | Terrestre - Horda    |
+| HORDA                       |      | Media                   | Terrestre - Horda    |
 | ESPECIALISTA                |      | Lenta                   | Terrestre - Especial |
 | VOLADORA                    |      | Media                   | Aérea - Normal       |  
 
