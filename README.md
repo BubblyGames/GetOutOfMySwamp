@@ -143,7 +143,7 @@ Los niveles se conforman de grids y hay distintas variantes de las celdas. Los n
 | -------------- | --------- | ------- | ----------------- | ------------------- | --------------------------------- |
 | TORRE PESADA   | Largo     | Elevado | ÁreaTT\*          | Lento               | \-                                |
 | TORRE BÁSICA   | Medio     | Medio   | IndividualTA-TT\* | Medio               | \-                                |
-| TORRE PSÍQUICA | Corto     | Bajo    | IndividualTT\*    | Medio               | El enemigo retrocede              |
+| TORRE PSÍQUICA | Corto     | Bajo    | IndividualTT\*    | Medio               | El enemigo se ralentiza           |
 | TORRE ACUÁTICA | Medio     | Bajo    | ÁreaTA-TT\*       | Rápido              | Prioriza ataque a enemigos aéreos |
 | **TRAMPAS**    |           |         |                   |                     |                                   |
 | TRAMPA PANTANO | 1 Casilla | \-      | ÁreaTT\*          | \-                  | Ralentiza                         |
@@ -158,7 +158,7 @@ TA: Ataques desde Tierra a objetivos Aéreos.
 | NORMAL                      |      | Media                   | Terrestre - Normal   |
 | LIGERA                      |      | Rápida                  | Terrestre - Ligera   |
 | TANQUE                      |      | Lenta                   | Terrestre - Pesada   |
-| HORDA                       |      | Normal                  | Terrestre - Horda    |
+| HORDA                       |      | Media                   | Terrestre - Horda    |
 | ESPECIALISTA                |      | Lenta                   | Terrestre - Especial |
 | VOLADORA                    |      | Media                   | Aérea - Normal       |  
 
@@ -216,9 +216,43 @@ Existen distintos climas/biomas para los niveles.
 
 ### 7.1 Diseños básicos de los menús
 
+Para la interfaz se cuentan con 7 ventanas:
+
+- Menú principal:
+
+![Recurso 1](https://user-images.githubusercontent.com/56488179/138528960-718ce87f-39bf-4bea-81c1-eb6578d89557.png)
+
+- Ajustes:
+
+![Recurso 4](https://user-images.githubusercontent.com/56488179/138528974-991d5275-41b5-4bf1-a620-c50ca0b1f0b7.png)
+
+- Tutoriales:
+
+![Recurso 8](https://user-images.githubusercontent.com/56488179/138528983-708fb63e-830f-4603-b29a-61109a15d99c.png)
+
+- Selector de nivel:
+
+![Recurso 9](https://user-images.githubusercontent.com/56488179/138529005-17654b79-0642-410d-97b6-890ab7c430d7.png)
+
+- Menú de pausa:
+
+![Recurso 5](https://user-images.githubusercontent.com/56488179/138529015-26a65fcd-6918-43c8-b392-2fea20f42fd0.png)
+
+- Final de nivel:
+- 
+![Recurso 6](https://user-images.githubusercontent.com/56488179/138529024-42a8e7bd-ff84-42a7-b9b5-fdfce59aea37.png)
+
+- Interfaz de juego:
+
+![Recurso 7](https://user-images.githubusercontent.com/56488179/138528992-09385b3c-c4b4-493f-b28d-f235ab558277.png)
 
 ### 7.2 Diagrama de flujo
 
+Flujo de escenas:![](https://lh3.googleusercontent.com/d1OW5IrnItYd-uL6fcf7FtDf9U_lcSw07onnqJBWMI2-xB3UAZmFERc6UdLDmMYnR2YuWjMXJSNvAbm_hNuFA8Ac68ptwgdI4frlY-Qq9MMD3pI_N9C0C7JgZ5ZQesvDg5GE00VW=s1600)
+
+Flujo de juego:
+
+![](https://lh3.googleusercontent.com/aF1nWLFmWOgguDnGZoJvcOlg-Rg5idqPTJ36BbybrI7znmQiQz3duVFWYjOZu0G9ywJHTiWaXSx0U-r1mU3JT1imTOPqgxp3-cy9zKN_-aYHIY8eDtvKcv5eABgkfKF-SN-zxnpM=s1600)
 
 ## 
 
@@ -228,11 +262,11 @@ Existen distintos climas/biomas para los niveles.
 
 ### 8.1 Hito 1: Alfa
 
-- Motor Voxel que genere de manera procedural el cubo, los caminos y los obstáculos.
-- Funcionalidades básicas de juego (IA, vida y ataque).
-- Juego responsive.
-- Torres y enemigos definidos, con concepts y algún modelo de ellos.
-- Campaña de marketing iniciada (redes sociales preparadas).
+- Motor Voxel que genere de manera procedural el cubo, los caminos y los obstáculos:
+- Funcionalidades básicas de juego (IA, vida y ataque):
+- Juego responsive: 18 de Octubre de 2021.
+- Torres y enemigos definidos, con concepts y algún modelo de ellos:
+- Campaña de marketing iniciada (redes sociales preparadas): 11 de Octubre de 2021
 
 
 ### 8.2 Hito 2: Beta
