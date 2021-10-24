@@ -8,29 +8,41 @@ public abstract class EnemyBehaviour : MonoBehaviour
     [Header("Stats")]
     [SerializeField] protected int startHealth = 10;
     [SerializeField] protected int healthPoints = 10;
-    [SerializeField] protected float speed = 1f;
+    [SerializeField] protected float startSpeed = 1f;
+    [SerializeField] protected float currentSpeed;
 
+    [SerializeField] protected int damage = 10;
     [Header("Rewards")]
     [SerializeField] protected int moneyValue = 1;
     [SerializeField] protected int scoreValue = 1;
 
-    [Header("Special Enemy States")]
-    [SerializeField] protected int recoilQuantity = 2;
-    [SerializeField] protected float recoilTime = 2;
+    [Header("Altered States")]
+    [SerializeField] protected bool isSlowed;
+    [SerializeField] protected float slowIntensity = 0.25f;
+    [SerializeField] protected float slowDuration; //Time is going to be slowed
+    [SerializeField] protected float slowTimer = 0; //time left being slowed
 
-    [Space]
-    public int damage = 10;
 
-    public HealthBarController healthBar;
+    protected HealthBarController healthBar;
 
     //Path the enemy will follow
     private Path path;
     private int nextIndexPath = 1;
     private float lerpProgression = 0;
 
-    //Recoil State variables 
-    bool isRecoiling;
-    float actualRecoilTime;
+
+    private void Awake()
+    {
+        healthBar = GetComponentInChildren<HealthBarController>();
+    }
+
+    // Start is called before the first frame update
+    void Start()
+    {
+        healthPoints = startHealth;
+        currentSpeed = startSpeed;
+        healthBar.setMaxHealth(startHealth);
+    }
 
     void Update()
     {
@@ -38,23 +50,25 @@ public abstract class EnemyBehaviour : MonoBehaviour
             return;
 
         transform.position = Vector3.Lerp(path.GetStep(nextIndexPath - 1), path.GetStep(nextIndexPath), lerpProgression);
-        if (lerpProgression < 1)
-        {
-            if (actualRecoilTime >= recoilTime)
-            {
-                isRecoiling = false;
-                actualRecoilTime = 0;
-            }
 
-            if (isRecoiling)
+        if (isSlowed)
+        {
+            if (slowTimer>=slowDuration)
             {
-                lerpProgression += Time.deltaTime * speed / recoilQuantity;
-                actualRecoilTime += Time.deltaTime;
+                isSlowed = false;
+                slowTimer = 0;
+                currentSpeed = startSpeed;
             }
             else
             {
-                lerpProgression += Time.deltaTime * speed;
+                slowTimer += Time.deltaTime;
             }
+        }
+
+        if (lerpProgression < 1)
+        {
+            lerpProgression += Time.deltaTime * currentSpeed;
+
         }
         else
         {
@@ -70,23 +84,12 @@ public abstract class EnemyBehaviour : MonoBehaviour
                 //Damage
                 LevelManager.instance.dealDamageToBase(this.damage);
                 Destroy(this.gameObject);
-                WaveController.instance.ReduceActiveEnemies();
+                WaveController.instance.ReduceActiveEnemies(this);
             }
         }
     }
 
     public void SetPath(Path path) { this.path = path; }
-
-    public void SetInitialState(Path path)
-    {
-        this.path = path;
-        SetInitialHealth();
-    }
-    public void SetInitialHealth()
-    {
-        healthPoints = startHealth;
-        healthBar.setMaxHealth(startHealth);
-    }
 
     public virtual bool Hurt(int damage)
     {
@@ -104,17 +107,20 @@ public abstract class EnemyBehaviour : MonoBehaviour
     }
 
     //function called when a bullet has the recoil effect
-    public void RecoilHurt(int damage) {
+    public void slowAndDamage(int damage) {
         Hurt(damage);
-        if (!isRecoiling)
+        if (!isSlowed)
         {
-            isRecoiling = true;
+            currentSpeed = currentSpeed * slowIntensity;
         }
+        isSlowed = true;
+         slowDuration = 2f;
+
     }
 
     public virtual void Die()
     {
-        WaveController.instance.ReduceActiveEnemies();
+        WaveController.instance.ReduceActiveEnemies(this);
         LevelStats.instance.getEnemyRewards(this.moneyValue, this.scoreValue);
         //Particles and sound
 

@@ -88,6 +88,12 @@ public class LevelStats : MonoBehaviour
         moneyText.text = "Money:" + currentMoney.ToString();
     }
 
+    public void EarnMoney(int quantity)
+    {
+        currentMoney += quantity;
+        moneyText.text = "Money:" + currentMoney.ToString();
+    }
+
     public void UpdateScoreText()
     {
         scoreText.text = "Score:" + currentScore.ToString();

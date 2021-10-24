@@ -1,4 +1,4 @@
-using System;
+//using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -12,6 +12,7 @@ public class WaveController : MonoBehaviour
     public static WaveController instance;
 
     public int activeEnemies = 0;
+    public List<EnemyBehaviour> enemies;
 
     public Wave[] waves;
 
@@ -19,6 +20,7 @@ public class WaveController : MonoBehaviour
     public float timeBeforeRoundStarts = 3f;
     public float timeVariable;
 
+    public bool isGameOver = false;
     public bool isWaveActive;
     public bool isBetweenWaves;
     public bool allWavesCleared;
@@ -40,6 +42,7 @@ public class WaveController : MonoBehaviour
             Destroy(this);
         }
         enemySpawner = GetComponent<EnemySpawner>();
+        enemies = new List<EnemyBehaviour>();
     }
 
     public void Start()
@@ -65,6 +68,12 @@ public class WaveController : MonoBehaviour
 
     void Update()
     {
+        if (isGameOver)
+        {
+            isBetweenWaves = false;
+            isWaveActive = false;
+            allWavesCleared = false;
+        }
         if (allWavesCleared)
         {
             isBetweenWaves = false;
@@ -95,15 +104,16 @@ public class WaveController : MonoBehaviour
 
     }
 
-    public void AddToActiveEnemies()
+    public void AddToActiveEnemies(EnemyBehaviour enemy)
     {
         activeEnemies++;
+        enemies.Add(enemy);
     }
 
-    public void ReduceActiveEnemies()
+    public void ReduceActiveEnemies(EnemyBehaviour enemy)
     {
-
         activeEnemies--;
+        enemies.Remove(enemy);
     }
 
     IEnumerator SpawnWave()
@@ -121,7 +131,7 @@ public class WaveController : MonoBehaviour
 
         for (int i = 0; i < currentWave.enemyAmount; i++)
         {
-            int pathId = UnityEngine.Random.Range(0, CubeWorldGenerator.worldGeneratorInstance.nPaths-1);
+            int pathId = Random.Range(0, CubeWorldGenerator.worldGeneratorInstance.nPaths);
             enemySpawner.SpawnEnemy(currentWave.enemyId, CubeWorldGenerator.worldGeneratorInstance.paths[pathId]);
             yield return new WaitForSeconds(1f / currentWave.spawnRate);
         }
@@ -132,5 +142,6 @@ public class WaveController : MonoBehaviour
     void StopWave()
     {
         StopCoroutine("SpawnWave");
+        isGameOver = true;
     }
 }

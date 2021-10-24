@@ -8,8 +8,8 @@ public class Shop : MonoBehaviour
 
     [SerializeField] private int shopIndex = -1;
 
-    public List<DefenseBlueprint> defenseBlueprints;
-    public DefenseBlueprint selectedDefenseBlueprint;
+    public List<StructureBlueprint> defenseBlueprints;
+    public StructureBlueprint selectedDefenseBlueprint;
 
     private void Awake()
     {
@@ -31,9 +31,9 @@ public class Shop : MonoBehaviour
 
     public void purchaseDefense()
     {
-        if (shopIndex >= 0 && shopIndex <defenseBlueprints.Count)
+        if (shopIndex >= 0 && shopIndex < defenseBlueprints.Count)
         {
-            BuildManager.instance.SelectDefenseToBuild(selectedDefenseBlueprint);
+            BuildManager.instance.SelectStructureToBuild(selectedDefenseBlueprint);
         }
     }
 }

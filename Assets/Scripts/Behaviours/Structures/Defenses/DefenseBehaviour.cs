@@ -6,34 +6,39 @@ using UnityEngine;
 public abstract class DefenseBehaviour : Structure
 {
     [Tooltip("This layer will be used to check for enemys")]
-    public LayerMask enemyLayerMask;
+    protected int layerMask= 1 << 6;
 
     [Header("Defense Stats")]
 
-    [Tooltip("How much time does it take to reaload between shots")]
-    public float attackWait = 1f;
+    [SerializeField][Tooltip("Number of shoots per second")]
+    protected float fireRate = 1f;
     
     [Tooltip("Time when the next shot will be shot")]
-    protected float nextAttackTime = 0;
+    protected float fireCountdown = 0;
 
-    [Tooltip("Damage an attack will deal")]
-    public int damage = 1;
+    [SerializeField][Tooltip("Damage an attack will deal")]
+    protected int damage;
 
     [Tooltip("Speed of the bullet")]
-    public float bulletSpeed = 1f;
+    protected float bulletSpeed = 1f;
 
-    [Tooltip("The radius of the sphere in which the defense detects an enemy")]
-    public float detectionRange = 5f;
+    [SerializeField][Tooltip("The radius of the sphere in which the defense detects an enemy")]
+    protected float attackRange = 5f;
 
+    public override void UpgradeStrucrure()
+    {
+        base.UpgradeStrucrure();
 
+        if (level < maxLevel)
+        {
+            this.fireRate -= this.fireRate * 0.1f;
+            this.damage += Mathf.RoundToInt(this.damage * 0.1f);
+        }
+    }
     protected virtual void Attack() { }
 
-    protected void Update()
+    private void OnDrawGizmos()
     {
-        if (Time.time > nextAttackTime)
-        {
-            nextAttackTime = Time.time + attackWait;
-            Attack();
-        }
+        Gizmos.DrawWireSphere(transform.position, attackRange);
     }
 }

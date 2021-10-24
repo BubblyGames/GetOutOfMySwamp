@@ -5,38 +5,48 @@ using UnityEngine;
 public class BulletBehaviour : MonoBehaviour
 {
     protected int damage;
-    protected float speed;
+    protected float speed = 50f;
     protected Transform target;
 
     [Header("Bullet Destruction")]
-    private float radius;
-    private float distanceTravelled;
+    [SerializeField] protected float maxDistance;
+    [SerializeField] protected float distanceTravelled;
 
 
     [Header("Bullet Effects")]
     [SerializeField] protected int actualEffect;
 
+
     void FixedUpdate()
     {
-        if (distanceTravelled >= radius)
+        
+        if (distanceTravelled >= maxDistance)
         {
+            Debug.Log("Break");
             Destroy(gameObject);
         }
         else
         {
-            transform.Translate(Time.deltaTime * speed * Vector3.forward);
-            distanceTravelled += Time.deltaTime * speed;
+            if (target == null)
+            {
+                transform.Translate(Time.deltaTime * speed * Vector3.forward);
+                distanceTravelled += Time.deltaTime * speed;
+                return;
+            }
+            Vector3 direction = target.position - transform.position;
+            float distanceThisFrame = speed * Time.fixedDeltaTime;
+            
+            transform.Translate(direction.normalized * distanceThisFrame, Space.World);
         }
 
     }
-    virtual public void SetBulletBehaviour(Transform target, int damage, float speed, int effect, float detectionRange)
+    virtual public void SetBulletBehaviour(Transform target, int damage, int effect, float range)
     {
         this.damage = damage;
-        this.speed = speed;
         this.target = target;
         transform.LookAt(target.position);
         actualEffect = effect;
-        radius = detectionRange;
+        maxDistance = range;
     }
 
     private void OnTriggerEnter(Collider other)
@@ -46,7 +56,7 @@ public class BulletBehaviour : MonoBehaviour
             switch (actualEffect)
             {
                 case 1:
-                    other.gameObject.GetComponent<EnemyBehaviour>().RecoilHurt(damage);
+                    other.gameObject.GetComponent<EnemyBehaviour>().slowAndDamage(damage);
                     Destroy(gameObject);
                     break;
                 default:

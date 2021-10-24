@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -6,11 +7,13 @@ public class BuildManager : MonoBehaviour
 {
     public static BuildManager instance;
 
-    public DefenseBlueprint defenseToBuild = null; //Defense is going to be built
+    private StructureBlueprint structureToBuild = null; //Structure is going to be built
+    [SerializeField]
+    private Structure selectedStructure; //Already Built structure 
+    [SerializeField]
+    private CellInfo selectedCell;
 
-    public CellInfo selectedCell;
-
-    public bool canBuild;//Checks if a defense is selected to be built
+    public bool canBuild;//Checks if a structure is selected to be built
 
     private void Awake()
     {
@@ -25,7 +28,7 @@ public class BuildManager : MonoBehaviour
     }
 
     private void Update()
-    {
+    { 
         if (Input.GetMouseButtonDown(0))
         {
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
@@ -37,22 +40,36 @@ public class BuildManager : MonoBehaviour
             // But instead we want to collide against everything except layer 8.The ~ operator does this, it inverts a bitmask.
             layerMask = ~layerMask;
 
-            if (Physics.Raycast(ray, out hit, Mathf.Infinity, layerMask))
+            if (Physics.Raycast(ray, out hit, Mathf.Infinity))
             {
                 if (hit.collider.tag == "World")
                 {
                     checkWorldCoordinates(hit);
+                    
                 }
-                else if(hit.collider.tag == "Structure")
-                {
-                    //Interact with existing defenses
-                    selectedCell = hit.collider.gameObject.GetComponent<CellInfo>();
-                }
+
             }
+            else if (hit.collider == UIController.instance.upgradeMenu)//if raycast doesnt hit
+            {
+
+                Debug.Log("Menu");
+
+            }
+            else if (hit.collider == null)//if raycast doesnt hit
+            {
+
+                Debug.Log("DidntHit");
+                //UIController.instance.DisableUpdateMenu();
+            }
+           
         }
     }
 
-    //old SpawnWeapon
+    internal void SetSelectedStructure(Structure structure)
+    {
+        selectedStructure = structure;
+    }
+
     private void checkWorldCoordinates(RaycastHit hit)
     {
         Vector3 pos = hit.point;
@@ -63,99 +80,122 @@ public class BuildManager : MonoBehaviour
         CellInfo cell = LevelManager.instance.world.GetCell(intPos);
 
         Vector3 rayNormal = hit.normal;
-        Vector3Int normal = new Vector3Int();
 
-        float x = Mathf.Abs(rayNormal.x);
-        float y = Mathf.Abs(rayNormal.y);
-        float z = Mathf.Abs(rayNormal.z);
+        int x = Mathf.RoundToInt(rayNormal.x);
+        int y = Mathf.RoundToInt(rayNormal.y);
+        int z = Mathf.RoundToInt(rayNormal.z);
 
-        if (x >= y && x >= z)
-        {
-            if (rayNormal.x > 0)
-            {
-                normal.x = 1;
-            }
-            else
-            {
-                normal.x = -1;
-            }
-        }
-        else if (y >= x && y >= z)
-        {
-            if (rayNormal.y > 0)
-            {
-                normal.y = 1;
-            }
-            else
-            {
-                normal.y = -1;
-            }
-        }
-        else
-        {
-            if (rayNormal.z > 0)
-            {
-                normal.z = 1;
-            }
-            else
-            {
-                normal.z = -1;
-            }
-        }
+        Vector3Int normalInt = new Vector3Int(x,y,z);
+
 
         switch (cell.blockType)
         {
             case BlockType.Air:
                 break;
             case BlockType.Path:
-                break;
+                return;
             case BlockType.Grass:
-                intPos += normal;
+                intPos += normalInt;
                 break;
             case BlockType.Rock:
-                //intPos += LevelManager.instance.world.GetFaceNormal(cell);
+                intPos += normalInt;
                 break;
             case BlockType.Swamp:
                 return;
             default:
                 break;
         }
-        
+
+
+        //SelectCell(cell);
         selectedCell = cell;
+        Debug.Log("Hit World");
+
         if (!canBuild)
             return;
 
-        BuildDefenseOn(intPos);
+        BuildStructure(intPos, rayNormal);
 
     }
 
-    public void SelectDefenseToBuild(DefenseBlueprint defense)
+    public void SelectCell(CellInfo cell)
     {
-        defenseToBuild = defense;
+        selectedCell = cell;
+        structureToBuild = null;
+    }
+
+    public void SelectStructureToBuild(StructureBlueprint defense)
+    {
+        structureToBuild = defense;
+        selectedCell = null;
         canBuild = true;
     }
 
-    public void ResetDefenseToBuild()
+    public void ResetCanBuild()
     {
         canBuild = false;
     }
 
 
-    public void BuildDefenseOn(Vector3 position)
+    public void BuildStructure(Vector3 position, Vector3 normal)
     {
-        if (LevelStats.instance.CurrentMoney >= defenseToBuild.cost )
+        if (LevelStats.instance.infinteMoney)
         {
-            Structure structure = Instantiate(defenseToBuild.defensePrefab, position, Quaternion.identity).GetComponent<Structure>();
-            selectedCell.SetStructure(structure);
-            ResetDefenseToBuild(); // after building an structure you have to select another one to be able to place it
-            if (!LevelStats.instance.infinteMoney) {
-                LevelStats.instance.SpendMoney(defenseToBuild.cost);            
-            }
+            CreateTowerOnCell(position,normal);
+            ResetCanBuild(); // after building an structure you have to select another one to be able to place it
+        }
+        else if (LevelStats.instance.CurrentMoney >= structureToBuild.creationCost )
+        {
+
+            CreateTowerOnCell(position,normal);
+            LevelStats.instance.SpendMoney(structureToBuild.creationCost);
+            ResetCanBuild(); // after building an structure you have to select another one to be able to place it
         }
         else
         {
             Debug.Log("Not enough Money");
             //TODO: Show on screen there is not enough money
         }
+    }
+
+    public void CreateTowerOnCell(Vector3 position, Vector3 normal)
+    {
+        Structure structure = Instantiate(structureToBuild.structurePrefab, position, Quaternion.Euler(normal)).GetComponent<Structure>();
+        structure.SetNormal(normal);
+
+        //Not working
+        if (selectedCell.GetStructure() != null)
+        {
+            Destroy(selectedCell.GetStructure());
+        }
+        selectedCell.SetStructure(structure);
+    }
+
+    public void UpgradeStructure()
+    {
+        if (LevelStats.instance.infinteMoney)
+        {
+            selectedCell.structure.UpgradeStrucrure();
+        }
+        if (LevelStats.instance.CurrentMoney >= structureToBuild.creationCost * Mathf.Pow(structureToBuild.upgradeMultiplicator, selectedCell.structure.GetLevel()))
+        {
+            selectedCell.structure.UpgradeStrucrure();
+            LevelStats.instance.SpendMoney(structureToBuild.creationCost);
+            
+        }
+        else
+        {
+            Debug.Log("Not enough Money");
+            //TODO: Show on screen there is not enough money
+        }
+    }
+
+    public void SellStructure()
+    {
+        
+        selectedStructure.Sell();
+        selectedCell.structure = null;
+        LevelStats.instance.EarnMoney(50);
+
     }
 }

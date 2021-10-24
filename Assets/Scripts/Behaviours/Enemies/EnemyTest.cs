@@ -5,10 +5,7 @@ using UnityEngine;
 public class EnemyTest : EnemyBehaviour
 {
 
-    private void Start()
-    {
-        SetInitialHealth();
-    }
+   
     public override bool Hurt(int damage)
     {
         healthPoints -= damage;
