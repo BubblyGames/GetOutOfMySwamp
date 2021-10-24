@@ -1,3 +1,5 @@
+//Código modificado, extraído de: http://vodacek.zvb.cz/archiv/750.html
+
 Shader "Custom/CellShading"
 {Properties
 	{
