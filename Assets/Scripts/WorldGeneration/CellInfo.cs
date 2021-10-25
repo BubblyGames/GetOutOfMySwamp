@@ -16,7 +16,7 @@ public class CellInfo
     public bool explored = false;
     [HideInInspector]
     public bool isPath = false;
-    [HideInInspector]
+    //[HideInInspector]
     public Vector3Int normalInt = Vector3Int.zero;
     internal bool isSurface = false;
     internal bool canWalk = false;

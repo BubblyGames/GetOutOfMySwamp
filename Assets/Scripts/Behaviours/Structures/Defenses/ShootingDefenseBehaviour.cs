@@ -2,74 +2,77 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[System.Serializable]
 public class ShootingDefenseBehaviour : DefenseBehaviour
 {
-    public GameObject[] shotPositions; //0 front, 1 back, 2 right, 3 left
-    public GameObject bulletType;
+    public Transform firePoint;
+    [SerializeField] private EnemyBehaviour enemyTarget;
+    [SerializeField] public float turnSpeed = 5f;
 
-    GameObject enemyTarget;
-    [Header("Bullet Effects")]
+    [Header("Bullet Atributes")]
+    public GameObject bulletPrefab;
     [SerializeField] protected int actualEffect;
 
-    new void Update()
+    private void Start()
     {
-        RaycastHit[] hits = Physics.SphereCastAll(transform.position, detectionRange, transform.forward, detectionRange, enemyLayerMask);
+        InvokeRepeating("UpdateTarget", 0f, 0.5f);
+
+    }
+
+    void UpdateTarget()
+    {
+         RaycastHit[] hits = Physics.SphereCastAll(transform.position, attackRange, transform.forward, attackRange, layerMask);
         if (hits.Length > 0)
         {
-            if (Time.time > nextAttackTime)
+            float shortestDistance = Mathf.Infinity;
+            EnemyBehaviour nearestEnemy = null;
+            foreach (RaycastHit hit in hits)
             {
-                nextAttackTime = Time.time + attackWait;
+                if (hit.collider.gameObject.tag =="Enemy")
                 {
-                    enemyTarget = hits[0].collider.gameObject;
-                    EnemyBehaviour eb;
-                    if (enemyTarget != null && enemyTarget.TryGetComponent<EnemyBehaviour>(out eb))
+                    EnemyBehaviour enemy = hit.collider.gameObject.GetComponent<EnemyBehaviour>();
+                    float distanceToEnemy = Vector3.Distance(transform.position, enemy.transform.position);
+                    if (distanceToEnemy < shortestDistance)
                     {
-                        Vector3 bulletPos = chooseBulletPos();
-                        GameObject bullet = Instantiate(bulletType, bulletPos, Quaternion.identity);
-                        BulletBehaviour b = bullet.GetComponent<BulletBehaviour>();
-                        b.SetBulletBehaviour(enemyTarget.transform, damage, bulletSpeed, actualEffect, detectionRange);
+                        shortestDistance = distanceToEnemy;
+                        nearestEnemy = enemy;
                     }
                 }
+            }
+                
+
+            if (nearestEnemy !=null && shortestDistance <=attackRange)
+            {
+                enemyTarget = nearestEnemy;
+            }
+            else
+            {
+                enemyTarget = null;
             }
         }
     }
 
-    Vector3 chooseBulletPos()
+    protected void Update()
     {
-        Vector3 enemyVector = enemyTarget.transform.position - gameObject.transform.position;
-        float angle = Mathf.Atan2(enemyVector.x, enemyVector.y) * Mathf.Rad2Deg;
-        Transform finalShotPos;
+        if (enemyTarget == null)
+        {
+            return;
+        }
 
-        if (angle > 0)
+        transform.LookAt(enemyTarget.transform,normal);
+
+        if (fireCountdown <= 0f)
         {
-            if (angle <= 45)
-            {
-                finalShotPos = shotPositions[0].transform;
-            }
-            else if (angle >= 135)
-            {
-                finalShotPos = shotPositions[1].transform;
-            }
-            else
-            {
-                finalShotPos = shotPositions[2].transform;
-            }
+            Attack();
+            fireCountdown = 1f / fireRate;
         }
-        else
-        {
-            if (angle >= -45)
-            {
-                finalShotPos = shotPositions[0].transform;
-            }
-            else if (angle <= -135)
-            {
-                finalShotPos = shotPositions[1].transform;
-            }
-            else
-            {
-                finalShotPos = shotPositions[3].transform;
-            }
-        }
-        return finalShotPos.position;
+        fireCountdown -= Time.deltaTime;
+    }
+
+    protected override void Attack()
+    {
+        
+        BulletBehaviour bullet = Instantiate(bulletPrefab, firePoint.position, firePoint.rotation).GetComponent<BulletBehaviour>();
+        bullet.SetBulletBehaviour(enemyTarget.gameObject.transform, this.damage, this.actualEffect, this.attackRange);
     }
 }

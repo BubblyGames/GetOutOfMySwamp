@@ -9,4 +9,12 @@ public class Gatherer : Structure
     protected int resourceGatheredEachCicle;
     [SerializeField] protected float timeToGatherResource; // Time when the next resources will be gathered
     [SerializeField] protected float timerToGetResource;
+
+    public override void UpgradeStrucrure()
+    {
+        base.UpgradeStrucrure();
+
+        this.timeToGatherResource = this.timeToGatherResource * 0.2f;
+        this.resourceGatheredEachCicle += 2;
+    }
 }

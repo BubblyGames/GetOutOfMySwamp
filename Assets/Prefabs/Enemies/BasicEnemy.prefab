@@ -513,13 +513,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   startHealth: 30
   healthPoints: 0
-  speed: 4
+  startSpeed: 5
+  currentSpeed: 0
+  damage: 10
   moneyValue: 25
   scoreValue: 100
+  isSlowed: 0
+  slowIntensity: 0.25
+  slowDuration: 0
+  slowTimer: 0
   recoilQuantity: 2
   recoilTime: 2
-  damage: 10
-  healthBar: {fileID: 9136587772348585253}
 --- !u!135 &4165739703014183546
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -532,4 +536,4 @@ SphereCollider:
   m_Enabled: 1
   serializedVersion: 2
   m_Radius: 0.5
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Center: {x: 0, y: 0.5, z: 0}

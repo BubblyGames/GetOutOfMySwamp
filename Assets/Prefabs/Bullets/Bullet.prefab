@@ -26,7 +26,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6002255402025451531}
-  m_LocalRotation: {x: -0.3328266, y: 0.62388015, z: 0.3328266, w: 0.62388015}
+  m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071068}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -34,7 +34,7 @@ Transform:
   - {fileID: 6002255403397826104}
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
 --- !u!136 &6058848542193078387
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -45,9 +45,9 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 1
   m_Enabled: 1
-  m_Radius: 0.5
-  m_Height: 1
-  m_Direction: 1
+  m_Radius: 0.2
+  m_Height: 0.75
+  m_Direction: 2
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &4368742845796970718
 MonoBehaviour:
@@ -61,7 +61,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6cd6092f3a9de044a83331118199fa0c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  radius: 5
+  maxDistance: 10
+  distanceTravelled: 0
   actualEffect: 0
 --- !u!54 &5849195941064890303
 Rigidbody:
