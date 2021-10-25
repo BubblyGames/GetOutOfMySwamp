@@ -42,6 +42,23 @@ public class MoveAroundObject : MonoBehaviour
             _rotationX -= mouseY;
         }
 
+        if (Input.GetKeyDown(KeyCode.W))
+        {
+            RotateUp();
+        }
+        else if (Input.GetKeyDown(KeyCode.S))
+        {
+            RotateDown();
+        }
+        else if (Input.GetKeyDown(KeyCode.D))
+        {
+            RotateRight();
+        }
+        else if (Input.GetKeyDown(KeyCode.A))
+        {
+            RotateLeft();
+        }
+
         // Apply clamping for x rotation 
         _rotationX = Mathf.Clamp(_rotationX, _rotationXMinMax.x, _rotationXMinMax.y);
 

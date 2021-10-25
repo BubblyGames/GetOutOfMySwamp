@@ -39,6 +39,9 @@ public class CubeWorldGenerator : MonoBehaviour
     public bool debugMidpoints = false;
     public GameObject lineRendererPrefab;
     List<GameObject> debugStuff = new List<GameObject>();
+    public bool rebuild = false;
+
+    public List<Vector3Int> interestPoints;
 
     VoxelRenderer voxelRenderer;
     MeshCollider meshCollider;
@@ -57,6 +60,12 @@ public class CubeWorldGenerator : MonoBehaviour
         int count = 1;
         if (seed == 0f)
             seed = Mathf.RoundToInt(Random.value * 10000);
+
+        paths = new List<Path>();
+        for (int i = 0; i < nPaths; i++)
+        {
+            paths.Add(new Path());
+        }
 
         float startTime = Time.time;
         while (!success && count < 100)
@@ -225,9 +234,53 @@ public class CubeWorldGenerator : MonoBehaviour
         }
     }
 
+
     private bool GeneratePaths(int endX, int endY, int endZ)
     {
-        paths = new List<Path>();
+        while (interestPoints.Count > nMidpoints * nPaths)
+        {
+            nMidpoints++;
+        }
+
+        for (int i = 0; i < nPaths; i++)
+        {
+            paths[i] = new Path();
+            for (int j = 0; j < nMidpoints; j++)
+            {
+                paths[i].AddMidpoint(new Midpoint(GetRandomCell(), false));
+            }
+        }
+
+        for (int i = 0; i < interestPoints.Count; i++)
+        {
+            float minDist = Mathf.Infinity;
+            int bestPath = -1;
+            int bestPoint = -1;
+            bool found = false;
+
+            for (int j = 0; j < nPaths; j++)
+            {
+                for (int k = 0; k < nMidpoints; k++)
+                {
+                    Midpoint current = paths[j].midPoints[k];
+                    float dist = Vector3.Distance(current.cell.GetPos(), interestPoints[i]);
+                    if (!current.important && dist < minDist)
+                    {
+                        found = true;
+                        minDist = dist;
+                        bestPath = j;
+                        bestPoint = k;
+                        
+                    }
+                }
+            }
+
+            if (!found)
+                return false;
+
+            paths[bestPath].midPoints[bestPoint] = new Midpoint(GetCell(interestPoints[i]), true);
+        }
+
 
         for (int i = 0; i < nPaths; i++)
         {
@@ -255,25 +308,13 @@ public class CubeWorldGenerator : MonoBehaviour
             cells[x, y + 1, z].blockType = BlockType.Path;
             Node p;
 
-            LineRenderer lr = null;
-            if (debugMidpoints)
-            {
-                GameObject startObject = GameObject.CreatePrimitive(PrimitiveType.Cube);
-                startObject.transform.position = new Vector3(x, y, z);
-                debugStuff.Add(startObject);
-
-                GameObject line = GameObject.Instantiate(lineRendererPrefab);
-                lr = line.GetComponent<LineRenderer>();
-                debugStuff.Add(line);
-            }
-
             switch (pathMetod)
             {
                 case PathMethod.AStar:
                     p = FindPathAstar(new Node(cells[x, y, z]), cells[endX, endY, endZ], true);
                     break;
                 case PathMethod.AStarWithMidpoints:
-                    p = FindPathAstarWithMidpoints(cells[x, y, z], cells[endX, endY, endZ]);
+                    p = FindPathAstarWithMidpoints(cells[x, y, z], cells[endX, endY, endZ], paths[i]);
                     break;
                 case PathMethod.Random:
                     p = FindPathRandom(cells[x, y, z], cells[endX, endY, endZ]);
@@ -285,6 +326,21 @@ public class CubeWorldGenerator : MonoBehaviour
 
             if (p == null)
                 return false;
+
+            LineRenderer lr = null;
+            if (debugMidpoints)
+            {
+                GameObject line = GameObject.Instantiate(lineRendererPrefab);
+                lr = line.GetComponent<LineRenderer>();
+                debugStuff.Add(line);
+
+                foreach (Midpoint m in paths[i].midPoints)
+                {
+                    GameObject midSphere = GameObject.CreatePrimitive(PrimitiveType.Sphere);
+                    midSphere.transform.position = new Vector3(m.cell.x, m.cell.y, m.cell.z);
+                    debugStuff.Add(midSphere);
+                }
+            }
 
             List<CellInfo> pathCells = new List<CellInfo>();
             while (p != null)
@@ -341,29 +397,42 @@ public class CubeWorldGenerator : MonoBehaviour
                 }
             }*/
 
-            paths.Add(new Path(pathCells.ToArray()));
+            paths[i].SetPath(pathCells.ToArray());
         }
 
         return paths.Count == nPaths;
     }
 
     bool canCrossPath = true;
-    Node FindPathAstarWithMidpoints(CellInfo start, CellInfo end)
+    Node FindPathAstarWithMidpoints(CellInfo start, CellInfo end, Path path)
     {
         Node current = new Node(start);
         current.ComputeFScore(end.x, end.y, end.z);
 
-        CellInfo midpoint;
+        Midpoint midpoint;
 
         for (int i = 0; i < nMidpoints; i++)
         {
             //Debug.Log("Finding path to midpoint " + i);
-            Node result = null;
+            midpoint = path.midPoints[i];
+            Node result = FindPathAstar(current, midpoint.cell);
+
+            if (midpoint.important)
+            {
+                Debug.Log("Important");
+            }
+
+            if (result == null && midpoint.important)
+            {
+                Debug.Log("Couldn't get to midpoint " + midpoint.cell.id);
+                return null;//Could try to change previous point instead? For beta maybe
+            }
+
             int count = 0;
             while (result == null && count < 10)
             {
-                midpoint = GetRandomCell(current);
-                result = FindPathAstar(current, midpoint);
+                midpoint.cell = GetRandomCell();
+                result = FindPathAstar(current, midpoint.cell);
                 count++;
             }
             //Debug.Log(count + " attempts needed");
@@ -372,13 +441,6 @@ public class CubeWorldGenerator : MonoBehaviour
             {
                 //Debug.Log("Failed to find a way");
                 return null;
-            }
-
-            if (debugMidpoints)
-            {
-                GameObject midSphere = GameObject.CreatePrimitive(PrimitiveType.Sphere);
-                midSphere.transform.position = new Vector3(result.x, result.y, result.z);
-                debugStuff.Add(midSphere);
             }
 
             current = result;
@@ -480,7 +542,7 @@ public class CubeWorldGenerator : MonoBehaviour
     }
 
     bool onXFace = true;
-    CellInfo GetRandomCell(Node current)
+    CellInfo GetRandomCell()
     {
         int x = 1;
         int y = 1;

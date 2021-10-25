@@ -37,7 +37,10 @@ public abstract class EnemyBehaviour : MonoBehaviour
         if (path == null)
             return;
 
+        if (nextIndexPath >= path.Length) { Destroy(this.gameObject); return; }
+
         transform.position = Vector3.Lerp(path.GetStep(nextIndexPath - 1), path.GetStep(nextIndexPath), lerpProgression);
+
         if (lerpProgression < 1)
         {
             if (actualRecoilTime >= recoilTime)
@@ -104,7 +107,8 @@ public abstract class EnemyBehaviour : MonoBehaviour
     }
 
     //function called when a bullet has the recoil effect
-    public void RecoilHurt(int damage) {
+    public void RecoilHurt(int damage)
+    {
         Hurt(damage);
         if (!isRecoiling)
         {

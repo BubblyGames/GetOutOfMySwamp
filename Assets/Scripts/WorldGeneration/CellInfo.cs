@@ -39,4 +39,9 @@ public class CellInfo
     {
         return this.structure;
     }
+
+    public Vector3 GetPos()
+    {
+        return new Vector3(x, y, z);
+    }
 }
