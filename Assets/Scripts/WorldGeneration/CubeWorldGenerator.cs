@@ -144,7 +144,6 @@ public class CubeWorldGenerator : MonoBehaviour
         return meshData;
     }
 
-
     private Vector3Int GenerateWorld()
     {
         int endX = size / 2;
@@ -234,7 +233,6 @@ public class CubeWorldGenerator : MonoBehaviour
         }
     }
 
-
     private bool GeneratePaths(int endX, int endY, int endZ)
     {
         while (interestPoints.Count > nMidpoints * nPaths)
@@ -244,7 +242,7 @@ public class CubeWorldGenerator : MonoBehaviour
 
         for (int i = 0; i < nPaths; i++)
         {
-            paths[i] = new Path();
+            paths[i].midPoints.Clear();
             for (int j = 0; j < nMidpoints; j++)
             {
                 paths[i].AddMidpoint(new Midpoint(GetRandomCell(), false));
@@ -270,7 +268,7 @@ public class CubeWorldGenerator : MonoBehaviour
                         minDist = dist;
                         bestPath = j;
                         bestPoint = k;
-                        
+
                     }
                 }
             }
@@ -751,6 +749,22 @@ public class CubeWorldGenerator : MonoBehaviour
         debugStuff.Clear();
     }
 
+    public void AddInterestPoint(Vector3Int point)
+    {
+        interestPoints.Add(point);
+        UpdateWorld();
+    }
+
+    void UpdateWorld()
+    {
+        if (!generatingWorld && cells != null)
+        {
+            generatingWorld = true;
+            StartCoroutine(BuildWorld());
+        }
+    }
+
+
 #if UNITY_EDITOR
     private void OnDrawGizmos()
     {
@@ -768,11 +782,7 @@ public class CubeWorldGenerator : MonoBehaviour
     {
         if (!Application.isPlaying) return;
 
-        if (!generatingWorld && cells != null)
-        {
-            generatingWorld = true;
-            StartCoroutine(BuildWorld());
-        }
+        UpdateWorld();
     }
 
     IEnumerator BuildWorld()

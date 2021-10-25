@@ -28,7 +28,7 @@ public class BuildManager : MonoBehaviour
     }
 
     private void Update()
-    { 
+    {
         if (Input.GetMouseButtonDown(0))
         {
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
@@ -45,7 +45,7 @@ public class BuildManager : MonoBehaviour
                 if (hit.collider.tag == "World")
                 {
                     checkWorldCoordinates(hit);
-                    
+
                 }
 
             }
@@ -61,7 +61,7 @@ public class BuildManager : MonoBehaviour
                 Debug.Log("DidntHit");
                 //UIController.instance.DisableUpdateMenu();
             }
-           
+
         }
     }
 
@@ -85,7 +85,7 @@ public class BuildManager : MonoBehaviour
         int y = Mathf.RoundToInt(rayNormal.y);
         int z = Mathf.RoundToInt(rayNormal.z);
 
-        Vector3Int normalInt = new Vector3Int(x,y,z);
+        Vector3Int normalInt = new Vector3Int(x, y, z);
 
 
         switch (cell.blockType)
@@ -141,13 +141,13 @@ public class BuildManager : MonoBehaviour
     {
         if (LevelStats.instance.infinteMoney)
         {
-            CreateTowerOnCell(position,normal);
+            CreateTowerOnCell(position, normal);
             ResetCanBuild(); // after building an structure you have to select another one to be able to place it
         }
-        else if (LevelStats.instance.CurrentMoney >= structureToBuild.creationCost )
+        else if (LevelStats.instance.CurrentMoney >= structureToBuild.creationCost)
         {
 
-            CreateTowerOnCell(position,normal);
+            CreateTowerOnCell(position, normal);
             LevelStats.instance.SpendMoney(structureToBuild.creationCost);
             ResetCanBuild(); // after building an structure you have to select another one to be able to place it
         }
@@ -162,6 +162,12 @@ public class BuildManager : MonoBehaviour
     {
         Structure structure = Instantiate(structureToBuild.structurePrefab, position, Quaternion.Euler(normal)).GetComponent<Structure>();
         structure.SetNormal(normal);
+
+        Gatherer g;
+        if (structure.TryGetComponent<Gatherer>(out g))
+        {
+            CubeWorldGenerator.worldGeneratorInstance.AddInterestPoint(new Vector3Int((int)position.x, (int)position.y, (int)position.z));
+        }
 
         //Not working
         if (selectedCell.GetStructure() != null)
@@ -181,7 +187,7 @@ public class BuildManager : MonoBehaviour
         {
             selectedCell.structure.UpgradeStrucrure();
             LevelStats.instance.SpendMoney(structureToBuild.creationCost);
-            
+
         }
         else
         {
@@ -192,7 +198,7 @@ public class BuildManager : MonoBehaviour
 
     public void SellStructure()
     {
-        
+
         selectedStructure.Sell();
         selectedCell.structure = null;
         LevelStats.instance.EarnMoney(50);
