@@ -51,11 +51,18 @@ public abstract class EnemyBehaviour : MonoBehaviour
 
         if (nextIndexPath >= path.Length) { Destroy(this.gameObject); return; }
 
+        if (path.GetCell(nextIndexPath).isInteresting)
+        {
+            //Deal damage
+            Debug.Log("A");
+            return;
+        }
+
         transform.position = Vector3.Lerp(path.GetStep(nextIndexPath - 1), path.GetStep(nextIndexPath), lerpProgression);
 
         if (isSlowed)
         {
-            if (slowTimer>=slowDuration)
+            if (slowTimer >= slowDuration)
             {
                 isSlowed = false;
                 slowTimer = 0;
@@ -109,14 +116,15 @@ public abstract class EnemyBehaviour : MonoBehaviour
     }
 
     //function called when a bullet has the recoil effect
-    public void slowAndDamage(int damage) {
+    public void slowAndDamage(int damage)
+    {
         Hurt(damage);
         if (!isSlowed)
         {
             currentSpeed = currentSpeed * slowIntensity;
         }
         isSlowed = true;
-         slowDuration = 2f;
+        slowDuration = 2f;
 
     }
 

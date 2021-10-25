@@ -23,6 +23,7 @@ public class CellInfo
     internal bool endZone = false;
 
     public Structure structure;
+    public bool isInteresting = false;
 
     public CellInfo(int x, int y, int z)
     {

@@ -61,6 +61,18 @@ public class CubeWorldGenerator : MonoBehaviour
         if (seed == 0f)
             seed = Mathf.RoundToInt(Random.value * 10000);
 
+        cells = new CellInfo[size, size, size];
+        for (int i = 0; i < size; i++)
+        {
+            for (int j = 0; j < size; j++)
+            {
+                for (int k = 0; k < size; k++)
+                {
+                    cells[i, j, k] = new CellInfo(i, j, k);
+                }
+            }
+        }
+
         paths = new List<Path>();
         for (int i = 0; i < nPaths; i++)
         {
@@ -146,18 +158,18 @@ public class CubeWorldGenerator : MonoBehaviour
 
     private Vector3Int GenerateWorld()
     {
-        int endX = size / 2;
-        int endY = size - 1;
-        int endZ = size / 2;
+        end.x = size / 2;
+        end.y = size - 1;
+        end.z = size / 2;
 
-        cells = new CellInfo[size, size, size];
+        //cells = new CellInfo[size, size, size];
         FillWorld();
 
         //Debug.Log("World generated");
-        GenerateSwamp(endX, endY, endZ);
+        GenerateSwamp(end.x, end.y, end.z);
         //Debug.Log("Swamp generated");
 
-        return new Vector3Int(endX, endY, endZ);
+        return new Vector3Int(end.x, end.y, end.z);
     }
 
     void FillWorld()
@@ -168,7 +180,7 @@ public class CubeWorldGenerator : MonoBehaviour
             {
                 for (int k = 0; k < size; k++)
                 {
-                    CellInfo cell = new CellInfo(i, j, k);
+                    CellInfo cell = cells[i, j, k];
                     cell.isSurface = CheckIfIsInSurface(cell);
                     if (cell.isSurface)
                         cell.normalInt = GetFaceNormal(cell);
@@ -203,8 +215,6 @@ public class CubeWorldGenerator : MonoBehaviour
                     {
                         cell.blockType = BlockType.Grass;
                     }
-
-                    cells[i, j, k] = cell;
                 }
             }
         }
@@ -268,7 +278,6 @@ public class CubeWorldGenerator : MonoBehaviour
                         minDist = dist;
                         bestPath = j;
                         bestPoint = k;
-
                     }
                 }
             }
@@ -749,9 +758,11 @@ public class CubeWorldGenerator : MonoBehaviour
         debugStuff.Clear();
     }
 
+    public Vector3 v;
     public void AddInterestPoint(Vector3Int point)
     {
         interestPoints.Add(point);
+        cells[(int)point.x, (int)point.y, (int)point.z].isInteresting = true;
         UpdateWorld();
     }
 
@@ -763,28 +774,6 @@ public class CubeWorldGenerator : MonoBehaviour
             StartCoroutine(BuildWorld());
         }
     }
-
-
-#if UNITY_EDITOR
-    private void OnDrawGizmos()
-    {
-        if (!Application.isPlaying) return;
-
-        foreach (CellInfo cell in cells)
-        {
-            if (cell.canWalk)
-                Handles.Label(new Vector3(cell.x, cell.y, cell.z), 1.ToString());
-            //Gizmos.DrawSphere(new Vector3(cell.x, cell.y, cell.z), .5f);
-        }
-    }
-
-    private void OnValidate()
-    {
-        if (!Application.isPlaying) return;
-
-        UpdateWorld();
-    }
-
     IEnumerator BuildWorld()
     {
         generatingWorld = true;
@@ -798,5 +787,29 @@ public class CubeWorldGenerator : MonoBehaviour
         generatingWorld = false;
         yield return null;
     }
+
+
+
+#if UNITY_EDITOR
+    private void OnDrawGizmos()
+    {
+        if (!Application.isPlaying) return;
+
+        foreach (CellInfo cell in cells)
+        {
+            if (cell.isInteresting)
+                Handles.Label(new Vector3(cell.x, cell.y, cell.z), 1.ToString());
+            //Gizmos.DrawSphere(new Vector3(cell.x, cell.y, cell.z), .5f);
+        }
+    }
+
+    private void OnValidate()
+    {
+        if (!Application.isPlaying) return;
+
+        UpdateWorld();
+    }
+
+   
 #endif
 }

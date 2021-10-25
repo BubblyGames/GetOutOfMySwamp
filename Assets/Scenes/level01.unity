@@ -648,8 +648,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 100, y: 200}
-  m_SizeDelta: {x: 200, y: 400}
+  m_AnchoredPosition: {x: 100, y: 100}
+  m_SizeDelta: {x: 200, y: 202}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &316150466
 MonoBehaviour:
@@ -3824,7 +3824,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   size: 30
-  nPaths: 3
+  nPaths: 1
   wallDensity: 0.5
   rocksVisualReduction: 0.9
   rockSize: 10
@@ -3835,6 +3835,7 @@ MonoBehaviour:
   lineRendererPrefab: {fileID: 3920875017051324963, guid: ffef0eddca5eb324f94bad8de9cc038b, type: 3}
   rebuild: 0
   interestPoints: []
+  v: {x: 0, y: 0, z: 0}
 --- !u!114 &1903685288
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3916,6 +3917,7 @@ MonoBehaviour:
     isPath: 0
     normalInt: {x: 0, y: 0, z: 0}
     structure: {fileID: 0}
+    isInteresting: 0
   canBuild: 0
 --- !u!114 &1903685292
 MonoBehaviour:
@@ -3967,7 +3969,7 @@ MonoBehaviour:
   startMoney: 800
   currentMoney: 0
   currentScore: 0
-  infinteMoney: 0
+  infinteMoney: 1
   infinteHP: 0
 --- !u!64 &1903685294
 MeshCollider:
@@ -4019,7 +4021,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: 16, y: -15}
+  m_AnchoredPosition: {x: 0, y: -15}
   m_SizeDelta: {x: 60, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1918940730
