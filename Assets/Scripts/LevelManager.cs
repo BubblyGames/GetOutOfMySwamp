@@ -87,6 +87,10 @@ public class LevelManager : MonoBehaviour
         //        }
         //    }
         //}
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            PauseGame();
+        }
     }
 
 
@@ -116,7 +120,17 @@ public class LevelManager : MonoBehaviour
 
     }
 
-    
+    public void PauseGame()
+    {
+        UIController.instance.EnablePauseMenu();
+        Time.timeScale = 0;
+    }
+
+    public void ResumeGame()
+    {
+        Time.timeScale = 1;
+        UIController.instance.DisablePauseMenu();
+    }
 }
 
 

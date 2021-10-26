@@ -9,10 +9,12 @@ public class UIController : MonoBehaviour
 
     public GameObject upgradeMenu;
     public GameObject shopMenu;
+    public GameObject pauseMenu;
     public enum Menus
     {
         UpgradeMenu,
-        ShopMenu
+        ShopMenu,
+        PauseMenu
     }
 
     public Menus menus;
@@ -39,6 +41,20 @@ public class UIController : MonoBehaviour
         upgradeMenu.SetActive(false);
     }
 
+    public void EnablePauseMenu()
+    {
+        upgradeMenu.SetActive(false);
+        shopMenu.SetActive(false);
+        pauseMenu.SetActive(true);
+
+    }
+
+    public void DisablePauseMenu()
+    {
+        pauseMenu.SetActive(false);
+
+    }
+
     public void SetMenuActive()
     {
         switch (menus)
@@ -50,6 +66,10 @@ public class UIController : MonoBehaviour
             case Menus.ShopMenu:
                 shopMenu.SetActive(true);
                 break;
+            case Menus.PauseMenu:
+                pauseMenu.SetActive(true);
+                break;
+
             default:
                 break;
         }
@@ -64,6 +84,9 @@ public class UIController : MonoBehaviour
                 break;
             case Menus.ShopMenu:
                 shopMenu.SetActive(false);
+                break;
+            case Menus.PauseMenu:
+                pauseMenu.SetActive(false);
                 break;
             default:
                 break;
