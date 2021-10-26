@@ -5,13 +5,12 @@ using UnityEngine;
 public class BulletBehaviour : MonoBehaviour
 {
     protected int damage;
-    protected float speed = 50f;
+    protected float speed = 30f;
     protected Transform target;
 
     [Header("Bullet Destruction")]
     [SerializeField] protected float maxDistance;
     [SerializeField] protected float distanceTravelled;
-
 
     [Header("Bullet Effects")]
     [SerializeField] protected int actualEffect;
@@ -19,29 +18,21 @@ public class BulletBehaviour : MonoBehaviour
 
     void Update()
     {
-        
         if (distanceTravelled >= maxDistance)
         {
-            Debug.Log("Break");
             Destroy(gameObject);
         }
         else
         {
-
-            if (target == null)
-            {
-                Destroy(gameObject);
-            }
-            else
+            if (target != null)
             {
                 rotateBullet();
-                transform.Translate(Time.deltaTime * speed * gameObject.transform.forward);
             }
-            distanceTravelled += speed * Time.deltaTime;
-
+            transform.Translate(Time.deltaTime * speed * Vector3.forward);
+            distanceTravelled += Time.deltaTime * speed;
         }
-
     }
+
     virtual public void SetBulletBehaviour(Transform target, int damage, int effect, float range)
     {
         this.damage = damage;
@@ -73,6 +64,6 @@ public class BulletBehaviour : MonoBehaviour
     }
     void rotateBullet()
     {
-        transform.LookAt(target.transform, Vector3.up);
+        transform.LookAt(target.transform);
     }
 }
