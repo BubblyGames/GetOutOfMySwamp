@@ -14,6 +14,9 @@ public class WaveController : MonoBehaviour
     public int activeEnemies = 0;
     public List<EnemyBehaviour> enemies;
 
+
+    [Range(0f, 0.5f)]
+    public float randomRange;
     public Wave[] waves;
 
     public float timeBetweenWaves = 5f;
@@ -27,6 +30,7 @@ public class WaveController : MonoBehaviour
 
     public int waveCount; // Wave its being played
 
+ 
     ///public Text waveText;
 
     EnemySpawner enemySpawner;
@@ -129,11 +133,15 @@ public class WaveController : MonoBehaviour
         }
 
 
-        for (int i = 0; i < currentWave.enemyAmount; i++)
+        for (int i = 0; i < currentWave.packs.Length; i++)
         {
-            int pathId = Random.Range(0, CubeWorldGenerator.worldGeneratorInstance.nPaths);
-            enemySpawner.SpawnEnemy(currentWave.enemyId, CubeWorldGenerator.worldGeneratorInstance.paths[pathId]);
-            yield return new WaitForSeconds(1f / currentWave.spawnRate);
+            Pack p = currentWave.packs[i];
+            for (int j = 0; j < p.enemyAmount; j++)
+            {
+                int pathId = Random.Range(0, CubeWorldGenerator.worldGeneratorInstance.nPaths);
+                enemySpawner.SpawnEnemy(p.enemyType, CubeWorldGenerator.worldGeneratorInstance.paths[pathId]);
+                yield return new WaitForSeconds((1f / currentWave.spawnRate) + Random.Range(0f, randomRange)); //randomness between 
+            }
         }
 
 
