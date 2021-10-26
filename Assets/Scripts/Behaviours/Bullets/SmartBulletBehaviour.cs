@@ -38,7 +38,6 @@ public class SmartBulletBehaviour : BulletBehaviour
         initialPos = transform.position;
         rotateBullet();
     }
-
     void rotateBullet()
     {
         transform.LookAt(target.transform, Vector3.up);

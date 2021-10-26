@@ -73,6 +73,6 @@ public class ShootingDefenseBehaviour : DefenseBehaviour
     {
         
         BulletBehaviour bullet = Instantiate(bulletPrefab, firePoint.position, firePoint.rotation).GetComponent<BulletBehaviour>();
-        bullet.SetBulletBehaviour(enemyTarget.gameObject.transform, this.damage, this.actualEffect, this.attackRange);
+        bullet.SetBulletBehaviour(enemyTarget.gameObject.transform, this.damage, this.actualEffect, this.attackRange, gameObject.transform,firePoint.position);
     }
 }
