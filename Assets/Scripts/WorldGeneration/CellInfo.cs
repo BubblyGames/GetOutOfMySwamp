@@ -13,8 +13,6 @@ public class CellInfo
     public int id { get { return x + (1000 * y) + (1000000 * z); } }
     public BlockType blockType = BlockType.Air;
     [HideInInspector]
-    public bool explored = false;
-    [HideInInspector]
     public bool isPath = false;
     //[HideInInspector]
     public Vector3Int normalInt = Vector3Int.zero;
@@ -23,6 +21,7 @@ public class CellInfo
     internal bool endZone = false;
 
     public Structure structure;
+    public bool isInteresting = false;
 
     public CellInfo(int x, int y, int z)
     {
@@ -38,5 +37,15 @@ public class CellInfo
     public Structure GetStructure()
     {
         return this.structure;
+    }
+
+    public Vector3 GetPos()
+    {
+        return new Vector3(x, y, z);
+    }
+
+    public Vector3Int GetPosInt()
+    {
+        return new Vector3Int(x, y, z);
     }
 }
