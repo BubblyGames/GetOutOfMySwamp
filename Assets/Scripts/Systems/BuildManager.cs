@@ -28,60 +28,12 @@ public class BuildManager : MonoBehaviour
         }
     }
 
-    private void Update()
-    {
-        if (Input.GetMouseButtonDown(0))
-        {
-            //if (EventSystem.current.IsPointerOverGameObject())
-            //{
-            //    return;
-            //}
-
-            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-
-            RaycastHit hit = new RaycastHit();
-
-            // Bit shift the index of the layer (8: Structures) to get a bit mask
-            int layerMask = 1 << 8;
-            // But instead we want to collide against everything except layer 8.The ~ operator does this, it inverts a bitmask.
-            layerMask = ~layerMask;
-
-            if (Physics.Raycast(ray, out hit, Mathf.Infinity))
-            {
-                if (hit.collider.tag == "World")
-                {
-                    checkWorldCoordinates(hit);
-
-                }
-
-            }
-            else if (hit.collider == UIController.instance.upgradeMenu)//if raycast doesnt hit
-            {
-
-                Debug.Log("Menu");
-
-            }
-            else if (hit.collider == null)//if raycast doesnt hit
-            {
-
-                //Debug.Log("DidntHit");
-                //UIController.instance.DisableUpdateMenu();
-            }
-
-        }
-    }
-
-    internal void SetSelectedStructure(Structure structure)
-    {
-        selectedStructure = structure;
-    }
-
-    private void checkWorldCoordinates(RaycastHit hit)
+    public bool CheckIfCanBuild(RaycastHit hit, out Vector3Int intPos)
     {
         Vector3 pos = hit.point;
         pos -= hit.normal / 2;
 
-        Vector3Int intPos = new Vector3Int(Mathf.RoundToInt(pos.x), Mathf.RoundToInt(pos.y), Mathf.RoundToInt(pos.z));
+        intPos = new Vector3Int(Mathf.RoundToInt(pos.x), Mathf.RoundToInt(pos.y), Mathf.RoundToInt(pos.z));
 
         CellInfo cell = LevelManager.instance.world.GetCell(intPos);
 
@@ -93,13 +45,12 @@ public class BuildManager : MonoBehaviour
 
         Vector3Int normalInt = new Vector3Int(x, y, z);
 
-
         switch (cell.blockType)
         {
             case BlockType.Air:
                 break;
             case BlockType.Path:
-                return;
+                return false;
             case BlockType.Grass:
                 intPos += normalInt;
                 break;
@@ -107,21 +58,32 @@ public class BuildManager : MonoBehaviour
                 intPos += normalInt;
                 break;
             case BlockType.Swamp:
-                return;
+                return false;
             default:
                 break;
         }
 
-
         //SelectCell(cell);
         selectedCell = cell;
-        Debug.Log("Hit World");
 
         if (!canBuild)
-            return;
+            return false;
 
-        BuildStructure(intPos, rayNormal);
+        return true;
+    }
 
+    public void PlaceObject(RaycastHit hit)
+    {
+        Vector3Int pos;
+        if (CheckIfCanBuild(hit, out pos))
+        {
+            BuildStructure(pos, hit.normal);
+        }
+    }
+
+    internal void SetSelectedStructure(Structure structure)
+    {
+        selectedStructure = structure;
     }
 
     public void SelectCell(CellInfo cell)
@@ -142,7 +104,6 @@ public class BuildManager : MonoBehaviour
         canBuild = false;
     }
 
-
     public void BuildStructure(Vector3 position, Vector3 normal)
     {
         if (LevelStats.instance.infinteMoney)
@@ -152,7 +113,6 @@ public class BuildManager : MonoBehaviour
         }
         else if (LevelStats.instance.CurrentMoney >= structureToBuild.creationCost)
         {
-
             CreateTowerOnCell(position, normal);
             LevelStats.instance.SpendMoney(structureToBuild.creationCost);
             ResetCanBuild(); // after building an structure you have to select another one to be able to place it
@@ -209,10 +169,8 @@ public class BuildManager : MonoBehaviour
 
     public void SellStructure()
     {
-
         selectedStructure.Sell();
         selectedCell.structure = null;
         LevelStats.instance.EarnMoney(50);
-
     }
 }

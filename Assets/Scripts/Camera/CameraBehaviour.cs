@@ -4,8 +4,10 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 
 //https://www.youtube.com/watch?v=zVX9-c_aZVg
-public class MoveAroundObject : MonoBehaviour
+public class CameraBehaviour : MonoBehaviour
 {
+    public static CameraBehaviour instance;
+
     [SerializeField]
     private float _mouseSensitivity = 3.0f;
     [SerializeField]
@@ -18,7 +20,7 @@ public class MoveAroundObject : MonoBehaviour
     private Transform _target;
 
     [SerializeField]
-    private float _distanceFromTarget = 3.0f;
+    internal float _distanceFromTarget = 3.0f;
 
     private Vector3 _currentRotation;
     private Vector3 _smoothVelocity = Vector3.zero;
@@ -32,18 +34,13 @@ public class MoveAroundObject : MonoBehaviour
     [SerializeField]
     private bool freeMovement = true;
 
+    private void Awake()
+    {
+        instance = this;
+    }
+
     void Update()
     {
-        
-        float mouseX = Input.GetAxis("Mouse X") * _mouseSensitivity;
-        float mouseY = Input.GetAxis("Mouse Y") * _mouseSensitivity;
-
-        if (freeMovement && Input.GetButton("Fire1"))
-        {
-            _rotationY += mouseX;
-            _rotationX -= mouseY;
-        }
-
         if (Input.GetKeyDown(KeyCode.W))
         {
             RotateUp();
@@ -72,8 +69,20 @@ public class MoveAroundObject : MonoBehaviour
 
         // Substract forward vector of the GameObject to point its forward vector to the target
         transform.position = _target.position - transform.forward * _distanceFromTarget;
+    }
 
-        _distanceFromTarget += -_scrollSensitivity * Input.mouseScrollDelta.y;
+    public void Zoom(float amount)
+    {
+        _distanceFromTarget += -_scrollSensitivity * amount;
+    }
+
+    public void Rotate(float mouseX, float mouseY)
+    {
+        if (freeMovement && Input.GetButton("Fire1"))
+        {
+            _rotationY += mouseX * _mouseSensitivity;
+            _rotationX -= mouseY * _mouseSensitivity;
+        }
     }
 
     public void RotateRight()
