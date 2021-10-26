@@ -1525,11 +1525,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemyLibrary:
     enemyPrefabs:
-    - enemyId: BasicEnemy
+    - enemyId: 0
       enemyPrefab: {fileID: 5803062399679311112, guid: edbebc9645c93bc47b4257b361fcc5b1, type: 3}
-    - enemyId: HordeEnemy
+    - enemyId: 3
       enemyPrefab: {fileID: 2261941344971277516, guid: f4ca4a2b775f94b4187494af4829186e, type: 3}
-    - enemyId: TankEnemy
+    - enemyId: 2
       enemyPrefab: {fileID: 7991666902177097144, guid: 3e08db26345a218428538443214b6dd8, type: 3}
 --- !u!4 &742249782
 Transform:
@@ -3723,9 +3723,9 @@ GameObject:
   - component: {fileID: 1903685289}
   - component: {fileID: 1903685290}
   - component: {fileID: 1903685288}
-  - component: {fileID: 1903685295}
   - component: {fileID: 1903685286}
   - component: {fileID: 1903685285}
+  - component: {fileID: 1903685296}
   - component: {fileID: 1903685294}
   m_Layer: 7
   m_Name: LevelManager
@@ -3880,16 +3880,26 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   activeEnemies: 0
   enemies: []
+  randomRange: 0.25
   waves:
-  - enemyId: BasicEnemy
-    enemyAmount: 10
+  - packs:
+    - enemyType: 0
+      enemyAmount: 5
     spawnRate: 1
-  - enemyId: TankEnemy
-    enemyAmount: 5
-    spawnRate: 0.5
-  - enemyId: HordeEnemy
-    enemyAmount: 20
-    spawnRate: 4
+  - packs:
+    - enemyType: 2
+      enemyAmount: 2
+    - enemyType: 3
+      enemyAmount: 5
+    spawnRate: 1
+  - packs:
+    - enemyType: 2
+      enemyAmount: 3
+    - enemyType: 0
+      enemyAmount: 5
+    - enemyType: 3
+      enemyAmount: 10
+    spawnRate: 1
   timeBetweenWaves: 5
   timeBeforeRoundStarts: 3
   timeVariable: 0
@@ -3999,7 +4009,7 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
---- !u!114 &1903685295
+--- !u!114 &1903685296
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -4011,6 +4021,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2dfe097ea71e51e418932634b15962d3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  sprite: {fileID: 0}
+  target:
+    r: 1
+    g: 0
+    b: 0
+    a: 1
 --- !u!1 &1918940728
 GameObject:
   m_ObjectHideFlags: 0

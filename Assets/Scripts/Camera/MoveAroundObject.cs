@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 //https://www.youtube.com/watch?v=zVX9-c_aZVg
 public class MoveAroundObject : MonoBehaviour
@@ -33,6 +34,7 @@ public class MoveAroundObject : MonoBehaviour
 
     void Update()
     {
+        
         float mouseX = Input.GetAxis("Mouse X") * _mouseSensitivity;
         float mouseY = Input.GetAxis("Mouse Y") * _mouseSensitivity;
 
