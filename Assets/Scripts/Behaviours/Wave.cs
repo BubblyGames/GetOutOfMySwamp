@@ -5,8 +5,17 @@ using UnityEngine;
 [System.Serializable]
 public class Wave
 {
-    public string enemyId;
-    public int enemyAmount; // Number of enemys will be spawned
+    public Pack[] packs;
     public float spawnRate; //Speed between enemy spawns
 
+    
+
+}
+
+[System.Serializable]
+public class Pack
+{
+
+    public EnemyType enemyType;
+    public int enemyAmount; // Number of enemys will be spawned
 }

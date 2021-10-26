@@ -19,7 +19,7 @@ public class EnemySpawner : MonoBehaviour
         }
     }
 
-    public void SpawnEnemy(string enemyId, Path path)
+    public void SpawnEnemy(EnemyType enemyId, Path path)
     {
 
         //TODO (FINAL BUILD): swap commented line to get prefabs from game manager
