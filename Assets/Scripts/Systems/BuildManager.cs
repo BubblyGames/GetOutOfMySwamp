@@ -58,7 +58,7 @@ public class BuildManager : MonoBehaviour
             else if (hit.collider == null)//if raycast doesnt hit
             {
 
-                Debug.Log("DidntHit");
+                //Debug.Log("DidntHit");
                 //UIController.instance.DisableUpdateMenu();
             }
 
@@ -160,14 +160,19 @@ public class BuildManager : MonoBehaviour
 
     public void CreateTowerOnCell(Vector3 position, Vector3 normal)
     {
+        Gatherer g;
+        if (structureToBuild.structurePrefab.TryGetComponent<Gatherer>(out g))
+        {
+            bool canAdd = CubeWorldGenerator.worldGeneratorInstance.AddInterestPoint(new Vector3Int((int)position.x, (int)position.y, (int)position.z));
+            if (!canAdd)
+            {
+                Debug.Log("Can't add");
+                return;
+            }
+        }
+
         Structure structure = Instantiate(structureToBuild.structurePrefab, position, Quaternion.Euler(normal)).GetComponent<Structure>();
         structure.SetNormal(normal);
-
-        Gatherer g;
-        if (structure.TryGetComponent<Gatherer>(out g))
-        {
-            CubeWorldGenerator.worldGeneratorInstance.AddInterestPoint(new Vector3Int((int)position.x, (int)position.y, (int)position.z));
-        }
 
         //Not working
         if (selectedCell.GetStructure() != null)

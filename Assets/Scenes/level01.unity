@@ -1330,7 +1330,7 @@ Light:
   m_BounceIntensity: 0
   m_ColorTemperature: 6570
   m_UseColorTemperature: 0
-  m_BoundingSphereOverride: {x: 0, y: 0, z: 0, w: 0}
+  m_BoundingSphereOverride: {x: 0, y: -3.6900616e-10, z: 4.5904e-41, w: 1e-45}
   m_UseBoundingSphereOverride: 0
   m_UseViewFrustumForShadowCasterCull: 1
   m_ShadowRadius: 0
@@ -3140,7 +3140,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1589931359
 RectTransform:
   m_ObjectHideFlags: 0
@@ -3823,19 +3823,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 835b7f56cca299441ab8d78a438b21fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  size: 30
-  nPaths: 1
-  wallDensity: 0.5
+  size: 31
+  nPaths: 2
+  wallDensity: 0.4
   rocksVisualReduction: 0.9
   rockSize: 10
   seed: 0
   pathMetod: 1
-  nMidpoints: 2
+  numberOfMidpoints: 1
   debugMidpoints: 0
   lineRendererPrefab: {fileID: 3920875017051324963, guid: ffef0eddca5eb324f94bad8de9cc038b, type: 3}
   rebuild: 0
-  interestPoints: []
-  v: {x: 0, y: 0, z: 0}
 --- !u!114 &1903685288
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3913,7 +3911,6 @@ MonoBehaviour:
     y: 0
     z: 0
     blockType: -1
-    explored: 0
     isPath: 0
     normalInt: {x: 0, y: 0, z: 0}
     structure: {fileID: 0}

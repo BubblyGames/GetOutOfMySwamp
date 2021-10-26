@@ -13,6 +13,10 @@ public class Path
     float spawnWait = 1f;
     float nextSpawnTime = 0;
     public int Length { get { return cells.Length; } }
+    public bool dirty = true;
+    public bool initiated = false;
+    public Vector3Int start = new Vector3Int();
+    public int id = -1;
 
     public Path()
     {
@@ -21,6 +25,7 @@ public class Path
 
     public void SetPath(CellInfo[] cellInfos)
     {
+        initiated = true;
         cells = cellInfos;
     }
 

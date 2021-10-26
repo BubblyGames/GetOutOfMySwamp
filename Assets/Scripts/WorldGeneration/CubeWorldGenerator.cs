@@ -12,8 +12,8 @@ public class CubeWorldGenerator : MonoBehaviour
 {
     public static CubeWorldGenerator worldGeneratorInstance;
 
-    public int size = 20;
-    internal CellInfo[,,] cells; //0 walkable //1 can build //2 can't build //3 target
+    public int size = 21;//Odd numbers look better
+    internal CellInfo[,,] cells;
 
     internal List<Path> paths;
     public int nPaths = 4;
@@ -21,44 +21,38 @@ public class CubeWorldGenerator : MonoBehaviour
     [Range(0.0f, 1.0f)]
     public float wallDensity = 0.3f;
     [Range(0.0f, 1.0f)]
-    public float rocksVisualReduction = 0.75f;
+    public float rocksVisualReduction = 0.9f;
     public float rockSize = 3f;
     public int seed = 0;
     public enum PathMethod
     {
         AStar,
-        AStarWithMidpoints,
-        Random
+        AStarWithMidpoints
     }
     public PathMethod pathMetod = PathMethod.AStarWithMidpoints;
-    public int nMidpoints = 1;
+    public int numberOfMidpoints = 1;
 
     internal Vector3Int end;
-    bool generatingWorld = false;
 
+    //Debug stuff
     public bool debugMidpoints = false;
     public GameObject lineRendererPrefab;
     List<GameObject> debugStuff = new List<GameObject>();
     public bool rebuild = false;
 
-    public List<Vector3Int> interestPoints;
-
-    VoxelRenderer voxelRenderer;
-    MeshCollider meshCollider;
+    VoxelRenderer voxelRenderer;//Transforms the cells array into a mesh
 
     private void Awake()
     {
         worldGeneratorInstance = this;
         voxelRenderer = GetComponent<VoxelRenderer>();
-        meshCollider = GetComponent<MeshCollider>();
     }
 
     void Start()
     {
-        generatingWorld = true;
         bool success = false;
         int count = 1;
-        if (seed == 0f)
+        if (seed == 0f)//If seed is set to 0 on inspector it chooses a random one
             seed = Mathf.RoundToInt(Random.value * 10000);
 
         cells = new CellInfo[size, size, size];
@@ -68,92 +62,40 @@ public class CubeWorldGenerator : MonoBehaviour
             {
                 for (int k = 0; k < size; k++)
                 {
+                    //CreatinG cells JUST ONCE
                     cells[i, j, k] = new CellInfo(i, j, k);
                 }
             }
         }
 
+        //Paths store a list of cellinfos which the enemies use to navigate
         paths = new List<Path>();
         for (int i = 0; i < nPaths; i++)
         {
-            paths.Add(new Path());
+            Path p = new Path();
+            p.id = i;
+            paths.Add(p);
         }
 
-        float startTime = Time.time;
+        //While enough paths can't be created, it will try new seeds and restart the process
         while (!success && count < 100)
         {
             Debug.Log("Attempt: " + count + " Seed: " + seed.ToString());
             Random.InitState(seed);
-            end = GenerateWorld();
-            success = GeneratePaths(end.x, end.y, end.z);
+            end = GenerateWorld();//Choose the blocktype of each cell
+            success = GeneratePaths(end.x, end.y, end.z);//Tries to create paths
             if (!success)
             {
                 ClearDebugStuff();
-                seed = Mathf.RoundToInt(Random.value * 10000);
+                seed = Mathf.RoundToInt(Random.value * 10000);//New seed
                 count++;
+                wallDensity -= 0.01f;
             }
         }
 
         //Add geometry
-        MeshData meshData = GenerateMesh();
-        voxelRenderer.RenderMesh(meshData);
-        generatingWorld = false;
-    }
-
-    MeshData GenerateMesh()
-    {
-        MeshData meshData = new MeshData(true);
-        for (int i = 0; i < size; i++)
-        {
-            for (int j = 0; j < size; j++)
-            {
-                for (int k = 0; k < size; k++)
-                {
-                    if (cells[i, j, k].blockType != BlockType.Air)
-                    {
-                        cells[i, j, k].normalInt = Vector3Int.zero;
-
-                        if (j + 1 >= size - 1 || (j + 1 < size - 1 && cells[i, j + 1, k].blockType == BlockType.Air))
-                        {
-                            meshData.AddFace(Direction.Up, i, j, k, cells[i, j, k].blockType);
-                            cells[i, j, k].normalInt += Vector3Int.up;
-                        }
-
-                        if (j - 1 <= 0 || (j - 1 > 0 && cells[i, j - 1, k].blockType == BlockType.Air))
-                        {
-                            meshData.AddFace(Direction.Down, i, j, k, cells[i, j, k].blockType);
-                            cells[i, j, k].normalInt += Vector3Int.down;
-                        }
-
-                        if (i + 1 >= size - 1 || (i + 1 < size - 1 && cells[i + 1, j, k].blockType == BlockType.Air))
-                        {
-                            meshData.AddFace(Direction.Right, i, j, k, cells[i, j, k].blockType);
-                            cells[i, j, k].normalInt += Vector3Int.right;
-                        }
-
-                        if (i - 1 <= 0 || (i - 1 > 0 && cells[i - 1, j, k].blockType == BlockType.Air))
-                        {
-                            meshData.AddFace(Direction.Left, i, j, k, cells[i, j, k].blockType);
-                            cells[i, j, k].normalInt += Vector3Int.left;
-                        }
-
-                        if (k + 1 >= size - 1 || (k + 1 < size - 1 && cells[i, j, k + 1].blockType == BlockType.Air))
-                        {
-                            meshData.AddFace(Direction.Front, i, j, k, cells[i, j, k].blockType);
-                            cells[i, j, k].normalInt += Vector3Int.forward;
-                        }
-
-                        if (k - 1 <= 0 || (k - 1 > 0 && cells[i, j, k - 1].blockType == BlockType.Air))
-                        {
-                            meshData.AddFace(Direction.Back, i, j, k, cells[i, j, k].blockType);
-                            cells[i, j, k].normalInt += Vector3Int.back;
-                        }
-                    }
-                }
-            }
-        }
-
-        return meshData;
+        MeshData meshData = GenerateMesh(); //Converts the array into a mesh
+        voxelRenderer.RenderMesh(meshData); //Renders mesh
     }
 
     private Vector3Int GenerateWorld()
@@ -220,6 +162,62 @@ public class CubeWorldGenerator : MonoBehaviour
         }
     }
 
+    MeshData GenerateMesh()
+    {
+        MeshData meshData = new MeshData(true);
+        for (int i = 0; i < size; i++)
+        {
+            for (int j = 0; j < size; j++)
+            {
+                for (int k = 0; k < size; k++)
+                {
+                    if (cells[i, j, k].blockType != BlockType.Air)
+                    {
+                        cells[i, j, k].normalInt = Vector3Int.zero;
+
+                        if (j + 1 >= size - 1 || (j + 1 < size - 1 && cells[i, j + 1, k].blockType == BlockType.Air))
+                        {
+                            meshData.AddFace(Direction.Up, i, j, k, cells[i, j, k].blockType);
+                            cells[i, j, k].normalInt += Vector3Int.up;
+                        }
+
+                        if (j - 1 <= 0 || (j - 1 > 0 && cells[i, j - 1, k].blockType == BlockType.Air))
+                        {
+                            meshData.AddFace(Direction.Down, i, j, k, cells[i, j, k].blockType);
+                            cells[i, j, k].normalInt += Vector3Int.down;
+                        }
+
+                        if (i + 1 >= size - 1 || (i + 1 < size - 1 && cells[i + 1, j, k].blockType == BlockType.Air))
+                        {
+                            meshData.AddFace(Direction.Right, i, j, k, cells[i, j, k].blockType);
+                            cells[i, j, k].normalInt += Vector3Int.right;
+                        }
+
+                        if (i - 1 <= 0 || (i - 1 > 0 && cells[i - 1, j, k].blockType == BlockType.Air))
+                        {
+                            meshData.AddFace(Direction.Left, i, j, k, cells[i, j, k].blockType);
+                            cells[i, j, k].normalInt += Vector3Int.left;
+                        }
+
+                        if (k + 1 >= size - 1 || (k + 1 < size - 1 && cells[i, j, k + 1].blockType == BlockType.Air))
+                        {
+                            meshData.AddFace(Direction.Front, i, j, k, cells[i, j, k].blockType);
+                            cells[i, j, k].normalInt += Vector3Int.forward;
+                        }
+
+                        if (k - 1 <= 0 || (k - 1 > 0 && cells[i, j, k - 1].blockType == BlockType.Air))
+                        {
+                            meshData.AddFace(Direction.Back, i, j, k, cells[i, j, k].blockType);
+                            cells[i, j, k].normalInt += Vector3Int.back;
+                        }
+                    }
+                }
+            }
+        }
+
+        return meshData;
+    }
+
     private void GenerateSwamp(int endX, int endY, int endZ)
     {
         int radius = 3;
@@ -245,100 +243,105 @@ public class CubeWorldGenerator : MonoBehaviour
 
     private bool GeneratePaths(int endX, int endY, int endZ)
     {
-        while (interestPoints.Count > nMidpoints * nPaths)
-        {
-            nMidpoints++;
-        }
-
         for (int i = 0; i < nPaths; i++)
         {
-            paths[i].midPoints.Clear();
-            for (int j = 0; j < nMidpoints; j++)
+            /*if (!paths[i].dirty) //Should check if a path has been modified to update it, but not yet
+                continue;*/
+            paths[i].dirty = false;
+
+            if (!paths[i].initiated)//First time calculating a path
             {
-                paths[i].AddMidpoint(new Midpoint(GetRandomCell(), false));
-            }
-        }
+                //Random start position
+                paths[i].start.x = Random.Range(2, size - 3);
+                paths[i].start.y = 0;
+                paths[i].start.z = Random.Range(2, size - 3);
 
-        for (int i = 0; i < interestPoints.Count; i++)
-        {
-            float minDist = Mathf.Infinity;
-            int bestPath = -1;
-            int bestPoint = -1;
-            bool found = false;
-
-            for (int j = 0; j < nPaths; j++)
-            {
-                for (int k = 0; k < nMidpoints; k++)
+                //If start position is not ok, find another one
+                int count = 0;
+                while ((GetCell(paths[i].start).isPath || //Not part of an existing path
+                    !GetCell(paths[i].start).canWalk || //Must be normal floor
+                    !GetCell(paths[i].start).isSurface || //Must be on surface
+                    FindPathAstar(new Node(GetCell(paths[i].start)), cells[endX, endY, endZ], true) == null) //There must be a path to the end
+                    && count < 10000)
                 {
-                    Midpoint current = paths[j].midPoints[k];
-                    float dist = Vector3.Distance(current.cell.GetPos(), interestPoints[i]);
-                    if (!current.important && dist < minDist)
-                    {
-                        found = true;
-                        minDist = dist;
-                        bestPath = j;
-                        bestPoint = k;
-                    }
+                    paths[i].start.x = Random.Range(2, size - 3);
+                    paths[i].start.z = Random.Range(2, size - 3);
+                    count++;
                 }
-            }
 
-            if (!found)
-                return false;
-
-            paths[bestPath].midPoints[bestPoint] = new Midpoint(GetCell(interestPoints[i]), true);
-        }
-
-
-        for (int i = 0; i < nPaths; i++)
-        {
-            //Random tart position
-            //Debug.Log("Generating starting point for path " + i);
-            int x = Random.Range(2, size - 3);
-            int y = 0;
-            int z = Random.Range(2, size - 3);
-
-            int count = 0;
-            while ((cells[x, y, z].isPath || !cells[x, y, z].canWalk || !cells[x, y, z].isSurface) && count < 10000)
-            {
-                if (i < nPaths / 2)
+                paths[i].AddMidpoint(new Midpoint(GetCell(paths[i].start), false));
+                for (int j = 0; j < numberOfMidpoints; j++)
                 {
-                    x = Random.Range(2, size - 3);
+                    paths[i].AddMidpoint(new Midpoint(GetRandomCell(paths[i].midPoints[j].cell.y), false));
                 }
-                else
-                {
-                    z = Random.Range(2, size - 3);
-                }
-                count++;
+                paths[i].AddMidpoint(new Midpoint(GetCell(end), false));
             }
             //Debug.Log(count + " attempts needed to find starting point");
 
-            cells[x, y + 1, z].blockType = BlockType.Path;
-            Node p;
+            //Node which will store the result of the path finding
+            Node result;
 
             switch (pathMetod)
             {
                 case PathMethod.AStar:
-                    p = FindPathAstar(new Node(cells[x, y, z]), cells[endX, endY, endZ], true);
+                    //Normal path to end
+                    result = FindPathAstar(new Node(GetCell(paths[i].start)), cells[endX, endY, endZ], true);
                     break;
                 case PathMethod.AStarWithMidpoints:
-                    p = FindPathAstarWithMidpoints(cells[x, y, z], cells[endX, endY, endZ], paths[i]);
-                    break;
-                case PathMethod.Random:
-                    p = FindPathRandom(cells[x, y, z], cells[endX, endY, endZ]);
+                    //Path to end with midpoints
+                    result = FindPathAstarWithMidpoints(GetCell(paths[i].start), cells[endX, endY, endZ], paths[i]);
                     break;
                 default:
-                    p = null;
+                    result = null;
                     break;
             }
 
-            if (p == null)
+            //If result is null, a path couldn't be found and returns false so it tries another seed
+            if (result == null)
                 return false;
 
-            LineRenderer lr = null;
+            //List of cells in the path
+            List<CellInfo> pathCells = new List<CellInfo>();
+            while (result != null)
+            {
+                CellInfo cell = cells[result.x, result.y, result.z];
+                Vector3Int normal = cell.normalInt;
+                CellInfo cellUnder = cells[result.x - normal.x, result.y - normal.y, result.z - normal.z];
+
+                if (cellUnder.blockType != BlockType.Swamp && cellUnder.blockType != BlockType.Air)
+                {
+                    cellUnder.blockType = BlockType.Path;
+                }
+                else
+                {
+                    int c = 0;
+                    while (cellUnder.blockType == BlockType.Air && c < 100)
+                    {
+                        cell = cellUnder;
+                        cellUnder = cells[cell.x - normal.x, cell.y - normal.y, cell.z - normal.z];
+                        c++;
+                    }
+
+                    if (cellUnder.blockType == BlockType.Swamp)
+                    {
+                        cell = cellUnder;
+                    }
+                }
+                pathCells.Add(cell);
+                result = result.Parent;
+            }
+
+            //Cells are added from last to first, so we reverse the list
+            pathCells.Reverse();
+
+            //Send cells to path to store it
+            paths[i].SetPath(pathCells.ToArray());
+
+            //Debug paths and midpoints
             if (debugMidpoints)
             {
                 GameObject line = GameObject.Instantiate(lineRendererPrefab);
-                lr = line.GetComponent<LineRenderer>();
+                LineRenderer lr = line.GetComponent<LineRenderer>();
                 debugStuff.Add(line);
 
                 foreach (Midpoint m in paths[i].midPoints)
@@ -347,99 +350,48 @@ public class CubeWorldGenerator : MonoBehaviour
                     midSphere.transform.position = new Vector3(m.cell.x, m.cell.y, m.cell.z);
                     debugStuff.Add(midSphere);
                 }
+
+                lr.positionCount = pathCells.Count;
+                for (int idx = 0; idx < pathCells.Count; idx++)
+                {
+                    lr.SetPosition(idx, pathCells[idx].GetPos());
+                }
             }
-
-            List<CellInfo> pathCells = new List<CellInfo>();
-            while (p != null)
-            {
-                CellInfo cell = cells[p.x, p.y, p.z];
-                Vector3Int normal = cell.normalInt;
-                CellInfo cellUnder = cells[p.x - normal.x, p.y - normal.y, p.z - normal.z];
-
-                if (cellUnder.blockType != BlockType.Swamp && cellUnder.blockType != BlockType.Air)
-                {
-                    cellUnder.blockType = BlockType.Path;
-                    cell = cells[p.x, p.y, p.z];
-                }
-                else
-                {
-                    if (cellUnder.blockType == BlockType.Air)
-                    {
-                        int c = 0;
-                        while (cellUnder.blockType == BlockType.Air && c < 100)
-                        {
-                            cell = cellUnder;
-                            cellUnder = cells[cell.x - normal.x, cell.y - normal.y, cell.z - normal.z];
-                            c++;
-                        }
-                    }
-
-                    if (cellUnder.blockType == BlockType.Swamp)
-                    {
-                        cell = cellUnder;
-                    }
-                }
-
-                if (debugMidpoints)
-                {
-                    lr.positionCount = pathCells.Count + 1;
-                    lr.SetPosition(pathCells.Count, new Vector3(p.x, p.y, p.z));
-                }
-                pathCells.Add(cell);
-                p = p.Parent;
-            }
-
-            pathCells.Reverse();
-
-            for (int idx = pathCells.Count - 5; idx < pathCells.Count - 5; idx++)
-            {
-                pathCells[idx].isPath = false;
-            }
-
-            /*for (int idx = 0; i < 2; idx++)
-            {
-                if (pathCells.Count > 0)
-                {
-                    pathCells.RemoveAt(pathCells.Count - 1);
-                }
-            }*/
-
-            paths[i].SetPath(pathCells.ToArray());
         }
 
-        return paths.Count == nPaths;
+        return true; //Success
     }
 
-    bool canCrossPath = true;
     Node FindPathAstarWithMidpoints(CellInfo start, CellInfo end, Path path)
     {
+
         Node current = new Node(start);
         current.ComputeFScore(end.x, end.y, end.z);
-
         Midpoint midpoint;
+        bool lastSept = false;
 
-        for (int i = 0; i < nMidpoints; i++)
+        for (int i = 1; i < path.midPoints.Count; i++)
         {
-            //Debug.Log("Finding path to midpoint " + i);
+            lastSept = i == path.midPoints.Count - 1; //Is this the segment bewteen the last midpoint and the end?
+
             midpoint = path.midPoints[i];
-            Node result = FindPathAstar(current, midpoint.cell);
 
-            if (midpoint.important)
-            {
-                Debug.Log("Important");
-            }
+            //Debug.Log("Finding path to midpoint " + i);
+            Node result = FindPathAstar(current, midpoint.cell, lastSept);
 
+            //If a midpoint is important but the path can't be made, the path fails
             if (result == null && midpoint.important)
             {
                 Debug.Log("Couldn't get to midpoint " + midpoint.cell.id);
                 return null;//Could try to change previous point instead? For beta maybe
             }
 
+            //Tries 10 times to find a suitable midpoint
             int count = 0;
             while (result == null && count < 10)
             {
-                midpoint.cell = GetRandomCell();
-                result = FindPathAstar(current, midpoint.cell);
+                midpoint.cell = GetRandomCell(path.midPoints[i - 1].cell.y);
+                result = FindPathAstar(current, midpoint.cell, lastSept);
                 count++;
             }
             //Debug.Log(count + " attempts needed");
@@ -450,19 +402,16 @@ public class CubeWorldGenerator : MonoBehaviour
                 return null;
             }
 
+            //The end of this segment will become the start of the next one
             current = result;
         }
 
         //Final step is finding the actual end
-        current = FindPathAstar(current, end, true);
-
         return current;
     }
 
     Node FindPathAstar(Node firstNode, CellInfo end, bool lastStep = false)
     {
-        canCrossPath = true;
-
         Node current;
 
         List<Node> openList = new List<Node>();
@@ -489,20 +438,10 @@ public class CubeWorldGenerator : MonoBehaviour
 
             if (current.cell == end || (lastStep && current.cell.blockType == BlockType.Swamp))//If first node is goal,returns current Node3D
             {
-                //Debug.Log("Success: " + count.ToString());
-                /*Node n = current.Parent;
-                while(current.Parent != null)
-                {
-                    current.cell.isPath = true;
-                    current = current.Parent;//WTF
-                }*/
                 return current;
             }
             else
             {
-                if (current.cell.isPath)
-                    canCrossPath = false;
-
                 //Expands neightbors, (compute cost of each one) and add them to the list
                 CellInfo[] neighbours = GetWalkableNeighbours(current.cell, lastStep);
                 foreach (CellInfo neighbour in neighbours)
@@ -549,7 +488,7 @@ public class CubeWorldGenerator : MonoBehaviour
     }
 
     bool onXFace = true;
-    CellInfo GetRandomCell()
+    CellInfo GetRandomCell(int minY = 1)
     {
         int x = 1;
         int y = 1;
@@ -558,8 +497,7 @@ public class CubeWorldGenerator : MonoBehaviour
         CellInfo cell = cells[x, y, z];
 
         //Debug.Log("Looking for a random midpoint...");
-        //Big ñapa
-
+        //BIG ñapa
         int count = 0;
         while (!CheckIfIsInSurface(cell) || !cell.canWalk || cell.isPath)
         {
@@ -574,7 +512,7 @@ public class CubeWorldGenerator : MonoBehaviour
                 z = (size - 1) * Mathf.RoundToInt(Random.value);
             }
 
-            y = Random.Range(1, size - 2);
+            y = Random.Range(minY, size - 2);
 
             cell = cells[x, y, z];
             count++;
@@ -586,6 +524,8 @@ public class CubeWorldGenerator : MonoBehaviour
 
     private CellInfo[] GetWalkableNeighbours(CellInfo current, bool lastStep = true)
     {
+        //Returns an array of cells around the provided cell
+        //If it's not the path to the end (lastStep), cells in the end zone can't be returned
         List<CellInfo> result = new List<CellInfo>();
         CellInfo cell;
 
@@ -595,31 +535,24 @@ public class CubeWorldGenerator : MonoBehaviour
             {
                 for (int k = -1; k <= 1; k++)
                 {
-                    if (Mathf.Abs(i) + Mathf.Abs(j) + Mathf.Abs(k) > 1)
+                    if (Mathf.Abs(i) + Mathf.Abs(j) + Mathf.Abs(k) > 1)//Prevents movement in a diagonal
                         continue;
 
                     int x = current.x + i;
                     int y = current.y + j;
                     int z = current.z + k;
 
-
                     if (isPosInBounds(x, y, z))
                     {
                         cell = cells[x, y, z];
-                        if (!cell.canWalk ||
-                            (cell.isPath && !canCrossPath) ||
-                            (!lastStep && cell.endZone))//(cells[x, y, z].blockType != BlockType.Air && cells[x, y, z].blockType != BlockType.Swamp)
+                        if (!cell.canWalk || (!lastStep && cell.endZone))
                             continue;
 
-                        if (cell.isPath) canCrossPath = false;
-
                         result.Add(cell);
-                        cell.explored = true;
                     }
                 }
             }
         }
-
         return result.ToArray();
     }
 
@@ -636,6 +569,8 @@ public class CubeWorldGenerator : MonoBehaviour
 
     public Vector3Int GetFaceNormal(CellInfo cellInfo)
     {
+        //Returns the normal of the face in which a cell is placed
+        //If a cell is in a corner, it gets the addition of all of the faces it's part of
         Vector3Int result = Vector3Int.zero;
 
         if (cellInfo.x == 0)
@@ -667,63 +602,6 @@ public class CubeWorldGenerator : MonoBehaviour
     public Vector3 GetFaceNormal(int x, int y, int z)
     {
         return GetFaceNormal(cells[x, y, z]);
-    }
-
-    public BlockType CheckBlockType(int x, int y, int z)
-    {
-        return cells[x, y, z].blockType;
-    }
-
-    Node FindPathRandom(CellInfo start, CellInfo end)
-    {
-        Node current;
-        Node firstNode;
-
-        List<Node> openList = new List<Node>();
-
-        firstNode = new Node(start);
-        firstNode.Parent = null;
-        openList.Add(firstNode);
-
-        current = firstNode;
-
-        int count = 0;
-        while (current.cell.blockType != BlockType.Swamp && count < 1000000)
-        {
-            //Expands neightbors, (compute cost of each one) and add them to the list
-            CellInfo[] neighbours = GetWalkableNeighbours(current.cell);
-            foreach (CellInfo neighbour in neighbours)
-            {
-                if (neighbour != null)
-                {
-                    //if neighbour no esta en open
-                    bool IsInOpen = false;
-                    foreach (Node nf in openList)
-                    {
-                        if (nf.cell.id == neighbour.id)
-                        {
-                            IsInOpen = true;
-                            break;
-                        }
-                    }
-
-                    if (!IsInOpen)
-                    {
-                        Node n = new Node(neighbour);
-                        n.Parent = current;
-                        n.cell = cells[n.x, n.y, n.z];
-
-                        openList.Add(n);
-                    }
-                }
-            }
-            current = openList[Mathf.RoundToInt(Random.Range(0, openList.Count))];
-            count++;
-        }
-
-        Debug.Log(count);
-
-        return current;
     }
 
     //https://answers.unity.com/questions/938178/3d-perlin-noise.html
@@ -758,37 +636,81 @@ public class CubeWorldGenerator : MonoBehaviour
         debugStuff.Clear();
     }
 
-    public Vector3 v;
-    public void AddInterestPoint(Vector3Int point)
+    public bool AddInterestPoint(Vector3Int point)
     {
-        interestPoints.Add(point);
-        cells[(int)point.x, (int)point.y, (int)point.z].isInteresting = true;
-        UpdateWorld();
-    }
+        int bestP = -1;
+        int bestM = -1;
+        float minDist = Mathf.Infinity;
+        bool found = false;
 
-    void UpdateWorld()
-    {
-        if (!generatingWorld && cells != null)
+        //Find the closest existing midpoint
+        for (int p = 0; p < paths.Count; p++)
         {
-            generatingWorld = true;
-            StartCoroutine(BuildWorld());
+            for (int m = 0; m < paths[p].midPoints.Count; m++)
+            {
+                float dist = Vector3.Distance(point, paths[p].midPoints[m].cell.GetPos());
+                if (dist < minDist)
+                {
+                    Node n = FindPathAstar(new Node(paths[p].midPoints[m].cell), GetCell(point), true);
+                    if (n != null)
+                    {
+                        //Found it!
+                        minDist = dist;
+                        bestP = p;
+                        bestM = m;
+                        found = true;
+                    }
+                }
+            }
         }
+
+        if (found)
+        {
+            //There's a midpoint close, so the point is added as a midpoint after it
+            paths[bestP].midPoints.Insert(bestM + 1, new Midpoint(GetCell(point), true));
+        }
+        else
+        {
+            //There are no midpoints close, so the point is added to a random path (shouldn't happen)
+            Debug.Log("This should never happen");
+            bestP = Mathf.RoundToInt(Random.Range(0, nPaths));
+            paths[bestP].midPoints.Add(new Midpoint(GetCell(point), true));
+        }
+
+        paths[bestP].dirty = true;//This path need to be recalculated
+        cells[(int)point.x, (int)point.y, (int)point.z].isInteresting = true;//This cell has an object on it
+
+        return UpdateWorld();
     }
-    IEnumerator BuildWorld()
+
+    public bool RemoveInterestPoint(Vector3Int point)
     {
-        generatingWorld = true;
-        ClearDebugStuff();
-        FillWorld();
-        GenerateSwamp(end.x, end.y, end.z);
-        GeneratePaths(end.x, end.y, end.z);
-
-        MeshData meshData = GenerateMesh();
-        voxelRenderer.RenderMesh(meshData);
-        generatingWorld = false;
-        yield return null;
+        CellInfo cell = GetCell(point);
+        if (cell.isInteresting)
+        {
+            cell.isInteresting = false;
+            return true;
+        }
+        return false;
     }
 
+    bool UpdateWorld()
+    {
+        if (cells != null)
+        {
+            ClearDebugStuff();
+            FillWorld();
+            GenerateSwamp(end.x, end.y, end.z);
+            if (!GeneratePaths(end.x, end.y, end.z))
+                return false;
 
+            MeshData meshData = GenerateMesh();
+            voxelRenderer.RenderMesh(meshData);
+        }
+        else { return false; }
+
+        return true;
+    }
 
 #if UNITY_EDITOR
     private void OnDrawGizmos()
@@ -802,14 +724,15 @@ public class CubeWorldGenerator : MonoBehaviour
             //Gizmos.DrawSphere(new Vector3(cell.x, cell.y, cell.z), .5f);
         }
     }
-
     private void OnValidate()
     {
         if (!Application.isPlaying) return;
-
+        foreach (Path p in paths)
+        {
+            if (p.initiated)
+                p.dirty = true;
+        }
         UpdateWorld();
     }
-
-   
 #endif
 }

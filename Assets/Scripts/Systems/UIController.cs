@@ -76,7 +76,6 @@ public class UIController : MonoBehaviour
 [CustomEditor(typeof(UIController))]
 public class UIControllerEditor : Editor
 {
-
     public override void OnInspectorGUI()
     {
         UIController uIcontroller = (UIController) target;
@@ -91,7 +90,6 @@ public class UIControllerEditor : Editor
             uIcontroller.SetMenuInactive();
         }
     }
-
 }
 #endif
 

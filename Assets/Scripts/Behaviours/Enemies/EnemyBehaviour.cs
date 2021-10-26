@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 
 /*Basic Enemy Class, all kind of enemys  will inherit from this*/
@@ -53,8 +54,7 @@ public abstract class EnemyBehaviour : MonoBehaviour
 
         if (path.GetCell(nextIndexPath).isInteresting)
         {
-            //Deal damage
-            Debug.Log("A");
+            //Deal damage to structure
             return;
         }
 
@@ -136,4 +136,13 @@ public abstract class EnemyBehaviour : MonoBehaviour
 
         Destroy(gameObject);
     }
+
+#if UNITY_EDITOR
+    private void OnDrawGizmos()
+    {
+        if (!Application.isPlaying) return;
+
+        Handles.Label(transform.position, "1");
+    }
+#endif
 }
