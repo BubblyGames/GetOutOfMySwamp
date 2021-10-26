@@ -248,7 +248,9 @@ Para la interfaz se cuentan con 7 ventanas:
 
 ### 7.2 Diagrama de flujo
 
-Flujo de escenas:![](https://lh3.googleusercontent.com/d1OW5IrnItYd-uL6fcf7FtDf9U_lcSw07onnqJBWMI2-xB3UAZmFERc6UdLDmMYnR2YuWjMXJSNvAbm_hNuFA8Ac68ptwgdI4frlY-Qq9MMD3pI_N9C0C7JgZ5ZQesvDg5GE00VW=s1600)
+Flujo de escenas:
+
+![](https://lh6.googleusercontent.com/7k6M4w1ZdGuKuBK72xem0Uu5PHNoBZPJjpaYxPJgbp3hJ1ydfIefFEy0RCkq3md5ElrEPwxL41SNHyZbHJ82DnDf-CXiI_CyJ198rYmyd8uAWpHVXEuaZW8tnHJZfTWVvFW_Q90J=s1600)
 
 Flujo de juego:
 
