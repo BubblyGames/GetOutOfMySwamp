@@ -40,7 +40,7 @@ El modelo de monetización dependerá del desempeño económico del producto una
 
 ![](https://lh6.googleusercontent.com/qtqYHgtjQsrfuDW2jzYMS6uORjEzjM1dH7jmhMES1awgUNY3AevEl5UOzc_10r92SlEo8O1f5x5UMYijkVQKC_15Q1pSoWWwYCZl0PBZe-dqzdw0vG6RoCIt5AK4DzaX2rLJqLVC=s0)
 
-Nuestro cliente se trata de una persona con una fuerte presencia del arte en su vida. Es una persona sencilla, amable, dulce y optimista, la cual quiere o la gustaría poder dedicarse al arte y vivir de ello, siendo reconocida por más gente del gremio.
+Nuestro cliente se trata de una persona con una fuerte presencia del arte en su vida. Es una persona sencilla, amable, dulce y optimista, la cual quiere o la gustaría poder dedicarse al arte y vivir de ello, siendo reconocida por más gente del gremio aunque para ello debe competir contra gente con talento en una situación laboral un tanto delicada.
 
 ![nuestroMapa](https://user-images.githubusercontent.com/56488179/138941794-d059db82-28a3-4edf-8668-2a979de50dbb.png)
 
