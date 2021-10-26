@@ -29,7 +29,7 @@ public class BuildManager : MonoBehaviour
     }
 
     private void Update()
-    { 
+    {
         if (Input.GetMouseButtonDown(0))
         {
             //if (EventSystem.current.IsPointerOverGameObject())
@@ -51,7 +51,7 @@ public class BuildManager : MonoBehaviour
                 if (hit.collider.tag == "World")
                 {
                     checkWorldCoordinates(hit);
-                    
+
                 }
 
             }
@@ -64,10 +64,10 @@ public class BuildManager : MonoBehaviour
             else if (hit.collider == null)//if raycast doesnt hit
             {
 
-                Debug.Log("DidntHit");
+                //Debug.Log("DidntHit");
                 //UIController.instance.DisableUpdateMenu();
             }
-           
+
         }
     }
 
@@ -91,7 +91,7 @@ public class BuildManager : MonoBehaviour
         int y = Mathf.RoundToInt(rayNormal.y);
         int z = Mathf.RoundToInt(rayNormal.z);
 
-        Vector3Int normalInt = new Vector3Int(x,y,z);
+        Vector3Int normalInt = new Vector3Int(x, y, z);
 
 
         switch (cell.blockType)
@@ -147,13 +147,13 @@ public class BuildManager : MonoBehaviour
     {
         if (LevelStats.instance.infinteMoney)
         {
-            CreateTowerOnCell(position,normal);
+            CreateTowerOnCell(position, normal);
             ResetCanBuild(); // after building an structure you have to select another one to be able to place it
         }
-        else if (LevelStats.instance.CurrentMoney >= structureToBuild.creationCost )
+        else if (LevelStats.instance.CurrentMoney >= structureToBuild.creationCost)
         {
 
-            CreateTowerOnCell(position,normal);
+            CreateTowerOnCell(position, normal);
             LevelStats.instance.SpendMoney(structureToBuild.creationCost);
             ResetCanBuild(); // after building an structure you have to select another one to be able to place it
         }
@@ -166,6 +166,17 @@ public class BuildManager : MonoBehaviour
 
     public void CreateTowerOnCell(Vector3 position, Vector3 normal)
     {
+        Gatherer g;
+        if (structureToBuild.structurePrefab.TryGetComponent<Gatherer>(out g))
+        {
+            bool canAdd = CubeWorldGenerator.worldGeneratorInstance.AddInterestPoint(new Vector3Int((int)position.x, (int)position.y, (int)position.z));
+            if (!canAdd)
+            {
+                Debug.Log("Can't add");
+                return;
+            }
+        }
+
         Structure structure = Instantiate(structureToBuild.structurePrefab, position, Quaternion.Euler(normal)).GetComponent<Structure>();
         structure.SetNormal(normal);
 
@@ -187,7 +198,7 @@ public class BuildManager : MonoBehaviour
         {
             selectedCell.structure.UpgradeStrucrure();
             LevelStats.instance.SpendMoney(structureToBuild.creationCost);
-            
+
         }
         else
         {
@@ -198,7 +209,7 @@ public class BuildManager : MonoBehaviour
 
     public void SellStructure()
     {
-        
+
         selectedStructure.Sell();
         selectedCell.structure = null;
         LevelStats.instance.EarnMoney(50);
