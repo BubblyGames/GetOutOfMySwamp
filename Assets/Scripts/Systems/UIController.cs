@@ -52,6 +52,7 @@ public class UIController : MonoBehaviour
     public void DisablePauseMenu()
     {
         pauseMenu.SetActive(false);
+        shopMenu.SetActive(true);
 
     }
 
