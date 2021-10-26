@@ -115,7 +115,6 @@ public class BuildManager : MonoBehaviour
 
         //SelectCell(cell);
         selectedCell = cell;
-        Debug.Log("Hit World");
 
         if (!canBuild)
             return;

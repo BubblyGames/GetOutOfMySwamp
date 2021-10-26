@@ -47,19 +47,32 @@ public class WaveController : MonoBehaviour
         }
         enemySpawner = GetComponent<EnemySpawner>();
         enemies = new List<EnemyBehaviour>();
+
+       
     }
 
     public void Start()
     {
         isWaveActive = false;
-        isBetweenWaves = true;
+        //isBetweenWaves = false;
 
         waveCount = 0;
 
-        timeVariable = Time.time + (.5f * timeBeforeRoundStarts);
-        LevelManager.instance.OnGameLost += StopWave;
-        LevelManager.instance.OnGameLost += LevelCompleted;
+        timeVariable = Time.time + ( timeBeforeRoundStarts);
 
+    }
+
+    private void OnEnable()
+    {
+        LevelManager.OnGameLost += StopWave;
+        LevelManager.OnGameLost += LevelCompleted;
+        LevelManager.OnGameStart += StartWaves;
+        Debug.Log("W Enabled");
+    }
+
+    private void StartWaves()
+    {
+        this.isBetweenWaves = true;
     }
 
     private void LevelCompleted()
@@ -78,7 +91,7 @@ public class WaveController : MonoBehaviour
             isWaveActive = false;
             allWavesCleared = false;
         }
-        if (allWavesCleared)
+        else if (allWavesCleared)
         {
             isBetweenWaves = false;
             isWaveActive = false;

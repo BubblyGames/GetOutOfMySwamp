@@ -44,7 +44,7 @@ public class SceneController : MonoBehaviour
         }
 
         SceneManager.LoadScene(index);
-        yield return new WaitForSeconds(waitTime);
+        //yield return new WaitForSeconds(waitTime);
 
         for (float t = 0; t < 1; t+= Time.deltaTime/duration)
         {

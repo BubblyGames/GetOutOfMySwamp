@@ -56,7 +56,8 @@ public class MoveAroundObject : MonoBehaviour
         // Substract forward vector of the GameObject to point its forward vector to the target
         transform.position = _target.position - transform.forward * _distanceFromTarget;
 
-        _distanceFromTarget += -_scrollSensitivity * Input.mouseScrollDelta.y;
+        _distanceFromTarget = Mathf.Clamp(_distanceFromTarget + -_scrollSensitivity * Input.mouseScrollDelta.y, 125 , 250); 
+
     }
 
     public void RotateRight()

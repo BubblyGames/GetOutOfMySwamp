@@ -27,7 +27,7 @@ public class LevelManager : MonoBehaviour
     private Shop shop;
 
     //Actions
-    public event Action OnGameStarted, OnGameLost, OnGameCompleted;
+    public static event Action OnGameStart, OnGameLost, OnGameCompleted;
     public event Action<int> OnDamageTaken;
     public event Action<int, int> OnEnemyKilled;
 
@@ -62,7 +62,7 @@ public class LevelManager : MonoBehaviour
 
     private void Start()
     {
-        OnGameStarted?.Invoke();
+        OnGameStart?.Invoke();
     }
 
     private void Update()
@@ -90,6 +90,11 @@ public class LevelManager : MonoBehaviour
 
     }
 
+    //private void OnEnable()
+    //{
+    //    OnGameStart?.Invoke();
+    //    Debug.Log("L Enabled");
+    //}
 
     public void dealDamageToBase(int damageTaken)
     {
