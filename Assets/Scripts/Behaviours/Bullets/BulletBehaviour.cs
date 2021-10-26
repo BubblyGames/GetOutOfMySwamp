@@ -12,39 +12,31 @@ public class BulletBehaviour : MonoBehaviour
     [SerializeField] protected float maxDistance;
     [SerializeField] protected float distanceTravelled;
 
-
     [Header("Bullet Effects")]
     [SerializeField] protected int actualEffect;
 
 
-    void FixedUpdate()
+    void Update()
     {
-        
         if (distanceTravelled >= maxDistance)
         {
-            Debug.Log("Break");
             Destroy(gameObject);
         }
         else
         {
-            if (target == null)
+            if (target != null)
             {
-                transform.Translate(Time.deltaTime * speed * Vector3.forward);
-                distanceTravelled += Time.deltaTime * speed;
-                return;
+                rotateBullet();
             }
-            Vector3 direction = target.position - transform.position;
-            float distanceThisFrame = speed * Time.fixedDeltaTime;
-            
-            transform.Translate(direction.normalized * distanceThisFrame, Space.World);
+            transform.Translate(Time.deltaTime * speed * Vector3.forward);
+            distanceTravelled += Time.deltaTime * speed;
         }
-
     }
+
     virtual public void SetBulletBehaviour(Transform target, int damage, int effect, float range)
     {
         this.damage = damage;
         this.target = target;
-        transform.LookAt(target.position);
         actualEffect = effect;
         maxDistance = range;
     }
@@ -69,5 +61,9 @@ public class BulletBehaviour : MonoBehaviour
         {
             Destroy(gameObject);
         }
+    }
+    void rotateBullet()
+    {
+        transform.LookAt(target.transform);
     }
 }
