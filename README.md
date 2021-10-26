@@ -40,6 +40,10 @@ El modelo de monetización dependerá del desempeño económico del producto una
 
 ![](https://lh6.googleusercontent.com/qtqYHgtjQsrfuDW2jzYMS6uORjEzjM1dH7jmhMES1awgUNY3AevEl5UOzc_10r92SlEo8O1f5x5UMYijkVQKC_15Q1pSoWWwYCZl0PBZe-dqzdw0vG6RoCIt5AK4DzaX2rLJqLVC=s0)
 
+Nuestro cliente se trata de una persona con una fuerte presencia del arte en su vida. Es una persona sencilla, amable, dulce y optimista, la cual quiere o la gustaría poder dedicarse al arte y vivir de ello, siendo reconocida por más gente del gremio aunque para ello debe competir contra gente con talento en una situación laboral un tanto delicada.
+
+![nuestroMapa](https://user-images.githubusercontent.com/56488179/138941794-d059db82-28a3-4edf-8668-2a979de50dbb.png)
+
 
 ### 2.2 Tablas de productos y precios
 
@@ -144,7 +148,7 @@ Los niveles se conforman de grids y hay distintas variantes de las celdas. Los n
 | TORRE PESADA   | Largo     | Elevado | ÁreaTT\*          | Lento               | \-                                |
 | TORRE BÁSICA   | Medio     | Medio   | IndividualTA-TT\* | Medio               | \-                                |
 | TORRE PSÍQUICA | Corto     | Bajo    | IndividualTT\*    | Medio               | El enemigo se ralentiza           |
-| TORRE ACUÁTICA | Medio     | Bajo    | ÁreaTA-TT\*       | Rápido              | Prioriza ataque a enemigos aéreos |
+| TORRE MORTERO  | Medio     | Bajo    | ÁreaTA-TT\*       | Rápido              | Prioriza ataque a enemigos aéreos |
 | **TRAMPAS**    |           |         |                   |                     |                                   |
 | TRAMPA PANTANO | 1 Casilla | \-      | ÁreaTT\*          | \-                  | Ralentiza                         |
 
@@ -248,7 +252,9 @@ Para la interfaz se cuentan con 7 ventanas:
 
 ### 7.2 Diagrama de flujo
 
-Flujo de escenas:![](https://lh3.googleusercontent.com/d1OW5IrnItYd-uL6fcf7FtDf9U_lcSw07onnqJBWMI2-xB3UAZmFERc6UdLDmMYnR2YuWjMXJSNvAbm_hNuFA8Ac68ptwgdI4frlY-Qq9MMD3pI_N9C0C7JgZ5ZQesvDg5GE00VW=s1600)
+Flujo de escenas:
+
+![](https://lh6.googleusercontent.com/7k6M4w1ZdGuKuBK72xem0Uu5PHNoBZPJjpaYxPJgbp3hJ1ydfIefFEy0RCkq3md5ElrEPwxL41SNHyZbHJ82DnDf-CXiI_CyJ198rYmyd8uAWpHVXEuaZW8tnHJZfTWVvFW_Q90J=s1600)
 
 Flujo de juego:
 
