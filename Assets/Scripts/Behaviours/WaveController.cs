@@ -16,7 +16,7 @@ public class WaveController : MonoBehaviour
 
 
     [Range(0f, 0.5f)]
-    public float randomRange;
+    public float randomRange = 0.25f;
     public Wave[] waves;
 
     public float timeBetweenWaves = 5f;
