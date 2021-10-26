@@ -9,7 +9,7 @@ public class EnemyLibrary
     public EnemyEntry[] enemyPrefabs;
 
 
-    public GameObject GetPrefabByIdentificator(string identificator)
+    public GameObject GetPrefabByIdentificator(EnemyType identificator)
     {
         for (int i = 0; i < enemyPrefabs.Length; i++)
         {
@@ -26,6 +26,16 @@ public class EnemyLibrary
 [System.Serializable]
 public class EnemyEntry
 {
-    public string enemyId;
+    public EnemyType enemyId;
     public GameObject enemyPrefab;
+}
+
+public enum EnemyType
+{
+    BasicEnemy,
+    LightEnemy,
+    TankEnemy,
+    HordeEnemy,
+    SpecialistEnemy,
+    FlyingEnemy
 }

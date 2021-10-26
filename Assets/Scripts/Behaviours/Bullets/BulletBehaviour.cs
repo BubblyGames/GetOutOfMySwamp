@@ -5,7 +5,7 @@ using UnityEngine;
 public class BulletBehaviour : MonoBehaviour
 {
     protected int damage;
-    protected float speed = 50f;
+    protected float speed = 30f;
     protected Transform target;
 
     [Header("Bullet Destruction")]
