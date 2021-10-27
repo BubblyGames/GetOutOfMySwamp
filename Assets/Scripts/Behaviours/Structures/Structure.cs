@@ -20,6 +20,8 @@ public class Structure : MonoBehaviour
     [SerializeField]
     protected Vector3 normal;
 
+    public BlockType blockType = BlockType.Grass;
+
     public void SetNormal(Vector3 normal)
     {
        this.normal = normal;
@@ -34,30 +36,7 @@ public class Structure : MonoBehaviour
         }
         
     }
-    private void OnMouseDown()
-    {
 
-        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-
-        RaycastHit hit = new RaycastHit();
-
-        // Bit shift the index of the layer (8: Structures) to get a bit mask
-        int layerMask = 1 << 8;
-        // But instead we want to collide against everything except layer 8.The ~ operator does this, it inverts a bitmask.
-        layerMask = ~layerMask;
-
-        if (Physics.Raycast(ray, out hit, Mathf.Infinity))
-        {
-            if (hit.collider.tag == "Structure")
-            {
-                //TODO: Improve checker for already built structures
-                //Interact with existing defenses
-                Debug.Log("Cant build there");
-                UIController.instance.EnableUpdateMenu();
-                BuildManager.instance.SetSelectedStructure(this);
-            }
-        }
-    }
     public int GetLevel()
     {
         return level;

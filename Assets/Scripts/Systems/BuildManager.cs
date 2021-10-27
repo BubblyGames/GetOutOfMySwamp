@@ -28,100 +28,48 @@ public class BuildManager : MonoBehaviour
         }
     }
 
-    private void Update()
-    { 
-        if (Input.GetMouseButtonDown(0))
+    public bool CheckIfCanBuild(RaycastHit hit, out Vector3Int intPos)
+    {
+        //Position where structure will be build
+        intPos = new Vector3Int(
+            Mathf.RoundToInt(hit.point.x + (hit.normal.x / 2)),
+            Mathf.RoundToInt(hit.point.y + (hit.normal.y / 2)),
+            Mathf.RoundToInt(hit.point.z + (hit.normal.z / 2)));
+
+        Vector3Int intPosUnder = new Vector3Int(
+            Mathf.RoundToInt(hit.point.x - (hit.normal.x / 2)),
+            Mathf.RoundToInt(hit.point.y - (hit.normal.y / 2)),
+            Mathf.RoundToInt(hit.point.z - (hit.normal.z / 2)));
+
+        selectedCell = LevelManager.instance.world.GetCell(intPosUnder);
+
+        if (!canBuild || selectedCell.blockType != structureToBuild.structurePrefab.GetComponent<Structure>().blockType)
+            return false;
+
+        Gatherer g;
+        if (CubeWorldGenerator.instance.isPosInBounds(intPos.x, intPos.y, intPos.z) &&
+            !LevelManager.instance.world.GetCell(intPos).isCloseToPath &&
+            structureToBuild.structurePrefab.TryGetComponent<Gatherer>(out g))
         {
-            //if (EventSystem.current.IsPointerOverGameObject())
-            //{
-            //    return;
-            //}
+            //Debug.Log("Can't add");
+            return false;
+        }
 
-            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        return true;
+    }
 
-            RaycastHit hit = new RaycastHit();
-
-            // Bit shift the index of the layer (8: Structures) to get a bit mask
-            int layerMask = 1 << 8;
-            // But instead we want to collide against everything except layer 8.The ~ operator does this, it inverts a bitmask.
-            layerMask = ~layerMask;
-
-            if (Physics.Raycast(ray, out hit, Mathf.Infinity))
-            {
-                if (hit.collider.tag == "World")
-                {
-                    checkWorldCoordinates(hit);
-                    
-                }
-
-            }
-            else if (hit.collider == UIController.instance.upgradeMenu)//if raycast doesnt hit
-            {
-
-                Debug.Log("Menu");
-
-            }
-            else if (hit.collider == null)//if raycast doesnt hit
-            {
-
-                Debug.Log("DidntHit");
-                //UIController.instance.DisableUpdateMenu();
-            }
-           
+    public void PlaceObject(RaycastHit hit)
+    {
+        Vector3Int pos;
+        if (CheckIfCanBuild(hit, out pos))
+        {
+            BuildStructure(pos, hit.normal);
         }
     }
 
     internal void SetSelectedStructure(Structure structure)
     {
         selectedStructure = structure;
-    }
-
-    private void checkWorldCoordinates(RaycastHit hit)
-    {
-        Vector3 pos = hit.point;
-        pos -= hit.normal / 2;
-
-        Vector3Int intPos = new Vector3Int(Mathf.RoundToInt(pos.x), Mathf.RoundToInt(pos.y), Mathf.RoundToInt(pos.z));
-
-        CellInfo cell = LevelManager.instance.world.GetCell(intPos);
-
-        Vector3 rayNormal = hit.normal;
-
-        int x = Mathf.RoundToInt(rayNormal.x);
-        int y = Mathf.RoundToInt(rayNormal.y);
-        int z = Mathf.RoundToInt(rayNormal.z);
-
-        Vector3Int normalInt = new Vector3Int(x,y,z);
-
-
-        switch (cell.blockType)
-        {
-            case BlockType.Air:
-                break;
-            case BlockType.Path:
-                return;
-            case BlockType.Grass:
-                intPos += normalInt;
-                break;
-            case BlockType.Rock:
-                intPos += normalInt;
-                break;
-            case BlockType.Swamp:
-                return;
-            default:
-                break;
-        }
-
-
-        //SelectCell(cell);
-        selectedCell = cell;
-        Debug.Log("Hit World");
-
-        if (!canBuild)
-            return;
-
-        BuildStructure(intPos, rayNormal);
-
     }
 
     public void SelectCell(CellInfo cell)
@@ -142,18 +90,16 @@ public class BuildManager : MonoBehaviour
         canBuild = false;
     }
 
-
-    public void BuildStructure(Vector3 position, Vector3 normal)
+    public void BuildStructure(Vector3Int position, Vector3 normal)
     {
         if (LevelStats.instance.infinteMoney)
         {
-            CreateTowerOnCell(position,normal);
+            CreateTowerOnCell(position, normal);
             ResetCanBuild(); // after building an structure you have to select another one to be able to place it
         }
-        else if (LevelStats.instance.CurrentMoney >= structureToBuild.creationCost )
+        else if (LevelStats.instance.CurrentMoney >= structureToBuild.creationCost)
         {
-
-            CreateTowerOnCell(position,normal);
+            CreateTowerOnCell(position, normal);
             LevelStats.instance.SpendMoney(structureToBuild.creationCost);
             ResetCanBuild(); // after building an structure you have to select another one to be able to place it
         }
@@ -164,7 +110,7 @@ public class BuildManager : MonoBehaviour
         }
     }
 
-    public void CreateTowerOnCell(Vector3 position, Vector3 normal)
+    public void CreateTowerOnCell(Vector3Int position, Vector3 normal)
     {
         Structure structure = Instantiate(structureToBuild.structurePrefab, position, Quaternion.Euler(normal)).GetComponent<Structure>();
         structure.SetNormal(normal);
@@ -187,7 +133,7 @@ public class BuildManager : MonoBehaviour
         {
             selectedCell.structure.UpgradeStrucrure();
             LevelStats.instance.SpendMoney(structureToBuild.creationCost);
-            
+
         }
         else
         {
@@ -198,10 +144,9 @@ public class BuildManager : MonoBehaviour
 
     public void SellStructure()
     {
-        
+        Debug.Log("Selling: " + selectedStructure.name);
         selectedStructure.Sell();
         selectedCell.structure = null;
         LevelStats.instance.EarnMoney(50);
-
     }
 }

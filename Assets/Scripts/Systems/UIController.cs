@@ -106,8 +106,7 @@ public class UIController : MonoBehaviour
     }
 }
 
-
-
+#if UNITY_EDITOR
 [CustomEditor(typeof(UIController))]
 public class UIControllerEditor : Editor
 {
@@ -126,5 +125,5 @@ public class UIControllerEditor : Editor
         }
     }
 }
-
+#endif
 

@@ -8,18 +8,35 @@ using UnityEngine.UI;
 [System.Serializable]
 public class Path
 {
-    CellInfo[] cells3D;
+    CellInfo[] cells;
+    public List<Midpoint> midPoints = new List<Midpoint>();
     float spawnWait = 1f;
     float nextSpawnTime = 0;
-    public int Length { get { return cells3D.Length; } }
+    public int Length { get { return cells.Length; } }
+    public bool dirty = true;
+    public bool initiated = false;
+    public Vector3Int start = new Vector3Int();
+    public int id = -1;
 
+    List<EnemyBehaviour> enemies = new List<EnemyBehaviour>();
 
-    public Path(CellInfo[] cellInfos)
+    public Path()
     {
-        cells3D = cellInfos;
+        
     }
 
-    public Vector3 GetStep(int idx) { return new Vector3(cells3D[idx].x, cells3D[idx].y, cells3D[idx].z); }
+    public void SetPath(CellInfo[] cellInfos)
+    {
+        initiated = true;
+        cells = cellInfos;
+    }
+
+    public void AddMidpoint(Midpoint midpoint)
+    {
+        midPoints.Add(midpoint);
+    }
+
+    public Vector3 GetStep(int idx) { return new Vector3(cells[idx].x, cells[idx].y, cells[idx].z); }
 
     public bool CheckSpawn()
     {
@@ -33,6 +50,17 @@ public class Path
 
     internal CellInfo GetCell(int idx)
     {
-        return cells3D[idx];
+        return cells[idx];
+    }
+
+    public void AddEnemy(EnemyBehaviour enemy) {
+        enemies.Add(enemy);
+    }
+
+    public void Reset() {
+        foreach (EnemyBehaviour e in enemies)
+        {
+            e.FindNewPath();
+        }
     }
 }

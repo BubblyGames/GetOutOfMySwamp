@@ -20,8 +20,6 @@ public class Node
         h = Math.Abs(targetX - x) + Math.Abs(targetY - y) + Math.Abs(targetX - z);
         if (Parent != null)
             g = Parent.g + 10;
-        f = h;
+        f = h - g;
     }
-
-
 }

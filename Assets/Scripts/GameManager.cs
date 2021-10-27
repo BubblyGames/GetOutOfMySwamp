@@ -10,6 +10,8 @@ public class GameManager : MonoBehaviour
     public EnemyLibrary enemyLibrary;
     public AudioManager audioManager;
 
+    internal WorldInfo worldInfo = null;
+
     private void Awake()
     {
         if (instance == null)
@@ -22,7 +24,6 @@ public class GameManager : MonoBehaviour
         }
 
         DontDestroyOnLoad(instance);
-
     }
 
     void Start() 

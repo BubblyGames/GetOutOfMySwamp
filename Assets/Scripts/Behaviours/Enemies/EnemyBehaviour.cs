@@ -1,5 +1,7 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 
 /*Basic Enemy Class, all kind of enemys  will inherit from this*/
@@ -44,16 +46,29 @@ public abstract class EnemyBehaviour : MonoBehaviour
         healthBar.setMaxHealth(startHealth);
     }
 
+    internal void FindNewPath()
+    {
+        //path = null;
+    }
+
     void Update()
     {
         if (path == null)
             return;
 
+        if (nextIndexPath >= path.Length) { Destroy(this.gameObject); return; }
+
+        if (path.GetCell(nextIndexPath).isInteresting)
+        {
+            //Deal damage to structure
+            return;
+        }
+
         transform.position = Vector3.Lerp(path.GetStep(nextIndexPath - 1), path.GetStep(nextIndexPath), lerpProgression);
 
         if (isSlowed)
         {
-            if (slowTimer>=slowDuration)
+            if (slowTimer >= slowDuration)
             {
                 isSlowed = false;
                 slowTimer = 0;
@@ -89,7 +104,11 @@ public abstract class EnemyBehaviour : MonoBehaviour
         }
     }
 
-    public void SetPath(Path path) { this.path = path; }
+    public void SetPath(Path path)
+    {
+        this.path = path;
+        path.AddEnemy(this);
+    }
 
     public virtual bool Hurt(int damage)
     {
@@ -107,14 +126,15 @@ public abstract class EnemyBehaviour : MonoBehaviour
     }
 
     //function called when a bullet has the recoil effect
-    public void slowAndDamage(int damage) {
+    public void slowAndDamage(int damage)
+    {
         Hurt(damage);
         if (!isSlowed)
         {
             currentSpeed = currentSpeed * slowIntensity;
         }
         isSlowed = true;
-         slowDuration = 2f;
+        slowDuration = 2f;
 
     }
 
@@ -126,4 +146,13 @@ public abstract class EnemyBehaviour : MonoBehaviour
 
         Destroy(gameObject);
     }
+
+#if UNITY_EDITOR
+    private void OnDrawGizmos()
+    {
+        if (!Application.isPlaying) return;
+
+        Handles.Label(transform.position, "1");
+    }
+#endif
 }
