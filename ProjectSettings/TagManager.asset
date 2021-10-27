@@ -8,6 +8,7 @@ TagManager:
   - Bullet
   - World
   - Structure
+  - Card
   layers:
   - Default
   - TransparentFX
