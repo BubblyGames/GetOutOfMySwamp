@@ -2,17 +2,26 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class UIController : MonoBehaviour
 {
     public static UIController instance;
 
+
+    [Header("Menus")]
     public GameObject upgradeMenu;
     public GameObject shopMenu;
+    public GameObject endgameMenu;
+
+
+    [Header("LevelToRestart")]
+    public int levelToRestart;
     public enum Menus
     {
         UpgradeMenu,
-        ShopMenu
+        ShopMenu,
+        EndgameMenu
     }
 
     public Menus menus;
@@ -39,6 +48,13 @@ public class UIController : MonoBehaviour
         upgradeMenu.SetActive(false);
     }
 
+    public void EnableEndgameMenu()
+    {
+        upgradeMenu.SetActive(false);
+        shopMenu.SetActive(false);
+        endgameMenu.SetActive(true);
+    }
+
     public void SetMenuActive()
     {
         switch (menus)
@@ -49,6 +65,9 @@ public class UIController : MonoBehaviour
                 break;
             case Menus.ShopMenu:
                 shopMenu.SetActive(true);
+                break;
+            case Menus.EndgameMenu:
+                endgameMenu.SetActive(true);
                 break;
             default:
                 break;
@@ -65,17 +84,25 @@ public class UIController : MonoBehaviour
             case Menus.ShopMenu:
                 shopMenu.SetActive(false);
                 break;
+            case Menus.EndgameMenu:
+                endgameMenu.SetActive(false);
+                break;
             default:
                 break;
         }
     }
 
+    public void ChangeToMainScene()
+    {
+        SceneManager.LoadScene(0);
+    }
 }
+
+
 
 [CustomEditor(typeof(UIController))]
 public class UIControllerEditor : Editor
 {
-
     public override void OnInspectorGUI()
     {
         UIController uIcontroller = (UIController) target;
@@ -90,7 +117,6 @@ public class UIControllerEditor : Editor
             uIcontroller.SetMenuInactive();
         }
     }
-
 }
 
 
