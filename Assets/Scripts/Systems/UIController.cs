@@ -36,6 +36,8 @@ public class UIController : MonoBehaviour
         {
             Destroy(this);
         }
+
+        levelToRestart = SceneManager.GetActiveScene().buildIndex;
     }
 
     public void EnableUpdateMenu()
@@ -53,6 +55,12 @@ public class UIController : MonoBehaviour
         upgradeMenu.SetActive(false);
         shopMenu.SetActive(false);
         endgameMenu.SetActive(true);
+    }
+
+    public void Restart()
+    {
+        endgameMenu.SetActive(false);
+        SceneManager.LoadScene(levelToRestart);
     }
 
     public void SetMenuActive()
