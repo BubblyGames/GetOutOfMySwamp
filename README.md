@@ -1,6 +1,6 @@
 
 
-### Get out of my swamp!
+### Get out of my pond!
 
 
 
@@ -24,7 +24,7 @@ Dos facciones de ranas se enfrentan por la conquista del mundo de una, nuestra f
 
 ### 1.3 Propósito, público objetivo y plataformas
 
-Se desarrolla para navegadores web y móviles y es para todos los públicos. El objetivo/propósito del juego es defender tu estanque de la invasión.
+Se desarrolla para navegadores web y móviles y es para todos los públicos. El objetivo/propósito del juego es defender tu estanque de la invasión de ranitas sucias.
 
 
 ## 2. Monetización
@@ -44,8 +44,12 @@ Nuestro cliente se trata de una persona con una fuerte presencia del arte en su 
 
 ![nuestroMapa](https://user-images.githubusercontent.com/56488179/138941794-d059db82-28a3-4edf-8668-2a979de50dbb.png)
 
+### 2.2 Mapa de lienzo
 
-### 2.2 Tablas de productos y precios
+![lienzo](https://user-images.githubusercontent.com/56488179/139027865-52553938-30dd-4256-9999-9de7453164f4.png)
+
+
+### 2.3 Tablas de productos y precios
 
 
 ## 3. Planificación y Costes
@@ -55,13 +59,15 @@ Nuestro cliente se trata de una persona con una fuerte presencia del arte en su 
 
 El equipo está formado por 6 integrantes:
 
-Gonzalo Lobo: Scrum Master
+Gonzalo Lobo: Scrum Master, Diseñador, Publicidad
 
 Marta Vidal: Artista
 
 Alberto Garcia: Diseñador
 
-Daniel Marti, Jose Márquez y Adrian Ramirez: Programadores
+Daniel Marti, Jose Márquez: Programadores
+
+Adrían Ramírez: Programador, Publicidad
 
 
 ### 3.2 Estimación temporal del desarrollo
@@ -76,6 +82,8 @@ El tiempo de desarrollo para las distintas etapas del proyecto se estima en:
 
 
 ### 3.3 Costes asociados
+
+Los costes del trabajo consisten en los salarios de programadores, gestores, artistas, publicistas y diseñadores.
 
 ### 3.4 Campaña de publicidad
 
@@ -183,7 +191,7 @@ Hay 2 personajes característicos en el juego:el líder de las ranas limpias y e
 
 ### 5.3 Entornos y lugares
 
-Al haber 3 niveles jugables hay 3 entornos o biomas: pantano, nieve y ciudad.
+Al haber 2 niveles jugables pero se han pensado en 3 entornos o biomas: pantano, nieve y ciudad.
 
 - Pantano: el estanque de las ranas limpias es un estanque limpio, vívido y con nenúfares mientras que el estanque de las ranas sucias es oscuro, con lodo y fango.
 - Ciudad: el estanque de las ranas limpias se encuentra en un parque, con bancos y papeleras; mientras que las ranas sucias vienen de las alcantarillas.
@@ -268,11 +276,11 @@ Flujo de juego:
 
 ### 8.1 Hito 1: Alfa
 
-- Motor Voxel que genere de manera procedural el cubo, los caminos y los obstáculos:
-- Funcionalidades básicas de juego (IA, vida y ataque):
-- Juego responsive: 18 de Octubre de 2021.
+- Motor Voxel que genere de manera procedural el cubo, los caminos y los obstáculos: 26/10/2021
+- Funcionalidades básicas de juego (IA, vida y ataque):25/10/2021
+- Juego responsive: 18/10/2021.
 - Torres y enemigos definidos, con concepts y algún modelo de ellos:
-- Campaña de marketing iniciada (redes sociales preparadas): 11 de Octubre de 2021
+- Campaña de marketing iniciada (redes sociales preparadas): 11/10/2021
 
 
 ### 8.2 Hito 2: Beta
@@ -282,5 +290,6 @@ Flujo de juego:
 
 
 ### 8.4 Fecha de lanzamiento
+
 
   
