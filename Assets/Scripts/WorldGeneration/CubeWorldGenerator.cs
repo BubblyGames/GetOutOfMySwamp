@@ -7,11 +7,12 @@ using UnityEngine.SceneManagement;
 
 //https://www.youtube.com/watch?v=s5mAf-VMgCM&list=PLcRSafycjWFdYej0h_9sMD6rEUCpa7hDH&index=30
 
-[RequireComponent(typeof(MeshCollider))]
+[RequireComponent(typeof(VoxelRenderer))]
 public class CubeWorldGenerator : MonoBehaviour
 {
     public static CubeWorldGenerator instance;
 
+    public bool demo = false;
     public int size = 21;//Odd numbers look better
     internal CellInfo[,,] cells;
 
@@ -33,12 +34,12 @@ public class CubeWorldGenerator : MonoBehaviour
     public int numberOfMidpoints = 1;
 
     internal Vector3Int end;
+    internal Transform center;
 
     //Debug stuff
     public bool debugMidpoints = false;
     public GameObject lineRendererPrefab;
     List<GameObject> debugStuff = new List<GameObject>();
-    public bool rebuild = false;
 
     VoxelRenderer voxelRenderer;//Transforms the cells array into a mesh
 
@@ -46,6 +47,22 @@ public class CubeWorldGenerator : MonoBehaviour
     {
         instance = this;
         voxelRenderer = GetComponent<VoxelRenderer>();
+
+        GameObject worldCenter = new GameObject("World center");
+        worldCenter.transform.position = transform.position + (Vector3.one * ((size - 1) / 2f)); //set center tu middle of the cube
+        worldCenter.transform.parent = transform;
+        center = worldCenter.transform;
+
+
+        if (!demo && GameManager.instance != null && GameManager.instance.worldInfo != null)
+        {
+            nPaths = GameManager.instance.worldInfo.nPaths;
+            wallDensity = GameManager.instance.worldInfo.wallDensity;
+            rocksVisualReduction = GameManager.instance.worldInfo.rocksVisualReduction;
+            rockSize = GameManager.instance.worldInfo.rockSize;
+            numberOfMidpoints = GameManager.instance.worldInfo.numberOfMidpoints;
+            GetComponent<MeshRenderer>().material = GameManager.instance.worldInfo.material;
+        }
     }
 
     void Start()
@@ -83,13 +100,20 @@ public class CubeWorldGenerator : MonoBehaviour
             Debug.Log("Attempt: " + count + " Seed: " + seed.ToString());
             Random.InitState(seed);
             end = GenerateWorld();//Choose the blocktype of each cell
-            success = GeneratePaths(end.x, end.y, end.z);//Tries to create paths
-            if (!success)
+            if (!demo)
             {
-                ClearDebugStuff();
-                seed = Mathf.RoundToInt(Random.value * 10000);//New seed
-                count++;
-                wallDensity -= 0.01f;
+                success = GeneratePaths(end.x, end.y, end.z);//Tries to create paths
+                if (!success)
+                {
+                    ClearDebugStuff();
+                    seed = Mathf.RoundToInt(Random.value * 10000);//New seed
+                    count++;
+                    wallDensity -= 0.01f;
+                }
+            }
+            else
+            {
+                success = true;
             }
         }
 
@@ -718,8 +742,12 @@ public class CubeWorldGenerator : MonoBehaviour
             ClearDebugStuff();
             FillWorld();
             GenerateSwamp(end.x, end.y, end.z);
-            if (!GeneratePaths(end.x, end.y, end.z))
-                return false;
+
+            if (!demo)
+            {
+                if (!GeneratePaths(end.x, end.y, end.z))
+                    return false;
+            }
 
             MeshData meshData = GenerateMesh();
             voxelRenderer.RenderMesh(meshData);

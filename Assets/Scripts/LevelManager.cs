@@ -35,7 +35,6 @@ public class LevelManager : MonoBehaviour
 
     public Text text;
     public LayerMask floorLayer;
-    public Transform center;
     public GameObject waterSplashPrefab;
 
 
@@ -56,8 +55,6 @@ public class LevelManager : MonoBehaviour
         levelStats = GetComponent<LevelStats>();
         buildManager = GetComponent<BuildManager>();
         shop = GetComponent<Shop>();
-
-        center.transform.position = Vector3.one * ((world.size - 1) / 2f); //set center tu middle of the cube
     }
 
     private void Start()
