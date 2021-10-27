@@ -61,11 +61,7 @@ public class InputManager : MonoBehaviour
             MouseUp();
         }
 
-        if (movingCamera)
-        {
-            CameraBehaviour.instance.Rotate(Input.GetAxis("Mouse X") * mouseSensitivity, Input.GetAxis("Mouse Y") * mouseSensitivity);
-        }
-
+        //Zoom
         if (isMobile)
         {
             CheckPinch();
@@ -92,18 +88,17 @@ public class InputManager : MonoBehaviour
                     Vector3Int pos;
                     if (BuildManager.instance.CheckIfCanBuild(hit, out pos))
                     {
-                        cursor.SetActive(true);
                         cursor.GetComponent<MeshRenderer>().material.color = Color.white;
                     }
                     else
                     {
                         cursor.GetComponent<MeshRenderer>().material.color = Color.red;
                     }
+
+                    cursor.SetActive(true);
                     cursor.transform.position = pos;
                     cursor.transform.up = hit.normal;
                 }
-
-
                 selectedCard.SetActive(false);
             }
             else
@@ -111,8 +106,11 @@ public class InputManager : MonoBehaviour
                 cursor.SetActive(false);
                 selectedCard.SetActive(true);
                 selectedCard.transform.position = GetMouseAsWorldPoint() + mOffset;
-                //selectedCard.transform.Translate(40 * Time.deltaTime *  new Vector3(Input.GetAxis("Mouse X"), Input.GetAxis("Mouse Y"), 0));
             }
+        }
+        else
+        {
+            CameraBehaviour.instance.Rotate(Input.GetAxis("Mouse X") * mouseSensitivity, Input.GetAxis("Mouse Y") * mouseSensitivity);
         }
     }
 

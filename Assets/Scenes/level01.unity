@@ -4602,7 +4602,7 @@ MonoBehaviour:
   size: 31
   nPaths: 4
   wallDensity: 0.4
-  rocksVisualReduction: 0.5
+  rocksVisualReduction: 0.8
   rockSize: 10
   seed: 0
   pathMetod: 1
