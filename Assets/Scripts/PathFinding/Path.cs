@@ -18,6 +18,8 @@ public class Path
     public Vector3Int start = new Vector3Int();
     public int id = -1;
 
+    List<EnemyBehaviour> enemies = new List<EnemyBehaviour>();
+
     public Path()
     {
         
@@ -49,5 +51,16 @@ public class Path
     internal CellInfo GetCell(int idx)
     {
         return cells[idx];
+    }
+
+    public void AddEnemy(EnemyBehaviour enemy) {
+        enemies.Add(enemy);
+    }
+
+    public void Reset() {
+        foreach (EnemyBehaviour e in enemies)
+        {
+            e.FindNewPath();
+        }
     }
 }

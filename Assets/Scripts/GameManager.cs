@@ -22,7 +22,6 @@ public class GameManager : MonoBehaviour
         }
 
         DontDestroyOnLoad(instance);
-
     }
 
     void Start() 
