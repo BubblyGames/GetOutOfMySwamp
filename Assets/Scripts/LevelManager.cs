@@ -67,34 +67,10 @@ public class LevelManager : MonoBehaviour
 
     private void Update()
     {
-        text.text = Mathf.Round((1 / Time.deltaTime)).ToString(); //FpS text
-
-        //if (Input.GetMouseButtonDown(0))
-        //{
-        //    Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-
-        //    RaycastHit hit = new RaycastHit();
-
-        //    if (Physics.Raycast(ray, out hit))
-        //    {
-        //        if (hit.collider.tag == "World")
-        //        {
-        //            checkWorldCoordinates(hit);
-        //        }
-        //        else
-        //        {
-        //            //Interact with existing defenses
-        //        }
-        //    }
-        //}
+        text.text = Mathf.Round((1 / Time.deltaTime)).ToString(); //FpS 
 
     }
 
-    //private void OnEnable()
-    //{
-    //    OnGameStart?.Invoke();
-    //    Debug.Log("L Enabled");
-    //}
 
     public void dealDamageToBase(int damageTaken)
     {
