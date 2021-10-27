@@ -50,6 +50,7 @@ public class BuildManager : MonoBehaviour
             case BlockType.Air:
                 break;
             case BlockType.Path:
+                intPos += normalInt;
                 return false;
             case BlockType.Grass:
                 intPos += normalInt;
@@ -58,6 +59,7 @@ public class BuildManager : MonoBehaviour
                 intPos += normalInt;
                 break;
             case BlockType.Swamp:
+                intPos += normalInt;
                 return false;
             default:
                 break;
@@ -169,6 +171,7 @@ public class BuildManager : MonoBehaviour
 
     public void SellStructure()
     {
+        Debug.Log("Selling: " + selectedStructure.name);
         selectedStructure.Sell();
         selectedCell.structure = null;
         LevelStats.instance.EarnMoney(50);

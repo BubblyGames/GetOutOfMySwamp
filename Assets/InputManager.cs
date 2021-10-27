@@ -7,12 +7,23 @@ using UnityEngine.UI;
 public class InputManager : MonoBehaviour
 {
     public static InputManager instance;
+    bool isMobile = false;
+
     bool movingCamera = false;
     bool choosingWhereToBuild = false;
+    bool upgrading = false;
+    bool firstFrame = true;
 
     GameObject selectedCard;
+
+
+    [SerializeField]
+    private float mouseSensitivity = 3.0f;
+    [SerializeField]
+    private float scrollSensitivity = 15.0f;
+    [SerializeField]
+    private float pinchSensitivity = 15.0f;
     public GameObject cursor;
-    public Slider zoomSlider;
 
     private void Awake()
     {
@@ -52,10 +63,17 @@ public class InputManager : MonoBehaviour
 
         if (movingCamera)
         {
-            CameraBehaviour.instance.Rotate(Input.GetAxis("Mouse X"), Input.GetAxis("Mouse Y"));
+            CameraBehaviour.instance.Rotate(Input.GetAxis("Mouse X") * mouseSensitivity, Input.GetAxis("Mouse Y") * mouseSensitivity);
         }
-        //CameraBehaviour.instance.Zoom(Input.mouseScrollDelta.y);
-        CameraBehaviour.instance._distanceFromTarget = zoomSlider.value;
+
+        if (isMobile)
+        {
+            CheckPinch();
+        }
+        else
+        {
+            CameraBehaviour.instance.Zoom(Input.mouseScrollDelta.y * scrollSensitivity);
+        }
     }
 
     private void MouseDrag()
@@ -65,34 +83,50 @@ public class InputManager : MonoBehaviour
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             RaycastHit hit = new RaycastHit();
 
+            //Choosing a place to build a structure
             if (Physics.Raycast(ray, out hit, Mathf.Infinity) && hit.collider.tag == "World")
             {
+                //If mouse is over world, card is hidden and cursor enabled
                 Vector3Int pos;
                 if (BuildManager.instance.CheckIfCanBuild(hit, out pos))
                 {
                     cursor.SetActive(true);
-                    cursor.transform.position = pos;
-                    cursor.transform.up = hit.normal;
+                    cursor.GetComponent<MeshRenderer>().material.color = Color.white;
                 }
                 else
                 {
-                    cursor.SetActive(false);
+                    cursor.GetComponent<MeshRenderer>().material.color = Color.red;
                 }
 
+                cursor.transform.position = pos;
+                cursor.transform.up = hit.normal;
                 selectedCard.SetActive(false);
             }
             else
             {
+                cursor.SetActive(false);
                 selectedCard.SetActive(true);
+                selectedCard.transform.position = GetMouseAsWorldPoint() + mOffset;
                 //selectedCard.transform.Translate(40 * Time.deltaTime *  new Vector3(Input.GetAxis("Mouse X"), Input.GetAxis("Mouse Y"), 0));
             }
         }
     }
 
+    //https://www.patreon.com/posts/unity-3d-drag-22917454
+    private Vector3 mOffset;
+    private float mZCoord;
+    private Vector3 defaultPos;
+
     private void MouseDown()
     {
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         RaycastHit hit = new RaycastHit();
+
+        if (upgrading)
+        {
+            UIController.instance.DisableUpdateMenu();
+            upgrading = false;
+        }
 
         if (Physics.Raycast(ray, out hit, Mathf.Infinity))
         {
@@ -104,7 +138,15 @@ public class InputManager : MonoBehaviour
                 case "Card":
                     choosingWhereToBuild = true;
                     selectedCard = hit.collider.gameObject;
+                    selectedCard.GetComponent<Collider>().enabled = false;
+
+                    //Select structure
                     Shop.instance.setShopIndex(selectedCard.GetComponent<Card>().index);
+
+                    //Getting offset between camera and card
+                    defaultPos = selectedCard.transform.position;
+                    mZCoord = Camera.main.WorldToScreenPoint(defaultPos).z;
+                    mOffset = defaultPos - GetMouseAsWorldPoint();
                     break;
                 case "Structure":
                     //TODO: Improve checker for already built structures
@@ -112,10 +154,9 @@ public class InputManager : MonoBehaviour
                     Debug.Log("Cant build there");
                     UIController.instance.EnableUpdateMenu();
                     BuildManager.instance.SetSelectedStructure(hit.collider.gameObject.GetComponent<Structure>());
+                    upgrading = true;
                     break;
                 default:
-                    //Clicks outside
-                    UIController.instance.DisableUpdateMenu();
                     break;
             }
         }
@@ -137,7 +178,6 @@ public class InputManager : MonoBehaviour
                 case "World":
                     if (choosingWhereToBuild)
                     {
-                        cursor.SetActive(false);
                         BuildManager.instance.PlaceObject(hit);
                     }
                     break;
@@ -148,12 +188,63 @@ public class InputManager : MonoBehaviour
 
         if (choosingWhereToBuild)
         {
+            selectedCard.GetComponent<Collider>().enabled = true;
             selectedCard.SetActive(true);
+            selectedCard.transform.position = defaultPos;
             selectedCard = null;
             choosingWhereToBuild = false;
+            cursor.SetActive(false);
         }
 
         movingCamera = false;
+    }
+
+    bool CheckPinch()
+    {
+        int activeTouches = Input.touchCount;
+
+        if (activeTouches < 2) {
+            firstFrame = true;
+            return false;
+        }
+
+        Vector2 touch0 = Input.GetTouch(0).position;
+        Vector2 touch1 = Input.GetTouch(1).position;
+        Vector2 delta0 = Input.GetTouch(0).deltaPosition;
+        Vector2 delta1 = Input.GetTouch(1).deltaPosition;
+
+        if (firstFrame)
+        {
+            firstFrame = false;
+            return true;
+        }
+
+        if (Vector2.Dot(delta0, delta1) < 0)
+        {
+            float oldDist = Vector2.Distance(touch0, touch1);//1
+            float newDist = Vector2.Distance(touch0 + delta0, touch1 + delta1);//2
+
+            CameraBehaviour.instance.Zoom((oldDist - newDist) * Time.deltaTime * pinchSensitivity);
+        }
+
+        return true;
+    }
+
+    private Vector3 GetMouseAsWorldPoint()
+    {
+        // Pixel coordinates of mouse (x,y)
+        Vector3 mousePoint = Input.mousePosition;
+
+        // z coordinate of game object on screen
+        mousePoint.z = mZCoord;
+
+        // Convert it to world points
+        return Camera.main.ScreenToWorldPoint(mousePoint);
+    }
+
+    public void ChangeIsMobile(bool b)
+    {
+        isMobile = b;
     }
 }
 //https://answers.unity.com/questions/1698508/detect-mobile-client-in-webgl.html?childToView=1698985#answer-1698985
