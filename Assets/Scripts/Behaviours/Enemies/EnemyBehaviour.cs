@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEditor;
@@ -43,6 +44,11 @@ public abstract class EnemyBehaviour : MonoBehaviour
         healthPoints = startHealth;
         currentSpeed = startSpeed;
         healthBar.setMaxHealth(startHealth);
+    }
+
+    internal void FindNewPath()
+    {
+        //path = null;
     }
 
     void Update()
@@ -98,7 +104,11 @@ public abstract class EnemyBehaviour : MonoBehaviour
         }
     }
 
-    public void SetPath(Path path) { this.path = path; }
+    public void SetPath(Path path)
+    {
+        this.path = path;
+        path.AddEnemy(this);
+    }
 
     public virtual bool Hurt(int damage)
     {

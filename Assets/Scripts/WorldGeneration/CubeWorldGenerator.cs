@@ -10,7 +10,7 @@ using UnityEngine.SceneManagement;
 [RequireComponent(typeof(MeshCollider))]
 public class CubeWorldGenerator : MonoBehaviour
 {
-    public static CubeWorldGenerator worldGeneratorInstance;
+    public static CubeWorldGenerator instance;
 
     public int size = 21;//Odd numbers look better
     internal CellInfo[,,] cells;
@@ -44,7 +44,7 @@ public class CubeWorldGenerator : MonoBehaviour
 
     private void Awake()
     {
-        worldGeneratorInstance = this;
+        instance = this;
         voxelRenderer = GetComponent<VoxelRenderer>();
     }
 
@@ -142,20 +142,24 @@ public class CubeWorldGenerator : MonoBehaviour
                     {
                         if (perlin > (1 - ((wallDensity * rocksVisualReduction) * alpha)))
                         {
+                            cell.canWalk = false;
                             cell.blockType = BlockType.Rock;
                         }
                         else if (perlin > (1 - (wallDensity * alpha)))
                         {
-                            //cell.blockType = BlockType.Grass;
+                            cell.canWalk = false;
+                            cell.blockType = BlockType.Air;
                         }
                         else
                         {
                             cell.canWalk = true;
+                            cell.blockType = BlockType.Air;
                         }
                     }
                     else
                     {
                         cell.blockType = BlockType.Grass;
+                        cell.canWalk = false;
                     }
                 }
             }
@@ -328,6 +332,12 @@ public class CubeWorldGenerator : MonoBehaviour
                     }
                 }
                 pathCells.Add(cell);
+
+                foreach (CellInfo c in GetNeighbours(cell))
+                {
+                    c.isCloseToPath = true;
+                }
+
                 result = result.Parent;
             }
 
@@ -443,9 +453,14 @@ public class CubeWorldGenerator : MonoBehaviour
             else
             {
                 //Expands neightbors, (compute cost of each one) and add them to the list
-                CellInfo[] neighbours = GetWalkableNeighbours(current.cell, lastStep);
+                CellInfo[] neighbours = GetNeighbours(current.cell);
                 foreach (CellInfo neighbour in neighbours)
                 {
+                    if (!neighbour.canWalk ||
+                        (!lastStep && neighbour.endZone) ||
+                        neighbour.isInteresting)//||(neighbour.isPath && !neighbour.endZone)
+                        continue;
+
                     if (neighbour != null)
                     {
                         //if neighbour no esta en open
@@ -522,7 +537,7 @@ public class CubeWorldGenerator : MonoBehaviour
         return cell;
     }
 
-    private CellInfo[] GetWalkableNeighbours(CellInfo current, bool lastStep = true)
+    private CellInfo[] GetNeighbours(CellInfo current)
     {
         //Returns an array of cells around the provided cell
         //If it's not the path to the end (lastStep), cells in the end zone can't be returned
@@ -535,7 +550,8 @@ public class CubeWorldGenerator : MonoBehaviour
             {
                 for (int k = -1; k <= 1; k++)
                 {
-                    if (Mathf.Abs(i) + Mathf.Abs(j) + Mathf.Abs(k) > 1)//Prevents movement in a diagonal
+                    int sum = Mathf.Abs(i) + Mathf.Abs(j) + Mathf.Abs(k);
+                    if (sum > 1 || sum == 0)//Prevents movement in a diagonal and returning same cell
                         continue;
 
                     int x = current.x + i;
@@ -545,9 +561,6 @@ public class CubeWorldGenerator : MonoBehaviour
                     if (isPosInBounds(x, y, z))
                     {
                         cell = cells[x, y, z];
-                        if (!cell.canWalk || (!lastStep && cell.endZone))
-                            continue;
-
                         result.Add(cell);
                     }
                 }
@@ -677,10 +690,14 @@ public class CubeWorldGenerator : MonoBehaviour
             paths[bestP].midPoints.Add(new Midpoint(GetCell(point), true));
         }
 
-        paths[bestP].dirty = true;//This path need to be recalculated
-        cells[(int)point.x, (int)point.y, (int)point.z].isInteresting = true;//This cell has an object on it
 
-        return UpdateWorld();
+        if (UpdateWorld())
+        {
+            paths[bestP].dirty = true;//This path need to be recalculated
+            cells[(int)point.x, (int)point.y, (int)point.z].isInteresting = true;//This cell has an object on it
+            return true;
+        }
+        return false;
     }
 
     public bool RemoveInterestPoint(Vector3Int point)
@@ -719,8 +736,8 @@ public class CubeWorldGenerator : MonoBehaviour
 
         foreach (CellInfo cell in cells)
         {
-            if (cell.isInteresting)
-                Handles.Label(new Vector3(cell.x, cell.y, cell.z), 1.ToString());
+            if (cell.isCloseToPath)
+                Handles.Label(new Vector3(cell.x, cell.y, cell.z), "1");
             //Gizmos.DrawSphere(new Vector3(cell.x, cell.y, cell.z), .5f);
         }
     }
