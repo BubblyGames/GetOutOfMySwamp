@@ -357,7 +357,8 @@ public class CubeWorldGenerator : MonoBehaviour
                 }
                 pathCells.Add(cell);
 
-                foreach (CellInfo c in GetNeighbours(cell))
+                cellUnder = cells[cell.x - normal.x, cell.y - normal.y, cell.z - normal.z];
+                foreach (CellInfo c in GetNeighbours(cellUnder, true))
                 {
                     c.isCloseToPath = true;
                 }
@@ -561,7 +562,7 @@ public class CubeWorldGenerator : MonoBehaviour
         return cell;
     }
 
-    private CellInfo[] GetNeighbours(CellInfo current)
+    private CellInfo[] GetNeighbours(CellInfo current, bool addCorners = false)
     {
         //Returns an array of cells around the provided cell
         //If it's not the path to the end (lastStep), cells in the end zone can't be returned
@@ -575,7 +576,7 @@ public class CubeWorldGenerator : MonoBehaviour
                 for (int k = -1; k <= 1; k++)
                 {
                     int sum = Mathf.Abs(i) + Mathf.Abs(j) + Mathf.Abs(k);
-                    if (sum > 1 || sum == 0)//Prevents movement in a diagonal and returning same cell
+                    if ((sum > 1 && !addCorners) || sum == 0)//Prevents movement in a diagonal and returning same cell
                         continue;
 
                     int x = current.x + i;
