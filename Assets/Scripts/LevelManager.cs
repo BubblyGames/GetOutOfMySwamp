@@ -91,9 +91,8 @@ public class LevelManager : MonoBehaviour
         }
     }
 
-    public void levelCompleted()
+    public void LevelCompleted()
     {
-        Debug.Log("levelCompleted");
         OnGameCompleted?.Invoke();
 
     }

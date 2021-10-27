@@ -87,7 +87,7 @@ public abstract class EnemyBehaviour : MonoBehaviour
                 lerpProgression = 0;
                 transform.LookAt(path.GetStep(nextIndexPath), path.GetCell(nextIndexPath).normalInt);
             }
-            //if the enemy reach the end of the path deal damge to base
+            //if the enemy reach the end of the path deal damage to base
             else
             {
                 //Damage
@@ -115,7 +115,7 @@ public abstract class EnemyBehaviour : MonoBehaviour
         return false;
     }
 
-    //function called when a bullet has the recoil effect
+    //function called when a bullet has the slow effect
     public void slowAndDamage(int damage)
     {
         Hurt(damage);

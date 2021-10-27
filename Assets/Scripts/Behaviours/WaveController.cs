@@ -14,6 +14,7 @@ public class WaveController : MonoBehaviour
     public int activeEnemies = 0;
     public List<EnemyBehaviour> enemies;
 
+    private Coroutine spawncoroutine;
 
     [Range(0f, 0.5f)]
     public float randomRange = 0.25f;
@@ -60,14 +61,15 @@ public class WaveController : MonoBehaviour
 
         timeVariable = Time.time + ( timeBeforeRoundStarts);
 
+        LevelManager.OnGameLost += StopSpawning;
+        LevelManager.OnGameCompleted += LevelCompleted;
+
     }
 
     private void OnEnable()
     {
-        LevelManager.OnGameLost += StopWave;
-        LevelManager.OnGameLost += LevelCompleted;
+
         LevelManager.OnGameStart += StartWaves;
-        Debug.Log("W Enabled");
     }
 
     private void StartWaves()
@@ -79,6 +81,7 @@ public class WaveController : MonoBehaviour
     {
         if (LevelStats.instance.CurrentBaseHealthPoints > 0)
         {
+            Debug.Log("Level Cmplete");
             allWavesCleared = true;
         }
     }
@@ -103,7 +106,7 @@ public class WaveController : MonoBehaviour
             {
                 isBetweenWaves = false;
                 isWaveActive = true;
-                StartCoroutine("SpawnWave");
+                spawncoroutine = StartCoroutine("SpawnWave");
                 return;
             }
         }
@@ -138,31 +141,32 @@ public class WaveController : MonoBehaviour
         Wave currentWave = new Wave();
         if (waveCount >= waves.Length)
         {
-            LevelManager.instance.levelCompleted();
+            LevelManager.instance.LevelCompleted();
+            
         }
         else
         {
             currentWave = waves[waveCount];
-        }
 
 
-        for (int i = 0; i < currentWave.packs.Length; i++)
-        {
-            Pack p = currentWave.packs[i];
-            for (int j = 0; j < p.enemyAmount; j++)
+            for (int i = 0; i < currentWave.packs.Length; i++)
             {
-                int pathId = Random.Range(0, CubeWorldGenerator.worldGeneratorInstance.nPaths);
-                enemySpawner.SpawnEnemy(p.enemyType, CubeWorldGenerator.worldGeneratorInstance.paths[pathId]);
-                yield return new WaitForSeconds((1f / currentWave.spawnRate) + Random.Range(0f, randomRange)); //randomness between 
+                Pack p = currentWave.packs[i];
+                for (int j = 0; j < p.enemyAmount; j++)
+                {
+                    int pathId = Random.Range(0, CubeWorldGenerator.worldGeneratorInstance.nPaths);
+                    enemySpawner.SpawnEnemy(p.enemyType, CubeWorldGenerator.worldGeneratorInstance.paths[pathId]);
+                    yield return new WaitForSeconds((1f / currentWave.spawnRate) + Random.Range(0f, randomRange)); //randomness between 
+                }
             }
         }
 
 
     }
 
-    void StopWave()
+    void StopSpawning()
     {
-        StopCoroutine("SpawnWave");
-        isGameOver = true;
+        StopCoroutine(spawncoroutine);
+ 
     }
 }
