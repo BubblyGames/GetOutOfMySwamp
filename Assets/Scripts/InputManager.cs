@@ -27,7 +27,14 @@ public class InputManager : MonoBehaviour
 
     private void Awake()
     {
-        instance = this;
+        if (instance == null)
+        {
+            instance = this;
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
     }
     void Start()
     {
@@ -126,7 +133,7 @@ public class InputManager : MonoBehaviour
 
         if (upgrading)
         {
-            UIController.instance.DisableUpdateMenu();
+            //UIController.instance.DisableUpdateMenu();
             upgrading = false;
         }
 
@@ -136,6 +143,7 @@ public class InputManager : MonoBehaviour
             {
                 case "World":
                     movingCamera = true;
+                    UIController.instance.DisableUpdateMenu();
                     break;
                 case "Card":
                     choosingWhereToBuild = true;
@@ -149,6 +157,7 @@ public class InputManager : MonoBehaviour
                     defaultPos = selectedCard.transform.position;
                     mZCoord = Camera.main.WorldToScreenPoint(defaultPos).z;
                     mOffset = defaultPos - GetMouseAsWorldPoint();
+                    UIController.instance.DisableUpdateMenu();
                     break;
                 case "Structure":
                     //TODO: Improve checker for already built structures

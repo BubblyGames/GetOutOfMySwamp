@@ -16,6 +16,9 @@ public class Structure : MonoBehaviour
     protected int level = 0;
     [SerializeField]
     protected int maxLevel = 3;
+    [SerializeField]
+    protected bool isMaxLevel = false;
+
 
     [SerializeField]
     protected Vector3 normal;
@@ -30,9 +33,17 @@ public class Structure : MonoBehaviour
 
     public virtual void UpgradeStrucrure()
     {
-        if (level < maxLevel)
+        if (!isMaxLevel)
         {
-            level++;
+            if (level < maxLevel)
+            {
+                level++;
+            }
+
+            if (level == maxLevel)
+            {
+                isMaxLevel = true;
+            }
         }
         
     }
