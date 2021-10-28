@@ -191,7 +191,7 @@ Hay 2 personajes característicos en el juego:el líder de las ranas limpias y e
 
 ### 5.3 Entornos y lugares
 
-Al haber 2 niveles jugables pero se han pensado en 3 entornos o biomas: pantano, nieve y ciudad.
+Hay 3 niveles jugables y se han pensado en 3 entornos o biomas: pantano, nieve y ciudad.
 
 - Pantano: el estanque de las ranas limpias es un estanque limpio, vívido y con nenúfares mientras que el estanque de las ranas sucias es oscuro, con lodo y fango.
 - Ciudad: el estanque de las ranas limpias se encuentra en un parque, con bancos y papeleras; mientras que las ranas sucias vienen de las alcantarillas.
