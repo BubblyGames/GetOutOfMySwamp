@@ -15,9 +15,7 @@ public class UIController : MonoBehaviour
     public GameObject shopMenu;
     public GameObject endgameMenu;
 
-
-    [Header("LevelToRestart")]
-    public int levelToRestart;
+    private int levelToRestart;
     public enum Menus
     {
         UpgradeMenu,
@@ -109,8 +107,11 @@ public class UIController : MonoBehaviour
 
     public void GoToNextLevel()
     {
-        GameManager.instance.SetNextLevelWorld();
-        SceneManager.LoadScene(levelToRestart);
+        if (GameManager.instance.actualLevel < GameManager.instance.worldList.Count - 1)
+        {
+            GameManager.instance.SetNextLevelWorld();
+            SceneManager.LoadScene(levelToRestart);
+        }
     }
 }
 

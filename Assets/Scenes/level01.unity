@@ -921,7 +921,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1087118763921206292, guid: 4185117bdf14b7841b70189a0c7285ae, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1087118763921206293, guid: 4185117bdf14b7841b70189a0c7285ae, type: 3}
       propertyPath: m_Pivot.x
@@ -4350,7 +4350,6 @@ MonoBehaviour:
   upgradeMenu: {fileID: 1766098232}
   shopMenu: {fileID: 316150464}
   endgameMenu: {fileID: 1993991589}
-  levelToRestart: 1
   menus: 2
 --- !u!114 &1903685289
 MonoBehaviour:

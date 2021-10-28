@@ -66,7 +66,7 @@ public class LevelSelector : MonoBehaviour
             GameManager.instance.worldList.Add(worldInfo);
 
             //set the waves of enemies for that level
-            GameManager.instance.wavesLevelsList[i]= enemies[i];
+            //GameManager.instance.wavesLevelsList[i]= enemies[i];
         }
     }
 
