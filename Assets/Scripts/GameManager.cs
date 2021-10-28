@@ -12,6 +12,7 @@ public class GameManager : MonoBehaviour
     public AudioManager audioManager;
 
     internal List<WorldInfo> worldList = new List<WorldInfo>();
+    public int actualLevel;
     internal WorldInfo worldInfo = null;
 
     private void Awake()
@@ -31,5 +32,11 @@ public class GameManager : MonoBehaviour
     void Start() 
     {
         AudioManager.instance.Play("mainMenuSong");
+    }
+
+    public void SetNextLevelWorld()
+    {
+        actualLevel++;
+        worldInfo=worldList[actualLevel];
     }
 }

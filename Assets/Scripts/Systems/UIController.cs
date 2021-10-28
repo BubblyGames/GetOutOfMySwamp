@@ -106,6 +106,12 @@ public class UIController : MonoBehaviour
     {
         SceneManager.LoadScene(0);
     }
+
+    public void GoToNextLevel()
+    {
+        GameManager.instance.SetNextLevelWorld();
+        SceneManager.LoadScene(levelToRestart);
+    }
 }
 
 #if UNITY_EDITOR
