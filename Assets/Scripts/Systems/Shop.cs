@@ -4,23 +4,36 @@ using UnityEngine;
 
 public class Shop : MonoBehaviour
 {
+    public static Shop instance;
+
     [SerializeField] private int shopIndex = -1;
 
-    public List<StructureBlueprint> structureBlueprints;
-    public StructureBlueprint selectedStructureBlueprint;
+    public List<StructureBlueprint> defenseBlueprints;
+    public StructureBlueprint selectedDefenseBlueprint;
+
+    private void Awake()
+    {
+        if (instance == null)
+        {
+            instance = this;
+        }
+        else
+        {
+            Destroy(this);
+        }
+    }
     public void setShopIndex(int newIndex)
     {
         shopIndex = newIndex;
-        selectedStructureBlueprint = structureBlueprints[shopIndex];
-        purchaseStructure();
+        selectedDefenseBlueprint = defenseBlueprints[shopIndex];
+        purchaseDefense();
     }
 
-    public void purchaseStructure()
+    public void purchaseDefense()
     {
-        if (shopIndex >= 0 && shopIndex <structureBlueprints.Count)
+        if (shopIndex >= 0 && shopIndex < defenseBlueprints.Count)
         {
-           
-            BuildManager.buildManagerInstance.SelectStructureToBuild(selectedStructureBlueprint);
+            BuildManager.instance.SelectStructureToBuild(selectedDefenseBlueprint);
         }
     }
 }

@@ -6,5 +6,6 @@ using UnityEngine;
 public class StructureBlueprint
 {
     public GameObject structurePrefab;
-    public int cost;
+    public int creationCost;
+    public float upgradeMultiplicator;
 }

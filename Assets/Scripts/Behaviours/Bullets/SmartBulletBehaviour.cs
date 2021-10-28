@@ -29,17 +29,15 @@ public class SmartBulletBehaviour : BulletBehaviour
         }
     }
 
-    override public void SetBulletBehaviour(Transform target, int damage, float speed)
+    public void SetBulletBehaviour(Transform target, int damage, float speed)
     {
         Debug.Log("aaa");
         this.target = target;
         this.damage = damage;
         this.speed = speed / Vector3.Distance(target.position, transform.position);
-        Debug.Log(this.speed);
         initialPos = transform.position;
         rotateBullet();
     }
-
     void rotateBullet()
     {
         transform.LookAt(target.transform, Vector3.up);

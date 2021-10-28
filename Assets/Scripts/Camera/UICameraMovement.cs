@@ -1,3 +1,4 @@
+using DG.Tweening;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -87,8 +88,11 @@ public class UICameraMovement : MonoBehaviour
 
     void setCameraOrientation(int pos)
     {
-        gameObject.transform.position = cameraPositions[pos].transform.position;
-        gameObject.transform.rotation = cameraPositions[pos].transform.rotation;
+       // gameObject.transform.position = cameraPositions[pos].transform.position;
+        //gameObject.transform.rotation = cameraPositions[pos].transform.rotation;
+        gameObject.transform.DOMove(cameraPositions[pos].transform.position, 0.25f);
+        gameObject.transform.DORotateQuaternion(cameraPositions[pos].transform.rotation, 0.25f);
+        //gameObject.transform.DOLookAt(new Vector3(9.5f, 9.5f, 9.5f), 0.5f);
     }
 
     public void startCamera(List<GameObject>positions)

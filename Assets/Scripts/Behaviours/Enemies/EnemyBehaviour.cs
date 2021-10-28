@@ -1,5 +1,7 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 
 /*Basic Enemy Class, all kind of enemys  will inherit from this*/
@@ -8,16 +10,22 @@ public abstract class EnemyBehaviour : MonoBehaviour
     [Header("Stats")]
     [SerializeField] protected int startHealth = 10;
     [SerializeField] protected int healthPoints = 10;
-    [SerializeField] protected float speed = 1f;
+    [SerializeField] protected float startSpeed = 1f;
+    [SerializeField] protected float currentSpeed;
 
+    [SerializeField] protected int damage = 10;
     [Header("Rewards")]
     [SerializeField] protected int moneyValue = 1;
     [SerializeField] protected int scoreValue = 1;
 
-    [Space]
-    public int damage = 10;
+    [Header("Altered States")]
+    [SerializeField] protected bool isSlowed;
+    [SerializeField] protected float slowIntensity = 0.25f;
+    [SerializeField] protected float slowDuration; //Time is going to be slowed
+    [SerializeField] protected float slowTimer = 0; //time left being slowed
 
-    public HealthBarController healthBar;
+
+    protected HealthBarController healthBar;
 
     //Path the enemy will follow
     private Path path;
@@ -25,15 +33,57 @@ public abstract class EnemyBehaviour : MonoBehaviour
     private float lerpProgression = 0;
 
 
+    private void Awake()
+    {
+        healthBar = GetComponentInChildren<HealthBarController>();
+    }
+
+    // Start is called before the first frame update
+    void Start()
+    {
+        healthPoints = startHealth;
+        currentSpeed = startSpeed;
+        healthBar.setMaxHealth(startHealth);
+    }
+
+    internal void FindNewPath()
+    {
+        //path = null;
+    }
+
     void Update()
     {
         if (path == null)
             return;
 
+        if (nextIndexPath >= path.Length) { Destroy(this.gameObject); return; }
+
+        if (path.GetCell(nextIndexPath).isInteresting)
+        {
+            //Deal damage to structure
+            return;
+        }
+
         transform.position = Vector3.Lerp(path.GetStep(nextIndexPath - 1), path.GetStep(nextIndexPath), lerpProgression);
+
+        if (isSlowed)
+        {
+            if (slowTimer >= slowDuration)
+            {
+                isSlowed = false;
+                slowTimer = 0;
+                currentSpeed = startSpeed;
+            }
+            else
+            {
+                slowTimer += Time.deltaTime;
+            }
+        }
+
         if (lerpProgression < 1)
         {
-            lerpProgression += Time.deltaTime * speed;
+            lerpProgression += Time.deltaTime * currentSpeed;
+
         }
         else
         {
@@ -47,30 +97,23 @@ public abstract class EnemyBehaviour : MonoBehaviour
             else
             {
                 //Damage
-                GameManager.gameInstance.dealDamageToBase(this.damage);
+                LevelManager.instance.dealDamageToBase(this.damage);
                 Destroy(this.gameObject);
-                WaveController.waveControllerInstance.ReduceActiveEnemies();
+                WaveController.instance.ReduceActiveEnemies(this);
             }
         }
     }
 
-    public void SetPath(Path path) { this.path = path; }
-
-    public void SetInitialState(Path path)
+    public void SetPath(Path path)
     {
         this.path = path;
-        SetInitialHealth();
-    }
-    public void SetInitialHealth()
-    {
-        healthPoints = startHealth;
-        healthBar.setMaxHealth(startHealth);
+        path.AddEnemy(this);
     }
 
     public virtual bool Hurt(int damage)
     {
         healthPoints -= damage;
-        if (healthPoints < 0)
+        if (healthPoints <= 0)
         {
             Die();
             return true;
@@ -82,14 +125,34 @@ public abstract class EnemyBehaviour : MonoBehaviour
         return false;
     }
 
+    //function called when a bullet has the recoil effect
+    public void slowAndDamage(int damage)
+    {
+        Hurt(damage);
+        if (!isSlowed)
+        {
+            currentSpeed = currentSpeed * slowIntensity;
+        }
+        isSlowed = true;
+        slowDuration = 2f;
+
+    }
+
     public virtual void Die()
     {
-
-        LevelStats.levelStatsInstance.EarnMoney(moneyValue);
-        WaveController.waveControllerInstance.ReduceActiveEnemies();
-
+        WaveController.instance.ReduceActiveEnemies(this);
+        LevelStats.instance.getEnemyRewards(this.moneyValue, this.scoreValue);
         //Particles and sound
 
         Destroy(gameObject);
     }
+
+#if UNITY_EDITOR
+    private void OnDrawGizmos()
+    {
+        if (!Application.isPlaying) return;
+
+        Handles.Label(transform.position, "1");
+    }
+#endif
 }

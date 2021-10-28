@@ -5,45 +5,65 @@ using UnityEngine;
 public class BulletBehaviour : MonoBehaviour
 {
     protected int damage;
-    protected float speed;
+    protected float speed = 30f;
     protected Transform target;
-    [SerializeField] Vector3 velocity;
 
-    void FixedUpdate()
+    [Header("Bullet Destruction")]
+    [SerializeField] protected float maxDistance;
+    [SerializeField] protected float distanceTravelled;
+
+    [Header("Bullet Effects")]
+    [SerializeField] protected int actualEffect;
+
+
+    void Update()
     {
-        //gameObject.transform.Translate(Time.fixedDeltaTime * speed * velocity);
-        //gameObject.transform.position += Time.fixedDeltaTime * velocity;
-        transform.Translate(Time.fixedDeltaTime*speed*Vector3.forward);
+        if (distanceTravelled >= maxDistance)
+        {
+            Destroy(gameObject);
+        }
+        else
+        {
+            if (target != null)
+            {
+                rotateBullet();
+            }
+            transform.Translate(Time.deltaTime * speed * Vector3.forward);
+            distanceTravelled += Time.deltaTime * speed;
+        }
     }
-    virtual public void SetBulletBehaviour(Transform target, int damage, float speed)
+
+    virtual public void SetBulletBehaviour(Transform target, int damage, int effect, float range)
     {
         this.damage = damage;
-        this.speed = speed;
         this.target = target;
-        transform.LookAt(target.position);
-        velocity = speed * (target.position - transform.position).normalized;
-        //GetComponent<Rigidbody>().velocity = velocity;
+        actualEffect = effect;
+        maxDistance = range;
     }
 
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.CompareTag("Enemy"))
         {
-            other.gameObject.GetComponent<EnemyBehaviour>().Hurt(damage);
+            switch (actualEffect)
+            {
+                case 1:
+                    other.gameObject.GetComponent<EnemyBehaviour>().slowAndDamage(damage);
+                    Destroy(gameObject);
+                    break;
+                default:
+                    other.gameObject.GetComponent<EnemyBehaviour>().Hurt(damage);
+                    Destroy(gameObject);
+                    break;
+            }
+        }
+        else if (other.gameObject.CompareTag("World"))
+        {
             Destroy(gameObject);
         }
     }
-
-    /*private void OnCollisionEnter(Collision collision)
+    void rotateBullet()
     {
-        if (collision.collider.gameObject.CompareTag("Enemy"))
-        {
-            collision.collider.gameObject.GetComponent<EnemyBehaviour>().Hurt(damage);
-            Destroy(gameObject);
-        }
-        else if (collision.collider.gameObject.CompareTag("Bullet"))
-        {
-            Destroy(gameObject);
-        }
-    }*/
+        transform.LookAt(target.transform);
+    }
 }
