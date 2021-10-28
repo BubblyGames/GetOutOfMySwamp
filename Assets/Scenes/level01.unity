@@ -5338,9 +5338,7 @@ MonoBehaviour:
   shopMenu: {fileID: 316150464}
   pauseMenu: {fileID: 1738156960}
   endgameMenu: {fileID: 1348527078}
-  a: 1
-  levelToRestart: 1
-  menus: 2
+  menus: 3
 --- !u!114 &1903685289
 MonoBehaviour:
   m_ObjectHideFlags: 0

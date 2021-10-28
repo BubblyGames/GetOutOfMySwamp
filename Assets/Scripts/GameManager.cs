@@ -11,9 +11,12 @@ public class GameManager : MonoBehaviour
     public EnemyLibrary enemyLibrary;
     public AudioManager audioManager;
 
-    internal List<WorldInfo> worldList = new List<WorldInfo>();
     public int actualLevel;
     internal WorldInfo worldInfo = null;
+
+    //list containing different level stats and enemies waves 
+    internal List<WorldInfo> worldList = new List<WorldInfo>();
+    public Wave[][] wavesLevelsList;
 
     private void Awake()
     {

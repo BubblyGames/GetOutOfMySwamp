@@ -9,16 +9,13 @@ public class UIController : MonoBehaviour
 {
     public static UIController instance;
 
-
     [Header("Menus")]
     public GameObject upgradeMenu;
     public GameObject shopMenu;
     public GameObject pauseMenu;
     public GameObject endgameMenu;
 
-    public float a = 1f;
-    [Header("LevelToRestart")]
-    public int levelToRestart;
+    private int levelToRestart;
     public enum Menus
     {
         UpgradeMenu,
@@ -71,8 +68,7 @@ public class UIController : MonoBehaviour
     {
         upgradeMenu.SetActive(false);
         shopMenu.SetActive(false);
-        endgameMenu.SetActive(true);
-        GameObject.Find("FinalScoreText").GetComponent<UnityEngine.UI.Text>().text ="Score: "+LevelStats.instance.currentScore;
+        Toggle();
     }
 
 
@@ -113,7 +109,7 @@ public class UIController : MonoBehaviour
                 pauseMenu.SetActive(false);
                 break;
             case Menus.EndgameMenu:
-                endgameMenu.SetActive(false);
+                Toggle();
                 break;
             default:
                 break;
@@ -122,16 +118,16 @@ public class UIController : MonoBehaviour
 
     public void Toggle()
     {
-        endgameMenu.SetActive(true);
-
-        if (endgameMenu.activeSelf)
+        if (endgameMenu.activeSelf==false)
         {
-            Time.timeScale = 0;
+            endgameMenu.SetActive(true);
+            GameObject.Find("FinalScoreText").GetComponent<UnityEngine.UI.Text>().text = "Score: " + LevelStats.instance.currentScore;
+            Time.timeScale = 0;      
         }
         else
         {
-            a = 1;
-            
+            endgameMenu.SetActive(false);
+            Time.timeScale = 1;
         }
     }
 
@@ -163,15 +159,15 @@ public class UIController : MonoBehaviour
 
     public void GoToNextLevel()
     {
-        //TODO: fix
-        GameManager.instance.SetNextLevelWorld();
         Toggle();
         if (SceneController.instance)
         {
             SceneController.instance.LoadScene(levelToRestart);
         }
         else
+        if (GameManager.instance.actualLevel < GameManager.instance.worldList.Count - 1)
         {
+            GameManager.instance.SetNextLevelWorld();
             SceneManager.LoadScene(levelToRestart);
         }
     }

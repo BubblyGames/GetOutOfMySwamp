@@ -1,5 +1,8 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using System.Collections.Generic;
+using System;
+using System.Collections;
 
 public class LevelSelector : MonoBehaviour
 {
@@ -11,6 +14,9 @@ public class LevelSelector : MonoBehaviour
     public GameObject mainMenuPanel;
     public GameObject levelSelectPanel;
     public CubeWorldGenerator[] worlds;
+
+    [Header("Enemies waves setup")]
+    public Wave[][] enemies;
 
     private void Awake()
     {
@@ -56,6 +62,7 @@ public class LevelSelector : MonoBehaviour
     {
         for (int i = 0; i < worlds.Length; i++)
         {
+            //insert the level world settings in the list containing the different levels
             WorldInfo worldInfo = new WorldInfo();
             worldInfo.nPaths = worlds[i].nPaths;
             worldInfo.wallDensity = worlds[i].wallDensity;
@@ -64,6 +71,9 @@ public class LevelSelector : MonoBehaviour
             worldInfo.numberOfMidpoints = worlds[i].numberOfMidpoints;
             worldInfo.material = worlds[i].GetComponent<MeshRenderer>().material;
             GameManager.instance.worldList.Add(worldInfo);
+
+            //set the waves of enemies for that level
+            //GameManager.instance.wavesLevelsList[i]= enemies[i];
         }
     }
 
