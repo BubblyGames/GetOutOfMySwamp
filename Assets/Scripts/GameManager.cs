@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -10,6 +11,7 @@ public class GameManager : MonoBehaviour
     public EnemyLibrary enemyLibrary;
     public AudioManager audioManager;
 
+    internal List<WorldInfo> worldList = new List<WorldInfo>();
     internal WorldInfo worldInfo = null;
 
     private void Awake()
