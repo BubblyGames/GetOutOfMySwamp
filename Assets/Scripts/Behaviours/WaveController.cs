@@ -44,7 +44,7 @@ public class WaveController : MonoBehaviour
         }
         else
         {
-            Destroy(this);
+            Destroy(gameObject);
         }
         enemySpawner = GetComponent<EnemySpawner>();
         enemies = new List<EnemyBehaviour>();
@@ -156,8 +156,8 @@ public class WaveController : MonoBehaviour
                 Pack p = currentWave.packs[i];
                 for (int j = 0; j < p.enemyAmount; j++)
                 {
-                    int pathId = Random.Range(0, CubeWorldGenerator.worldGeneratorInstance.nPaths);
-                    enemySpawner.SpawnEnemy(p.enemyType, CubeWorldGenerator.worldGeneratorInstance.paths[pathId]);
+                    int pathId = Random.Range(0, CubeWorldGenerator.instance.nPaths);
+                    enemySpawner.SpawnEnemy(p.enemyType, CubeWorldGenerator.instance.paths[pathId]);
                     yield return new WaitForSeconds((1f / currentWave.spawnRate) + Random.Range(0f, randomRange)); //randomness between 
                 }
             }

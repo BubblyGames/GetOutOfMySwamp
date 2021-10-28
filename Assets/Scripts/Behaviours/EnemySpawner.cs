@@ -15,7 +15,7 @@ public class EnemySpawner : MonoBehaviour
         }
         else
         {   
-            Destroy(this); // destroy excess instances
+            Destroy(gameObject); // destroy excess instances
         }
     }
 

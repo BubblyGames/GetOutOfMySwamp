@@ -22,7 +22,7 @@ public class UIController : MonoBehaviour
     {
         UpgradeMenu,
         ShopMenu,
-        PauseMenu
+        PauseMenu,
         EndgameMenu
     }
 
@@ -36,7 +36,7 @@ public class UIController : MonoBehaviour
         }
         else
         {
-            Destroy(this);
+            Destroy(gameObject);
         }
 
         levelToRestart = SceneManager.GetActiveScene().buildIndex;
@@ -64,6 +64,7 @@ public class UIController : MonoBehaviour
     {
         pauseMenu.SetActive(false);
         shopMenu.SetActive(true);
+    }
 
     public void EnableEndgameMenu()
     {
@@ -113,6 +114,7 @@ public class UIController : MonoBehaviour
                 break;
             case Menus.PauseMenu:
                 pauseMenu.SetActive(false);
+                break;
             case Menus.EndgameMenu:
                 endgameMenu.SetActive(false);
                 break;

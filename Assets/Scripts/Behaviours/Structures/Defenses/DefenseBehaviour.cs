@@ -27,13 +27,15 @@ public abstract class DefenseBehaviour : Structure
 
     public override void UpgradeStrucrure()
     {
-        base.UpgradeStrucrure();
 
-        if (level < maxLevel)
+        if (!isMaxLevel)
         {
             this.fireRate -= this.fireRate * 0.1f;
             this.damage += Mathf.RoundToInt(this.damage * 0.1f);
+
         }
+        base.UpgradeStrucrure();
+
     }
     protected virtual void Attack() { }
 

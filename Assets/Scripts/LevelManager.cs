@@ -46,7 +46,7 @@ public class LevelManager : MonoBehaviour
         }
         else
         {
-            Destroy(this);
+            Destroy(gameObject);
         }
 
         world = GetComponent<CubeWorldGenerator>();

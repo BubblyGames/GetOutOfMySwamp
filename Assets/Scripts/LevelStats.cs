@@ -38,7 +38,7 @@ public class LevelStats : MonoBehaviour
         }
         else
         {
-            Destroy(this);
+            Destroy(gameObject);
         }
 
 
