@@ -14,9 +14,20 @@ public class LevelSelector : MonoBehaviour
 
     private void Awake()
     {
-        instance = this;
+        if (instance == null)
+        {
+            instance = this;
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
     }
 
+    private void Start()
+    {
+        CreateWorldList();
+    }
     public void SelectLevel(string levelId)
     {
         SceneManager.LoadScene(levelId);
@@ -41,18 +52,25 @@ public class LevelSelector : MonoBehaviour
         }
     }
 
+    public void CreateWorldList()
+    {
+        for (int i = 0; i < worlds.Length; i++)
+        {
+            WorldInfo worldInfo = new WorldInfo();
+            worldInfo.nPaths = worlds[i].nPaths;
+            worldInfo.wallDensity = worlds[i].wallDensity;
+            worldInfo.rocksVisualReduction = worlds[i].rocksVisualReduction;
+            worldInfo.rockSize = worlds[i].rockSize;
+            worldInfo.numberOfMidpoints = worlds[i].numberOfMidpoints;
+            worldInfo.material = worlds[i].GetComponent<MeshRenderer>().material;
+            GameManager.instance.worldList.Add(worldInfo);
+        }
+    }
+
     public void SelectWorld()
     {
-        WorldInfo worldInfo = new WorldInfo();
-        worldInfo.nPaths = worlds[selectedWorld].nPaths;
-        worldInfo.wallDensity = worlds[selectedWorld].wallDensity;
-        worldInfo.rocksVisualReduction = worlds[selectedWorld].rocksVisualReduction;
-        worldInfo.rockSize = worlds[selectedWorld].rockSize;
-        worldInfo.numberOfMidpoints = worlds[selectedWorld].numberOfMidpoints;
-        worldInfo.material = worlds[selectedWorld].GetComponent<MeshRenderer>().material;
-
-        GameManager.instance.worldInfo = worldInfo;
-
+        GameManager.instance.worldInfo = GameManager.instance.worldList[selectedWorld];
+        GameManager.instance.actualLevel = selectedWorld;
         SceneManager.LoadScene("level01");
     }
 

@@ -24,7 +24,7 @@ public class BuildManager : MonoBehaviour
         }
         else
         {
-            Destroy(this);
+            Destroy(gameObject);
         }
     }
 
@@ -129,7 +129,7 @@ public class BuildManager : MonoBehaviour
         {
             selectedCell.structure.UpgradeStrucrure();
         }
-        if (LevelStats.instance.CurrentMoney >= structureToBuild.creationCost * Mathf.Pow(structureToBuild.upgradeMultiplicator, selectedCell.structure.GetLevel()))
+        else if (LevelStats.instance.CurrentMoney >= structureToBuild.creationCost * Mathf.Pow(structureToBuild.upgradeMultiplicator, selectedCell.structure.GetLevel()))
         {
             selectedCell.structure.UpgradeStrucrure();
             LevelStats.instance.SpendMoney(structureToBuild.creationCost);
@@ -146,6 +146,7 @@ public class BuildManager : MonoBehaviour
     {
         UIController.instance.DisableUpdateMenu();
         Debug.Log("Selling: " + selectedStructure.name);
+        UIController.instance.DisableUpdateMenu();
         selectedStructure.Sell();
         selectedCell.structure = null;
         LevelStats.instance.EarnMoney(50);
