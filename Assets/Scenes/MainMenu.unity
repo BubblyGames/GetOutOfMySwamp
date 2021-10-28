@@ -1061,6 +1061,7 @@ MonoBehaviour:
     - enemyId: 5
       enemyPrefab: {fileID: 5803062399679311112, guid: edbebc9645c93bc47b4257b361fcc5b1, type: 3}
   audioManager: {fileID: 1474084401}
+  actualLevel: 0
 --- !u!4 &429681862
 Transform:
   m_ObjectHideFlags: 0
@@ -2859,6 +2860,17 @@ MonoBehaviour:
   worlds:
   - {fileID: 85103256}
   - {fileID: 1532256123}
+  enemies:
+  - packs:
+    - enemyType: 0
+      enemyAmount: 0
+    - enemyType: 0
+      enemyAmount: 0
+    - enemyType: 0
+      enemyAmount: 0
+    spawnRate: 0
+  - packs: []
+    spawnRate: 0
 --- !u!4 &1305970971
 Transform:
   m_ObjectHideFlags: 0
