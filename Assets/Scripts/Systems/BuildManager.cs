@@ -30,46 +30,30 @@ public class BuildManager : MonoBehaviour
 
     public bool CheckIfCanBuild(RaycastHit hit, out Vector3Int intPos)
     {
-        Vector3 pos = hit.point;
-        pos -= hit.normal / 2;
+        //Position where structure will be build
+        intPos = new Vector3Int(
+            Mathf.RoundToInt(hit.point.x + (hit.normal.x / 2)),
+            Mathf.RoundToInt(hit.point.y + (hit.normal.y / 2)),
+            Mathf.RoundToInt(hit.point.z + (hit.normal.z / 2)));
 
-        intPos = new Vector3Int(Mathf.RoundToInt(pos.x), Mathf.RoundToInt(pos.y), Mathf.RoundToInt(pos.z));
+        Vector3Int intPosUnder = new Vector3Int(
+            Mathf.RoundToInt(hit.point.x - (hit.normal.x / 2)),
+            Mathf.RoundToInt(hit.point.y - (hit.normal.y / 2)),
+            Mathf.RoundToInt(hit.point.z - (hit.normal.z / 2)));
 
-        CellInfo cell = LevelManager.instance.world.GetCell(intPos);
+        selectedCell = LevelManager.instance.world.GetCell(intPosUnder);
 
-        Vector3 rayNormal = hit.normal;
-
-        int x = Mathf.RoundToInt(rayNormal.x);
-        int y = Mathf.RoundToInt(rayNormal.y);
-        int z = Mathf.RoundToInt(rayNormal.z);
-
-        Vector3Int normalInt = new Vector3Int(x, y, z);
-
-        switch (cell.blockType)
-        {
-            case BlockType.Air:
-                break;
-            case BlockType.Path:
-                intPos += normalInt;
-                return false;
-            case BlockType.Grass:
-                intPos += normalInt;
-                break;
-            case BlockType.Rock:
-                intPos += normalInt;
-                break;
-            case BlockType.Swamp:
-                intPos += normalInt;
-                return false;
-            default:
-                break;
-        }
-
-        //SelectCell(cell);
-        selectedCell = cell;
-
-        if (!canBuild)
+        if (!canBuild || selectedCell.blockType != structureToBuild.structurePrefab.GetComponent<Structure>().blockType)
             return false;
+
+        Gatherer g;
+        if (CubeWorldGenerator.instance.isPosInBounds(intPos.x, intPos.y, intPos.z) &&
+            !LevelManager.instance.world.GetCell(intPos).isCloseToPath &&
+            structureToBuild.structurePrefab.TryGetComponent<Gatherer>(out g))
+        {
+            //Debug.Log("Can't add");
+            return false;
+        }
 
         return true;
     }
@@ -106,7 +90,7 @@ public class BuildManager : MonoBehaviour
         canBuild = false;
     }
 
-    public void BuildStructure(Vector3 position, Vector3 normal)
+    public void BuildStructure(Vector3Int position, Vector3 normal)
     {
         if (LevelStats.instance.infinteMoney)
         {
@@ -126,19 +110,8 @@ public class BuildManager : MonoBehaviour
         }
     }
 
-    public void CreateTowerOnCell(Vector3 position, Vector3 normal)
+    public void CreateTowerOnCell(Vector3Int position, Vector3 normal)
     {
-        Gatherer g;
-        if (structureToBuild.structurePrefab.TryGetComponent<Gatherer>(out g))
-        {
-            bool canAdd = CubeWorldGenerator.worldGeneratorInstance.AddInterestPoint(new Vector3Int((int)position.x, (int)position.y, (int)position.z));
-            if (!canAdd)
-            {
-                Debug.Log("Can't add");
-                return;
-            }
-        }
-
         Structure structure = Instantiate(structureToBuild.structurePrefab, position, Quaternion.Euler(normal)).GetComponent<Structure>();
         structure.SetNormal(normal);
 

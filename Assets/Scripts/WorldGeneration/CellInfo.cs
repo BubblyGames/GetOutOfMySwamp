@@ -22,6 +22,7 @@ public class CellInfo
 
     public Structure structure;
     public bool isInteresting = false;
+    internal bool isCloseToPath = false;
 
     public CellInfo(int x, int y, int z)
     {

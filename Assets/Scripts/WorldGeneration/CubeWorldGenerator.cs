@@ -7,11 +7,12 @@ using UnityEngine.SceneManagement;
 
 //https://www.youtube.com/watch?v=s5mAf-VMgCM&list=PLcRSafycjWFdYej0h_9sMD6rEUCpa7hDH&index=30
 
-[RequireComponent(typeof(MeshCollider))]
+[RequireComponent(typeof(VoxelRenderer))]
 public class CubeWorldGenerator : MonoBehaviour
 {
-    public static CubeWorldGenerator worldGeneratorInstance;
+    public static CubeWorldGenerator instance;
 
+    public bool demo = false;
     public int size = 21;//Odd numbers look better
     internal CellInfo[,,] cells;
 
@@ -33,19 +34,35 @@ public class CubeWorldGenerator : MonoBehaviour
     public int numberOfMidpoints = 1;
 
     internal Vector3Int end;
+    internal Transform center;
 
     //Debug stuff
     public bool debugMidpoints = false;
     public GameObject lineRendererPrefab;
     List<GameObject> debugStuff = new List<GameObject>();
-    public bool rebuild = false;
 
     VoxelRenderer voxelRenderer;//Transforms the cells array into a mesh
 
     private void Awake()
     {
-        worldGeneratorInstance = this;
+        instance = this;
         voxelRenderer = GetComponent<VoxelRenderer>();
+
+        GameObject worldCenter = new GameObject("World center");
+        worldCenter.transform.position = transform.position + (Vector3.one * ((size - 1) / 2f)); //set center tu middle of the cube
+        worldCenter.transform.parent = transform;
+        center = worldCenter.transform;
+
+
+        if (!demo && GameManager.instance != null && GameManager.instance.worldInfo != null)
+        {
+            nPaths = GameManager.instance.worldInfo.nPaths;
+            wallDensity = GameManager.instance.worldInfo.wallDensity;
+            rocksVisualReduction = GameManager.instance.worldInfo.rocksVisualReduction;
+            rockSize = GameManager.instance.worldInfo.rockSize;
+            numberOfMidpoints = GameManager.instance.worldInfo.numberOfMidpoints;
+            GetComponent<MeshRenderer>().material = GameManager.instance.worldInfo.material;
+        }
     }
 
     void Start()
@@ -83,13 +100,20 @@ public class CubeWorldGenerator : MonoBehaviour
             Debug.Log("Attempt: " + count + " Seed: " + seed.ToString());
             Random.InitState(seed);
             end = GenerateWorld();//Choose the blocktype of each cell
-            success = GeneratePaths(end.x, end.y, end.z);//Tries to create paths
-            if (!success)
+            if (!demo)
             {
-                ClearDebugStuff();
-                seed = Mathf.RoundToInt(Random.value * 10000);//New seed
-                count++;
-                wallDensity -= 0.01f;
+                success = GeneratePaths(end.x, end.y, end.z);//Tries to create paths
+                if (!success)
+                {
+                    ClearDebugStuff();
+                    seed = Mathf.RoundToInt(Random.value * 10000);//New seed
+                    count++;
+                    wallDensity -= 0.01f;
+                }
+            }
+            else
+            {
+                success = true;
             }
         }
 
@@ -142,20 +166,24 @@ public class CubeWorldGenerator : MonoBehaviour
                     {
                         if (perlin > (1 - ((wallDensity * rocksVisualReduction) * alpha)))
                         {
+                            cell.canWalk = false;
                             cell.blockType = BlockType.Rock;
                         }
                         else if (perlin > (1 - (wallDensity * alpha)))
                         {
-                            //cell.blockType = BlockType.Grass;
+                            cell.canWalk = false;
+                            cell.blockType = BlockType.Air;
                         }
                         else
                         {
                             cell.canWalk = true;
+                            cell.blockType = BlockType.Air;
                         }
                     }
                     else
                     {
                         cell.blockType = BlockType.Grass;
+                        cell.canWalk = false;
                     }
                 }
             }
@@ -328,6 +356,13 @@ public class CubeWorldGenerator : MonoBehaviour
                     }
                 }
                 pathCells.Add(cell);
+
+                cellUnder = cells[cell.x - normal.x, cell.y - normal.y, cell.z - normal.z];
+                foreach (CellInfo c in GetNeighbours(cellUnder, true))
+                {
+                    c.isCloseToPath = true;
+                }
+
                 result = result.Parent;
             }
 
@@ -443,9 +478,14 @@ public class CubeWorldGenerator : MonoBehaviour
             else
             {
                 //Expands neightbors, (compute cost of each one) and add them to the list
-                CellInfo[] neighbours = GetWalkableNeighbours(current.cell, lastStep);
+                CellInfo[] neighbours = GetNeighbours(current.cell);
                 foreach (CellInfo neighbour in neighbours)
                 {
+                    if (!neighbour.canWalk ||
+                        (!lastStep && neighbour.endZone) ||
+                        neighbour.isInteresting)//||(neighbour.isPath && !neighbour.endZone)
+                        continue;
+
                     if (neighbour != null)
                     {
                         //if neighbour no esta en open
@@ -522,7 +562,7 @@ public class CubeWorldGenerator : MonoBehaviour
         return cell;
     }
 
-    private CellInfo[] GetWalkableNeighbours(CellInfo current, bool lastStep = true)
+    private CellInfo[] GetNeighbours(CellInfo current, bool addCorners = false)
     {
         //Returns an array of cells around the provided cell
         //If it's not the path to the end (lastStep), cells in the end zone can't be returned
@@ -535,7 +575,8 @@ public class CubeWorldGenerator : MonoBehaviour
             {
                 for (int k = -1; k <= 1; k++)
                 {
-                    if (Mathf.Abs(i) + Mathf.Abs(j) + Mathf.Abs(k) > 1)//Prevents movement in a diagonal
+                    int sum = Mathf.Abs(i) + Mathf.Abs(j) + Mathf.Abs(k);
+                    if ((sum > 1 && !addCorners) || sum == 0)//Prevents movement in a diagonal and returning same cell
                         continue;
 
                     int x = current.x + i;
@@ -545,9 +586,6 @@ public class CubeWorldGenerator : MonoBehaviour
                     if (isPosInBounds(x, y, z))
                     {
                         cell = cells[x, y, z];
-                        if (!cell.canWalk || (!lastStep && cell.endZone))
-                            continue;
-
                         result.Add(cell);
                     }
                 }
@@ -677,10 +715,14 @@ public class CubeWorldGenerator : MonoBehaviour
             paths[bestP].midPoints.Add(new Midpoint(GetCell(point), true));
         }
 
-        paths[bestP].dirty = true;//This path need to be recalculated
-        cells[(int)point.x, (int)point.y, (int)point.z].isInteresting = true;//This cell has an object on it
 
-        return UpdateWorld();
+        if (UpdateWorld())
+        {
+            paths[bestP].dirty = true;//This path need to be recalculated
+            cells[(int)point.x, (int)point.y, (int)point.z].isInteresting = true;//This cell has an object on it
+            return true;
+        }
+        return false;
     }
 
     public bool RemoveInterestPoint(Vector3Int point)
@@ -701,8 +743,12 @@ public class CubeWorldGenerator : MonoBehaviour
             ClearDebugStuff();
             FillWorld();
             GenerateSwamp(end.x, end.y, end.z);
-            if (!GeneratePaths(end.x, end.y, end.z))
-                return false;
+
+            if (!demo)
+            {
+                if (!GeneratePaths(end.x, end.y, end.z))
+                    return false;
+            }
 
             MeshData meshData = GenerateMesh();
             voxelRenderer.RenderMesh(meshData);
@@ -719,8 +765,8 @@ public class CubeWorldGenerator : MonoBehaviour
 
         foreach (CellInfo cell in cells)
         {
-            if (cell.isInteresting)
-                Handles.Label(new Vector3(cell.x, cell.y, cell.z), 1.ToString());
+            if (cell.isCloseToPath)
+                Handles.Label(new Vector3(cell.x, cell.y, cell.z), "1");
             //Gizmos.DrawSphere(new Vector3(cell.x, cell.y, cell.z), .5f);
         }
     }

@@ -93,11 +93,13 @@ public class WaveController : MonoBehaviour
             isBetweenWaves = false;
             isWaveActive = false;
             allWavesCleared = false;
+            UIController.instance.EnableEndgameMenu();
         }
         else if (allWavesCleared)
         {
             isBetweenWaves = false;
             isWaveActive = false;
+            UIController.instance.EnableEndgameMenu();
 
         }
         else if (isBetweenWaves)

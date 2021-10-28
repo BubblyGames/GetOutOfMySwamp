@@ -61,11 +61,7 @@ public class InputManager : MonoBehaviour
             MouseUp();
         }
 
-        if (movingCamera)
-        {
-            CameraBehaviour.instance.Rotate(Input.GetAxis("Mouse X") * mouseSensitivity, Input.GetAxis("Mouse Y") * mouseSensitivity);
-        }
-
+        //Zoom
         if (isMobile)
         {
             CheckPinch();
@@ -84,22 +80,25 @@ public class InputManager : MonoBehaviour
             RaycastHit hit = new RaycastHit();
 
             //Choosing a place to build a structure
-            if (Physics.Raycast(ray, out hit, Mathf.Infinity) && hit.collider.tag == "World")
+            if (Physics.Raycast(ray, out hit, Mathf.Infinity))
             {
-                //If mouse is over world, card is hidden and cursor enabled
-                Vector3Int pos;
-                if (BuildManager.instance.CheckIfCanBuild(hit, out pos))
+                if (hit.collider.tag == "World")
                 {
-                    cursor.SetActive(true);
-                    cursor.GetComponent<MeshRenderer>().material.color = Color.white;
-                }
-                else
-                {
-                    cursor.GetComponent<MeshRenderer>().material.color = Color.red;
-                }
+                    //If mouse is over world, card is hidden and cursor enabled
+                    Vector3Int pos;
+                    if (BuildManager.instance.CheckIfCanBuild(hit, out pos))
+                    {
+                        cursor.GetComponent<MeshRenderer>().material.color = Color.white;
+                    }
+                    else
+                    {
+                        cursor.GetComponent<MeshRenderer>().material.color = Color.red;
+                    }
 
-                cursor.transform.position = pos;
-                cursor.transform.up = hit.normal;
+                    cursor.SetActive(true);
+                    cursor.transform.position = pos;
+                    cursor.transform.up = hit.normal;
+                }
                 selectedCard.SetActive(false);
             }
             else
@@ -107,8 +106,11 @@ public class InputManager : MonoBehaviour
                 cursor.SetActive(false);
                 selectedCard.SetActive(true);
                 selectedCard.transform.position = GetMouseAsWorldPoint() + mOffset;
-                //selectedCard.transform.Translate(40 * Time.deltaTime *  new Vector3(Input.GetAxis("Mouse X"), Input.GetAxis("Mouse Y"), 0));
             }
+        }
+        else
+        {
+            CameraBehaviour.instance.Rotate(Input.GetAxis("Mouse X") * mouseSensitivity, Input.GetAxis("Mouse Y") * mouseSensitivity);
         }
     }
 
@@ -205,7 +207,8 @@ public class InputManager : MonoBehaviour
     {
         int activeTouches = Input.touchCount;
 
-        if (activeTouches < 2) {
+        if (activeTouches < 2)
+        {
             firstFrame = true;
             return false;
         }
@@ -225,8 +228,12 @@ public class InputManager : MonoBehaviour
         {
             float oldDist = Vector2.Distance(touch0, touch1);//1
             float newDist = Vector2.Distance(touch0 + delta0, touch1 + delta1);//2
+            float difference = oldDist - newDist;
 
-            CameraBehaviour.instance.Zoom((oldDist - newDist) * Time.deltaTime * pinchSensitivity);
+            if (difference < 300)
+            {
+                CameraBehaviour.instance.Zoom((difference) * Time.deltaTime * pinchSensitivity);
+            }
         }
 
         return true;

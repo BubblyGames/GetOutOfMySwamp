@@ -20,6 +20,8 @@ public class Structure : MonoBehaviour
     [SerializeField]
     protected Vector3 normal;
 
+    public BlockType blockType = BlockType.Grass;
+
     public void SetNormal(Vector3 normal)
     {
        this.normal = normal;
