@@ -7,13 +7,8 @@ using UnityEngine.UI;
 public class InputManager : MonoBehaviour
 {
     public static InputManager instance;
-    bool isMobile = false;
-
-    bool movingCamera = false;
-    bool choosingWhereToBuild = false;
-    bool upgrading = false;
-    bool firstFrame = true;
-    bool zooming = false;
+    bool choosingWhereToBuild = false; //A structure card has been selected
+    bool zooming = false;//Is zooming
 
     GameObject selectedCard;
 
@@ -23,6 +18,7 @@ public class InputManager : MonoBehaviour
     private float scrollSensitivity = 15.0f;
     [SerializeField]
     private float pinchSensitivity = 15.0f;
+    //Gameobject that will be placed where structure is about to be built
     public GameObject cursor;
 
     private void Awake()
@@ -31,6 +27,7 @@ public class InputManager : MonoBehaviour
     }
     void Start()
     {
+        //If no cursor is assigned, a cube will be created and used
         if (cursor == null)
         {
             cursor = GameObject.CreatePrimitive(PrimitiveType.Cube);
@@ -46,45 +43,44 @@ public class InputManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        //Zoom
+        CheckPinch();
+        CameraBehaviour.instance.Zoom(Input.mouseScrollDelta.y * scrollSensitivity); //Zoom with mouse wheel
+
+        //Click
         if (Input.GetMouseButtonDown(0))
         {
             MouseDown();
         }
 
-        if (Input.GetMouseButton(0))
-        {
-            MouseDrag();
-        }
-
+        //Click release
         if (Input.GetMouseButtonUp(0))
         {
             MouseUp();
         }
 
-        //Zoom
-        if (isMobile)
+        //Drag
+        if (Input.GetMouseButton(0))
         {
-            CheckPinch();
+            MouseDrag();
         }
-        else
-        {
-            CameraBehaviour.instance.Zoom(Input.mouseScrollDelta.y * scrollSensitivity);
-        }
+
+
     }
 
     private void MouseDrag()
     {
         if (choosingWhereToBuild)
         {
+            //Casts a ray to find out where does the player want to place the structure
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             RaycastHit hit = new RaycastHit();
 
-            //Choosing a place to build a structure
             if (Physics.Raycast(ray, out hit, Mathf.Infinity))
             {
-                if (hit.collider.tag == "World")
+                if (hit.collider.tag == "World")//If mouse is over world
                 {
-                    //If mouse is over world, card is hidden and cursor enabled
+                    //If can't build on selected cell, cursor turns red
                     Vector3Int pos;
                     if (BuildManager.instance.CheckIfCanBuild(hit, out pos))
                     {
@@ -95,21 +91,26 @@ public class InputManager : MonoBehaviour
                         cursor.GetComponent<MeshRenderer>().material.color = Color.red;
                     }
 
+                    //Cursor activates and moves to selected cell
                     cursor.SetActive(true);
                     cursor.transform.position = pos;
                     cursor.transform.up = hit.normal;
                 }
+                //Card is hidden if poiting at anything in the world
                 selectedCard.SetActive(false);
             }
             else
             {
+                //If mouse isn't over the world, cursor is hidden and card is shown again
                 cursor.SetActive(false);
                 selectedCard.SetActive(true);
+                //Card is moved with mouse
                 selectedCard.transform.position = GetMouseAsWorldPoint() + mOffset;
             }
         }
         else if (!zooming)
         {
+            //If not zooming, camera will be moved
             CameraBehaviour.instance.Rotate(Input.GetAxis("Mouse X") * mouseSensitivity, Input.GetAxis("Mouse Y") * mouseSensitivity);
         }
     }
@@ -118,26 +119,21 @@ public class InputManager : MonoBehaviour
     private Vector3 mOffset;
     private float mZCoord;
     private Vector3 defaultPos;
+    private Vector3 worldPos;
 
     private void MouseDown()
     {
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         RaycastHit hit = new RaycastHit();
 
-        if (upgrading)
-        {
-            upgrading = false;
-        }
-
         if (Physics.Raycast(ray, out hit, Mathf.Infinity))
         {
             switch (hit.collider.tag)
             {
-                case "World":
-                    movingCamera = true;
-                    break;
                 case "Card":
                     choosingWhereToBuild = true;
+
+                    //Select clicked card
                     selectedCard = hit.collider.gameObject;
                     selectedCard.GetComponent<Collider>().enabled = false;
 
@@ -145,25 +141,19 @@ public class InputManager : MonoBehaviour
                     Shop.instance.setShopIndex(selectedCard.GetComponent<Card>().index);
 
                     //Getting offset between camera and card
-                    defaultPos = selectedCard.transform.position;
-                    mZCoord = Camera.main.WorldToScreenPoint(defaultPos).z;
-                    mOffset = defaultPos - GetMouseAsWorldPoint();
+                    defaultPos = selectedCard.transform.localPosition;
+                    worldPos = selectedCard.transform.position;
+                    mZCoord = Camera.main.WorldToScreenPoint(worldPos).z;
+                    mOffset = worldPos - GetMouseAsWorldPoint();
                     break;
                 case "Structure":
-                    //TODO: Improve checker for already built structures
                     //Interact with existing defenses
-                    Debug.Log("Cant build there");
                     UIController.instance.EnableUpdateMenu();
                     BuildManager.instance.SetSelectedStructure(hit.collider.gameObject.GetComponent<Structure>());
-                    upgrading = true;
                     break;
                 default:
                     break;
             }
-        }
-        else
-        {
-            movingCamera = true;
         }
     }
 
@@ -177,6 +167,7 @@ public class InputManager : MonoBehaviour
             switch (hit.collider.tag)
             {
                 case "World":
+                    //If mouse released over world while choosing where to build, the structure will be built if possible
                     if (choosingWhereToBuild)
                     {
                         BuildManager.instance.PlaceObject(hit);
@@ -189,15 +180,14 @@ public class InputManager : MonoBehaviour
 
         if (choosingWhereToBuild)
         {
+            //Card gets released, so everything resets
             selectedCard.GetComponent<Collider>().enabled = true;
             selectedCard.SetActive(true);
-            selectedCard.transform.position = defaultPos;
+            selectedCard.transform.localPosition = defaultPos;
             selectedCard = null;
             choosingWhereToBuild = false;
             cursor.SetActive(false);
         }
-
-        movingCamera = false;
     }
 
     bool CheckPinch()
@@ -207,10 +197,9 @@ public class InputManager : MonoBehaviour
 
         int activeTouches = Input.touchCount;
 
-        if (activeTouches < 2)
+        if (activeTouches < 2)//If less than two touches, can't zoom
         {
             zooming = false;
-            firstFrame = true;
             return false;
         }
 
@@ -218,22 +207,17 @@ public class InputManager : MonoBehaviour
 
         Vector2 touch0 = Input.GetTouch(0).position;
         Vector2 touch1 = Input.GetTouch(1).position;
+        //Deltas are the position change since las frame
         Vector2 delta0 = Input.GetTouch(0).deltaPosition;
         Vector2 delta1 = Input.GetTouch(1).deltaPosition;
 
-        if (firstFrame)
+        if (Vector2.Dot(delta0, delta1) < 0)//If deltas form an angle greater than 90 degrees
         {
-            firstFrame = false;
-            return true;
-        }
+            float currentDist = Vector2.Distance(touch0, touch1);
+            float previousDist = Vector2.Distance(touch0 - delta0, touch1 - delta1);
+            float difference = previousDist - currentDist;
 
-        if (Vector2.Dot(delta0, delta1) < 0)
-        {
-            float oldDist = Vector2.Distance(touch0, touch1);//1
-            float newDist = Vector2.Distance(touch0 + delta0, touch1 + delta1);//2
-            float difference = oldDist - newDist;
-
-            if (difference < 300)
+            if (difference < 50)
             {
                 CameraBehaviour.instance.Zoom((difference) * Time.deltaTime * pinchSensitivity);
             }
@@ -252,11 +236,6 @@ public class InputManager : MonoBehaviour
 
         // Convert it to world points
         return Camera.main.ScreenToWorldPoint(mousePoint);
-    }
-
-    public void ChangeIsMobile(bool b)
-    {
-        isMobile = b;
     }
 }
 //https://answers.unity.com/questions/1698508/detect-mobile-client-in-webgl.html?childToView=1698985#answer-1698985
