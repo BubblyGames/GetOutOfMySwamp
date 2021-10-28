@@ -156,7 +156,7 @@ Los niveles se conforman de grids y hay distintas variantes de las celdas. Los n
 | TORRE PESADA   | Largo     | Elevado | ÁreaTT\*          | Lento               | \-                                |
 | TORRE BÁSICA   | Medio     | Medio   | IndividualTA-TT\* | Medio               | \-                                |
 | TORRE PSÍQUICA | Corto     | Bajo    | IndividualTT\*    | Medio               | El enemigo se ralentiza           |
-| TORRE MORTERO  | Medio     | Bajo    | ÁreaTA-TT\*       | Rápido              | Prioriza ataque a enemigos aéreos |
+| TORRE MONTAÑA  | Medio     | Bajo    | ÁreaTA-TT\*       | Rápido              | Prioriza ataque a enemigos aéreos |
 | **TRAMPAS**    |           |         |                   |                     |                                   |
 | TRAMPA PANTANO | 1 Casilla | \-      | ÁreaTT\*          | \-                  | Ralentiza                         |
 
