@@ -144,6 +144,7 @@ public class BuildManager : MonoBehaviour
 
     public void SellStructure()
     {
+        UIController.instance.DisableUpdateMenu();
         Debug.Log("Selling: " + selectedStructure.name);
         UIController.instance.DisableUpdateMenu();
         selectedStructure.Sell();
