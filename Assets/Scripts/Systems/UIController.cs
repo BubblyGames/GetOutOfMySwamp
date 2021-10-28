@@ -13,6 +13,7 @@ public class UIController : MonoBehaviour
     [Header("Menus")]
     public GameObject upgradeMenu;
     public GameObject shopMenu;
+    public GameObject pauseMenu;
     public GameObject endgameMenu;
 
     private int levelToRestart;
@@ -20,6 +21,7 @@ public class UIController : MonoBehaviour
     {
         UpgradeMenu,
         ShopMenu,
+        PauseMenu,
         EndgameMenu
     }
 
@@ -33,7 +35,7 @@ public class UIController : MonoBehaviour
         }
         else
         {
-            Destroy(this);
+            Destroy(gameObject);
         }
 
         levelToRestart = SceneManager.GetActiveScene().buildIndex;
@@ -49,6 +51,20 @@ public class UIController : MonoBehaviour
         upgradeMenu.SetActive(false);
     }
 
+    public void EnablePauseMenu()
+    {
+        upgradeMenu.SetActive(false);
+        shopMenu.SetActive(false);
+        pauseMenu.SetActive(true);
+
+    }
+
+    public void DisablePauseMenu()
+    {
+        pauseMenu.SetActive(false);
+        shopMenu.SetActive(true);
+    }
+
     public void EnableEndgameMenu()
     {
         upgradeMenu.SetActive(false);
@@ -57,11 +73,6 @@ public class UIController : MonoBehaviour
         GameObject.Find("FinalScoreText").GetComponent<UnityEngine.UI.Text>().text ="Score: "+LevelStats.instance.currentScore;
     }
 
-    public void Restart()
-    {
-        endgameMenu.SetActive(false);
-        SceneManager.LoadScene(levelToRestart);
-    }
 
     public void SetMenuActive()
     {
@@ -74,6 +85,10 @@ public class UIController : MonoBehaviour
             case Menus.ShopMenu:
                 shopMenu.SetActive(true);
                 break;
+            case Menus.PauseMenu:
+                pauseMenu.SetActive(true);
+                break;
+
             case Menus.EndgameMenu:
                 EnableEndgameMenu();
                 break;
@@ -92,6 +107,9 @@ public class UIController : MonoBehaviour
             case Menus.ShopMenu:
                 shopMenu.SetActive(false);
                 break;
+            case Menus.PauseMenu:
+                pauseMenu.SetActive(false);
+                break;
             case Menus.EndgameMenu:
                 endgameMenu.SetActive(false);
                 break;
@@ -100,20 +118,68 @@ public class UIController : MonoBehaviour
         }
     }
 
-    public void ChangeToMainMenu()
+    public void Toggle()
     {
-        SceneManager.LoadScene(0);
+        endgameMenu.SetActive(true);
+
+        if (endgameMenu.activeSelf)
+        {
+            Time.timeScale = 0;
+        }
+        else
+        {
+            a = 1;
+            
+        }
+    }
+
+    public void Retry()
+    {
+        Toggle();
+        if (SceneController.instance)
+        {
+            SceneController.instance.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        }
+        else
+        {
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        }
+    }
+
+    public void Exit()
+    {
+        Toggle();
+        if (SceneController.instance)
+        {
+            SceneController.instance.LoadScene(0);
+        }
+        else
+        {
+            SceneManager.LoadScene(0);
+        }
     }
 
     public void GoToNextLevel()
     {
-        if (GameManager.instance.actualLevel < GameManager.instance.worldList.Count - 1)
+        //TODO: fix
+        GameManager.instance.SetNextLevelWorld();
+        Toggle();
+        if (SceneController.instance)
+        {
+            SceneController.instance.LoadScene(levelToRestart);
+        }
+        else if(GameManager.instance.actualLevel < GameManager.instance.worldList.Count - 1)
         {
             GameManager.instance.SetNextLevelWorld();
             SceneManager.LoadScene(levelToRestart);
         }
     }
+    public void SlowGame()
+    {
+        //TODO try to slow to stop game when gameover
+    }
 }
+
 
 #if UNITY_EDITOR
 [CustomEditor(typeof(UIController))]

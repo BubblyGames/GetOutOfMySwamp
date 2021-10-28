@@ -19,7 +19,7 @@ public class Shop : MonoBehaviour
         }
         else
         {
-            Destroy(this);
+            Destroy(gameObject);
         }
     }
     public void setShopIndex(int newIndex)

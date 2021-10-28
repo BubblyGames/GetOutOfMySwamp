@@ -178,13 +178,10 @@ MonoBehaviour:
   damage: 15
   moneyValue: 75
   scoreValue: 125
-  slowIntensity: 0.25
   isSlowed: 0
+  slowIntensity: 0.25
   slowDuration: 0
   slowTimer: 0
-  recoilQuantity: 2
-  recoilTime: 2
-  healthBar: {fileID: 3541860110349647073}
 --- !u!135 &8512708308545649598
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -196,7 +193,7 @@ SphereCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.25
+  m_Radius: 0.5
   m_Center: {x: 0, y: 0.5, z: 0}
 --- !u!1 &5369838017730028779
 GameObject:
