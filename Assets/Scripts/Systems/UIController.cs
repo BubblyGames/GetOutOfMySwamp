@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class UIController : MonoBehaviour
 {
@@ -71,6 +72,7 @@ public class UIController : MonoBehaviour
         upgradeMenu.SetActive(false);
         shopMenu.SetActive(false);
         endgameMenu.SetActive(true);
+        GameObject.Find("FinalScoreText").GetComponent<UnityEngine.UI.Text>().text ="Score: "+LevelStats.instance.currentScore;
     }
 
     public void Restart()
@@ -95,7 +97,7 @@ public class UIController : MonoBehaviour
                 break;
 
             case Menus.EndgameMenu:
-                endgameMenu.SetActive(true);
+                EnableEndgameMenu();
                 break;
             default:
                 break;
@@ -123,9 +125,15 @@ public class UIController : MonoBehaviour
         }
     }
 
-    public void ChangeToMainScene()
+    public void ChangeToMainMenu()
     {
         SceneManager.LoadScene(0);
+    }
+
+    public void GoToNextLevel()
+    {
+        GameManager.instance.SetNextLevelWorld();
+        SceneManager.LoadScene(levelToRestart);
     }
 }
 

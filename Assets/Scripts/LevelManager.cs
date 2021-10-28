@@ -48,7 +48,7 @@ public class LevelManager : MonoBehaviour
         {
             Destroy(gameObject);
         }
-
+        
         world = GetComponent<CubeWorldGenerator>();
         waveController = GetComponent<WaveController>();
         scoreSystem = GetComponent<ScoreSystem>();
