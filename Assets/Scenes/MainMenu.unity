@@ -739,7 +739,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Button
+  m_Text: Back
 --- !u!222 &110576182
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -3007,17 +3007,7 @@ MonoBehaviour:
   worlds:
   - {fileID: 85103256}
   - {fileID: 1532256123}
-  enemies:
-  - packs:
-    - enemyType: 0
-      enemyAmount: 0
-    - enemyType: 0
-      enemyAmount: 0
-    - enemyType: 0
-      enemyAmount: 0
-    spawnRate: 0
-  - packs: []
-    spawnRate: 0
+  - {fileID: 96266344}
 --- !u!4 &1305970971
 Transform:
   m_ObjectHideFlags: 0

@@ -10,8 +10,6 @@ using UnityEngine.SceneManagement;
 [RequireComponent(typeof(VoxelRenderer))]
 public class CubeWorldGenerator : MonoBehaviour
 {
-    public static CubeWorldGenerator instance;
-
     public bool demo = false;
     public int size = 21;//Odd numbers look better
     internal CellInfo[,,] cells;
@@ -45,8 +43,6 @@ public class CubeWorldGenerator : MonoBehaviour
 
     private void Awake()
     {
-            instance = this;
-
         voxelRenderer = GetComponent<VoxelRenderer>();
 
         GameObject worldCenter = new GameObject("World center");
@@ -588,7 +584,7 @@ public class CubeWorldGenerator : MonoBehaviour
                     int y = current.y + j;
                     int z = current.z + k;
 
-                    if (isPosInBounds(x, y, z))
+                    if (IsPosInBounds(x, y, z))
                     {
                         cell = cells[x, y, z];
                         result.Add(cell);
@@ -665,7 +661,7 @@ public class CubeWorldGenerator : MonoBehaviour
         return Mathf.Sin(Mathf.PI * Mathf.PerlinNoise(a, b));
     }
 
-    public bool isPosInBounds(int coordX, int coordY, int coordZ)
+    public bool IsPosInBounds(int coordX, int coordY, int coordZ)
     {
         return coordX >= 0 && coordX < size && coordY >= 0 && coordY < size && coordZ >= 0 && coordZ < size;
     }
