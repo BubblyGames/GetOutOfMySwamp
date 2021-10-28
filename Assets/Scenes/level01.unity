@@ -921,7 +921,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1087118763921206292, guid: 4185117bdf14b7841b70189a0c7285ae, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1087118763921206293, guid: 4185117bdf14b7841b70189a0c7285ae, type: 3}
       propertyPath: m_Pivot.x
@@ -5336,8 +5336,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   upgradeMenu: {fileID: 1766098232}
   shopMenu: {fileID: 316150464}
-  endgameMenu: {fileID: 1993991589}
-  menus: 2
+  pauseMenu: {fileID: 1738156960}
+  endgameMenu: {fileID: 1348527078}
+  menus: 3
 --- !u!114 &1903685289
 MonoBehaviour:
   m_ObjectHideFlags: 0
