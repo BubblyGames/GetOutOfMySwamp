@@ -46,7 +46,7 @@ Nuestro cliente se trata de una persona con una fuerte presencia del arte en su 
 
 ### 2.2 Mapa de lienzo
 
-![lienzo](https://user-images.githubusercontent.com/56488179/139027865-52553938-30dd-4256-9999-9de7453164f4.png)
+![lienzo](https://user-images.githubusercontent.com/56488179/139236673-cd2449f1-2d47-4c1d-9013-9da3400c528b.png)
 
 
 ### 2.3 Tablas de productos y precios
