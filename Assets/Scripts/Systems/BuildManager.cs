@@ -47,7 +47,7 @@ public class BuildManager : MonoBehaviour
             return false;
 
         Gatherer g;
-        if (CubeWorldGenerator.instance.isPosInBounds(intPos.x, intPos.y, intPos.z) &&
+        if (WorldManager.instance.IsPosInBounds(intPos.x, intPos.y, intPos.z) &&
             !LevelManager.instance.world.GetCell(intPos).isCloseToPath &&
             structureToBuild.structurePrefab.TryGetComponent<Gatherer>(out g))
         {

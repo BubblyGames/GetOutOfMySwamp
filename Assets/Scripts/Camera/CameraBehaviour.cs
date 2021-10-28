@@ -47,7 +47,7 @@ public class CameraBehaviour : MonoBehaviour
 
     private void Start()
     {
-        _target = CubeWorldGenerator.instance.center;
+        _target = WorldManager.instance.GetCenter();
     }
 
     void Update()

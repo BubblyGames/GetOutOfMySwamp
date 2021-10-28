@@ -156,8 +156,8 @@ public class WaveController : MonoBehaviour
                 Pack p = currentWave.packs[i];
                 for (int j = 0; j < p.enemyAmount; j++)
                 {
-                    int pathId = Random.Range(0, CubeWorldGenerator.instance.nPaths);
-                    enemySpawner.SpawnEnemy(p.enemyType, CubeWorldGenerator.instance.paths[pathId]);
+                    int pathId = Random.Range(0, WorldManager.instance.nPaths);
+                    enemySpawner.SpawnEnemy(p.enemyType, WorldManager.instance.paths[pathId]);
                     yield return new WaitForSeconds((1f / currentWave.spawnRate) + Random.Range(0f, randomRange)); //randomness between 
                 }
             }
