@@ -45,14 +45,7 @@ public class CubeWorldGenerator : MonoBehaviour
 
     private void Awake()
     {
-        if (instance == null)
-        {
             instance = this;
-        }
-        else
-        {
-            Destroy(gameObject);
-        }
 
         voxelRenderer = GetComponent<VoxelRenderer>();
 
