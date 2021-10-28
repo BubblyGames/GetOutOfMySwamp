@@ -55,6 +55,7 @@ public class LevelManager : MonoBehaviour
         levelStats = GetComponent<LevelStats>();
         buildManager = GetComponent<BuildManager>();
         shop = GetComponent<Shop>();
+
     }
 
     private void Start()
@@ -84,13 +85,19 @@ public class LevelManager : MonoBehaviour
             Debug.Log("Game Over");
 
             // Show Game Over Screen
-            //Go to menu
+            GameOver();
         }
+    }
+
+    public void GameOver()
+    {
+        UIController.instance.Toggle();
     }
 
     public void LevelCompleted()
     {
         OnGameCompleted?.Invoke();
+        UIController.instance.Toggle();
 
     }
 }

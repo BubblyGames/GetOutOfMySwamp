@@ -81,7 +81,7 @@ public class WaveController : MonoBehaviour
     {
         if (LevelStats.instance.CurrentBaseHealthPoints > 0)
         {
-            Debug.Log("Level Cmplete");
+            Debug.Log("Level Complete");
             allWavesCleared = true;
         }
     }
@@ -93,13 +93,13 @@ public class WaveController : MonoBehaviour
             isBetweenWaves = false;
             isWaveActive = false;
             allWavesCleared = false;
-            UIController.instance.EnableEndgameMenu();
+
         }
         else if (allWavesCleared)
         {
             isBetweenWaves = false;
             isWaveActive = false;
-            UIController.instance.EnableEndgameMenu();
+
 
         }
         else if (isBetweenWaves)
