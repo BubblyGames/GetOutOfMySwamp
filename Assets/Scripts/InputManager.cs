@@ -13,9 +13,9 @@ public class InputManager : MonoBehaviour
     bool choosingWhereToBuild = false;
     bool upgrading = false;
     bool firstFrame = true;
+    bool zooming = false;
 
     GameObject selectedCard;
-
 
     [SerializeField]
     private float mouseSensitivity = 3.0f;
@@ -108,7 +108,7 @@ public class InputManager : MonoBehaviour
                 selectedCard.transform.position = GetMouseAsWorldPoint() + mOffset;
             }
         }
-        else
+        else if (!zooming)
         {
             CameraBehaviour.instance.Rotate(Input.GetAxis("Mouse X") * mouseSensitivity, Input.GetAxis("Mouse Y") * mouseSensitivity);
         }
@@ -126,7 +126,6 @@ public class InputManager : MonoBehaviour
 
         if (upgrading)
         {
-            UIController.instance.DisableUpdateMenu();
             upgrading = false;
         }
 
@@ -203,13 +202,19 @@ public class InputManager : MonoBehaviour
 
     bool CheckPinch()
     {
+        if (choosingWhereToBuild)
+            return false;
+
         int activeTouches = Input.touchCount;
 
         if (activeTouches < 2)
         {
+            zooming = false;
             firstFrame = true;
             return false;
         }
+
+        zooming = true;
 
         Vector2 touch0 = Input.GetTouch(0).position;
         Vector2 touch1 = Input.GetTouch(1).position;

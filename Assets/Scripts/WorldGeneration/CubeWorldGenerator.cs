@@ -106,9 +106,9 @@ public class CubeWorldGenerator : MonoBehaviour
                 if (!success)
                 {
                     ClearDebugStuff();
-                    seed = Mathf.RoundToInt(Random.value * 10000);//New seed
+                    seed = Mathf.RoundToInt(Random.value * 100000);//New seed
                     count++;
-                    wallDensity -= 0.01f;
+                    wallDensity -= 0.1f;
                 }
             }
             else
@@ -150,6 +150,9 @@ public class CubeWorldGenerator : MonoBehaviour
                     cell.isSurface = CheckIfIsInSurface(cell);
                     if (cell.isSurface)
                         cell.normalInt = GetFaceNormal(cell);
+                    cell.isPath = false;
+                    cell.isCloseToPath = false;
+                    cell.isInteresting = false;
 
                     //Rock generation
                     float alpha = 1;
@@ -460,7 +463,7 @@ public class CubeWorldGenerator : MonoBehaviour
         openList.Add(firstNode);
 
         int count = 0;
-        while (openList.Count > 0 && count < 100000)
+        while (openList.Count > 0 && count < 10000)
         {
             count++;
             //Sorting the list in "h" in increasing order
@@ -498,6 +501,8 @@ public class CubeWorldGenerator : MonoBehaviour
                                 break;
                             }
                         }
+                        if (IsInOpen)
+                            continue;
 
                         bool IsInClosed = false;
                         foreach (Node nf in closedList)
@@ -522,7 +527,6 @@ public class CubeWorldGenerator : MonoBehaviour
                 }
             }
         }
-        //Debug.Log("Fail");
 
         return null;
     }
@@ -773,12 +777,12 @@ public class CubeWorldGenerator : MonoBehaviour
     private void OnValidate()
     {
         if (!Application.isPlaying) return;
-        foreach (Path p in paths)
+        /*foreach (Path p in paths)
         {
-            if (p.initiated)
+            if (p!= null && p.initiated)
                 p.dirty = true;
         }
-        UpdateWorld();
+        UpdateWorld();*/
     }
 #endif
 }
