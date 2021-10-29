@@ -24,7 +24,7 @@ public class BuildManager : MonoBehaviour
         }
         else
         {
-            Destroy(this);
+            Destroy(gameObject);
         }
     }
 
@@ -47,7 +47,7 @@ public class BuildManager : MonoBehaviour
             return false;
 
         Gatherer g;
-        if (CubeWorldGenerator.instance.isPosInBounds(intPos.x, intPos.y, intPos.z) &&
+        if (WorldManager.instance.IsPosInBounds(intPos.x, intPos.y, intPos.z) &&
             !LevelManager.instance.world.GetCell(intPos).isCloseToPath &&
             structureToBuild.structurePrefab.TryGetComponent<Gatherer>(out g))
         {
@@ -129,7 +129,7 @@ public class BuildManager : MonoBehaviour
         {
             selectedCell.structure.UpgradeStrucrure();
         }
-        if (LevelStats.instance.CurrentMoney >= structureToBuild.creationCost * Mathf.Pow(structureToBuild.upgradeMultiplicator, selectedCell.structure.GetLevel()))
+        else if (LevelStats.instance.CurrentMoney >= structureToBuild.creationCost * Mathf.Pow(structureToBuild.upgradeMultiplicator, selectedCell.structure.GetLevel()))
         {
             selectedCell.structure.UpgradeStrucrure();
             LevelStats.instance.SpendMoney(structureToBuild.creationCost);
@@ -145,6 +145,7 @@ public class BuildManager : MonoBehaviour
     public void SellStructure()
     {
         Debug.Log("Selling: " + selectedStructure.name);
+        UIController.instance.ShowMenu(UIController.GameMenu.Game);
         selectedStructure.Sell();
         selectedCell.structure = null;
         LevelStats.instance.EarnMoney(50);

@@ -10,8 +10,6 @@ using UnityEngine.SceneManagement;
 [RequireComponent(typeof(VoxelRenderer))]
 public class CubeWorldGenerator : MonoBehaviour
 {
-    public static CubeWorldGenerator instance;
-
     public bool demo = false;
     public int size = 21;//Odd numbers look better
     internal CellInfo[,,] cells;
@@ -45,7 +43,6 @@ public class CubeWorldGenerator : MonoBehaviour
 
     private void Awake()
     {
-        instance = this;
         voxelRenderer = GetComponent<VoxelRenderer>();
 
         GameObject worldCenter = new GameObject("World center");
@@ -53,15 +50,16 @@ public class CubeWorldGenerator : MonoBehaviour
         worldCenter.transform.parent = transform;
         center = worldCenter.transform;
 
-
-        if (!demo && GameManager.instance != null && GameManager.instance.worldInfo != null)
+        if (!demo && GameManager.instance != null)
         {
-            nPaths = GameManager.instance.worldInfo.nPaths;
-            wallDensity = GameManager.instance.worldInfo.wallDensity;
-            rocksVisualReduction = GameManager.instance.worldInfo.rocksVisualReduction;
-            rockSize = GameManager.instance.worldInfo.rockSize;
-            numberOfMidpoints = GameManager.instance.worldInfo.numberOfMidpoints;
-            GetComponent<MeshRenderer>().material = GameManager.instance.worldInfo.material;
+            Debug.Log("Loading level: " + GameManager.instance.currentWorldId);
+            WorldInfo worldInfo = GameManager.instance.GetCurrentWorld();
+            nPaths = worldInfo.nPaths;
+            wallDensity = worldInfo.wallDensity;
+            rocksVisualReduction = worldInfo.rocksVisualReduction;
+            rockSize = worldInfo.rockSize;
+            numberOfMidpoints = worldInfo.numberOfMidpoints;
+            GetComponent<MeshRenderer>().material = worldInfo.material;
         }
     }
 
@@ -106,9 +104,9 @@ public class CubeWorldGenerator : MonoBehaviour
                 if (!success)
                 {
                     ClearDebugStuff();
-                    seed = Mathf.RoundToInt(Random.value * 10000);//New seed
+                    seed = Mathf.RoundToInt(Random.value * 100000);//New seed
                     count++;
-                    wallDensity -= 0.01f;
+                    wallDensity -= 0.1f;
                 }
             }
             else
@@ -150,6 +148,9 @@ public class CubeWorldGenerator : MonoBehaviour
                     cell.isSurface = CheckIfIsInSurface(cell);
                     if (cell.isSurface)
                         cell.normalInt = GetFaceNormal(cell);
+                    cell.isPath = false;
+                    cell.isCloseToPath = false;
+                    cell.isInteresting = false;
 
                     //Rock generation
                     float alpha = 1;
@@ -460,7 +461,7 @@ public class CubeWorldGenerator : MonoBehaviour
         openList.Add(firstNode);
 
         int count = 0;
-        while (openList.Count > 0 && count < 100000)
+        while (openList.Count > 0 && count < 10000)
         {
             count++;
             //Sorting the list in "h" in increasing order
@@ -498,6 +499,8 @@ public class CubeWorldGenerator : MonoBehaviour
                                 break;
                             }
                         }
+                        if (IsInOpen)
+                            continue;
 
                         bool IsInClosed = false;
                         foreach (Node nf in closedList)
@@ -522,7 +525,6 @@ public class CubeWorldGenerator : MonoBehaviour
                 }
             }
         }
-        //Debug.Log("Fail");
 
         return null;
     }
@@ -583,7 +585,7 @@ public class CubeWorldGenerator : MonoBehaviour
                     int y = current.y + j;
                     int z = current.z + k;
 
-                    if (isPosInBounds(x, y, z))
+                    if (IsPosInBounds(x, y, z))
                     {
                         cell = cells[x, y, z];
                         result.Add(cell);
@@ -660,7 +662,7 @@ public class CubeWorldGenerator : MonoBehaviour
         return Mathf.Sin(Mathf.PI * Mathf.PerlinNoise(a, b));
     }
 
-    public bool isPosInBounds(int coordX, int coordY, int coordZ)
+    public bool IsPosInBounds(int coordX, int coordY, int coordZ)
     {
         return coordX >= 0 && coordX < size && coordY >= 0 && coordY < size && coordZ >= 0 && coordZ < size;
     }
@@ -773,12 +775,12 @@ public class CubeWorldGenerator : MonoBehaviour
     private void OnValidate()
     {
         if (!Application.isPlaying) return;
-        foreach (Path p in paths)
+        /*foreach (Path p in paths)
         {
-            if (p.initiated)
+            if (p!= null && p.initiated)
                 p.dirty = true;
         }
-        UpdateWorld();
+        UpdateWorld();*/
     }
 #endif
 }

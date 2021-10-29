@@ -1,6 +1,6 @@
 
 
-### Get out of my pond!
+### Get Out Of My Swamp!
 
 
 
@@ -34,11 +34,11 @@ Se desarrolla para navegadores web y móviles y es para todos los públicos. El 
 
 El modelo de monetización dependerá del desempeño económico del producto una vez lanzado al mercado. Se han estructurado 3 posibles casos: ruta optimista, ruta normal, ruta pesimista.
 
-![](https://lh3.googleusercontent.com/NDok-owYDmq-nwNgygDbRXiC_imSoQfDmGG--ZBRdhj06D-Gra9gRHcpBK-UgUpN9wqcpNrYbVjkmJv8gvRJvbv_m8-sO3VaA3N30WNo2yMRoYWLCQ1BDHIchIngL1WyXdZhekcp=s0)
+![Ruta Optimista 2](https://user-images.githubusercontent.com/56488179/139238880-8860ddc7-279e-4836-b721-d27ed36f9ebd.jpg)
 
-![](https://lh5.googleusercontent.com/yLeVvIKrbgzTepkci_sdpZwFOD4xHR-sfVYYtzEeKjQ6LuV9q3_To2p_3tYslYGGOk1IOkCN2wDLkIdDePRQswpZftIUGr7SQZNl6p8MkT2oxJ1U8Ec13ciUD6yZvwZeUkitSFc6=s0)
+![Ruta Normal 2](https://user-images.githubusercontent.com/56488179/139238908-71ff0b96-5043-4a57-bc40-45395381ac53.jpg)
 
-![](https://lh6.googleusercontent.com/qtqYHgtjQsrfuDW2jzYMS6uORjEzjM1dH7jmhMES1awgUNY3AevEl5UOzc_10r92SlEo8O1f5x5UMYijkVQKC_15Q1pSoWWwYCZl0PBZe-dqzdw0vG6RoCIt5AK4DzaX2rLJqLVC=s0)
+![Ruta Pesimista 2](https://user-images.githubusercontent.com/56488179/139238939-7d72531e-c0d7-48d5-8773-f88fb6ec8354.jpg)
 
 Nuestro cliente se trata de una persona con una fuerte presencia del arte en su vida. Es una persona sencilla, amable, dulce y optimista, la cual quiere o la gustaría poder dedicarse al arte y vivir de ello, siendo reconocida por más gente del gremio aunque para ello debe competir contra gente con talento en una situación laboral un tanto delicada.
 
@@ -46,7 +46,7 @@ Nuestro cliente se trata de una persona con una fuerte presencia del arte en su 
 
 ### 2.2 Mapa de lienzo
 
-![lienzo](https://user-images.githubusercontent.com/56488179/139027865-52553938-30dd-4256-9999-9de7453164f4.png)
+![lienzo](https://user-images.githubusercontent.com/56488179/139236673-cd2449f1-2d47-4c1d-9013-9da3400c528b.png)
 
 
 ### 2.3 Tablas de productos y precios
@@ -156,7 +156,7 @@ Los niveles se conforman de grids y hay distintas variantes de las celdas. Los n
 | TORRE PESADA   | Largo     | Elevado | ÁreaTT\*          | Lento               | \-                                |
 | TORRE BÁSICA   | Medio     | Medio   | IndividualTA-TT\* | Medio               | \-                                |
 | TORRE PSÍQUICA | Corto     | Bajo    | IndividualTT\*    | Medio               | El enemigo se ralentiza           |
-| TORRE MORTERO  | Medio     | Bajo    | ÁreaTA-TT\*       | Rápido              | Prioriza ataque a enemigos aéreos |
+| TORRE MONTAÑA  | Medio     | Bajo    | ÁreaTA-TT\*       | Rápido              | Prioriza ataque a enemigos aéreos |
 | **TRAMPAS**    |           |         |                   |                     |                                   |
 | TRAMPA PANTANO | 1 Casilla | \-      | ÁreaTT\*          | \-                  | Ralentiza                         |
 
@@ -191,7 +191,7 @@ Hay 2 personajes característicos en el juego:el líder de las ranas limpias y e
 
 ### 5.3 Entornos y lugares
 
-Al haber 2 niveles jugables pero se han pensado en 3 entornos o biomas: pantano, nieve y ciudad.
+Hay 3 niveles jugables y se han pensado en 3 entornos o biomas: pantano, nieve y ciudad.
 
 - Pantano: el estanque de las ranas limpias es un estanque limpio, vívido y con nenúfares mientras que el estanque de las ranas sucias es oscuro, con lodo y fango.
 - Ciudad: el estanque de las ranas limpias se encuentra en un parque, con bancos y papeleras; mientras que las ranas sucias vienen de las alcantarillas.
@@ -206,18 +206,76 @@ Al haber 2 niveles jugables pero se han pensado en 3 entornos o biomas: pantano,
 
 ### 6.1 Estética general del juego
 
-El apartado visual consistirá en modelos voxel, tanto para el escenario como para las torres y los enemigos.
+Los gráficos del juego serían principalmente 3D, de estética y técnica Voxel Art, tanto para el escenario como para la representación física de defensas y enemigos. Por otro lado, todo lo relacionado con la interfaz, el HUD y otros elementos varios (cartas de personajes, información adicional, etc) serán en 2D.
+
+Con todo, la estética general del juego estará basada en el minimalismo, con colores planos y suaves, es decir, no muy saturados y con alta luminosidad.
 
 
 ### 6.2 Apartado visual
 
-Existen distintos climas/biomas para los niveles.
+Siguiendo en todo momento la línea estética general del juego, se diferenciarán diversos elementos del apartado visual:
+
+- **Escenario**.
+
+El escenario será un hexaedro regular o cubo, limitado por seis caras del mismo tamaño y generado a partir de unidades definidas en formato Voxel. Por la superficie del poliedro estarán repartidas zonas elevadas, zonas llanas y caminos, cada uno diferenciado por un color específico. Por último, una de las caras contendrá la charca, es decir, el elemento a defender.
+
+![](https://lh5.googleusercontent.com/1pp7M7gs_g1WoIg_xEuAlbCaI-q7GpncsJo5DxNHqUQL1ByV5s9OGFHVqFiTTYkGQAjDMign6c0eZUf87mPH5SDK2_bB-pbNMn-9uj5dNo75ePGSPz11JoL5_9HwieehbhHEpByZ)
+
+Así pues, en una primera instancia, se limitan los colores del escenario jugable a cuatro.
+
+Se planea incluir diversos biomas u escenarios jugables, cada uno de ellos basado en una paleta de colores diferenciada;
+
+Bioma Pantano:
+
+![](https://lh4.googleusercontent.com/TXgQWhpVlt83etDjwyYZxmVOVPrlITub35fW6DAcFtA7LPzNhg3M7nMgYrNafSEyJ20paOBGp5wyTFgmkCkk-GYfFl1u3ooGeAzqImXpHy3aheO0lrHU4wik3ZZYzqpsGvj-WL_Z)
+
+![](https://lh5.googleusercontent.com/rK1Dd5JWwy1GxaCoPw6uzcGak2qy_9cbq-xHiRPymrxKhMh4TFVeFv0a6Zl4Uu91OFZW7Kf2yeLaik4JcB2CMBWRmC97kNLvhFVIq-XcEEPfvwAeC9l9Nj45nsOXgikCjeNt13u7)
+
+
+Bioma Ciudad:
+
+![](https://lh6.googleusercontent.com/Z41MUXJ7gsGdB0-wqKRionSkHEM7b0xHw2xt5lHWmSbZVd8jw5R1l-QMfFdtzLF-Hmd7l831v-c1z9vijDtHBnatru3Xj26GpkPvsK-eWeHLULY_-Ki46UXsw2BF9tqVgKnxPi4j)
+
+![](https://lh6.googleusercontent.com/ASA0QnjXO-dbM1D6dp4Rvd5GMp41v-_T6zwML90An7MpX2yYpfsXZUPi5RbpV2A0RamsDm2j-jmorlBmVXc9D14YAohFmSMxr7kL_hMfD1FGYAFQm1TlfeZ-4VzBPz0aG9ZEjoZT)
+
+
+Bioma Montaña:
+
+![](https://lh4.googleusercontent.com/BK7V2ioEAjoyQnGm7btwQTIIZejfD8ZpiHLmawmiaaD-DrBs647Yx6qjIlPKCiOrht3NV9W28lh3p_V5Z28jlGwWc9kJnl_4ULSFMy1FiRs9qizqyaVCPhjqrk78uTqrp3hNrKuE)
+
+![](https://lh5.googleusercontent.com/AZ-85cmuXKm2jMr9DdmTxCduSSe7394JMhqrcEQBTV-8728i2_fs2FbrR8CIKmWwq_K4elSYTttiHMw3PbmvKVQ9ZpDRKNnWulx2wJtAUYUVHIer9HSS2pcDGWK6wAiTRKc8pArr)
+
+Otros biomas:
+
+![](https://lh5.googleusercontent.com/pCXfBnfKCp12tBGAqrz_iixI9uXFEhYbyeM49xcxCWKXDhxbzPcPPdqNF7SUs7KB145WxYBPg7mwlvkVP6AptwDWy7o2m8xY82EaDP3gtb4DAlJru1ZGoRPpUliR0CEQlaWqv1OD)
+
+![](https://lh3.googleusercontent.com/sZM54ldy0WYvTPkmVwHaDWvQA5AxngABtHF8KJui1eTovgTu9EuEFM6PweAag9n3FWCKl7JXVbOHLXRHcAuTjNh3F2RRyddz6-hI7ra0Aa8PuNhc_57iba3Apb0qG1kBLFKADIUJ)
+
+- **Personajes**
+
+La representación en el escenario tanto de las defensas como de los enemigos serán modelos Voxel de dimensiones 16x16x16 voxeles.
+
+- Torre básica:
+
+![](https://lh5.googleusercontent.com/XNT-bL2hfcgTNgpkOQsYFB5iP4YnurFkLsm7gyMbDb4IRbBP2g8J4YSuQupDQS8a_RXvc7q3q0-2JE_9D7VLZQGJyOSh7ZMQV6bNyDTu0dnPl2kqX39gIiY5j7NxJEIa6T9gV-5U)
+
+- Torre pesada:
+- Torre psíquica:
+- Torre montañosa:
+- Enemigos:
+
+A su vez, la representación mediante cartas o pantallas de información será en gráficos 2D acorde a las descripciones de la estética general y al resto de elementos 2D.
+
+Ejemplo, torreta pesada:
+
+![](https://lh4.googleusercontent.com/Dzd7nWF57Rs77VOYupw-UyEDxH8ne5-6BegqIbMsGoOlOjXHHTOmph_U8cBsECglTBBoB5a21ZOJfKTo5pBb2WBmR24A_NquxksyRXWxeH6uMW1kYXeZau0la7q7CbZvrNM9ieAf)
 
 
 ### 6.3 Música
 
 
 ### 6.4 Ambiente sonoro
+
 
 
 ## 

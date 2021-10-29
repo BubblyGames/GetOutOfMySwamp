@@ -14,6 +14,7 @@ public class WaveController : MonoBehaviour
     public int activeEnemies = 0;
     public List<EnemyBehaviour> enemies;
 
+    private Coroutine spawncoroutine;
 
     [Range(0f, 0.5f)]
     public float randomRange = 0.25f;
@@ -30,7 +31,7 @@ public class WaveController : MonoBehaviour
 
     public int waveCount; // Wave its being played
 
- 
+
     ///public Text waveText;
 
     EnemySpawner enemySpawner;
@@ -43,29 +44,48 @@ public class WaveController : MonoBehaviour
         }
         else
         {
-            Destroy(this);
+            Destroy(gameObject);
         }
         enemySpawner = GetComponent<EnemySpawner>();
         enemies = new List<EnemyBehaviour>();
+
+        if (GameManager.instance != null)
+        {
+            WorldInfo worldInfo = GameManager.instance.GetCurrentWorld();
+            waves = worldInfo.waves;
+        }
     }
 
     public void Start()
     {
         isWaveActive = false;
-        isBetweenWaves = true;
+        //isBetweenWaves = false;
 
         waveCount = 0;
 
-        timeVariable = Time.time + (.5f * timeBeforeRoundStarts);
-        LevelManager.instance.OnGameLost += StopWave;
-        LevelManager.instance.OnGameLost += LevelCompleted;
+        timeVariable = Time.time + (timeBeforeRoundStarts);
 
+        //LevelManager.OnGameLost += StopSpawning;
+        LevelManager.OnGameCompleted += LevelCompleted;
+
+    }
+
+    private void OnEnable()
+    {
+
+        LevelManager.OnGameStart += StartWaves;
+    }
+
+    private void StartWaves()
+    {
+        this.isBetweenWaves = true;
     }
 
     private void LevelCompleted()
     {
         if (LevelStats.instance.CurrentBaseHealthPoints > 0)
         {
+            Debug.Log("Level Complete");
             allWavesCleared = true;
         }
     }
@@ -77,13 +97,13 @@ public class WaveController : MonoBehaviour
             isBetweenWaves = false;
             isWaveActive = false;
             allWavesCleared = false;
-            UIController.instance.EnableEndgameMenu();
+
         }
-        if (allWavesCleared)
+        else if (allWavesCleared)
         {
             isBetweenWaves = false;
             isWaveActive = false;
-            UIController.instance.EnableEndgameMenu();
+
 
         }
         else if (isBetweenWaves)
@@ -92,7 +112,7 @@ public class WaveController : MonoBehaviour
             {
                 isBetweenWaves = false;
                 isWaveActive = true;
-                StartCoroutine("SpawnWave");
+                spawncoroutine = StartCoroutine(SpawnWave());
                 return;
             }
         }
@@ -127,31 +147,30 @@ public class WaveController : MonoBehaviour
         Wave currentWave = new Wave();
         if (waveCount >= waves.Length)
         {
-            LevelManager.instance.levelCompleted();
+            LevelManager.instance.LevelCompleted();
+
         }
         else
         {
             currentWave = waves[waveCount];
-        }
 
 
-        for (int i = 0; i < currentWave.packs.Length; i++)
-        {
-            Pack p = currentWave.packs[i];
-            for (int j = 0; j < p.enemyAmount; j++)
+            for (int i = 0; i < currentWave.packs.Length; i++)
             {
-                int pathId = Random.Range(0, CubeWorldGenerator.instance.nPaths);
-                enemySpawner.SpawnEnemy(p.enemyType, CubeWorldGenerator.instance.paths[pathId]);
-                yield return new WaitForSeconds((1f / currentWave.spawnRate) + Random.Range(0f, randomRange)); //randomness between 
+                Pack p = currentWave.packs[i];
+                for (int j = 0; j < p.enemyAmount; j++)
+                {
+                    int pathId = Random.Range(0, WorldManager.instance.nPaths);
+                    enemySpawner.SpawnEnemy(p.enemyType, WorldManager.instance.paths[pathId]);
+                    yield return new WaitForSeconds((1f / currentWave.spawnRate) + Random.Range(0f, randomRange)); //randomness between 
+                }
             }
         }
-
-
     }
 
-    void StopWave()
+    /*void StopSpawning()
     {
         StopCoroutine("SpawnWave");
-        isGameOver = true;
-    }
+ 
+    }*/
 }

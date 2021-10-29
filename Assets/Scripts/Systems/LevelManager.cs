@@ -27,7 +27,7 @@ public class LevelManager : MonoBehaviour
     private Shop shop;
 
     //Actions
-    public event Action OnGameStarted, OnGameLost, OnGameCompleted;
+    public static event Action OnGameStart, OnGameLost, OnGameCompleted;
     public event Action<int> OnDamageTaken;
     public event Action<int, int> OnEnemyKilled;
 
@@ -46,44 +46,27 @@ public class LevelManager : MonoBehaviour
         }
         else
         {
-            Destroy(this);
+            Destroy(gameObject);
         }
-
+        
         world = GetComponent<CubeWorldGenerator>();
         waveController = GetComponent<WaveController>();
         scoreSystem = GetComponent<ScoreSystem>();
         levelStats = GetComponent<LevelStats>();
         buildManager = GetComponent<BuildManager>();
         shop = GetComponent<Shop>();
+
     }
 
     private void Start()
     {
-        OnGameStarted?.Invoke();
+        OnGameStart?.Invoke();
     }
 
     private void Update()
     {
-        text.text = Mathf.Round((1 / Time.deltaTime)).ToString(); //FpS text
+        text.text = Mathf.Round((1 / Time.deltaTime)).ToString(); //FpS 
 
-        //if (Input.GetMouseButtonDown(0))
-        //{
-        //    Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-
-        //    RaycastHit hit = new RaycastHit();
-
-        //    if (Physics.Raycast(ray, out hit))
-        //    {
-        //        if (hit.collider.tag == "World")
-        //        {
-        //            checkWorldCoordinates(hit);
-        //        }
-        //        else
-        //        {
-        //            //Interact with existing defenses
-        //        }
-        //    }
-        //}
     }
 
 
@@ -102,18 +85,21 @@ public class LevelManager : MonoBehaviour
             Debug.Log("Game Over");
 
             // Show Game Over Screen
-            //Go to menu
+            GameOver();
         }
     }
 
-    public void levelCompleted()
+    public void GameOver()
     {
-        Debug.Log("levelCompleted");
-        OnGameCompleted?.Invoke();
-
+        UIController.instance.ShowMenu(UIController.GameMenu.EndgameMenu);
     }
 
-    
+    public void LevelCompleted()
+    {
+        OnGameCompleted?.Invoke();
+        UIController.instance.ShowMenu(UIController.GameMenu.EndgameMenu);
+    }
+
 }
 
 

@@ -35,12 +35,19 @@ public class CameraBehaviour : MonoBehaviour
 
     private void Awake()
     {
-        instance = this;
+        if (instance == null)
+        {
+            instance = this;
+        }
+        else
+        {
+            Destroy(this);
+        }
     }
 
     private void Start()
     {
-        _target = CubeWorldGenerator.instance.center;
+        _target = WorldManager.instance.GetCenter();
     }
 
     void Update()

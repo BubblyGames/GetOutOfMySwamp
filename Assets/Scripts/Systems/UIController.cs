@@ -1,5 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
+using System;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -8,23 +7,22 @@ public class UIController : MonoBehaviour
 {
     public static UIController instance;
 
-
     [Header("Menus")]
     public GameObject upgradeMenu;
     public GameObject shopMenu;
+    public GameObject pauseMenu;
     public GameObject endgameMenu;
 
-
-    [Header("LevelToRestart")]
-    public int levelToRestart;
-    public enum Menus
+    private int gameSceneId;
+    public enum GameMenu
     {
         UpgradeMenu,
-        ShopMenu,
-        EndgameMenu
+        PauseMenu,
+        EndgameMenu,
+        Game
     }
 
-    public Menus menus;
+    public GameMenu selectedMenu;
 
     private void Awake()
     {
@@ -34,77 +32,113 @@ public class UIController : MonoBehaviour
         }
         else
         {
-            Destroy(this);
+            Destroy(gameObject);
         }
 
-        levelToRestart = SceneManager.GetActiveScene().buildIndex;
+        gameSceneId = SceneManager.GetActiveScene().buildIndex;
     }
 
-    public void EnableUpdateMenu()
+    public void ShowMenu(GameMenu menu)
     {
-        upgradeMenu.SetActive(true);
+        //Shows the selected manu and hides all other menus
+        //Also sets up time scale
+        switch (menu)
+        {
+            case GameMenu.UpgradeMenu:
+                upgradeMenu.SetActive(true);
+                pauseMenu.SetActive(false);
+                Time.timeScale = 1;
+                break;
+            case GameMenu.PauseMenu:
+                pauseMenu.SetActive(true);
+                upgradeMenu.SetActive(false);
+                Time.timeScale = 0;
+                break;
+            case GameMenu.EndgameMenu:
+                endgameMenu.SetActive(true);
+                upgradeMenu.SetActive(false);
+                pauseMenu.SetActive(false);
+                GameObject.Find("FinalScoreText").GetComponent<UnityEngine.UI.Text>().text = "Score: " + LevelStats.instance.currentScore;
+                Time.timeScale = 1;
+                break;
+            case GameMenu.Game:
+                shopMenu.SetActive(true);
+                upgradeMenu.SetActive(false);
+                pauseMenu.SetActive(false);
+                endgameMenu.SetActive(false);
+                Time.timeScale = 1;
+                break;
+            default:
+                break;
+        }
     }
 
-    public void DisableUpdateMenu()
+    internal void ShowSelectedMenu()
     {
-        upgradeMenu.SetActive(false);
-    }
-
-    public void EnableEndgameMenu()
-    {
-        upgradeMenu.SetActive(false);
-        shopMenu.SetActive(false);
-        endgameMenu.SetActive(true);
+        //Shows selected menu
+        ShowMenu(selectedMenu);
     }
 
     public void Restart()
     {
-        endgameMenu.SetActive(false);
-        SceneManager.LoadScene(levelToRestart);
-    }
-
-    public void SetMenuActive()
-    {
-        switch (menus)
+        //Restarts game
+        Time.timeScale = 1;
+        if (SceneController.instance)
         {
-            case Menus.UpgradeMenu:
-                upgradeMenu.SetActive(true);
-
-                break;
-            case Menus.ShopMenu:
-                shopMenu.SetActive(true);
-                break;
-            case Menus.EndgameMenu:
-                endgameMenu.SetActive(true);
-                break;
-            default:
-                break;
+            SceneController.instance.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        }
+        else
+        {
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         }
     }
 
-    public void SetMenuInactive()
+    public void Exit()
     {
-        switch (menus)
+        //Goes back to main menu
+        Time.timeScale = 1;
+        if (SceneController.instance)
         {
-            case Menus.UpgradeMenu:
-                upgradeMenu.SetActive(false);
-                break;
-            case Menus.ShopMenu:
-                shopMenu.SetActive(false);
-                break;
-            case Menus.EndgameMenu:
-                endgameMenu.SetActive(false);
-                break;
-            default:
-                break;
+            SceneController.instance.LoadScene(0);
+        }
+        else
+        {
+            SceneManager.LoadScene(0);
         }
     }
 
-    public void ChangeToMainScene()
+    public void GoToNextLevel()
     {
-        SceneManager.LoadScene(0);
+        //Goes to next level
+        Time.timeScale = 1;
+        if (SceneController.instance && GameManager.instance.IncreaseCurrentWorldId())
+        {
+            SceneController.instance.LoadScene(1);
+        }
+        else
+        {
+            SceneController.instance.LoadScene(0);
+        }
     }
+
+    public void SlowGame()
+    {
+        //TODO try to slow to stop game when gameover
+    }
+
+    public void Pause()
+    {
+        ShowMenu(GameMenu.PauseMenu);
+    }
+
+    public void Continue()
+    {
+        ShowMenu(GameMenu.Game);
+    }
+
+    
 }
+
 
 #if UNITY_EDITOR
 [CustomEditor(typeof(UIController))]
@@ -112,16 +146,11 @@ public class UIControllerEditor : Editor
 {
     public override void OnInspectorGUI()
     {
-        UIController uIcontroller = (UIController) target;
+        UIController uIcontroller = (UIController)target;
         DrawDefaultInspector();
         if (GUILayout.Button("Enable"))
         {
-            uIcontroller.SetMenuActive();
-        }
-
-        if (GUILayout.Button("Disable"))
-        {
-            uIcontroller.SetMenuInactive();
+            uIcontroller.ShowSelectedMenu();
         }
     }
 }

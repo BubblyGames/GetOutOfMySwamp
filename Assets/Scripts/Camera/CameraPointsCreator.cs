@@ -24,7 +24,7 @@ public class CameraPointsCreator : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        center = CubeWorldGenerator.instance.center;
+        center = WorldManager.instance.GetCenter();
         positions = new List<GameObject>();
         createPositions();
     }
