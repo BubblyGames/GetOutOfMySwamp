@@ -34,9 +34,9 @@ public class LevelSelector : MonoBehaviour
     {
         CreateWorldList();
     }
-    public void SelectLevel(string levelId)
+    public void SelectLevel(int levelId)
     {
-        SceneManager.LoadScene(levelId);
+        SceneController.instance.LoadScene(levelId);
     }
 
     public void NextWorld()
@@ -80,7 +80,7 @@ public class LevelSelector : MonoBehaviour
     public void SelectWorld()
     {
         GameManager.instance.currentWorldId = selectedWorld;
-        SceneManager.LoadScene("level01");
+        SceneManager.LoadScene("Game");
     }
 
     public void DoneChanging()
