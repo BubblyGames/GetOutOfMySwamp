@@ -11,12 +11,11 @@ public class GameManager : MonoBehaviour
     public EnemyLibrary enemyLibrary;
     public AudioManager audioManager;
 
-    public int actualLevel;
-    internal WorldInfo worldInfo = null;
 
+    public int currentWorldId = 0;
     //list containing different level stats and enemies waves 
     internal List<WorldInfo> worldList = new List<WorldInfo>();
-    public Wave[][] wavesLevelsList;
+    internal bool initiated = false;
 
     private void Awake()
     {
@@ -34,12 +33,25 @@ public class GameManager : MonoBehaviour
 
     void Start() 
     {
-        AudioManager.instance.Play("mainMenuSong");
+        AudioManager.instance.Play("mainMenuSong");//Pls change asap
     }
 
-    public void SetNextLevelWorld()
+    public void SetNextLevelWorld(int nextWorld)
     {
-        actualLevel++;
-        worldInfo=worldList[actualLevel];
+        currentWorldId = nextWorld;
+    }
+
+    public bool IncreaseCurrentWorldId()
+    {
+        if (currentWorldId >= worldList.Count - 1)
+            return false;
+
+        currentWorldId++;
+        return true;
+    }
+
+    public WorldInfo GetCurrentWorld()
+    {
+        return worldList[currentWorldId];
     }
 }
