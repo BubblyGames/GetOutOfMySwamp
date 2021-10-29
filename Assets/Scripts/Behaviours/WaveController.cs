@@ -31,7 +31,7 @@ public class WaveController : MonoBehaviour
 
     public int waveCount; // Wave its being played
 
- 
+
     ///public Text waveText;
 
     EnemySpawner enemySpawner;
@@ -49,7 +49,7 @@ public class WaveController : MonoBehaviour
         enemySpawner = GetComponent<EnemySpawner>();
         enemies = new List<EnemyBehaviour>();
 
-       
+
     }
 
     public void Start()
@@ -59,9 +59,9 @@ public class WaveController : MonoBehaviour
 
         waveCount = 0;
 
-        timeVariable = Time.time + ( timeBeforeRoundStarts);
+        timeVariable = Time.time + (timeBeforeRoundStarts);
 
-        LevelManager.OnGameLost += StopSpawning;
+        //LevelManager.OnGameLost += StopSpawning;
         LevelManager.OnGameCompleted += LevelCompleted;
 
     }
@@ -144,7 +144,7 @@ public class WaveController : MonoBehaviour
         if (waveCount >= waves.Length)
         {
             LevelManager.instance.LevelCompleted();
-            
+
         }
         else
         {
@@ -166,9 +166,9 @@ public class WaveController : MonoBehaviour
 
     }
 
-    void StopSpawning()
+    /*void StopSpawning()
     {
-        StopCoroutine(spawncoroutine);
+        StopCoroutine("SpawnWave");
  
-    }
+    }*/
 }
