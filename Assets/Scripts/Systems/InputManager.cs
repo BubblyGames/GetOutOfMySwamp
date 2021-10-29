@@ -148,7 +148,7 @@ public class InputManager : MonoBehaviour
                     break;
                 case "Structure":
                     //Interact with existing defenses
-                    UIController.instance.EnableUpdateMenu();
+                    UIController.instance.ShowMenu(UIController.GameMenu.UpgradeMenu);
                     BuildManager.instance.SetSelectedStructure(hit.collider.gameObject.GetComponent<Structure>());
                     break;
                 default:

@@ -32,7 +32,8 @@ public class LevelSelector : MonoBehaviour
 
     private void Start()
     {
-        CreateWorldList();
+        if (!GameManager.instance.initiated)
+            CreateWorldList();
     }
     public void SelectLevel(int levelId)
     {
@@ -73,6 +74,7 @@ public class LevelSelector : MonoBehaviour
             worldInfo.waves = worlds[i].GetComponent<WaveInfo>().waves;
             GameManager.instance.worldList.Add(worldInfo);
         }
+        GameManager.instance.initiated = true;
     }
 
     public void SelectWorld()

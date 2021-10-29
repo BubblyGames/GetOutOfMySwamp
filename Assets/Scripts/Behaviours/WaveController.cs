@@ -112,7 +112,7 @@ public class WaveController : MonoBehaviour
             {
                 isBetweenWaves = false;
                 isWaveActive = true;
-                spawncoroutine = StartCoroutine("SpawnWave");
+                spawncoroutine = StartCoroutine(SpawnWave());
                 return;
             }
         }
@@ -166,8 +166,6 @@ public class WaveController : MonoBehaviour
                 }
             }
         }
-
-
     }
 
     /*void StopSpawning()

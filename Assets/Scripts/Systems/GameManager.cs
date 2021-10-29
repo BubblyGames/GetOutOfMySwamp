@@ -15,6 +15,7 @@ public class GameManager : MonoBehaviour
     public int currentWorldId = 0;
     //list containing different level stats and enemies waves 
     internal List<WorldInfo> worldList = new List<WorldInfo>();
+    internal bool initiated = false;
 
     private void Awake()
     {
@@ -38,6 +39,15 @@ public class GameManager : MonoBehaviour
     public void SetNextLevelWorld(int nextWorld)
     {
         currentWorldId = nextWorld;
+    }
+
+    public bool IncreaseCurrentWorldId()
+    {
+        if (currentWorldId >= worldList.Count - 1)
+            return false;
+
+        currentWorldId++;
+        return true;
     }
 
     public WorldInfo GetCurrentWorld()

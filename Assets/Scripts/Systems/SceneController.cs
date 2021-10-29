@@ -39,23 +39,25 @@ public class SceneController : MonoBehaviour
     private IEnumerator FadeScene(int index, float duration, float waitTime)
     {
         //TO DO: find a better way to do this
+        fader = GameObject.Find("FadeImage").GetComponent<Image>();
         fader.enabled = true;
         for (float t = 0; t < 1; t += Time.deltaTime / duration)
         {
             fader.color = new Color(0, 0, 0, Mathf.Lerp(0, 1, t));
             yield return null;
         }
-
+        fader = null;
         SceneManager.LoadScene(index);
         //yield return new WaitForSeconds(waitTime);
 
         //TO DO: fix this (by Joy)
-        while (!SceneManager.GetSceneByBuildIndex(index).isLoaded)
+        while (fader == null)
         {
+            fader = GameObject.Find("FadeImage").GetComponent<Image>();
             yield return null;
         }
 
-        fader = GameObject.Find("FadeImage").GetComponent<Image>();
+       
         for (float t = 0; t < 1; t += Time.deltaTime / duration)
         {
             fader.color = new Color(0, 0, 0, Mathf.Lerp(1, 0, t));

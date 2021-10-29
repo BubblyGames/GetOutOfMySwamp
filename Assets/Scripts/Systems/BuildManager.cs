@@ -144,9 +144,8 @@ public class BuildManager : MonoBehaviour
 
     public void SellStructure()
     {
-        UIController.instance.DisableUpdateMenu();
         Debug.Log("Selling: " + selectedStructure.name);
-        UIController.instance.DisableUpdateMenu();
+        UIController.instance.ShowMenu(UIController.GameMenu.Game);
         selectedStructure.Sell();
         selectedCell.structure = null;
         LevelStats.instance.EarnMoney(50);

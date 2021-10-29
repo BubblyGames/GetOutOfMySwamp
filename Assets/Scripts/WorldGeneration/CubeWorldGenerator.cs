@@ -52,6 +52,7 @@ public class CubeWorldGenerator : MonoBehaviour
 
         if (!demo && GameManager.instance != null)
         {
+            Debug.Log("Loading level: " + GameManager.instance.currentWorldId);
             WorldInfo worldInfo = GameManager.instance.GetCurrentWorld();
             nPaths = worldInfo.nPaths;
             wallDensity = worldInfo.wallDensity;
