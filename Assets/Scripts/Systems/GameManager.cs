@@ -15,7 +15,6 @@ public class GameManager : MonoBehaviour
     public int currentWorldId = 0;
     //list containing different level stats and enemies waves 
     internal List<WorldInfo> worldList = new List<WorldInfo>();
-    public Wave[][] wavesLevelsList;
 
     private void Awake()
     {
@@ -33,7 +32,7 @@ public class GameManager : MonoBehaviour
 
     void Start() 
     {
-        AudioManager.instance.Play("mainMenuSong");
+        AudioManager.instance.Play("mainMenuSong");//Pls change asap
     }
 
     public void SetNextLevelWorld(int nextWorld)

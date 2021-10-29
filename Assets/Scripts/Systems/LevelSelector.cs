@@ -8,7 +8,7 @@ public class LevelSelector : MonoBehaviour
 {
     public static LevelSelector instance;
 
-    int selectedWorld = 0;
+    public int selectedWorld = 0;
     internal bool changing = false;
 
     public GameObject mainMenuPanel;
@@ -70,17 +70,16 @@ public class LevelSelector : MonoBehaviour
             worldInfo.rockSize = worlds[i].rockSize;
             worldInfo.numberOfMidpoints = worlds[i].numberOfMidpoints;
             worldInfo.material = worlds[i].GetComponent<MeshRenderer>().material;
+            worldInfo.waves = worlds[i].GetComponent<WaveInfo>().waves;
             GameManager.instance.worldList.Add(worldInfo);
-
-            //set the waves of enemies for that level
-            //GameManager.instance.wavesLevelsList[i]= enemies[i];
         }
     }
 
     public void SelectWorld()
     {
+        //Loads game scene with selected world
         GameManager.instance.currentWorldId = selectedWorld;
-        SceneManager.LoadScene("Game");
+        SceneController.instance.LoadScene(1);
     }
 
     public void DoneChanging()

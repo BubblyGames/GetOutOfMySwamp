@@ -49,7 +49,11 @@ public class WaveController : MonoBehaviour
         enemySpawner = GetComponent<EnemySpawner>();
         enemies = new List<EnemyBehaviour>();
 
-
+        if (GameManager.instance != null)
+        {
+            WorldInfo worldInfo = GameManager.instance.GetCurrentWorld();
+            waves = worldInfo.waves;
+        }
     }
 
     public void Start()
