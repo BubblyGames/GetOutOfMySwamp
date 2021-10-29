@@ -79,8 +79,7 @@ public class LevelSelector : MonoBehaviour
 
     public void SelectWorld()
     {
-        GameManager.instance.worldInfo = GameManager.instance.worldList[selectedWorld];
-        GameManager.instance.actualLevel = selectedWorld;
+        GameManager.instance.currentWorldId = selectedWorld;
         SceneManager.LoadScene("level01");
     }
 

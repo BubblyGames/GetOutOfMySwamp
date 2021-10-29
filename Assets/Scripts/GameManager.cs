@@ -11,9 +11,8 @@ public class GameManager : MonoBehaviour
     public EnemyLibrary enemyLibrary;
     public AudioManager audioManager;
 
-    public int actualLevel;
-    internal WorldInfo worldInfo = null;
 
+    public int currentWorldId = 0;
     //list containing different level stats and enemies waves 
     internal List<WorldInfo> worldList = new List<WorldInfo>();
     public Wave[][] wavesLevelsList;
@@ -37,9 +36,13 @@ public class GameManager : MonoBehaviour
         AudioManager.instance.Play("mainMenuSong");
     }
 
-    public void SetNextLevelWorld()
+    public void SetNextLevelWorld(int nextWorld)
     {
-        actualLevel++;
-        worldInfo=worldList[actualLevel];
+        currentWorldId = nextWorld;
+    }
+
+    public WorldInfo GetCurrentWorld()
+    {
+        return worldList[currentWorldId];
     }
 }

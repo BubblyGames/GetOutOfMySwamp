@@ -50,15 +50,15 @@ public class CubeWorldGenerator : MonoBehaviour
         worldCenter.transform.parent = transform;
         center = worldCenter.transform;
 
-
-        if (!demo && GameManager.instance != null && GameManager.instance.worldInfo != null)
+        if (!demo && GameManager.instance != null)
         {
-            nPaths = GameManager.instance.worldInfo.nPaths;
-            wallDensity = GameManager.instance.worldInfo.wallDensity;
-            rocksVisualReduction = GameManager.instance.worldInfo.rocksVisualReduction;
-            rockSize = GameManager.instance.worldInfo.rockSize;
-            numberOfMidpoints = GameManager.instance.worldInfo.numberOfMidpoints;
-            GetComponent<MeshRenderer>().material = GameManager.instance.worldInfo.material;
+            WorldInfo worldInfo = GameManager.instance.GetCurrentWorld();
+            nPaths = worldInfo.nPaths;
+            wallDensity = worldInfo.wallDensity;
+            rocksVisualReduction = worldInfo.rocksVisualReduction;
+            rockSize = worldInfo.rockSize;
+            numberOfMidpoints = worldInfo.numberOfMidpoints;
+            GetComponent<MeshRenderer>().material = worldInfo.material;
         }
     }
 

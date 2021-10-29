@@ -1,9 +1,6 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using UnityEngine.UI;
 
 public class UIController : MonoBehaviour
 {
@@ -15,7 +12,7 @@ public class UIController : MonoBehaviour
     public GameObject pauseMenu;
     public GameObject endgameMenu;
 
-    private int levelToRestart;
+    private int gameSceneId;
     public enum Menus
     {
         UpgradeMenu,
@@ -37,7 +34,7 @@ public class UIController : MonoBehaviour
             Destroy(gameObject);
         }
 
-        levelToRestart = SceneManager.GetActiveScene().buildIndex;
+        gameSceneId = SceneManager.GetActiveScene().buildIndex;
     }
 
     public void EnableUpdateMenu()
@@ -78,7 +75,6 @@ public class UIController : MonoBehaviour
         {
             case Menus.UpgradeMenu:
                 upgradeMenu.SetActive(true);
-
                 break;
             case Menus.ShopMenu:
                 shopMenu.SetActive(true);
@@ -86,7 +82,6 @@ public class UIController : MonoBehaviour
             case Menus.PauseMenu:
                 pauseMenu.SetActive(true);
                 break;
-
             case Menus.EndgameMenu:
                 EnableEndgameMenu();
                 break;
@@ -118,11 +113,11 @@ public class UIController : MonoBehaviour
 
     public void Toggle()
     {
-        if (endgameMenu.activeSelf==false)
+        if (endgameMenu.activeSelf == false)
         {
             endgameMenu.SetActive(true);
             GameObject.Find("FinalScoreText").GetComponent<UnityEngine.UI.Text>().text = "Score: " + LevelStats.instance.currentScore;
-            Time.timeScale = 0;      
+            Time.timeScale = 0;
         }
         else
         {
@@ -162,13 +157,16 @@ public class UIController : MonoBehaviour
         Toggle();
         if (SceneController.instance)
         {
-            SceneController.instance.LoadScene(levelToRestart);
+            SceneController.instance.LoadScene(gameSceneId);
+        }
+        else if (GameManager.instance.currentWorldId < GameManager.instance.worldList.Count - 1)
+        {
+            GameManager.instance.SetNextLevelWorld(GameManager.instance.currentWorldId + 1);
+            SceneManager.LoadScene(gameSceneId);
         }
         else
-        if (GameManager.instance.actualLevel < GameManager.instance.worldList.Count - 1)
         {
-            GameManager.instance.SetNextLevelWorld();
-            SceneManager.LoadScene(levelToRestart);
+            SceneManager.LoadScene("MainMenu");
         }
     }
     public void SlowGame()
@@ -184,7 +182,7 @@ public class UIControllerEditor : Editor
 {
     public override void OnInspectorGUI()
     {
-        UIController uIcontroller = (UIController) target;
+        UIController uIcontroller = (UIController)target;
         DrawDefaultInspector();
         if (GUILayout.Button("Enable"))
         {
