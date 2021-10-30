@@ -108,10 +108,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c4a98b5cd3b201140920ba4c2508e89e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attackWait: 3
+  health: 0
+  canLoseHealth: 0
+  level: 0
+  maxLevel: 3
+  isMaxLevel: 0
+  normal: {x: 0, y: 0, z: 0}
+  blockType: 1
+  fireRate: 0.1
   damage: 20
-  bulletSpeed: 1
-  detectionRange: 5
-  enemyLayerMask:
-    serializedVersion: 2
-    m_Bits: 64
+  attackRange: 5

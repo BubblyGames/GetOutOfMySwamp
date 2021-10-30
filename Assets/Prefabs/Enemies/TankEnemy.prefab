@@ -436,11 +436,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b72c36df0c0980e41afc25113c5359e3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  startHealth: 100
+  startHealth: 250
   healthPoints: 0
   startSpeed: 2
   currentSpeed: 0
-  damage: 20
+  damage: 25
   moneyValue: 50
   scoreValue: 150
   isSlowed: 0

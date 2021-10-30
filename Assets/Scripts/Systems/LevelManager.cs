@@ -32,11 +32,12 @@ public class LevelManager : MonoBehaviour
     public event Action<int, int> OnEnemyKilled;
 
     //TODO: increment score when killing enemys.
-
-    public Text text;
     public LayerMask floorLayer;
     public GameObject waterSplashPrefab;
 
+    public Color waterColor;
+
+    public Color[] colors;
 
     private void Awake()
     {
@@ -48,31 +49,40 @@ public class LevelManager : MonoBehaviour
         {
             Destroy(gameObject);
         }
-        
+
         world = GetComponent<CubeWorldGenerator>();
         waveController = GetComponent<WaveController>();
         scoreSystem = GetComponent<ScoreSystem>();
         levelStats = GetComponent<LevelStats>();
         buildManager = GetComponent<BuildManager>();
         shop = GetComponent<Shop>();
-
     }
 
     private void Start()
     {
         OnGameStart?.Invoke();
+
+        Texture2D t = (Texture2D)GetComponent<MeshRenderer>().material.mainTexture;
+        waterColor = t.GetPixel(20, 0);
     }
 
     private void Update()
     {
-        text.text = Mathf.Round((1 / Time.deltaTime)).ToString(); //FpS 
-
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            GameObject waterSplash = GameObject.Instantiate(waterSplashPrefab);
+            waterSplash.transform.position = world.end;
+            waterSplash.GetComponent<ParticleSystem>().startColor = waterColor;
+        }
     }
 
 
     public void dealDamageToBase(int damageTaken)
     {
-        GameObject.Instantiate(waterSplashPrefab).transform.position = world.end;
+        GameObject waterSplash = GameObject.Instantiate(waterSplashPrefab);
+        waterSplash.transform.position = world.end;
+        waterSplash.GetComponent<ParticleSystem>().startColor = waterColor;
+
         if (!LevelStats.instance.infinteHP)
         {
             //LevelStats.levelStatsInstance.ReceiveDamage(damageTaken);

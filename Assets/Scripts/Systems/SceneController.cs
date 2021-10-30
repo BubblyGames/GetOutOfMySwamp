@@ -63,6 +63,6 @@ public class SceneController : MonoBehaviour
             fader.color = new Color(fadeColor.r, fadeColor.g, fadeColor.b, Mathf.Lerp(1, 0, t));
             yield return null;
         }*/
-        fader.enabled = false;
+        //fader.enabled = false;
     }
 }

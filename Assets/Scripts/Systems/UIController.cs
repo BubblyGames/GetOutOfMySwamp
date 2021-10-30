@@ -2,6 +2,7 @@ using System;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class UIController : MonoBehaviour
 {
@@ -24,6 +25,8 @@ public class UIController : MonoBehaviour
     }
 
     public GameMenu selectedMenu;
+
+    public Text FPSText;
 
     private void Awake()
     {
@@ -140,7 +143,10 @@ public class UIController : MonoBehaviour
         ShowMenu(GameMenu.Game);
     }
 
-    
+    private void Update()
+    {
+        FPSText.text = Mathf.Round((1 / Time.deltaTime)).ToString(); //FpS 
+    }
 }
 
 

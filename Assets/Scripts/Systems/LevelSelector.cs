@@ -3,6 +3,7 @@ using UnityEngine.SceneManagement;
 using System.Collections.Generic;
 using System;
 using System.Collections;
+using UnityEngine.UI;
 
 public class LevelSelector : MonoBehaviour
 {
@@ -17,6 +18,10 @@ public class LevelSelector : MonoBehaviour
 
     [Header("Enemies waves setup")]
     public Wave[][] enemies;
+
+    public Button previousButton;
+    public Button nextButton;
+    public Button selectButton;
 
     private void Awake()
     {
@@ -38,6 +43,9 @@ public class LevelSelector : MonoBehaviour
 
         if (!GameManager.instance.initiated)
             CreateWorldList();
+
+        GoTo(selectedWorld);
+        DoneChanging();
     }
     public void SelectLevel(int levelId)
     {
@@ -111,7 +119,21 @@ public class LevelSelector : MonoBehaviour
     public void GoTo(int nextIdx)
     {
         changing = true;
+        nextButton.interactable = false;
+        previousButton.interactable = false;
+        selectButton.interactable = false;
         StartCoroutine(GoToCube(nextIdx));
+    }
+
+    void DoneChanging()
+    {
+        if (selectedWorld < worlds.Length - 1)
+            nextButton.interactable = true;
+
+        if (selectedWorld > 0)
+            previousButton.interactable = true;
+
+        selectButton.interactable = true;
     }
 
     IEnumerator GoToCube(int nextIdx)
@@ -120,7 +142,7 @@ public class LevelSelector : MonoBehaviour
         MainMenuCamera camera = MainMenuCamera.instance;
 
         Light light = FindObjectOfType<Light>();
-        
+
         Color lightColor;
         Color backGroundColor; ;
 
@@ -150,6 +172,7 @@ public class LevelSelector : MonoBehaviour
         camera.idx = nextIdx;
         selectedWorld = nextIdx;
         changing = false;
+        DoneChanging();
         yield return null;
     }
 

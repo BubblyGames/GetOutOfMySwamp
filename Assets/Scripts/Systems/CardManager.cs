@@ -14,18 +14,26 @@ public class CardManager : MonoBehaviour
 
     void Start()
     {
-        float y = -2 - .75f; ;
+        float height = cardPrefab.transform.localScale.y;
+        float y = 0; 
 
-        Destroy(GetComponent<MeshRenderer>());
+        GetComponent<MeshRenderer>().enabled = false;
         for (int i = 0; i < materials.Count; i++)
         {
             GameObject card = GameObject.Instantiate(cardPrefab);
             card.transform.parent = transform;
-            card.transform.localPosition = new Vector3(0, y + 1 + (i * space), -0.01f);
+            card.transform.localPosition = new Vector3(0, -i *(height + space) + y, -0.01f);
             card.transform.localRotation = Quaternion.identity;
             card.GetComponent<MeshRenderer>().material = materials[i];
             card.GetComponent<Card>().index = i;
             cards.Add(card);
+
+            if (GameManager.instance != null)
+            {
+                GameObject back = card.transform.GetChild(0).gameObject;
+                Debug.Log(back.name);
+                back.GetComponent<MeshRenderer>().material.color = GameManager.instance.GetCurrentWorld().themeInfo.backGroundColor;
+            }
         }
     }
 
