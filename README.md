@@ -79,7 +79,7 @@ El tiempo de desarrollo para las distintas etapas del proyecto se estima en:
 - Alfa: 4 semanas
 - Beta: 3 semanas
 - Pruebas Beta: 5 días
-- Gold: ~2 semanas
+- Gold: 2 semanas y 2 días
 - Presentación: 1 semana
 
 
