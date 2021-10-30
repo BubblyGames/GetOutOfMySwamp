@@ -5,7 +5,7 @@ using UnityEngine;
 public class ThemeSelector : MonoBehaviour
 {
     public Theme theme;
-    public ThemeInfo themeInfo;
+    internal ThemeInfo themeInfo;
     private void Start()
     {
         themeInfo = ThemeManager.instace.GetTheme(theme);

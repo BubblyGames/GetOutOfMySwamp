@@ -52,18 +52,17 @@ public class SceneController : MonoBehaviour
         //yield return new WaitForSeconds(waitTime);
 
         //TO DO: fix this (by Joy)
-        while (fader == null)
+        /*while (fader == null)
         {
             fader = GameObject.Find("FadeImage").GetComponent<Image>();
             yield return null;
         }
-
-        //fader.color = fadeColor;
+        fader.enabled = true;
         for (float t = 0; t < 1; t += Time.deltaTime / duration)
         {
             fader.color = new Color(fadeColor.r, fadeColor.g, fadeColor.b, Mathf.Lerp(1, 0, t));
             yield return null;
-        }
+        }*/
         fader.enabled = false;
     }
 }

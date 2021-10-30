@@ -475,10 +475,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   theme: 0
-  themeInfo:
-    material: {fileID: 0}
-    lightColor: {r: 1, g: 1, b: 1, a: 1}
-    backGroundColor: {r: 0, g: 0, b: 0, a: 1}
 --- !u!114 &63313640
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -784,10 +780,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   theme: 1
-  themeInfo:
-    material: {fileID: 0}
-    lightColor: {r: 1, g: 1, b: 1, a: 1}
-    backGroundColor: {r: 0, g: 0, b: 0, a: 1}
 --- !u!1 &96266340
 GameObject:
   m_ObjectHideFlags: 0
@@ -970,10 +962,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   theme: 3
-  themeInfo:
-    material: {fileID: 0}
-    lightColor: {r: 1, g: 1, b: 1, a: 1}
-    backGroundColor: {r: 0, g: 0, b: 0, a: 1}
 --- !u!1 &110576179
 GameObject:
   m_ObjectHideFlags: 0
@@ -1104,10 +1092,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   theme: 2
-  themeInfo:
-    material: {fileID: 0}
-    lightColor: {r: 1, g: 1, b: 1, a: 1}
-    backGroundColor: {r: 0, g: 0, b: 0, a: 1}
 --- !u!114 &140904414
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2121,10 +2105,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   theme: 4
-  themeInfo:
-    material: {fileID: 0}
-    lightColor: {r: 1, g: 1, b: 1, a: 1}
-    backGroundColor: {r: 0, g: 0, b: 0, a: 1}
 --- !u!114 &504795243
 MonoBehaviour:
   m_ObjectHideFlags: 0
