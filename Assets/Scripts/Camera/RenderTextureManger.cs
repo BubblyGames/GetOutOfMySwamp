@@ -8,6 +8,7 @@ public class RenderTextureManger : MonoBehaviour
     public RawImage image;
     int w, h;
     Camera lowResCamera;
+    public int height = 270;
 
     private void Start()
     {
@@ -32,7 +33,7 @@ public class RenderTextureManger : MonoBehaviour
         w = Screen.width;
         h = Screen.height;
 
-        int newH = 270;
+        int newH = height;
         int newW = Mathf.RoundToInt(((float)w / h) * newH);
 
         lowResCamera.targetTexture = new RenderTexture(newW, newH, 0);

@@ -688,7 +688,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 549071505}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 3.83, y: 0, z: 25}
+  m_LocalPosition: {x: 3.83, y: 1.1, z: 25}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 963194228}
@@ -706,7 +706,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a9042c85da2e18748bbeaba820ed8172, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  space: 1.1
+  space: 0.15
   cardPrefab: {fileID: 8935117261002765910, guid: 4843d686fd24c0f40ba15d6a4dc577e5, type: 3}
   materials:
   - {fileID: 2100000, guid: 3753ade0373ef1a46b54984aae27f9f7, type: 2}
@@ -1861,7 +1861,7 @@ MonoBehaviour:
   maxDistance: 350
   minDistance: 75
   _smoothTime: 0.2
-  _rotationXMinMax: {x: -50, y: 50}
+  _rotationXMinMax: {x: -90, y: 90}
   freeMovement: 1
 --- !u!114 &963194232
 MonoBehaviour:
@@ -2645,6 +2645,7 @@ MonoBehaviour:
   endgameMenu: {fileID: 1348527078}
   pauseButton: {fileID: 1732745669}
   selectedMenu: 0
+  FPSText: {fileID: 1583022576}
 --- !u!1 &1348527078 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1087118763921206292, guid: 4185117bdf14b7841b70189a0c7285ae, type: 3}
@@ -3263,6 +3264,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   image: {fileID: 54399819}
+  height: 270
 --- !u!20 &1750140361
 Camera:
   m_ObjectHideFlags: 0
@@ -3677,11 +3679,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   world: {fileID: 0}
-  text: {fileID: 1583022576}
   floorLayer:
     serializedVersion: 2
     m_Bits: 128
   waterSplashPrefab: {fileID: 4964779859338955144, guid: da9a63bd877faf74db2fb8f6f899c1ca, type: 3}
+  waterColor: {r: 0, g: 0, b: 0, a: 0}
+  colors: []
 --- !u!4 &1903685283
 Transform:
   m_ObjectHideFlags: 0
@@ -3778,7 +3781,7 @@ MonoBehaviour:
   rockSize: 10
   seed: 0
   pathMetod: 1
-  numberOfMidpoints: 2
+  numberOfMidpoints: 0
   debugMidpoints: 0
   lineRendererPrefab: {fileID: 3920875017051324963, guid: ffef0eddca5eb324f94bad8de9cc038b, type: 3}
 --- !u!114 &1903685289
@@ -3908,7 +3911,7 @@ MonoBehaviour:
   startMoney: 800
   currentMoney: 0
   currentScore: 0
-  infinteMoney: 1
+  infinteMoney: 0
   infinteHP: 0
 --- !u!64 &1903685294
 MeshCollider:
