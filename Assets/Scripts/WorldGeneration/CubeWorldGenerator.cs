@@ -59,7 +59,9 @@ public class CubeWorldGenerator : MonoBehaviour
             rocksVisualReduction = worldInfo.rocksVisualReduction;
             rockSize = worldInfo.rockSize;
             numberOfMidpoints = worldInfo.numberOfMidpoints;
-            GetComponent<MeshRenderer>().material = worldInfo.material;
+            GetComponent<MeshRenderer>().material = worldInfo.themeInfo.material;
+            FindObjectOfType<Light>().color = worldInfo.themeInfo.lightColor;
+            RenderSettings.skybox.SetColor("_Tint", worldInfo.themeInfo.backGroundColor);
         }
     }
 
@@ -96,7 +98,6 @@ public class CubeWorldGenerator : MonoBehaviour
         while (!success && count < 100)
         {
             Debug.Log("Attempt: " + count + " Seed: " + seed.ToString());
-            Random.InitState(seed);
             end = GenerateWorld();//Choose the blocktype of each cell
             if (!demo)
             {
@@ -781,6 +782,11 @@ public class CubeWorldGenerator : MonoBehaviour
                 p.dirty = true;
         }
         UpdateWorld();*/
+
+        if (demo)
+        {
+            UpdateWorld();
+        }
     }
 #endif
 }

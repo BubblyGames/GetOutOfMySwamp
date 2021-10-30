@@ -11,7 +11,6 @@ public class GameManager : MonoBehaviour
     public EnemyLibrary enemyLibrary;
     public AudioManager audioManager;
 
-
     public int currentWorldId = 0;
     //list containing different level stats and enemies waves 
     internal List<WorldInfo> worldList = new List<WorldInfo>();
@@ -53,5 +52,10 @@ public class GameManager : MonoBehaviour
     public WorldInfo GetCurrentWorld()
     {
         return worldList[currentWorldId];
+    }
+
+    private void OnApplicationQuit()
+    {
+        RenderSettings.skybox.SetColor("_Tint", Color.white);
     }
 }
