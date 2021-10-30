@@ -63,11 +63,13 @@ Gonzalo Lobo: Scrum Master, Diseñador, Publicidad
 
 Marta Vidal: Artista
 
-Alberto Garcia: Diseñador
+Alberto García: Diseñador
 
-Daniel Marti, Jose Márquez: Programadores
+Daniel Martí: Programador
 
-Adrían Ramírez: Programador, Publicidad
+José Márquez: Programador
+
+Adrián Ramírez: Programador, Publicidad
 
 
 ### 3.2 Estimación temporal del desarrollo
