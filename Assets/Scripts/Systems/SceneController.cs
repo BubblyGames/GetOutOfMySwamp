@@ -13,6 +13,7 @@ public class SceneController : MonoBehaviour
     public float faderDuration;
     public float waitTime;
 
+    public Color fadeColor = Color.black;
     private void Awake()
     {
         if (instance == null)
@@ -43,7 +44,7 @@ public class SceneController : MonoBehaviour
         fader.enabled = true;
         for (float t = 0; t < 1; t += Time.deltaTime / duration)
         {
-            fader.color = new Color(0, 0, 0, Mathf.Lerp(0, 1, t));
+            fader.color = new Color(fadeColor.r, fadeColor.g, fadeColor.b, Mathf.Lerp(0, 1, t));
             yield return null;
         }
         fader = null;
@@ -57,10 +58,10 @@ public class SceneController : MonoBehaviour
             yield return null;
         }
 
-       
+        //fader.color = fadeColor;
         for (float t = 0; t < 1; t += Time.deltaTime / duration)
         {
-            fader.color = new Color(0, 0, 0, Mathf.Lerp(1, 0, t));
+            fader.color = new Color(fadeColor.r, fadeColor.g, fadeColor.b, Mathf.Lerp(1, 0, t));
             yield return null;
         }
         fader.enabled = false;

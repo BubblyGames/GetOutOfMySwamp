@@ -72,7 +72,7 @@ public class LevelSelector : MonoBehaviour
             worldInfo.rocksVisualReduction = worlds[i].rocksVisualReduction;
             worldInfo.rockSize = worlds[i].rockSize;
             worldInfo.numberOfMidpoints = worlds[i].numberOfMidpoints;
-            worldInfo.themeInfo = worlds[i].GetComponent<ThemeSelector>().GetThemeInfo();
+            worldInfo.themeInfo = worlds[i].GetComponent<ThemeSelector>().themeInfo;
             worldInfo.waves = worlds[i].GetComponent<WaveInfo>().waves;
             GameManager.instance.worldList.Add(worldInfo);
         }
@@ -83,6 +83,8 @@ public class LevelSelector : MonoBehaviour
     {
         //Loads game scene with selected world
         GameManager.instance.currentWorldId = selectedWorld;
+        ThemeInfo theme = GameManager.instance.GetCurrentWorld().themeInfo;
+        SceneController.instance.fadeColor = theme.backGroundColor;
         SceneController.instance.LoadScene(1);
     }
 

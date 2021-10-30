@@ -98,7 +98,6 @@ public class CubeWorldGenerator : MonoBehaviour
         while (!success && count < 100)
         {
             Debug.Log("Attempt: " + count + " Seed: " + seed.ToString());
-            Random.InitState(seed);
             end = GenerateWorld();//Choose the blocktype of each cell
             if (!demo)
             {
@@ -783,6 +782,11 @@ public class CubeWorldGenerator : MonoBehaviour
                 p.dirty = true;
         }
         UpdateWorld();*/
+
+        if (demo)
+        {
+            UpdateWorld();
+        }
     }
 #endif
 }

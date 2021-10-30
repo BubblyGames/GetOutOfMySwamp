@@ -4,23 +4,28 @@ using UnityEngine;
 
 public class ThemeSelector : MonoBehaviour
 {
-    public Color lightColor = Color.white;
-    public Color backGroundColor = Color.black;
+    public Theme theme;
+    public ThemeInfo themeInfo;
+    private void Start()
+    {
+        themeInfo = ThemeManager.instace.GetTheme(theme);
+        if (themeInfo == null)
+        {
+            Debug.Log("null");
+        }
+        GetComponent<MeshRenderer>().material = themeInfo.material;
+    }
     public ThemeInfo GetThemeInfo()
     {
-        ThemeInfo ti = new ThemeInfo();
-        ti.lightColor = lightColor;
-        ti.backGroundColor = backGroundColor;
-        ti.material = GetComponent<MeshRenderer>().material;
-        return ti;
+        return themeInfo;
     }
 
-    private void OnValidate()
+    /*private void OnValidate()
     {
         if (!Application.isPlaying)
             return;
 
         FindObjectOfType<Light>().color = lightColor;
         RenderSettings.skybox.SetColor("_Tint", backGroundColor);
-    }
+    }*/
 }
