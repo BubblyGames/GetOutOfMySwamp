@@ -292,7 +292,7 @@ Para la interfaz se cuentan con 7 ventanas:
 
 - Menú principal:
 
-![Recurso 1](https://user-images.githubusercontent.com/56488179/138528960-718ce87f-39bf-4bea-81c1-eb6578d89557.png)
+![Recurso 1](https://lh6.googleusercontent.com/rCV4rqVBA8GQbaqIftoS6yrzmLV9DwA7l6kJW7XkonW1ULULik42KtX_4j6akqnKth_PsSnr87lHH7DmWR3j8Hmg9wh0v4ivM9CVmDRlU_JMkhv9aXNCumx1oYIlLnnbNdzS2AiH)
 
 - Ajustes:
 
