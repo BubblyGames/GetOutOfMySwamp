@@ -19,7 +19,7 @@ Tower defense 3D en un mapa cúbico con vista isométrica sobre ranas defendiend
 
 ### 1.2 Descripción breve de la historia y personajes
 
-En un mundo cúbico hay dos grupos de ranas en caras opuestas de éste, las ranas del estanque sucio y mugriento quieren ir a ensuciar el estanque de las ranas limpias metiéndose en él con las patas llenas de barro. Las ranas del charco limpio las expulsarán con todos los recursos al alcance de sus ancas.
+En un mundo cúbico hay dos grupos de ranas en caras opuestas de éste, las ranas del estanque sucio y mugriento quieren arrebatarle el estanque de las ranas limpias porque el suyo ya no es habitable. Las ranas del charco limpio las expulsarán con todos los recursos al alcance de sus ancas.
 
 
 ### 1.3 Propósito, público objetivo y plataformas
@@ -129,7 +129,7 @@ El juego comienza con una cantidad determinada de monedas para poner las torres 
 
 #### 4.2.4 Defensas y enemigos
 
-Existen dos tipos de defensas: Las torres y las trampas. Las torres tienen vida, alcance, daño, velocidad de ataque y éstos pueden ser individuales o en área y tener efectos de estado sobre los enemigos. Solo se pueden construir adyacentes al camino de los enemigos u otra torre previamente construida. Además, tienen dos niveles de mejoras para aumentar sus estadísticas. Luego están las trampas, las cuales se colocan en el camino del enemigo. Tienen daño, durabilidad y pueden tener efecto.
+Existen dos tipos de defensas: Las torres y las trampas. Las torres tienen vida, alcance, daño, velocidad de ataque y éstos pueden ser individuales o en área y tener efectos de estado sobre los enemigos. Se puede construir en cualquier lugar menos caminos y rocas, a excepción de la torre económica que solo se puede adyacente al camino. Además, tienen dos niveles de mejoras para aumentar sus estadísticas. Luego están las trampas, las cuales se colocan en el camino del enemigo, tienen daño, durabilidad y pueden tener efecto.
 
 Por otro lado están los enemigos, con características de vida, velocidad de movimiento y opcionales como la capacidad de volar o dañar las torres. Aparecen por oleadas y aumentan en número conforme avanzas en la partida. Tienen diferentes roles en función de sus estadísticas, siendo los roles unicad básica, ligera, tanque, horda, especialista y voladora, explicadas más adelante en el apartado Enemigos.
 
@@ -146,9 +146,9 @@ El jugador durante la partida tendrá dos tareas principales, vigilar el mapa pa
 
 ### 4.4 Niveles y misiones
 
-El juego cuenta con 2 niveles por el momento. La misión en ambos niveles es defender tu estanque de las tropas enemigas.
+El juego cuenta con 2 niveles por el momento, diferenciados a nivel visual y en la generación del mapa. La misión en ambos niveles es defender tu estanque de las tropas enemigas.
 
-Los niveles se conforman de grids y hay distintas variantes de las celdas. Los niveles son semi procedurales: los niveles se crean mediante seed, pero a medida que se progresa su dificultad va aumentando.
+Los niveles se conforman de grids y hay distintas variantes de las celdas. Los niveles son semi procedurales y se crean mediante una seed.
 
 
 ### 4.5 Torres y trampas
@@ -181,14 +181,14 @@ TA: Ataques desde Tierra a objetivos Aéreos.
 
 ### 5.1 Descripción detallada de la historia y la trama
 
-Dos sociedades de ranitas viven cada una en un estanque de un cubo espacial en paz y armonía. Pero una de las sociedades ha ensuciado su estanque hasta tal punto de volverlo tóxico e inhabitable, lanzando una invasión al estanque de las ranas limpias para poder encontrar un nuevo lugar donde vivir.
+Dos sociedades de ranitas viven cada una en un estanque de un cubo espacial en paz y armonía. Pero una de las sociedades ha ensuciado su estanque hasta tal punto de volverlo tóxico e inhabitable, lanzando una invasión al estanque de las ranas limpias para poder encontrar un nuevo lugar donde continuar sus actividades.
 
 Las ranas limpias, ante esta situación, deben defender su estanque de la invasión de las ranas sucias.
 
 
 ### 5.2 Personajes
 
-Hay 2 personajes característicos en el juego:el líder de las ranas limpias y el líder de las ranas sucias.
+Hay 2 personajes característicos en el juego: el líder de las ranas limpias y el líder de las ranas sucias.
 
 
 ### 5.3 Entornos y lugares
