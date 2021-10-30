@@ -2606,7 +2606,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1328887938}
   - component: {fileID: 1328887940}
-  - component: {fileID: 1328887939}
   m_Layer: 7
   m_Name: UI
   m_TagString: Untagged
@@ -2628,19 +2627,6 @@ Transform:
   m_Father: {fileID: 1903685283}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1328887939
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1328887937}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 51af426be66dc6a48904d41b2b0c9cf4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  pauseMenu: {fileID: 1738156960}
 --- !u!114 &1328887940
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2657,6 +2643,7 @@ MonoBehaviour:
   shopMenu: {fileID: 549071505}
   pauseMenu: {fileID: 1738156960}
   endgameMenu: {fileID: 1348527078}
+  pauseButton: {fileID: 1732745669}
   selectedMenu: 0
 --- !u!1 &1348527078 stripped
 GameObject:

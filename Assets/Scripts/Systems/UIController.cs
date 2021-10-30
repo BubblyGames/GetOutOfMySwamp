@@ -12,6 +12,7 @@ public class UIController : MonoBehaviour
     public GameObject shopMenu;
     public GameObject pauseMenu;
     public GameObject endgameMenu;
+    public GameObject pauseButton;
 
     private int gameSceneId;
     public enum GameMenu
@@ -52,12 +53,14 @@ public class UIController : MonoBehaviour
             case GameMenu.PauseMenu:
                 pauseMenu.SetActive(true);
                 upgradeMenu.SetActive(false);
+                pauseButton.SetActive(false);
                 Time.timeScale = 0;
                 break;
             case GameMenu.EndgameMenu:
                 endgameMenu.SetActive(true);
                 upgradeMenu.SetActive(false);
-                pauseMenu.SetActive(false);
+                pauseMenu.SetActive(false); 
+                pauseButton.SetActive(false);
                 GameObject.Find("FinalScoreText").GetComponent<UnityEngine.UI.Text>().text = "Score: " + LevelStats.instance.currentScore;
                 Time.timeScale = 1;
                 break;
@@ -66,6 +69,7 @@ public class UIController : MonoBehaviour
                 upgradeMenu.SetActive(false);
                 pauseMenu.SetActive(false);
                 endgameMenu.SetActive(false);
+                pauseButton.SetActive(true);
                 Time.timeScale = 1;
                 break;
             default:
