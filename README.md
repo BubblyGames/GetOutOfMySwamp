@@ -19,12 +19,12 @@ Tower defense 3D en un mapa cúbico con vista isométrica sobre ranas defendiend
 
 ### 1.2 Descripción breve de la historia y personajes
 
-Dos facciones de ranas se enfrentan por la conquista del mundo de una, nuestra facción. Las ranas de un estanque sucio y mugriento quieren ir a ensuciar el estanque de las otras ranas metiéndose en él con las patas llenas de barro. Las ranas del charco limpio las expulsarán con todos los recursos al alcance de sus ancas.
+En un mundo cúbico hay dos grupos de ranas en caras opuestas de éste, las ranas del estanque sucio y mugriento quieren ir a ensuciar el estanque de las ranas limpias metiéndose en él con las patas llenas de barro. Las ranas del charco limpio las expulsarán con todos los recursos al alcance de sus ancas.
 
 
 ### 1.3 Propósito, público objetivo y plataformas
 
-Se desarrolla para navegadores web y móviles y es para todos los públicos. El objetivo/propósito del juego es defender tu estanque de la invasión de ranitas sucias.
+Se desarrolla para navegadores web y móviles, dirigido es para todos los públicos. El objetivo del juego es defender tu estanque de la invasión de ranitas sucias.
 
 
 ## 2. Monetización
@@ -124,12 +124,12 @@ En el mapa hay tres tipos de casillas: Casillas de camino, por las que los enemi
 
 #### 4.2.3 Economía
 
-El juego comienza con una cantidad determinada de monedas para poner las torres iniciales. Una vez iniciada la partida, la fuente de ingresos será la derrota de los enemigos. El dinero conseguido se puede gastar en construir más defensas o mejorar las ya existentes.
+El juego comienza con una cantidad determinada de monedas para poner las torres iniciales. Una vez iniciada la partida, la fuente de ingresos será la derrota de los enemigos y el edificio que genera monedas. El dinero conseguido se puede gastar en construir más estructuras o mejorar las ya existentes.
 
 
 #### 4.2.4 Defensas y enemigos
 
-Existen dos tipos de defensas, las torres y las trampas. Las torres tienen vida, alcance, daño, velocidad de ataque y éstos pueden ser individuales o en área y tener efectos de estado sobre los enemigos. Solo se pueden construir adyacentes al camino de los enemigos u otra torre previamente construida. Además, tienen dos niveles de mejoras para aumentar sus estadísticas. Luego están las trampas, las cuales se colocan en el camino del enemigo. Tienen daño, durabilidad y pueden tener efecto.
+Existen dos tipos de defensas: Las torres y las trampas. Las torres tienen vida, alcance, daño, velocidad de ataque y éstos pueden ser individuales o en área y tener efectos de estado sobre los enemigos. Solo se pueden construir adyacentes al camino de los enemigos u otra torre previamente construida. Además, tienen dos niveles de mejoras para aumentar sus estadísticas. Luego están las trampas, las cuales se colocan en el camino del enemigo. Tienen daño, durabilidad y pueden tener efecto.
 
 Por otro lado están los enemigos, con características de vida, velocidad de movimiento y opcionales como la capacidad de volar o dañar las torres. Aparecen por oleadas y aumentan en número conforme avanzas en la partida. Tienen diferentes roles en función de sus estadísticas, siendo los roles unicad básica, ligera, tanque, horda, especialista y voladora, explicadas más adelante en el apartado Enemigos.
 
