@@ -9,7 +9,7 @@ public class WorldInfo
     public float rocksVisualReduction = 0.9f;
     public float rockSize = 3f;
     public int numberOfMidpoints = 1;
-    public Material material = null;
+    internal ThemeInfo themeInfo;
     internal Wave[] waves;
 
     public WorldInfo() { }

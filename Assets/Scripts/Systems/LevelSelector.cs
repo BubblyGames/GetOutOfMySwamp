@@ -32,6 +32,10 @@ public class LevelSelector : MonoBehaviour
 
     private void Start()
     {
+        ThemeInfo startTheme = worlds[0].GetComponent<ThemeSelector>().GetThemeInfo();
+        RenderSettings.skybox.SetColor("_Tint", startTheme.backGroundColor);
+        FindObjectOfType<Light>().color = startTheme.lightColor;
+
         if (!GameManager.instance.initiated)
             CreateWorldList();
     }
@@ -45,8 +49,7 @@ public class LevelSelector : MonoBehaviour
         if (!changing && selectedWorld < worlds.Length - 1)
         {
             changing = true;
-            selectedWorld++;
-            MainMenuCamera.instance.GoTo(selectedWorld);
+            GoTo(selectedWorld + 1);
         }
     }
     public void PreviousWorld()
@@ -54,8 +57,7 @@ public class LevelSelector : MonoBehaviour
         if (!changing && selectedWorld > 0)
         {
             changing = true;
-            selectedWorld--;
-            MainMenuCamera.instance.GoTo(selectedWorld);
+            GoTo(selectedWorld - 1);
         }
     }
 
@@ -70,7 +72,7 @@ public class LevelSelector : MonoBehaviour
             worldInfo.rocksVisualReduction = worlds[i].rocksVisualReduction;
             worldInfo.rockSize = worlds[i].rockSize;
             worldInfo.numberOfMidpoints = worlds[i].numberOfMidpoints;
-            worldInfo.material = worlds[i].GetComponent<MeshRenderer>().material;
+            worldInfo.themeInfo = worlds[i].GetComponent<ThemeSelector>().GetThemeInfo();
             worldInfo.waves = worlds[i].GetComponent<WaveInfo>().waves;
             GameManager.instance.worldList.Add(worldInfo);
         }
@@ -82,11 +84,6 @@ public class LevelSelector : MonoBehaviour
         //Loads game scene with selected world
         GameManager.instance.currentWorldId = selectedWorld;
         SceneController.instance.LoadScene(1);
-    }
-
-    public void DoneChanging()
-    {
-        changing = false;
     }
 
     public void switchBetweenPanels(int panelId)
@@ -108,4 +105,50 @@ public class LevelSelector : MonoBehaviour
                 break;
         }
     }
+
+    public void GoTo(int nextIdx)
+    {
+        changing = true;
+        StartCoroutine(GoToCube(nextIdx));
+    }
+
+    IEnumerator GoToCube(int nextIdx)
+    {
+        GameObject cameraObj = MainMenuCamera.instance.gameObject;
+        MainMenuCamera camera = MainMenuCamera.instance;
+
+        Light light = FindObjectOfType<Light>();
+        
+        Color lightColor;
+        Color backGroundColor; ;
+
+        ThemeInfo theme1 = worlds[nextIdx].GetComponent<ThemeSelector>().GetThemeInfo();
+        ThemeInfo theme2 = worlds[selectedWorld].GetComponent<ThemeSelector>().GetThemeInfo();
+
+        float waitTime = 1f;
+        float doneTime = Time.time + waitTime;
+        float delta;
+        Vector3 position;
+
+        while (Time.time < doneTime)
+        {
+            delta = ((doneTime - Time.time) / waitTime);
+            position = Vector3.Lerp(worlds[nextIdx].center.position, worlds[selectedWorld].center.position, delta);
+
+            cameraObj.transform.position = camera.offset + position;
+            cameraObj.transform.LookAt(position + (Vector3.right * camera.offset.x), Vector3.up);
+
+            lightColor = Color.Lerp(theme1.lightColor, theme2.lightColor, delta);
+            backGroundColor = Color.Lerp(theme1.backGroundColor, theme2.backGroundColor, delta);
+
+            light.color = lightColor;
+            RenderSettings.skybox.SetColor("_Tint", backGroundColor);
+            yield return null;
+        }
+        camera.idx = nextIdx;
+        selectedWorld = nextIdx;
+        changing = false;
+        yield return null;
+    }
+
 }

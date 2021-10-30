@@ -59,7 +59,9 @@ public class CubeWorldGenerator : MonoBehaviour
             rocksVisualReduction = worldInfo.rocksVisualReduction;
             rockSize = worldInfo.rockSize;
             numberOfMidpoints = worldInfo.numberOfMidpoints;
-            GetComponent<MeshRenderer>().material = worldInfo.material;
+            GetComponent<MeshRenderer>().material = worldInfo.themeInfo.material;
+            FindObjectOfType<Light>().color = worldInfo.themeInfo.lightColor;
+            RenderSettings.skybox.SetColor("_Tint", worldInfo.themeInfo.backGroundColor);
         }
     }
 
