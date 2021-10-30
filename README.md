@@ -119,7 +119,7 @@ Para ganar la partida se ha de defender un número determinado de oleadas y con 
 
 El mapa tiene forma de cubo, con sus 6 caras siendo terreno jugable. Las caras visibles serán de 1 a 3, dependiendo de la rotación del cubo que elija el jugador. El cubo se puede rotar en cualquier momento de la partida menos en el menú de construcción.
 
-En el mapa hay tres tipos de casillas: Casillas de camino, por las que los enemigos transitan y se pueden poner trampas; Casillas de terreno construible, donde se podrá poner cualquier tipo de torre; Y casillas obstáculo, en las que no puede haber camino ni estructuras.
+En el mapa hay tres tipos de casillas: Casillas de camino, por las que los enemigos transitan y se pueden poner trampas; Casillas de terreno construible, donde se podrá poner cualquier tipo de torre; y casillas obstáculo, en las que no puede haber camino ni estructuras.
 
 
 #### 4.2.3 Economía
@@ -129,9 +129,9 @@ El juego comienza con una cantidad determinada de monedas para poner las torres 
 
 #### 4.2.4 Defensas y enemigos
 
-Existen dos tipos de defensas: Las torres y las trampas. Las torres tienen vida, alcance, daño, velocidad de ataque y éstos pueden ser individuales o en área y tener efectos de estado sobre los enemigos. Se puede construir en cualquier lugar menos caminos y rocas, a excepción de la torre económica que solo se puede adyacente al camino. Además, tienen dos niveles de mejoras para aumentar sus estadísticas. Luego están las trampas, las cuales se colocan en el camino del enemigo, tienen daño, durabilidad y pueden tener efecto.
+Existen dos tipos de defensas: Las torres y las trampas. Las torres tienen vida, alcance, daño, velocidad de ataque y éstos pueden ser individuales o en área y tener efectos de estado sobre los enemigos. Se puede construir en cualquier lugar menos caminos y rocas, a excepción de la torre económica que solo se puede poner adyacente al camino. Además, tienen dos niveles de mejoras para aumentar sus estadísticas. Luego están las trampas, las cuales se colocan en el camino del enemigo, tienen daño, durabilidad y pueden tener efecto.
 
-Por otro lado están los enemigos, con características de vida, velocidad de movimiento y opcionales como la capacidad de volar o dañar las torres. Aparecen por oleadas y aumentan en número conforme avanzas en la partida. Tienen diferentes roles en función de sus estadísticas, siendo los roles unicad básica, ligera, tanque, horda, especialista y voladora, explicadas más adelante en el apartado Enemigos.
+Por otro lado están los enemigos, con características de vida, velocidad de movimiento y opcionales como la capacidad de volar o dañar las torres. Aparecen por oleadas y aumentan en número conforme avanzas en la partida. Tienen diferentes roles en función de sus estadísticas, siendo los roles unidad básica, ligera, tanque, horda, especialista y voladora, explicadas más adelante en el apartado Enemigos.
 
 
 ![](https://lh6.googleusercontent.com/XyZfstCSw-DLWgamwydXli8vhxtgT-UwKJedln-d8n8b128AX2uwMAu_ZfEi14CkXv6f0j37Y27lFRzzMlJHlza6lMVwx9gM2rYwonhWBWuMDhGatPP_NvB05I83jCBoDTnug5R2=s1600)
@@ -146,7 +146,7 @@ El jugador durante la partida tendrá dos tareas principales, vigilar el mapa pa
 
 ### 4.4 Niveles y misiones
 
-El juego cuenta con 2 niveles por el momento, diferenciados a nivel visual y en la generación del mapa. La misión en ambos niveles es defender tu estanque de las tropas enemigas.
+El juego cuenta con 4 niveles por el momento, diferenciados a nivel visual y en la generación del mapa. La misión en ambos niveles es defender tu estanque de las tropas enemigas.
 
 Los niveles se conforman de grids y hay distintas variantes de las celdas. Los niveles son semi procedurales y se crean mediante una seed.
 
@@ -193,7 +193,7 @@ Hay 2 personajes característicos en el juego: el líder de las ranas limpias y 
 
 ### 5.3 Entornos y lugares
 
-Hay 3 niveles jugables y se han pensado en 3 entornos o biomas: pantano, nieve y ciudad.
+Hay 4 niveles jugables y se han pensado en 3 entornos o biomas: pantano, nieve y ciudad.
 
 - Pantano: el estanque de las ranas limpias es un estanque limpio, vívido y con nenúfares mientras que el estanque de las ranas sucias es oscuro, con lodo y fango.
 - Ciudad: el estanque de las ranas limpias se encuentra en un parque, con bancos y papeleras; mientras que las ranas sucias vienen de las alcantarillas.
@@ -208,18 +208,18 @@ Hay 3 niveles jugables y se han pensado en 3 entornos o biomas: pantano, nieve y
 
 ### 6.1 Estética general del juego
 
-Los gráficos del juego serían principalmente 3D, de estética y técnica Voxel Art, tanto para el escenario como para la representación física de defensas y enemigos. Por otro lado, todo lo relacionado con la interfaz, el HUD y otros elementos varios (cartas de personajes, información adicional, etc) serán en 2D.
+Los gráficos del juego son principalmente 3D, de estética y técnica Voxel Art, tanto para el escenario como para la representación física de defensas y enemigos. Por otro lado, todo lo relacionado con la interfaz, el HUD y otros elementos varios (cartas de personajes, información adicional, etc) son en 2D.
 
-Con todo, la estética general del juego estará basada en el minimalismo, con colores planos y suaves, es decir, no muy saturados y con alta luminosidad.
+Con todo, la estética general del juego está basada en el minimalismo, con colores planos y suaves, es decir, no muy saturados y con alta luminosidad.
 
 
 ### 6.2 Apartado visual
 
-Siguiendo en todo momento la línea estética general del juego, se diferenciarán diversos elementos del apartado visual:
+Siguiendo en todo momento la línea estética general del juego, se diferencian diversos elementos del apartado visual:
 
 - **Escenario**.
 
-El escenario será un hexaedro regular o cubo, limitado por seis caras del mismo tamaño y generado a partir de unidades definidas en formato Voxel. Por la superficie del poliedro estarán repartidas zonas elevadas, zonas llanas y caminos, cada uno diferenciado por un color específico. Por último, una de las caras contendrá la charca, es decir, el elemento a defender.
+El escenario es un hexaedro regular o cubo, limitado por seis caras del mismo tamaño y generado a partir de unidades definidas en formato Voxel. Por la superficie del poliedro están repartidas zonas elevadas, zonas llanas y caminos, cada uno diferenciado por un color específico. Por último, una de las caras contiene la charca, es decir, el elemento a defender.
 
 ![](https://lh5.googleusercontent.com/1pp7M7gs_g1WoIg_xEuAlbCaI-q7GpncsJo5DxNHqUQL1ByV5s9OGFHVqFiTTYkGQAjDMign6c0eZUf87mPH5SDK2_bB-pbNMn-9uj5dNo75ePGSPz11JoL5_9HwieehbhHEpByZ)
 
@@ -255,7 +255,7 @@ Otros biomas:
 
 - **Personajes**
 
-La representación en el escenario tanto de las defensas como de los enemigos serán modelos Voxel de dimensiones 16x16x16 voxeles.
+La representación en el escenario tanto de las defensas como de los enemigos son modelos Voxel de dimensiones 16x16x16 voxeles.
 
 - Torre básica:
 
@@ -266,7 +266,7 @@ La representación en el escenario tanto de las defensas como de los enemigos se
 - Torre montañosa:
 - Enemigos:
 
-A su vez, la representación mediante cartas o pantallas de información será en gráficos 2D acorde a las descripciones de la estética general y al resto de elementos 2D.
+A su vez, la representación mediante cartas o pantallas de información es en gráficos 2D acorde a las descripciones de la estética general y al resto de elementos 2D.
 
 Ejemplo, torreta pesada:
 
@@ -339,7 +339,7 @@ Flujo de juego:
 - Motor Voxel que genere de manera procedural el cubo, los caminos y los obstáculos: 26/10/2021
 - Funcionalidades básicas de juego (IA, vida y ataque):25/10/2021
 - Juego responsive: 18/10/2021.
-- Torres y enemigos definidos, con concepts y algún modelo de ellos:
+- Torres y enemigos definidos, con concepts y algún modelo de ellos: 29/10/2021
 - Campaña de marketing iniciada (redes sociales preparadas): 11/10/2021
 
 
