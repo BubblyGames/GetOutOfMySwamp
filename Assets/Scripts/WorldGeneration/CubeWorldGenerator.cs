@@ -16,6 +16,7 @@ public class CubeWorldGenerator : MonoBehaviour
 
     internal List<Path> paths;
     public int nPaths = 4;
+    public bool canMergePaths = false;
 
     [Range(0.0f, 1.0f)]
     public float wallDensity = 0.3f;
@@ -55,6 +56,7 @@ public class CubeWorldGenerator : MonoBehaviour
             Debug.Log("Loading level: " + GameManager.instance.currentWorldId);
             WorldInfo worldInfo = GameManager.instance.GetCurrentWorld();
             nPaths = worldInfo.nPaths;
+            canMergePaths = worldInfo.canMergePaths;
             wallDensity = worldInfo.wallDensity;
             rocksVisualReduction = worldInfo.rocksVisualReduction;
             rockSize = worldInfo.rockSize;
@@ -68,7 +70,7 @@ public class CubeWorldGenerator : MonoBehaviour
     void Start()
     {
         bool success = false;
-        int count = 1;
+        int count = 0;
         if (seed == 0f)//If seed is set to 0 on inspector it chooses a random one
             seed = Mathf.RoundToInt(Random.value * 10000);
 
@@ -97,17 +99,22 @@ public class CubeWorldGenerator : MonoBehaviour
         //While enough paths can't be created, it will try new seeds and restart the process
         while (!success && count < 100)
         {
+            count++;
             Debug.Log("Attempt: " + count + " Seed: " + seed.ToString());
             end = GenerateWorld();//Choose the blocktype of each cell
             if (!demo)
             {
+                foreach (Path p in paths)
+                {
+                    p.dirty = true;
+                }
+
                 success = GeneratePaths(end.x, end.y, end.z);//Tries to create paths
                 if (!success)
                 {
                     ClearDebugStuff();
                     seed = Mathf.RoundToInt(Random.value * 100000);//New seed
-                    count++;
-                    wallDensity -= 0.1f;
+                    wallDensity -= 0.05f;
                 }
             }
             else
@@ -273,11 +280,11 @@ public class CubeWorldGenerator : MonoBehaviour
 
     private bool GeneratePaths(int endX, int endY, int endZ)
     {
+        float startTime = Time.realtimeSinceStartup;
         for (int i = 0; i < nPaths; i++)
         {
-            /*if (!paths[i].dirty) //Should check if a path has been modified to update it, but not yet
-                continue;*/
-            paths[i].dirty = false;
+            if (!paths[i].dirty) //Should check if a path has been modified to update it, but not yet
+                continue;
 
             if (!paths[i].initiated)//First time calculating a path
             {
@@ -292,12 +299,15 @@ public class CubeWorldGenerator : MonoBehaviour
                     !GetCell(paths[i].start).canWalk || //Must be normal floor
                     !GetCell(paths[i].start).isSurface || //Must be on surface
                     FindPathAstar(new Node(GetCell(paths[i].start)), cells[endX, endY, endZ], true) == null) //There must be a path to the end
-                    && count < 10000)
+                    && count < 100)
                 {
                     paths[i].start.x = Random.Range(2, size - 3);
                     paths[i].start.z = Random.Range(2, size - 3);
                     count++;
                 }
+
+                if (count >= 100)
+                    return false;
 
                 paths[i].AddMidpoint(new Midpoint(GetCell(paths[i].start), false));
                 for (int j = 0; j < numberOfMidpoints; j++)
@@ -357,15 +367,25 @@ public class CubeWorldGenerator : MonoBehaviour
                         cell = cellUnder;
                     }
                 }
+                cell.isPath = true;
                 pathCells.Add(cell);
 
                 cellUnder = cells[cell.x - normal.x, cell.y - normal.y, cell.z - normal.z];
-                foreach (CellInfo c in GetNeighbours(cellUnder, true))
+                /*foreach (CellInfo c in GetNeighbours(cellUnder, true))
                 {
                     c.isCloseToPath = true;
-                }
+                }*/
 
                 result = result.Parent;
+            }
+
+            for (int j = 0; j < 7; j++)
+            {
+                pathCells[j].isPath = false;
+                foreach (CellInfo c in GetNeighbours(pathCells[j], true))
+                {
+                    c.isCloseToPath = false;
+                }
             }
 
             //Cells are added from last to first, so we reverse the list
@@ -394,8 +414,11 @@ public class CubeWorldGenerator : MonoBehaviour
                     lr.SetPosition(idx, pathCells[idx].GetPos());
                 }
             }
+
+            paths[i].dirty = false;
         }
 
+        Debug.Log("Generating paths took: " + (Time.realtimeSinceStartup - startTime) + "s");
         return true; //Success
     }
 
@@ -437,6 +460,17 @@ public class CubeWorldGenerator : MonoBehaviour
             {
                 //Debug.Log("Failed to find a way");
                 return null;
+            }
+
+            Node n = result;
+            while (n != current)
+            {
+                n.cell.isPath = true;
+                foreach (CellInfo c in GetNeighbours(n.cell, true))
+                {
+                    c.isCloseToPath = true;
+                }
+                n = n.Parent;
             }
 
             //The end of this segment will become the start of the next one
@@ -485,7 +519,8 @@ public class CubeWorldGenerator : MonoBehaviour
                 {
                     if (!neighbour.canWalk ||
                         (!lastStep && neighbour.endZone) ||
-                        neighbour.isInteresting)//||(neighbour.isPath && !neighbour.endZone)
+                        neighbour.isInteresting ||
+                        ((neighbour.isPath) && !canMergePaths && !lastStep))//||(neighbour.isPath && !neighbour.endZone)
                         continue;
 
                     if (neighbour != null)
@@ -718,13 +753,20 @@ public class CubeWorldGenerator : MonoBehaviour
             paths[bestP].midPoints.Add(new Midpoint(GetCell(point), true));
         }
 
-
-        if (UpdateWorld())
+        Node start = new Node(GetCell(point));
+        Node result = FindPathAstar(start, GetCell(end), true);
+        if (result != null)
         {
             paths[bestP].dirty = true;//This path need to be recalculated
-            cells[(int)point.x, (int)point.y, (int)point.z].isInteresting = true;//This cell has an object on it
+            GetCell(point).isInteresting = true;//This cell has an object on it
+            UpdateWorld();
             return true;
         }
+        else
+        {
+            Debug.Log("Couldn't add interest point at: " + point.ToString());
+        }
+
         return false;
     }
 
@@ -762,14 +804,30 @@ public class CubeWorldGenerator : MonoBehaviour
     }
 
 #if UNITY_EDITOR
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.I))
+        {
+            Debug.Log("Adding random interest point");
+            AddInterestPoint(GetRandomCell().GetPosInt());
+        }
+    }
+
+
     private void OnDrawGizmos()
     {
         if (!Application.isPlaying) return;
 
         foreach (CellInfo cell in cells)
         {
-            if (cell.isCloseToPath)
+            if (cell.isPath)
+            {
                 Handles.Label(new Vector3(cell.x, cell.y, cell.z), "1");
+            }
+            else if (cell.isCloseToPath)
+            {
+                Handles.Label(new Vector3(cell.x, cell.y, cell.z), "2");
+            }
             //Gizmos.DrawSphere(new Vector3(cell.x, cell.y, cell.z), .5f);
         }
     }

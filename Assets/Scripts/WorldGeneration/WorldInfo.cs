@@ -9,8 +9,9 @@ public class WorldInfo
     public float rocksVisualReduction = 0.9f;
     public float rockSize = 3f;
     public int numberOfMidpoints = 1;
-    internal ThemeInfo themeInfo;
-    internal Wave[] waves;
+    public ThemeInfo themeInfo;
+    public Wave[] waves;
+    public bool canMergePaths;
 
     public WorldInfo() { }
 }
