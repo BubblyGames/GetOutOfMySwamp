@@ -1,7 +1,7 @@
 
 
 ### Get Out Of My Swamp!
-## by BubblyGames Studio
+### by BubblyGames Studio
 
 
 
