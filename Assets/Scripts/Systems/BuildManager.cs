@@ -36,6 +36,9 @@ public class BuildManager : MonoBehaviour
             Mathf.RoundToInt(hit.point.y + (hit.normal.y / 2)),
             Mathf.RoundToInt(hit.point.z + (hit.normal.z / 2)));
 
+        if (LevelStats.instance.CurrentMoney < structureToBuild.creationCost)
+            return false;
+
         Vector3Int intPosUnder = new Vector3Int(
             Mathf.RoundToInt(hit.point.x - (hit.normal.x / 2)),
             Mathf.RoundToInt(hit.point.y - (hit.normal.y / 2)),

@@ -534,13 +534,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   demo: 1
   size: 31
-  nPaths: 2
+  nPaths: 1
+  canMergePaths: 0
   wallDensity: 0.286
   rocksVisualReduction: 0.8
   rockSize: 26
   seed: 2856
   pathMetod: 1
-  numberOfMidpoints: 2
+  numberOfMidpoints: 4
   debugMidpoints: 0
   lineRendererPrefab: {fileID: 3920875017051324963, guid: ffef0eddca5eb324f94bad8de9cc038b, type: 3}
 --- !u!64 &63313644
@@ -644,13 +645,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   demo: 1
   size: 31
-  nPaths: 2
+  nPaths: 1
+  canMergePaths: 0
   wallDensity: 0.4
   rocksVisualReduction: 0.8
   rockSize: 26.94
   seed: 2922
   pathMetod: 1
-  numberOfMidpoints: 2
+  numberOfMidpoints: 3
   debugMidpoints: 0
   lineRendererPrefab: {fileID: 3920875017051324963, guid: ffef0eddca5eb324f94bad8de9cc038b, type: 3}
 --- !u!64 &85103257
@@ -864,13 +866,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   demo: 1
   size: 31
-  nPaths: 1
+  nPaths: 3
+  canMergePaths: 1
   wallDensity: 0.55
   rocksVisualReduction: 1
   rockSize: 8.84
   seed: 6296
   pathMetod: 1
-  numberOfMidpoints: 3
+  numberOfMidpoints: 1
   debugMidpoints: 0
   lineRendererPrefab: {fileID: 3920875017051324963, guid: ffef0eddca5eb324f94bad8de9cc038b, type: 3}
 --- !u!64 &96266345
@@ -1159,7 +1162,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   demo: 1
   size: 31
-  nPaths: 3
+  nPaths: 2
+  canMergePaths: 1
   wallDensity: 0.4
   rocksVisualReduction: 0.9
   rockSize: 14.82
@@ -2176,13 +2180,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   demo: 1
   size: 31
-  nPaths: 1
+  nPaths: 4
+  canMergePaths: 1
   wallDensity: 0.5
   rocksVisualReduction: 1
   rockSize: 10.49
   seed: 6400
   pathMetod: 1
-  numberOfMidpoints: 3
+  numberOfMidpoints: 0
   debugMidpoints: 0
   lineRendererPrefab: {fileID: 3920875017051324963, guid: ffef0eddca5eb324f94bad8de9cc038b, type: 3}
 --- !u!64 &504795247

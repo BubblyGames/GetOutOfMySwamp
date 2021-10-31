@@ -79,6 +79,7 @@ public class LevelStats : MonoBehaviour
     public void receiveDamage(int damageTaken)
     {
         currentBaseHealthPoints -= damageTaken;
+        currentBaseHealthPoints = Mathf.Max(0, currentBaseHealthPoints);
         hpText.text = "Health: " + currentBaseHealthPoints.ToString();
     }
 

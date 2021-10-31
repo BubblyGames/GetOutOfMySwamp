@@ -31,7 +31,6 @@ public class CardManager : MonoBehaviour
             if (GameManager.instance != null)
             {
                 GameObject back = card.transform.GetChild(0).gameObject;
-                Debug.Log(back.name);
                 back.GetComponent<MeshRenderer>().material.color = GameManager.instance.GetCurrentWorld().themeInfo.backGroundColor;
             }
         }

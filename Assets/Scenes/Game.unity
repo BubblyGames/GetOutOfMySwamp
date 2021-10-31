@@ -3776,6 +3776,7 @@ MonoBehaviour:
   demo: 0
   size: 31
   nPaths: 4
+  canMergePaths: 0
   wallDensity: 0.4
   rocksVisualReduction: 0.8
   rockSize: 10

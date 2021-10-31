@@ -76,6 +76,7 @@ public class LevelSelector : MonoBehaviour
             //insert the level world settings in the list containing the different levels
             WorldInfo worldInfo = new WorldInfo();
             worldInfo.nPaths = worlds[i].nPaths;
+            worldInfo.canMergePaths = worlds[i].canMergePaths;
             worldInfo.wallDensity = worlds[i].wallDensity;
             worldInfo.rocksVisualReduction = worlds[i].rocksVisualReduction;
             worldInfo.rockSize = worlds[i].rockSize;

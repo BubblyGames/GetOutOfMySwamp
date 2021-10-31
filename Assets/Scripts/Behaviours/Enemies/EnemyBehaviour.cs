@@ -50,7 +50,7 @@ public abstract class EnemyBehaviour : MonoBehaviour
     {
         //path = null;
     }
-
+    private Vector3 _smoothVelocity = Vector3.zero;
     void Update()
     {
         if (path == null)
@@ -58,14 +58,10 @@ public abstract class EnemyBehaviour : MonoBehaviour
 
         if (nextIndexPath >= path.Length) { Destroy(this.gameObject); return; }
 
-        if (path.GetCell(nextIndexPath).isInteresting)
-        {
-            //Deal damage to structure
-            return;
-        }
-
         transform.position = Vector3.Lerp(path.GetStep(nextIndexPath - 1), path.GetStep(nextIndexPath), lerpProgression);
-
+        //transform.position = Vector3.Lerp(transform.position, path.GetStep(nextIndexPath), lerpProgression);//A saltos
+        //transform.position = Vector3.SmoothDamp(transform.position, path.GetStep(nextIndexPath), ref _smoothVelocity, currentSpeed);//Smooth
+        
         if (isSlowed)
         {
             if (slowTimer >= slowDuration)
