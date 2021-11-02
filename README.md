@@ -154,14 +154,14 @@ Los niveles se conforman de grids y hay distintas variantes de las celdas. Los n
 
 ### 4.5 Torres y trampas
 
-| **TORRES**     | ALCANCE   | DAÑO    | OBJETIVO          | VELOCIDAD DE ATAQUE | EFECTO                            |
-| -------------- | --------- | ------- | ----------------- | ------------------- | --------------------------------- |
-| TORRE PESADA   | Largo     | Elevado | ÁreaTT\*          | Lento               | \-                                |
-| TORRE BÁSICA   | Medio     | Medio   | IndividualTA-TT\* | Medio               | \-                                |
-| TORRE PSÍQUICA | Corto     | Bajo    | IndividualTT\*    | Medio               | El enemigo se ralentiza           |
-| TORRE MONTAÑA  | Medio     | Bajo    | ÁreaTA-TT\*       | Rápido              | Prioriza ataque a enemigos aéreos |
-| **TRAMPAS**    |           |         |                   |                     |                                   |
-| TRAMPA PANTANO | 1 Casilla | \-      | ÁreaTT\*          | \-                  | Ralentiza                         |
+| **TORRES**     | ALCANCE   | DAÑO           | OBJETIVO          | VELOCIDAD DE ATAQUE | EFECTO                            |
+| -------------- | --------- | -------------- | ----------------- | ------------------- | --------------------------------- |
+| TORRE PESADA   | Largo     | Elevado (x ud) | ÁreaTT\*          | Lento               | \-                                |
+| TORRE BÁSICA   | Medio     | Medio (x ud)   | IndividualTA-TT\* | Medio               | \-                                |
+| TORRE PSÍQUICA | Corto     | Bajo (x ud)    | IndividualTT\*    | Medio               | El enemigo se ralentiza           |
+| TORRE MONTAÑA  | Medio     | Bajo (x ud)    | ÁreaTA-TT\*       | Rápido              | Prioriza ataque a enemigos aéreos |
+| **TRAMPAS**    |           |                |                   |                     |                                   |
+| TRAMPA PANTANO | 1 Casilla | \-             | ÁreaTT\*          | \-                  | Ralentiza                         |
 
 \*TT: Ataques desde Tierra a objetivos Terrestres.
 TA: Ataques desde Tierra a objetivos Aéreos.
