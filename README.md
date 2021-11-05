@@ -35,11 +35,11 @@ Se desarrolla para navegadores web y móviles, dirigido es para todos los públi
 
 El modelo de monetización dependerá del desempeño económico del producto una vez lanzado al mercado. Se han estructurado 3 posibles casos: ruta optimista, ruta normal, ruta pesimista.
 
-![Ruta Optimista 2](https://user-images.githubusercontent.com/56488179/139238880-8860ddc7-279e-4836-b721-d27ed36f9ebd.jpg)
+![Ruta-Optimista 2](https://user-images.githubusercontent.com/56488179/140507385-0ab6b37b-fa93-49e6-ab92-213dce35a1aa.jpg)
 
-![Ruta Normal 2](https://user-images.githubusercontent.com/56488179/139238908-71ff0b96-5043-4a57-bc40-45395381ac53.jpg)
+![Ruta-Normal 2](https://user-images.githubusercontent.com/56488179/140507397-54ba72cd-e751-424d-b67c-791d360da57c.jpg)
 
-![Ruta Pesimista 2](https://user-images.githubusercontent.com/56488179/139238939-7d72531e-c0d7-48d5-8773-f88fb6ec8354.jpg)
+![Ruta-Pesimista 2](https://user-images.githubusercontent.com/56488179/140507410-1169a49a-f06d-49c8-95d5-5bfa44343184.jpg)
 
 Nuestro cliente se trata de una persona con una fuerte presencia del arte en su vida. Es una persona sencilla, amable, dulce y optimista, la cual quiere o la gustaría poder dedicarse al arte y vivir de ello, siendo reconocida por más gente del gremio aunque para ello debe competir contra gente con talento en una situación laboral un tanto delicada.
 
@@ -47,8 +47,7 @@ Nuestro cliente se trata de una persona con una fuerte presencia del arte en su 
 
 ### 2.2 Mapa de lienzo
 
-![lienzo](https://user-images.githubusercontent.com/56488179/139236673-cd2449f1-2d47-4c1d-9013-9da3400c528b.png)
-
+![lienzo_Beta](https://user-images.githubusercontent.com/56488179/140507434-c524ac65-eed2-472b-8f6d-7883491391b7.png)
 
 ### 2.3 Tablas de productos y precios
 
