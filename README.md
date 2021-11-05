@@ -92,7 +92,7 @@ Los costes del trabajo consisten en los salarios de programadores, gestores, art
 La campaña de publicidad se va a desarrollar en 4 plataformas distintas: Twitter, Reddit, Itch.io y YouTube.
 La estrategia general consiste en captar a gente a través de Reddit y Twitter para redirigirles a Itch.io, donde encontrarán más información sobre el juego. Mientras YouTube actúa como plataforma dedicada a mostrar de manera extensa el juego.
 - Twitter: subir fotos de elementos de arte, videos gameplay y más elementos del juego, incluyendo en el mensaje un enlace a la página de Itch.io. Se aprovecharán hastags del mundo indie (#ScreenshotSaturday, #indiegame, #indiedev y #indiesp) para conseguir más alcance en el público adecuado.
-- Reddit: lo mismo que en Twitter, pero se subirán a subreddits del mundo indie para tener más alcance. En este caso se subirán contenidos a r/IndieGaming y a r/indiegames.
+- Reddit: lo mismo que en Twitter, pero se subirán a subreddits del mundo indie para tener más alcance. En este caso se subirán contenidos a r/IndieGaming, a r/indiegames, a r/frogs y a r/frogsandtoads.
 - YouTube: subir versiones extendidas de los vídeos publicados en el resto de redes. Indicar tipo de contenido mostrado en el vídeo.
 - Itch.io: subir DevBlogs hablando del desarrollo del juego en cada etapa. Comentar los aspectos más relevantes de cada equipo.
 
