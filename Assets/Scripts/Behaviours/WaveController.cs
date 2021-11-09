@@ -92,6 +92,8 @@ public class WaveController : MonoBehaviour
 
     void Update()
     {
+  
+
         if (isGameOver)
         {
             isBetweenWaves = false;
@@ -117,7 +119,14 @@ public class WaveController : MonoBehaviour
             }
         }
         else if (isWaveActive)
-        {
+        {   
+
+            //if spawn is not enabled timer for next wave should not run
+            if (!CheatManager.instance.enableEnemySpawn)
+            {
+                return;
+            }
+
             if (activeEnemies <= 0)
             {
                 isBetweenWaves = true;
@@ -152,14 +161,20 @@ public class WaveController : MonoBehaviour
         }
         else
         {
-            currentWave = waves[waveCount];
+            
 
+            currentWave = waves[waveCount];
 
             for (int i = 0; i < currentWave.packs.Length; i++)
             {
                 Pack p = currentWave.packs[i];
                 for (int j = 0; j < p.enemyAmount; j++)
                 {
+                    //loop used to stop spawining for testing
+                    while (!CheatManager.instance.enableEnemySpawn)
+                    {
+                        yield return null;
+                    }
                     int pathId = Random.Range(0, WorldManager.instance.nPaths);
                     enemySpawner.SpawnEnemy(p.enemyType, WorldManager.instance.paths[pathId]);
                     yield return new WaitForSeconds((1f / currentWave.spawnRate) + Random.Range(0f, randomRange)); //randomness between 
@@ -173,4 +188,10 @@ public class WaveController : MonoBehaviour
         StopCoroutine("SpawnWave");
  
     }*/
+    public void TestSpawnEnemy(EnemyType enemyType)
+    {
+        int pathId = Random.Range(0, WorldManager.instance.nPaths);
+        enemySpawner.SpawnEnemy(enemyType, WorldManager.instance.paths[pathId]);
+    }
+
 }
