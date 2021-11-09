@@ -95,7 +95,7 @@ public class BuildManager : MonoBehaviour
 
     public void BuildStructure(Vector3Int position, Vector3 normal)
     {
-        if (LevelStats.instance.infinteMoney)
+        if (CheatManager.instance.infiniteMoney)
         {
             CreateTowerOnCell(position, normal);
             ResetCanBuild(); // after building an structure you have to select another one to be able to place it

@@ -3654,11 +3654,11 @@ GameObject:
   - component: {fileID: 1903685292}
   - component: {fileID: 1903685293}
   - component: {fileID: 1903685289}
+  - component: {fileID: 1903685296}
   - component: {fileID: 1903685290}
   - component: {fileID: 1903685286}
   - component: {fileID: 1903685285}
   - component: {fileID: 1903685294}
-  - component: {fileID: 1903685296}
   m_Layer: 7
   m_Name: LevelManager
   m_TagString: World
