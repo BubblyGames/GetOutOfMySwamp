@@ -20,6 +20,7 @@ public class InputManager : MonoBehaviour
     private float pinchSensitivity = 15.0f;
     //Gameobject that will be placed where structure is about to be built
     public GameObject cursor;
+    private GameObject cursorBase;
 
     private void Awake()
     {
@@ -38,6 +39,8 @@ public class InputManager : MonoBehaviour
             cursor = GameObject.Instantiate(cursor);
             cursor.SetActive(false);
         }
+
+        cursorBase = cursor.transform.GetChild(0).gameObject;
     }
 
     // Update is called once per frame
@@ -145,6 +148,11 @@ public class InputManager : MonoBehaviour
                     worldPos = selectedCard.transform.position;
                     mZCoord = Camera.main.WorldToScreenPoint(worldPos).z;
                     mOffset = worldPos - GetMouseAsWorldPoint();
+
+                    DefenseBehaviour db;
+                    if (Shop.instance.selectedDefenseBlueprint.structurePrefab.TryGetComponent<DefenseBehaviour>(out db))
+                        cursorBase.transform.localScale = new Vector3(2 * db.attackRange, 2 * db.attackRange, 1);
+
                     break;
                 case "Structure":
                     //Interact with existing defenses
