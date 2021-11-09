@@ -3783,7 +3783,7 @@ MonoBehaviour:
   seed: 0
   pathMetod: 1
   numberOfMidpoints: 0
-  debugMidpoints: 0
+  debugMidpoints: 1
   lineRendererPrefab: {fileID: 3920875017051324963, guid: ffef0eddca5eb324f94bad8de9cc038b, type: 3}
 --- !u!114 &1903685289
 MonoBehaviour:
