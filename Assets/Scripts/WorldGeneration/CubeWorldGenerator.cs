@@ -271,6 +271,16 @@ public class CubeWorldGenerator : MonoBehaviour
                 cells[endX + i, size - 2, endZ + k].canWalk = true;
                 cells[endX + i, size - 3, endZ + k].canWalk = true;
 
+                /*cells[endX + i, size - 1, endZ + k].endZone = true;
+                cells[endX + i, size - 2, endZ + k].endZone = true;
+                cells[endX + i, size - 3, endZ + k].endZone = true;*/
+            }
+        }
+
+        for (int i = -2 * radius; i < 2 * radius; i++)
+        {
+            for (int k = -2 * radius; k < 2 * radius; k++)
+            {
                 cells[endX + i, size - 1, endZ + k].endZone = true;
                 cells[endX + i, size - 2, endZ + k].endZone = true;
                 cells[endX + i, size - 3, endZ + k].endZone = true;
@@ -430,6 +440,9 @@ public class CubeWorldGenerator : MonoBehaviour
         Midpoint midpoint;
         bool lastSept = false;
 
+        closedList = new List<Node>();
+        openList = new List<Node>();
+
         for (int i = 1; i < path.midPoints.Count; i++)
         {
             lastSept = i == path.midPoints.Count - 1; //Is this the segment bewteen the last midpoint and the end?
@@ -481,12 +494,16 @@ public class CubeWorldGenerator : MonoBehaviour
         return current;
     }
 
+    List<Node> openList = new List<Node>();
+    List<Node> closedList = new List<Node>();
     Node FindPathAstar(Node firstNode, CellInfo end, bool lastStep = false)
     {
         Node current;
 
-        List<Node> openList = new List<Node>();
-        List<Node> closedList = new List<Node>();
+        openList = new List<Node>();
+        if (lastStep)
+            closedList = new List<Node>();
+
 
         openList = new List<Node>();
         closedList = new List<Node>();
@@ -529,7 +546,7 @@ public class CubeWorldGenerator : MonoBehaviour
                         bool IsInOpen = false;
                         foreach (Node nf in openList)
                         {
-                            if (nf.cell.id == neighbour.id)
+                            if (nf.cell == neighbour)
                             {
                                 IsInOpen = true;
                                 break;
@@ -541,7 +558,7 @@ public class CubeWorldGenerator : MonoBehaviour
                         bool IsInClosed = false;
                         foreach (Node nf in closedList)
                         {
-                            if (nf.cell.id == neighbour.id)
+                            if (nf.cell == neighbour)
                             {
                                 IsInClosed = true;
                                 break;
@@ -574,6 +591,8 @@ public class CubeWorldGenerator : MonoBehaviour
 
         CellInfo cell = cells[x, y, z];
 
+        int min = 10;
+        int max = size - 11;
         //Debug.Log("Looking for a random midpoint...");
         //BIG ñapa
         int count = 0;
@@ -582,15 +601,15 @@ public class CubeWorldGenerator : MonoBehaviour
             if (!onXFace)
             {
                 x = (size - 1) * Mathf.RoundToInt(Random.value);
-                z = Random.Range(0, size - 1);
+                z = Random.Range(min, max);
             }
             else
             {
-                x = Random.Range(0, size - 1);
+                x = Random.Range(min, max);
                 z = (size - 1) * Mathf.RoundToInt(Random.value);
             }
 
-            y = Random.Range(minY, size - 2);
+            y = Random.Range(minY + 1, Mathf.Min(minY + min, size - 2));
 
             cell = cells[x, y, z];
             count++;
