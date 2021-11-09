@@ -345,6 +345,12 @@ Flujo de juego:
 
 ### 8.2 Hito 2: Beta
 
+- Interfaz implementada con estructura final y arte de GUI final:
+- Tutorial introductorio en el que se expliquen las mecánicas básicas:
+- Balanceo de las estadisticas de enemigos y torres para hacer el juego divertido y justo:
+- Agregar estanque desde el que spawnean los enemigos:
+- Ajustar la generación de caminos:
+- Crear y meter en el juego los 6 modelos de enemigo y los 5 modelos de torre/defensa:
 
 ### 8.3 Hito 3: Gold
 
