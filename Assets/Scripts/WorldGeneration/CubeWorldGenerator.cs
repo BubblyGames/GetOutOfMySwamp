@@ -800,12 +800,39 @@ public class CubeWorldGenerator : MonoBehaviour
         return false;
     }
 
+    public void Explode(Vector3Int pos, int radius)
+    {
+        for (int i = -radius; i <= radius; i++)
+        {
+            for (int j = -radius; j <= radius; j++)
+            {
+                for (int k = -radius; k <= radius; k++)
+                {
+                    int x = pos.x + i;
+                    int y = pos.y + j;
+                    int z = pos.z + k;
+
+                    if (IsPosInBounds(x, y, z))
+                    {
+                        Vector3Int newPos = new Vector3Int(x,y,z);
+                        if (Vector3Int.Distance(pos,newPos)<= radius)
+                        {
+                            cells[x, y, z].blockType = BlockType.Air;
+                        }
+                    }
+                }
+            }
+        }
+
+        UpdateWorld();
+    }
+
     bool UpdateWorld()
     {
         if (cells != null)
         {
             ClearDebugStuff();
-            FillWorld();
+            //FillWorld();
             GenerateSwamp(end.x, end.y, end.z);
 
             if (!demo)

@@ -64,6 +64,7 @@ public class BuildManager : MonoBehaviour
     public void PlaceObject(RaycastHit hit)
     {
         Vector3Int pos;
+
         if (CheckIfCanBuild(hit, out pos))
         {
             BuildStructure(pos, hit.normal);

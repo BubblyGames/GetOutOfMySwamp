@@ -713,6 +713,7 @@ MonoBehaviour:
   - {fileID: 2100000, guid: 087940d22f6226f40b86af3d8a810afe, type: 2}
   - {fileID: 2100000, guid: db9ecb3b746c1224b96ebce2da87b0eb, type: 2}
   - {fileID: 2100000, guid: 55721add5ad05114298eb5c6154225ec, type: 2}
+  - {fileID: 2100000, guid: a72c57717c0a26441858e5ff93f5fcb9, type: 2}
 --- !u!33 &549071508
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -3659,6 +3660,7 @@ GameObject:
   - component: {fileID: 1903685286}
   - component: {fileID: 1903685285}
   - component: {fileID: 1903685294}
+  - component: {fileID: 1903685288}
   m_Layer: 7
   m_Name: LevelManager
   m_TagString: World
@@ -3785,6 +3787,22 @@ MonoBehaviour:
   numberOfMidpoints: 0
   debugMidpoints: 1
   lineRendererPrefab: {fileID: 3920875017051324963, guid: ffef0eddca5eb324f94bad8de9cc038b, type: 3}
+--- !u!114 &1903685288
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1903685281}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b74ea02730753d44f99324699b92aa51, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  infiniteHealth: 0
+  infiniteMoney: 0
+  enableEnemySpawn: 1
+  enemy: 0
 --- !u!114 &1903685289
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3888,6 +3906,9 @@ MonoBehaviour:
   - structurePrefab: {fileID: 2711408889448630410, guid: 4cdbff3b4cc893847ad0a47225cd137b, type: 3}
     creationCost: 500
     upgradeMultiplicator: 1.1
+  - structurePrefab: {fileID: 4422750441095425187, guid: 7461b5dc79e93e44796d7af498e661aa, type: 3}
+    creationCost: 1
+    upgradeMultiplicator: 2
   selectedDefenseBlueprint:
     structurePrefab: {fileID: 0}
     creationCost: 0
