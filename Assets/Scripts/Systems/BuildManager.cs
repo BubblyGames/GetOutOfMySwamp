@@ -132,6 +132,8 @@ public class BuildManager : MonoBehaviour
         {
             selectedCell.structure.UpgradeStrucrure();
         }
+
+        //TODO: get values from Upgrade
         else if (LevelStats.instance.CurrentMoney >= structureToBuild.creationCost * Mathf.Pow(structureToBuild.upgradeMultiplicator, selectedCell.structure.GetLevel()))
         {
             selectedCell.structure.UpgradeStrucrure();
