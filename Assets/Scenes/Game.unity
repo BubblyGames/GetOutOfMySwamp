@@ -3877,7 +3877,7 @@ MonoBehaviour:
   shopIndex: -1
   defenseBlueprints:
   - structurePrefab: {fileID: 7137880238603071797, guid: e1fa9704af9f5114992d5229e61c2040, type: 3}
-    creationCost: 100
+    creationCost: 125
     upgradeMultiplicator: 1.5
   - structurePrefab: {fileID: 8305915707849881324, guid: df406671fc6064a4c978095ef361ebfd, type: 3}
     creationCost: 300
@@ -3886,7 +3886,7 @@ MonoBehaviour:
     creationCost: 200
     upgradeMultiplicator: 1.3
   - structurePrefab: {fileID: 2711408889448630410, guid: 4cdbff3b4cc893847ad0a47225cd137b, type: 3}
-    creationCost: 500
+    creationCost: 400
     upgradeMultiplicator: 1.1
   selectedDefenseBlueprint:
     structurePrefab: {fileID: 0}
