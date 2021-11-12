@@ -171,12 +171,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b72c36df0c0980e41afc25113c5359e3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  startHealth: 10
+  startHealth: 25
   healthPoints: 0
-  startSpeed: 10
+  startSpeed: 7
   currentSpeed: 0
   damage: 15
-  moneyValue: 75
+  moneyValue: 20
   scoreValue: 125
   isSlowed: 0
   slowIntensity: 0.25

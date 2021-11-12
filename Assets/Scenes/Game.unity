@@ -3654,11 +3654,11 @@ GameObject:
   - component: {fileID: 1903685292}
   - component: {fileID: 1903685293}
   - component: {fileID: 1903685289}
+  - component: {fileID: 1903685296}
   - component: {fileID: 1903685290}
   - component: {fileID: 1903685286}
   - component: {fileID: 1903685285}
   - component: {fileID: 1903685294}
-  - component: {fileID: 1903685296}
   m_Layer: 7
   m_Name: LevelManager
   m_TagString: World
@@ -3877,7 +3877,7 @@ MonoBehaviour:
   shopIndex: -1
   defenseBlueprints:
   - structurePrefab: {fileID: 7137880238603071797, guid: e1fa9704af9f5114992d5229e61c2040, type: 3}
-    creationCost: 100
+    creationCost: 125
     upgradeMultiplicator: 1.5
     upgrades:
     - cost: 0
@@ -3899,7 +3899,7 @@ MonoBehaviour:
     upgradeMultiplicator: 1.3
     upgrades: []
   - structurePrefab: {fileID: 2711408889448630410, guid: 4cdbff3b4cc893847ad0a47225cd137b, type: 3}
-    creationCost: 500
+    creationCost: 400
     upgradeMultiplicator: 1.1
     upgrades: []
   selectedDefenseBlueprint:

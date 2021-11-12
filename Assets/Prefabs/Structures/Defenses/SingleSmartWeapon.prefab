@@ -202,15 +202,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3890934ac96f66841abdff0c0a54e5b5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attackWait: 1
+  health: 0
+  canLoseHealth: 0
+  level: 0
+  maxLevel: 3
+  isMaxLevel: 0
+  normal: {x: 0, y: 0, z: 0}
+  blockType: 1
+  fireRate: 1
   damage: 40
-  bulletSpeed: 30
-  detectionRange: 5
-  enemyLayerMask:
-    serializedVersion: 2
-    m_Bits: 64
-  shotPositions: []
-  bulletType: {fileID: 4067383769571425247, guid: 22095a00db534e34a8b4121737457093, type: 3}
+  attackRange: 5
+  firePoint: {fileID: 0}
+  enemyTarget: {fileID: 0}
+  turnSpeed: 5
+  bulletPrefab: {fileID: 0}
   actualEffect: 0
 --- !u!1 &8505893711344014288
 GameObject:

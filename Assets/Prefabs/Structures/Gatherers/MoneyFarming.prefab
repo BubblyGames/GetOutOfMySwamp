@@ -110,6 +110,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   health: 100
   canLoseHealth: 1
-  resourceGatheredEachCicle: 10
-  timeToGatherResource: 5
+  level: 0
+  maxLevel: 3
+  isMaxLevel: 0
+  normal: {x: 0, y: 0, z: 0}
+  blockType: 1
+  resourceGatheredEachCicle: 30
+  timeToGatherResource: 3
   timerToGetResource: 0

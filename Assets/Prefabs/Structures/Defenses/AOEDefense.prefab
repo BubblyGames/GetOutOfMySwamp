@@ -115,6 +115,6 @@ MonoBehaviour:
   isMaxLevel: 0
   normal: {x: 0, y: 0, z: 0}
   blockType: 1
-  fireRate: 0.1
-  damage: 20
+  fireRate: 0.05
+  damage: 35
   attackRange: 5

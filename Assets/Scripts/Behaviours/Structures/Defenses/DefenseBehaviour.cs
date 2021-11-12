@@ -23,7 +23,7 @@ public abstract class DefenseBehaviour : Structure
     protected float bulletSpeed = 1f;
 
     [SerializeField][Tooltip("The radius of the sphere in which the defense detects an enemy")]
-    protected float attackRange = 5f;
+    internal float attackRange = 5f;
 
     public override void UpgradeStrucrure()
     {
