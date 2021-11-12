@@ -30,9 +30,23 @@ public abstract class DefenseBehaviour : Structure
 
         if (!isMaxLevel)
         {
-            this.fireRate -= this.fireRate * 0.1f;
-            this.damage += Mathf.RoundToInt(this.damage * 0.1f);
-
+            foreach (Stats stats in Blueprint.upgrades[level].stats)
+            {
+                switch (stats.statToUpgrade)
+                {
+                    case Stat.attackDamage:
+                        this.damage += (int)stats.upgradeAddedValue;
+                        break;
+                    case Stat.attackSpeed:
+                        this.fireRate += stats.upgradeAddedValue;
+                        break;
+                    case Stat.range:
+                        this.attackRange += stats.upgradeAddedValue;
+                        break;
+                    default:
+                        break;
+                }
+            }
         }
         base.UpgradeStrucrure();
 
