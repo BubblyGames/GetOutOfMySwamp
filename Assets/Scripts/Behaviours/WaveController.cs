@@ -122,7 +122,7 @@ public class WaveController : MonoBehaviour
         {   
 
             //if spawn is not enabled timer for next wave should not run
-            if (!CheatManager.instance.enableEnemySpawn)
+            if (CheatManager.instance!=null && !CheatManager.instance.enableEnemySpawn)
             {
                 return;
             }
@@ -171,7 +171,7 @@ public class WaveController : MonoBehaviour
                 for (int j = 0; j < p.enemyAmount; j++)
                 {
                     //loop used to stop spawining for testing
-                    while (!CheatManager.instance.enableEnemySpawn)
+                    while (CheatManager.instance != null&&!CheatManager.instance.enableEnemySpawn)
                     {
                         yield return null;
                     }
