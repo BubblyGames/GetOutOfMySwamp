@@ -209,8 +209,11 @@ MonoBehaviour:
   canLoseHealth: 0
   level: 0
   maxLevel: 3
+  isMaxLevel: 0
+  normal: {x: 0, y: 0, z: 0}
+  blockType: 1
   fireRate: 1
-  damage: 10
+  damage: 7
   attackRange: 5
   firePoint: {fileID: 1127500018515762662}
   enemyTarget: {fileID: 0}
