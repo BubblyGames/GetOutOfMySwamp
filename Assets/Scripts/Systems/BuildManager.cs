@@ -117,6 +117,7 @@ public class BuildManager : MonoBehaviour
     {
         Structure structure = Instantiate(structureToBuild.structurePrefab, position, Quaternion.Euler(normal)).GetComponent<Structure>();
         structure.SetNormal(normal);
+        structure.Blueprint = structureToBuild;
 
         //Not working
         if (selectedCell.GetStructure() != null)
@@ -134,7 +135,7 @@ public class BuildManager : MonoBehaviour
         }
 
         //TODO: get values from Upgrade
-        else if (LevelStats.instance.CurrentMoney >= structureToBuild.creationCost * Mathf.Pow(structureToBuild.upgradeMultiplicator, selectedCell.structure.GetLevel()))
+        else if (LevelStats.instance.CurrentMoney >= structureToBuild.upgrades[selectedStructure.GetLevel()].cost)
         {
             selectedCell.structure.UpgradeStrucrure();
             LevelStats.instance.SpendMoney(structureToBuild.creationCost);

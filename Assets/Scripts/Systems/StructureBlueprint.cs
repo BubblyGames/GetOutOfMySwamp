@@ -9,6 +9,7 @@ public class StructureBlueprint
     public int creationCost;
     public float upgradeMultiplicator;
     public Upgrade[] upgrades;
+
 }
 
 [System.Serializable]
@@ -16,14 +17,14 @@ public class Upgrade
 {
     public int cost;
     public Stats[] stats;
-    
+  
 }
 
 [System.Serializable]
 public class Stats
 {
     public Stat statToUpgrade;
-    public float upgradedStatValue;
+    public float upgradeAddedValue;
 }
 
 public enum Stat
