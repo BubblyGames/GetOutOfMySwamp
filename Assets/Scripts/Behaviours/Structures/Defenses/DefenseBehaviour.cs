@@ -23,16 +23,30 @@ public abstract class DefenseBehaviour : Structure
     protected float bulletSpeed = 1f;
 
     [SerializeField][Tooltip("The radius of the sphere in which the defense detects an enemy")]
-    protected float attackRange = 5f;
+    internal float attackRange = 5f;
 
     public override void UpgradeStrucrure()
     {
 
         if (!isMaxLevel)
         {
-            this.fireRate -= this.fireRate * 0.1f;
-            this.damage += Mathf.RoundToInt(this.damage * 0.1f);
-
+            foreach (Stats stats in Blueprint.upgrades[level].stats)
+            {
+                switch (stats.statToUpgrade)
+                {
+                    case Stat.attackDamage:
+                        this.damage += (int)stats.upgradeAddedValue;
+                        break;
+                    case Stat.attackSpeed:
+                        this.fireRate += stats.upgradeAddedValue;
+                        break;
+                    case Stat.range:
+                        this.attackRange += stats.upgradeAddedValue;
+                        break;
+                    default:
+                        break;
+                }
+            }
         }
         base.UpgradeStrucrure();
 

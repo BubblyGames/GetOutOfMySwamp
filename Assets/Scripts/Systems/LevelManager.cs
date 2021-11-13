@@ -83,7 +83,7 @@ public class LevelManager : MonoBehaviour
         waterSplash.transform.position = world.end;
         waterSplash.GetComponent<ParticleSystem>().startColor = waterColor;
 
-        if (!CheatManager.instance.infiniteHealth)
+        if (CheatManager.instance!=null && CheatManager.instance.infiniteHealth)
         {
             //LevelStats.levelStatsInstance.ReceiveDamage(damageTaken);
             OnDamageTaken?.Invoke(damageTaken);

@@ -96,7 +96,7 @@ public class BuildManager : MonoBehaviour
 
     public void BuildStructure(Vector3Int position, Vector3 normal)
     {
-        if (CheatManager.instance.infiniteMoney)
+        if (CheatManager.instance!=null && CheatManager.instance.infiniteMoney)
         {
             CreateTowerOnCell(position, normal);
             ResetCanBuild(); // after building an structure you have to select another one to be able to place it
@@ -118,6 +118,7 @@ public class BuildManager : MonoBehaviour
     {
         Structure structure = Instantiate(structureToBuild.structurePrefab, position, Quaternion.Euler(normal)).GetComponent<Structure>();
         structure.SetNormal(normal);
+        structure.Blueprint = structureToBuild;
 
         //Not working
         if (selectedCell.GetStructure() != null)
@@ -133,7 +134,9 @@ public class BuildManager : MonoBehaviour
         {
             selectedCell.structure.UpgradeStrucrure();
         }
-        else if (LevelStats.instance.CurrentMoney >= structureToBuild.creationCost * Mathf.Pow(structureToBuild.upgradeMultiplicator, selectedCell.structure.GetLevel()))
+
+        //TODO: get values from Upgrade
+        else if (LevelStats.instance.CurrentMoney >= structureToBuild.upgrades[selectedStructure.GetLevel()].cost)
         {
             selectedCell.structure.UpgradeStrucrure();
             LevelStats.instance.SpendMoney(structureToBuild.creationCost);

@@ -351,6 +351,7 @@ Flujo de juego:
 - Agregar estanque desde el que spawnean los enemigos:
 - Ajustar la generación de caminos:
 - Crear y meter en el juego los 6 modelos de enemigo y los 5 modelos de torre/defensa:
+- Nueva mecánica característica
 
 ### 8.3 Hito 3: Gold
 

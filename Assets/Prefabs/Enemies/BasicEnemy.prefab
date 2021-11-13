@@ -513,10 +513,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   startHealth: 40
   healthPoints: 0
-  startSpeed: 5
+  startSpeed: 3
   currentSpeed: 0
   damage: 10
-  moneyValue: 25
+  moneyValue: 10
   scoreValue: 100
   isSlowed: 0
   slowIntensity: 0.25

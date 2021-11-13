@@ -6,6 +6,10 @@ using UnityEngine;
 [System.Serializable]
 public class Structure : MonoBehaviour
 {
+    private StructureBlueprint _blueprint;
+
+    public StructureBlueprint Blueprint { get => _blueprint; set => _blueprint = value; }
+
     [Header("General stats")]
     [SerializeField]
     protected int health;
@@ -24,6 +28,8 @@ public class Structure : MonoBehaviour
     protected Vector3 normal;
 
     public BlockType blockType = BlockType.Grass;
+
+
 
     public void SetNormal(Vector3 normal)
     {
