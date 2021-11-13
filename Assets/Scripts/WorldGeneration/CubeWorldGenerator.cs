@@ -24,12 +24,7 @@ public class CubeWorldGenerator : MonoBehaviour
     public float rocksVisualReduction = 0.9f;
     public float rockSize = 3f;
     public int seed = 0;
-    public enum PathMethod
-    {
-        AStar,
-        AStarWithMidpoints
-    }
-    public PathMethod pathMetod = PathMethod.AStarWithMidpoints;
+
     public int numberOfMidpoints = 1;
 
     internal Vector3Int end;
@@ -91,7 +86,7 @@ public class CubeWorldGenerator : MonoBehaviour
         paths = new List<Path>();
         for (int i = 0; i < nPaths; i++)
         {
-            Path p = new Path();
+            Path p = new Path(this);
             p.id = i;
             paths.Add(p);
         }
@@ -291,6 +286,7 @@ public class CubeWorldGenerator : MonoBehaviour
     private bool GeneratePaths(int endX, int endY, int endZ)
     {
         float startTime = Time.realtimeSinceStartup;
+
         for (int i = 0; i < nPaths; i++)
         {
             if (!paths[i].dirty) //Should check if a path has been modified to update it, but not yet
@@ -308,7 +304,7 @@ public class CubeWorldGenerator : MonoBehaviour
                 while ((GetCell(paths[i].start).isPath || //Not part of an existing path
                     !GetCell(paths[i].start).canWalk || //Must be normal floor
                     !GetCell(paths[i].start).isSurface || //Must be on surface
-                    FindPathAstar(new Node(GetCell(paths[i].start)), cells[endX, endY, endZ], true) == null) //There must be a path to the end
+                    Path.FindPathAstar(this,new Node(GetCell(paths[i].start)), cells[endX, endY, endZ], true) == null) //There must be a path to the end
                     && count < 100)
                 {
                     paths[i].start.x = Random.Range(2, size - 3);
@@ -329,83 +325,11 @@ public class CubeWorldGenerator : MonoBehaviour
             //Debug.Log(count + " attempts needed to find starting point");
 
             //Node which will store the result of the path finding
-            Node result;
 
-            switch (pathMetod)
-            {
-                case PathMethod.AStar:
-                    //Normal path to end
-                    result = FindPathAstar(new Node(GetCell(paths[i].start)), cells[endX, endY, endZ], true);
-                    break;
-                case PathMethod.AStarWithMidpoints:
-                    //Path to end with midpoints
-                    result = FindPathAstarWithMidpoints(GetCell(paths[i].start), cells[endX, endY, endZ], paths[i]);
-                    break;
-                default:
-                    result = null;
-                    break;
-            }
-
-            //If result is null, a path couldn't be found and returns false so it tries another seed
-            if (result == null)
-                return false;
-
-            //List of cells in the path
-            List<CellInfo> pathCells = new List<CellInfo>();
-            while (result != null)
-            {
-                CellInfo cell = cells[result.x, result.y, result.z];
-                Vector3Int normal = cell.normalInt;
-                CellInfo cellUnder = cells[result.x - normal.x, result.y - normal.y, result.z - normal.z];
-
-                if (cellUnder.blockType != BlockType.Swamp && cellUnder.blockType != BlockType.Air)
-                {
-                    cellUnder.blockType = BlockType.Path;
-                }
-                else
-                {
-                    int c = 0;
-                    while (cellUnder.blockType == BlockType.Air && c < 100)
-                    {
-                        cell = cellUnder;
-                        cellUnder = cells[cell.x - normal.x, cell.y - normal.y, cell.z - normal.z];
-                        c++;
-                    }
-
-                    if (cellUnder.blockType == BlockType.Swamp)
-                    {
-                        cell = cellUnder;
-                    }
-                }
-                cell.isPath = true;
-                pathCells.Add(cell);
-
-                cellUnder = cells[cell.x - normal.x, cell.y - normal.y, cell.z - normal.z];
-                /*foreach (CellInfo c in GetNeighbours(cellUnder, true))
-                {
-                    c.isCloseToPath = true;
-                }*/
-
-                result = result.Parent;
-            }
-
-            for (int j = 0; j < 7; j++)
-            {
-                pathCells[j].isPath = false;
-                foreach (CellInfo c in GetNeighbours(pathCells[j], true))
-                {
-                    c.isCloseToPath = false;
-                }
-            }
-
-            //Cells are added from last to first, so we reverse the list
-            pathCells.Reverse();
-
-            //Send cells to path to store it
-            paths[i].SetPath(pathCells.ToArray());
+            paths[i].SetPathTo(end);
 
             //Debug paths and midpoints
-            if (debugMidpoints)
+            /*if (debugMidpoints)
             {
                 GameObject line = GameObject.Instantiate(lineRendererPrefab);
                 LineRenderer lr = line.GetComponent<LineRenderer>();
@@ -423,167 +347,20 @@ public class CubeWorldGenerator : MonoBehaviour
                 {
                     lr.SetPosition(idx, pathCells[idx].GetPos());
                 }
-            }
+            }*/
 
-            paths[i].dirty = false;
         }
 
         Debug.Log("Generating paths took: " + (Time.realtimeSinceStartup - startTime) + "s");
         return true; //Success
     }
 
-    Node FindPathAstarWithMidpoints(CellInfo start, CellInfo end, Path path)
-    {
-
-        Node current = new Node(start);
-        current.ComputeFScore(end.x, end.y, end.z);
-        Midpoint midpoint;
-        bool lastSept = false;
-
-        closedList = new List<Node>();
-        openList = new List<Node>();
-
-        for (int i = 1; i < path.midPoints.Count; i++)
-        {
-            lastSept = i == path.midPoints.Count - 1; //Is this the segment bewteen the last midpoint and the end?
-
-            midpoint = path.midPoints[i];
-
-            //Debug.Log("Finding path to midpoint " + i);
-            Node result = FindPathAstar(current, midpoint.cell, lastSept);
-
-            //If a midpoint is important but the path can't be made, the path fails
-            if (result == null && midpoint.important)
-            {
-                Debug.Log("Couldn't get to midpoint " + midpoint.cell.id);
-                return null;//Could try to change previous point instead? For beta maybe
-            }
-
-            //Tries 10 times to find a suitable midpoint
-            int count = 0;
-            while (result == null && count < 10)
-            {
-                midpoint.cell = GetRandomCell(path.midPoints[i - 1].cell.y);
-                result = FindPathAstar(current, midpoint.cell, lastSept);
-                count++;
-            }
-            //Debug.Log(count + " attempts needed");
-
-            if (result == null)
-            {
-                //Debug.Log("Failed to find a way");
-                return null;
-            }
-
-            Node n = result;
-            while (n != current)
-            {
-                n.cell.isPath = true;
-                foreach (CellInfo c in GetNeighbours(n.cell, true))
-                {
-                    c.isCloseToPath = true;
-                }
-                n = n.Parent;
-            }
-
-            //The end of this segment will become the start of the next one
-            current = result;
-        }
-
-        //Final step is finding the actual end
-        return current;
-    }
-
-    List<Node> openList = new List<Node>();
-    List<Node> closedList = new List<Node>();
-    Node FindPathAstar(Node firstNode, CellInfo end, bool lastStep = false)
-    {
-        Node current;
-
-        openList = new List<Node>();
-        if (lastStep)
-            closedList = new List<Node>();
+    
 
 
-        openList = new List<Node>();
-        closedList = new List<Node>();
-
-        //First node, with starting position and null parent
-        firstNode.ComputeFScore(end.x, end.y, end.z);
-        openList.Add(firstNode);
-
-        int count = 0;
-        while (openList.Count > 0 && count < 10000)
-        {
-            count++;
-            //Sorting the list in "h" in increasing order
-            openList = openList.OrderBy(o => o.f).ToList();
-
-            //Check lists's first node
-            current = openList[0];
-            closedList.Add(current);
-            openList.Remove(current);
-
-            if (current.cell == end || (lastStep && current.cell.blockType == BlockType.Swamp))//If first node is goal,returns current Node3D
-            {
-                return current;
-            }
-            else
-            {
-                //Expands neightbors, (compute cost of each one) and add them to the list
-                CellInfo[] neighbours = GetNeighbours(current.cell);
-                foreach (CellInfo neighbour in neighbours)
-                {
-                    if (!neighbour.canWalk ||
-                        (!lastStep && neighbour.endZone) ||
-                        neighbour.isInteresting ||
-                        ((neighbour.isPath) && !canMergePaths && !lastStep))//||(neighbour.isPath && !neighbour.endZone)
-                        continue;
-
-                    if (neighbour != null)
-                    {
-                        //if neighbour no esta en open
-                        bool IsInOpen = false;
-                        foreach (Node nf in openList)
-                        {
-                            if (nf.cell == neighbour)
-                            {
-                                IsInOpen = true;
-                                break;
-                            }
-                        }
-                        if (IsInOpen)
-                            continue;
-
-                        bool IsInClosed = false;
-                        foreach (Node nf in closedList)
-                        {
-                            if (nf.cell == neighbour)
-                            {
-                                IsInClosed = true;
-                                break;
-                            }
-                        }
-
-                        if (!IsInOpen && !IsInClosed)
-                        {
-                            Node n = new Node(neighbour);
-                            n.ComputeFScore(end.x, end.y, end.z);
-                            n.Parent = current;
-                            n.cell = cells[n.x, n.y, n.z];
-
-                            openList.Add(n);
-                        }
-                    }
-                }
-            }
-        }
-
-        return null;
-    }
 
     bool onXFace = true;
-    CellInfo GetRandomCell(int minY = 1)
+    public CellInfo GetRandomCell(int minY = 1)
     {
         int x = 1;
         int y = 1;
@@ -619,7 +396,7 @@ public class CubeWorldGenerator : MonoBehaviour
         return cell;
     }
 
-    private CellInfo[] GetNeighbours(CellInfo current, bool addCorners = false)
+    public CellInfo[] GetNeighbours(CellInfo current, bool addCorners = false)
     {
         //Returns an array of cells around the provided cell
         //If it's not the path to the end (lastStep), cells in the end zone can't be returned
@@ -746,7 +523,7 @@ public class CubeWorldGenerator : MonoBehaviour
                 float dist = Vector3.Distance(point, paths[p].midPoints[m].cell.GetPos());
                 if (dist < minDist)
                 {
-                    Node n = FindPathAstar(new Node(paths[p].midPoints[m].cell), GetCell(point), true);
+                    Node n = Path.FindPathAstar(this, new Node(paths[p].midPoints[m].cell), GetCell(point), true);
                     if (n != null)
                     {
                         //Found it!
@@ -773,7 +550,7 @@ public class CubeWorldGenerator : MonoBehaviour
         }
 
         Node start = new Node(GetCell(point));
-        Node result = FindPathAstar(start, GetCell(end), true);
+        Node result = Path.FindPathAstar(this, start, GetCell(end), true);
         if (result != null)
         {
             paths[bestP].dirty = true;//This path need to be recalculated
@@ -814,8 +591,8 @@ public class CubeWorldGenerator : MonoBehaviour
 
                     if (IsPosInBounds(x, y, z))
                     {
-                        Vector3Int newPos = new Vector3Int(x,y,z);
-                        if (Vector3Int.Distance(pos,newPos)<= radius)
+                        Vector3Int newPos = new Vector3Int(x, y, z);
+                        if (Vector3Int.Distance(pos, newPos) <= radius)
                         {
                             cells[x, y, z].blockType = BlockType.Air;
                         }
@@ -894,3 +671,4 @@ public class CubeWorldGenerator : MonoBehaviour
     }
 #endif
 }
+

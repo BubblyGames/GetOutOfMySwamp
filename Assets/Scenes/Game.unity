@@ -688,7 +688,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 549071505}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 3.83, y: 1.1, z: 25}
+  m_LocalPosition: {x: 5, y: 1.5, z: 32}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 963194228}
@@ -3901,9 +3901,9 @@ MonoBehaviour:
     - cost: 0
       stats:
       - statToUpgrade: 0
-        upgradedStatValue: 0
+        upgradeAddedValue: 0
       - statToUpgrade: 1
-        upgradedStatValue: 0
+        upgradeAddedValue: 0
     - cost: 0
       stats: []
     - cost: 0
@@ -3919,6 +3919,10 @@ MonoBehaviour:
   - structurePrefab: {fileID: 4422750441095425187, guid: 7461b5dc79e93e44796d7af498e661aa, type: 3}
     creationCost: 1
     upgradeMultiplicator: 2
+    upgrades: []
+  - structurePrefab: {fileID: 4422750441095425187, guid: 7461b5dc79e93e44796d7af498e661aa, type: 3}
+    creationCost: 1
+    upgradeMultiplicator: 0
     upgrades: []
   selectedDefenseBlueprint:
     structurePrefab: {fileID: 0}
