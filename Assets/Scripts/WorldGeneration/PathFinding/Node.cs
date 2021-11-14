@@ -1,4 +1,5 @@
 ﻿using System;
+using UnityEngine;
 
 public class Node
 {
@@ -15,11 +16,13 @@ public class Node
         z = cell.z;
     }
 
-    public void ComputeFScore(int targetX, int targetY, int targetZ)
+    public void ComputeFScore(int targetX, int targetY, int targetZ, int extra = 0)
     {
-        h = Math.Abs(targetX - x) + Math.Abs(targetY - y) + Math.Abs(targetX - z);
+        h = Math.Abs(targetX - x) + Math.Abs(targetY - y) + Math.Abs(targetZ - z);
         if (Parent != null)
-            g = Parent.g + 10;
+            g = Parent.g + 1;
+
         f = h - g;
+        f += extra;
     }
 }

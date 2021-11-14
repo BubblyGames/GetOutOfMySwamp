@@ -5,10 +5,10 @@ using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 
-[System.Serializable]
+//[System.Serializable]
 public class Path
 {
-    CellInfo[] cells;
+    internal CellInfo[] cells;
     public List<Midpoint> midPoints = new List<Midpoint>();
     float spawnWait = 1f;
     float nextSpawnTime = 0;
@@ -28,11 +28,11 @@ public class Path
         this.world = world;
     }
 
-    public bool SetPathTo(Vector3Int end)
+    public bool FindPath()
     {
+        Debug.Log("Finding path");
 
-        this.end = end;
-
+        end = midPoints[midPoints.Count() - 1].cell.GetPosInt();
 
         Node result = result = FindPathAstarWithMidpoints(world.GetCell(start), world.GetCell(end));
 
@@ -45,36 +45,35 @@ public class Path
         while (result != null)
         {
             CellInfo cell = world.cells[result.x, result.y, result.z];
-            Vector3Int normal = cell.normalInt;
-            CellInfo cellUnder = world.cells[result.x - normal.x, result.y - normal.y, result.z - normal.z];
 
-            if (cellUnder.blockType != BlockType.Swamp && cellUnder.blockType != BlockType.Air)
+            cell.normalInt = GetNormalOf(cell);
+
+            //Debug.Log(cell.normalInt);
+
+            CellInfo cellUnder = world.GetCell(cell.GetPosInt() - cell.normalInt);
+
+            if (cellUnder.blockType == BlockType.Grass)
             {
                 cellUnder.blockType = BlockType.Path;
             }
             else
             {
-                int c = 0;
-                while (cellUnder.blockType == BlockType.Air && c < 100)
-                {
-                    cell = cellUnder;
-                    cellUnder = world.cells[cell.x - normal.x, cell.y - normal.y, cell.z - normal.z];
-                    c++;
-                }
-
                 if (cellUnder.blockType == BlockType.Swamp)
                 {
                     cell = cellUnder;
                 }
             }
-            cell.isPath = true;
-            pathCells.Add(cell);
 
-            cellUnder = world.cells[cell.x - normal.x, cell.y - normal.y, cell.z - normal.z];
-            /*foreach (CellInfo c in GetNeighbours(cellUnder, true))
+            //cellUnder = world.GetCellUnder(cell);
+            /*foreach (CellInfo c in world.GetNeighbours(cellUnder, true))
             {
                 c.isCloseToPath = true;
             }*/
+
+            cell.isPath = true;
+            pathCells.Add(cell);
+            cell.paths.Add(this);
+
 
             result = result.Parent;
         }
@@ -92,18 +91,14 @@ public class Path
         pathCells.Reverse();
 
         //Send cells to path to store it
-        SetPath(pathCells.ToArray());
-
-        
+        cells = pathCells.ToArray();
 
         dirty = false;
-
 
         return true;
     }
 
-    List<Node> openList = new List<Node>();
-    List<Node> closedList = new List<Node>();
+
     public static Node FindPathAstar(CubeWorldGenerator _world, Node firstNode, CellInfo end, bool lastStep = false)
     {
         Node current;
@@ -139,49 +134,59 @@ public class Path
             {
                 //Expands neightbors, (compute cost of each one) and add them to the list
                 CellInfo[] neighbours = _world.GetNeighbours(current.cell);
+
+                //If there are no neighbours, try next node in open list
+                while (neighbours.Length == 0)
+                {
+                    current = openList[0];
+                    closedList.Add(current);
+                    openList.Remove(current);
+                    neighbours = _world.GetNeighbours(current.cell);
+                }
+
                 foreach (CellInfo neighbour in neighbours)
                 {
-                    if (!neighbour.canWalk ||
+                    if (neighbour == null ||
+                        !neighbour.canWalk ||
                         (!lastStep && neighbour.endZone) ||
                         neighbour.isInteresting ||
                         ((neighbour.isPath) && !_world.canMergePaths && !lastStep))//||(neighbour.isPath && !neighbour.endZone)
                         continue;
 
-                    if (neighbour != null)
+                    //if neighbour no esta en open
+                    bool IsInOpen = false;
+                    foreach (Node nf in openList)
                     {
-                        //if neighbour no esta en open
-                        bool IsInOpen = false;
-                        foreach (Node nf in openList)
+                        if (nf.cell == neighbour)
                         {
-                            if (nf.cell == neighbour)
-                            {
-                                IsInOpen = true;
-                                break;
-                            }
-                        }
-                        if (IsInOpen)
-                            continue;
-
-                        bool IsInClosed = false;
-                        foreach (Node nf in closedList)
-                        {
-                            if (nf.cell == neighbour)
-                            {
-                                IsInClosed = true;
-                                break;
-                            }
-                        }
-
-                        if (!IsInOpen && !IsInClosed)
-                        {
-                            Node n = new Node(neighbour);
-                            n.ComputeFScore(end.x, end.y, end.z);
-                            n.Parent = current;
-                            n.cell = _world.cells[n.x, n.y, n.z];
-
-                            openList.Add(n);
+                            IsInOpen = true;
+                            break;
                         }
                     }
+                    if (IsInOpen)
+                        continue;
+
+                    bool IsInClosed = false;
+                    foreach (Node nf in closedList)
+                    {
+                        if (nf.cell == neighbour)
+                        {
+                            IsInClosed = true;
+                            break;
+                        }
+                    }
+
+                    if (!IsInOpen && !IsInClosed)
+                    {
+                        Node n = new Node(neighbour);
+
+                        n.ComputeFScore(end.x, end.y, end.z);
+                        n.Parent = current;
+                        n.cell = _world.cells[n.x, n.y, n.z];
+
+                        openList.Add(n);
+                    }
+
                 }
             }
         }
@@ -197,8 +202,8 @@ public class Path
         Midpoint midpoint;
         bool lastSept = false;
 
-        closedList = new List<Node>();
-        openList = new List<Node>();
+        List<Node> closedList = new List<Node>();
+        List<Node> openList = new List<Node>();
 
         for (int i = 1; i < midPoints.Count; i++)
         {
@@ -251,12 +256,6 @@ public class Path
         return current;
     }
 
-    public void SetPath(CellInfo[] cellInfos)
-    {
-        initiated = true;
-        cells = cellInfos;
-    }
-
     public void AddMidpoint(Midpoint midpoint)
     {
         midPoints.Add(midpoint);
@@ -290,5 +289,65 @@ public class Path
         {
             e.FindNewPath();
         }
+
+        foreach (CellInfo c in cells)
+        {
+            c.paths.Remove(this);
+            c.Reset();
+        }
+
+        dirty = true;
+
+        enemies.Clear();
+    }
+
+    Vector3Int GetNormalOf(CellInfo cell)
+    {
+        
+        Vector3Int result = Vector3Int.zero;
+
+        for (int i = -1; i <= 1; i++)
+        {
+            for (int j = -1; j <= 1; j++)
+            {
+                for (int k = -1; k <= 1; k++)
+                {
+                    int sum = Mathf.Abs(i) + Mathf.Abs(j) + Mathf.Abs(k);
+                    if (sum > 1)//Prevents movement in a diagonal and returning same cell
+                        continue;
+
+                    int x = cell.x + i;
+                    int y = cell.y + j;
+                    int z = cell.z + k;
+
+                    if (world.IsPosInBounds(x, y, z))
+                    {
+                        result += new Vector3Int(-i, -j, -k);
+                    }
+                }
+            }
+        }
+
+        if (result.x >= 1)
+            result.x = 1;
+
+        if (result.y >= 1)
+            result.y = 1;
+
+        if (result.z >= 1)
+            result.z = 1;
+
+        if (result.x <= -1)
+            result.x = -1;
+
+        if (result.y <= -1)
+            result.y = -1;
+
+        if (result.z <= -1)
+            result.z = -1;
+
+
+
+        return result;
     }
 }

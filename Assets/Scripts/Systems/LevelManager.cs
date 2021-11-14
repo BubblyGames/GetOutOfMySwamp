@@ -63,7 +63,12 @@ public class LevelManager : MonoBehaviour
         OnGameStart?.Invoke();
 
         Texture2D t = (Texture2D)GetComponent<MeshRenderer>().material.mainTexture;
-        waterColor = t.GetPixel(20, 0);
+        colors[0] = t.GetPixel(0, 0);
+        colors[1] = t.GetPixel(0, 20);
+        colors[2] = t.GetPixel(20, 0);
+        colors[3] = t.GetPixel(20, 20);
+
+        waterColor = colors[2];
     }
 
     private void Update()

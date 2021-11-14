@@ -126,7 +126,7 @@ public class CubeWorldGenerator : MonoBehaviour
     private Vector3Int GenerateWorld()
     {
         end.x = size / 2;
-        end.y = size - 1;
+        end.y = size - 3;
         end.z = size / 2;
 
         //cells = new CellInfo[size, size, size];
@@ -149,8 +149,8 @@ public class CubeWorldGenerator : MonoBehaviour
                 {
                     CellInfo cell = cells[i, j, k];
                     cell.isSurface = CheckIfIsInSurface(cell);
-                    if (cell.isSurface)
-                        cell.normalInt = GetFaceNormal(cell);
+                    /*if (cell.isSurface)
+                        cell.normalInt = GetFaceNormal(cell);*/
                     cell.isPath = false;
                     cell.isCloseToPath = false;
                     cell.isInteresting = false;
@@ -205,42 +205,34 @@ public class CubeWorldGenerator : MonoBehaviour
                 {
                     if (cells[i, j, k].blockType != BlockType.Air)
                     {
-                        cells[i, j, k].normalInt = Vector3Int.zero;
-
                         if (j + 1 >= size - 1 || (j + 1 < size - 1 && cells[i, j + 1, k].blockType == BlockType.Air))
                         {
                             meshData.AddFace(Direction.Up, i, j, k, cells[i, j, k].blockType);
-                            cells[i, j, k].normalInt += Vector3Int.up;
                         }
 
                         if (j - 1 <= 0 || (j - 1 > 0 && cells[i, j - 1, k].blockType == BlockType.Air))
                         {
                             meshData.AddFace(Direction.Down, i, j, k, cells[i, j, k].blockType);
-                            cells[i, j, k].normalInt += Vector3Int.down;
                         }
 
                         if (i + 1 >= size - 1 || (i + 1 < size - 1 && cells[i + 1, j, k].blockType == BlockType.Air))
                         {
                             meshData.AddFace(Direction.Right, i, j, k, cells[i, j, k].blockType);
-                            cells[i, j, k].normalInt += Vector3Int.right;
                         }
 
                         if (i - 1 <= 0 || (i - 1 > 0 && cells[i - 1, j, k].blockType == BlockType.Air))
                         {
                             meshData.AddFace(Direction.Left, i, j, k, cells[i, j, k].blockType);
-                            cells[i, j, k].normalInt += Vector3Int.left;
                         }
 
                         if (k + 1 >= size - 1 || (k + 1 < size - 1 && cells[i, j, k + 1].blockType == BlockType.Air))
                         {
                             meshData.AddFace(Direction.Front, i, j, k, cells[i, j, k].blockType);
-                            cells[i, j, k].normalInt += Vector3Int.forward;
                         }
 
                         if (k - 1 <= 0 || (k - 1 > 0 && cells[i, j, k - 1].blockType == BlockType.Air))
                         {
                             meshData.AddFace(Direction.Back, i, j, k, cells[i, j, k].blockType);
-                            cells[i, j, k].normalInt += Vector3Int.back;
                         }
                     }
                 }
@@ -304,7 +296,7 @@ public class CubeWorldGenerator : MonoBehaviour
                 while ((GetCell(paths[i].start).isPath || //Not part of an existing path
                     !GetCell(paths[i].start).canWalk || //Must be normal floor
                     !GetCell(paths[i].start).isSurface || //Must be on surface
-                    Path.FindPathAstar(this,new Node(GetCell(paths[i].start)), cells[endX, endY, endZ], true) == null) //There must be a path to the end
+                    Path.FindPathAstar(this, new Node(GetCell(paths[i].start)), cells[endX, endY, endZ], true) == null) //There must be a path to the end
                     && count < 100)
                 {
                     paths[i].start.x = Random.Range(2, size - 3);
@@ -321,15 +313,19 @@ public class CubeWorldGenerator : MonoBehaviour
                     paths[i].AddMidpoint(new Midpoint(GetRandomCell(paths[i].midPoints[j].cell.y), false));
                 }
                 paths[i].AddMidpoint(new Midpoint(GetCell(end), false));
+                paths[i].initiated = true;
             }
             //Debug.Log(count + " attempts needed to find starting point");
 
             //Node which will store the result of the path finding
 
-            paths[i].SetPathTo(end);
+            paths[i].FindPath();
+        }
 
-            //Debug paths and midpoints
-            /*if (debugMidpoints)
+        //Debug paths and midpoints
+        if (debugMidpoints)
+        {
+            for (int i = 0; i < nPaths; i++)
             {
                 GameObject line = GameObject.Instantiate(lineRendererPrefab);
                 LineRenderer lr = line.GetComponent<LineRenderer>();
@@ -342,20 +338,19 @@ public class CubeWorldGenerator : MonoBehaviour
                     debugStuff.Add(midSphere);
                 }
 
-                lr.positionCount = pathCells.Count;
-                for (int idx = 0; idx < pathCells.Count; idx++)
+                lr.positionCount = paths[i].Length;
+                for (int idx = 0; idx < lr.positionCount; idx++)
                 {
-                    lr.SetPosition(idx, pathCells[idx].GetPos());
+                    lr.SetPosition(idx, paths[i].GetCell(idx).GetPos());
                 }
-            }*/
-
+            }
         }
 
         Debug.Log("Generating paths took: " + (Time.realtimeSinceStartup - startTime) + "s");
         return true; //Success
     }
 
-    
+
 
 
 
@@ -476,6 +471,39 @@ public class CubeWorldGenerator : MonoBehaviour
         return GetFaceNormal(cells[x, y, z]);
     }
 
+    float a = .5f;
+    public CellInfo GetCellUnder(CellInfo cell)
+    {
+        /*Vector3 normal = new Vector3(
+            cell.x - center.position.x,
+            cell.y - center.position.y,
+            cell.z - center.position.z);
+
+        normal.Normalize();
+
+        Vector3Int normalInt = Vector3Int.zero;
+
+        if (normal.x >= a)
+            normalInt.x = 1;
+
+        if (normal.y >= a)
+            normalInt.y = 1;
+
+        if (normal.z >= a)
+            normalInt.z = 1;
+
+        if (normal.x <= -a)
+            normalInt.x = -1;
+
+        if (normal.y <= -a)
+            normalInt.y = -1;
+
+        if (normal.z <= -a)
+            normalInt.z = -1;*/
+
+        return GetCell(cell.GetPosInt() - cell.normalInt);
+    }
+
     //https://answers.unity.com/questions/938178/3d-perlin-noise.html
     public static float Perlin3D(float x, float y, float z)
     {
@@ -579,6 +607,9 @@ public class CubeWorldGenerator : MonoBehaviour
 
     public void Explode(Vector3Int pos, int radius)
     {
+        List<Path> affectedPaths = new List<Path>();
+        List<CellInfo> affectedCells = new List<CellInfo>();
+
         for (int i = -radius; i <= radius; i++)
         {
             for (int j = -radius; j <= radius; j++)
@@ -594,11 +625,31 @@ public class CubeWorldGenerator : MonoBehaviour
                         Vector3Int newPos = new Vector3Int(x, y, z);
                         if (Vector3Int.Distance(pos, newPos) <= radius)
                         {
-                            cells[x, y, z].blockType = BlockType.Air;
+                            if (cells[x, y, z].endZone)
+                                continue;
+
+                            foreach (Path p in cells[x, y, z].paths)
+                            {
+                                if (!affectedPaths.Contains(p))
+                                    affectedPaths.Add(p);
+                            }
+
+                            affectedCells.Add(cells[x, y, z]);
                         }
                     }
                 }
             }
+        }
+
+        foreach (Path p in affectedPaths)
+        {
+            p.Reset();
+        }
+
+        foreach (CellInfo c in affectedCells)
+        {
+            c.blockType = BlockType.Air;
+            c.canWalk = true;
         }
 
         UpdateWorld();
@@ -610,7 +661,6 @@ public class CubeWorldGenerator : MonoBehaviour
         {
             ClearDebugStuff();
             //FillWorld();
-            GenerateSwamp(end.x, end.y, end.z);
 
             if (!demo)
             {
@@ -634,6 +684,20 @@ public class CubeWorldGenerator : MonoBehaviour
             Debug.Log("Adding random interest point");
             AddInterestPoint(GetRandomCell().GetPosInt());
         }
+
+        if (Input.GetKeyDown(KeyCode.E))
+        {
+            Debug.Log("Random explosion");
+            Explode(GetRandomCell().GetPosInt(), 5);
+        }
+
+        if (Input.GetKeyDown(KeyCode.C))
+        {
+            CellInfo c = GetRandomCell();
+            Debug.Log(c.GetPosInt());
+            Debug.Log("---------->");
+            Debug.Log(GetCellUnder(c).GetPosInt());
+        }
     }
 
 
@@ -641,7 +705,7 @@ public class CubeWorldGenerator : MonoBehaviour
     {
         if (!Application.isPlaying) return;
 
-        foreach (CellInfo cell in cells)
+        /*foreach (CellInfo cell in cells)
         {
             if (cell.isPath)
             {
@@ -652,6 +716,11 @@ public class CubeWorldGenerator : MonoBehaviour
                 Handles.Label(new Vector3(cell.x, cell.y, cell.z), "2");
             }
             //Gizmos.DrawSphere(new Vector3(cell.x, cell.y, cell.z), .5f);
+        }*/
+
+        foreach (CellInfo c in paths[0].cells)
+        {
+            Gizmos.DrawLine(c.GetPos(), c.GetPos() + c.normalInt);
         }
     }
     private void OnValidate()

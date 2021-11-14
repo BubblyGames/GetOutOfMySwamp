@@ -4,7 +4,6 @@ using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 
-[System.Serializable]
 public class CellInfo
 {
     public int x, y, z;
@@ -12,13 +11,16 @@ public class CellInfo
     [HideInInspector]
     public int id { get { return x + (1000 * y) + (1000000 * z); } }
     public BlockType blockType = BlockType.Air;
+
     [HideInInspector]
     public bool isPath = false;
-    //[HideInInspector]
+    [HideInInspector]
     public Vector3Int normalInt = Vector3Int.zero;
     internal bool isSurface = false;
     internal bool canWalk = false;
     internal bool endZone = false;
+
+    public List<Path> paths = new List<Path>();
 
     public Structure structure;
     public bool isInteresting = false;
@@ -48,5 +50,16 @@ public class CellInfo
     public Vector3Int GetPosInt()
     {
         return new Vector3Int(x, y, z);
+    }
+
+    public void Reset()
+    {
+        if (paths.Count == 0)
+        {
+            isPath = false;
+            CellInfo cellUnder = LevelManager.instance.world.GetCellUnder(this);
+            if (cellUnder.blockType == BlockType.Path)
+                cellUnder.blockType = BlockType.Grass;
+        }
     }
 }
