@@ -6,7 +6,7 @@ public class Bomb : DefenseBehaviour
 {
     private RaycastHit[] hits;
 
-    protected void Explode()
+    public void Explode()
     {
         hits = Physics.SphereCastAll(transform.position, attackRange, transform.forward, attackRange, layerMask);
         for (int i = 0; i < hits.Length; i++)

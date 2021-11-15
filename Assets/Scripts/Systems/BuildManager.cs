@@ -49,6 +49,14 @@ public class BuildManager : MonoBehaviour
         if (!canBuild || selectedCell.blockType != structureToBuild.structurePrefab.GetComponent<Structure>().blockType)
             return false;
 
+        Bomb b;
+        if (WorldManager.instance.IsPosInBounds(intPos.x, intPos.y, intPos.z) &&
+           structureToBuild.structurePrefab.TryGetComponent<Bomb>(out b))
+        {
+
+            return true;
+        }
+
         Gatherer g;
         if (WorldManager.instance.IsPosInBounds(intPos.x, intPos.y, intPos.z) &&
             !LevelManager.instance.world.GetCell(intPos).isCloseToPath &&
