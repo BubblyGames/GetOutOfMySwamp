@@ -117,4 +117,4 @@ MonoBehaviour:
   blockType: 0
   fireRate: 0
   damage: 300
-  attackRange: 3
+  attackRange: 5

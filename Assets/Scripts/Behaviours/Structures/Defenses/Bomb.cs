@@ -4,11 +4,10 @@ using UnityEngine;
 
 public class Bomb : DefenseBehaviour
 {
-    private RaycastHit[] hits;
 
     public void Explode()
     {
-        hits = Physics.SphereCastAll(transform.position, attackRange, transform.forward, attackRange, layerMask);
+        RaycastHit[] hits = Physics.SphereCastAll(transform.position, attackRange, transform.forward, attackRange, layerMask);
         for (int i = 0; i < hits.Length; i++)
         {
             EnemyBehaviour eb;
@@ -17,6 +16,7 @@ public class Bomb : DefenseBehaviour
                 eb.Hurt(damage);
             }
         }
+        Destroy(gameObject);
     }
 }
 

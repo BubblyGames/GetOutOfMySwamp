@@ -49,17 +49,6 @@ public class BuildManager : MonoBehaviour
         if (!canBuild || selectedCell.blockType != structureToBuild.structurePrefab.GetComponent<Structure>().blockType)
             return false;
 
-        Bomb b;
-        if (WorldManager.instance.IsPosInBounds(intPos.x, intPos.y, intPos.z) &&
-           structureToBuild.structurePrefab.TryGetComponent<Bomb>(out b))
-        {
-            if (selectedCell.GetStructure() == null)
-            {
-                selectedCell.SetStructure(b);
-            }
-            return true;
-        }
-
         Gatherer g;
         if (WorldManager.instance.IsPosInBounds(intPos.x, intPos.y, intPos.z) &&
             !LevelManager.instance.world.GetCell(intPos).isCloseToPath &&
@@ -106,6 +95,8 @@ public class BuildManager : MonoBehaviour
 
     public void BuildStructure(Vector3Int position, Vector3 normal)
     {
+        
+
         if (CheatManager.instance!=null && CheatManager.instance.infiniteMoney)
         {
             CreateTowerOnCell(position, normal);
@@ -130,12 +121,26 @@ public class BuildManager : MonoBehaviour
         structure.SetNormal(normal);
         structure.Blueprint = structureToBuild;
 
+        Bomb b;
+        CellInfo cell = LevelManager.instance.world.GetCell(position);
+
+        if (structure.TryGetComponent<Bomb>(out b))
+        {
+            if (cell.GetStructure() == null)
+            {
+                cell.SetStructure(b);
+            }
+        }
+
+
         //Not working
+        /*
         if (selectedCell.GetStructure() != null)
         {
             Destroy(selectedCell.GetStructure());
         }
         selectedCell.SetStructure(structure);
+        */
     }
 
     public void UpgradeStructure()
