@@ -214,7 +214,7 @@ MonoBehaviour:
   blockType: 1
   fireRate: 1
   damage: 7
-  attackRange: 5
+  attackRange: 3
   firePoint: {fileID: 1127500018515762662}
   enemyTarget: {fileID: 0}
   turnSpeed: 5
