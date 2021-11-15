@@ -87,10 +87,13 @@ public abstract class EnemyBehaviour : MonoBehaviour
         {
             if (nextIndexPath < path.Length - 1)
             {
+                //Look if the next position has an Structure
                 currentCell = path.GetCell(nextIndexPath);
                 if (currentCell.GetStructure() != null)
                 {
                     Structure currentCellStructure = currentCell.GetStructure();
+                    //If the structure is a bomb, it explodes, hurts enemies and destroys.
+                    //Then we set the structure of the cell to null for been able to put another.
                     Bomb bomb;
                     if (currentCellStructure.TryGetComponent<Bomb>(out bomb))
                     {
