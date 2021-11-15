@@ -22,11 +22,6 @@ public class LevelStats : MonoBehaviour
     
     [SerializeField] public int currentScore; //Score the player has
 
-
-    [Header("God Mode control")]
-    [SerializeField] public bool infinteMoney;
-    [SerializeField] public bool infinteHP;
-
     public int CurrentMoney { get => currentMoney; set => currentMoney = value; }
     public int CurrentBaseHealthPoints { get => currentBaseHealthPoints; set => currentBaseHealthPoints = value; }
 
