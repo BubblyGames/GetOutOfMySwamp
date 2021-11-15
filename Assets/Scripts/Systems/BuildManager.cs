@@ -142,6 +142,8 @@ public class BuildManager : MonoBehaviour
 
     public void UpgradeStructure()
     {
+        UIController.instance.ShowMenu(UIController.GameMenu.Game);
+
         if (LevelStats.instance.infinteMoney)
         {
             selectedCell.structure.UpgradeStrucrure();

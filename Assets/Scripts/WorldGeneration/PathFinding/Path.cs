@@ -46,15 +46,18 @@ public class Path
         {
             CellInfo cell = world.cells[result.x, result.y, result.z];
 
-            cell.normalInt = GetNormalOf(result);
+            cell.normalInt = GetNormalOfff(result);
 
-            foreach (CellInfo c in world.GetNeighbours(cell))
+            /*CellInfo cellUnder = world.cells[result.x - cell.normalInt.x, result.y - cell.normalInt.y, result.z - cell.normalInt.z];
+            cellUnder.blockType = BlockType.Path;*/
+
+            /*foreach (CellInfo c in world.GetNeighbours(cell))
             {
                 c.isCloseToPath = true;
 
-                if (c.blockType == BlockType.Grass)
+                if (c.blockType != BlockType.Swamp && c.blockType != BlockType.Air)
                     c.blockType = BlockType.Path;
-            }
+            }*/
 
             //cellUnder = world.GetCellUnder(cell);
             /*foreach (CellInfo c in world.GetNeighbours(cellUnder, true))
@@ -96,7 +99,6 @@ public class Path
 
         List<Node> openList = new List<Node>();
         List<Node> closedList = new List<Node>();
-
 
         openList = new List<Node>();
         closedList = new List<Node>();
@@ -299,7 +301,77 @@ public class Path
         Vector3Int result = Vector3Int.zero;
 
         Vector3 dir = n.Position - world.center.position;
-        dir.Normalize();
+
+        return Vec3ToInt(dir.normalized);
+    }
+
+    Vector3Int GetNormalOff(Node n)
+    {
+        if (n.Parent == null)
+            return Vector3Int.down;
+
+        Vector3Int result = Vector3Int.zero;
+
+
+        Vector3 down = n.Position - world.center.position;
+
+        Vector3 dirToParent = n.Position - n.Parent.Position;
+
+        Vector3 right = Vector3.Cross(down, dirToParent);
+
+        Vector3 dir = Vector3.Cross(dirToParent, right);
+
+        return Vec3ToInt(dir.normalized);
+    }
+
+
+    Vector3Int GetNormalOfff(Node n)
+    {
+        if (n.Parent == null)
+            return Vector3Int.down;
+
+        Vector3 result = Vector3.zero;
+
+        CellInfo[] parentNeighbours = world.GetNeighbours(n.Parent.cell, false);
+
+        for (int i = -1; i <= 1; i++)
+        {
+            for (int j = -1; j <= 1; j++)
+            {
+                for (int k = -1; k <= 1; k++)
+                {
+                    int sum = Mathf.Abs(i) + Mathf.Abs(j) + Mathf.Abs(k);
+                    if (sum > 1)//Prevents movement in a diagonal and returning same cell
+                        continue;
+
+                    int x = n.x + i;
+                    int y = n.y + j;
+                    int z = n.z + k;
+
+                    if (!world.IsPosInBounds(x, y, z))
+                        continue;
+
+                    foreach (CellInfo cell in parentNeighbours)
+                    {
+                        if (world.cells[x, y, z] == cell)
+                        {
+                            result += new Vector3Int(-i, -j, -k);
+
+                            if (world.cells[x, y, z].blockType != BlockType.Swamp && world.cells[x, y, z].blockType != BlockType.Air)
+                                world.cells[x, y, z].blockType = BlockType.Path;
+                        }
+                    }
+                }
+            }
+        }
+
+        return Vec3ToInt(result.normalized);
+    }
+
+
+    Vector3Int Vec3ToInt(Vector3 dir)
+    {
+        Vector3Int result = Vector3Int.zero;
 
         if (dir.x > value)
             result.x = 1;

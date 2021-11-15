@@ -3825,21 +3825,7 @@ MonoBehaviour:
   waves:
   - packs:
     - enemyType: 0
-      enemyAmount: 10
-    spawnRate: 1
-  - packs:
-    - enemyType: 2
-      enemyAmount: 2
-    - enemyType: 3
-      enemyAmount: 5
-    spawnRate: 1
-  - packs:
-    - enemyType: 2
-      enemyAmount: 3
-    - enemyType: 0
-      enemyAmount: 5
-    - enemyType: 3
-      enemyAmount: 10
+      enemyAmount: 99999
     spawnRate: 1
   timeBetweenWaves: 5
   timeBeforeRoundStarts: 3
