@@ -53,7 +53,10 @@ public class BuildManager : MonoBehaviour
         if (WorldManager.instance.IsPosInBounds(intPos.x, intPos.y, intPos.z) &&
            structureToBuild.structurePrefab.TryGetComponent<Bomb>(out b))
         {
-
+            if (selectedCell.GetStructure() == null)
+            {
+                selectedCell.SetStructure(b);
+            }
             return true;
         }
 

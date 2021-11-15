@@ -3876,16 +3876,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   shopIndex: -1
   defenseBlueprints:
-  - structurePrefab: {fileID: 7137880238603071797, guid: e1fa9704af9f5114992d5229e61c2040, type: 3}
-    creationCost: 125
+  - structurePrefab: {fileID: 3250008881624491856, guid: d47e0467f382b7241aafc52e24236632, type: 3}
+    creationCost: 0
     upgradeMultiplicator: 1.5
     upgrades:
     - cost: 0
       stats:
       - statToUpgrade: 0
-        upgradedStatValue: 0
+        upgradeAddedValue: 0
       - statToUpgrade: 1
-        upgradedStatValue: 0
+        upgradeAddedValue: 0
     - cost: 0
       stats: []
     - cost: 0

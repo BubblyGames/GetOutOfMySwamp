@@ -64,6 +64,7 @@ public abstract class EnemyBehaviour : MonoBehaviour
         //transform.position = Vector3.SmoothDamp(transform.position, path.GetStep(nextIndexPath), ref _smoothVelocity, currentSpeed);//Smooth
 
         currentCell = path.GetCell(nextIndexPath);
+
         if (currentCell.GetStructure() != null)
         {
             Structure currentCellStructure = currentCell.GetStructure();
