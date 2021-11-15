@@ -3895,7 +3895,7 @@ MonoBehaviour:
   shopIndex: -1
   defenseBlueprints:
   - structurePrefab: {fileID: 7137880238603071797, guid: e1fa9704af9f5114992d5229e61c2040, type: 3}
-    creationCost: 0
+    creationCost: 100
     upgradeMultiplicator: 1.5
     upgrades:
     - cost: 50
