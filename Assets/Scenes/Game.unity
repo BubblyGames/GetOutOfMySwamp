@@ -713,6 +713,7 @@ MonoBehaviour:
   - {fileID: 2100000, guid: 087940d22f6226f40b86af3d8a810afe, type: 2}
   - {fileID: 2100000, guid: db9ecb3b746c1224b96ebce2da87b0eb, type: 2}
   - {fileID: 2100000, guid: 55721add5ad05114298eb5c6154225ec, type: 2}
+  - {fileID: 2100000, guid: 55721add5ad05114298eb5c6154225ec, type: 2}
 --- !u!33 &549071508
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -3876,7 +3877,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   shopIndex: -1
   defenseBlueprints:
-  - structurePrefab: {fileID: 3250008881624491856, guid: d47e0467f382b7241aafc52e24236632, type: 3}
+  - structurePrefab: {fileID: 7137880238603071797, guid: e1fa9704af9f5114992d5229e61c2040, type: 3}
     creationCost: 0
     upgradeMultiplicator: 1.5
     upgrades:
@@ -3900,6 +3901,10 @@ MonoBehaviour:
     upgrades: []
   - structurePrefab: {fileID: 2711408889448630410, guid: 4cdbff3b4cc893847ad0a47225cd137b, type: 3}
     creationCost: 400
+    upgradeMultiplicator: 1.1
+    upgrades: []
+  - structurePrefab: {fileID: 3250008881624491856, guid: d47e0467f382b7241aafc52e24236632, type: 3}
+    creationCost: 0
     upgradeMultiplicator: 1.1
     upgrades: []
   selectedDefenseBlueprint:
