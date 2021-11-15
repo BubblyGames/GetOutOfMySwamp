@@ -119,12 +119,18 @@ public class BuildManager : MonoBehaviour
         structure.SetNormal(normal);
         structure.Blueprint = structureToBuild;
 
-        //Not working
-        if (selectedCell.GetStructure() != null)
+        //If we are putting a bomb, apart from creating the model, we set the cell's structure associated in which we are creating it
+        Bomb b;
+        CellInfo cell = LevelManager.instance.world.GetCell(position);
+        if (structure.TryGetComponent<Bomb>(out b))
         {
-            Destroy(selectedCell.GetStructure());
+            if (cell.GetStructure() == null)
+            {
+                cell.SetStructure(b);
+            }
         }
-        selectedCell.SetStructure(structure);
+
+        cell.SetStructure(structure);
     }
 
     public void UpgradeStructure()
