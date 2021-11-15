@@ -46,7 +46,15 @@ public class BuildManager : MonoBehaviour
 
         selectedCell = LevelManager.instance.world.GetCell(intPosUnder);
 
-        if (!canBuild || selectedCell.blockType != structureToBuild.structurePrefab.GetComponent<Structure>().blockType)
+        if (!canBuild)
+            return false;
+
+        return !canBuild || CheckBuilding(intPos);
+
+    }
+
+    bool CheckBuilding(Vector3Int intPos) {
+        if (selectedCell.blockType != structureToBuild.structurePrefab.GetComponent<Structure>().blockType)
             return false;
 
         Gatherer g;

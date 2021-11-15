@@ -7,6 +7,9 @@ public class Node
     public int f, h, g;
     public Node Parent;
     public CellInfo cell;
+    public Vector3 Position {
+        get { return new Vector3(x,y,z); }
+    }
 
     public Node(CellInfo cell)
     {
@@ -25,4 +28,6 @@ public class Node
         f = h - g;
         f += extra;
     }
+
+
 }

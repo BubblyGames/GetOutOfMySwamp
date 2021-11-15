@@ -3873,16 +3873,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   selectedStructure: {fileID: 0}
-  selectedCell:
-    x: 0
-    y: 0
-    z: 0
-    blockType: -1
-    isPath: 0
-    normalInt: {x: 0, y: 0, z: 0}
-    paths: []
-    structure: {fileID: 0}
-    isInteresting: 0
   canBuild: 0
 --- !u!114 &1903685292
 MonoBehaviour:

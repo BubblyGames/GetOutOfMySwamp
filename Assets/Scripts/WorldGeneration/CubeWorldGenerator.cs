@@ -37,6 +37,8 @@ public class CubeWorldGenerator : MonoBehaviour
 
     VoxelRenderer voxelRenderer;//Transforms the cells array into a mesh
 
+    int endzoneRadious;
+
     private void Awake()
     {
         voxelRenderer = GetComponent<VoxelRenderer>();
@@ -64,6 +66,8 @@ public class CubeWorldGenerator : MonoBehaviour
 
     void Start()
     {
+        endzoneRadious = size / 4;
+
         bool success = false;
         int count = 0;
         if (seed == 0f)//If seed is set to 0 on inspector it chooses a random one
@@ -159,39 +163,48 @@ public class CubeWorldGenerator : MonoBehaviour
                     float alpha = 1;
                     //float dist = Mathf.Sqrt(2 * size * size) - Mathf.Sqrt(Mathf.Pow(endX - i, 2f) + Mathf.Pow(endY - j, 2f));
 
-                    if (Vector3.Distance(end, new Vector3(i, j, k)) < size / 4)
+                    if (Vector3.Distance(end, new Vector3(i, j, k)) < endzoneRadious)
                     {
                         alpha = 0;
                     }
 
                     float perlin = alpha * Perlin3D((seed + (i / rockSize)), (seed + (j / rockSize)), (seed + (k / rockSize)));
 
-                    if (cell.isSurface)
+
+                    if (perlin > (1 - ((wallDensity * rocksVisualReduction) * alpha)))
                     {
-                        if (perlin > (1 - ((wallDensity * rocksVisualReduction) * alpha)))
-                        {
-                            cell.canWalk = false;
-                            cell.blockType = BlockType.Rock;
-                        }
-                        else if (perlin > (1 - (wallDensity * alpha)))
-                        {
-                            cell.canWalk = false;
-                            cell.blockType = BlockType.Air;
-                        }
-                        else
+                        cell.canWalk = false;
+                        cell.blockType = BlockType.Rock;
+                    }
+                    else if (perlin > (1 - (wallDensity * alpha)))
+                    {
+                        cell.canWalk = false;
+                        cell.blockType = BlockType.Air;
+                    }
+                    else
+                    {
+                        if (cell.isSurface)
                         {
                             cell.canWalk = true;
                             cell.blockType = BlockType.Air;
                         }
-                    }
-                    else
-                    {
-                        cell.blockType = BlockType.Grass;
-                        cell.canWalk = false;
+                        else
+                        {
+                            cell.blockType = BlockType.Grass;
+                            cell.canWalk = false;
+                        }
                     }
                 }
             }
         }
+    }
+
+    bool IsCore(int i)
+    {
+        int radius = size / 4;
+        int mid = 1 + (size / 2);
+
+        return i < mid + radius && i > mid - radius;
     }
 
     MeshData GenerateMesh()
@@ -244,33 +257,32 @@ public class CubeWorldGenerator : MonoBehaviour
 
     private void GenerateSwamp(int endX, int endY, int endZ)
     {
-        int radius = 3;
-
-        for (int i = -radius; i < radius; i++)
+        for (int i = -endzoneRadious; i < endzoneRadious; i++)
         {
-            for (int k = -radius; k < radius; k++)
+            for (int j = size - 1; j > 0; j--)
             {
-                cells[endX + i, size - 1, endZ + k].blockType = BlockType.Air;
-                cells[endX + i, size - 2, endZ + k].blockType = BlockType.Air;
-                cells[endX + i, size - 3, endZ + k].blockType = BlockType.Swamp;
+                for (int k = -endzoneRadious; k < endzoneRadious; k++)
+                {
+                    cells[endX + i, j, endZ + k].endZone = true;
 
-                cells[endX + i, size - 1, endZ + k].canWalk = true;
-                cells[endX + i, size - 2, endZ + k].canWalk = true;
-                cells[endX + i, size - 3, endZ + k].canWalk = true;
+                    if (Mathf.Abs(i) > endzoneRadious - 4 || Mathf.Abs(k) > endzoneRadious - 4)
+                        continue;
 
-                /*cells[endX + i, size - 1, endZ + k].endZone = true;
-                cells[endX + i, size - 2, endZ + k].endZone = true;
-                cells[endX + i, size - 3, endZ + k].endZone = true;*/
-            }
-        }
-
-        for (int i = -2 * radius; i < 2 * radius; i++)
-        {
-            for (int k = -2 * radius; k < 2 * radius; k++)
-            {
-                cells[endX + i, size - 1, endZ + k].endZone = true;
-                cells[endX + i, size - 2, endZ + k].endZone = true;
-                cells[endX + i, size - 3, endZ + k].endZone = true;
+                    if (j > size - 3)
+                    {
+                        cells[endX + i, j, endZ + k].blockType = BlockType.Air;
+                        cells[endX + i, j, endZ + k].canWalk = true;
+                    }
+                    else if (j == size - 3)
+                    {
+                        cells[endX + i, j, endZ + k].blockType = BlockType.Swamp;
+                        cells[endX + i, j, endZ + k].canWalk = true;
+                    }
+                    else
+                    {
+                        cells[endX + i, j, endZ + k].blockType = BlockType.Rock;
+                    }
+                }
             }
         }
     }
@@ -287,9 +299,9 @@ public class CubeWorldGenerator : MonoBehaviour
             if (!paths[i].initiated)//First time calculating a path
             {
                 //Random start position
-                paths[i].start.x = Random.Range(2, size - 3);
+                paths[i].start.x = Random.Range(endX - endzoneRadious, endX + endzoneRadious);
                 paths[i].start.y = 0;
-                paths[i].start.z = Random.Range(2, size - 3);
+                paths[i].start.z = Random.Range(endX - endzoneRadious, endX + endzoneRadious);
 
                 //If start position is not ok, find another one
                 int count = 0;
@@ -299,8 +311,8 @@ public class CubeWorldGenerator : MonoBehaviour
                     Path.FindPathAstar(this, new Node(GetCell(paths[i].start)), cells[endX, endY, endZ], true) == null) //There must be a path to the end
                     && count < 100)
                 {
-                    paths[i].start.x = Random.Range(2, size - 3);
-                    paths[i].start.z = Random.Range(2, size - 3);
+                    paths[i].start.x = Random.Range(endX - endzoneRadious, endX + endzoneRadious);
+                    paths[i].start.z = Random.Range(endX - endzoneRadious, endX + endzoneRadious);
                     count++;
                 }
 
@@ -623,11 +635,12 @@ public class CubeWorldGenerator : MonoBehaviour
                     if (IsPosInBounds(x, y, z))
                     {
                         Vector3Int newPos = new Vector3Int(x, y, z);
+
+                        if (cells[x, y, z].endZone || cells[x, y, z].isCore)
+                            continue;
+
                         if (Vector3Int.Distance(pos, newPos) <= radius)
                         {
-                            if (cells[x, y, z].endZone)
-                                continue;
-
                             foreach (Path p in cells[x, y, z].paths)
                             {
                                 if (!affectedPaths.Contains(p))
@@ -650,6 +663,12 @@ public class CubeWorldGenerator : MonoBehaviour
         {
             c.blockType = BlockType.Air;
             c.canWalk = true;
+            if (c.structure)
+            {
+                Destroy(c.structure.gameObject);
+                c.structure = null;
+                c.isInteresting = false;
+            }
         }
 
         UpdateWorld();
@@ -721,6 +740,7 @@ public class CubeWorldGenerator : MonoBehaviour
         foreach (CellInfo c in paths[0].cells)
         {
             Gizmos.DrawLine(c.GetPos(), c.GetPos() + c.normalInt);
+            Handles.Label(c.GetPos(), c.normalInt.magnitude.ToString());
         }
     }
     private void OnValidate()

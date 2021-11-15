@@ -46,22 +46,14 @@ public class Path
         {
             CellInfo cell = world.cells[result.x, result.y, result.z];
 
-            cell.normalInt = GetNormalOf(cell);
+            cell.normalInt = GetNormalOf(result);
 
-            //Debug.Log(cell.normalInt);
-
-            CellInfo cellUnder = world.GetCell(cell.GetPosInt() - cell.normalInt);
-
-            if (cellUnder.blockType == BlockType.Grass)
+            foreach (CellInfo c in world.GetNeighbours(cell))
             {
-                cellUnder.blockType = BlockType.Path;
-            }
-            else
-            {
-                if (cellUnder.blockType == BlockType.Swamp)
-                {
-                    cell = cellUnder;
-                }
+                c.isCloseToPath = true;
+
+                if (c.blockType == BlockType.Grass)
+                    c.blockType = BlockType.Path;
             }
 
             //cellUnder = world.GetCellUnder(cell);
@@ -73,7 +65,6 @@ public class Path
             cell.isPath = true;
             pathCells.Add(cell);
             cell.paths.Add(this);
-
 
             result = result.Parent;
         }
@@ -138,6 +129,7 @@ public class Path
                 //If there are no neighbours, try next node in open list
                 while (neighbours.Length == 0)
                 {
+                    openList[0].Parent = current;
                     current = openList[0];
                     closedList.Add(current);
                     openList.Remove(current);
@@ -301,52 +293,31 @@ public class Path
         enemies.Clear();
     }
 
-    Vector3Int GetNormalOf(CellInfo cell)
+    float value = .5f;
+    Vector3Int GetNormalOf(Node n)
     {
-        
         Vector3Int result = Vector3Int.zero;
 
-        for (int i = -1; i <= 1; i++)
-        {
-            for (int j = -1; j <= 1; j++)
-            {
-                for (int k = -1; k <= 1; k++)
-                {
-                    int sum = Mathf.Abs(i) + Mathf.Abs(j) + Mathf.Abs(k);
-                    if (sum > 1)//Prevents movement in a diagonal and returning same cell
-                        continue;
+        Vector3 dir = n.Position - world.center.position;
+        dir.Normalize();
 
-                    int x = cell.x + i;
-                    int y = cell.y + j;
-                    int z = cell.z + k;
-
-                    if (world.IsPosInBounds(x, y, z))
-                    {
-                        result += new Vector3Int(-i, -j, -k);
-                    }
-                }
-            }
-        }
-
-        if (result.x >= 1)
+        if (dir.x > value)
             result.x = 1;
 
-        if (result.y >= 1)
-            result.y = 1;
-
-        if (result.z >= 1)
-            result.z = 1;
-
-        if (result.x <= -1)
+        if (dir.x < -value)
             result.x = -1;
 
-        if (result.y <= -1)
+        if (dir.y > value)
+            result.y = 1;
+
+        if (dir.y < -value)
             result.y = -1;
 
-        if (result.z <= -1)
+        if (dir.z > value)
+            result.z = 1;
+
+        if (dir.z < -value)
             result.z = -1;
-
-
 
         return result;
     }
