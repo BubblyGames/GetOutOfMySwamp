@@ -31,6 +31,7 @@ public abstract class EnemyBehaviour : MonoBehaviour
     private Path path;
     private int nextIndexPath = 1;
     private float lerpProgression = 0;
+    private CellInfo currentCell;
 
 
     private void Awake()
@@ -61,7 +62,18 @@ public abstract class EnemyBehaviour : MonoBehaviour
         transform.position = Vector3.Lerp(path.GetStep(nextIndexPath - 1), path.GetStep(nextIndexPath), lerpProgression);
         //transform.position = Vector3.Lerp(transform.position, path.GetStep(nextIndexPath), lerpProgression);//A saltos
         //transform.position = Vector3.SmoothDamp(transform.position, path.GetStep(nextIndexPath), ref _smoothVelocity, currentSpeed);//Smooth
-        
+
+        currentCell = path.GetCell(nextIndexPath);
+        if (currentCell.GetStructure() != null)
+        {
+            Structure currentCellStructure = currentCell.GetStructure();
+            Bomb bomb;
+            if (currentCellStructure.TryGetComponent<Bomb>(out bomb))
+            {
+                bomb.Explode();
+            }
+           
+        }
         if (isSlowed)
         {
             if (slowTimer >= slowDuration)
