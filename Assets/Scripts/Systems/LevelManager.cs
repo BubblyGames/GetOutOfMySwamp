@@ -34,6 +34,7 @@ public class LevelManager : MonoBehaviour
     //TODO: increment score when killing enemys.
     public LayerMask floorLayer;
     public GameObject waterSplashPrefab;
+    public Material waterMaterial;
 
     public Color waterColor;
 
@@ -69,6 +70,7 @@ public class LevelManager : MonoBehaviour
         colors[3] = t.GetPixel(20, 20);
 
         waterColor = colors[2];
+        waterMaterial.color = waterColor.gamma;
     }
 
     private void Update()
@@ -77,7 +79,6 @@ public class LevelManager : MonoBehaviour
         {
             GameObject waterSplash = GameObject.Instantiate(waterSplashPrefab);
             waterSplash.transform.position = world.end;
-            waterSplash.GetComponent<ParticleSystem>().startColor = waterColor;
         }
     }
 
@@ -86,9 +87,8 @@ public class LevelManager : MonoBehaviour
     {
         GameObject waterSplash = GameObject.Instantiate(waterSplashPrefab);
         waterSplash.transform.position = world.end;
-        waterSplash.GetComponent<ParticleSystem>().startColor = waterColor;
 
-        if (CheatManager.instance!=null && CheatManager.instance.infiniteHealth)
+        if (CheatManager.instance != null && CheatManager.instance.infiniteHealth)
         {
             //LevelStats.levelStatsInstance.ReceiveDamage(damageTaken);
             OnDamageTaken?.Invoke(damageTaken);

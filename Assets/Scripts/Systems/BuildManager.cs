@@ -49,11 +49,15 @@ public class BuildManager : MonoBehaviour
         if (!canBuild)
             return false;
 
-        return !canBuild || CheckBuilding(intPos);
+        SpellBehaviour sb;
+        if (structureToBuild.structurePrefab.TryGetComponent<SpellBehaviour>(out sb))
+            return true;
 
+        return CheckBuilding(intPos);
     }
 
-    bool CheckBuilding(Vector3Int intPos) {
+    bool CheckBuilding(Vector3Int intPos)
+    {
         if (selectedCell.blockType != structureToBuild.structurePrefab.GetComponent<Structure>().blockType)
             return false;
 
@@ -104,7 +108,7 @@ public class BuildManager : MonoBehaviour
 
     public void BuildStructure(Vector3Int position, Vector3 normal)
     {
-        if (CheatManager.instance!=null && CheatManager.instance.infiniteMoney)
+        if (CheatManager.instance != null && CheatManager.instance.infiniteMoney)
         {
             CreateTowerOnCell(position, normal);
             ResetCanBuild(); // after building an structure you have to select another one to be able to place it

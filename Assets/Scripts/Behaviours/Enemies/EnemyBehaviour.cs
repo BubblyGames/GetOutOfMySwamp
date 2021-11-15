@@ -85,9 +85,13 @@ public abstract class EnemyBehaviour : MonoBehaviour
         {
             if (nextIndexPath < path.Length - 1)
             {
+                //If there's a mine in path.GetStep(nextIndexPath), explode it
+
+
                 nextIndexPath++;
                 lerpProgression = 0;
                 transform.LookAt(path.GetStep(nextIndexPath), path.GetCell(nextIndexPath).normalInt);
+                
             }
             //if the enemy reach the end of the path deal damage to base
             else

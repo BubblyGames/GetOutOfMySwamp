@@ -3685,6 +3685,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 128
   waterSplashPrefab: {fileID: 4964779859338955144, guid: da9a63bd877faf74db2fb8f6f899c1ca, type: 3}
+  waterMaterial: {fileID: 2100000, guid: b69aabdbb83200d4e86cc4b07ec67723, type: 2}
   waterColor: {r: 0, g: 0, b: 0, a: 0}
   colors:
   - {r: 0, g: 0, b: 0, a: 0}
@@ -3910,7 +3911,7 @@ MonoBehaviour:
     creationCost: 200
     upgradeMultiplicator: 1.3
     upgrades: []
-  - structurePrefab: {fileID: 4422750441095425187, guid: 7461b5dc79e93e44796d7af498e661aa, type: 3}
+  - structurePrefab: {fileID: 2711408889448630410, guid: 4cdbff3b4cc893847ad0a47225cd137b, type: 3}
     creationCost: 1
     upgradeMultiplicator: 2
     upgrades: []
