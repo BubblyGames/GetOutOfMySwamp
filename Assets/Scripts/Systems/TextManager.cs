@@ -25,7 +25,10 @@ public class TextManager : MonoBehaviour
         Settings,
         Exit,
         Lesson,
-        Description
+        Description,
+        restart,
+        pausedtext,
+        continue
     */
 
     private void Awake()
@@ -35,17 +38,6 @@ public class TextManager : MonoBehaviour
         subscribersGameScene = new List<GameObject>();
         currentDictionary = spanishDictionary;
         english = false;
-    }
-
-    private void Start()
-    {
-
-
-    }
-
-    private void Update()
-    {
-        //Debug.Log(englishDictionary.Count);
     }
 
     public void UpdateSubscribers()
@@ -109,6 +101,9 @@ public class TextManager : MonoBehaviour
         englishDictionary.Add("lenguage", "Lenguage");
         englishDictionary.Add("exit", "Exit");
         englishDictionary.Add("lesson", "Lesson");
+        englishDictionary.Add("restart", "Restart");
+        englishDictionary.Add("pausedtext", "Pause Menu");
+        englishDictionary.Add("continue", "Continue");
         //descriptions of lessons in English
         englishDictionary.Add("description", "asadsafdsfdsfdsfsdfds");
 
@@ -126,8 +121,24 @@ public class TextManager : MonoBehaviour
         spanishDictionary.Add("lenguage", "Idioma");
         spanishDictionary.Add("exit", "Salir");
         spanishDictionary.Add("lesson", "Lección");
+        spanishDictionary.Add("restart", "Reiniciar");
+        spanishDictionary.Add("pausedtext", "Menu de Pausa");
+        spanishDictionary.Add("continue", "Continuar");
         //descriptions of lessons in Spanish
         spanishDictionary.Add("description", "asadsafdsfdsfdsfsdfds");
+    }
+
+    public void emptyGameobjectsList(bool restart)
+    {
+     
+        if (SceneManager.GetActiveScene().name.Equals("MainMenu")||restart)
+        {
+            subscribersGameScene.Clear();
+        }
+        else
+        {
+            subscribersMainScene.Clear();
+        }
     }
 
 }

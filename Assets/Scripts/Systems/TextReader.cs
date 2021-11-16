@@ -8,8 +8,8 @@ public class TextReader:MonoBehaviour
 {
     GameObject textManager;
     public string key;
-    string text;
     public GameObject textContainer;
+
     private void Start()
     {
         if (GameObject.Find("GameManager").GetComponent<TextManager>() != null)
@@ -21,8 +21,30 @@ public class TextReader:MonoBehaviour
 
         if (gameObject.name.Equals("LenguageButton"))
         {
-            gameObject.GetComponent<Button>().onClick.AddListener(ChangeLenguage);
+            Button b;
+            if (gameObject.TryGetComponent<Button>(out b)) {
+                b.onClick.AddListener(ChangeLenguage);
+            }
+            else
+            {
+                Debug.Log("ERROR");
+            }
+            
         }
+        if (gameObject.name.Equals("ExitButton")|| gameObject.name.Equals("RestartButton") || gameObject.name.Equals("Select"))
+        {
+            Button b;
+            if (gameObject.TryGetComponent<Button>(out b))
+            {
+                b.onClick.AddListener(EmptyLists);
+            }
+            else
+            {
+                Debug.Log("ERROR");
+            }
+
+        }
+
     }
     public void Subscribe()
     {
@@ -37,5 +59,18 @@ public class TextReader:MonoBehaviour
     public void ChangeLenguage()
     {
         textManager.GetComponent<TextManager>().ChangeLenguage();
+    }
+
+    public void EmptyLists()
+    {
+        if (gameObject.name.Equals("RestartButton"))
+        {
+            textManager.GetComponent<TextManager>().emptyGameobjectsList(true);
+        }
+        else
+        {
+            textManager.GetComponent<TextManager>().emptyGameobjectsList(false);
+        }
+    
     }
 }
