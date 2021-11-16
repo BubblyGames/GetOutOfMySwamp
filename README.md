@@ -129,7 +129,7 @@ El juego comienza con una cantidad determinada de monedas para poner las torres 
 
 #### 4.2.4 Defensas y enemigos
 
-Existen dos tipos de defensas: Las torres y las trampas. Las torres tienen vida, alcance, daño, velocidad de ataque y éstos pueden ser individuales o en área y tener efectos de estado sobre los enemigos. Se puede construir en cualquier lugar menos caminos y rocas, a excepción de la torre económica que solo se puede poner adyacente al camino. Además, tienen dos niveles de mejoras para aumentar sus estadísticas. Luego están las trampas, las cuales se colocan en el camino del enemigo, tienen daño, durabilidad y pueden tener efecto.
+Existen dos tipos de defensas: Las torres y las trampas. Las torres tienen vida, alcance, daño, velocidad de ataque y éstos pueden ser individuales o en área y tener efectos de estado sobre los enemigos. Se puede construir en cualquier lugar menos caminos y rocas, a excepción de la torre económica que solo se puede poner adyacente al camino. Además, tienen tres niveles de mejoras para aumentar sus estadísticas. Luego están las trampas, las cuales se colocan en el camino del enemigo, tienen daño, durabilidad y pueden tener efecto.
 
 Por otro lado están los enemigos, con características de vida, velocidad de movimiento y opcionales como la capacidad de volar o dañar las torres. Aparecen por oleadas y aumentan en número conforme avanzas en la partida. Tienen diferentes roles en función de sus estadísticas, siendo los roles unidad básica, ligera, tanque, horda, especialista y voladora, explicadas más adelante en el apartado Enemigos.
 
@@ -153,14 +153,46 @@ Los niveles se conforman de grids y hay distintas variantes de las celdas. Los n
 
 ### 4.5 Torres y trampas
 
-| **TORRES**     | ALCANCE   | DAÑO           | OBJETIVO          | VELOCIDAD DE ATAQUE | EFECTO                            |
-| -------------- | --------- | -------------- | ----------------- | ------------------- | --------------------------------- |
-| TORRE PESADA   | Largo     | Elevado (x ud) | ÁreaTT\*          | Lento               | \-                                |
-| TORRE BÁSICA   | Medio     | Medio (x ud)   | IndividualTA-TT\* | Medio               | \-                                |
-| TORRE PSÍQUICA | Corto     | Bajo (x ud)    | IndividualTT\*    | Medio               | El enemigo se ralentiza           |
-| TORRE MONTAÑA  | Medio     | Bajo (x ud)    | ÁreaTA-TT\*       | Rápido              | Prioriza ataque a enemigos aéreos |
-| **TRAMPAS**    |           |                |                   |                     |                                   |
-| TRAMPA PANTANO | 1 Casilla | \-             | ÁreaTT\*          | \-                  | Ralentiza                         |
+| **TORRES**     | ALCANCE      | DAÑO           | OBJETIVO          | VELOCIDAD DE ATAQUE | EFECTO                            |
+| -------------- | ---------    | -------------- | ----------------- | ------------------- | --------------------------------- |
+| TORRE PESADA   | Largo (7 ud) | Elevado (35 ud)| ÁreaTT\*          | Lento (0.1 ud)      | \-                                |
+| TORRE BÁSICA   | Medio (5 ud) | Medio (10 ud)  | IndividualTA-TT\* | Medio (1 ud)        | \-                                |
+| TORRE PSÍQUICA | Corto (3 ud) | Bajo (7 ud)    | IndividualTT\*    | Medio (1 ud)        | El enemigo se ralentiza           |
+| TORRE MONTAÑA  | Medio (x ud) | Bajo (x ud)    | ÁreaTA-TT\*       | Rápido              | Prioriza ataque a enemigos aéreos |
+| **TRAMPAS**    |              |                |                   |                     |                                   |
+| TRAMPA PANTANO | 1 Casilla    | \-             | ÁreaTT\*          | \-                  | Ralentiza                         |
+
+Cada defensa del jugador se puede mejorar, por separado, hasta tres veces, aumentando con estas mejoras las estadísticas de dicha defensa y haciéndola más eficaz en combate.
+
+Nivel 1:
+| **TORRES**     | ALCANCE      | DAÑO           | OBJETIVO          | VELOCIDAD DE ATAQUE | EFECTO                            | COSTE  |
+| -------------- | ---------    | -------------- | ----------------- | ------------------- | --------------------------------- |--------|
+| TORRE PESADA   | Largo (7 ud) | Elevado (70 ud)| ÁreaTT\*          | Lento (0.1 ud)      | \-                                | 150    |
+| TORRE BÁSICA   | Medio (5 ud) | Medio (12 ud)  | IndividualTA-TT\* | Medio (1.5 ud)      | \-                                | 50     |
+| TORRE PSÍQUICA | Corto (4 ud) | Bajo (8 ud)    | IndividualTT\*    | Medio (1 ud)        | El enemigo se ralentiza           | 100    |
+| TORRE MONTAÑA  | Medio (x ud) | Bajo (x ud)    | ÁreaTA-TT\*       | Rápido              | Prioriza ataque a enemigos aéreos |        |
+| **TRAMPAS**    |              |                |                   |                     |                                   |        |
+| TRAMPA PANTANO | 1 Casilla    | \-             | ÁreaTT\*          | \-                  | Ralentiza                         |        |
+
+Nivel 2:
+| **TORRES**     | ALCANCE      | DAÑO           | OBJETIVO          | VELOCIDAD DE ATAQUE | EFECTO                            | COSTE  |
+| -------------- | ---------    | -------------- | ----------------- | ------------------- | --------------------------------- |--------|
+| TORRE PESADA   | Largo (12 ud)| Elevado (70 ud)| ÁreaTT\*          | Lento (0.1 ud)      | \-                                | 200    |
+| TORRE BÁSICA   | Largo (8 ud) | Medio (14 ud)  | IndividualTA-TT\* | Medio (1.5 ud)      | \-                                | 100    |
+| TORRE PSÍQUICA | Medio (5 ud) | Medio (9 ud)   | IndividualTT\*    | Medio (1 ud)        | El enemigo se ralentiza           | 150    |
+| TORRE MONTAÑA  | Medio (x ud) | Bajo (x ud)    | ÁreaTA-TT\*       | Rápido              | Prioriza ataque a enemigos aéreos |        |
+| **TRAMPAS**    |              |                |                   |                     |                                   |        |
+| TRAMPA PANTANO | 1 Casilla    | \-             | ÁreaTT\*          | \-                  | Ralentiza                         |        |
+
+Nivel 3:
+| **TORRES**     | ALCANCE      | DAÑO           | OBJETIVO          | VELOCIDAD DE ATAQUE | EFECTO                            | COSTE  |
+| -------------- | ---------    | -------------- | ----------------- | ------------------- | --------------------------------- |--------|
+| TORRE PESADA   | Largo (12 ud)| Elevado (70 ud)| ÁreaTT\*          | Lento (0.2 ud)      | \-                                | 300    |
+| TORRE BÁSICA   | Largo (10 ud)| Medio (14 ud)  | IndividualTA-TT\* | Rápido (1.75 ud)    | \-                                | 150    |
+| TORRE PSÍQUICA | Medio (5 ud) | Medio (9 ud)   | IndividualTT\*    | Medio (1.5 ud)      | El enemigo se ralentiza           | 200    |
+| TORRE MONTAÑA  | Medio (x ud) | Bajo (x ud)    | ÁreaTA-TT\*       | Rápido              | Prioriza ataque a enemigos aéreos |        |
+| **TRAMPAS**    |              |                |                   |                     |                                   |        |
+| TRAMPA PANTANO | 1 Casilla    | \-             | ÁreaTT\*          | \-                  | Ralentiza                         |        |
 
 \*TT: Ataques desde Tierra a objetivos Terrestres.
 TA: Ataques desde Tierra a objetivos Aéreos.
@@ -169,10 +201,10 @@ TA: Ataques desde Tierra a objetivos Aéreos.
 
 | **ENEMIGOS**(PONER NOMBRES) | VIDA | VELOCIDAD DE MOVIMIENTO | TIPO                 |
 | --------------------------- | ---- | ----------------------- | -------------------- |
-| NORMAL                      |      | Media                   | Terrestre - Normal   |
+| NORMAL                      |  40  | Media                   | Terrestre - Normal   |
 | LIGERA                      |      | Rápida                  | Terrestre - Ligera   |
-| TANQUE                      |      | Lenta                   | Terrestre - Pesada   |
-| HORDA                       |      | Media                   | Terrestre - Horda    |
+| TANQUE                      | 250  | Lenta                   | Terrestre - Pesada   |
+| HORDA                       |  25  | Media                   | Terrestre - Horda    |
 | ESPECIALISTA                |      | Lenta                   | Terrestre - Especial |
 | VOLADORA                    |      | Media                   | Aérea - Normal       |  
 
@@ -352,6 +384,7 @@ Flujo de juego:
 - Ajustar la generación de caminos:
 - Crear y meter en el juego los 6 modelos de enemigo y los 5 modelos de torre/defensa:
 - Nueva mecánica característica
+- Añadir offset para la colocación de torres:
 
 ### 8.3 Hito 3: Gold
 
