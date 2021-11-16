@@ -59,14 +59,6 @@ public class CellInfo
 
     public void Reset()
     {
-        if (paths.Count == 0)
-        {
-            isPath = false;
-            foreach (CellInfo cell in LevelManager.instance.world.GetNeighbours(this))
-            {
-                if (cell.blockType == BlockType.Path)
-                    cell.blockType = BlockType.Grass;
-            }
-        }
+        isPath = paths.Count > 0;
     }
 }

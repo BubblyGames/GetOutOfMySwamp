@@ -294,8 +294,6 @@ public class Path
         if (c.endZone)
         {
             lastCell = world.GetCell(c.GetPosInt() + Vector3Int.down);
-            if (lastCell.blockType == BlockType.Grass)
-                lastCell.blockType = BlockType.Path;
             return Vector3Int.up;
         }
 
@@ -316,7 +314,6 @@ public class Path
                 {
                     result = c.GetPosInt() - n.GetPosInt();
                     lastCell = n;
-                    lastCell.blockType = BlockType.Path;
                     //GameObject.CreatePrimitive(PrimitiveType.Sphere).transform.position = lastCell.GetPos();
                     return result;
                 }
@@ -344,7 +341,6 @@ public class Path
         }
 
         lastCell = neighbours[best];
-        lastCell.blockType = BlockType.Path;
 
         return result;
     }

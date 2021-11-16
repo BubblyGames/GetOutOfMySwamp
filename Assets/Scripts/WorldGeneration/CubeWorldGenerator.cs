@@ -122,6 +122,8 @@ public class CubeWorldGenerator : MonoBehaviour
             }
         }
 
+        StartCoroutine(ShowPaths());
+
         //Add geometry
         MeshData meshData = GenerateMesh(); //Converts the array into a mesh
         voxelRenderer.RenderMesh(meshData); //Renders mesh
@@ -673,11 +675,23 @@ public class CubeWorldGenerator : MonoBehaviour
     bool UpdateWorld()
     {
         if (!updating)
-            StartCoroutine(UpdateWorldCoroutine());
+        {
+            StopAllCoroutines();
+            //StartCoroutine(UpdateWorldCoroutine());
+            ClearDebugStuff();
+            GeneratePaths(end.x, end.y, end.z);
+            StartCoroutine(ShowPaths());
+        }
+        else
+        {
+            hasNewChanges = true;
+        }
+
         return true;
     }
 
     bool updating = false;
+    bool hasNewChanges = false;
     IEnumerator UpdateWorldCoroutine()
     {
         updating = true;
@@ -689,9 +703,44 @@ public class CubeWorldGenerator : MonoBehaviour
             yield return null;
             MeshData meshData = GenerateMesh();
             voxelRenderer.RenderMesh(meshData);
+
+            StartCoroutine(ShowPaths());
             yield return null;
         }
         updating = false;
+
+        if (hasNewChanges)
+        {
+            hasNewChanges = false;
+            StartCoroutine(UpdateWorldCoroutine());
+        }
+
+        yield return null;
+    }
+
+    IEnumerator ShowPaths()
+    {
+        int max = 0;
+        for (int i = 0; i < paths.Count; i++)
+        {
+            max = Mathf.Max(max, paths[i].Length);
+        }
+
+        for (int i = 0; i < max; i++)
+        {
+            for (int j = 0; j < paths.Count; j++)
+            {
+                if (i < paths[j].Length - 1)
+                {
+                    CellInfo c = GetCellUnder(paths[j].GetCell(i));
+                    if (c.blockType == BlockType.Grass || c.blockType == BlockType.Rock)
+                        c.blockType = BlockType.Path;
+                }
+            }
+            MeshData meshData = GenerateMesh();
+            voxelRenderer.RenderMesh(meshData);
+            yield return new WaitForSeconds(.075f);
+        }
 
         yield return null;
     }
