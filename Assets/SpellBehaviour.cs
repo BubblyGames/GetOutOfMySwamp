@@ -6,6 +6,7 @@ public class SpellBehaviour : Structure
 {
     // Start is called before the first frame update
     public GameObject particles;
+    public int size = 5;
     void Start()
     {
         Vector3Int pos = new Vector3Int();
@@ -14,7 +15,7 @@ public class SpellBehaviour : Structure
         pos.y = (int)transform.position.y;
         pos.z = (int)transform.position.z;
 
-        LevelManager.instance.world.Explode(pos, 5);
+        LevelManager.instance.world.Explode(pos, size);
 
         GameObject p = GameObject.Instantiate(particles);
         p.transform.position = transform.position;

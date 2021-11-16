@@ -11,6 +11,8 @@ public class Node
     public Vector3Int normal = Vector3Int.zero;
     public Vector3 dir = Vector3.zero;
 
+    public bool isCorner = false;
+
     public Vector3 Position {
         get { return new Vector3(x,y,z); }
     }

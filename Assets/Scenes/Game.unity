@@ -3782,7 +3782,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   demo: 0
-  size: 31
+  size: 21
   nPaths: 1
   canMergePaths: 0
   wallDensity: 0.4

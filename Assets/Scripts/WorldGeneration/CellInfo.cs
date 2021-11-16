@@ -28,7 +28,8 @@ public class CellInfo
     internal bool isCore = false;
 
     //DELETE LATER
-    internal Vector3 dir = Vector3.zero;
+    //internal Vector3 dir = Vector3.zero;
+    internal bool isCorner;
 
     public CellInfo(int x, int y, int z)
     {

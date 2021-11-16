@@ -66,7 +66,7 @@ public class CubeWorldGenerator : MonoBehaviour
 
     void Start()
     {
-        endzoneRadious = size / 4;
+        endzoneRadious = (int)(size / 3.5f);
 
         bool success = false;
         int count = 0;
@@ -169,32 +169,26 @@ public class CubeWorldGenerator : MonoBehaviour
                     }
 
                     float perlin = alpha * Perlin3D((seed + (i / rockSize)), (seed + (j / rockSize)), (seed + (k / rockSize)));
+                    bool isRock = perlin > (1 - ((wallDensity * rocksVisualReduction) * alpha));
+                    bool isNotRockButActsLikeRock = perlin > (1 - (wallDensity * alpha));
 
-
-
-                    if (cell.isSurface)
+                    if (isRock)
                     {
-                        if (perlin > (1 - ((wallDensity * rocksVisualReduction) * alpha)))
+                        cell.canWalk = false;
+                        cell.blockType = BlockType.Rock;
+                    }
+                    else
+                    {
+                        if (cell.isSurface)
                         {
-                            cell.canWalk = false;
-                            cell.blockType = BlockType.Rock;
-                        }
-                        else if (perlin > (1 - (wallDensity * alpha)))
-                        {
-                            cell.canWalk = false;
+                            cell.canWalk = !isNotRockButActsLikeRock;
                             cell.blockType = BlockType.Air;
                         }
                         else
                         {
-                            cell.canWalk = true;
-                            cell.blockType = BlockType.Air;
-
+                            cell.blockType = BlockType.Grass;
+                            cell.canWalk = false;
                         }
-                    }
-                    else
-                    {
-                        cell.blockType = BlockType.Grass;
-                        cell.canWalk = false;
                     }
                 }
             }
@@ -282,7 +276,7 @@ public class CubeWorldGenerator : MonoBehaviour
                     }
                     else
                     {
-                        cells[endX + i, j, endZ + k].blockType = BlockType.Rock;
+                        //cells[endX + i, j, endZ + k].blockType = BlockType.Rock;
                     }
                 }
             }
@@ -638,7 +632,7 @@ public class CubeWorldGenerator : MonoBehaviour
                     {
                         Vector3Int newPos = new Vector3Int(x, y, z);
 
-                        if (cells[x, y, z].endZone || cells[x, y, z].isCore)
+                        if (cells[x, y, z].endZone || cells[x, y, z].isCore)// || cells[x, y, z].blockType == BlockType.Rock)
                             continue;
 
                         if (Vector3Int.Distance(pos, newPos) <= radius)
@@ -714,7 +708,7 @@ public class CubeWorldGenerator : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.E))
         {
             Debug.Log("Random explosion");
-            Explode(GetRandomCell().GetPosInt(), 5);
+            Explode(GetRandomCell().GetPosInt(), 15);
         }
 
         if (Input.GetKeyDown(KeyCode.C))
@@ -746,10 +740,14 @@ public class CubeWorldGenerator : MonoBehaviour
 
         foreach (CellInfo c in paths[0].cells)
         {
-            Gizmos.color = Color.red;
+            if (c.isCorner)
+                Gizmos.color = Color.red;
+            else
+                Gizmos.color = Color.white;
+
             Gizmos.DrawLine(c.GetPos(), c.GetPos() + c.normalInt);
-            Gizmos.color = Color.white;
-            Gizmos.DrawLine(c.GetPos(), c.GetPos() + c.dir);
+            //Gizmos.color = Color.white;
+            //Gizmos.DrawLine(c.GetPos(), c.GetPos() + c.dir);
             //Handles.Label(c.GetPos(), c.normalInt.magnitude.ToString());
         }
     }

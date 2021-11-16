@@ -15,6 +15,7 @@ public class GameManager : MonoBehaviour
     //list containing different level stats and enemies waves 
     internal List<WorldInfo> worldList = new List<WorldInfo>();
     internal bool initiated = false;
+    public bool isMobile = false;
 
     private void Awake()
     {
