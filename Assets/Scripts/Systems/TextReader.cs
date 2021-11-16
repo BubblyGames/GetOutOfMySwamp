@@ -2,31 +2,40 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class TextReader:MonoBehaviour
 {
-    TextManager textManager;
+    GameObject textManager;
     public string key;
     string text;
-    public Text textContainer;
+    public GameObject textContainer;
     private void Start()
     {
-
-        if (GameObject.Find("TextManager") != null)
+        if (GameObject.Find("GameManager").GetComponent<TextManager>() != null)
         {
-            textManager = GameObject.Find("TextManager").GetComponent<TextManager>();
+            textManager = GameObject.Find("GameManager");
             Subscribe();
             Read();
+        }
+
+        if (gameObject.name.Equals("LenguageButton"))
+        {
+            gameObject.GetComponent<Button>().onClick.AddListener(ChangeLenguage);
         }
     }
     public void Subscribe()
     {
-        textManager.Subscribe(this);
+        textManager.GetComponent<TextManager>().Subscribe(gameObject, SceneManager.GetActiveScene().name);
     }
 
     public void Read()
     {
-        text = textManager.currentDictionary[key];
-        textContainer.text = text;
+        textContainer.GetComponent<Text>().text = textManager.GetComponent<TextManager>().currentDictionary[key];
+    }
+
+    public void ChangeLenguage()
+    {
+        textManager.GetComponent<TextManager>().ChangeLenguage();
     }
 }
