@@ -110,7 +110,7 @@ public class TextManager : MonoBehaviour
         //Spanish 
         spanishDictionary.Add("play", "Jugar");
         spanishDictionary.Add("next", "Siguiente");
-        spanishDictionary.Add("back", "Atras");
+        spanishDictionary.Add("back", "Atrás");
         spanishDictionary.Add("previous", "Anterior");
         spanishDictionary.Add("select", "Seleccionar Mundo");
         spanishDictionary.Add("pause", "Pausa");

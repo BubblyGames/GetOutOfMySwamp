@@ -4,48 +4,47 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
-public class TextReader:MonoBehaviour
+public class TextReader : MonoBehaviour
 {
     GameObject textManager;
     public string key;
     public GameObject textContainer;
+    private string _text;
+    private GameObject levelManager;
 
+    private void Awake()
+    {
+        textManager = GameObject.Find("GameManager");
+        if (SceneManager.GetActiveScene().name.Equals("Game"))
+        {
+            levelManager = GameObject.Find("LevelManager");
+
+        }
+    }
     private void Start()
     {
-        if (GameObject.Find("GameManager").GetComponent<TextManager>() != null)
-        {
-            textManager = GameObject.Find("GameManager");
-            Subscribe();
-            Read();
-        }
+        Subscribe();
+        Read();
 
         if (gameObject.name.Equals("LenguageButton"))
         {
             Button b;
-            if (gameObject.TryGetComponent<Button>(out b)) {
+            if (gameObject.TryGetComponent<Button>(out b))
+            {
                 b.onClick.AddListener(ChangeLenguage);
             }
-            else
-            {
-                Debug.Log("ERROR");
-            }
-            
+
         }
-        if (gameObject.name.Equals("ExitButton")|| gameObject.name.Equals("RestartButton") || gameObject.name.Equals("Select"))
+        if (gameObject.name.Equals("ExitButton") || gameObject.name.Equals("RestartButton") || gameObject.name.Equals("Select"))
         {
             Button b;
             if (gameObject.TryGetComponent<Button>(out b))
             {
                 b.onClick.AddListener(EmptyLists);
             }
-            else
-            {
-                Debug.Log("ERROR");
-            }
-
         }
-
     }
+
     public void Subscribe()
     {
         textManager.GetComponent<TextManager>().Subscribe(gameObject, SceneManager.GetActiveScene().name);
@@ -53,7 +52,25 @@ public class TextReader:MonoBehaviour
 
     public void Read()
     {
-        textContainer.GetComponent<Text>().text = textManager.GetComponent<TextManager>().currentDictionary[key];
+        _text = textManager.GetComponent<TextManager>().currentDictionary[key];
+
+
+        if (gameObject.name.Equals("hpText"))
+        {
+            textContainer.GetComponent<Text>().text = _text + ":" + levelManager.GetComponent<LevelStats>().GetCurrentBaseHealth();
+        }
+        else if (gameObject.name.Equals("moneyText"))
+        {
+            textContainer.GetComponent<Text>().text = _text + ":" + levelManager.GetComponent<LevelStats>().GetCurrentMoney();
+        }
+        else if (gameObject.name.Equals("scoreText"))
+        {
+            textContainer.GetComponent<Text>().text = _text + ":" + levelManager.GetComponent<LevelStats>().GetCurrentScore();
+        }
+        else
+        {
+            textContainer.GetComponent<Text>().text = _text;
+        }
     }
 
     public void ChangeLenguage()
@@ -71,6 +88,11 @@ public class TextReader:MonoBehaviour
         {
             textManager.GetComponent<TextManager>().emptyGameobjectsList(false);
         }
-    
+
+    }
+
+    public string GetText()
+    {
+        return _text;
     }
 }
