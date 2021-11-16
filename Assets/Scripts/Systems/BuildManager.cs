@@ -36,17 +36,64 @@ public class BuildManager : MonoBehaviour
             Mathf.RoundToInt(hit.point.y + (hit.normal.y / 2)),
             Mathf.RoundToInt(hit.point.z + (hit.normal.z / 2)));
 
-        if (LevelStats.instance.CurrentMoney < structureBlueprint.creationCost)
-            return false;
+        if (!CheatManager.instance.infiniteMoney)
+        {
+            if (LevelStats.instance.CurrentMoney < structureBlueprint.creationCost)
+                return false;
+        }
 
+        //Unnecessary ??
         Vector3Int intPosUnder = new Vector3Int(
             Mathf.RoundToInt(hit.point.x - (hit.normal.x / 2)),
             Mathf.RoundToInt(hit.point.y - (hit.normal.y / 2)),
             Mathf.RoundToInt(hit.point.z - (hit.normal.z / 2)));
 
-        selectedCell = LevelManager.instance.world.GetCell(intPosUnder);
 
-        if (!canBuild || selectedCell.blockType != structureBlueprint.structurePrefab.GetComponent<Structure>().blockType)
+
+        selectedCell = LevelManager.instance.world.GetCell(intPosUnder);
+        Vector3Int cubeForward = Vector3Int.zero;
+        
+        if (hit.normal == Vector3Int.forward)
+        {
+            cubeForward = Vector3Int.up;
+        }
+        else if (hit.normal == Vector3Int.up)
+        {
+            cubeForward = Vector3Int.forward;
+        }
+        else if (hit.normal == Vector3Int.back)
+        {
+            cubeForward = Vector3Int.up;
+        }
+        else if (hit.normal == Vector3Int.down)
+        {
+            cubeForward = Vector3Int.forward;
+        }
+        else if(hit.normal == Vector3Int.right)
+        {
+            cubeForward = Vector3Int.up;
+        }
+        else if (hit.normal == Vector3Int.left)
+        {
+            cubeForward = Vector3Int.up;
+        }
+
+
+        Vector3Int cubeDotProduct = Vector3Int.FloorToInt(Vector3.Cross(hit.normal, cubeForward));
+
+        for (int i = 0; i < structureBlueprint.structurePrefab.GetComponentInChildren<Structure>().Width; i++)
+        {
+            for (int j = 0; j < structureBlueprint.structurePrefab.GetComponentInChildren<Structure>().Width; j++)
+            {
+ 
+                Vector3Int sizeChecker = intPosUnder + (cubeForward * i) + (cubeDotProduct * j) ;
+                Vector3Int OnTopofSizeChecker = intPos + (cubeForward * i) + (cubeDotProduct * j) ;
+                if (!LevelManager.instance.world.CheckCell(sizeChecker, structureBlueprint.structurePrefab.GetComponentInChildren<Structure>().blockType, OnTopofSizeChecker))
+                    return false;
+            }
+        }
+
+        if (!canBuild || selectedCell.blockType != structureBlueprint.structurePrefab.GetComponentInChildren<Structure>().blockType)
             return false;
 
         Gatherer g;
@@ -119,7 +166,10 @@ public class BuildManager : MonoBehaviour
 
     public void CreateTowerOnCell(Vector3Int position, Vector3 normal)
     {
-        Structure structure = Instantiate(structureBlueprint.structurePrefab, position, Quaternion.Euler(normal)).GetComponent<Structure>();
+        GameObject structureGO = Instantiate(structureBlueprint.structurePrefab, position, Quaternion.Euler(normal));
+        Debug.Log(position);
+        Structure structure = structureGO.GetComponentInChildren<Structure>();
+        structure.gameObject.transform.localScale *= structure.Width;
         structure.SetNormal(normal);
         structure.Blueprint = structureBlueprint;
 

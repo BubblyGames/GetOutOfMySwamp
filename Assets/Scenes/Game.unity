@@ -3801,7 +3801,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   infiniteHealth: 0
   infiniteMoney: 0
-  enableEnemySpawn: 1
+  enableEnemySpawn: 0
   enemy: 0
 --- !u!114 &1903685289
 MonoBehaviour:
@@ -3894,7 +3894,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   shopIndex: -1
   defenseBlueprints:
-  - structurePrefab: {fileID: 7137880238603071797, guid: e1fa9704af9f5114992d5229e61c2040, type: 3}
+  - structurePrefab: {fileID: 3918528406213560500, guid: 7ab3ad8c3b525764a96ab4a0bab03ce3, type: 3}
     creationCost: 100
     upgradeMultiplicator: 1.5
     upgrades:
