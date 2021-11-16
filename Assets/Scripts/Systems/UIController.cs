@@ -47,7 +47,7 @@ public class UIController : MonoBehaviour
         gameSceneId = SceneManager.GetActiveScene().buildIndex;
     }
 
-    public void ShowMenu(GameMenu menu)
+    public virtual void ShowMenu(GameMenu menu)
     {
         //Shows the selected manu and hides all other menus
         //Also sets up time scale
@@ -220,6 +220,7 @@ public class UIController : MonoBehaviour
 
     private void Update()
     {
+        if(LevelManager.instance!=null)
         FPSText.text = Mathf.Round((1 / Time.deltaTime)).ToString(); //FpS 
     }
 }
