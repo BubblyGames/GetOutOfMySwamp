@@ -307,10 +307,17 @@ Ejemplo, torreta pesada:
 
 ### 6.3 Música
 
+El juego cuenta con una sola canción propia la cual se reproduce tanto en los menúes como durante la partida.
 
 ### 6.4 Ambiente sonoro
 
+El juego cuenta con efectos de sonido para la construcción de las torres y sus mejoras, para la muerte de las ranas enemigas y para cuando estas llegan a tu estanque, inflingiendote daño, todas cortesía de [Zapsplat](https://www.zapsplat.com/)
 
+El efecto de sonido de la construcción de las torres y de la mejora de estas es la misma. Es el sonido de unos ladrillos infantiles agitándose en una bolsa.
+El efecto de sonido de la muerte de las ranas consiste en el croar de una rana.
+El efecto de sonido cuando los enemigos llegan a tu estanque varía entre 3 efectos de sonido distintos: 
+- La agitación de una loción de bebé en un bote
+- 2 chapoteos distintos en el agua
 
 ## 
 
@@ -379,11 +386,9 @@ Flujo de juego:
 
 - Interfaz implementada con estructura final y arte de GUI final:
 - Tutorial introductorio en el que se expliquen las mecánicas básicas:
-- Balanceo de las estadisticas de enemigos y torres para hacer el juego divertido y justo:
-- Agregar estanque desde el que spawnean los enemigos:
-- Ajustar la generación de caminos:
+- Balanceo de las estadisticas de enemigos y torres para hacer el juego divertido y justo: 15/11/2021
 - Crear y meter en el juego los 6 modelos de enemigo y los 5 modelos de torre/defensa:
-- Nueva mecánica característica
+- Nueva mecánica característica:
 - Añadir offset para la colocación de torres:
 
 ### 8.3 Hito 3: Gold
