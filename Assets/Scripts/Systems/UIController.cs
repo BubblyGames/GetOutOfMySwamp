@@ -14,6 +14,9 @@ public class UIController : MonoBehaviour
     public GameObject pauseMenu;
     public GameObject endgameMenu;
     public GameObject pauseButton;
+    public GameObject settingsMenu;
+    public GameObject settingsButton;
+    public GameObject tutorialMenu;
 
     private int gameSceneId;
     public enum GameMenu
@@ -21,7 +24,9 @@ public class UIController : MonoBehaviour
         UpgradeMenu,
         PauseMenu,
         EndgameMenu,
-        Game
+        Game,
+        Settings,
+        Tutorial
     }
 
     public GameMenu selectedMenu;
@@ -42,7 +47,7 @@ public class UIController : MonoBehaviour
         gameSceneId = SceneManager.GetActiveScene().buildIndex;
     }
 
-    public void ShowMenu(GameMenu menu)
+    public virtual void ShowMenu(GameMenu menu)
     {
         //Shows the selected manu and hides all other menus
         //Also sets up time scale
@@ -64,6 +69,8 @@ public class UIController : MonoBehaviour
                 upgradeMenu.SetActive(false);
                 pauseMenu.SetActive(false); 
                 pauseButton.SetActive(false);
+                settingsMenu.SetActive(false);
+                settingsButton.SetActive(false);
                 GameObject.Find("FinalScoreText").GetComponent<UnityEngine.UI.Text>().text = "Score: " + LevelStats.instance.currentScore;
                 Time.timeScale = 1;
                 break;
@@ -73,7 +80,59 @@ public class UIController : MonoBehaviour
                 pauseMenu.SetActive(false);
                 endgameMenu.SetActive(false);
                 pauseButton.SetActive(true);
+                settingsButton.SetActive(true);
+                settingsMenu.SetActive(false);
                 Time.timeScale = 1;
+                break;
+            case GameMenu.Settings:
+                if (settingsMenu.activeSelf == false)
+                {
+                    if (LevelManager.instance != null)
+                    {
+                        settingsMenu.SetActive(true);
+                        settingsButton.SetActive(false);
+                        upgradeMenu.SetActive(false);
+                        pauseMenu.SetActive(false);
+                        endgameMenu.SetActive(false);
+                        pauseButton.SetActive(false);
+                        tutorialMenu.SetActive(false);
+                        Time.timeScale = 0;
+                    }
+                    else
+                    {
+                        settingsMenu.SetActive(true);
+                        settingsButton.SetActive(false);
+                    }
+                }
+                else
+                {
+                    if (LevelManager.instance != null)
+                    {
+                        settingsMenu.SetActive(false);
+                        settingsButton.SetActive(true);
+                        upgradeMenu.SetActive(false);
+                        pauseMenu.SetActive(false);
+                        endgameMenu.SetActive(false);
+                        pauseButton.SetActive(true);
+                        tutorialMenu.SetActive(false);
+                        Time.timeScale = 1;
+                    }
+                    else
+                    {
+                        settingsMenu.SetActive(false);
+                        settingsButton.SetActive(true);
+                    }
+                }
+                break;
+            case GameMenu.Tutorial:
+                if (tutorialMenu.activeSelf == true)
+                {
+                    tutorialMenu.SetActive(false);
+                }
+                else
+                {
+                    tutorialMenu.SetActive(true);
+                }
                 break;
             default:
                 break;
@@ -143,8 +202,25 @@ public class UIController : MonoBehaviour
         ShowMenu(GameMenu.Game);
     }
 
+    public void EnterSettings()
+    {
+        ShowMenu(GameMenu.Settings);
+    }
+
+    public void CloseSettings()
+    {
+        ShowMenu(GameMenu.Settings);
+    }
+
+    public void ShowTutorial()
+    {
+        ShowMenu(GameMenu.Tutorial);
+    }
+
+
     private void Update()
     {
+        if(LevelManager.instance!=null)
         FPSText.text = Mathf.Round((1 / Time.deltaTime)).ToString(); //FpS 
     }
 }
