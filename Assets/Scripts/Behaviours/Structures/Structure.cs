@@ -29,8 +29,6 @@ public class Structure : MonoBehaviour
 
     public BlockType blockType = BlockType.Grass;
 
-
-
     public void SetNormal(Vector3 normal)
     {
        this.normal = normal;

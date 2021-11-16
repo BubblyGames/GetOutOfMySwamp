@@ -27,6 +27,9 @@ public class CellInfo
     internal bool isCloseToPath = false;
     internal bool isCore = false;
 
+    //DELETE LATER
+    internal Vector3 dir = Vector3.zero;
+
     public CellInfo(int x, int y, int z)
     {
         this.x = x;
@@ -58,9 +61,11 @@ public class CellInfo
         if (paths.Count == 0)
         {
             isPath = false;
-            CellInfo cellUnder = LevelManager.instance.world.GetCellUnder(this);
-            if (cellUnder.blockType == BlockType.Path)
-                cellUnder.blockType = BlockType.Grass;
+            foreach (CellInfo cell in LevelManager.instance.world.GetNeighbours(this))
+            {
+                if (cell.blockType == BlockType.Path)
+                    cell.blockType = BlockType.Grass;
+            }
         }
     }
 }

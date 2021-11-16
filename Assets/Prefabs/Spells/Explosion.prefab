@@ -108,3 +108,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 587da1d5a576ec74599cff80b182f280, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  health: 0
+  canLoseHealth: 0
+  level: 0
+  maxLevel: 3
+  isMaxLevel: 0
+  normal: {x: 0, y: 0, z: 0}
+  blockType: 1
+  particles: {fileID: 4964779859338955144, guid: 8a2ab21b4543bb14ebee8f6ff1221879, type: 3}

@@ -171,28 +171,30 @@ public class CubeWorldGenerator : MonoBehaviour
                     float perlin = alpha * Perlin3D((seed + (i / rockSize)), (seed + (j / rockSize)), (seed + (k / rockSize)));
 
 
-                    if (perlin > (1 - ((wallDensity * rocksVisualReduction) * alpha)))
+
+                    if (cell.isSurface)
                     {
-                        cell.canWalk = false;
-                        cell.blockType = BlockType.Rock;
-                    }
-                    else if (perlin > (1 - (wallDensity * alpha)))
-                    {
-                        cell.canWalk = false;
-                        cell.blockType = BlockType.Air;
-                    }
-                    else
-                    {
-                        if (cell.isSurface)
+                        if (perlin > (1 - ((wallDensity * rocksVisualReduction) * alpha)))
                         {
-                            cell.canWalk = true;
+                            cell.canWalk = false;
+                            cell.blockType = BlockType.Rock;
+                        }
+                        else if (perlin > (1 - (wallDensity * alpha)))
+                        {
+                            cell.canWalk = false;
                             cell.blockType = BlockType.Air;
                         }
                         else
                         {
-                            cell.blockType = BlockType.Grass;
-                            cell.canWalk = false;
+                            cell.canWalk = true;
+                            cell.blockType = BlockType.Air;
+
                         }
+                    }
+                    else
+                    {
+                        cell.blockType = BlockType.Grass;
+                        cell.canWalk = false;
                     }
                 }
             }
@@ -293,8 +295,8 @@ public class CubeWorldGenerator : MonoBehaviour
 
         for (int i = 0; i < nPaths; i++)
         {
-            if (!paths[i].dirty) //Should check if a path has been modified to update it, but not yet
-                continue;
+            /*if (!paths[i].dirty) //Should check if a path has been modified to update it, but not yet
+                continue;*/
 
             if (!paths[i].initiated)//First time calculating a path
             {
@@ -676,23 +678,28 @@ public class CubeWorldGenerator : MonoBehaviour
 
     bool UpdateWorld()
     {
+        if (!updating)
+            StartCoroutine(UpdateWorldCoroutine());
+        return true;
+    }
+
+    bool updating = false;
+    IEnumerator UpdateWorldCoroutine()
+    {
+        updating = true;
         if (cells != null)
         {
             ClearDebugStuff();
             //FillWorld();
-
-            if (!demo)
-            {
-                if (!GeneratePaths(end.x, end.y, end.z))
-                    return false;
-            }
-
+            GeneratePaths(end.x, end.y, end.z);
+            yield return null;
             MeshData meshData = GenerateMesh();
             voxelRenderer.RenderMesh(meshData);
+            yield return null;
         }
-        else { return false; }
+        updating = false;
 
-        return true;
+        yield return null;
     }
 
 #if UNITY_EDITOR
@@ -739,8 +746,11 @@ public class CubeWorldGenerator : MonoBehaviour
 
         foreach (CellInfo c in paths[0].cells)
         {
+            Gizmos.color = Color.red;
             Gizmos.DrawLine(c.GetPos(), c.GetPos() + c.normalInt);
-            Handles.Label(c.GetPos(), c.normalInt.magnitude.ToString());
+            Gizmos.color = Color.white;
+            Gizmos.DrawLine(c.GetPos(), c.GetPos() + c.dir);
+            //Handles.Label(c.GetPos(), c.normalInt.magnitude.ToString());
         }
     }
     private void OnValidate()
@@ -755,6 +765,7 @@ public class CubeWorldGenerator : MonoBehaviour
 
         if (demo)
         {
+            FillWorld();
             UpdateWorld();
         }
     }

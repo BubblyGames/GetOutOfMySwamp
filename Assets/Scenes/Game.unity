@@ -3685,7 +3685,8 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 128
   waterSplashPrefab: {fileID: 4964779859338955144, guid: da9a63bd877faf74db2fb8f6f899c1ca, type: 3}
-  waterMaterial: {fileID: 2100000, guid: b69aabdbb83200d4e86cc4b07ec67723, type: 2}
+  waterSplashMaterial: {fileID: 2100000, guid: b69aabdbb83200d4e86cc4b07ec67723, type: 2}
+  waterMaterial: {fileID: 2100000, guid: f2bfe60c202150547be22d486a012286, type: 2}
   waterColor: {r: 0, g: 0, b: 0, a: 0}
   colors:
   - {r: 0, g: 0, b: 0, a: 0}
@@ -3738,7 +3739,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 36777aadbcc269d4d944e83c116139ca, type: 2}
+  - {fileID: 2100000, guid: 9d2697eb6a4f80a48abb3b7c62b67118, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

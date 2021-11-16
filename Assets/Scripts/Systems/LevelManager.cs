@@ -34,11 +34,14 @@ public class LevelManager : MonoBehaviour
     //TODO: increment score when killing enemys.
     public LayerMask floorLayer;
     public GameObject waterSplashPrefab;
+    public Material waterSplashMaterial;
     public Material waterMaterial;
 
     public Color waterColor;
 
     public Color[] colors;
+
+    GameObject water;
 
     private void Awake()
     {
@@ -70,7 +73,15 @@ public class LevelManager : MonoBehaviour
         colors[3] = t.GetPixel(20, 20);
 
         waterColor = colors[2];
-        waterMaterial.color = waterColor.gamma;
+        waterSplashMaterial.color = waterColor.gamma;
+
+        water = GameObject.CreatePrimitive(PrimitiveType.Cube);
+        water.transform.position = world.center.transform.position;
+        water.transform.localScale = (world.size - 4.5f) * Vector3.one;
+        water.GetComponent<MeshRenderer>().material = waterMaterial;
+        Destroy(water.GetComponent<BoxCollider>());
+        waterMaterial.color = new Color(waterColor.r, waterColor.g, waterColor.b, .5f);
+
     }
 
     private void Update()

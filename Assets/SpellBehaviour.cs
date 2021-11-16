@@ -5,6 +5,7 @@ using UnityEngine;
 public class SpellBehaviour : Structure
 {
     // Start is called before the first frame update
+    public GameObject particles;
     void Start()
     {
         Vector3Int pos = new Vector3Int();
@@ -14,6 +15,10 @@ public class SpellBehaviour : Structure
         pos.z = (int)transform.position.z;
 
         LevelManager.instance.world.Explode(pos, 5);
+
+        GameObject p = GameObject.Instantiate(particles);
+        p.transform.position = transform.position;
+        p.transform.rotation = transform.rotation;
 
         Destroy(gameObject);
     }

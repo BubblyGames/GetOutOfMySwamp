@@ -40,30 +40,17 @@ public class Path
         if (result == null)
             return false;
 
+        result.normal = Vector3Int.up;
         //List of cells in the path
         List<CellInfo> pathCells = new List<CellInfo>();
         while (result != null)
         {
             CellInfo cell = world.cells[result.x, result.y, result.z];
 
-            cell.normalInt = GetNormalOfff(result);
+            cell.normalInt = GetNormalOffff(result);
+            cell.dir = result.dir;
 
-            /*CellInfo cellUnder = world.cells[result.x - cell.normalInt.x, result.y - cell.normalInt.y, result.z - cell.normalInt.z];
-            cellUnder.blockType = BlockType.Path;*/
-
-            /*foreach (CellInfo c in world.GetNeighbours(cell))
-            {
-                c.isCloseToPath = true;
-
-                if (c.blockType != BlockType.Swamp && c.blockType != BlockType.Air)
-                    c.blockType = BlockType.Path;
-            }*/
-
-            //cellUnder = world.GetCellUnder(cell);
-            /*foreach (CellInfo c in world.GetNeighbours(cellUnder, true))
-            {
-                c.isCloseToPath = true;
-            }*/
+            //world.GetCellUnder(cell).blockType = BlockType.Path;
 
             cell.isPath = true;
             pathCells.Add(cell);
@@ -75,10 +62,6 @@ public class Path
         for (int j = 0; j < 7; j++)
         {
             pathCells[j].isPath = false;
-            foreach (CellInfo c in world.GetNeighbours(pathCells[j], true))
-            {
-                c.isCloseToPath = false;
-            }
         }
 
         //Cells are added from last to first, so we reverse the list
@@ -127,16 +110,20 @@ public class Path
             {
                 //Expands neightbors, (compute cost of each one) and add them to the list
                 CellInfo[] neighbours = _world.GetNeighbours(current.cell);
+                //CellInfo[] neighboursWitCorners = _world.GetNeighbours(current.cell, true);
 
-                //If there are no neighbours, try next node in open list
-                while (neighbours.Length == 0)
+                current.isFloating = true;
+                for (int i = 0; i < neighbours.Length; i++)
                 {
-                    openList[0].Parent = current;
-                    current = openList[0];
-                    closedList.Add(current);
-                    openList.Remove(current);
-                    neighbours = _world.GetNeighbours(current.cell);
+                    if (neighbours[i].blockType != BlockType.Air || current.cell.endZone)
+                    {
+                        current.isFloating = false;
+                        break;
+                    }
                 }
+
+                if (current.isFloating && current.Parent.isFloating)
+                    continue;
 
                 foreach (CellInfo neighbour in neighbours)
                 {
@@ -332,7 +319,7 @@ public class Path
 
         Vector3 result = Vector3.zero;
 
-        CellInfo[] parentNeighbours = world.GetNeighbours(n.Parent.cell, false);
+        CellInfo[] parentNeighbours = world.GetNeighbours(n.Parent.cell, true);
 
         for (int i = -1; i <= 1; i++)
         {
@@ -351,14 +338,15 @@ public class Path
                     if (!world.IsPosInBounds(x, y, z))
                         continue;
 
-                    foreach (CellInfo cell in parentNeighbours)
+                    CellInfo cell = world.cells[x, y, z];
+                    foreach (CellInfo neighbourCell in parentNeighbours)
                     {
-                        if (world.cells[x, y, z] == cell)
+                        if (world.cells[x, y, z] == neighbourCell)
                         {
                             result += new Vector3Int(-i, -j, -k);
 
-                            if (world.cells[x, y, z].blockType != BlockType.Swamp && world.cells[x, y, z].blockType != BlockType.Air)
-                                world.cells[x, y, z].blockType = BlockType.Path;
+                            if (cell.blockType != BlockType.Swamp && cell.blockType != BlockType.Air && !world.CheckIfIsInSurface(cell))
+                                cell.blockType = BlockType.Path;
                         }
                     }
                 }
@@ -366,6 +354,33 @@ public class Path
         }
 
         return Vec3ToInt(result.normalized);
+    }
+
+    Vector3Int GetNormalOffff(Node n)
+    {
+        //Si es el ultimo
+        if (n.Parent == null)
+        {
+            return n.normal;
+        }
+
+        //Si es el penultimo
+        if (n.Parent.Parent == null)
+        {
+            n.Parent.normal = n.normal;
+            return n.normal;
+        }
+
+        n.Parent.dir = n.Parent.Position - n.Position;
+
+        if (n.dir != n.Parent.dir)
+        {
+            n.normal = Vec3ToInt(Vector3.Cross(-n.dir, n.Parent.dir));
+        }
+
+        n.Parent.normal = n.normal;
+
+        return n.normal;
     }
 
 

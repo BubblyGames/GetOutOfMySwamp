@@ -7,6 +7,10 @@ public class Node
     public int f, h, g;
     public Node Parent;
     public CellInfo cell;
+    public bool isFloating = false;
+    public Vector3Int normal = Vector3Int.zero;
+    public Vector3 dir = Vector3.zero;
+
     public Vector3 Position {
         get { return new Vector3(x,y,z); }
     }
