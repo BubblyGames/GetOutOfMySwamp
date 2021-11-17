@@ -90,6 +90,9 @@ public class TextManager : MonoBehaviour
         englishDictionary.Add("round", "ROUND");
         englishDictionary.Add("credits", "Credits");
         englishDictionary.Add("nextLevel", "Next Level");
+        englishDictionary.Add("retry", "Retry");
+        englishDictionary.Add("loose", "You loose!");
+        englishDictionary.Add("win", "You win!");
 
 
         //upgrade texts in english
@@ -144,6 +147,9 @@ public class TextManager : MonoBehaviour
         spanishDictionary.Add("round", "RONDA");
         spanishDictionary.Add("credits", "Créditos");
         spanishDictionary.Add("nextLevel", "Siguiente nivel");
+        spanishDictionary.Add("retry", "Reintentar");
+        spanishDictionary.Add("loose", "¡Has perdido!");
+        spanishDictionary.Add("win", "¡Has ganado!");
 
         //upgrade texts in spanish
         spanishDictionary.Add("target", "Objetivo");
