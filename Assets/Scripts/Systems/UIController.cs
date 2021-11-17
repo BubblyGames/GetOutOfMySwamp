@@ -9,7 +9,11 @@ public class UIController : MonoBehaviour
 {
     public static UIController instance;
 
-    [Header("Menus")]
+    [Header("MainScene Menus")]
+    public GameObject tittleText;
+    public GameObject playButton;
+
+    [Header("GameScene Menus")]
     public GameObject upgradeMenu;
     public GameObject upgradeButton;
     public GameObject sellButton;
@@ -120,7 +124,9 @@ public class UIController : MonoBehaviour
                     else
                     {
                         settingsMenu.SetActive(true);
+                        playButton.SetActive(false);
                         settingsButton.SetActive(false);
+                        tittleText.SetActive(false);
                     }
                 }
                 else
@@ -139,7 +145,9 @@ public class UIController : MonoBehaviour
                     else
                     {
                         settingsMenu.SetActive(false);
+                        playButton.SetActive(true);
                         settingsButton.SetActive(true);
+                        tittleText.SetActive(true);
                     }
                 }
                 break;
