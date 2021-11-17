@@ -113,6 +113,20 @@ public class TextManager : MonoBehaviour
         englishDictionary.Add("damage", "Damage");
         englishDictionary.Add("fireRate", "Fire Rate");
 
+        //defense stats in english
+        englishDictionary.Add("air", "Air");
+        englishDictionary.Add("ground", "Ground");
+        englishDictionary.Add("groundAir", "Ground & Air");
+
+        englishDictionary.Add("large", "Large");
+        englishDictionary.Add("medium", "Medium");
+        englishDictionary.Add("low", "Low");
+
+        englishDictionary.Add("slow", "Slow");
+        englishDictionary.Add("fast", "Fast");
+
+        englishDictionary.Add("high", "High");
+
         //descriptions of lessons in English
         englishDictionary.Add("lesson1", "Lesson 1");
         englishDictionary.Add("description1", "asadsafdsfdsfdsfsdfds");
@@ -144,6 +158,21 @@ public class TextManager : MonoBehaviour
         spanishDictionary.Add("range", "Rango");
         spanishDictionary.Add("damage", "Daño");
         spanishDictionary.Add("fireRate", "Velocidad Disparo");
+
+
+        //defense stats in spanish
+        spanishDictionary.Add("air", "Aire");
+        spanishDictionary.Add("ground", "Tierra");
+        spanishDictionary.Add("groundAir", "Tierra y Aire");
+
+        spanishDictionary.Add("large", "Largo");
+        spanishDictionary.Add("medium", "Medio");
+        spanishDictionary.Add("low", "Bajo");
+
+        spanishDictionary.Add("slow", "Lento");
+        spanishDictionary.Add("fast", "Rápido");
+
+        spanishDictionary.Add("high", "Alto");
 
         //descriptions of lessons in Spanish
         spanishDictionary.Add("lesson1", "Lección 1");
