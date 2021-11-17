@@ -116,6 +116,7 @@ MonoBehaviour:
   normal: {x: 0, y: 0, z: 0}
   blockType: 1
   structureName: areaTower
+  structureId: 2
   fireRate: 0.1
   damage: 35
   attackRange: 7

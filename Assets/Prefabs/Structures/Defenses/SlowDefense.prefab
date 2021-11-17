@@ -213,6 +213,7 @@ MonoBehaviour:
   normal: {x: 0, y: 0, z: 0}
   blockType: 1
   structureName: psiquicTower
+  structureId: 1
   fireRate: 1
   damage: 7
   attackRange: 3

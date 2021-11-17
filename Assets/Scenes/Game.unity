@@ -4136,6 +4136,7 @@ MonoBehaviour:
   - {fileID: 423694798}
   - {fileID: 1874567660}
   towerName: {fileID: 1029310091}
+  upgradeCostText: {fileID: 327890052}
   basicTowerSprite: {fileID: 21300000, guid: 6c53c68d74df63a4792a296a3030e0d3, type: 3}
   slowTowerSprite: {fileID: 21300000, guid: dfe144ffea944824f974f903a34fd04b, type: 3}
   areaTowerSprite: {fileID: 21300000, guid: d028348a0d83f564baeecfeed75490c0, type: 3}
@@ -4146,6 +4147,7 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 7d9467091172b7a459d21f854fa1d33e, type: 3}
   - {fileID: 21300000, guid: 0a5235c4f88ebda4ba1e0f9423950d8a, type: 3}
   - {fileID: 21300000, guid: 24bff72e7482c1a459680b7aa6355cc8, type: 3}
+  shopContainer: {fileID: 1903685281}
   selectedMenu: 0
   FPSText: {fileID: 1583022576}
 --- !u!1 &1348527078 stripped
@@ -6009,22 +6011,6 @@ MonoBehaviour:
         upgradeAddedValue: 0.25
       - statToUpgrade: 2
         upgradeAddedValue: 2
-  - structurePrefab: {fileID: 8305915707849881324, guid: df406671fc6064a4c978095ef361ebfd, type: 3}
-    creationCost: 300
-    upgradeMultiplicator: 1.2
-    upgrades:
-    - cost: 150
-      stats:
-      - statToUpgrade: 0
-        upgradeAddedValue: 35
-    - cost: 200
-      stats:
-      - statToUpgrade: 2
-        upgradeAddedValue: 5
-    - cost: 300
-      stats:
-      - statToUpgrade: 1
-        upgradeAddedValue: 0.1
   - structurePrefab: {fileID: 7137880238603071797, guid: 0d87b48302d7d6c4d88056ea6fb54a3d, type: 3}
     creationCost: 200
     upgradeMultiplicator: 1.3
@@ -6045,12 +6031,28 @@ MonoBehaviour:
       stats:
       - statToUpgrade: 1
         upgradeAddedValue: 0.5
-  - structurePrefab: {fileID: 2711408889448630410, guid: 4cdbff3b4cc893847ad0a47225cd137b, type: 3}
-    creationCost: 400
-    upgradeMultiplicator: 1.1
-    upgrades: []
+  - structurePrefab: {fileID: 8305915707849881324, guid: df406671fc6064a4c978095ef361ebfd, type: 3}
+    creationCost: 300
+    upgradeMultiplicator: 1.2
+    upgrades:
+    - cost: 150
+      stats:
+      - statToUpgrade: 0
+        upgradeAddedValue: 35
+    - cost: 200
+      stats:
+      - statToUpgrade: 2
+        upgradeAddedValue: 5
+    - cost: 300
+      stats:
+      - statToUpgrade: 1
+        upgradeAddedValue: 0.1
   - structurePrefab: {fileID: 3250008881624491856, guid: d47e0467f382b7241aafc52e24236632, type: 3}
     creationCost: 0
+    upgradeMultiplicator: 1.1
+    upgrades: []
+  - structurePrefab: {fileID: 2711408889448630410, guid: 4cdbff3b4cc893847ad0a47225cd137b, type: 3}
+    creationCost: 400
     upgradeMultiplicator: 1.1
     upgrades: []
   selectedDefenseBlueprint:

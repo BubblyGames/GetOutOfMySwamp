@@ -28,7 +28,7 @@ public class Structure : MonoBehaviour
 
     public BlockType blockType = BlockType.Grass;
     public string structureName;
-
+    public int structureId;
 
 
     public void SetNormal(Vector3 normal)
@@ -44,7 +44,7 @@ public class Structure : MonoBehaviour
             if (level < maxLevel)
             {
                 level++;
-                uIController.UpdateUpgradeButton(level);
+                uIController.UpdateUpgradeButton(level,structureId);
             }
 
             if (level == maxLevel)
