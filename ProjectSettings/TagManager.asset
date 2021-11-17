@@ -9,6 +9,7 @@ TagManager:
   - World
   - Structure
   - Card
+  - Gatherer
   layers:
   - Default
   - TransparentFX

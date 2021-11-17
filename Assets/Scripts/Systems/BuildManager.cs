@@ -7,12 +7,14 @@ using UnityEngine.EventSystems;
 public class BuildManager : MonoBehaviour
 {
     public static BuildManager instance;
-
-    private StructureBlueprint structureToBuild = null; //Structure is going to be built
+    private StructureBlueprint structureBlueprint = null; //Structure is going to be built
     [SerializeField]
     private Structure selectedStructure; //Already Built structure 
     [SerializeField]
     private CellInfo selectedCell;
+    [SerializeField]
+    private UIController uIController;
+
 
     public bool canBuild;//Checks if a structure is selected to be built
 
@@ -36,8 +38,7 @@ public class BuildManager : MonoBehaviour
             Mathf.RoundToInt(hit.point.y + (hit.normal.y / 2)),
             Mathf.RoundToInt(hit.point.z + (hit.normal.z / 2)));
 
-        //If player has enough money
-        if (LevelStats.instance.CurrentMoney < structureToBuild.creationCost || !canBuild)
+        if (LevelStats.instance.CurrentMoney < structureBlueprint.creationCost)
             return false;
 
         //Spell will always be 
@@ -57,17 +58,13 @@ public class BuildManager : MonoBehaviour
 
         selectedCell = LevelManager.instance.world.GetCell(intPosUnder);
 
-        return CheckBuilding(intPos);
-    }
-
-    bool CheckBuilding(Vector3Int intPos)
-    {
-        if (selectedCell.blockType != structureToBuild.structurePrefab.GetComponent<Structure>().blockType)
+        if (!canBuild || selectedCell.blockType != structureBlueprint.structurePrefab.GetComponent<Structure>().blockType)
             return false;
 
-        Gatherer g = null;
-        if (!LevelManager.instance.world.GetCell(intPos).isCloseToPath &&
-            structureToBuild.structurePrefab.TryGetComponent<Gatherer>(out g))
+        Gatherer g;
+        if (WorldManager.instance.IsPosInBounds(intPos.x, intPos.y, intPos.z) &&
+            !LevelManager.instance.world.GetCell(intPos).isCloseToPath &&
+            structureBlueprint.structurePrefab.TryGetComponent<Gatherer>(out g))
         {
             //Debug.Log("Can't add");
             return false;
@@ -93,17 +90,21 @@ public class BuildManager : MonoBehaviour
     internal void SetSelectedStructure(Structure structure)
     {
         selectedStructure = structure;
+        structureBlueprint = selectedStructure.Blueprint;
+        selectedCell = null;
+
     }
 
     public void SelectCell(CellInfo cell)
     {
         selectedCell = cell;
-        structureToBuild = null;
+        selectedStructure = null;
+        structureBlueprint = null;
     }
 
     public void SelectStructureToBuild(StructureBlueprint defense)
     {
-        structureToBuild = defense;
+        structureBlueprint = defense;
         selectedCell = null;
         canBuild = true;
     }
@@ -115,15 +116,15 @@ public class BuildManager : MonoBehaviour
 
     public void BuildStructure(Vector3Int position, Vector3 normal)
     {
-        if (CheatManager.instance != null && CheatManager.instance.infiniteMoney)
+        if (CheatManager.instance.infiniteMoney)
         {
             CreateTowerOnCell(position, normal);
             ResetCanBuild(); // after building an structure you have to select another one to be able to place it
         }
-        else if (LevelStats.instance.CurrentMoney >= structureToBuild.creationCost)
+        else if (LevelStats.instance.CurrentMoney >= structureBlueprint.creationCost)
         {
             CreateTowerOnCell(position, normal);
-            LevelStats.instance.SpendMoney(structureToBuild.creationCost);
+            LevelStats.instance.SpendMoney(structureBlueprint.creationCost);
             ResetCanBuild(); // after building an structure you have to select another one to be able to place it
         }
         else
@@ -135,9 +136,9 @@ public class BuildManager : MonoBehaviour
 
     public void CreateTowerOnCell(Vector3Int position, Vector3 normal)
     {
-        Structure structure = Instantiate(structureToBuild.structurePrefab, position, Quaternion.Euler(normal)).GetComponent<Structure>();
+        Structure structure = Instantiate(structureBlueprint.structurePrefab, position, Quaternion.Euler(normal)).GetComponent<Structure>();
         structure.SetNormal(normal);
-        structure.Blueprint = structureToBuild;
+        structure.Blueprint = structureBlueprint;
 
         //THIS SHOULDN'T BE NECESSARY
         if (!LevelManager.instance.world.IsPosInBounds(position))
@@ -162,22 +163,23 @@ public class BuildManager : MonoBehaviour
     {
         UIController.instance.ShowMenu(UIController.GameMenu.Game);
 
-        if (LevelStats.instance.infinteMoney)
+        if (selectedStructure.GetLevel() < 3)
         {
-            selectedCell.structure.UpgradeStrucrure();
-        }
+            if (CheatManager.instance.infiniteMoney)
+            {
+                selectedCell.structure.UpgradeStrucrure(uIController);
+            }
+            else if ( LevelStats.instance.CurrentMoney >= structureBlueprint.upgrades[selectedStructure.GetLevel()].cost)
+            {
+                selectedStructure.UpgradeStrucrure(uIController);
+                LevelStats.instance.SpendMoney(structureBlueprint.creationCost);
 
-        //TODO: get values from Upgrade
-        else if (LevelStats.instance.CurrentMoney >= structureToBuild.upgrades[selectedStructure.GetLevel()].cost)
-        {
-            selectedCell.structure.UpgradeStrucrure();
-            LevelStats.instance.SpendMoney(structureToBuild.creationCost);
-
-        }
-        else
-        {
-            Debug.Log("Not enough Money");
-            //TODO: Show on screen there is not enough money
+            }
+            else
+            {
+                Debug.Log("Not enough Money");
+                //TODO: Show on screen there is not enough money
+            }
         }
     }
 

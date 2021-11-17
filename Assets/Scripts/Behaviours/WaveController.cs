@@ -31,6 +31,8 @@ public class WaveController : MonoBehaviour
 
     public int waveCount; // Wave its being played
 
+    public Text numberOfWaves;
+    public Text actualWave;
 
     ///public Text waveText;
 
@@ -58,6 +60,8 @@ public class WaveController : MonoBehaviour
 
     public void Start()
     {
+        numberOfWaves.text = waves.Length.ToString();
+        actualWave.text = waveCount.ToString(); 
         isWaveActive = false;
         //isBetweenWaves = false;
 
@@ -134,6 +138,7 @@ public class WaveController : MonoBehaviour
 
                 timeVariable = Time.time + timeBetweenWaves;
                 waveCount++;
+                actualWave.text = waveCount.ToString();
             }
         }
 

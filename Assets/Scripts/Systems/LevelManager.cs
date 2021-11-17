@@ -99,9 +99,9 @@ public class LevelManager : MonoBehaviour
         GameObject waterSplash = GameObject.Instantiate(waterSplashPrefab);
         waterSplash.transform.position = world.end;
 
-        if (CheatManager.instance != null && CheatManager.instance.infiniteHealth)
+        //if (CheatManager.instance != null && CheatManager.instance.infiniteHealth)
+        if (!CheatManager.instance.infiniteHealth)
         {
-            //LevelStats.levelStatsInstance.ReceiveDamage(damageTaken);
             OnDamageTaken?.Invoke(damageTaken);
         }
         if (LevelStats.instance.CurrentBaseHealthPoints <= 0)
@@ -117,13 +117,13 @@ public class LevelManager : MonoBehaviour
 
     public void GameOver()
     {
-        UIController.instance.ShowMenu(UIController.GameMenu.EndgameMenu);
+        UIController.instance.ShowMenu(UIController.GameMenu.EndgameMenuLoose);
     }
 
     public void LevelCompleted()
     {
         OnGameCompleted?.Invoke();
-        UIController.instance.ShowMenu(UIController.GameMenu.EndgameMenu);
+        UIController.instance.ShowMenu(UIController.GameMenu.EndgameMenuWin);
     }
 
 }

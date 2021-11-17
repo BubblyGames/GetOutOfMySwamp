@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 2830652515697065864}
   m_Layer: 8
   m_Name: MoneyFarming
-  m_TagString: Untagged
+  m_TagString: Gatherer
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -115,6 +115,8 @@ MonoBehaviour:
   isMaxLevel: 0
   normal: {x: 0, y: 0, z: 0}
   blockType: 1
+  structureName: moneyGatherer
+  structureId: 4
   resourceGatheredEachCicle: 30
   timeToGatherResource: 3
   timerToGetResource: 0

@@ -103,7 +103,7 @@ En el caso de las plataformas de Twitter, Reddit y YouTube se subirán elementos
 
 ### 4.1 Descripción detallada del concepto de juego
 
-Es un tower defense 3D con vista isométrica en un mapa cúbico. El origen de los enemigos y la meta están en caras opuestas y tienen que recorrer una serie de caminos pasando por el resto de caras para llegar al final. Los caminos serán semi procedurales, así que el jugador tendrá en primera instancia que familiarizarse con el mapa que le tocó para defenderlo adecuadamente. Los enemigos aparecen por oleadas con una dificultad que aumenta progresivamente, tanto por un aumento de número como por diversidad de tipos de enemigos. Defender satisfactoriamente tiene una recompensa económica para poder seguir expandiendo las defensas y mejorar las ya existentes. Todas las torres aparecen disponibles desde un inicio y el único factor limitante será su precio. Si una rana enemiga consigue llegar al final se reduce un punto de vida hasta que llegue a 0 y se acabe la partida.
+Es un tower defense 3D con vista isométrica en un mapa cúbico. El origen de los enemigos y la meta están en caras opuestas y tienen que recorrer una serie de caminos pasando por el resto de caras para llegar al final. Los caminos serán semi procedimentales, así que el jugador tendrá en primera instancia que familiarizarse con el mapa que le tocó para defenderlo adecuadamente. Los enemigos aparecen por oleadas con una dificultad que aumenta progresivamente, tanto por un aumento de número como por diversidad de tipos de enemigos. Defender satisfactoriamente tiene una recompensa económica para poder seguir expandiendo las defensas y mejorar las ya existentes. Todas las torres aparecen disponibles desde un inicio y el único factor limitante será su precio. Si una rana enemiga consigue llegar al final se reduce una cantidad determinada de vida hasta que llegue a 0 y se acabe la partida.
 
 
 ### 4.2 Descripción detallada de las mecánicas de juego
@@ -112,12 +112,12 @@ Es un tower defense 3D con vista isométrica en un mapa cúbico. El origen de lo
 
 #### 4.2.1 Victoria y derrota
 
-Para ganar la partida se ha de defender un número determinado de oleadas y con la vida igual o superior a 1. El número de oleadas defendidas y por defender estará en pantalla al inicio de cada ronda. Si llegan a la meta un número de enemigos igual a la cantidad de vidas la partida se acaba.
+Para ganar la partida se ha de defender un número determinado de oleadas y con la vida igual o superior a uno. El número de oleadas defendidas y por defender estará en pantalla al inicio de cada ronda. Si llegan a la meta un número de enemigos igual a la cantidad de vidas la partida se acaba.
 
 
 #### 4.2.2 Mapa
 
-El mapa tiene forma de cubo, con sus 6 caras siendo terreno jugable. Las caras visibles serán de 1 a 3, dependiendo de la rotación del cubo que elija el jugador. El cubo se puede rotar en cualquier momento de la partida menos en el menú de construcción.
+El mapa tiene forma de cubo, con sus seis caras siendo terreno jugable. Las caras visibles serán de una a tres, dependiendo de la rotación del cubo que elija el jugador. El cubo se puede rotar en cualquier momento de la partida menos cuando se coloca una torre.
 
 En el mapa hay tres tipos de casillas: Casillas de camino, por las que los enemigos transitan y se pueden poner trampas; Casillas de terreno construible, donde se podrá poner cualquier tipo de torre; y casillas obstáculo, en las que no puede haber camino ni estructuras.
 
@@ -129,9 +129,9 @@ El juego comienza con una cantidad determinada de monedas para poner las torres 
 
 #### 4.2.4 Defensas y enemigos
 
-Existen dos tipos de defensas: Las torres y las trampas. Las torres tienen vida, alcance, daño, velocidad de ataque y éstos pueden ser individuales o en área y tener efectos de estado sobre los enemigos. Se puede construir en cualquier lugar menos caminos y rocas, a excepción de la torre económica que solo se puede poner adyacente al camino. Además, tienen tres niveles de mejoras para aumentar sus estadísticas. Luego están las trampas, las cuales se colocan en el camino del enemigo, tienen daño, durabilidad y pueden tener efecto.
+Existen dos tipos de defensas: Las torres y las trampas. Las torres tienen alcance, daño, velocidad de ataque y éstos pueden ser individuales o en área o tener efectos de estado sobre los enemigos. Se puede construir en cualquier lugar menos caminos y rocas, a excepción de la torre económica que solo se puede poner adyacente al camino. Además, tienen tres niveles de mejoras para aumentar sus estadísticas. Luego están las trampas, las cuales se colocan en el camino del enemigo, tienen daño, durabilidad y pueden tener efecto.
 
-Por otro lado están los enemigos, con características de vida, velocidad de movimiento y opcionales como la capacidad de volar o dañar las torres. Aparecen por oleadas y aumentan en número conforme avanzas en la partida. Tienen diferentes roles en función de sus estadísticas, siendo los roles unidad básica, ligera, tanque, horda, especialista y voladora, explicadas más adelante en el apartado Enemigos.
+Por otro lado están los enemigos, con características de vida y velocidad de movimiento. Aparecen por oleadas y aumentan en número conforme avanzas en la partida. Tienen diferentes roles en función de sus estadísticas, siendo los roles unidad básica, tanque y horda, explicadas más adelante en el apartado Enemigos.
 
 
 ![](https://lh6.googleusercontent.com/XyZfstCSw-DLWgamwydXli8vhxtgT-UwKJedln-d8n8b128AX2uwMAu_ZfEi14CkXv6f0j37Y27lFRzzMlJHlza6lMVwx9gM2rYwonhWBWuMDhGatPP_NvB05I83jCBoDTnug5R2=s1600)
@@ -146,21 +146,21 @@ El jugador durante la partida tendrá dos tareas principales, vigilar el mapa pa
 
 ### 4.4 Niveles y misiones
 
-El juego cuenta con 4 niveles por el momento, diferenciados a nivel visual y en la generación del mapa. La misión en ambos niveles es defender tu estanque de las tropas enemigas.
+El juego cuenta con cinco mapas, diferenciados a nivel visual y en la generación del terreno. El objetivo en todos ellos es defender tu estanque de las tropas enemigas.
 
-Los niveles se conforman de grids y hay distintas variantes de las celdas. Los niveles son semi procedurales y se crean mediante una seed.
+Los niveles son semi procedimentales y se crean mediante una semilla.
 
 
 ### 4.5 Torres y trampas
 
-| **TORRES**     | ALCANCE      | DAÑO           | OBJETIVO          | VELOCIDAD DE ATAQUE | EFECTO                            |
-| -------------- | ---------    | -------------- | ----------------- | ------------------- | --------------------------------- |
-| TORRE PESADA   | Largo (7 ud) | Elevado (35 ud)| ÁreaTT\*          | Lento (0.1 ud)      | \-                                |
-| TORRE BÁSICA   | Medio (5 ud) | Medio (10 ud)  | IndividualTA-TT\* | Medio (1 ud)        | \-                                |
-| TORRE PSÍQUICA | Corto (3 ud) | Bajo (7 ud)    | IndividualTT\*    | Medio (1 ud)        | El enemigo se ralentiza           |
-| TORRE MONTAÑA  | Medio (x ud) | Bajo (x ud)    | ÁreaTA-TT\*       | Rápido              | Prioriza ataque a enemigos aéreos |
-| **TRAMPAS**    |              |                |                   |                     |                                   |
-| TRAMPA PANTANO | 1 Casilla    | \-             | ÁreaTT\*          | \-                  | Ralentiza                         |
+| **TORRES**     | ALCANCE      | DAÑO           | OBJETIVO          | VELOCIDAD DE ATAQUE | EFECTO                            | COSTE  |
+| -------------- | ---------    | -------------- | ----------------- | ------------------- | --------------------------------- |--------|
+| TORRE PESADA   | Largo (7 ud) | Elevado (35 ud)| ÁreaTT\*          | Lento (0.1 ud)      | \-                                | 300    |
+| TORRE BÁSICA   | Medio (5 ud) | Medio (10 ud)  | IndividualTA-TT\* | Medio (1 ud)        | \-                                | 125    |
+| TORRE PSÍQUICA | Corto (3 ud) | Bajo (7 ud)    | IndividualTT\*    | Medio (1 ud)        | El enemigo se ralentiza           | 200    |
+| TORRE ECONÓMICA| Nada         | Ninguno        | Ninguno           | Sin ataque          | Genera ingresos de forma pasiva   | 400    |
+| **TRAMPAS**    |              |                |                   |                     |                                   |        |
+| TRAMPA PANTANO | 1 Casilla    | \-             | ÁreaTT\*          | \-                  | Ralentiza                         | X      |
 
 Cada defensa del jugador se puede mejorar, por separado, hasta tres veces, aumentando con estas mejoras las estadísticas de dicha defensa y haciéndola más eficaz en combate.
 
@@ -170,9 +170,6 @@ Nivel 1:
 | TORRE PESADA   | Largo (7 ud) | Elevado (70 ud)| ÁreaTT\*          | Lento (0.1 ud)      | \-                                | 150    |
 | TORRE BÁSICA   | Medio (5 ud) | Medio (12 ud)  | IndividualTA-TT\* | Medio (1.5 ud)      | \-                                | 50     |
 | TORRE PSÍQUICA | Corto (4 ud) | Bajo (8 ud)    | IndividualTT\*    | Medio (1 ud)        | El enemigo se ralentiza           | 100    |
-| TORRE MONTAÑA  | Medio (x ud) | Bajo (x ud)    | ÁreaTA-TT\*       | Rápido              | Prioriza ataque a enemigos aéreos |        |
-| **TRAMPAS**    |              |                |                   |                     |                                   |        |
-| TRAMPA PANTANO | 1 Casilla    | \-             | ÁreaTT\*          | \-                  | Ralentiza                         |        |
 
 Nivel 2:
 | **TORRES**     | ALCANCE      | DAÑO           | OBJETIVO          | VELOCIDAD DE ATAQUE | EFECTO                            | COSTE  |
@@ -180,9 +177,6 @@ Nivel 2:
 | TORRE PESADA   | Largo (12 ud)| Elevado (70 ud)| ÁreaTT\*          | Lento (0.1 ud)      | \-                                | 200    |
 | TORRE BÁSICA   | Largo (8 ud) | Medio (14 ud)  | IndividualTA-TT\* | Medio (1.5 ud)      | \-                                | 100    |
 | TORRE PSÍQUICA | Medio (5 ud) | Medio (9 ud)   | IndividualTT\*    | Medio (1 ud)        | El enemigo se ralentiza           | 150    |
-| TORRE MONTAÑA  | Medio (x ud) | Bajo (x ud)    | ÁreaTA-TT\*       | Rápido              | Prioriza ataque a enemigos aéreos |        |
-| **TRAMPAS**    |              |                |                   |                     |                                   |        |
-| TRAMPA PANTANO | 1 Casilla    | \-             | ÁreaTT\*          | \-                  | Ralentiza                         |        |
 
 Nivel 3:
 | **TORRES**     | ALCANCE      | DAÑO           | OBJETIVO          | VELOCIDAD DE ATAQUE | EFECTO                            | COSTE  |
@@ -190,23 +184,21 @@ Nivel 3:
 | TORRE PESADA   | Largo (12 ud)| Elevado (70 ud)| ÁreaTT\*          | Lento (0.2 ud)      | \-                                | 300    |
 | TORRE BÁSICA   | Largo (10 ud)| Medio (14 ud)  | IndividualTA-TT\* | Rápido (1.75 ud)    | \-                                | 150    |
 | TORRE PSÍQUICA | Medio (5 ud) | Medio (9 ud)   | IndividualTT\*    | Medio (1.5 ud)      | El enemigo se ralentiza           | 200    |
-| TORRE MONTAÑA  | Medio (x ud) | Bajo (x ud)    | ÁreaTA-TT\*       | Rápido              | Prioriza ataque a enemigos aéreos |        |
-| **TRAMPAS**    |              |                |                   |                     |                                   |        |
-| TRAMPA PANTANO | 1 Casilla    | \-             | ÁreaTT\*          | \-                  | Ralentiza                         |        |
 
 \*TT: Ataques desde Tierra a objetivos Terrestres.
 TA: Ataques desde Tierra a objetivos Aéreos.
 
 ### 4.6 Enemigos
 
-| **ENEMIGOS**(PONER NOMBRES) | VIDA | VELOCIDAD DE MOVIMIENTO | TIPO                 |
+| **ENEMIGOS**                | VIDA | VELOCIDAD DE MOVIMIENTO | TIPO                 |
 | --------------------------- | ---- | ----------------------- | -------------------- |
 | NORMAL                      |  40  | Media                   | Terrestre - Normal   |
-| LIGERA                      |      | Rápida                  | Terrestre - Ligera   |
 | TANQUE                      | 250  | Lenta                   | Terrestre - Pesada   |
-| HORDA                       |  25  | Media                   | Terrestre - Horda    |
-| ESPECIALISTA                |      | Lenta                   | Terrestre - Especial |
-| VOLADORA                    |      | Media                   | Aérea - Normal       |  
+| HORDA                       |  25  | Media                   | Terrestre - Horda    | 
+
+### 4.7 Evento aleatorio
+
+**Proyectil:** Aleatoriamente se producirán explosiones en el mapa generando cráteres, destruyendo torres y enemigos y modificando la geometría del cubo, junto con el camino si impacta contra él. 
 
 ## 5. Trasfondo
 
@@ -220,16 +212,18 @@ Las ranas limpias, ante esta situación, deben defender su estanque de la invasi
 
 ### 5.2 Personajes
 
-Hay 2 personajes característicos en el juego: el líder de las ranas limpias y el líder de las ranas sucias.
+Hay dos personajes característicos en el juego: el líder de las ranas limpias y el líder de las ranas sucias.
 
 
 ### 5.3 Entornos y lugares
 
-Hay 4 niveles jugables y se han pensado en 3 entornos o biomas: pantano, nieve y ciudad.
+Hay cinco niveles jugables, cada uno con su estética única: Pantano, Tundra, Otoño, Cerezo y Nevado.
 
-- Pantano: el estanque de las ranas limpias es un estanque limpio, vívido y con nenúfares mientras que el estanque de las ranas sucias es oscuro, con lodo y fango.
-- Ciudad: el estanque de las ranas limpias se encuentra en un parque, con bancos y papeleras; mientras que las ranas sucias vienen de las alcantarillas.
-- Nieve: tanto el estanque de las ranas limpias como el de las ranas sucias son estanques normales en una montaña o un bosque, pero el de las ranas sucias es más oscuro.
+- Primer mapa: Pantano. El estanque de las ranas limpias es un estanque limpio, vívido y con nenúfares mientras que el estanque de las ranas sucias es oscuro, con lodo.
+- Segundo mapa: Tundra. Antes de llegar a las frías tierras del ártico, las ranas se refugian en un charquito de aguas termales, a donde acuden grandes ranas cubiertas de fango. 
+- Tercer mapa: Otoño. Con la caída de las hojas y las temperaturas, el suelo se tiñe de marrón y nuestras ranitas buscan el calor grupal en un pequeño estanque. 
+- Cuarto mapa: Cerezo. Los cerezos anuncian la llegada de la primavera con su lluvia de pétalos rosas, dando al campo un color jovial y acompañando a una plácida mañana soleada.
+- Quinto mapa: Nevado. Las huellas quedan marcadas en la nieve ante el paso de nuestras protagonistas, que se dirigen a una calentita charca. 
 
 
 ## 
@@ -307,10 +301,17 @@ Ejemplo, torreta pesada:
 
 ### 6.3 Música
 
+El juego cuenta con una sola canción propia la cual se reproduce tanto en los menúes como durante la partida.
 
 ### 6.4 Ambiente sonoro
 
+El juego cuenta con efectos de sonido para la construcción de las torres y sus mejoras, para la muerte de las ranas enemigas y para cuando estas llegan a tu estanque, inflingiendote daño, todas cortesía de [Zapsplat](https://www.zapsplat.com/)
 
+El efecto de sonido de la construcción de las torres y de la mejora de estas es la misma. Es el sonido de unos ladrillos infantiles agitándose en una bolsa.
+El efecto de sonido de la muerte de las ranas consiste en el croar de una rana.
+El efecto de sonido cuando los enemigos llegan a tu estanque varía entre 3 efectos de sonido distintos: 
+- La agitación de una loción de bebé en un bote
+- 2 chapoteos distintos en el agua
 
 ## 
 
@@ -362,11 +363,21 @@ Flujo de juego:
 
 ## 
 
+## 8. Post-Mortems
 
-## 8. Hoja de ruta del desarrollo
+
+### 8.1 Post-Mortem de la etapa Alfa
+
+### 8.2 Post-Mortem de la etapa Beta
+
+### 8.3 Post-Mortem de la etapa Gold
+
+##
+
+## 9. Hoja de ruta del desarrollo
 
 
-### 8.1 Hito 1: Alfa
+### 9.1 Hito 1: Alfa
 
 - Motor Voxel que genere de manera procedural el cubo, los caminos y los obstáculos: 26/10/2021
 - Funcionalidades básicas de juego (IA, vida y ataque):25/10/2021
@@ -375,21 +386,27 @@ Flujo de juego:
 - Campaña de marketing iniciada (redes sociales preparadas): 11/10/2021
 
 
-### 8.2 Hito 2: Beta
+### 9.2 Hito 2: Beta
 
 - Interfaz implementada con estructura final y arte de GUI final:
 - Tutorial introductorio en el que se expliquen las mecánicas básicas:
-- Balanceo de las estadisticas de enemigos y torres para hacer el juego divertido y justo:
-- Agregar estanque desde el que spawnean los enemigos:
-- Ajustar la generación de caminos:
+- Balanceo de las estadisticas de enemigos y torres para hacer el juego divertido y justo: 15/11/2021
 - Crear y meter en el juego los 6 modelos de enemigo y los 5 modelos de torre/defensa:
-- Nueva mecánica característica
+- Nueva mecánica característica:
 - Añadir offset para la colocación de torres:
+- Arreglar proporciones de las torres en el cubo:
+- Dirigir correctamente la barra de vida de los enemigos hacia la camara del jugador: 16/11/2021
+- Portfolio actualizado en su nueva versión: 
 
-### 8.3 Hito 3: Gold
+### 9.3 Hito 3: Gold
 
+- Pulir la generación de caminos en el cubo:
+- Añadir estanque en el spawn de los enemigos:
+- Añadir animaciones a las torres:
+- Añadir efectos de partículas al disparo de la torre que ralentiza, a la entrada de los enemigos en el estanque y al caminar de los enemigos:
+- Añadir efectos de sonido a la muerte de los enemigos, a la llegada de estos al estanque del jugador y a la construcción y mejora de las torres:
 
-### 8.4 Fecha de lanzamiento
+### 9.4 Fecha de lanzamiento
 
-
+- Campaña de marketing en redes sociales en el que se hable de los distintos elementos del juego:
   

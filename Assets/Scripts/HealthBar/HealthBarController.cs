@@ -21,5 +21,10 @@ public class HealthBarController : MonoBehaviour
         slider.value = h;
         fill.color = gradient.Evaluate(slider.normalizedValue);
     }
+    private void Update()
+    {
+        //transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(CameraBehaviour.instance.gameObject.transform.position - transform.position), Time.deltaTime);
+        transform.rotation = Quaternion.LookRotation(CameraBehaviour.instance.gameObject.transform.position - transform.position);
+    }
 
 }
