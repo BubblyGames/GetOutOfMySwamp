@@ -95,6 +95,7 @@ public class TextManager : MonoBehaviour
         englishDictionary.Add("range", "Range");
         englishDictionary.Add("damage", "Damage");
         englishDictionary.Add("fireRate", "Fire Rate");
+        englishDictionary.Add("moneyGathered", "Money Given");
 
         //defense stats in english
         englishDictionary.Add("air", "Air");
@@ -146,6 +147,7 @@ public class TextManager : MonoBehaviour
         spanishDictionary.Add("range", "Rango");
         spanishDictionary.Add("damage", "Daño");
         spanishDictionary.Add("fireRate", "Velocidad Disparo");
+        spanishDictionary.Add("moneyGathered", "Dinero Dado");
 
 
         //defense stats in spanish

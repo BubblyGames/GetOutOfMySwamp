@@ -17,4 +17,9 @@ public class Gatherer : Structure
         this.timeToGatherResource = this.timeToGatherResource * 0.2f;
         this.resourceGatheredEachCicle += 2;
     }
+
+    public int GetResourceGatheredAmount()
+    {
+        return resourceGatheredEachCicle;
+    }
 }

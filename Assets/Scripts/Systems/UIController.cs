@@ -281,13 +281,13 @@ public class UIController : MonoBehaviour
         FPSText.text = Mathf.Round((1 / Time.deltaTime)).ToString(); //FpS 
     }
 
-    public void SetUpgradeMenu(string structureType, string structureName, int level, string target, string range, string fireRate, string damage)
+    public void SetUpgradeMenu(string structureType, string structureName, int level, string target, string range, string fireRate, string damage, int moneyGiven)
     {
         towerName.GetComponent<TextReader>().SetKey(structureName);
         if (!structureType.Equals("money"))
         {
             activateUpgradeTexts();
-
+            fixedTexts[0].GetComponent<TextReader>().SetKey("target");
             statsTexts[0].GetComponent<TextReader>().SetKey(target);
             statsTexts[1].GetComponent<TextReader>().SetKey(range);
             statsTexts[2].GetComponent<TextReader>().SetKey(fireRate);
@@ -319,6 +319,10 @@ public class UIController : MonoBehaviour
         else
         {
             desactivateUpgradeTexts();
+            fixedTexts[0].SetActive(true);
+            statsTexts[0].SetActive(true);
+            fixedTexts[0].GetComponent<TextReader>().SetKey("moneyGathered");
+            statsTexts[0].GetComponent<Text>().text = moneyGiven.ToString();
         }
 
         switch (structureType)
