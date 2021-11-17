@@ -100,6 +100,7 @@ public class TextManager : MonoBehaviour
         englishDictionary.Add("settings", "Settings");
         englishDictionary.Add("lenguage", "Lenguage");
         englishDictionary.Add("exit", "Exit");
+        englishDictionary.Add("finish", "Finish");
         englishDictionary.Add("restart", "Restart");
         englishDictionary.Add("pausedtext", "Pause Menu");
         englishDictionary.Add("continue", "Continue");
@@ -123,6 +124,7 @@ public class TextManager : MonoBehaviour
         spanishDictionary.Add("settings", "Ajustes");
         spanishDictionary.Add("lenguage", "Idioma");
         spanishDictionary.Add("exit", "Salir");
+        spanishDictionary.Add("finish", "Finalizar");
         spanishDictionary.Add("restart", "Reiniciar");
         spanishDictionary.Add("pausedtext", "Menu de Pausa");
         spanishDictionary.Add("continue", "Continuar");

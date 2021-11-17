@@ -46,17 +46,17 @@ public class LevelStats : MonoBehaviour
     {
         currentBaseHealthPoints = startBaseHealthPoints;
         currentMoney = startMoney;
-        hpText.text = hpText.gameObject.GetComponent<TextReader>().GetText()+":" + currentBaseHealthPoints.ToString();
-        moneyText.text = moneyText.gameObject.GetComponent<TextReader>().GetText() + ":" + currentMoney.ToString();
-        scoreText.text = scoreText.gameObject.GetComponent<TextReader>().GetText() + ":" + currentScore.ToString();
+        hpText.text = currentBaseHealthPoints.ToString();
+        moneyText.text = currentMoney.ToString();
+        scoreText.text = currentScore.ToString();
     }
 
     public void getEnemyRewards(int moneyReward, int scoreReward)
     {
         currentMoney += moneyReward;
-        moneyText.text = moneyText.gameObject.GetComponent<TextReader>().GetText() + ":" + currentMoney.ToString();
+        moneyText.text = currentMoney.ToString();
         currentScore += scoreReward;
-        scoreText.text = scoreText.gameObject.GetComponent<TextReader>().GetText() + ":" + currentScore.ToString();
+        scoreText.text =currentScore.ToString();
     }
 
     public void getResource(int resourceId, int amount)
@@ -65,7 +65,7 @@ public class LevelStats : MonoBehaviour
         {
             case 0:
                 currentMoney += amount;
-                moneyText.text = moneyText.gameObject.GetComponent<TextReader>().GetText() + ":" + currentMoney.ToString();
+                moneyText.text = currentMoney.ToString();
                 break;
         }
     }
@@ -74,24 +74,24 @@ public class LevelStats : MonoBehaviour
     {
         currentBaseHealthPoints -= damageTaken;
         currentBaseHealthPoints = Mathf.Max(0, currentBaseHealthPoints);
-        hpText.text = hpText.gameObject.GetComponent<TextReader>().GetText() + ":" + currentBaseHealthPoints.ToString();
+        hpText.text = currentBaseHealthPoints.ToString();
     }
 
     public void SpendMoney(int quantity)
     {
         currentMoney -= quantity;
-        moneyText.text = moneyText.gameObject.GetComponent<TextReader>().GetText() + ":" + currentMoney.ToString();
+        moneyText.text =currentMoney.ToString();
     }
 
     public void EarnMoney(int quantity)
     {
         currentMoney += quantity;
-        moneyText.text = moneyText.gameObject.GetComponent<TextReader>().GetText() + ":" + currentMoney.ToString();
+        moneyText.text =currentMoney.ToString();
     }
 
     public void UpdateScoreText()
     {
-        scoreText.text = scoreText.gameObject.GetComponent<TextReader>().GetText() + ":" + currentScore.ToString();
+        scoreText.text =currentScore.ToString();
     }
 
     public int GetCurrentScore()

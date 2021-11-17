@@ -80,8 +80,6 @@ public class UIController : MonoBehaviour
                 pauseMenu.SetActive(false);
                 endgameMenu.SetActive(false);
                 pauseButton.SetActive(true);
-                settingsButton.SetActive(true);
-                settingsMenu.SetActive(false);
                 Time.timeScale = 1;
                 break;
             case GameMenu.Settings:
