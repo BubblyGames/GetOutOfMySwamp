@@ -107,6 +107,12 @@ public class TextManager : MonoBehaviour
         englishDictionary.Add("round", "ROUND");
         englishDictionary.Add("credits", "Credits");
 
+        //upgrade texts in english
+        englishDictionary.Add("target", "Target");
+        englishDictionary.Add("range", "Range");
+        englishDictionary.Add("damage", "Damage");
+        englishDictionary.Add("fireRate", "Fire Rate");
+
         //descriptions of lessons in English
         englishDictionary.Add("lesson1", "Lesson 1");
         englishDictionary.Add("description1", "asadsafdsfdsfdsfsdfds");
@@ -133,6 +139,11 @@ public class TextManager : MonoBehaviour
         spanishDictionary.Add("round", "RONDA");
         spanishDictionary.Add("credits", "Créditos");
 
+        //upgrade texts in spanish
+        spanishDictionary.Add("target", "Objetivo");
+        spanishDictionary.Add("range", "Rango");
+        spanishDictionary.Add("damage", "Daño");
+        spanishDictionary.Add("fireRate", "Velocidad Disparo");
 
         //descriptions of lessons in Spanish
         spanishDictionary.Add("lesson1", "Lección 1");
