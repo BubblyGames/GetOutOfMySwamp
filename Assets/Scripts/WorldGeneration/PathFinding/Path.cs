@@ -26,18 +26,14 @@ public class Path
     public Path(CubeWorldGenerator world)
     {
         this.world = world;
-
-        Debug.Log(Vector3.Dot(Vector3.up, Vector3.right));
     }
 
     public bool FindPath()
     {
-        Debug.Log("Finding path");
-
         start = midPoints[0].cell.GetPosInt();
         end = midPoints[midPoints.Count() - 1].cell.GetPosInt();
 
-        Node result = result = FindPathAstarWithMidpoints(world.GetCell(start), world.GetCell(end));
+        Node result = FindPathAstarWithMidpoints(world.GetCell(start), world.GetCell(end));
 
         //If result is null, a path couldn't be found and returns false so it tries another seed
         if (result == null)
@@ -79,16 +75,16 @@ public class Path
         return true;
     }
 
-
     public static Node FindPathAstar(CubeWorldGenerator _world, Node firstNode, CellInfo end, bool lastStep = false)
     {
         Node current;
 
+        NodeComparer nodeComparer = new NodeComparer();
+        //SortedSet<Node> openList = new SortedSet<Node>(nodeComparer);
         List<Node> openList = new List<Node>();
         List<Node> closedList = new List<Node>();
 
-        openList = new List<Node>();
-        closedList = new List<Node>();
+        //SortedSet<Node> sortedList = new SortedSet<Node>();
 
         //First node, with starting position and null parent
         firstNode.ComputeFScore(end.x, end.y, end.z);
@@ -102,11 +98,12 @@ public class Path
             openList = openList.OrderBy(o => o.f).ToList();
 
             //Check lists's first node
+            //current = openList.Min;
             current = openList[0];
             closedList.Add(current);
             openList.Remove(current);
 
-            if (current.cell == end || (lastStep && current.cell.blockType == BlockType.Swamp))//If first node is goal,returns current Node3D
+            if (current.cell == end)//If first node is goal,returns current Node3D
             {
                 return current;
             }
@@ -133,9 +130,7 @@ public class Path
                 {
                     if (neighbour == null ||
                         !neighbour.canWalk ||
-                        (!lastStep && neighbour.endZone) ||
-                        neighbour.isInteresting ||
-                        ((neighbour.isPath) && !_world.canMergePaths && !lastStep))//||(neighbour.isPath && !neighbour.endZone)
+                        (!lastStep && neighbour.endZone))//||(neighbour.isPath && !neighbour.endZone)
                         continue;
 
                     //if neighbour no esta en open
@@ -184,11 +179,9 @@ public class Path
 
         Node current = new Node(start);
         current.ComputeFScore(end.x, end.y, end.z);
+
         Midpoint midpoint;
         bool lastSept = false;
-
-        List<Node> closedList = new List<Node>();
-        List<Node> openList = new List<Node>();
 
         for (int i = 1; i < midPoints.Count; i++)
         {
@@ -210,7 +203,7 @@ public class Path
             int count = 0;
             while (result == null && count < 10)
             {
-                midpoint.cell = world.GetRandomCell(midPoints[i - 1].cell.y);
+                midpoint.cell = world.GetCompletelyRandomCell();
                 result = Path.FindPathAstar(world, current, midpoint.cell, lastSept);
                 count++;
             }
@@ -286,7 +279,7 @@ public class Path
         enemies.Clear();
     }
 
-    
+
 
     CellInfo lastCell;
     Vector3Int GetNormalOf(CellInfo c)
@@ -322,11 +315,13 @@ public class Path
 
         result = c.GetPosInt() - lastCell.GetPosInt();
 
+
         neighbours = world.GetNeighbours(c, true);
 
         int best = -1;
         float minDist = Mathf.Infinity;
 
+        //Sometimes all neighbours are air and can't find the best option
         for (int i = 0; i < neighbours.Length; i++)
         {
             if (neighbours[i].blockType != BlockType.Air)
@@ -340,11 +335,16 @@ public class Path
             }
         }
 
+        if (best == -1)
+        {
+            best = UnityEngine.Random.Range(0, neighbours.Length - 1);
+        }
+
         lastCell = neighbours[best];
 
         return result;
     }
 
 
-   
+
 }

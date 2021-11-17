@@ -3782,14 +3782,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   demo: 0
-  size: 21
+  size: 31
   nPaths: 1
   canMergePaths: 0
   wallDensity: 0.4
   rocksVisualReduction: 1
   rockSize: 10
   seed: 0
-  numberOfMidpoints: 0
+  numberOfMidpoints: 2
   debugMidpoints: 1
   lineRendererPrefab: {fileID: 3920875017051324963, guid: ffef0eddca5eb324f94bad8de9cc038b, type: 3}
 --- !u!114 &1903685288

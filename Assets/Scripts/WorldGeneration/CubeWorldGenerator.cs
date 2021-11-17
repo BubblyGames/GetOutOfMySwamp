@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using Unity.Jobs;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -159,7 +160,7 @@ public class CubeWorldGenerator : MonoBehaviour
                         cell.normalInt = GetFaceNormal(cell);*/
                     cell.isPath = false;
                     cell.isCloseToPath = false;
-                    cell.isInteresting = false;
+                    cell.hasStructure = false;
 
                     //Rock generation
                     float alpha = 1;
@@ -285,14 +286,15 @@ public class CubeWorldGenerator : MonoBehaviour
         }
     }
 
+
     private bool GeneratePaths(int endX, int endY, int endZ)
     {
         float startTime = Time.realtimeSinceStartup;
 
         for (int i = 0; i < nPaths; i++)
         {
-            /*if (!paths[i].dirty) //Should check if a path has been modified to update it, but not yet
-                continue;*/
+            if (!paths[i].dirty) //Should check if a path has been modified to update it, but not yet
+                continue;
 
             if (!paths[i].initiated)//First time calculating a path
             {
@@ -317,19 +319,26 @@ public class CubeWorldGenerator : MonoBehaviour
                 if (count >= 100)
                     return false;
 
-                paths[i].AddMidpoint(new Midpoint(GetCell(paths[i].start), false));
+                paths[i].AddMidpoint(new Midpoint(GetCell(paths[i].start), true));
                 for (int j = 0; j < numberOfMidpoints; j++)
                 {
-                    paths[i].AddMidpoint(new Midpoint(GetRandomCell(paths[i].midPoints[j].cell.y), false));
+                    paths[i].AddMidpoint(new Midpoint(GetRandomCellOnSurface(paths[i].midPoints[j].cell.y), false));
                 }
-                paths[i].AddMidpoint(new Midpoint(GetCell(end), false));
+                paths[i].AddMidpoint(new Midpoint(GetCell(end), true));
                 paths[i].initiated = true;
+            }
+            else
+            {
+                paths[i].Reset();
             }
             //Debug.Log(count + " attempts needed to find starting point");
 
             //Node which will store the result of the path finding
 
-            paths[i].FindPath();
+            if (!paths[i].FindPath())
+                return false;
+            //else
+            //StartCoroutine(ShowPath(paths[i]));
         }
 
         //Debug paths and midpoints
@@ -356,7 +365,7 @@ public class CubeWorldGenerator : MonoBehaviour
             }
         }
 
-        Debug.Log("Generating paths took: " + (Time.realtimeSinceStartup - startTime) + "s");
+        //Debug.Log("Generating paths took: " + (Time.realtimeSinceStartup - startTime) + "s");
         return true; //Success
     }
 
@@ -365,7 +374,7 @@ public class CubeWorldGenerator : MonoBehaviour
 
 
     bool onXFace = true;
-    public CellInfo GetRandomCell(int minY = 1)
+    public CellInfo GetRandomCellOnSurface(int minY = 1)
     {
         int x = 1;
         int y = 1;
@@ -391,7 +400,7 @@ public class CubeWorldGenerator : MonoBehaviour
                 z = (size - 1) * Mathf.RoundToInt(Random.value);
             }
 
-            y = Random.Range(minY + 1, Mathf.Min(minY + min, size - 2));
+            y = Random.Range(minY + 1, size - 2);
 
             cell = cells[x, y, z];
             count++;
@@ -399,6 +408,79 @@ public class CubeWorldGenerator : MonoBehaviour
         //Debug.Log("Midpoint found after " + count.ToString() + " attempts");
         onXFace = !onXFace;
         return cell;
+    }
+
+
+    public CellInfo GetCompletelyRandomCell()
+    {
+        int x, y, z;
+        CellInfo cell = null;
+
+        while (cell == null)
+        {
+            x = Random.Range(0, size);
+            y = Random.Range(1, size - 2);
+            z = Random.Range(0, size);
+
+            if (cells[x, y, z].canWalk && !cells[x, y, z].endZone && !CheckIfFloating(cells[x, y, z]))
+                cell = cells[x, y, z];
+        }
+
+        return cell;
+    }
+
+    public bool CheckIfFloating(CellInfo cell) {
+        foreach (CellInfo c in GetNeighbours(cell))
+        {
+            if (c.blockType != BlockType.Air)
+                return false;
+        }
+        return true;
+    }
+
+    public CellInfo GetRandomCellWithRay()
+    {
+        int x, y, z;
+        int min = 10;
+        int max = size - 11;
+        CellInfo selectedCell = null;
+
+        while (selectedCell == null)
+        {
+            if (!onXFace)
+            {
+                x = (size - 1) * Mathf.RoundToInt(Random.value);
+                z = Random.Range(min, max);
+            }
+            else
+            {
+                x = Random.Range(min, max);
+                z = (size - 1) * Mathf.RoundToInt(Random.value);
+            }
+
+            y = Random.Range(1, size - 2);
+
+            Vector3 pos = new Vector3(x, y, z);
+
+            RaycastHit hit;
+            Physics.Raycast(pos, center.position - pos, out hit, Mathf.Infinity);
+
+            Vector3Int intPos = new Vector3Int(
+                Mathf.RoundToInt(hit.point.x + (hit.normal.x / 2)),
+                Mathf.RoundToInt(hit.point.y + (hit.normal.y / 2)),
+                Mathf.RoundToInt(hit.point.z + (hit.normal.z / 2)));
+
+            if (!IsPosInBounds(intPos))
+                continue;
+
+            CellInfo c = GetCell(intPos);
+
+            if (c.canWalk)
+                selectedCell = c;
+        }
+        onXFace = !onXFace;
+
+        return selectedCell;
     }
 
     public CellInfo[] GetNeighbours(CellInfo current, bool addCorners = false)
@@ -430,6 +512,7 @@ public class CubeWorldGenerator : MonoBehaviour
                 }
             }
         }
+
         return result.ToArray();
     }
 
@@ -537,6 +620,11 @@ public class CubeWorldGenerator : MonoBehaviour
         return coordX >= 0 && coordX < size && coordY >= 0 && coordY < size && coordZ >= 0 && coordZ < size;
     }
 
+    public bool IsPosInBounds(Vector3Int pos)
+    {
+        return pos.x >= 0 && pos.x < size && pos.y >= 0 && pos.y < size && pos.z >= 0 && pos.z < size;
+    }
+
     void ClearDebugStuff()
     {
         foreach (GameObject g in debugStuff)
@@ -546,8 +634,16 @@ public class CubeWorldGenerator : MonoBehaviour
         debugStuff.Clear();
     }
 
-    public bool AddInterestPoint(Vector3Int point)
+    public bool ReplaceInterestPoint(Vector3Int point)
     {
+        Node start = new Node(GetCell(point));
+        Node result = Path.FindPathAstar(this, start, GetCell(end), true);
+        if (result == null)
+        {
+            Debug.Log("Couldn't add interest point at: " + point.ToString());
+            return false;
+        }
+
         int bestP = -1;
         int bestM = -1;
         float minDist = Mathf.Infinity;
@@ -556,7 +652,7 @@ public class CubeWorldGenerator : MonoBehaviour
         //Find the closest existing midpoint
         for (int p = 0; p < paths.Count; p++)
         {
-            for (int m = 0; m < paths[p].midPoints.Count; m++)
+            for (int m = 0; m < paths[p].midPoints.Count - 1; m++)
             {
                 float dist = Vector3.Distance(point, paths[p].midPoints[m].cell.GetPos());
                 if (dist < minDist)
@@ -577,39 +673,88 @@ public class CubeWorldGenerator : MonoBehaviour
         if (found)
         {
             //There's a midpoint close, so the point is added as a midpoint after it
+
+            paths[bestP].midPoints[bestM].cell = GetCell(point);
+        }
+        else
+        {
+            //There are no midpoints close, so the point is added to a random path (shouldn't happen)
+            Debug.Log("This should never happen");
+            paths[bestP].midPoints.Insert(1, new Midpoint(GetCell(point), true));
+            return false;
+        }
+
+
+        paths[bestP].dirty = true;//This path need to be recalculated
+        //GetCell(point).hasStructure = true;//This cell has an object on it
+        CallUpdateWorld();
+        return true;
+    }
+
+    public bool AddInterestPoint(Vector3Int point)
+    {
+        Node start = new Node(GetCell(point));
+        Node result = Path.FindPathAstar(this, start, GetCell(end), true);
+        if (result == null)
+        {
+            Debug.Log("Couldn't add interest point at: " + point.ToString());
+            return false;
+        }
+
+        int bestP = -1;
+        int bestM = -1;
+        float minDist = Mathf.Infinity;
+        bool found = false;
+
+        //Find the closest existing midpoint
+        for (int p = 0; p < paths.Count; p++)
+        {
+            for (int m = 0; m < paths[p].midPoints.Count - 1; m++)
+            {
+                float dist = Vector3.Distance(point, paths[p].midPoints[m].cell.GetPos());
+                if (dist < minDist)
+                {
+                    Node n = Path.FindPathAstar(this, new Node(paths[p].midPoints[m].cell), GetCell(point), true);
+                    if (n != null)
+                    {
+                        //Found it!
+                        minDist = dist;
+                        bestP = p;
+                        bestM = m;
+                        found = true;
+                    }
+                }
+            }
+        }
+
+        if (found)
+        {
+            //There's a midpoint close, so the point is added as a midpoint after it
+            Debug.Log("Valid midpoint");
             paths[bestP].midPoints.Insert(bestM + 1, new Midpoint(GetCell(point), true));
         }
         else
         {
             //There are no midpoints close, so the point is added to a random path (shouldn't happen)
             Debug.Log("This should never happen");
+            return false;
             bestP = Mathf.RoundToInt(Random.Range(0, nPaths));
-            paths[bestP].midPoints.Add(new Midpoint(GetCell(point), true));
+            paths[bestP].midPoints.Insert(1, new Midpoint(GetCell(point), true));
         }
 
-        Node start = new Node(GetCell(point));
-        Node result = Path.FindPathAstar(this, start, GetCell(end), true);
-        if (result != null)
-        {
-            paths[bestP].dirty = true;//This path need to be recalculated
-            GetCell(point).isInteresting = true;//This cell has an object on it
-            UpdateWorld();
-            return true;
-        }
-        else
-        {
-            Debug.Log("Couldn't add interest point at: " + point.ToString());
-        }
 
-        return false;
+        paths[bestP].dirty = true;//This path need to be recalculated
+        GetCell(point).hasStructure = true;//This cell has an object on it
+        CallUpdateWorld();
+        return true;
     }
 
     public bool RemoveInterestPoint(Vector3Int point)
     {
         CellInfo cell = GetCell(point);
-        if (cell.isInteresting)
+        if (cell.hasStructure)
         {
-            cell.isInteresting = false;
+            cell.hasStructure = false;
             return true;
         }
         return false;
@@ -641,8 +786,7 @@ public class CubeWorldGenerator : MonoBehaviour
                         {
                             foreach (Path p in cells[x, y, z].paths)
                             {
-                                if (!affectedPaths.Contains(p))
-                                    affectedPaths.Add(p);
+                                p.dirty = true;
                             }
 
                             affectedCells.Add(cells[x, y, z]);
@@ -650,11 +794,6 @@ public class CubeWorldGenerator : MonoBehaviour
                     }
                 }
             }
-        }
-
-        foreach (Path p in affectedPaths)
-        {
-            p.Reset();
         }
 
         foreach (CellInfo c in affectedCells)
@@ -665,55 +804,65 @@ public class CubeWorldGenerator : MonoBehaviour
             {
                 Destroy(c.structure.gameObject);
                 c.structure = null;
-                c.isInteresting = false;
+                c.hasStructure = false;
             }
         }
 
-        UpdateWorld();
+
+        CallUpdateWorld();
     }
 
-    bool UpdateWorld()
+    bool updating = false;
+    bool hasNewChanges = false;
+
+    public bool CallUpdateWorld()
     {
         if (!updating)
         {
-            StopAllCoroutines();
-            //StartCoroutine(UpdateWorldCoroutine());
             ClearDebugStuff();
-            GeneratePaths(end.x, end.y, end.z);
+            StopAllCoroutines();
+            //UpdateJob updateJob = new UpdateJob();
+            //updateJob.Schedule();
+            if (!GeneratePaths(end.x, end.y, end.z))
+            {
+                return false;
+            }
+
+
             StartCoroutine(ShowPaths());
         }
         else
         {
             hasNewChanges = true;
         }
+        return true;
+    }
+
+    public bool UpdateWorld()
+    {
+        if (!GeneratePaths(end.x, end.y, end.z))
+        {
+            return false;
+        }
 
         return true;
     }
 
-    bool updating = false;
-    bool hasNewChanges = false;
-    IEnumerator UpdateWorldCoroutine()
+    IEnumerator ShowPath(Path p)
     {
-        updating = true;
-        if (cells != null)
+        Debug.Log("Showing path: " + p.id);
+        foreach (CellInfo c in p.cells)
         {
-            ClearDebugStuff();
-            //FillWorld();
-            GeneratePaths(end.x, end.y, end.z);
-            yield return null;
-            MeshData meshData = GenerateMesh();
-            voxelRenderer.RenderMesh(meshData);
-
-            StartCoroutine(ShowPaths());
+            CellInfo cu = GetCellUnder(c);
+            if (cu.blockType == BlockType.Grass || cu.blockType == BlockType.Rock)
+                cu.blockType = BlockType.Path;
+            //MeshData meshData = GenerateMesh();
+            //voxelRenderer.RenderMesh(meshData);
             yield return null;
         }
-        updating = false;
 
-        if (hasNewChanges)
-        {
-            hasNewChanges = false;
-            StartCoroutine(UpdateWorldCoroutine());
-        }
+        MeshData meshData = GenerateMesh();
+        voxelRenderer.RenderMesh(meshData);
 
         yield return null;
     }
@@ -739,10 +888,15 @@ public class CubeWorldGenerator : MonoBehaviour
             }
             MeshData meshData = GenerateMesh();
             voxelRenderer.RenderMesh(meshData);
-            yield return new WaitForSeconds(.075f);
+            yield return null;
         }
 
         yield return null;
+    }
+
+    private void OnDestroy()
+    {
+        StopAllCoroutines();
     }
 
 #if UNITY_EDITOR
@@ -751,18 +905,24 @@ public class CubeWorldGenerator : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.I))
         {
             Debug.Log("Adding random interest point");
-            AddInterestPoint(GetRandomCell().GetPosInt());
+            ReplaceInterestPoint(GetRandomCellOnSurface().GetPosInt());
+        }
+
+        if (Input.GetKeyDown(KeyCode.H))
+        {
+            Debug.Log("Adding random interest point with ray");
+            AddInterestPoint(GetRandomCellWithRay().GetPosInt());
         }
 
         if (Input.GetKeyDown(KeyCode.E))
         {
             Debug.Log("Random explosion");
-            Explode(GetRandomCell().GetPosInt(), 15);
+            Explode(GetRandomCellOnSurface().GetPosInt(), 15);
         }
 
         if (Input.GetKeyDown(KeyCode.C))
         {
-            CellInfo c = GetRandomCell();
+            CellInfo c = GetRandomCellOnSurface();
             Debug.Log(c.GetPosInt());
             Debug.Log("---------->");
             Debug.Log(GetCellUnder(c).GetPosInt());
@@ -785,20 +945,16 @@ public class CubeWorldGenerator : MonoBehaviour
                 Handles.Label(new Vector3(cell.x, cell.y, cell.z), "2");
             }
             //Gizmos.DrawSphere(new Vector3(cell.x, cell.y, cell.z), .5f);
-        }*/
+        }
 
         foreach (CellInfo c in paths[0].cells)
         {
-            if (c.isCorner)
-                Gizmos.color = Color.red;
-            else
-                Gizmos.color = Color.white;
-
+            Gizmos.color = Color.white;
             Gizmos.DrawLine(c.GetPos(), c.GetPos() + c.normalInt);
             //Gizmos.color = Color.white;
             //Gizmos.DrawLine(c.GetPos(), c.GetPos() + c.dir);
             //Handles.Label(c.GetPos(), c.normalInt.magnitude.ToString());
-        }
+        }*/
     }
     private void OnValidate()
     {
@@ -813,9 +969,20 @@ public class CubeWorldGenerator : MonoBehaviour
         if (demo)
         {
             FillWorld();
-            UpdateWorld();
+            CallUpdateWorld();
         }
     }
 #endif
+}
+
+
+// Job adding two floating point values together
+public struct UpdateJob : IJob
+{
+    public void Execute()
+    {
+        //LevelManager.instance.world.UpdateWorld();
+        Debug.Log("Job running");
+    }
 }
 

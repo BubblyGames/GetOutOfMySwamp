@@ -59,8 +59,8 @@ public abstract class EnemyBehaviour : MonoBehaviour
 
         if (nextIndexPath >= path.Length) { Destroy(this.gameObject); return; }
 
-        transform.position = Vector3.Lerp(path.GetStep(nextIndexPath - 1), path.GetStep(nextIndexPath), lerpProgression);
-        //transform.position = Vector3.Lerp(transform.position, path.GetStep(nextIndexPath), lerpProgression);//A saltos
+        //transform.position = Vector3.Lerp(path.GetStep(nextIndexPath - 1), path.GetStep(nextIndexPath), lerpProgression);
+        transform.position = Vector3.Lerp(transform.position, path.GetStep(nextIndexPath), lerpProgression);//A saltos
         //transform.position = Vector3.SmoothDamp(transform.position, path.GetStep(nextIndexPath), ref _smoothVelocity, currentSpeed);//Smooth
 
      

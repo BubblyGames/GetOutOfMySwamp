@@ -8,28 +8,23 @@ public class CellInfo
 {
     public int x, y, z;
 
-    [HideInInspector]
     public int id { get { return x + (1000 * y) + (1000000 * z); } }
     public BlockType blockType = BlockType.Air;
 
-    [HideInInspector]
-    public bool isPath = false;
-    [HideInInspector]
-    public Vector3Int normalInt = Vector3Int.zero;
     internal bool isSurface = false;
+    internal bool isCore = false;
+
+    public Structure structure;
+    public bool hasStructure = false;
+
+    //Path stuff
+    public List<Path> paths = new List<Path>();
+    public bool isPath = false;
+    internal bool isCloseToPath = false;
     internal bool canWalk = false;
     internal bool endZone = false;
 
-    public List<Path> paths = new List<Path>();
-
-    public Structure structure;
-    public bool isInteresting = false;
-    internal bool isCloseToPath = false;
-    internal bool isCore = false;
-
-    //DELETE LATER
-    //internal Vector3 dir = Vector3.zero;
-    internal bool isCorner;
+    public Vector3Int normalInt = Vector3Int.zero;
 
     public CellInfo(int x, int y, int z)
     {

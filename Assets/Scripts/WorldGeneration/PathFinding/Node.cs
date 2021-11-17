@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class Node
@@ -13,8 +14,9 @@ public class Node
 
     public bool isCorner = false;
 
-    public Vector3 Position {
-        get { return new Vector3(x,y,z); }
+    public Vector3 Position
+    {
+        get { return new Vector3(x, y, z); }
     }
 
     public Node(CellInfo cell)
@@ -31,9 +33,17 @@ public class Node
         if (Parent != null)
             g = Parent.g + 1;
 
-        f = h - g;
-        f += extra;
+        f = (h - g) + extra;
     }
 
 
+}
+
+public class NodeComparer : IComparer<Node>
+{
+    // Compares by Height, Length, and Width.
+    public int Compare(Node a, Node b)
+    {
+        return a.f.CompareTo(b.f);
+    }
 }

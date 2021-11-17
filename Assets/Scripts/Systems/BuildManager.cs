@@ -36,7 +36,7 @@ public class BuildManager : MonoBehaviour
             Mathf.RoundToInt(hit.point.y + (hit.normal.y / 2)),
             Mathf.RoundToInt(hit.point.z + (hit.normal.z / 2)));
 
-        if (LevelStats.instance.CurrentMoney < structureToBuild.creationCost)
+        if (LevelStats.instance.CurrentMoney < structureToBuild.creationCost || !LevelManager.instance.world.IsPosInBounds(intPos))
             return false;
 
         Vector3Int intPosUnder = new Vector3Int(
@@ -61,14 +61,17 @@ public class BuildManager : MonoBehaviour
         if (selectedCell.blockType != structureToBuild.structurePrefab.GetComponent<Structure>().blockType)
             return false;
 
-        Gatherer g;
-        if (WorldManager.instance.IsPosInBounds(intPos.x, intPos.y, intPos.z) &&
-            !LevelManager.instance.world.GetCell(intPos).isCloseToPath &&
+        Gatherer g = null;
+        if (!LevelManager.instance.world.GetCell(intPos).isCloseToPath &&
             structureToBuild.structurePrefab.TryGetComponent<Gatherer>(out g))
         {
             //Debug.Log("Can't add");
             return false;
         }
+
+        //if (g != null)
+          //LevelManager.instance.world.AddInterestPoint(intPos);
+
 
         return true;
     }
@@ -108,7 +111,7 @@ public class BuildManager : MonoBehaviour
 
     public void BuildStructure(Vector3Int position, Vector3 normal)
     {
-        if (CheatManager.instance!=null && CheatManager.instance.infiniteMoney)
+        if (CheatManager.instance != null && CheatManager.instance.infiniteMoney)
         {
             CreateTowerOnCell(position, normal);
             ResetCanBuild(); // after building an structure you have to select another one to be able to place it
@@ -134,7 +137,7 @@ public class BuildManager : MonoBehaviour
 
         //If we are putting a bomb, apart from creating the model, we set the cell's structure associated in which we are creating it
         Bomb b;
-        CellInfo cell = LevelManager.instance.world.GetCell(position);
+        CellInfo cell = LevelManager.instance.world.GetCell(position);//Sometimes gives errors
         if (structure.TryGetComponent<Bomb>(out b))
         {
             if (cell.GetStructure() == null)
