@@ -369,21 +369,21 @@ Flujo de juego:
 
 ## 
 
-## 9. Post-Mortems
+## 8. Post-Mortems
 
 
-### 9.1 Post-Mortem de la etapa Alfa
+### 8.1 Post-Mortem de la etapa Alfa
 
-### 9.2 Post-Mortem de la etapa Beta
+### 8.2 Post-Mortem de la etapa Beta
 
-### 9.3 Post-Mortem de la etapa Gold
+### 8.3 Post-Mortem de la etapa Gold
 
 ##
 
-## 8. Hoja de ruta del desarrollo
+## 9. Hoja de ruta del desarrollo
 
 
-### 8.1 Hito 1: Alfa
+### 9.1 Hito 1: Alfa
 
 - Motor Voxel que genere de manera procedural el cubo, los caminos y los obstáculos: 26/10/2021
 - Funcionalidades básicas de juego (IA, vida y ataque):25/10/2021
@@ -392,7 +392,7 @@ Flujo de juego:
 - Campaña de marketing iniciada (redes sociales preparadas): 11/10/2021
 
 
-### 8.2 Hito 2: Beta
+### 9.2 Hito 2: Beta
 
 - Interfaz implementada con estructura final y arte de GUI final:
 - Tutorial introductorio en el que se expliquen las mecánicas básicas:
@@ -404,7 +404,7 @@ Flujo de juego:
 - Dirigir correctamente la barra de vida de los enemigos hacia la camara del jugador: 16/11/2021
 - Portfolio actualizado en su nueva versión: 
 
-### 8.3 Hito 3: Gold
+### 9.3 Hito 3: Gold
 
 - Pulir la generación de caminos en el cubo:
 - Añadir estanque en el spawn de los enemigos:
@@ -412,7 +412,7 @@ Flujo de juego:
 - Añadir efectos de partículas al disparo de la torre que ralentiza, a la entrada de los enemigos en el estanque y al caminar de los enemigos:
 - Añadir efectos de sonido a la muerte de los enemigos, a la llegada de estos al estanque del jugador y a la construcción y mejora de las torres:
 
-### 8.4 Fecha de lanzamiento
+### 9.4 Fecha de lanzamiento
 
 - Campaña de marketing en redes sociales en el que se hable de los distintos elementos del juego:
   
