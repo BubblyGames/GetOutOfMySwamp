@@ -3699,6 +3699,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   upgradeMenu: {fileID: 1766098232}
   upgradeButton: {fileID: 795210832}
+  sellButton: {fileID: 1792218503}
   shopMenu: {fileID: 549071505}
   pauseMenu: {fileID: 1738156960}
   endgameMenu: {fileID: 1348527078}
