@@ -10,9 +10,9 @@ public class Gatherer : Structure
     [SerializeField] protected float timeToGatherResource; // Time when the next resources will be gathered
     [SerializeField] protected float timerToGetResource;
 
-    public override void UpgradeStrucrure()
+    public override void UpgradeStrucrure(UIController uIController)
     {
-        base.UpgradeStrucrure();
+        base.UpgradeStrucrure(uIController);
 
         this.timeToGatherResource = this.timeToGatherResource * 0.2f;
         this.resourceGatheredEachCicle += 2;

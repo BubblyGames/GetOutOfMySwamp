@@ -36,13 +36,14 @@ public class Structure : MonoBehaviour
        transform.up = this.normal;
     }
 
-    public virtual void UpgradeStrucrure()
+    public virtual void UpgradeStrucrure(UIController uIController)
     {
         if (!isMaxLevel)
         {
             if (level < maxLevel)
             {
                 level++;
+                uIController.UpdateUpgradeButton(level);
             }
 
             if (level == maxLevel)

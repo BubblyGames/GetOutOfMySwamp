@@ -251,26 +251,33 @@ public class UIController : MonoBehaviour
             case "bomb":
                 upgradeMenu.GetComponent<Image>().sprite = bombTowerSprite;
                 break;
+            case "money":
+                upgradeMenu.GetComponent<Image>().sprite = moneyStructureSprite;
+                break;
 
         }
 
         switch (level)
         {
             case 0:
-                upgradeButtonImage.sprite = upgradeLevels[0];
+                UpdateUpgradeButton(0);
                 break;
             case 1:
-                upgradeButtonImage.sprite = upgradeLevels[1];
+                UpdateUpgradeButton(1);
                 break;
             case 2:
-                upgradeButtonImage.sprite = upgradeLevels[2];
+                UpdateUpgradeButton(2);
                 break;
             case 3:
-                upgradeButtonImage.sprite = upgradeLevels[3];
-                upgradeButton.SetActive(false);
+                UpdateUpgradeButton(3);
                 break;
               
         }
+    }
+    
+    public void UpdateUpgradeButton(int level)
+    {
+        upgradeButtonImage.sprite = upgradeLevels[level];
     }
 }
 

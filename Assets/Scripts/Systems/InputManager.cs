@@ -178,7 +178,10 @@ public class InputManager : MonoBehaviour
                     {
                         UIController.instance.SetUpgradeMenu("bomb", structureHitted.GetComponent<Bomb>().GetLevel());
                     }
-
+                    else if (structureHitted.GetComponent<MoneyGatherer>() != null)
+                    {
+                        UIController.instance.SetUpgradeMenu("money", structureHitted.GetComponent<MoneyGatherer>().GetLevel());
+                    }
                     BuildManager.instance.SetSelectedStructure(structureHitted.GetComponent<Structure>());
                     break;
                 default:
