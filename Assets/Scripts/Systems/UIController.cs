@@ -68,9 +68,16 @@ public class UIController : MonoBehaviour
         switch (menu)
         {
             case GameMenu.UpgradeMenu:
-                upgradeMenu.SetActive(true);
-                pauseMenu.SetActive(false);
-                Time.timeScale = 1;
+                if (upgradeMenu.activeSelf == false)
+                {
+                    upgradeMenu.SetActive(true);
+                    pauseMenu.SetActive(false);
+                }
+                else
+                {
+                    upgradeMenu.SetActive(false);
+                    pauseMenu.SetActive(false);
+                }
                 break;
             case GameMenu.PauseMenu:
                 pauseMenu.SetActive(true);
@@ -222,6 +229,11 @@ public class UIController : MonoBehaviour
     public void CloseSettings()
     {
         ShowMenu(GameMenu.Settings);
+    }
+
+    public void CloseUpgrade()
+    {
+        ShowMenu(GameMenu.UpgradeMenu);
     }
 
     public void ShowTutorial()
