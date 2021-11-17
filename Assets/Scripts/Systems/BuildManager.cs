@@ -36,22 +36,26 @@ public class BuildManager : MonoBehaviour
             Mathf.RoundToInt(hit.point.y + (hit.normal.y / 2)),
             Mathf.RoundToInt(hit.point.z + (hit.normal.z / 2)));
 
-        if (LevelStats.instance.CurrentMoney < structureToBuild.creationCost || !LevelManager.instance.world.IsPosInBounds(intPos))
+        //If player has enough money
+        if (LevelStats.instance.CurrentMoney < structureToBuild.creationCost || !canBuild)
             return false;
 
+        //Spell will always be 
+        SpellBehaviour sb;
+        if (structureToBuild.structurePrefab.TryGetComponent<SpellBehaviour>(out sb))
+            return true;
+
+        //But for builidngs we need to check if the position is within the world bounds
+        if (!LevelManager.instance.world.IsPosInBounds(intPos))
+            return false;
+
+        //Position of the block under the block where the structure will be built
         Vector3Int intPosUnder = new Vector3Int(
             Mathf.RoundToInt(hit.point.x - (hit.normal.x / 2)),
             Mathf.RoundToInt(hit.point.y - (hit.normal.y / 2)),
             Mathf.RoundToInt(hit.point.z - (hit.normal.z / 2)));
 
         selectedCell = LevelManager.instance.world.GetCell(intPosUnder);
-
-        if (!canBuild)
-            return false;
-
-        SpellBehaviour sb;
-        if (structureToBuild.structurePrefab.TryGetComponent<SpellBehaviour>(out sb))
-            return true;
 
         return CheckBuilding(intPos);
     }
@@ -70,7 +74,7 @@ public class BuildManager : MonoBehaviour
         }
 
         //if (g != null)
-          //LevelManager.instance.world.AddInterestPoint(intPos);
+        //LevelManager.instance.world.AddInterestPoint(intPos);
 
 
         return true;
@@ -135,9 +139,14 @@ public class BuildManager : MonoBehaviour
         structure.SetNormal(normal);
         structure.Blueprint = structureToBuild;
 
+        //THIS SHOULDN'T BE NECESSARY
+        if (!LevelManager.instance.world.IsPosInBounds(position))
+            return;
+
+        CellInfo cell = LevelManager.instance.world.GetCell(position);//Sometimes FAILS :(
+
         //If we are putting a bomb, apart from creating the model, we set the cell's structure associated in which we are creating it
         Bomb b;
-        CellInfo cell = LevelManager.instance.world.GetCell(position);//Sometimes gives errors
         if (structure.TryGetComponent<Bomb>(out b))
         {
             if (cell.GetStructure() == null)

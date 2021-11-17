@@ -3251,7 +3251,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1750140360
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3783,14 +3783,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   demo: 0
   size: 31
-  nPaths: 1
+  nPaths: 3
   canMergePaths: 0
   wallDensity: 0.4
   rocksVisualReduction: 1
   rockSize: 10
   seed: 0
-  numberOfMidpoints: 2
-  debugMidpoints: 0
+  numberOfMidpoints: 3
+  debugMidpoints: 1
   lineRendererPrefab: {fileID: 3920875017051324963, guid: ffef0eddca5eb324f94bad8de9cc038b, type: 3}
 --- !u!114 &1903685288
 MonoBehaviour:

@@ -12,7 +12,17 @@ public class Path
     public List<Midpoint> midPoints = new List<Midpoint>();
     float spawnWait = 1f;
     float nextSpawnTime = 0;
-    public int Length { get { return cells.Length; } }
+    public int Length
+    {
+        get
+        {
+            if (cells != null)
+                return cells.Length;
+            else
+                return 0;
+        }
+    }
+
     public bool dirty = true;
     public bool initiated = false;
     public Vector3Int start = new Vector3Int();
@@ -51,6 +61,13 @@ public class Path
             CellInfo cell = world.cells[result.x, result.y, result.z];
 
             cell.normalInt = GetNormalOf(cell);
+
+            CellInfo cellUnder = world.GetCellUnder(cell);
+            if (cell.endZone && cellUnder.blockType == BlockType.Air)
+            {
+                cellUnder.normalInt = cell.normalInt;
+                cell = cellUnder;
+            }
 
             cell.isPath = true;
             pathCells.Add(cell);
@@ -123,7 +140,7 @@ public class Path
                     }
                 }
 
-                if (current.isFloating && current.Parent.isFloating)
+                if (current.isFloating && current.Parent != null && current.Parent.isFloating)
                     continue;
 
                 foreach (CellInfo neighbour in neighbours)
@@ -190,21 +207,39 @@ public class Path
             midpoint = midPoints[i];
 
             //Debug.Log("Finding path to midpoint " + i);
-            Node result = Path.FindPathAstar(world, current, midpoint.cell, lastSept);
+            Node result = null;
 
-            //If a midpoint is important but the path can't be made, the path fails
-            if (result == null && midpoint.important)
-            {
-                Debug.Log("Couldn't get to midpoint " + midpoint.cell.id);
-                return null;//Could try to change previous point instead? For beta maybe
-            }
 
-            //Tries 10 times to find a suitable midpoint
             int count = 0;
+            //Tries 10 times to find a suitable midpoint
             while (result == null && count < 10)
             {
-                midpoint.cell = world.GetCompletelyRandomCell();
+                int count2 = 0;
+                CellInfo c = midpoint.cell;
+                while ((world.CheckIfFloating(midpoint.cell) || !midpoint.cell.canWalk) && count2 < 10)
+                {
+                    c = world.GetCellUnder(midpoint.cell);
+                    c.normalInt = midpoint.cell.normalInt;
+                    midpoint.cell = c;
+                    count2++;
+                }
+
                 result = Path.FindPathAstar(world, current, midpoint.cell, lastSept);
+
+                if (result == null)
+                {
+                    Debug.Log("This should never happen");
+
+                    //If a midpoint is important but the path can't be made, the path fails
+                    if (midpoint.important)
+                    {
+                        Debug.Log("Couldn't get to midpoint " + midpoint.cell.id + " (" + i + ")");
+                        return null;
+                    }
+
+                    midpoint.cell = world.GetCompletelyRandomCell();
+                }
+
                 count++;
             }
             //Debug.Log(count + " attempts needed");
