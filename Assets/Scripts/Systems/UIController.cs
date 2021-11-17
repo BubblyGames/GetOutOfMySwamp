@@ -12,6 +12,11 @@ public class UIController : MonoBehaviour
     [Header("MainScene Menus")]
     public GameObject tittleText;
     public GameObject playButton;
+    public GameObject settingsMenu;
+    public GameObject settingsButton;
+    public GameObject tutorialMenu;
+    public GameObject creditsMenu;
+    public GameObject creditsButton;
 
     [Header("GameScene Menus")]
     public GameObject upgradeMenu;
@@ -21,9 +26,6 @@ public class UIController : MonoBehaviour
     public GameObject pauseMenu;
     public GameObject endgameMenu;
     public GameObject pauseButton;
-    public GameObject settingsMenu;
-    public GameObject settingsButton;
-    public GameObject tutorialMenu;
 
     [Header("UpgradeMenu Sprites")]
     public Sprite basicTowerSprite;
@@ -43,7 +45,8 @@ public class UIController : MonoBehaviour
         EndgameMenu,
         Game,
         Settings,
-        Tutorial
+        Tutorial,
+        Credits
     }
 
     public GameMenu selectedMenu;
@@ -163,6 +166,18 @@ public class UIController : MonoBehaviour
                     settingsMenu.SetActive(false);
                 }
                 break;
+            case GameMenu.Credits:
+                if (creditsMenu.activeSelf == true)
+                {
+                    creditsMenu.SetActive(false);
+                    settingsMenu.SetActive(true);
+                }
+                else
+                {
+                    creditsMenu.SetActive(true);
+                    settingsMenu.SetActive(false);
+                }
+                break;
             default:
                 break;
         }
@@ -249,6 +264,11 @@ public class UIController : MonoBehaviour
     public void ShowTutorial()
     {
         ShowMenu(GameMenu.Tutorial);
+    }
+
+    public void ShowCredits()
+    {
+        ShowMenu(GameMenu.Credits);
     }
 
 
