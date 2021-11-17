@@ -3079,8 +3079,9 @@ GameObject:
   - component: {fileID: 1029310092}
   - component: {fileID: 1029310094}
   - component: {fileID: 1029310093}
+  - component: {fileID: 1029310095}
   m_Layer: 5
-  m_Name: Text
+  m_Name: TowerName
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3147,6 +3148,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1029310091}
   m_CullTransparentMesh: 1
+--- !u!114 &1029310095
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1029310091}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9b9a52f61abc874ea10f049443698bd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  key: towerName
+  textContainer: {fileID: 1029310091}
 --- !u!1 &1040095943
 GameObject:
   m_ObjectHideFlags: 0
@@ -4120,6 +4135,7 @@ MonoBehaviour:
   - {fileID: 24310472}
   - {fileID: 423694798}
   - {fileID: 1874567660}
+  towerName: {fileID: 1029310091}
   basicTowerSprite: {fileID: 21300000, guid: 6c53c68d74df63a4792a296a3030e0d3, type: 3}
   slowTowerSprite: {fileID: 21300000, guid: dfe144ffea944824f974f903a34fd04b, type: 3}
   areaTowerSprite: {fileID: 21300000, guid: d028348a0d83f564baeecfeed75490c0, type: 3}

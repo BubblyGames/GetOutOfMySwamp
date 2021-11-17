@@ -27,6 +27,7 @@ public class Structure : MonoBehaviour
     protected Vector3 normal;
 
     public BlockType blockType = BlockType.Grass;
+    public string structureName;
 
 
 
@@ -62,5 +63,10 @@ public class Structure : MonoBehaviour
     public void Sell()
     {
         Destroy(gameObject);
+    }
+
+    public string GetStructureName()
+    {
+        return structureName;
     }
 }

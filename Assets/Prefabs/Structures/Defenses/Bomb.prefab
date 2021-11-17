@@ -115,6 +115,7 @@ MonoBehaviour:
   isMaxLevel: 0
   normal: {x: 0, y: 0, z: 0}
   blockType: 0
+  structureName: bomb
   fireRate: 0
   damage: 300
   attackRange: 5

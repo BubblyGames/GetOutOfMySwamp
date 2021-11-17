@@ -28,6 +28,7 @@ public class UIController : MonoBehaviour
     public GameObject pauseButton;
     public List<GameObject> fixedTexts;
     public List<GameObject> statsTexts;
+    public GameObject towerName;
 
     [Header("UpgradeMenu Sprites")]
     public Sprite basicTowerSprite;
@@ -280,9 +281,10 @@ public class UIController : MonoBehaviour
         FPSText.text = Mathf.Round((1 / Time.deltaTime)).ToString(); //FpS 
     }
 
-    public void SetUpgradeMenu(string structureName, int level, string target, string range, string fireRate, string damage)
+    public void SetUpgradeMenu(string structureType, string structureName, int level, string target, string range, string fireRate, string damage)
     {
-        if (!structureName.Equals("money"))
+        towerName.GetComponent<TextReader>().SetKey(structureName);
+        if (!structureType.Equals("money"))
         {
             activateUpgradeTexts();
 
@@ -308,7 +310,7 @@ public class UIController : MonoBehaviour
 
             }
 
-            if (structureName.Equals("bomb"))
+            if (structureType.Equals("bomb"))
             {
                 fixedTexts[2].SetActive(false);
                 statsTexts[2].SetActive(false);
@@ -319,7 +321,7 @@ public class UIController : MonoBehaviour
             desactivateUpgradeTexts();
         }
 
-        switch (structureName)
+        switch (structureType)
         {
             case "basic":
                 upgradeMenu.GetComponent<Image>().sprite = basicTowerSprite;

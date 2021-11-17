@@ -115,6 +115,7 @@ MonoBehaviour:
   isMaxLevel: 0
   normal: {x: 0, y: 0, z: 0}
   blockType: 1
+  structureName: moneyGatherer
   resourceGatheredEachCicle: 30
   timeToGatherResource: 3
   timerToGetResource: 0
