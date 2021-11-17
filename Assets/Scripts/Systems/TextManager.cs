@@ -104,6 +104,7 @@ public class TextManager : MonoBehaviour
         englishDictionary.Add("restart", "Restart");
         englishDictionary.Add("pausedtext", "Pause Menu");
         englishDictionary.Add("continue", "Continue");
+        englishDictionary.Add("round", "ROUND");
 
         //descriptions of lessons in English
         englishDictionary.Add("lesson1", "Lesson 1");
@@ -128,6 +129,8 @@ public class TextManager : MonoBehaviour
         spanishDictionary.Add("restart", "Reiniciar");
         spanishDictionary.Add("pausedtext", "Menu de Pausa");
         spanishDictionary.Add("continue", "Continuar");
+        spanishDictionary.Add("round", "RONDA");
+
 
         //descriptions of lessons in Spanish
         spanishDictionary.Add("lesson1", "Lección 1");
