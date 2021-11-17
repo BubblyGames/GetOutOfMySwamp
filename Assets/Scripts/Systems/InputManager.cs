@@ -163,20 +163,20 @@ public class InputManager : MonoBehaviour
                     if (structureHitted.GetComponent<ShootingDefenseBehaviour>() != null)
                     {
                         if(structureHitted.GetComponent<ShootingDefenseBehaviour>().GetEffect() == 1){
-                            UIController.instance.ChangeUpgradeMenuBackground("slow");
+                            UIController.instance.SetUpgradeMenu("slow", structureHitted.GetComponent<ShootingDefenseBehaviour>().GetLevel());
                         }
                         else
                         {
-                            UIController.instance.ChangeUpgradeMenuBackground("basic");
+                            UIController.instance.SetUpgradeMenu("basic", structureHitted.GetComponent<ShootingDefenseBehaviour>().GetLevel());
                         }
                     }
                     else if (structureHitted.GetComponent<AOEDefenseBehaviour>() != null)
                     {
-                        UIController.instance.ChangeUpgradeMenuBackground("area");
+                        UIController.instance.SetUpgradeMenu("area", structureHitted.GetComponent<AOEDefenseBehaviour>().GetLevel());
                     }
                     else if (structureHitted.GetComponent<Bomb>() != null)
                     {
-                        UIController.instance.ChangeUpgradeMenuBackground("bomb");
+                        UIController.instance.SetUpgradeMenu("bomb", structureHitted.GetComponent<Bomb>().GetLevel());
                     }
 
                     BuildManager.instance.SetSelectedStructure(structureHitted.GetComponent<Structure>());

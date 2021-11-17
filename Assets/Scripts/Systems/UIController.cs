@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -10,6 +11,7 @@ public class UIController : MonoBehaviour
 
     [Header("Menus")]
     public GameObject upgradeMenu;
+    public GameObject upgradeButton;
     public GameObject shopMenu;
     public GameObject pauseMenu;
     public GameObject endgameMenu;
@@ -18,15 +20,17 @@ public class UIController : MonoBehaviour
     public GameObject settingsButton;
     public GameObject tutorialMenu;
 
-    [Header("UpgradeMenu SpritesInfo Cards")]
+    [Header("UpgradeMenu Sprites")]
     public Sprite basicTowerSprite;
     public Sprite slowTowerSprite;
     public Sprite areaTowerSprite;
     public Sprite bombTowerSprite;
     public Sprite moneyStructureSprite;
+    public List<Sprite> upgradeLevels;
 
 
     private int gameSceneId;
+    private Image upgradeButtonImage;
     public enum GameMenu
     {
         UpgradeMenu,
@@ -53,7 +57,8 @@ public class UIController : MonoBehaviour
         }
 
         gameSceneId = SceneManager.GetActiveScene().buildIndex;
-    }
+        upgradeButtonImage=upgradeButton.GetComponent<Image>();
+}
 
     public virtual void ShowMenu(GameMenu menu)
     {
@@ -230,7 +235,7 @@ public class UIController : MonoBehaviour
         FPSText.text = Mathf.Round((1 / Time.deltaTime)).ToString(); //FpS 
     }
 
-    public void ChangeUpgradeMenuBackground(string structureName)
+    public void SetUpgradeMenu(string structureName, int level)
     {
         switch (structureName)
         {
@@ -247,6 +252,24 @@ public class UIController : MonoBehaviour
                 upgradeMenu.GetComponent<Image>().sprite = bombTowerSprite;
                 break;
 
+        }
+
+        switch (level)
+        {
+            case 0:
+                upgradeButtonImage.sprite = upgradeLevels[0];
+                break;
+            case 1:
+                upgradeButtonImage.sprite = upgradeLevels[1];
+                break;
+            case 2:
+                upgradeButtonImage.sprite = upgradeLevels[2];
+                break;
+            case 3:
+                upgradeButtonImage.sprite = upgradeLevels[3];
+                upgradeButton.SetActive(false);
+                break;
+              
         }
     }
 }
