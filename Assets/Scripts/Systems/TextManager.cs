@@ -89,6 +89,8 @@ public class TextManager : MonoBehaviour
         englishDictionary.Add("continue", "Continue");
         englishDictionary.Add("round", "ROUND");
         englishDictionary.Add("credits", "Credits");
+        englishDictionary.Add("nextLevel", "Next Level");
+
 
         //upgrade texts in english
         englishDictionary.Add("target", "Target");
@@ -141,6 +143,7 @@ public class TextManager : MonoBehaviour
         spanishDictionary.Add("continue", "Continuar");
         spanishDictionary.Add("round", "RONDA");
         spanishDictionary.Add("credits", "Créditos");
+        spanishDictionary.Add("nextLevel", "Siguiente nivel");
 
         //upgrade texts in spanish
         spanishDictionary.Add("target", "Objetivo");
