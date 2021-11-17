@@ -23,12 +23,12 @@ public class Structure : MonoBehaviour
     [SerializeField]
     protected bool isMaxLevel = false;
 
-
     [SerializeField]
     protected Vector3 normal;
 
     public BlockType blockType = BlockType.Grass;
-
+    public string structureName;
+    public int structureId;
 
 
     public void SetNormal(Vector3 normal)
@@ -37,13 +37,14 @@ public class Structure : MonoBehaviour
        transform.up = this.normal;
     }
 
-    public virtual void UpgradeStrucrure()
+    public virtual void UpgradeStrucrure(UIController uIController)
     {
         if (!isMaxLevel)
         {
             if (level < maxLevel)
             {
                 level++;
+                uIController.UpdateUpgradeButton(level,structureId);
             }
 
             if (level == maxLevel)
@@ -62,5 +63,10 @@ public class Structure : MonoBehaviour
     public void Sell()
     {
         Destroy(gameObject);
+    }
+
+    public string GetStructureName()
+    {
+        return structureName;
     }
 }

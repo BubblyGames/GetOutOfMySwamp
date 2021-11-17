@@ -14,23 +14,6 @@ public class TextManager : MonoBehaviour
     public Dictionary<string, string> spanishDictionary = new Dictionary<string, string>();
     public Dictionary<string, string> currentDictionary;
 
-    /*Type of keys 
-        Play,  
-        next,
-        back,
-        Pause,
-        health,
-        Score,
-        Money,
-        Settings,
-        Exit,
-        Lesson,
-        Description,
-        restart,
-        pausedtext,
-        continue
-    */
-
     private void Awake()
     {
         InitializeDictionaries();
@@ -100,9 +83,43 @@ public class TextManager : MonoBehaviour
         englishDictionary.Add("settings", "Settings");
         englishDictionary.Add("lenguage", "Lenguage");
         englishDictionary.Add("exit", "Exit");
+        englishDictionary.Add("finish", "Finish");
         englishDictionary.Add("restart", "Restart");
         englishDictionary.Add("pausedtext", "Pause Menu");
         englishDictionary.Add("continue", "Continue");
+        englishDictionary.Add("round", "ROUND");
+        englishDictionary.Add("credits", "Credits");
+        englishDictionary.Add("nextLevel", "Next Level");
+        englishDictionary.Add("retry", "Retry");
+        englishDictionary.Add("loose", "You loose!");
+        englishDictionary.Add("win", "You win!");
+
+
+        //upgrade texts in english
+        englishDictionary.Add("target", "Target");
+        englishDictionary.Add("range", "Range");
+        englishDictionary.Add("damage", "Damage");
+        englishDictionary.Add("fireRate", "Fire Rate");
+        englishDictionary.Add("moneyGathered", "Money Given");
+
+        //defense stats in english
+        englishDictionary.Add("air", "Air");
+        englishDictionary.Add("ground", "Ground");
+        englishDictionary.Add("groundAir", "Ground & Air");
+        englishDictionary.Add("large", "Large");
+        englishDictionary.Add("medium", "Medium");
+        englishDictionary.Add("low", "Low");
+        englishDictionary.Add("slow", "Slow");
+        englishDictionary.Add("fast", "Fast");
+        englishDictionary.Add("high", "High");
+
+        //structures names in english 
+        englishDictionary.Add("towerName", "Tower Name");
+        englishDictionary.Add("basicTower", "Basic Frog");
+        englishDictionary.Add("psiquicTower", "Psiquic Frog");
+        englishDictionary.Add("areaTower", "Area Frog");
+        englishDictionary.Add("bomb", "mushBOOMB");
+        englishDictionary.Add("moneyGatherer", "Money Frog");
 
         //descriptions of lessons in English
         englishDictionary.Add("lesson1", "Lesson 1");
@@ -123,9 +140,43 @@ public class TextManager : MonoBehaviour
         spanishDictionary.Add("settings", "Ajustes");
         spanishDictionary.Add("lenguage", "Idioma");
         spanishDictionary.Add("exit", "Salir");
+        spanishDictionary.Add("finish", "Finalizar");
         spanishDictionary.Add("restart", "Reiniciar");
         spanishDictionary.Add("pausedtext", "Menu de Pausa");
         spanishDictionary.Add("continue", "Continuar");
+        spanishDictionary.Add("round", "RONDA");
+        spanishDictionary.Add("credits", "Créditos");
+        spanishDictionary.Add("nextLevel", "Siguiente nivel");
+        spanishDictionary.Add("retry", "Reintentar");
+        spanishDictionary.Add("loose", "¡Has perdido!");
+        spanishDictionary.Add("win", "¡Has ganado!");
+
+        //upgrade texts in spanish
+        spanishDictionary.Add("target", "Objetivo");
+        spanishDictionary.Add("range", "Rango");
+        spanishDictionary.Add("damage", "Daño");
+        spanishDictionary.Add("fireRate", "Velocidad Disparo");
+        spanishDictionary.Add("moneyGathered", "Dinero Dado");
+
+
+        //defense stats in spanish
+        spanishDictionary.Add("air", "Aire");
+        spanishDictionary.Add("ground", "Tierra");
+        spanishDictionary.Add("groundAir", "Tierra y Aire");
+        spanishDictionary.Add("large", "Largo");
+        spanishDictionary.Add("medium", "Medio");
+        spanishDictionary.Add("low", "Bajo");
+        spanishDictionary.Add("slow", "Lento");
+        spanishDictionary.Add("fast", "Rápido");
+        spanishDictionary.Add("high", "Alto");
+
+        //structures names in spanish 
+        spanishDictionary.Add("towerName", "Nombre Torre");
+        spanishDictionary.Add("basicTower", "Rana básica");
+        spanishDictionary.Add("psiquicTower", "Rana Psíquica");
+        spanishDictionary.Add("areaTower", "Rana de Area");
+        spanishDictionary.Add("bomb", "Seta Bomba");
+        spanishDictionary.Add("moneyGatherer", "Rana banquera");
 
         //descriptions of lessons in Spanish
         spanishDictionary.Add("lesson1", "Lección 1");

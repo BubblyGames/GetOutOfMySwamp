@@ -7,12 +7,14 @@ using UnityEngine.EventSystems;
 public class BuildManager : MonoBehaviour
 {
     public static BuildManager instance;
-
     private StructureBlueprint structureBlueprint = null; //Structure is going to be built
     [SerializeField]
     private Structure selectedStructure; //Already Built structure 
     [SerializeField]
     private CellInfo selectedCell;
+    [SerializeField]
+    private UIController uIController;
+
 
     public bool canBuild;//Checks if a structure is selected to be built
 
@@ -144,11 +146,11 @@ public class BuildManager : MonoBehaviour
         {
             if (CheatManager.instance.infiniteMoney)
             {
-                selectedCell.structure.UpgradeStrucrure();
+                selectedCell.structure.UpgradeStrucrure(uIController);
             }
             else if ( LevelStats.instance.CurrentMoney >= structureBlueprint.upgrades[selectedStructure.GetLevel()].cost)
             {
-                selectedStructure.UpgradeStrucrure();
+                selectedStructure.UpgradeStrucrure(uIController);
                 LevelStats.instance.SpendMoney(structureBlueprint.creationCost);
 
             }
