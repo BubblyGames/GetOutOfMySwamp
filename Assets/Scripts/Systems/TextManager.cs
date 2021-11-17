@@ -100,12 +100,15 @@ public class TextManager : MonoBehaviour
         englishDictionary.Add("settings", "Settings");
         englishDictionary.Add("lenguage", "Lenguage");
         englishDictionary.Add("exit", "Exit");
-        englishDictionary.Add("lesson", "Lesson");
         englishDictionary.Add("restart", "Restart");
         englishDictionary.Add("pausedtext", "Pause Menu");
         englishDictionary.Add("continue", "Continue");
+
         //descriptions of lessons in English
-        englishDictionary.Add("description", "asadsafdsfdsfdsfsdfds");
+        englishDictionary.Add("lesson1", "Lesson 1");
+        englishDictionary.Add("description1", "asadsafdsfdsfdsfsdfds");
+        englishDictionary.Add("lesson2", "Lesson 2");
+        englishDictionary.Add("description2", "bbbbb");
 
         //Spanish 
         spanishDictionary.Add("play", "Jugar");
@@ -120,12 +123,15 @@ public class TextManager : MonoBehaviour
         spanishDictionary.Add("settings", "Ajustes");
         spanishDictionary.Add("lenguage", "Idioma");
         spanishDictionary.Add("exit", "Salir");
-        spanishDictionary.Add("lesson", "Lección");
         spanishDictionary.Add("restart", "Reiniciar");
         spanishDictionary.Add("pausedtext", "Menu de Pausa");
         spanishDictionary.Add("continue", "Continuar");
+
         //descriptions of lessons in Spanish
-        spanishDictionary.Add("description", "asadsafdsfdsfdsfsdfds");
+        spanishDictionary.Add("lesson1", "Lección 1");
+        spanishDictionary.Add("description1", "asadsafdsfdsfdsfsdfds");
+        spanishDictionary.Add("lesson2", "Lección 2");
+        spanishDictionary.Add("description2", "aaaa");
     }
 
     public void emptyGameobjectsList(bool restart)
