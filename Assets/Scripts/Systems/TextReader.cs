@@ -60,15 +60,15 @@ public class TextReader : MonoBehaviour
 
         if (gameObject.name.Equals("hpText"))
         {
-            textContainer.GetComponent<Text>().text = _text; ;
+            textContainer.GetComponent<Text>().text = levelManager.GetComponent<LevelStats>().GetCurrentBaseHealth().ToString();
         }
         else if (gameObject.name.Equals("moneyText"))
         {
-            textContainer.GetComponent<Text>().text = _text; ;
+            textContainer.GetComponent<Text>().text = levelManager.GetComponent<LevelStats>().GetCurrentMoney().ToString();
         }
         else if (gameObject.name.Equals("scoreText"))
         {
-            textContainer.GetComponent<Text>().text = _text; ;
+            textContainer.GetComponent<Text>().text = _text;
         }
         else
         {
