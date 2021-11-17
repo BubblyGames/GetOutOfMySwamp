@@ -65,4 +65,22 @@ public abstract class DefenseBehaviour : Structure
     {
         Gizmos.DrawWireSphere(transform.position, attackRange);
     }
+
+    public string GetTarget()
+    {
+        return Target;
+    }
+    public string GetRange()
+    {
+        return Range;
+    }
+    public string GetDamage()
+    {
+        return Damage;
+    }
+    public string GetFireRate()
+    {
+        return FireRate;
+    }
+
 }

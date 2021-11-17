@@ -118,3 +118,7 @@ MonoBehaviour:
   fireRate: 0.1
   damage: 35
   attackRange: 7
+  Target: ground
+  Range: large
+  Damage: high
+  FireRate: slow

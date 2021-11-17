@@ -163,31 +163,32 @@ public class InputManager : MonoBehaviour
                     if (structureHitted.GetComponent<ShootingDefenseBehaviour>() != null)
                     {
                         if(structureHitted.GetComponent<ShootingDefenseBehaviour>().GetEffect() == 1){
-                            UIController.instance.SetUpgradeMenu("slow", structureHitted.GetComponent<ShootingDefenseBehaviour>().GetLevel());
+                            UIController.instance.SetUpgradeMenu("slow", structureHitted.GetComponent<ShootingDefenseBehaviour>().GetLevel(), structureHitted.GetComponent<ShootingDefenseBehaviour>().GetTarget(),
+                                structureHitted.GetComponent<ShootingDefenseBehaviour>().GetRange(), structureHitted.GetComponent<ShootingDefenseBehaviour>().GetFireRate(), structureHitted.GetComponent<ShootingDefenseBehaviour>().GetDamage());
                         }
                         else
                         {
-                            UIController.instance.SetUpgradeMenu("basic", structureHitted.GetComponent<ShootingDefenseBehaviour>().GetLevel());
+                            UIController.instance.SetUpgradeMenu("basic", structureHitted.GetComponent<ShootingDefenseBehaviour>().GetLevel(), structureHitted.GetComponent<ShootingDefenseBehaviour>().GetTarget(),
+                                structureHitted.GetComponent<ShootingDefenseBehaviour>().GetRange(), structureHitted.GetComponent<ShootingDefenseBehaviour>().GetFireRate(), structureHitted.GetComponent<ShootingDefenseBehaviour>().GetDamage());
                         }
                     }
                     else if (structureHitted.GetComponent<AOEDefenseBehaviour>() != null)
                     {
-                        UIController.instance.SetUpgradeMenu("area", structureHitted.GetComponent<AOEDefenseBehaviour>().GetLevel());
+                        UIController.instance.SetUpgradeMenu("area", structureHitted.GetComponent<AOEDefenseBehaviour>().GetLevel(), structureHitted.GetComponent<AOEDefenseBehaviour>().GetTarget(),
+                                structureHitted.GetComponent<AOEDefenseBehaviour>().GetRange(), structureHitted.GetComponent<AOEDefenseBehaviour>().GetFireRate(), structureHitted.GetComponent<AOEDefenseBehaviour>().GetDamage());
                     }
                     else if (structureHitted.GetComponent<Bomb>() != null)
                     {
-                        UIController.instance.SetUpgradeMenu("bomb", structureHitted.GetComponent<Bomb>().GetLevel());
-                    }
-                    else if (structureHitted.GetComponent<MoneyGatherer>() != null)
-                    {
-                        UIController.instance.SetUpgradeMenu("money", structureHitted.GetComponent<MoneyGatherer>().GetLevel());
+                        UIController.instance.SetUpgradeMenu("bomb", structureHitted.GetComponent<Bomb>().GetLevel(), structureHitted.GetComponent<Bomb>().GetTarget(),
+                                structureHitted.GetComponent<Bomb>().GetRange(), structureHitted.GetComponent<Bomb>().GetFireRate(), structureHitted.GetComponent<Bomb>().GetDamage());
                     }
                     BuildManager.instance.SetSelectedStructure(structureHitted.GetComponent<Structure>());
                     break;
+
                 case "Gatherer":
                     GameObject gathererHitted = hit.collider.gameObject;
                     UIController.instance.ShowMenu(UIController.GameMenu.UpgradeMenu);
-                    UIController.instance.SetUpgradeMenu("money", gathererHitted.GetComponent<MoneyGatherer>().GetLevel());
+                    UIController.instance.SetUpgradeMenu("money", gathererHitted.GetComponent<MoneyGatherer>().GetLevel(),"","","","");
                     break;
                 default:
                     break;

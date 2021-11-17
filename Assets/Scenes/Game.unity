@@ -211,6 +211,7 @@ GameObject:
   - component: {fileID: 24310473}
   - component: {fileID: 24310475}
   - component: {fileID: 24310474}
+  - component: {fileID: 24310476}
   m_Layer: 5
   m_Name: RangeText
   m_TagString: Untagged
@@ -279,6 +280,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 24310472}
   m_CullTransparentMesh: 1
+--- !u!114 &24310476
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 24310472}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9b9a52f61abc874ea10f049443698bd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  key: range
+  textContainer: {fileID: 24310472}
 --- !u!1 &33161373
 GameObject:
   m_ObjectHideFlags: 0
@@ -1158,6 +1173,7 @@ GameObject:
   - component: {fileID: 423694799}
   - component: {fileID: 423694801}
   - component: {fileID: 423694800}
+  - component: {fileID: 423694802}
   m_Layer: 5
   m_Name: FRText
   m_TagString: Untagged
@@ -1226,6 +1242,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 423694798}
   m_CullTransparentMesh: 1
+--- !u!114 &423694802
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 423694798}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9b9a52f61abc874ea10f049443698bd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  key: fireRate
+  textContainer: {fileID: 423694798}
 --- !u!1 &549071505
 GameObject:
   m_ObjectHideFlags: 0
@@ -4075,15 +4105,21 @@ MonoBehaviour:
   creditsButton: {fileID: 0}
   upgradeMenu: {fileID: 1766098232}
   upgradeButton: {fileID: 795210832}
-  damageText: {fileID: 1472925914}
-  rangeText: {fileID: 24310474}
-  FRText: {fileID: 423694800}
-  TargetText: {fileID: 1357775386}
   sellButton: {fileID: 1792218503}
   shopMenu: {fileID: 549071505}
   pauseMenu: {fileID: 1738156960}
   endgameMenu: {fileID: 1348527078}
   pauseButton: {fileID: 1732745669}
+  fixedTexts:
+  - {fileID: 1962419175}
+  - {fileID: 2026893713}
+  - {fileID: 1900352225}
+  - {fileID: 1472925912}
+  statsTexts:
+  - {fileID: 1357775384}
+  - {fileID: 24310472}
+  - {fileID: 423694798}
+  - {fileID: 1874567660}
   basicTowerSprite: {fileID: 21300000, guid: 6c53c68d74df63a4792a296a3030e0d3, type: 3}
   slowTowerSprite: {fileID: 21300000, guid: dfe144ffea944824f974f903a34fd04b, type: 3}
   areaTowerSprite: {fileID: 21300000, guid: d028348a0d83f564baeecfeed75490c0, type: 3}
@@ -4112,6 +4148,7 @@ GameObject:
   - component: {fileID: 1357775385}
   - component: {fileID: 1357775387}
   - component: {fileID: 1357775386}
+  - component: {fileID: 1357775388}
   m_Layer: 5
   m_Name: TargetText
   m_TagString: Untagged
@@ -4180,6 +4217,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1357775384}
   m_CullTransparentMesh: 1
+--- !u!114 &1357775388
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1357775384}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9b9a52f61abc874ea10f049443698bd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  key: target
+  textContainer: {fileID: 1357775384}
 --- !u!1 &1450975232
 GameObject:
   m_ObjectHideFlags: 0
@@ -5077,7 +5128,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1766098233
 RectTransform:
   m_ObjectHideFlags: 0
@@ -5485,6 +5536,7 @@ GameObject:
   - component: {fileID: 1874567661}
   - component: {fileID: 1874567663}
   - component: {fileID: 1874567662}
+  - component: {fileID: 1874567664}
   m_Layer: 5
   m_Name: DamageText
   m_TagString: Untagged
@@ -5553,6 +5605,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1874567660}
   m_CullTransparentMesh: 1
+--- !u!114 &1874567664
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1874567660}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9b9a52f61abc874ea10f049443698bd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  key: damage
+  textContainer: {fileID: 1874567660}
 --- !u!1 &1900352225
 GameObject:
   m_ObjectHideFlags: 0

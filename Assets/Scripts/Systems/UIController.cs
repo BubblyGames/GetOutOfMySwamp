@@ -21,15 +21,13 @@ public class UIController : MonoBehaviour
     [Header("GameScene Menus")]
     public GameObject upgradeMenu;
     public GameObject upgradeButton;
-    public Text damageText;
-    public Text rangeText;
-    public Text FRText;
-    public Text TargetText;
     public GameObject sellButton;
     public GameObject shopMenu;
     public GameObject pauseMenu;
     public GameObject endgameMenu;
     public GameObject pauseButton;
+    public List<GameObject> fixedTexts;
+    public List<GameObject> statsTexts;
 
     [Header("UpgradeMenu Sprites")]
     public Sprite basicTowerSprite;
@@ -282,8 +280,45 @@ public class UIController : MonoBehaviour
         FPSText.text = Mathf.Round((1 / Time.deltaTime)).ToString(); //FpS 
     }
 
-    public void SetUpgradeMenu(string structureName, int level)
+    public void SetUpgradeMenu(string structureName, int level, string target, string range, string fireRate, string damage)
     {
+        if (!structureName.Equals("money"))
+        {
+            activateUpgradeTexts();
+
+            statsTexts[0].GetComponent<TextReader>().SetKey(target);
+            statsTexts[1].GetComponent<TextReader>().SetKey(range);
+            statsTexts[2].GetComponent<TextReader>().SetKey(fireRate);
+            statsTexts[3].GetComponent<TextReader>().SetKey(damage);
+
+            switch (level)
+            {
+                case 0:
+                    UpdateUpgradeButton(0);
+                    break;
+                case 1:
+                    UpdateUpgradeButton(1);
+                    break;
+                case 2:
+                    UpdateUpgradeButton(2);
+                    break;
+                case 3:
+                    UpdateUpgradeButton(3);
+                    break;
+
+            }
+
+            if (structureName.Equals("bomb"))
+            {
+                fixedTexts[2].SetActive(false);
+                statsTexts[2].SetActive(false);
+            }
+        }
+        else
+        {
+            desactivateUpgradeTexts();
+        }
+
         switch (structureName)
         {
             case "basic":
@@ -303,7 +338,7 @@ public class UIController : MonoBehaviour
                 break;
             case "bomb":
                 upgradeMenu.GetComponent<Image>().sprite = bombTowerSprite;
-                upgradeButton.SetActive(true);
+                upgradeButton.SetActive(false);
                 sellButton.SetActive(true);
                 break;
             case "money":
@@ -313,28 +348,39 @@ public class UIController : MonoBehaviour
                 break;
 
         }
-
-        switch (level)
-        {
-            case 0:
-                UpdateUpgradeButton(0);
-                break;
-            case 1:
-                UpdateUpgradeButton(1);
-                break;
-            case 2:
-                UpdateUpgradeButton(2);
-                break;
-            case 3:
-                UpdateUpgradeButton(3);
-                break;
-              
-        }
     }
     
     public void UpdateUpgradeButton(int level)
     {
         upgradeButtonImage.sprite = upgradeLevels[level];
+    }
+
+    void desactivateUpgradeTexts()
+    {
+        foreach(GameObject g in fixedTexts)
+        {
+            g.SetActive(false);
+        }
+
+
+        foreach (GameObject g in statsTexts)
+        {
+            g.SetActive(false);
+        }
+    }
+
+    void activateUpgradeTexts()
+    {
+        foreach (GameObject g in fixedTexts)
+        {
+            g.SetActive(true);
+        }
+
+
+        foreach (GameObject g in statsTexts)
+        {
+            g.SetActive(true);
+        }
     }
 }
 
