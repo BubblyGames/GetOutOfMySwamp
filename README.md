@@ -369,6 +369,16 @@ Flujo de juego:
 
 ## 
 
+## 9. Post-Mortems
+
+
+### 9.1 Post-Mortem de la etapa Alfa
+
+### 9.2 Post-Mortem de la etapa Beta
+
+### 9.3 Post-Mortem de la etapa Gold
+
+##
 
 ## 8. Hoja de ruta del desarrollo
 
@@ -390,11 +400,19 @@ Flujo de juego:
 - Crear y meter en el juego los 6 modelos de enemigo y los 5 modelos de torre/defensa:
 - Nueva mecánica característica:
 - Añadir offset para la colocación de torres:
+- Arreglar proporciones de las torres en el cubo:
+- Dirigir correctamente la barra de vida de los enemigos hacia la camara del jugador: 16/11/2021
+- Portfolio actualizado en su nueva versión: 
 
 ### 8.3 Hito 3: Gold
 
+- Pulir la generación de caminos en el cubo:
+- Añadir estanque en el spawn de los enemigos:
+- Añadir animaciones a las torres:
+- Añadir efectos de partículas al disparo de la torre que ralentiza, a la entrada de los enemigos en el estanque y al caminar de los enemigos:
+- Añadir efectos de sonido a la muerte de los enemigos, a la llegada de estos al estanque del jugador y a la construcción y mejora de las torres:
 
 ### 8.4 Fecha de lanzamiento
 
-
+- Campaña de marketing en redes sociales en el que se hable de los distintos elementos del juego:
   
