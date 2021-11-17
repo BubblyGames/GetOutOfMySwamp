@@ -147,10 +147,12 @@ public class UIController : MonoBehaviour
                 if (tutorialMenu.activeSelf == true)
                 {
                     tutorialMenu.SetActive(false);
+                    settingsMenu.SetActive(true);
                 }
                 else
                 {
                     tutorialMenu.SetActive(true);
+                    settingsMenu.SetActive(false);
                 }
                 break;
             default:
