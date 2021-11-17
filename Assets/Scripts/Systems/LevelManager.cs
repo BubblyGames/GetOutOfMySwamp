@@ -100,13 +100,13 @@ public class LevelManager : MonoBehaviour
 
     public void GameOver()
     {
-        UIController.instance.ShowMenu(UIController.GameMenu.EndgameMenu);
+        UIController.instance.ShowMenu(UIController.GameMenu.EndgameMenuLoose);
     }
 
     public void LevelCompleted()
     {
         OnGameCompleted?.Invoke();
-        UIController.instance.ShowMenu(UIController.GameMenu.EndgameMenu);
+        UIController.instance.ShowMenu(UIController.GameMenu.EndgameMenuWin);
     }
 
 }

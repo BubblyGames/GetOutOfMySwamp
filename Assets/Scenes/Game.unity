@@ -1290,8 +1290,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -64.2966, y: 4.4725}
-  m_SizeDelta: {x: 101.407, y: 44.1757}
+  m_AnchoredPosition: {x: -68.29298, y: 7.7}
+  m_SizeDelta: {x: 109.3998, y: 45.9757}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &570312821
 MonoBehaviour:
@@ -4036,7 +4036,8 @@ MonoBehaviour:
   sellButton: {fileID: 1792218503}
   shopMenu: {fileID: 549071505}
   pauseMenu: {fileID: 1738156960}
-  endgameMenu: {fileID: 1087118764266141309}
+  endgameMenuLoose: {fileID: 0}
+  endgameMenuWin: {fileID: 0}
   pauseButton: {fileID: 1732745669}
   fixedTexts:
   - {fileID: 1962419175}
@@ -6627,11 +6628,6 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 7539670085400212179, guid: fc31fd70b5945084fb72fefe99f91ba3, type: 3}
   m_PrefabInstance: {fileID: 7472722199113467055}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &1087118764266141309 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 7539670085400212178, guid: fc31fd70b5945084fb72fefe99f91ba3, type: 3}
-  m_PrefabInstance: {fileID: 7472722199113467055}
-  m_PrefabAsset: {fileID: 0}
 --- !u!222 &3538565075234769575
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -6961,7 +6957,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Restart
+  m_Text: Retry
 --- !u!224 &3538565076418110962
 RectTransform:
   m_ObjectHideFlags: 0
@@ -7211,7 +7207,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &4471435551474037848
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7265,6 +7261,10 @@ PrefabInstance:
       propertyPath: score
       value: 
       objectReference: {fileID: 868148736}
+    - target: {fileID: 7472722199058545214, guid: fc31fd70b5945084fb72fefe99f91ba3, type: 3}
+      propertyPath: key
+      value: retry
+      objectReference: {fileID: 0}
     - target: {fileID: 7539670083752080096, guid: fc31fd70b5945084fb72fefe99f91ba3, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 

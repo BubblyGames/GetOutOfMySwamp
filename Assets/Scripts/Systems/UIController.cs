@@ -24,7 +24,8 @@ public class UIController : MonoBehaviour
     public GameObject sellButton;
     public GameObject shopMenu;
     public GameObject pauseMenu;
-    public GameObject endgameMenu;
+    public GameObject endgameMenuLoose;
+    public GameObject endgameMenuWin;
     public GameObject pauseButton;
     public List<GameObject> fixedTexts;
     public List<GameObject> statsTexts;
@@ -48,7 +49,8 @@ public class UIController : MonoBehaviour
     {
         UpgradeMenu,
         PauseMenu,
-        EndgameMenu,
+        EndgameMenuLoose,
+        EndgameMenuWin,
         Game,
         Settings,
         Tutorial,
@@ -102,10 +104,19 @@ public class UIController : MonoBehaviour
                 pauseButton.SetActive(false);
                 Time.timeScale = 0;
                 break;
-            case GameMenu.EndgameMenu:
-                endgameMenu.SetActive(true);
+            case GameMenu.EndgameMenuLoose:
+                endgameMenuLoose.SetActive(true);
                 upgradeMenu.SetActive(false);
                 pauseMenu.SetActive(false); 
+                pauseButton.SetActive(false);
+                settingsMenu.SetActive(false);
+                settingsButton.SetActive(false);
+                Time.timeScale = 1;
+                break;
+            case GameMenu.EndgameMenuWin:
+                endgameMenuWin.SetActive(true);
+                upgradeMenu.SetActive(false);
+                pauseMenu.SetActive(false);
                 pauseButton.SetActive(false);
                 settingsMenu.SetActive(false);
                 settingsButton.SetActive(false);
@@ -116,7 +127,8 @@ public class UIController : MonoBehaviour
                 shopMenu.SetActive(true);
                 upgradeMenu.SetActive(false);
                 pauseMenu.SetActive(false);
-                endgameMenu.SetActive(false);
+                endgameMenuLoose.SetActive(false);
+                endgameMenuWin.SetActive(false);
                 pauseButton.SetActive(true);
                 Time.timeScale = 1;
                 break;
@@ -129,7 +141,8 @@ public class UIController : MonoBehaviour
                         settingsButton.SetActive(false);
                         upgradeMenu.SetActive(false);
                         pauseMenu.SetActive(false);
-                        endgameMenu.SetActive(false);
+                        endgameMenuLoose.SetActive(false);
+                        endgameMenuWin.SetActive(false);
                         pauseButton.SetActive(false);
                         tutorialMenu.SetActive(false);
                         Time.timeScale = 0;
@@ -150,7 +163,8 @@ public class UIController : MonoBehaviour
                         settingsButton.SetActive(true);
                         upgradeMenu.SetActive(false);
                         pauseMenu.SetActive(false);
-                        endgameMenu.SetActive(false);
+                        endgameMenuLoose.SetActive(false);
+                        endgameMenuWin.SetActive(false);
                         pauseButton.SetActive(true);
                         tutorialMenu.SetActive(false);
                         Time.timeScale = 1;
