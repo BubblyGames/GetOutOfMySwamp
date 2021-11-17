@@ -429,7 +429,8 @@ public class CubeWorldGenerator : MonoBehaviour
         return cell;
     }
 
-    public bool CheckIfFloating(CellInfo cell) {
+    public bool CheckIfFloating(CellInfo cell)
+    {
         foreach (CellInfo c in GetNeighbours(cell))
         {
             if (c.blockType != BlockType.Air)
@@ -877,18 +878,25 @@ public class CubeWorldGenerator : MonoBehaviour
 
         for (int i = 0; i < max; i++)
         {
+            bool dirty = false;
             for (int j = 0; j < paths.Count; j++)
             {
                 if (i < paths[j].Length - 1)
                 {
                     CellInfo c = GetCellUnder(paths[j].GetCell(i));
                     if (c.blockType == BlockType.Grass || c.blockType == BlockType.Rock)
+                    {
+                        dirty = true;
                         c.blockType = BlockType.Path;
+                    }
                 }
             }
-            MeshData meshData = GenerateMesh();
-            voxelRenderer.RenderMesh(meshData);
-            yield return null;
+            if (dirty)
+            {
+                MeshData meshData = GenerateMesh();
+                voxelRenderer.RenderMesh(meshData);
+                yield return null;
+            }
         }
 
         yield return null;

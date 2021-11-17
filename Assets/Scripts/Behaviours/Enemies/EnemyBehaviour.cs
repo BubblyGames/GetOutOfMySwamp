@@ -30,7 +30,7 @@ public abstract class EnemyBehaviour : MonoBehaviour
     //Path the enemy will follow
     private Path path;
     private int nextIndexPath = 1;
-    private float lerpProgression = 0;
+    private float lerpProgression = 0.01f;
     private CellInfo currentCell;
 
 
@@ -63,7 +63,7 @@ public abstract class EnemyBehaviour : MonoBehaviour
         transform.position = Vector3.Lerp(transform.position, path.GetStep(nextIndexPath), lerpProgression);//A saltos
         //transform.position = Vector3.SmoothDamp(transform.position, path.GetStep(nextIndexPath), ref _smoothVelocity, currentSpeed);//Smooth
 
-     
+
         if (isSlowed)
         {
             if (slowTimer >= slowDuration)
@@ -78,9 +78,10 @@ public abstract class EnemyBehaviour : MonoBehaviour
             }
         }
 
-        if (lerpProgression < 1)
+        if (lerpProgression < .99)
         {
             lerpProgression += Time.deltaTime * currentSpeed;
+            //lerpProgression += Time.deltaTime * currentSpeed * (lerpProgression);
 
         }
         else
@@ -101,11 +102,11 @@ public abstract class EnemyBehaviour : MonoBehaviour
                         currentCell.SetStructure(null);
                     }
 
-                } 
+                }
                 nextIndexPath++;
-                lerpProgression = 0;
+                lerpProgression = 0.01f;
                 transform.LookAt(path.GetStep(nextIndexPath), path.GetCell(nextIndexPath).normalInt);
-                
+
             }
             //if the enemy reach the end of the path deal damage to base
             else

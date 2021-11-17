@@ -3790,7 +3790,7 @@ MonoBehaviour:
   rockSize: 10
   seed: 0
   numberOfMidpoints: 2
-  debugMidpoints: 1
+  debugMidpoints: 0
   lineRendererPrefab: {fileID: 3920875017051324963, guid: ffef0eddca5eb324f94bad8de9cc038b, type: 3}
 --- !u!114 &1903685288
 MonoBehaviour:
