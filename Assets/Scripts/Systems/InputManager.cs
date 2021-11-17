@@ -184,6 +184,11 @@ public class InputManager : MonoBehaviour
                     }
                     BuildManager.instance.SetSelectedStructure(structureHitted.GetComponent<Structure>());
                     break;
+                case "Gatherer":
+                    GameObject gathererHitted = hit.collider.gameObject;
+                    UIController.instance.ShowMenu(UIController.GameMenu.UpgradeMenu);
+                    UIController.instance.SetUpgradeMenu("money", gathererHitted.GetComponent<MoneyGatherer>().GetLevel());
+                    break;
                 default:
                     break;
             }

@@ -12,6 +12,7 @@ public class UIController : MonoBehaviour
     [Header("Menus")]
     public GameObject upgradeMenu;
     public GameObject upgradeButton;
+    public GameObject sellButton;
     public GameObject shopMenu;
     public GameObject pauseMenu;
     public GameObject endgameMenu;
@@ -241,18 +242,28 @@ public class UIController : MonoBehaviour
         {
             case "basic":
                 upgradeMenu.GetComponent<Image>().sprite = basicTowerSprite;
+                upgradeButton.SetActive(true);
+                sellButton.SetActive(true);
                 break;
             case "slow":
                 upgradeMenu.GetComponent<Image>().sprite = slowTowerSprite;
+                upgradeButton.SetActive(true);
+                sellButton.SetActive(true);
                 break;
             case "area":
                 upgradeMenu.GetComponent<Image>().sprite = areaTowerSprite;
+                upgradeButton.SetActive(true);
+                sellButton.SetActive(true);
                 break;
             case "bomb":
                 upgradeMenu.GetComponent<Image>().sprite = bombTowerSprite;
+                upgradeButton.SetActive(true);
+                sellButton.SetActive(true);
                 break;
             case "money":
                 upgradeMenu.GetComponent<Image>().sprite = moneyStructureSprite;
+                upgradeButton.SetActive(false);
+                sellButton.SetActive(false);
                 break;
 
         }
