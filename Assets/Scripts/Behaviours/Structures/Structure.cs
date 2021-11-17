@@ -23,7 +23,6 @@ public class Structure : MonoBehaviour
     [SerializeField]
     protected bool isMaxLevel = false;
 
-
     [SerializeField]
     protected Vector3 normal;
 

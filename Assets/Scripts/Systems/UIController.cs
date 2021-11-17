@@ -18,6 +18,14 @@ public class UIController : MonoBehaviour
     public GameObject settingsButton;
     public GameObject tutorialMenu;
 
+    [Header("UpgradeMenu SpritesInfo Cards")]
+    public Sprite basicTowerSprite;
+    public Sprite slowTowerSprite;
+    public Sprite areaTowerSprite;
+    public Sprite bombTowerSprite;
+    public Sprite moneyStructureSprite;
+
+
     private int gameSceneId;
     public enum GameMenu
     {
@@ -220,6 +228,26 @@ public class UIController : MonoBehaviour
     {
         if(LevelManager.instance!=null)
         FPSText.text = Mathf.Round((1 / Time.deltaTime)).ToString(); //FpS 
+    }
+
+    public void ChangeUpgradeMenuBackground(string structureName)
+    {
+        switch (structureName)
+        {
+            case "basic":
+                upgradeMenu.GetComponent<Image>().sprite = basicTowerSprite;
+                break;
+            case "slow":
+                upgradeMenu.GetComponent<Image>().sprite = slowTowerSprite;
+                break;
+            case "area":
+                upgradeMenu.GetComponent<Image>().sprite = areaTowerSprite;
+                break;
+            case "bomb":
+                upgradeMenu.GetComponent<Image>().sprite = bombTowerSprite;
+                break;
+
+        }
     }
 }
 

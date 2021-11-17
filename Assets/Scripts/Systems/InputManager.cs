@@ -155,9 +155,31 @@ public class InputManager : MonoBehaviour
 
                     break;
                 case "Structure":
+                    GameObject structureHitted = hit.collider.gameObject;
                     //Interact with existing defenses
                     UIController.instance.ShowMenu(UIController.GameMenu.UpgradeMenu);
-                    BuildManager.instance.SetSelectedStructure(hit.collider.gameObject.GetComponent<Structure>());
+
+                    //check the structure type
+                    if (structureHitted.GetComponent<ShootingDefenseBehaviour>() != null)
+                    {
+                        if(structureHitted.GetComponent<ShootingDefenseBehaviour>().GetEffect() == 1){
+                            UIController.instance.ChangeUpgradeMenuBackground("slow");
+                        }
+                        else
+                        {
+                            UIController.instance.ChangeUpgradeMenuBackground("basic");
+                        }
+                    }
+                    else if (structureHitted.GetComponent<AOEDefenseBehaviour>() != null)
+                    {
+                        UIController.instance.ChangeUpgradeMenuBackground("area");
+                    }
+                    else if (structureHitted.GetComponent<Bomb>() != null)
+                    {
+                        UIController.instance.ChangeUpgradeMenuBackground("bomb");
+                    }
+
+                    BuildManager.instance.SetSelectedStructure(structureHitted.GetComponent<Structure>());
                     break;
                 default:
                     break;
