@@ -21,6 +21,10 @@ public class UIController : MonoBehaviour
     [Header("GameScene Menus")]
     public GameObject upgradeMenu;
     public GameObject upgradeButton;
+    public Text damageText;
+    public Text rangeText;
+    public Text FRText;
+    public Text TargetText;
     public GameObject sellButton;
     public GameObject shopMenu;
     public GameObject pauseMenu;
