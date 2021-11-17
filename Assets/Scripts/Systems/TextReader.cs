@@ -24,7 +24,10 @@ public class TextReader : MonoBehaviour
     private void Start()
     {
         Subscribe();
-        Read();
+        if (!key.Equals(""))
+        {
+            Read();
+        }
 
         if (gameObject.name.Equals("LenguageButton"))
         {
@@ -94,5 +97,11 @@ public class TextReader : MonoBehaviour
     public string GetText()
     {
         return _text;
+    }
+
+    public void SetKey(string newKey)
+    {
+        key = newKey;
+        Read();
     }
 }
