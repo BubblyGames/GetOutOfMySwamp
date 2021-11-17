@@ -4036,8 +4036,8 @@ MonoBehaviour:
   sellButton: {fileID: 1792218503}
   shopMenu: {fileID: 549071505}
   pauseMenu: {fileID: 1738156960}
-  endgameMenuLoose: {fileID: 0}
-  endgameMenuWin: {fileID: 0}
+  endgameMenuLoose: {fileID: 3538565076807928475}
+  endgameMenuWin: {fileID: 7472722199113467056}
   pauseButton: {fileID: 1732745669}
   fixedTexts:
   - {fileID: 1962419175}
@@ -7371,6 +7371,11 @@ PrefabInstance:
       objectReference: {fileID: 1328887940}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: fc31fd70b5945084fb72fefe99f91ba3, type: 3}
+--- !u!1 &7472722199113467056 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7539670085400212178, guid: fc31fd70b5945084fb72fefe99f91ba3, type: 3}
+  m_PrefabInstance: {fileID: 7472722199113467055}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &8189202186883519556
 MonoBehaviour:
   m_ObjectHideFlags: 0
