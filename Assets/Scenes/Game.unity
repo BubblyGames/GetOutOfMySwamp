@@ -4040,7 +4040,11 @@ MonoBehaviour:
   heavyTowerSprite: {fileID: 21300000, guid: dfe144ffea944824f974f903a34fd04b, type: 3}
   bombTowerSprite: {fileID: 21300000, guid: 94f357d1f3f2e7f4b8fe6077fff9fa66, type: 3}
   moneyStructureSprite: {fileID: 21300000, guid: f998ef7138313ad4e9d8f1fb319ffb23, type: 3}
-  upgradeLevels: []
+  upgradeLevels:
+  - {fileID: 21300000, guid: a655b2f44cde3b542b37a07a5df43a85, type: 3}
+  - {fileID: 21300000, guid: 7d9467091172b7a459d21f854fa1d33e, type: 3}
+  - {fileID: 21300000, guid: 0a5235c4f88ebda4ba1e0f9423950d8a, type: 3}
+  - {fileID: 21300000, guid: 24bff72e7482c1a459680b7aa6355cc8, type: 3}
   shopContainer: {fileID: 1903685281}
   selectedMenu: 0
   FPSText: {fileID: 1583022576}
@@ -5787,7 +5791,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   infiniteHealth: 0
   infiniteMoney: 0
-  enableEnemySpawn: 1
+  enableEnemySpawn: 0
   enemy: 0
 --- !u!114 &1903685289
 MonoBehaviour:
