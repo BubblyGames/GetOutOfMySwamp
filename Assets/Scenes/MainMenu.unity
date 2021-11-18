@@ -4360,7 +4360,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &991896027
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4647,8 +4647,8 @@ MonoBehaviour:
   towerName: {fileID: 0}
   upgradeCostText: {fileID: 0}
   basicTowerSprite: {fileID: 0}
-  slowTowerSprite: {fileID: 0}
-  areaTowerSprite: {fileID: 0}
+  psiquicTowerSprite: {fileID: 0}
+  heavyTowerSprite: {fileID: 0}
   bombTowerSprite: {fileID: 0}
   moneyStructureSprite: {fileID: 0}
   upgradeLevels: []
