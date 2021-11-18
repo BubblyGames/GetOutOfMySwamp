@@ -43,7 +43,7 @@ public class BuildManager : MonoBehaviour
 
         //Spell will always be 
         SpellBehaviour sb;
-        if (structureToBuild.structurePrefab.TryGetComponent<SpellBehaviour>(out sb))
+        if (structureBlueprint.structurePrefab.TryGetComponent<SpellBehaviour>(out sb))
             return true;
 
         //But for builidngs we need to check if the position is within the world bounds
