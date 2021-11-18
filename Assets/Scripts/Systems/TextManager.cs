@@ -180,9 +180,17 @@ public class TextManager : MonoBehaviour
 
         //descriptions of lessons in Spanish
         spanishDictionary.Add("lesson1", "Lección 1");
-        spanishDictionary.Add("description1", "asadsafdsfdsfdsfsdfds");
+        spanishDictionary.Add("description1", "La rana básica es la defensa más barata, pero no por ello menos útil. Su nivel de ataque medio combinado con su velocidad media de ataque puede salvarte de muchos apuros.");
         spanishDictionary.Add("lesson2", "Lección 2");
-        spanishDictionary.Add("description2", "aaaa");
+        spanishDictionary.Add("description2", "La rana psíquica es la defensa perfecta contra enemigos rápidos. Aunque tiene poco rango y daño, su efecto ralentizador combinado con otras defensas puede darte la victoria.");
+        spanishDictionary.Add("lesson3", "Lección 3");
+        spanishDictionary.Add("description3", "La rana pesada cuenta con una velocidad de disparo muy lenta, pero su alto alcance y su demoledor daño pueden ser decisivos.");
+        spanishDictionary.Add("lesson4", "Lección 4");
+        spanishDictionary.Add("description4", "La rana banquera rehuye de combatir prefiere estar centrada en recaudar dinero para crear más defensas. Úsala sabiamente.");
+        spanishDictionary.Add("lesson5", "Lección 5");
+        spanishDictionary.Add("description5", "La rana aérea tiene la mira puesta en el horizonte. Los enemigos deberán tener siempre los pies en la tierra cerca de ella o sufrirán las consecuencias");
+        spanishDictionary.Add("lesson6", "Lección 6");
+        spanishDictionary.Add("description6", "¡BUM! será lo último que escucharán tus enemigos. Además esta seta mina trae un 2x1 porque dejará a los enemigos aturdidos y se moverán más lento.");
     }
 
     public void emptyGameobjectsList(bool restart)
