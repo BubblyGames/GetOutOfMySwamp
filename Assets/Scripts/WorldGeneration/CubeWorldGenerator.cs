@@ -759,6 +759,20 @@ public class CubeWorldGenerator : MonoBehaviour
 
     public CellInfo GetCell(Vector3Int p) { return cells[p.x, p.y, p.z]; }
 
+    /// <summary>
+    /// Checks if a cube's position is valid
+    /// </summary>
+    /// <param name="cellindex">Checked position</param>
+    /// <returns>If position is inside cube's bounds</returns>
+    public bool CheckCell(Vector3 cellindex, BlockType blocktype,Vector3 cellOnTop) {
+        return (cellindex.x >= 1 && cellindex.x < cells.GetLength(0)-1) &&
+            (cellindex.y >= 1 && cellindex.y < cells.GetLength(0) - 1) &&
+            (cellindex.z >= 1 && cellindex.z < cells.GetLength(0) - 1) &&
+            GetCell(Vector3Int.FloorToInt(cellindex)).structure == null &&
+            GetCell(Vector3Int.FloorToInt(cellindex)).blockType == blocktype &&
+            GetCell(Vector3Int.FloorToInt(cellOnTop)).blockType == BlockType.Air;
+    }
+
     public Vector3Int GetFaceNormal(CellInfo cellInfo)
     {
         //Returns the normal of the face in which a cell is placed
