@@ -7,16 +7,21 @@ using UnityEngine.EventSystems;
 public class BuildManager : MonoBehaviour
 {
     public static BuildManager instance;
+    [SerializeField]
     private StructureBlueprint structureBlueprint = null; //Structure is going to be built
+
     [SerializeField]
     private Structure selectedStructure; //Already Built structure 
+
     [SerializeField]
     private CellInfo selectedCell;
+
     [SerializeField]
     private UIController uIController;
 
 
     public bool canBuild;//Checks if a structure is selected to be built
+    public Vector3 currentConstructionPositionOffset;
 
     private void Awake()
     {
@@ -30,7 +35,7 @@ public class BuildManager : MonoBehaviour
         }
     }
 
-    public bool CheckIfCanBuild(RaycastHit hit, out Vector3 intPos, out Vector3 sizeOffset)
+    public bool CheckIfCanBuild(RaycastHit hit, out Vector3 intPos )
     {
         //Position where structure will be build
         intPos = new Vector3(
@@ -38,7 +43,7 @@ public class BuildManager : MonoBehaviour
             Mathf.RoundToInt(hit.point.y + (hit.normal.y / 2)),
             Mathf.RoundToInt(hit.point.z + (hit.normal.z / 2)));
 
-        sizeOffset = Vector3Int.zero;
+
 
         if (!CheatManager.instance.infiniteMoney)
         {
@@ -94,7 +99,7 @@ public class BuildManager : MonoBehaviour
 
         Vector3Int cubeDotProduct = Vector3Int.FloorToInt(Vector3.Cross(hit.normal, cubeForward));
 
-        int structureSize = structureBlueprint.structurePrefab.GetComponentInChildren<Structure>().Size;
+        int structureSize = structureBlueprint.structurePrefab.GetComponent<Structure>().Size;
 
         for (int i = 0; i < structureSize; i++)
         {
@@ -103,15 +108,15 @@ public class BuildManager : MonoBehaviour
  
                 Vector3 sizeChecker = intPosUnder + (cubeForward * i) + (cubeDotProduct * j) ;
                 Vector3 OnTopofSizeChecker = intPos + (cubeForward * i) + (cubeDotProduct * j) ;
-                if (!LevelManager.instance.world.CheckCell(sizeChecker, structureBlueprint.structurePrefab.GetComponentInChildren<Structure>().blockType, OnTopofSizeChecker))
+                if (!LevelManager.instance.world.CheckCell(sizeChecker, structureBlueprint.structurePrefab.GetComponent<Structure>().blockType, OnTopofSizeChecker))
                     return false;
             }
         }
 
         if (structureSize > 1)
         {
-            sizeOffset =(hit.normal + cubeForward + cubeDotProduct) / structureSize;
-            Debug.Log("SO:"+sizeOffset);
+            currentConstructionPositionOffset =(hit.normal + cubeForward + cubeDotProduct) / structureSize;
+            Debug.Log("SO:"+currentConstructionPositionOffset);
         }
 
         if (!canBuild /*|| selectedCell.blockType != structureBlueprint.structurePrefab.GetComponentInChildren<Structure>().blockType*/)
@@ -136,21 +141,25 @@ public class BuildManager : MonoBehaviour
     public void PlaceObject(RaycastHit hit)
     {
         Vector3 pos;
-        Vector3 offset;
-        if (CheckIfCanBuild(hit, out pos, out offset))
+        if (CheckIfCanBuild(hit, out pos))
         {
-            pos += offset;
+            pos += currentConstructionPositionOffset;
             Debug.Log("Pos:"+pos);
             BuildStructure(pos, hit.normal);
         }
     }
 
-    internal void SetSelectedStructure(Structure structure)
+    public void SetSelectedStructure(Structure structure)
     {
         selectedStructure = structure;
         structureBlueprint = selectedStructure.Blueprint;
         selectedCell = null;
 
+    }
+
+    public int GetStructureSize()
+    {
+        return structureBlueprint.structurePrefab.GetComponent<Structure>().Size;
     }
 
     public void SelectCell(CellInfo cell)

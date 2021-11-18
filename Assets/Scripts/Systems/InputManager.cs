@@ -85,8 +85,7 @@ public class InputManager : MonoBehaviour
                 {
                     //If can't build on selected cell, cursor turns red
                     Vector3 pos;
-                    Vector3 offset;
-                    if (BuildManager.instance.CheckIfCanBuild(hit, out pos, out offset))
+                    if (BuildManager.instance.CheckIfCanBuild(hit, out pos))
                     {
                         cursor.GetComponent<MeshRenderer>().material.color = Color.white;
                     }
@@ -97,7 +96,16 @@ public class InputManager : MonoBehaviour
 
                     //Cursor activates and moves to selected cell
                     cursor.SetActive(true);
+
+                   
                     cursor.transform.position = pos;
+                    int structureSize = BuildManager.instance.GetStructureSize();
+                    if (structureSize > 1)
+                    {
+                        cursor.transform.localScale = Vector3.one * structureSize;
+                        cursor.transform.position += BuildManager.instance.currentConstructionPositionOffset;
+
+                    }
                     cursor.transform.up = hit.normal;
                 }
                 //Card is hidden if poiting at anything in the world
@@ -217,7 +225,7 @@ public class InputManager : MonoBehaviour
                         UIController.instance.SetUpgradeMenu(3, structureHitted.GetComponent<Bomb>().GetStructureName(), structureHitted.GetComponent<Bomb>().GetLevel(), structureHitted.GetComponent<Bomb>().GetTarget(),
                                 structureHitted.GetComponent<Bomb>().GetRange(), structureHitted.GetComponent<Bomb>().GetFireRate(), structureHitted.GetComponent<Bomb>().GetDamage(), 0);
                     }*/
-                    BuildManager.instance.SetSelectedStructure(structureHitted.GetComponent<Structure>());
+                    
                     break;
 
                 case "Gatherer":
