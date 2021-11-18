@@ -14,15 +14,19 @@ public class TextReader : MonoBehaviour
 
     private void Awake()
     {
-        textManager = GameObject.Find("GameManager");
+        //textManager = GameObject.Find("GameManager");
         if (SceneManager.GetActiveScene().name.Equals("Game"))
         {
             levelManager = GameObject.Find("LevelManager");
-
         }
     }
     private void Start()
     {
+        if (GameManager.instance == null)
+            return;
+
+        textManager = GameManager.instance.gameObject;
+
         Subscribe();
         if (!key.Equals(""))
         {
@@ -50,7 +54,8 @@ public class TextReader : MonoBehaviour
 
     public void Subscribe()
     {
-        textManager.GetComponent<TextManager>().Subscribe(gameObject, SceneManager.GetActiveScene().name);
+        if (textManager != null)
+            textManager.GetComponent<TextManager>().Subscribe(gameObject, SceneManager.GetActiveScene().name);
     }
 
     public void Read()

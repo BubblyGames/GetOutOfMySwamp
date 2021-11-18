@@ -274,9 +274,10 @@ public class CubeWorldGenerator : MonoBehaviour
                         cells[endX + i, j, endZ + k].blockType = BlockType.Swamp;
                         cells[endX + i, j, endZ + k].canWalk = true;
                     }
-                    else
+                    else if (j == 1)
                     {
-                        //cells[endX + i, j, endZ + k].blockType = BlockType.Rock;
+                        cells[endX + i, j, endZ + k].blockType = BlockType.Path;
+                        cells[endX + i, j, endZ + k].canWalk = false;
                     }
                 }
             }

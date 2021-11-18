@@ -87,7 +87,7 @@ public class UIController : MonoBehaviour
         switch (menu)
         {
             case GameMenu.UpgradeMenu:
-                if (upgradeMenu.activeSelf == false)
+                /*if (upgradeMenu.activeSelf == false)
                 {
                     upgradeMenu.SetActive(true);
                     pauseMenu.SetActive(false);
@@ -96,7 +96,11 @@ public class UIController : MonoBehaviour
                 {
                     upgradeMenu.SetActive(false);
                     pauseMenu.SetActive(false);
-                }
+                }*/
+
+                upgradeMenu.SetActive(!upgradeMenu.activeSelf);
+                pauseMenu.SetActive(false);
+
                 break;
             case GameMenu.PauseMenu:
                 pauseMenu.SetActive(true);
