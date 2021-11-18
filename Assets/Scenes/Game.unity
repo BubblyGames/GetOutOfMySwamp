@@ -4037,7 +4037,7 @@ MonoBehaviour:
   upgradeCostText: {fileID: 327890052}
   basicTowerSprite: {fileID: 21300000, guid: 6c53c68d74df63a4792a296a3030e0d3, type: 3}
   psiquicTowerSprite: {fileID: 21300000, guid: dfe144ffea944824f974f903a34fd04b, type: 3}
-  heavyTowerSprite: {fileID: 21300000, guid: 42013ccd03d3d3a4f919cc353e917dc4, type: 3}
+  heavyTowerSprite: {fileID: 21300000, guid: d028348a0d83f564baeecfeed75490c0, type: 3}
   bombTowerSprite: {fileID: 21300000, guid: 94f357d1f3f2e7f4b8fe6077fff9fa66, type: 3}
   moneyStructureSprite: {fileID: 21300000, guid: f998ef7138313ad4e9d8f1fb319ffb23, type: 3}
   upgradeLevels:
