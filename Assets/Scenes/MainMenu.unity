@@ -344,7 +344,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_FontData:
-    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
+    m_Font: {fileID: 12800000, guid: 5fba7281582215e46ac65f96af736fe6, type: 3}
     m_FontSize: 14
     m_FontStyle: 0
     m_BestFit: 1
@@ -1820,8 +1820,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 59.749}
-  m_SizeDelta: {x: 381.8563, y: 235.4987}
+  m_AnchoredPosition: {x: 3.5082, y: 51.8953}
+  m_SizeDelta: {x: 559.04, y: 211.9374}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &244025407
 MonoBehaviour:
@@ -1858,7 +1858,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_FontData:
-    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
+    m_Font: {fileID: 12800000, guid: 5fba7281582215e46ac65f96af736fe6, type: 3}
     m_FontSize: 14
     m_FontStyle: 0
     m_BestFit: 1
@@ -2117,7 +2117,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 242.6727, y: 195.7182}
+  m_AnchoredPosition: {x: 242.67, y: 219}
   m_SizeDelta: {x: 80.709, y: 62.3638}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &424300127
@@ -4360,7 +4360,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &991896027
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4377,6 +4377,17 @@ MonoBehaviour:
   descTextReader: {fileID: 244025405}
   headerContainer: {fileID: 16216186}
   descriptionContainer: {fileID: 244025408}
+  imageContainer: {fileID: 1343432533}
+  lessonImages:
+  - {fileID: 21300000, guid: a97e782458e54a4479509183f70690dc, type: 3}
+  - {fileID: 21300000, guid: 42013ccd03d3d3a4f919cc353e917dc4, type: 3}
+  - {fileID: 21300000, guid: e8f88bfc5484b994e822c3366e75171a, type: 3}
+  - {fileID: 21300000, guid: c5c965c2c28feb9488fef47aac22ad4f, type: 3}
+  - {fileID: 21300000, guid: 7a386d8465c07604c99bc8137235803f, type: 3}
+  - {fileID: 21300000, guid: 42ace1f76f092284eb79ab05322801e7, type: 3}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
 --- !u!222 &991896028
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -4423,7 +4434,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 0.392}
+  m_Color: {r: 0.9433962, g: 0.719606, b: 0.084549636, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -5700,8 +5711,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -158}
-  m_SizeDelta: {x: 200, y: 200}
+  m_AnchoredPosition: {x: -0.000015259, y: -154.66}
+  m_SizeDelta: {x: 178.5068, y: 226.31}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1343432533
 MonoBehaviour:
