@@ -259,7 +259,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 57840772}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 241.40437, y: 98.09852, z: -133.91808}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -3781,7 +3781,7 @@ MonoBehaviour:
   canMergePaths: 0
   wallDensity: 0.4
   rocksVisualReduction: 0.8
-  rockSize: 10
+  rockSize: 0
   seed: 0
   pathMetod: 1
   numberOfMidpoints: 0
@@ -3800,7 +3800,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   infiniteHealth: 0
-  infiniteMoney: 0
+  infiniteMoney: 1
   enableEnemySpawn: 0
   enemy: 0
 --- !u!114 &1903685289
@@ -3894,7 +3894,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   shopIndex: -1
   defenseBlueprints:
-  - structurePrefab: {fileID: 3918528406213560500, guid: 7ab3ad8c3b525764a96ab4a0bab03ce3, type: 3}
+  - structurePrefab: {fileID: 7137880238603071797, guid: e1fa9704af9f5114992d5229e61c2040, type: 3}
     creationCost: 100
     upgradeMultiplicator: 1.5
     upgrades:

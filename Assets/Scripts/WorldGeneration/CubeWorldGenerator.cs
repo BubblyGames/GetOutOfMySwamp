@@ -667,12 +667,12 @@ public class CubeWorldGenerator : MonoBehaviour
     /// </summary>
     /// <param name="cellindex">Checked position</param>
     /// <returns>If position is inside cube's bounds</returns>
-    public bool CheckCell(Vector3Int cellindex, BlockType blocktype,Vector3Int cellOnTop) {
+    public bool CheckCell(Vector3 cellindex, BlockType blocktype,Vector3 cellOnTop) {
         return (cellindex.x >= 1 && cellindex.x < cells.GetLength(0)-1) &&
             (cellindex.y >= 1 && cellindex.y < cells.GetLength(0) - 1) &&
             (cellindex.z >= 1 && cellindex.z < cells.GetLength(0) - 1) &&
-            GetCell(cellindex).blockType == blocktype &&
-            GetCell(cellOnTop).blockType == BlockType.Air;
+            GetCell(Vector3Int.FloorToInt(cellindex)).blockType == blocktype &&
+            GetCell(Vector3Int.FloorToInt(cellOnTop)).blockType == BlockType.Air;
     }
 
     public Vector3Int GetFaceNormal(CellInfo cellInfo)

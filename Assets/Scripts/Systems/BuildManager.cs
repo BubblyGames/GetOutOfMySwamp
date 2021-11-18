@@ -28,13 +28,15 @@ public class BuildManager : MonoBehaviour
         }
     }
 
-    public bool CheckIfCanBuild(RaycastHit hit, out Vector3Int intPos)
+    public bool CheckIfCanBuild(RaycastHit hit, out Vector3 intPos, out Vector3 sizeOffset)
     {
         //Position where structure will be build
-        intPos = new Vector3Int(
+        intPos = new Vector3(
             Mathf.RoundToInt(hit.point.x + (hit.normal.x / 2)),
             Mathf.RoundToInt(hit.point.y + (hit.normal.y / 2)),
             Mathf.RoundToInt(hit.point.z + (hit.normal.z / 2)));
+
+        sizeOffset = Vector3Int.zero;
 
         if (!CheatManager.instance.infiniteMoney)
         {
@@ -55,7 +57,7 @@ public class BuildManager : MonoBehaviour
         
         if (hit.normal == Vector3Int.forward)
         {
-            cubeForward = Vector3Int.up;
+            cubeForward = Vector3Int.right;
         }
         else if (hit.normal == Vector3Int.up)
         {
@@ -67,7 +69,7 @@ public class BuildManager : MonoBehaviour
         }
         else if (hit.normal == Vector3Int.down)
         {
-            cubeForward = Vector3Int.forward;
+            cubeForward = Vector3Int.right;
         }
         else if(hit.normal == Vector3Int.right)
         {
@@ -75,30 +77,38 @@ public class BuildManager : MonoBehaviour
         }
         else if (hit.normal == Vector3Int.left)
         {
-            cubeForward = Vector3Int.up;
+            cubeForward = Vector3Int.forward;
         }
 
 
         Vector3Int cubeDotProduct = Vector3Int.FloorToInt(Vector3.Cross(hit.normal, cubeForward));
 
-        for (int i = 0; i < structureBlueprint.structurePrefab.GetComponentInChildren<Structure>().Width; i++)
+        int structureSize = structureBlueprint.structurePrefab.GetComponentInChildren<Structure>().Width;
+
+        for (int i = 0; i < structureSize; i++)
         {
-            for (int j = 0; j < structureBlueprint.structurePrefab.GetComponentInChildren<Structure>().Width; j++)
+            for (int j = 0; j <structureSize; j++)
             {
  
-                Vector3Int sizeChecker = intPosUnder + (cubeForward * i) + (cubeDotProduct * j) ;
-                Vector3Int OnTopofSizeChecker = intPos + (cubeForward * i) + (cubeDotProduct * j) ;
+                Vector3 sizeChecker = intPosUnder + (cubeForward * i) + (cubeDotProduct * j) ;
+                Vector3 OnTopofSizeChecker = intPos + (cubeForward * i) + (cubeDotProduct * j) ;
                 if (!LevelManager.instance.world.CheckCell(sizeChecker, structureBlueprint.structurePrefab.GetComponentInChildren<Structure>().blockType, OnTopofSizeChecker))
                     return false;
             }
         }
 
-        if (!canBuild || selectedCell.blockType != structureBlueprint.structurePrefab.GetComponentInChildren<Structure>().blockType)
+        if (structureSize > 1)
+        {
+            sizeOffset =(hit.normal + cubeForward + cubeDotProduct) / structureSize;
+            Debug.Log("SO:"+sizeOffset);
+        }
+
+        if (!canBuild /*|| selectedCell.blockType != structureBlueprint.structurePrefab.GetComponentInChildren<Structure>().blockType*/)
             return false;
 
         Gatherer g;
-        if (WorldManager.instance.IsPosInBounds(intPos.x, intPos.y, intPos.z) &&
-            !LevelManager.instance.world.GetCell(intPos).isCloseToPath &&
+        if (WorldManager.instance.IsPosInBounds((int)intPos.x, (int)intPos.y, (int)intPos.z) &&
+            !LevelManager.instance.world.GetCell((int)intPos.x, (int)intPos.y, (int)intPos.z).isCloseToPath &&
             structureBlueprint.structurePrefab.TryGetComponent<Gatherer>(out g))
         {
             //Debug.Log("Can't add");
@@ -110,9 +120,12 @@ public class BuildManager : MonoBehaviour
 
     public void PlaceObject(RaycastHit hit)
     {
-        Vector3Int pos;
-        if (CheckIfCanBuild(hit, out pos))
+        Vector3 pos;
+        Vector3 offset;
+        if (CheckIfCanBuild(hit, out pos, out offset))
         {
+            pos += offset;
+            Debug.Log("Pos:"+pos);
             BuildStructure(pos, hit.normal);
         }
     }
@@ -144,7 +157,7 @@ public class BuildManager : MonoBehaviour
         canBuild = false;
     }
 
-    public void BuildStructure(Vector3Int position, Vector3 normal)
+    public void BuildStructure(Vector3 position, Vector3 normal)
     {
         if (CheatManager.instance.infiniteMoney)
         {
@@ -164,10 +177,9 @@ public class BuildManager : MonoBehaviour
         }
     }
 
-    public void CreateTowerOnCell(Vector3Int position, Vector3 normal)
+    public void CreateTowerOnCell(Vector3 position, Vector3 normal)
     {
         GameObject structureGO = Instantiate(structureBlueprint.structurePrefab, position, Quaternion.Euler(normal));
-        Debug.Log(position);
         Structure structure = structureGO.GetComponentInChildren<Structure>();
         structure.gameObject.transform.localScale *= structure.Width;
         structure.SetNormal(normal);
@@ -175,7 +187,7 @@ public class BuildManager : MonoBehaviour
 
         //If we are putting a bomb, apart from creating the model, we set the cell's structure associated in which we are creating it
         Bomb b;
-        CellInfo cell = LevelManager.instance.world.GetCell(position);
+        CellInfo cell = LevelManager.instance.world.GetCell((int)position.x, (int)position.y, (int)position.z);
         if (structure.TryGetComponent<Bomb>(out b))
         {
             if (cell.GetStructure() == null)

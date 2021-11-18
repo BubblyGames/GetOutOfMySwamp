@@ -84,8 +84,9 @@ public class InputManager : MonoBehaviour
                 if (hit.collider.tag == "World")//If mouse is over world
                 {
                     //If can't build on selected cell, cursor turns red
-                    Vector3Int pos;
-                    if (BuildManager.instance.CheckIfCanBuild(hit, out pos))
+                    Vector3 pos;
+                    Vector3 offset;
+                    if (BuildManager.instance.CheckIfCanBuild(hit, out pos, out offset))
                     {
                         cursor.GetComponent<MeshRenderer>().material.color = Color.white;
                     }
