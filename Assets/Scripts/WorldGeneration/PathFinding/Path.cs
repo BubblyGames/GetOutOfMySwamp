@@ -92,7 +92,7 @@ public class Path
         return true;
     }
 
-    public static Node FindPathAstar(CubeWorldGenerator _world, Node firstNode, CellInfo end, bool lastStep = false)
+    public static Node FindPathAstar(CubeWorldGenerator _world, Node firstNode, CellInfo end, bool lastStep = false, List<Node> excludedNodes = null)
     {
         Node current;
 
@@ -100,6 +100,9 @@ public class Path
         //SortedSet<Node> openList = new SortedSet<Node>(nodeComparer);
         List<Node> openList = new List<Node>();
         List<Node> closedList = new List<Node>();
+
+        if (excludedNodes != null)
+            closedList.AddRange(excludedNodes);
 
         //SortedSet<Node> sortedList = new SortedSet<Node>();
 
@@ -194,6 +197,9 @@ public class Path
     Node FindPathAstarWithMidpoints(CellInfo start, CellInfo end)
     {
 
+        List<Node> closedList = new List<Node>();
+        List<Midpoint> newMidpoints = new List<Midpoint>();
+
         Node current = new Node(start);
         current.ComputeFScore(end.x, end.y, end.z);
 
@@ -224,7 +230,7 @@ public class Path
                     count2++;
                 }
 
-                result = Path.FindPathAstar(world, current, midpoint.cell, lastSept);
+                result = Path.FindPathAstar(world, current, midpoint.cell, lastSept, closedList);
 
                 if (result == null)
                 {
@@ -251,18 +257,35 @@ public class Path
             }
 
             Node n = result;
+
+            count = 0;
+            int length = result.g - current.g;
+            //Debug.Log(length);
+
             while (n != current)
             {
+                Debug.Log(n.g);
+
+                if (!lastSept && count == length / 2)
+                    newMidpoints.Add(new Midpoint(n.cell, false));
+
+                closedList.Add(n);
                 n.cell.isPath = true;
                 foreach (CellInfo c in world.GetNeighbours(n.cell, true))
                 {
                     c.isCloseToPath = true;
                 }
                 n = n.Parent;
+                count++;
             }
 
             //The end of this segment will become the start of the next one
             current = result;
+        }
+
+        for (int i = 0; i < newMidpoints.Count; i++)
+        {
+            midPoints.Insert(i + 1, newMidpoints[i]);
         }
 
         //Final step is finding the actual end

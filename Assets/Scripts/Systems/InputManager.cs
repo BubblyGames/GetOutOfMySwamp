@@ -44,7 +44,7 @@ public class InputManager : MonoBehaviour
     }
 
     // Update is called once per frame
-    void LateUpdate()
+    void Update()
     {
         //Zoom
         CheckPinch();
@@ -162,18 +162,18 @@ public class InputManager : MonoBehaviour
                     //check the structure type
                     if (structureHitted.GetComponent<ShootingDefenseBehaviour>() != null)
                     {
-                        if (structureHitted.GetComponent<ShootingDefenseBehaviour>().GetEffect() == 1)
-                        {
-                            UIController.instance.SetUpgradeMenu(1, structureHitted.GetComponent<ShootingDefenseBehaviour>().GetStructureName(), structureHitted.GetComponent<ShootingDefenseBehaviour>().GetLevel(),
-                                structureHitted.GetComponent<ShootingDefenseBehaviour>().GetTarget(), structureHitted.GetComponent<ShootingDefenseBehaviour>().GetRange(), structureHitted.GetComponent<ShootingDefenseBehaviour>().GetFireRate(),
-                                structureHitted.GetComponent<ShootingDefenseBehaviour>().GetDamage(), 0);
-                        }
-                        else
-                        {
-                            UIController.instance.SetUpgradeMenu(0, structureHitted.GetComponent<ShootingDefenseBehaviour>().GetStructureName(), structureHitted.GetComponent<ShootingDefenseBehaviour>().GetLevel(),
-                                structureHitted.GetComponent<ShootingDefenseBehaviour>().GetTarget(), structureHitted.GetComponent<ShootingDefenseBehaviour>().GetRange(), structureHitted.GetComponent<ShootingDefenseBehaviour>().GetFireRate(),
-                                structureHitted.GetComponent<ShootingDefenseBehaviour>().GetDamage(), 0);
-                        }
+                        //If slows down
+                        int i = structureHitted.GetComponent<ShootingDefenseBehaviour>().GetEffect();
+                        ShootingDefenseBehaviour sfb = structureHitted.GetComponent<ShootingDefenseBehaviour>();
+
+                        UIController.instance.SetUpgradeMenu(i, 
+                            sfb.GetStructureName(),
+                            sfb.GetLevel(),
+                            sfb.GetTarget(),
+                            sfb.GetRange(),
+                            sfb.GetFireRate(),
+                            sfb.GetDamage(), 0);
+
                     }
                     else if (structureHitted.GetComponent<AOEDefenseBehaviour>() != null)
                     {

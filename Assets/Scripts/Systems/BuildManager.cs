@@ -161,8 +161,6 @@ public class BuildManager : MonoBehaviour
 
     public void UpgradeStructure()
     {
-        UIController.instance.ShowMenu(UIController.GameMenu.Game);
-
         if (selectedStructure.GetLevel() < 3)
         {
             if (CheatManager.instance.infiniteMoney)
