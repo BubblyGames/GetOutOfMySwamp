@@ -3618,7 +3618,7 @@ MonoBehaviour:
   m_ScaleFactor: 1
   m_ReferenceResolution: {x: 960, y: 600}
   m_ScreenMatchMode: 0
-  m_MatchWidthOrHeight: 1
+  m_MatchWidthOrHeight: 0
   m_PhysicalUnit: 3
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
@@ -4639,14 +4639,20 @@ MonoBehaviour:
   sellButton: {fileID: 0}
   shopMenu: {fileID: 0}
   pauseMenu: {fileID: 0}
-  endgameMenu: {fileID: 0}
+  endgameMenuLoose: {fileID: 0}
+  endgameMenuWin: {fileID: 0}
   pauseButton: {fileID: 0}
+  fixedTexts: []
+  statsTexts: []
+  towerName: {fileID: 0}
+  upgradeCostText: {fileID: 0}
   basicTowerSprite: {fileID: 0}
   slowTowerSprite: {fileID: 0}
   areaTowerSprite: {fileID: 0}
   bombTowerSprite: {fileID: 0}
   moneyStructureSprite: {fileID: 0}
   upgradeLevels: []
+  shopContainer: {fileID: 0}
   selectedMenu: 0
   FPSText: {fileID: 0}
 --- !u!4 &1108740209
