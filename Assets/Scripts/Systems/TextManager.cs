@@ -123,9 +123,19 @@ public class TextManager : MonoBehaviour
 
         //descriptions of lessons in English
         englishDictionary.Add("lesson1", "Lesson 1");
-        englishDictionary.Add("description1", "asadsafdsfdsfdsfsdfds");
+        englishDictionary.Add("description1", "The Basic Frog is the cheapest defense from all. However it's medium damage and range could save you when needed, son don't understimate it!");
         englishDictionary.Add("lesson2", "Lesson 2");
-        englishDictionary.Add("description2", "bbbbb");
+        englishDictionary.Add("description2", "Did anyone said Psiquic Frog? Combine this defense with others for amazing results thanks to it's delaying effect to enemies.");
+        englishDictionary.Add("lesson3", "Lesson 3");
+        englishDictionary.Add("description3", "Amazing damage makes up for the low range and slow fire rate. Let's make the pond shake!");
+        englishDictionary.Add("lesson4", "Lesson 4");
+        englishDictionary.Add("description4", "Fighting? Nah. The Money Frog sees a golden future for you just let it financiate it.");
+        englishDictionary.Add("lesson5", "Lesson 5");
+        englishDictionary.Add("description5", "The Aerial Frog is always on the moon, but it is settle for destroying flying enemies.");
+        englishDictionary.Add("lesson6", "Lesson 6");
+        englishDictionary.Add("description6", "Is that... a mushroom? No, it's a MushBOOMB! Be careful it not only destroys, it also has a delay effect on enemies.");
+        englishDictionary.Add("lesson7", "Lesson 7");
+        englishDictionary.Add("description7", "a");
 
         //Spanish 
         spanishDictionary.Add("play", "Jugar");
@@ -191,6 +201,8 @@ public class TextManager : MonoBehaviour
         spanishDictionary.Add("description5", "La rana aérea tiene la mira puesta en el horizonte. Los enemigos deberán tener siempre los pies en la tierra cerca de ella o sufrirán las consecuencias");
         spanishDictionary.Add("lesson6", "Lección 6");
         spanishDictionary.Add("description6", "¡BUM! será lo último que escucharán tus enemigos. Además esta seta mina trae un 2x1 porque dejará a los enemigos aturdidos y se moverán más lento.");
+        spanishDictionary.Add("lesson7", "Lección 7");
+        spanishDictionary.Add("description7", "b");
     }
 
     public void emptyGameobjectsList(bool restart)
