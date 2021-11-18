@@ -109,7 +109,7 @@ GameObject:
   - component: {fileID: 8006414575844936844}
   - component: {fileID: 6388906839533808407}
   m_Layer: 8
-  m_Name: SlowDefense
+  m_Name: PsiquicDefense
   m_TagString: Structure
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
