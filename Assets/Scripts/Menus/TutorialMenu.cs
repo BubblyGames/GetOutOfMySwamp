@@ -18,6 +18,8 @@ public class TutorialMenu : MonoBehaviour
 
     public Text headerContainer;
     public Text descriptionContainer;
+    public Image imageContainer;
+    public List<Sprite> lessonImages;
 
     // Start is called before the first frame update
     void Start()
@@ -26,8 +28,9 @@ public class TutorialMenu : MonoBehaviour
         fixTextDescription = "description";
         lesson = 1;
         UpdateKeys();
+        UpdateImages();
 
-    }
+}
 
     // Update is called once per frame
     void Update()
@@ -48,6 +51,7 @@ public class TutorialMenu : MonoBehaviour
         {
             lesson++;
             UpdateKeys();
+            UpdateImages();
         }
     }
 
@@ -57,6 +61,7 @@ public class TutorialMenu : MonoBehaviour
         {
             lesson--;
             UpdateKeys();
+            UpdateImages();
         }
     }
 
@@ -71,5 +76,10 @@ public class TutorialMenu : MonoBehaviour
     {
         headerContainer.text = headerTextReader.GetComponent<TextReader>().GetText();
         descriptionContainer.text = descTextReader.GetComponent<TextReader>().GetText();
+    }
+
+    public void UpdateImages()
+    {
+        imageContainer.sprite = lessonImages[lesson-1];
     }
 }
