@@ -117,7 +117,7 @@ public class TextManager : MonoBehaviour
         englishDictionary.Add("towerName", "Tower Name");
         englishDictionary.Add("basicTower", "Basic Frog");
         englishDictionary.Add("psiquicTower", "Psiquic Frog");
-        englishDictionary.Add("areaTower", "Poison Frog");
+        englishDictionary.Add("heavyTower", "Heavy Frog");
         englishDictionary.Add("bomb", "mushBOOMB");
         englishDictionary.Add("moneyGatherer", "Money Frog");
 
@@ -174,7 +174,7 @@ public class TextManager : MonoBehaviour
         spanishDictionary.Add("towerName", "Nombre Torre");
         spanishDictionary.Add("basicTower", "Rana básica");
         spanishDictionary.Add("psiquicTower", "Rana Psíquica");
-        spanishDictionary.Add("areaTower", "Rana tóxica");
+        spanishDictionary.Add("heavyTower", "Rana pesada");
         spanishDictionary.Add("bomb", "Seta Bomba");
         spanishDictionary.Add("moneyGatherer", "Rana banquera");
 
