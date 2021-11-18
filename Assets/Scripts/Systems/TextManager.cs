@@ -81,7 +81,7 @@ public class TextManager : MonoBehaviour
         englishDictionary.Add("score", "Score");
         englishDictionary.Add("money", "Money");
         englishDictionary.Add("settings", "Settings");
-        englishDictionary.Add("lenguage", "Lenguage");
+        englishDictionary.Add("lenguage", "Language");
         englishDictionary.Add("exit", "Exit");
         englishDictionary.Add("finish", "Finish");
         englishDictionary.Add("restart", "Restart");
