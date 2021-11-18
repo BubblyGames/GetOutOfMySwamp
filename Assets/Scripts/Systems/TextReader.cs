@@ -60,20 +60,19 @@ public class TextReader : MonoBehaviour
 
     public void Read()
     {
-        _text = textManager.GetComponent<TextManager>().currentDictionary[key];
+        if (textManager == null)
+            _text = "ERROR";
+        else
+            _text = textManager.GetComponent<TextManager>().currentDictionary[key];
 
 
-        if (gameObject.name.Equals("hpText"))
+        if (gameObject.name.Equals("hpText"))//Replace with keys when and if possible
         {
             textContainer.GetComponent<Text>().text = levelManager.GetComponent<LevelStats>().GetCurrentBaseHealth().ToString();
         }
         else if (gameObject.name.Equals("moneyText"))
         {
             textContainer.GetComponent<Text>().text = levelManager.GetComponent<LevelStats>().GetCurrentMoney().ToString();
-        }
-        else if (gameObject.name.Equals("scoreText"))
-        {
-            textContainer.GetComponent<Text>().text = _text;
         }
         else
         {

@@ -36,6 +36,7 @@ public class CubeWorldGenerator : MonoBehaviour
     public GameObject lineRendererPrefab;
     List<GameObject> debugStuff = new List<GameObject>();
 
+    MeshData meshData;
     VoxelRenderer voxelRenderer;//Transforms the cells array into a mesh
 
     int endzoneRadious;
@@ -92,6 +93,8 @@ public class CubeWorldGenerator : MonoBehaviour
             }
         }
 
+        meshData = new MeshData(true);
+
         //Paths store a list of cellinfos which the enemies use to navigate
         paths = new List<Path>();
         for (int i = 0; i < nPaths; i++)
@@ -131,8 +134,7 @@ public class CubeWorldGenerator : MonoBehaviour
         StartCoroutine(ShowPathsCoroutine());
 
         //Add geometry
-        MeshData meshData = GenerateMesh(); //Converts the array into a mesh
-        voxelRenderer.RenderMesh(meshData); //Renders mesh
+        UpdateMesh();
     }
 
     private Vector3Int GenerateWorld()
@@ -203,9 +205,9 @@ public class CubeWorldGenerator : MonoBehaviour
         }
     }
 
-    MeshData GenerateMesh()
+    void GenerateMesh()
     {
-        MeshData meshData = new MeshData(true);
+        meshData.Clear();
         for (int i = 0; i < size; i++)
         {
             for (int j = 0; j < size; j++)
@@ -247,8 +249,6 @@ public class CubeWorldGenerator : MonoBehaviour
                 }
             }
         }
-
-        return meshData;
     }
 
     private void GenerateSwamp(int endX, int endY, int endZ)
@@ -386,9 +386,16 @@ public class CubeWorldGenerator : MonoBehaviour
         return true;
     }
 
+    
     public void UpdateMesh()
     {
-        MeshData meshData = GenerateMesh();
+        GenerateMesh();
+        voxelRenderer.RenderMesh(meshData);
+    }
+
+    public void UpdateMeshSingleBlock()
+    {
+        GenerateMesh();
         voxelRenderer.RenderMesh(meshData);
     }
 
@@ -423,8 +430,7 @@ public class CubeWorldGenerator : MonoBehaviour
             }
             if (dirty)
             {
-                MeshData meshData = GenerateMesh();
-                voxelRenderer.RenderMesh(meshData);
+                UpdateMesh();
                 yield return null;
             }
         }
