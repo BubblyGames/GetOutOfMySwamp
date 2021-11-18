@@ -41,6 +41,16 @@ public class BuildManager : MonoBehaviour
         if (LevelStats.instance.CurrentMoney < structureBlueprint.creationCost)
             return false;
 
+        //Spell will always be 
+        SpellBehaviour sb;
+        if (structureBlueprint.structurePrefab.TryGetComponent<SpellBehaviour>(out sb))
+            return true;
+
+        //But for builidngs we need to check if the position is within the world bounds
+        if (!LevelManager.instance.world.IsPosInBounds(intPos))
+            return false;
+
+        //Position of the block under the block where the structure will be built
         Vector3Int intPosUnder = new Vector3Int(
             Mathf.RoundToInt(hit.point.x - (hit.normal.x / 2)),
             Mathf.RoundToInt(hit.point.y - (hit.normal.y / 2)),
@@ -60,12 +70,17 @@ public class BuildManager : MonoBehaviour
             return false;
         }
 
+        //if (g != null)
+        //LevelManager.instance.world.AddInterestPoint(intPos);
+
+
         return true;
     }
 
     public void PlaceObject(RaycastHit hit)
     {
         Vector3Int pos;
+
         if (CheckIfCanBuild(hit, out pos))
         {
             BuildStructure(pos, hit.normal);
@@ -125,9 +140,14 @@ public class BuildManager : MonoBehaviour
         structure.SetNormal(normal);
         structure.Blueprint = structureBlueprint;
 
+        //THIS SHOULDN'T BE NECESSARY
+        if (!LevelManager.instance.world.IsPosInBounds(position))
+            return;
+
+        CellInfo cell = LevelManager.instance.world.GetCell(position);//Sometimes FAILS :(
+
         //If we are putting a bomb, apart from creating the model, we set the cell's structure associated in which we are creating it
         Bomb b;
-        CellInfo cell = LevelManager.instance.world.GetCell(position);
         if (structure.TryGetComponent<Bomb>(out b))
         {
             if (cell.GetStructure() == null)
@@ -141,6 +161,7 @@ public class BuildManager : MonoBehaviour
 
     public void UpgradeStructure()
     {
+        UIController.instance.ShowMenu(UIController.GameMenu.Game);
 
         if (selectedStructure.GetLevel() < 3)
         {

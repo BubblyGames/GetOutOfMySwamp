@@ -649,7 +649,6 @@ MonoBehaviour:
   rocksVisualReduction: 0.8
   rockSize: 26
   seed: 2856
-  pathMetod: 1
   numberOfMidpoints: 4
   debugMidpoints: 0
   lineRendererPrefab: {fileID: 3920875017051324963, guid: ffef0eddca5eb324f94bad8de9cc038b, type: 3}
@@ -760,7 +759,6 @@ MonoBehaviour:
   rocksVisualReduction: 0.8
   rockSize: 26.94
   seed: 2922
-  pathMetod: 1
   numberOfMidpoints: 3
   debugMidpoints: 0
   lineRendererPrefab: {fileID: 3920875017051324963, guid: ffef0eddca5eb324f94bad8de9cc038b, type: 3}
@@ -981,7 +979,6 @@ MonoBehaviour:
   rocksVisualReduction: 1
   rockSize: 8.84
   seed: 6296
-  pathMetod: 1
   numberOfMidpoints: 1
   debugMidpoints: 0
   lineRendererPrefab: {fileID: 3920875017051324963, guid: ffef0eddca5eb324f94bad8de9cc038b, type: 3}
@@ -1277,7 +1274,6 @@ MonoBehaviour:
   rocksVisualReduction: 0.9
   rockSize: 14.82
   seed: 6172
-  pathMetod: 1
   numberOfMidpoints: 2
   debugMidpoints: 0
   lineRendererPrefab: {fileID: 3920875017051324963, guid: ffef0eddca5eb324f94bad8de9cc038b, type: 3}
@@ -2412,6 +2408,7 @@ MonoBehaviour:
       enemyPrefab: {fileID: 5803062399679311112, guid: edbebc9645c93bc47b4257b361fcc5b1, type: 3}
   audioManager: {fileID: 1474084401}
   currentWorldId: 0
+  isMobile: 0
 --- !u!4 &429681862
 Transform:
   m_ObjectHideFlags: 0
@@ -2915,7 +2912,6 @@ MonoBehaviour:
   rocksVisualReduction: 1
   rockSize: 10.49
   seed: 6400
-  pathMetod: 1
   numberOfMidpoints: 0
   debugMidpoints: 0
   lineRendererPrefab: {fileID: 3920875017051324963, guid: ffef0eddca5eb324f94bad8de9cc038b, type: 3}
@@ -8755,4 +8751,4 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
