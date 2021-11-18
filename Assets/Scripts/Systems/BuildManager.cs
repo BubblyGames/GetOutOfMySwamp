@@ -52,7 +52,7 @@ public class BuildManager : MonoBehaviour
             return true;
 
         //But for builidngs we need to check if the position is within the world bounds
-        if (!LevelManager.instance.world.IsPosInBounds(intPos))
+        if (!LevelManager.instance.world.IsPosInBounds(Vector3Int.FloorToInt(intPos)))
             return false;
 
         //Position of the block under the block where the structure will be built

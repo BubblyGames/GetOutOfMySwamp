@@ -4036,15 +4036,11 @@ MonoBehaviour:
   towerName: {fileID: 1029310091}
   upgradeCostText: {fileID: 327890052}
   basicTowerSprite: {fileID: 21300000, guid: 6c53c68d74df63a4792a296a3030e0d3, type: 3}
-  psiquicTowerSprite: {fileID: 21300000, guid: dfe144ffea944824f974f903a34fd04b, type: 3}
-  heavyTowerSprite: {fileID: 21300000, guid: d028348a0d83f564baeecfeed75490c0, type: 3}
+  psiquicTowerSprite: {fileID: 21300000, guid: d028348a0d83f564baeecfeed75490c0, type: 3}
+  heavyTowerSprite: {fileID: 21300000, guid: dfe144ffea944824f974f903a34fd04b, type: 3}
   bombTowerSprite: {fileID: 21300000, guid: 94f357d1f3f2e7f4b8fe6077fff9fa66, type: 3}
   moneyStructureSprite: {fileID: 21300000, guid: f998ef7138313ad4e9d8f1fb319ffb23, type: 3}
-  upgradeLevels:
-  - {fileID: 21300000, guid: a655b2f44cde3b542b37a07a5df43a85, type: 3}
-  - {fileID: 21300000, guid: 7d9467091172b7a459d21f854fa1d33e, type: 3}
-  - {fileID: 21300000, guid: 0a5235c4f88ebda4ba1e0f9423950d8a, type: 3}
-  - {fileID: 21300000, guid: 24bff72e7482c1a459680b7aa6355cc8, type: 3}
+  upgradeLevels: []
   shopContainer: {fileID: 1903685281}
   selectedMenu: 0
   FPSText: {fileID: 1583022576}
@@ -5670,8 +5666,8 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 128
   waterSplashPrefab: {fileID: 4964779859338955144, guid: da9a63bd877faf74db2fb8f6f899c1ca, type: 3}
-  waterSplashMaterial: {fileID: 2100000, guid: b69aabdbb83200d4e86cc4b07ec67723, type: 2}
-  waterMaterial: {fileID: 2100000, guid: f2bfe60c202150547be22d486a012286, type: 2}
+  waterSplashMaterial: {fileID: 0}
+  waterMaterial: {fileID: 0}
   waterColor: {r: 0, g: 0, b: 0, a: 0}
   colors:
   - {r: 0, g: 0, b: 0, a: 0}
@@ -5835,8 +5831,8 @@ MonoBehaviour:
   isBetweenWaves: 0
   allWavesCleared: 0
   waveCount: 0
-  numberOfWaves: {fileID: 663822927}
-  actualWave: {fileID: 1777606004}
+  numberOfWaves: {fileID: 0}
+  actualWave: {fileID: 0}
 --- !u!114 &1903685290
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5862,7 +5858,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   selectedStructure: {fileID: 0}
-  uIController: {fileID: 1328887940}
+  uIController: {fileID: 0}
   canBuild: 0
 --- !u!114 &1903685292
 MonoBehaviour:
@@ -7283,7 +7279,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7539670085400212178, guid: fc31fd70b5945084fb72fefe99f91ba3, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7539670085400212179, guid: fc31fd70b5945084fb72fefe99f91ba3, type: 3}
       propertyPath: m_Pivot.x
