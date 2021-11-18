@@ -30,12 +30,6 @@ public class Structure : MonoBehaviour
     public string structureName;
     public int structureId;
 
-
-    private void Awake()
-    {
-        Debug.Log(structureName);
-    }
-
     public void SetNormal(Vector3 normal)
     {
        this.normal = normal;

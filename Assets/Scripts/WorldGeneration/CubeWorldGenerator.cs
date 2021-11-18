@@ -458,7 +458,7 @@ public class CubeWorldGenerator : MonoBehaviour
         //Find the closest existing midpoint
         for (int p = 0; p < paths.Count; p++)
         {
-            for (int m = 0; m < paths[p].midPoints.Count - 1; m++)
+            for (int m = 1; m < paths[p].midPoints.Count - 1; m++)
             {
                 float dist = Vector3.Distance(point, paths[p].midPoints[m].cell.GetPos());
                 if (dist < minDist)
@@ -651,7 +651,7 @@ public class CubeWorldGenerator : MonoBehaviour
             if (currentCell.canWalk && Path.FindPathAstar(this, new Node(currentCell), GetCell(end.x, end.y, end.z), true) != null)
                 cell = currentCell;
         }
-        Debug.Log("Midpoint found after " + count.ToString() + " attempts");
+        //Debug.Log("Midpoint found after " + count.ToString() + " attempts");
         onXFace = !onXFace;
         return cell;
     }

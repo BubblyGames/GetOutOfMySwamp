@@ -8,7 +8,7 @@ using UnityEngine.UI;
 //[System.Serializable]
 public class Path
 {
-    internal CellInfo[] cells;
+    internal CellInfo[] cells = new CellInfo[0];
     public List<Midpoint> midPoints = new List<Midpoint>();
     float spawnWait = 1f;
     float nextSpawnTime = 0;
@@ -51,15 +51,17 @@ public class Path
 
         result.normal = Vector3Int.up;
 
-        CellInfo[] neighbours = world.GetNeighbours(world.cells[result.x, result.y, result.z]);
-        lastCell = neighbours[0];
+        /*CellInfo[] neighbours = world.GetNeighbours(world.cells[result.x, result.y, result.z]);
+        lastCell = neighbours[0];*/
+
+        lastCell = world.GetCellUnder(result.cell);
 
         //List of cells in the path
         List<CellInfo> pathCells = new List<CellInfo>();
+        //midPoints.Clear();
         while (result != null)
         {
             CellInfo cell = world.cells[result.x, result.y, result.z];
-
             cell.normalInt = GetNormalOf(cell);
 
             CellInfo cellUnder = world.GetCellUnder(cell);
@@ -115,7 +117,7 @@ public class Path
         {
             count++;
             //Sorting the list in "h" in increasing order
-            openList = openList.OrderBy(o => o.f).ToList();
+            openList.Sort(nodeComparer);
 
             //Check lists's first node
             //current = openList.Min;
@@ -180,9 +182,9 @@ public class Path
                     {
                         Node n = new Node(neighbour);
 
-                        n.ComputeFScore(end.x, end.y, end.z);
-                        n.Parent = current;
                         n.cell = _world.cells[n.x, n.y, n.z];
+                        n.Parent = current;
+                        n.ComputeFScore(end.x, end.y, end.z);
 
                         openList.Add(n);
                     }
@@ -198,9 +200,9 @@ public class Path
     {
 
         List<Node> closedList = new List<Node>();
-        List<Midpoint> newMidpoints = new List<Midpoint>();
 
         Node current = new Node(start);
+        current.midpoint = midPoints[0];
         current.ComputeFScore(end.x, end.y, end.z);
 
         Midpoint midpoint;
@@ -210,18 +212,15 @@ public class Path
         {
             lastSept = i == midPoints.Count - 1; //Is this the segment bewteen the last midpoint and the end?
 
-            midpoint = midPoints[i];
-
-            //Debug.Log("Finding path to midpoint " + i);
             Node result = null;
-
+            midpoint = midPoints[i];
 
             int count = 0;
             //Tries 10 times to find a suitable midpoint
             while (result == null && count < 10)
             {
                 int count2 = 0;
-                CellInfo c = midpoint.cell;
+                CellInfo c;
                 while ((world.CheckIfFloating(midpoint.cell) || !midpoint.cell.canWalk) && count2 < 10)
                 {
                     c = world.GetCellUnder(midpoint.cell);
@@ -230,7 +229,7 @@ public class Path
                     count2++;
                 }
 
-                result = Path.FindPathAstar(world, current, midpoint.cell, lastSept, closedList);
+                result = Path.FindPathAstar(world, current, midpoint.cell, lastSept, closedList);//
 
                 if (result == null)
                 {
@@ -245,7 +244,6 @@ public class Path
 
                     midpoint.cell = world.GetCompletelyRandomCell();
                 }
-
                 count++;
             }
             //Debug.Log(count + " attempts needed");
@@ -257,18 +255,14 @@ public class Path
             }
 
             Node n = result;
+            n.midpoint = midpoint;
 
             count = 0;
             int length = result.g - current.g;
-            //Debug.Log(length);
+            Debug.Log("Segment " + i + " has a length of " + length);
 
             while (n != current)
             {
-                Debug.Log(n.g);
-
-                if (!lastSept && count == length / 2)
-                    newMidpoints.Add(new Midpoint(n.cell, false));
-
                 closedList.Add(n);
                 n.cell.isPath = true;
                 foreach (CellInfo c in world.GetNeighbours(n.cell, true))
@@ -281,11 +275,6 @@ public class Path
 
             //The end of this segment will become the start of the next one
             current = result;
-        }
-
-        for (int i = 0; i < newMidpoints.Count; i++)
-        {
-            midPoints.Insert(i + 1, newMidpoints[i]);
         }
 
         //Final step is finding the actual end

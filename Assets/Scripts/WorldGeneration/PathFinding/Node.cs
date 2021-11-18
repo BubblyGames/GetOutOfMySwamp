@@ -12,7 +12,7 @@ public class Node
     public Vector3Int normal = Vector3Int.zero;
     public Vector3 dir = Vector3.zero;
 
-    public bool isCorner = false;
+    public Midpoint midpoint = null;
 
     public Vector3 Position
     {
