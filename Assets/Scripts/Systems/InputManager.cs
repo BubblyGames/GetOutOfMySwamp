@@ -160,7 +160,7 @@ public class InputManager : MonoBehaviour
                     GameObject structureHitted = hit.collider.gameObject;
                     //Interact with existing defenses
                     UIController.instance.ShowMenu(UIController.GameMenu.UpgradeMenu);
-
+                    BuildManager.instance.SetSelectedStructure(structureHitted.GetComponent<Structure>());
                     //check the structure type
                     switch (structureHitted.GetComponent<Structure>().structureId)
                     {
