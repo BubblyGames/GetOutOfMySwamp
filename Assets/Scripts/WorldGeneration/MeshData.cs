@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -143,5 +144,14 @@ public class MeshData
             colliderTriangles.Add(colliderVertices.Count - 2);
             colliderTriangles.Add(colliderVertices.Count - 1);
         }
+    }
+
+    internal void Clear()
+    {
+        vertices.Clear();
+        triangles.Clear();
+        uvs.Clear();
+        colliderTriangles.Clear();
+        colliderVertices.Clear();
     }
 }

@@ -161,8 +161,6 @@ public class BuildManager : MonoBehaviour
 
     public void UpgradeStructure()
     {
-        UIController.instance.ShowMenu(UIController.GameMenu.Game);
-
         if (selectedStructure.GetLevel() < 3)
         {
             if (CheatManager.instance.infiniteMoney)
@@ -188,7 +186,7 @@ public class BuildManager : MonoBehaviour
         Debug.Log("Selling: " + selectedStructure.name);
         UIController.instance.ShowMenu(UIController.GameMenu.Game);
         selectedStructure.Sell();
-        selectedCell.structure = null;
+        //selectedCell.structure = null;
         LevelStats.instance.EarnMoney(50);
     }
 }
