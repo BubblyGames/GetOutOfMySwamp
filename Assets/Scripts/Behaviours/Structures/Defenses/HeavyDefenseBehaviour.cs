@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 /*This tower deals damage in all enemys inside its radius of effect */
-public class AOEDefenseBehaviour : DefenseBehaviour
+public class HeavyDefenseBehaviour : ShootingDefenseBehaviour
 {
 
     private void Update()
@@ -25,7 +25,7 @@ public class AOEDefenseBehaviour : DefenseBehaviour
             EnemyBehaviour eb;
             if (hits[i].collider.TryGetComponent<EnemyBehaviour>(out eb))
             {
-                eb.Hurt(damage);
+                eb.slowAndDamage(damage);
             }
         }
     }

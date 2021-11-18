@@ -13,7 +13,7 @@ public class Bomb : DefenseBehaviour
             EnemyBehaviour eb;
             if (hits[i].collider.TryGetComponent<EnemyBehaviour>(out eb))
             {
-                eb.Hurt(damage);
+                eb.slowAndDamage(damage);
             }
         }
         Destroy(gameObject);

@@ -34,8 +34,8 @@ public class UIController : MonoBehaviour
 
     [Header("UpgradeMenu Sprites")]
     public Sprite basicTowerSprite;
-    public Sprite slowTowerSprite;
-    public Sprite areaTowerSprite;
+    public Sprite psiquicTowerSprite;
+    public Sprite heavyTowerSprite;
     public Sprite bombTowerSprite;
     public Sprite moneyStructureSprite;
     public List<Sprite> upgradeLevels;
@@ -113,8 +113,6 @@ public class UIController : MonoBehaviour
                 upgradeMenu.SetActive(false);
                 pauseMenu.SetActive(false); 
                 pauseButton.SetActive(false);
-                settingsMenu.SetActive(false);
-                settingsButton.SetActive(false);
                 Time.timeScale = 1;
                 break;
             case GameMenu.EndgameMenuWin:
@@ -122,8 +120,6 @@ public class UIController : MonoBehaviour
                 upgradeMenu.SetActive(false);
                 pauseMenu.SetActive(false);
                 pauseButton.SetActive(false);
-                settingsMenu.SetActive(false);
-                settingsButton.SetActive(false);
                 GameObject.Find("FinalScoreText").GetComponent<UnityEngine.UI.Text>().text = "Score: " + LevelStats.instance.currentScore;
                 Time.timeScale = 1;
                 break;
@@ -352,7 +348,7 @@ public class UIController : MonoBehaviour
                 }
                 break;
             case 1:
-                upgradeMenu.GetComponent<Image>().sprite = slowTowerSprite;
+                upgradeMenu.GetComponent<Image>().sprite = psiquicTowerSprite;
                 upgradeButton.SetActive(true);
                 sellButton.SetActive(true);
                 switch (level)
@@ -373,7 +369,7 @@ public class UIController : MonoBehaviour
                 }
                 break;
             case 2:
-                upgradeMenu.GetComponent<Image>().sprite = areaTowerSprite;
+                upgradeMenu.GetComponent<Image>().sprite = heavyTowerSprite;
                 upgradeButton.SetActive(true);
                 sellButton.SetActive(true);
                 switch (level)
