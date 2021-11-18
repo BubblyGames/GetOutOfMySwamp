@@ -19,6 +19,8 @@ public class BuildManager : MonoBehaviour
     [SerializeField]
     private UIController uIController;
 
+    public List<Vector3Int> structureFundation;
+
 
     public bool canBuild;//Checks if a structure is selected to be built
     public Vector3 currentConstructionPositionOffset;
@@ -33,6 +35,7 @@ public class BuildManager : MonoBehaviour
         {
             Destroy(gameObject);
         }
+        structureFundation = new List<Vector3Int>();
     }
 
     public bool CheckIfCanBuild(RaycastHit hit, out Vector3 intPos )
@@ -96,6 +99,8 @@ public class BuildManager : MonoBehaviour
             cubeForward = Vector3Int.forward;
         }
 
+        //empties fundation list cause ws dont want all of the past position just the ones behind the structure
+        structureFundation.Clear();
 
         Vector3Int cubeDotProduct = Vector3Int.FloorToInt(Vector3.Cross(hit.normal, cubeForward));
 
@@ -109,33 +114,48 @@ public class BuildManager : MonoBehaviour
                 Vector3 sizeChecker = intPosUnder + (cubeForward * i) + (cubeDotProduct * j) ;
                 Vector3 OnTopofSizeChecker = intPos + (cubeForward * i) + (cubeDotProduct * j) ;
                 if (!LevelManager.instance.world.CheckCell(sizeChecker, structureBlueprint.structurePrefab.GetComponent<Structure>().blockType, OnTopofSizeChecker))
+                {
+                    //if it can be placed we delete dteh fundation list
+                    structureFundation.Clear();
                     return false;
+                }
+                else
+                    structureFundation.Add(Vector3Int.FloorToInt(sizeChecker)); // and if it is a good place to build we save those positions
             }
         }
 
         if (structureSize > 1)
         {
             currentConstructionPositionOffset =(hit.normal + cubeForward + cubeDotProduct) / structureSize;
-            Debug.Log("SO:"+currentConstructionPositionOffset);
+
         }
 
         if (!canBuild /*|| selectedCell.blockType != structureBlueprint.structurePrefab.GetComponentInChildren<Structure>().blockType*/)
             return false;
 
         Gatherer g;
-        if (WorldManager.instance.IsPosInBounds((int)intPos.x, (int)intPos.y, (int)intPos.z) &&
-            !LevelManager.instance.world.GetCell((int)intPos.x, (int)intPos.y, (int)intPos.z).isCloseToPath &&
-            structureBlueprint.structurePrefab.TryGetComponent<Gatherer>(out g))
+
+        bool isCloseToPath = true;
+        foreach (Vector3 cellposition in structureFundation)
         {
-            //Debug.Log("Can't add");
-            return false;
+            if (!LevelManager.instance.world.GetCell(Vector3Int.FloorToInt(cellposition)).isCloseToPath &&
+            structureBlueprint.structurePrefab.TryGetComponent<Gatherer>(out g))
+            {
+                //set not close to path
+                isCloseToPath = false;
+            }
+            else
+            {
+                isCloseToPath = true;
+                break;
+            }
         }
 
         //if (g != null)
         //LevelManager.instance.world.AddInterestPoint(intPos);
 
 
-        return true;
+        return true && isCloseToPath;
     }
 
     public void PlaceObject(RaycastHit hit)
@@ -226,7 +246,15 @@ public class BuildManager : MonoBehaviour
             }
         }
 
-        cell.SetStructure(structure);
+        int structureSize = structureBlueprint.structurePrefab.GetComponent<Structure>().Size;
+
+        for (int i = 0; i < structureFundation.Count; i++)
+        {
+            LevelManager.instance.world.GetCell(structureFundation[0]).SetStructure(structure);
+            structureFundation.Remove(structureFundation[0]);
+        }
+
+        //cell.SetStructure(structure);
     }
 
     public void UpgradeStructure()

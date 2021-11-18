@@ -21,7 +21,7 @@ public class CellInfo
     //Path stuff
     public List<Path> paths = new List<Path>();
     public bool isPath = false;
-    internal bool isCloseToPath = false;
+    public bool isCloseToPath = false;
     internal bool canWalk = false;
     internal bool endZone = false;
 

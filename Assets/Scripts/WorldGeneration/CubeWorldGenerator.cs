@@ -768,6 +768,7 @@ public class CubeWorldGenerator : MonoBehaviour
         return (cellindex.x >= 1 && cellindex.x < cells.GetLength(0)-1) &&
             (cellindex.y >= 1 && cellindex.y < cells.GetLength(0) - 1) &&
             (cellindex.z >= 1 && cellindex.z < cells.GetLength(0) - 1) &&
+            GetCell(Vector3Int.FloorToInt(cellindex)).structure == null &&
             GetCell(Vector3Int.FloorToInt(cellindex)).blockType == blocktype &&
             GetCell(Vector3Int.FloorToInt(cellOnTop)).blockType == BlockType.Air;
     }
