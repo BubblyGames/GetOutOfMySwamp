@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 /*This tower deals damage in all enemys inside its radius of effect */
-public class AOEDefenseBehaviour : ShootingDefenseBehaviour
+public class HeavyDefenseBehaviour : ShootingDefenseBehaviour
 {
 
     private void Update()

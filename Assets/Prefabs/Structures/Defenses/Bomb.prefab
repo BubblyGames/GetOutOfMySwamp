@@ -124,3 +124,8 @@ MonoBehaviour:
   Range: medium
   Damage: high
   FireRate: low
+  firePoint: {fileID: 0}
+  enemyTarget: {fileID: 0}
+  turnSpeed: 5
+  bulletPrefab: {fileID: 0}
+  actualEffect: 1
