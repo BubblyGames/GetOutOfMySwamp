@@ -135,7 +135,11 @@ public class TextManager : MonoBehaviour
         englishDictionary.Add("lesson6", "Lesson 6");
         englishDictionary.Add("description6", "Is that... a mushroom? No, it's a MushBOOMB! Be careful it not only destroys, it also has a delay effect on enemies.");
         englishDictionary.Add("lesson7", "Lesson 7");
-        englishDictionary.Add("description7", "a");
+        englishDictionary.Add("description7", "Basic Enemy unit. Medium life and speed makes it an easy target but be careful don't forget about them");
+        englishDictionary.Add("lesson8", "Lesson 8");
+        englishDictionary.Add("description8", "Tank Enemy is used as a shield for the other enemy units. Be careful it's huge life won't make them easy to kill.");
+        englishDictionary.Add("lesson9", "Lesson 9");
+        englishDictionary.Add("description9", "Horde Enemies are not brave enough to come alone. Besides, they are very fast so put an eye on them!");
 
         //Spanish 
         spanishDictionary.Add("play", "Jugar");
@@ -202,7 +206,11 @@ public class TextManager : MonoBehaviour
         spanishDictionary.Add("lesson6", "Lección 6");
         spanishDictionary.Add("description6", "¡BUM! será lo último que escucharán tus enemigos. Además esta seta mina trae un 2x1 porque dejará a los enemigos aturdidos y se moverán más lento.");
         spanishDictionary.Add("lesson7", "Lección 7");
-        spanishDictionary.Add("description7", "b");
+        spanishDictionary.Add("description7", "La rana enemiga común, tiene una esperanza de vida media y velocidad promedias. Veremos cuanto aguantan contra nuestras defensas");
+        spanishDictionary.Add("lesson8", "Lección 8");
+        spanishDictionary.Add("description8", "Los enemigos tanques son lentos, pero aguantan muy bien los golpes. Sirven de escudo para el resto de enemigos asi que cuidado.");
+        spanishDictionary.Add("lesson9", "Lección 9");
+        spanishDictionary.Add("description9", "Dicen que los cobardes atacan en grupo. Las ranas que van en hordas tienen poca vida, pero son muy escurridizas.¡Que no escape ni una!");
     }
 
     public void emptyGameobjectsList(bool restart)

@@ -4360,7 +4360,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &991896027
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4662,6 +4662,7 @@ MonoBehaviour:
   heavyTowerSprite: {fileID: 0}
   bombTowerSprite: {fileID: 0}
   moneyStructureSprite: {fileID: 0}
+  aerialStructureSprite: {fileID: 0}
   upgradeLevels: []
   shopContainer: {fileID: 0}
   selectedMenu: 0
