@@ -10,15 +10,11 @@ public class Structure : MonoBehaviour
 
     public StructureBlueprint Blueprint { get => _blueprint; set => _blueprint = value; }
 
-    public int Length { get => length; set => length = value; }
-
-    public int Width { get => width; set => width = value; }
+    public int Size { get => size; set => size = value; }
 
     [Header("General stats")]
     [SerializeField]
-    protected int width =1;
-    [SerializeField]
-    protected int length =1;
+    protected int size =1;
 
     [SerializeField]
     protected int health;

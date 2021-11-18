@@ -94,7 +94,7 @@ public class BuildManager : MonoBehaviour
 
         Vector3Int cubeDotProduct = Vector3Int.FloorToInt(Vector3.Cross(hit.normal, cubeForward));
 
-        int structureSize = structureBlueprint.structurePrefab.GetComponentInChildren<Structure>().Width;
+        int structureSize = structureBlueprint.structurePrefab.GetComponentInChildren<Structure>().Size;
 
         for (int i = 0; i < structureSize; i++)
         {
@@ -196,7 +196,7 @@ public class BuildManager : MonoBehaviour
     {
         GameObject structureGO = Instantiate(structureBlueprint.structurePrefab, position, Quaternion.Euler(normal));
         Structure structure = structureGO.GetComponentInChildren<Structure>();
-        structure.gameObject.transform.localScale *= structure.Width;
+        structure.gameObject.transform.localScale *= structure.Size;
         structure.SetNormal(normal);
         structure.Blueprint = structureBlueprint;
 

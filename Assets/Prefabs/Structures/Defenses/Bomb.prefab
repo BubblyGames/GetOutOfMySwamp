@@ -61,7 +61,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 7ca4797308968fe40923d1f4a10d0128, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -108,12 +108,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0f4c7a95981900e4bb6cafb2ecb49a29, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  width: 1
+  length: 1
   health: 0
   canLoseHealth: 0
   level: 0
-  maxLevel: 3
-  isMaxLevel: 0
-  normal: {x: 0, y: 0, z: 0}
   blockType: 0
   structureName: bomb
   structureId: 3
@@ -124,8 +123,3 @@ MonoBehaviour:
   Range: medium
   Damage: high
   FireRate: low
-  firePoint: {fileID: 0}
-  enemyTarget: {fileID: 0}
-  turnSpeed: 5
-  bulletPrefab: {fileID: 0}
-  actualEffect: 1
