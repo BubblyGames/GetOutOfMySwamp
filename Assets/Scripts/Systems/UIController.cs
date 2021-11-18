@@ -113,8 +113,6 @@ public class UIController : MonoBehaviour
                 upgradeMenu.SetActive(false);
                 pauseMenu.SetActive(false); 
                 pauseButton.SetActive(false);
-                settingsMenu.SetActive(false);
-                settingsButton.SetActive(false);
                 Time.timeScale = 1;
                 break;
             case GameMenu.EndgameMenuWin:
@@ -122,8 +120,6 @@ public class UIController : MonoBehaviour
                 upgradeMenu.SetActive(false);
                 pauseMenu.SetActive(false);
                 pauseButton.SetActive(false);
-                settingsMenu.SetActive(false);
-                settingsButton.SetActive(false);
                 GameObject.Find("FinalScoreText").GetComponent<UnityEngine.UI.Text>().text = "Score: " + LevelStats.instance.currentScore;
                 Time.timeScale = 1;
                 break;
