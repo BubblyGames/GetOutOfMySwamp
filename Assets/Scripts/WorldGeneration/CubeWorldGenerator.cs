@@ -182,6 +182,11 @@ public class CubeWorldGenerator : MonoBehaviour
                     bool isRock = perlin > (1 - ((wallDensity * rocksVisualReduction) * alpha));
                     bool isNotRockButActsLikeRock = perlin > (1 - (wallDensity * alpha));
 
+                    //Maybe some day
+                    /*float distanceToCenter = Vector3.Distance(center.position, cell.GetPos());
+                    if (distanceToCenter > size / 2f)
+                        continue;*/
+
                     if (isRock)
                     {
                         cell.canWalk = false;
@@ -251,6 +256,8 @@ public class CubeWorldGenerator : MonoBehaviour
         }
     }
 
+
+
     private void GenerateSwamp(int endX, int endY, int endZ)
     {
         for (int i = -endzoneRadious; i < endzoneRadious; i++)
@@ -287,6 +294,9 @@ public class CubeWorldGenerator : MonoBehaviour
     private bool GeneratePaths(int endX, int endY, int endZ)
     {
         float startTime = Time.realtimeSinceStartup;
+
+        if (Path.FindPathAstar(this, new Node(cells[size / 2, 0, size / 2]), cells[endX, endY, endZ], true) == null)
+            return false;
 
         for (int i = 0; i < nPaths; i++)
         {
@@ -341,7 +351,7 @@ public class CubeWorldGenerator : MonoBehaviour
         //Debug paths and midpoints
         ShowDebugStuff();
 
-        //Debug.Log("Generating paths took: " + (Time.realtimeSinceStartup - startTime) + "s");
+        Debug.Log("Generating paths took: " + (Time.realtimeSinceStartup - startTime) + "s");
         return true; //Success
     }
 
@@ -386,7 +396,7 @@ public class CubeWorldGenerator : MonoBehaviour
         return true;
     }
 
-    
+
     public void UpdateMesh()
     {
         GenerateMesh();
@@ -430,10 +440,10 @@ public class CubeWorldGenerator : MonoBehaviour
             }
             if (dirty)
             {
-                UpdateMesh();
-                yield return null;
+                //yield return null;
             }
         }
+        UpdateMesh();
 
         yield return null;
     }
@@ -796,7 +806,12 @@ public class CubeWorldGenerator : MonoBehaviour
         return GetFaceNormal(cells[x, y, z]);
     }
 
-
+    /// <summary>
+    /// Returns cell directly under based on its normal. If the normal isn't valid,
+    /// generates a normal that sometimes is wrong.
+    /// </summary>
+    /// <param name="cell">Cell to pass.</param>
+    /// <returns>Returns the cell.</returns>
     public CellInfo GetCellUnder(CellInfo cell)
     {
 
@@ -808,16 +823,107 @@ public class CubeWorldGenerator : MonoBehaviour
                 return GetCell(newPos);
         }
 
+        return GetCellUnderWithGravity(cell);
+    }
+
+    public CellInfo GetCellUnderWithGravity(CellInfo cell)
+    {
         Vector3 dir = 1.5f * (cell.GetPos() - center.position).normalized;
 
         Vector3Int dirInt = new Vector3Int(Mathf.RoundToInt(dir.x),
             Mathf.RoundToInt(dir.y),
             Mathf.RoundToInt(dir.z));
-        //Debug.Log(dirInt);
 
-        return GetCell(cell.GetPosInt() - dirInt);
+        CellInfo newCell;
+        while (CheckIfFloating(cell))
+        {
+            newCell = GetCell(cell.GetPosInt() - dirInt);
 
+            if (!newCell.canWalk)
+            {
+                Vector3Int newDirInt = new Vector3Int(0, dirInt.y, dirInt.z);
+                newCell = GetCell(cell.GetPosInt() - newDirInt);
+            }
 
+            if (!newCell.canWalk)
+            {
+                Vector3Int newDirInt = new Vector3Int(dirInt.x, 0, dirInt.z);
+                newCell = GetCell(cell.GetPosInt() - newDirInt);
+            }
+
+            if (!newCell.canWalk)
+            {
+                Vector3Int newDirInt = new Vector3Int(dirInt.x, dirInt.y, 0);
+                newCell = GetCell(cell.GetPosInt() - newDirInt);
+            }
+
+            cell = newCell;
+        }
+
+        return cell;
+    }
+
+    internal CellInfo GetClosestWalkableCell(CellInfo cell)
+    {
+        Debug.Log("You shouldn't need me, but I just saved you");
+
+        Node current = new Node(cell);
+
+        List<Node> openList = new List<Node>();
+        List<Node> closedList = new List<Node>();
+
+        openList.Add(current);
+
+        int count = 0;
+        while (openList.Count > 0 && count < 100)
+        {
+            current = openList[0];
+            closedList.Add(current);
+            openList.Remove(current);
+
+            if (current.cell.canWalk)//If first node is goal,returns current Node3D
+            {
+                return current.cell;
+            }
+            else
+            {
+                foreach (CellInfo neighbour in GetNeighbours(current.cell))
+                {
+                    if (neighbour == null)//||(neighbour.isPath && !neighbour.endZone)
+                        continue;
+
+                    //if neighbour no esta en open
+                    bool IsInOpen = false;
+                    foreach (Node nf in openList)
+                    {
+                        if (nf.cell == neighbour)
+                        {
+                            IsInOpen = true;
+                            break;
+                        }
+                    }
+                    if (IsInOpen)
+                        continue;
+
+                    bool IsInClosed = false;
+                    foreach (Node nf in closedList)
+                    {
+                        if (nf.cell == neighbour)
+                        {
+                            IsInClosed = true;
+                            break;
+                        }
+                    }
+
+                    if (!IsInOpen && !IsInClosed)
+                    {
+                        Node n = new Node(neighbour);
+                        openList.Add(n);
+                    }
+                }
+            }
+        }
+        return null;
     }
     #endregion
 

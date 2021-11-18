@@ -21,7 +21,7 @@ public class CellInfo
     public List<Path> paths = new List<Path>();
     public bool isPath = false;
     internal bool isCloseToPath = false;
-    internal bool canWalk = false;
+    internal bool canWalk = true;
     internal bool endZone = false;
 
     public Vector3Int normalInt = Vector3Int.zero;

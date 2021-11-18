@@ -5768,13 +5768,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   demo: 0
   size: 31
-  nPaths: 1
+  nPaths: 0
   canMergePaths: 0
   wallDensity: 0.4
   rocksVisualReduction: 0.8
   rockSize: 10
   seed: 0
-  numberOfMidpoints: 1
+  numberOfMidpoints: 3
   debugMidpoints: 1
   lineRendererPrefab: {fileID: 3920875017051324963, guid: ffef0eddca5eb324f94bad8de9cc038b, type: 3}
 --- !u!114 &1903685288
@@ -7283,7 +7283,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7539670085400212178, guid: fc31fd70b5945084fb72fefe99f91ba3, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7539670085400212179, guid: fc31fd70b5945084fb72fefe99f91ba3, type: 3}
       propertyPath: m_Pivot.x

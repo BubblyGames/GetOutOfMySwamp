@@ -10,8 +10,6 @@ public class Path
 {
     internal CellInfo[] cells = new CellInfo[0];
     public List<Midpoint> midPoints = new List<Midpoint>();
-    float spawnWait = 1f;
-    float nextSpawnTime = 0;
     public int Length
     {
         get
@@ -22,12 +20,15 @@ public class Path
                 return 0;
         }
     }
+    const int MAX_SEGMENT_LENGTH = 30;
 
     public bool dirty = true;
     public bool initiated = false;
     public Vector3Int start = new Vector3Int();
     public Vector3Int end = new Vector3Int();
     public int id = -1;
+
+    bool firstTime = true;
 
     CubeWorldGenerator world;
 
@@ -42,6 +43,7 @@ public class Path
     {
         start = midPoints[0].cell.GetPosInt();
         end = midPoints[midPoints.Count() - 1].cell.GetPosInt();
+
 
         Node result = FindPathAstarWithMidpoints(world.GetCell(start), world.GetCell(end));
 
@@ -90,11 +92,12 @@ public class Path
         cells = pathCells.ToArray();
 
         dirty = false;
+        firstTime = false;
 
         return true;
     }
 
-    public static Node FindPathAstar(CubeWorldGenerator _world, Node firstNode, CellInfo end, bool lastStep = false, List<Node> excludedNodes = null)
+    public static Node FindPathAstar(CubeWorldGenerator _world, Node firstNode, CellInfo end, bool lastStep = false, List<Node> excludedNodes = null, List<CellInfo> goals = null)
     {
         Node current;
 
@@ -106,10 +109,14 @@ public class Path
         if (excludedNodes != null)
             closedList.AddRange(excludedNodes);
 
+        if (goals == null)
+            goals = new List<CellInfo>();
+
         //SortedSet<Node> sortedList = new SortedSet<Node>();
 
         //First node, with starting position and null parent
         firstNode.ComputeFScore(end.x, end.y, end.z);
+        current = firstNode;
         openList.Add(firstNode);
 
         int count = 0;
@@ -121,6 +128,7 @@ public class Path
 
             //Check lists's first node
             //current = openList.Min;
+
             current = openList[0];
             closedList.Add(current);
             openList.Remove(current);
@@ -131,7 +139,7 @@ public class Path
             }
             else
             {
-                //Expands neightbors, (compute cost of each one) and add them to the list
+                 //Expands neightbors, (compute cost of each one) and add them to the list
                 CellInfo[] neighbours = _world.GetNeighbours(current.cell);
                 //CellInfo[] neighboursWitCorners = _world.GetNeighbours(current.cell, true);
 
@@ -141,7 +149,11 @@ public class Path
                     if (neighbours[i].blockType != BlockType.Air || current.cell.endZone)
                     {
                         current.isFloating = false;
-                        break;
+                    }
+
+                    if (goals.Contains(neighbours[i]) && neighbours[i]!= end)
+                    {
+                        continue;
                     }
                 }
 
@@ -198,38 +210,51 @@ public class Path
 
     Node FindPathAstarWithMidpoints(CellInfo start, CellInfo end)
     {
-
         List<Node> closedList = new List<Node>();
+        List<Midpoint> midpointsCopy = new List<Midpoint>(midPoints);
+
+        List<CellInfo> goals = new List<CellInfo>();
+        foreach (Midpoint m in midPoints)
+        {
+            goals.Add(m.cell);
+        }
 
         Node current = new Node(start);
-        current.midpoint = midPoints[0];
+        current.isMidpoint = true;
         current.ComputeFScore(end.x, end.y, end.z);
 
         Midpoint midpoint;
-        bool lastSept = false;
+        bool lastSept;
 
-        for (int i = 1; i < midPoints.Count; i++)
+        int insertedMidpoints = 0;
+        for (int i = 1; i < midpointsCopy.Count; i++)
         {
-            lastSept = i == midPoints.Count - 1; //Is this the segment bewteen the last midpoint and the end?
+            lastSept = i == midpointsCopy.Count - 1; //Is this the segment bewteen the last midpoint and the end?
 
             Node result = null;
-            midpoint = midPoints[i];
+            midpoint = midpointsCopy[i];
 
             int count = 0;
+
             //Tries 10 times to find a suitable midpoint
             while (result == null && count < 10)
             {
-                int count2 = 0;
-                CellInfo c;
-                while ((world.CheckIfFloating(midpoint.cell) || !midpoint.cell.canWalk) && count2 < 10)
+                if (world.CheckIfFloating(midpoint.cell))
                 {
-                    c = world.GetCellUnder(midpoint.cell);
+                    CellInfo c;
+                    c = world.GetCellUnderWithGravity(midpoint.cell);
                     c.normalInt = midpoint.cell.normalInt;
                     midpoint.cell = c;
-                    count2++;
                 }
 
-                result = Path.FindPathAstar(world, current, midpoint.cell, lastSept, closedList);//
+                if (!midpoint.cell.canWalk) {
+                    CellInfo c;
+                    c = world.GetClosestWalkableCell(midpoint.cell);
+                    c.normalInt = midpoint.cell.normalInt;
+                    midpoint.cell = c;
+                }
+
+                result = Path.FindPathAstar(world, current, midpoint.cell, lastSept, closedList, goals);//
 
                 if (result == null)
                 {
@@ -255,14 +280,21 @@ public class Path
             }
 
             Node n = result;
-            n.midpoint = midpoint;
+            n.isMidpoint = true;
 
             count = 0;
             int length = result.g - current.g;
-            Debug.Log("Segment " + i + " has a length of " + length);
+            //Debug.Log("Segment " + i + " has a length of " + length);
 
-            while (n != current)
+            while (n.Parent != current)
             {
+                if (length > MAX_SEGMENT_LENGTH && count == length / 2)
+                {
+                    Debug.Log("New midpoint");
+                    midPoints.Insert(i + insertedMidpoints, new Midpoint(n.cell, false));
+                    insertedMidpoints++;
+                }
+
                 closedList.Add(n);
                 n.cell.isPath = true;
                 foreach (CellInfo c in world.GetNeighbours(n.cell, true))
@@ -277,6 +309,8 @@ public class Path
             current = result;
         }
 
+        ///midPoints = midpointsCopy;
+
         //Final step is finding the actual end
         return current;
     }
@@ -288,15 +322,7 @@ public class Path
 
     public Vector3 GetStep(int idx) { return new Vector3(cells[idx].x, cells[idx].y, cells[idx].z); }
 
-    public bool CheckSpawn()
-    {
-        if (Time.time > nextSpawnTime)
-        {
-            nextSpawnTime = Time.time + spawnWait;
-            return true;
-        }
-        return false;
-    }
+
 
     internal CellInfo GetCell(int idx)
     {
