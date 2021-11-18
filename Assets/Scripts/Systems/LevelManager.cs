@@ -34,10 +34,14 @@ public class LevelManager : MonoBehaviour
     //TODO: increment score when killing enemys.
     public LayerMask floorLayer;
     public GameObject waterSplashPrefab;
+    public Material waterSplashMaterial;
+    public Material waterMaterial;
 
     public Color waterColor;
 
     public Color[] colors;
+
+    GameObject water;
 
     private void Awake()
     {
@@ -63,7 +67,21 @@ public class LevelManager : MonoBehaviour
         OnGameStart?.Invoke();
 
         Texture2D t = (Texture2D)GetComponent<MeshRenderer>().material.mainTexture;
-        waterColor = t.GetPixel(20, 0);
+        colors[0] = t.GetPixel(0, 0);
+        colors[1] = t.GetPixel(0, 20);
+        colors[2] = t.GetPixel(20, 0);
+        colors[3] = t.GetPixel(20, 20);
+
+        waterColor = colors[2];
+        waterSplashMaterial.color = waterColor.gamma;
+
+        water = GameObject.CreatePrimitive(PrimitiveType.Cube);
+        water.transform.position = world.center.transform.position;
+        water.transform.localScale = (world.size - 4.5f) * Vector3.one;
+        water.GetComponent<MeshRenderer>().material = waterMaterial;
+        Destroy(water.GetComponent<BoxCollider>());
+        waterMaterial.color = new Color(waterColor.r, waterColor.g, waterColor.b, .5f);
+
     }
 
     private void Update()
@@ -72,7 +90,6 @@ public class LevelManager : MonoBehaviour
         {
             GameObject waterSplash = GameObject.Instantiate(waterSplashPrefab);
             waterSplash.transform.position = world.end;
-            waterSplash.GetComponent<ParticleSystem>().startColor = waterColor;
         }
     }
 
@@ -81,8 +98,8 @@ public class LevelManager : MonoBehaviour
     {
         GameObject waterSplash = GameObject.Instantiate(waterSplashPrefab);
         waterSplash.transform.position = world.end;
-        waterSplash.GetComponent<ParticleSystem>().startColor = waterColor;
 
+        //if (CheatManager.instance != null && CheatManager.instance.infiniteHealth)
         if (!CheatManager.instance.infiniteHealth)
         {
             OnDamageTaken?.Invoke(damageTaken);
@@ -100,13 +117,13 @@ public class LevelManager : MonoBehaviour
 
     public void GameOver()
     {
-        UIController.instance.ShowMenu(UIController.GameMenu.EndgameMenu);
+        UIController.instance.ShowMenu(UIController.GameMenu.EndgameMenuLoose);
     }
 
     public void LevelCompleted()
     {
         OnGameCompleted?.Invoke();
-        UIController.instance.ShowMenu(UIController.GameMenu.EndgameMenu);
+        UIController.instance.ShowMenu(UIController.GameMenu.EndgameMenuWin);
     }
 
 }

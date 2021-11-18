@@ -115,6 +115,17 @@ MonoBehaviour:
   isMaxLevel: 0
   normal: {x: 0, y: 0, z: 0}
   blockType: 0
+  structureName: bomb
+  structureId: 3
   fireRate: 0
   damage: 300
   attackRange: 5
+  Target: ground
+  Range: medium
+  Damage: high
+  FireRate: low
+  firePoint: {fileID: 0}
+  enemyTarget: {fileID: 0}
+  turnSpeed: 5
+  bulletPrefab: {fileID: 0}
+  actualEffect: 1

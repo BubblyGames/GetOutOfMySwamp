@@ -46,18 +46,17 @@ public class LevelStats : MonoBehaviour
     {
         currentBaseHealthPoints = startBaseHealthPoints;
         currentMoney = startMoney;
-        hpText.text = "Health: " + currentBaseHealthPoints.ToString();
-        moneyText.text = "Money:" + currentMoney.ToString();
-        scoreText.text = "Score:" + currentScore.ToString();
-
+        hpText.text = currentBaseHealthPoints.ToString();
+        moneyText.text = currentMoney.ToString();
+        scoreText.text = currentScore.ToString();
     }
 
     public void getEnemyRewards(int moneyReward, int scoreReward)
     {
         currentMoney += moneyReward;
-        moneyText.text = "Money:" + currentMoney.ToString();
+        moneyText.text = currentMoney.ToString();
         currentScore += scoreReward;
-        scoreText.text = "Score:" + currentScore.ToString();
+        scoreText.text =currentScore.ToString();
     }
 
     public void getResource(int resourceId, int amount)
@@ -66,7 +65,7 @@ public class LevelStats : MonoBehaviour
         {
             case 0:
                 currentMoney += amount;
-                moneyText.text = "Money:" + currentMoney.ToString();
+                moneyText.text = currentMoney.ToString();
                 break;
         }
     }
@@ -75,23 +74,37 @@ public class LevelStats : MonoBehaviour
     {
         currentBaseHealthPoints -= damageTaken;
         currentBaseHealthPoints = Mathf.Max(0, currentBaseHealthPoints);
-        hpText.text = "Health: " + currentBaseHealthPoints.ToString();
+        hpText.text = currentBaseHealthPoints.ToString();
     }
 
     public void SpendMoney(int quantity)
     {
         currentMoney -= quantity;
-        moneyText.text = "Money:" + currentMoney.ToString();
+        moneyText.text =currentMoney.ToString();
     }
 
     public void EarnMoney(int quantity)
     {
         currentMoney += quantity;
-        moneyText.text = "Money:" + currentMoney.ToString();
+        moneyText.text =currentMoney.ToString();
     }
 
     public void UpdateScoreText()
     {
-        scoreText.text = "Score:" + currentScore.ToString();
+        scoreText.text =currentScore.ToString();
+    }
+
+    public int GetCurrentScore()
+    {
+        return currentScore;
+    }
+    public int GetCurrentBaseHealth()
+    {
+        return currentBaseHealthPoints;
+    }
+
+    public int GetCurrentMoney()
+    {
+        return currentMoney;
     }
 }

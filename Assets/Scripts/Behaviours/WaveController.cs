@@ -31,6 +31,8 @@ public class WaveController : MonoBehaviour
 
     public int waveCount; // Wave its being played
 
+    public Text numberOfWaves;
+    public Text actualWave;
 
     ///public Text waveText;
 
@@ -58,6 +60,8 @@ public class WaveController : MonoBehaviour
 
     public void Start()
     {
+        numberOfWaves.text = waves.Length.ToString();
+        actualWave.text = (waveCount + 1).ToString();
         isWaveActive = false;
         //isBetweenWaves = false;
 
@@ -92,7 +96,7 @@ public class WaveController : MonoBehaviour
 
     void Update()
     {
-  
+
 
         if (isGameOver)
         {
@@ -119,10 +123,10 @@ public class WaveController : MonoBehaviour
             }
         }
         else if (isWaveActive)
-        {   
+        {
 
             //if spawn is not enabled timer for next wave should not run
-            if (CheatManager.instance!=null && !CheatManager.instance.enableEnemySpawn)
+            if (CheatManager.instance != null && !CheatManager.instance.enableEnemySpawn)
             {
                 return;
             }
@@ -134,6 +138,7 @@ public class WaveController : MonoBehaviour
 
                 timeVariable = Time.time + timeBetweenWaves;
                 waveCount++;
+                actualWave.text = waveCount.ToString();
             }
         }
 
@@ -161,7 +166,7 @@ public class WaveController : MonoBehaviour
         }
         else
         {
-            
+
 
             currentWave = waves[waveCount];
 
@@ -171,7 +176,7 @@ public class WaveController : MonoBehaviour
                 for (int j = 0; j < p.enemyAmount; j++)
                 {
                     //loop used to stop spawining for testing
-                    while (CheatManager.instance != null&&!CheatManager.instance.enableEnemySpawn)
+                    while (CheatManager.instance != null && !CheatManager.instance.enableEnemySpawn)
                     {
                         yield return null;
                     }

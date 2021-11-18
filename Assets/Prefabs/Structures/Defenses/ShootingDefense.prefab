@@ -210,10 +210,18 @@ MonoBehaviour:
   health: 0
   canLoseHealth: 0
   level: 0
+  maxLevel: 3
+  isMaxLevel: 0
+  normal: {x: 0, y: 0, z: 0}
   blockType: 1
+  structureName: basicTower
   fireRate: 1
   damage: 10
   attackRange: 5
+  Target: ground
+  Range: medium
+  Damage: medium
+  FireRate: medium
   firePoint: {fileID: 1127500018515762662}
   enemyTarget: {fileID: 0}
   turnSpeed: 5

@@ -7,12 +7,14 @@ using UnityEngine.EventSystems;
 public class BuildManager : MonoBehaviour
 {
     public static BuildManager instance;
-
     private StructureBlueprint structureBlueprint = null; //Structure is going to be built
     [SerializeField]
     private Structure selectedStructure; //Already Built structure 
     [SerializeField]
     private CellInfo selectedCell;
+    [SerializeField]
+    private UIController uIController;
+
 
     public bool canBuild;//Checks if a structure is selected to be built
 
@@ -44,7 +46,16 @@ public class BuildManager : MonoBehaviour
                 return false;
         }
 
-        //Unnecessary ??
+        //Spell will always be 
+        SpellBehaviour sb;
+        if (structureBlueprint.structurePrefab.TryGetComponent<SpellBehaviour>(out sb))
+            return true;
+
+        //But for builidngs we need to check if the position is within the world bounds
+        if (!LevelManager.instance.world.IsPosInBounds(intPos))
+            return false;
+
+        //Position of the block under the block where the structure will be built
         Vector3Int intPosUnder = new Vector3Int(
             Mathf.RoundToInt(hit.point.x - (hit.normal.x / 2)),
             Mathf.RoundToInt(hit.point.y - (hit.normal.y / 2)),
@@ -114,6 +125,10 @@ public class BuildManager : MonoBehaviour
             //Debug.Log("Can't add");
             return false;
         }
+
+        //if (g != null)
+        //LevelManager.instance.world.AddInterestPoint(intPos);
+
 
         return true;
     }
@@ -185,6 +200,12 @@ public class BuildManager : MonoBehaviour
         structure.SetNormal(normal);
         structure.Blueprint = structureBlueprint;
 
+        //THIS SHOULDN'T BE NECESSARY
+        //if (!LevelManager.instance.world.IsPosInBounds(position))
+        //    return;
+
+        //CellInfo cell = LevelManager.instance.world.GetCell(position);//Sometimes FAILS :(
+
         //If we are putting a bomb, apart from creating the model, we set the cell's structure associated in which we are creating it
         Bomb b;
         CellInfo cell = LevelManager.instance.world.GetCell((int)position.x, (int)position.y, (int)position.z);
@@ -201,16 +222,15 @@ public class BuildManager : MonoBehaviour
 
     public void UpgradeStructure()
     {
-
         if (selectedStructure.GetLevel() < 3)
         {
             if (CheatManager.instance.infiniteMoney)
             {
-                selectedCell.structure.UpgradeStrucrure();
+                selectedCell.structure.UpgradeStrucrure(uIController);
             }
             else if ( LevelStats.instance.CurrentMoney >= structureBlueprint.upgrades[selectedStructure.GetLevel()].cost)
             {
-                selectedStructure.UpgradeStrucrure();
+                selectedStructure.UpgradeStrucrure(uIController);
                 LevelStats.instance.SpendMoney(structureBlueprint.creationCost);
 
             }
@@ -227,7 +247,7 @@ public class BuildManager : MonoBehaviour
         Debug.Log("Selling: " + selectedStructure.name);
         UIController.instance.ShowMenu(UIController.GameMenu.Game);
         selectedStructure.Sell();
-        selectedCell.structure = null;
+        //selectedCell.structure = null;
         LevelStats.instance.EarnMoney(50);
     }
 }

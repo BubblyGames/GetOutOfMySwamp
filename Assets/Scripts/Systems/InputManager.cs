@@ -156,9 +156,75 @@ public class InputManager : MonoBehaviour
 
                     break;
                 case "Structure":
+
+                    GameObject structureHitted = hit.collider.gameObject;
                     //Interact with existing defenses
                     UIController.instance.ShowMenu(UIController.GameMenu.UpgradeMenu);
-                    BuildManager.instance.SetSelectedStructure(hit.collider.gameObject.GetComponent<Structure>());
+
+                    //check the structure type
+                    switch (structureHitted.GetComponent<Structure>().structureId)
+                    {
+                        case 0:
+                            ShootingDefenseBehaviour sfb = structureHitted.GetComponent<ShootingDefenseBehaviour>();
+
+                            UIController.instance.SetUpgradeMenu(sfb.structureId,
+                                sfb.GetStructureName(),
+                                sfb.GetLevel(),
+                                sfb.GetTarget(),
+                                sfb.GetRange(),
+                                sfb.GetFireRate(),
+                                sfb.GetDamage(), 0);
+                            break;
+                        case 1:
+                            //If slows down
+                            ShootingDefenseBehaviour sfb1= structureHitted.GetComponent<ShootingDefenseBehaviour>();
+
+                            UIController.instance.SetUpgradeMenu(sfb1.structureId,
+                                sfb1.GetStructureName(),
+                                sfb1.GetLevel(),
+                                sfb1.GetTarget(),
+                                sfb1.GetRange(),
+                                sfb1.GetFireRate(),
+                                sfb1.GetDamage(), 0);
+                            break;
+                        case 2:
+                            //If 
+                            ShootingDefenseBehaviour hdb = structureHitted.GetComponent<HeavyDefenseBehaviour>();
+
+                            UIController.instance.SetUpgradeMenu(hdb.structureId,
+                                hdb.GetStructureName(),
+                                hdb.GetLevel(),
+                                hdb.GetTarget(),
+                                hdb.GetRange(),
+                                hdb.GetFireRate(),
+                                hdb.GetDamage(), 0);
+                            break;
+                        case 3:
+                            Bomb bombB = structureHitted.GetComponent<Bomb>();
+
+                            UIController.instance.SetUpgradeMenu(bombB.structureId,
+                                bombB.GetStructureName(),
+                                bombB.GetLevel(),
+                                bombB.GetTarget(),
+                                bombB.GetRange(),
+                                bombB.GetFireRate(),
+                                bombB.GetDamage(), 0);
+                            break;
+                    }
+    /*
+                    else if (structureHitted.GetComponent<Bomb>() != null)
+                    {
+                        UIController.instance.SetUpgradeMenu(3, structureHitted.GetComponent<Bomb>().GetStructureName(), structureHitted.GetComponent<Bomb>().GetLevel(), structureHitted.GetComponent<Bomb>().GetTarget(),
+                                structureHitted.GetComponent<Bomb>().GetRange(), structureHitted.GetComponent<Bomb>().GetFireRate(), structureHitted.GetComponent<Bomb>().GetDamage(), 0);
+                    }*/
+                    BuildManager.instance.SetSelectedStructure(structureHitted.GetComponent<Structure>());
+                    break;
+
+                case "Gatherer":
+                    GameObject gathererHitted = hit.collider.gameObject;
+                    UIController.instance.ShowMenu(UIController.GameMenu.UpgradeMenu);
+                    UIController.instance.SetUpgradeMenu(4, gathererHitted.GetComponent<MoneyGatherer>().GetStructureName(), gathererHitted.GetComponent<MoneyGatherer>().GetLevel(), "", "", "", "",
+                        gathererHitted.GetComponent<MoneyGatherer>().GetResourceGatheredAmount());
                     break;
                 default:
                     break;
