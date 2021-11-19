@@ -29,7 +29,7 @@ public class LevelManager : MonoBehaviour
     private Shop shop;
 
     //Actions
-    public static event Action OnGameStart, OnGameLost, OnGameCompleted;
+    public static event Action OnGameStart, OnGameLost, OnGameCompleted, OnWaveCleared;
     public event Action<int> OnDamageTaken;
     public event Action<int, int> OnEnemyKilled;
 
@@ -114,6 +114,10 @@ public class LevelManager : MonoBehaviour
         UIController.instance.ShowMenu(UIController.GameMenu.EndgameMenuWin);
     }
 
+    public void WaveCleared()
+    {
+        OnWaveCleared?.Invoke();
+    }
 }
 
 

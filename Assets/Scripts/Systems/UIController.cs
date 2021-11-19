@@ -31,6 +31,8 @@ public class UIController : MonoBehaviour
     public List<GameObject> statsTexts;
     public GameObject towerName;
     public GameObject upgradeCostText;
+    public Text numberOfWaves;
+    public Text currentWave;
 
     [Header("UpgradeMenu Sprites")]
     public Sprite basicTowerSprite;
@@ -79,7 +81,19 @@ public class UIController : MonoBehaviour
             upgradeButtonImage = upgradeButton.GetComponent<Image>();
             structures = shopContainer.GetComponent<Shop>().defenseBlueprints;
         }
-}
+        LevelManager.OnWaveCleared += UpdateWaveText;
+    }
+
+    private void Start()
+    {
+        numberOfWaves.text = WaveController.instance.waves.Length.ToString();
+        currentWave.text = (WaveController.instance.waveCount + 1).ToString();
+    }
+
+    public void UpdateWaveText()
+    {
+        currentWave.text = (WaveController.instance.waveCount + 1).ToString();
+    }
 
     public virtual void ShowMenu(GameMenu menu)
     {

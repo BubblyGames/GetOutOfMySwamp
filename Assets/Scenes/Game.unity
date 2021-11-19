@@ -3891,6 +3891,8 @@ MonoBehaviour:
   - {fileID: 1874567660}
   towerName: {fileID: 1029310091}
   upgradeCostText: {fileID: 327890052}
+  numberOfWaves: {fileID: 663822927}
+  currentWave: {fileID: 1777606004}
   basicTowerSprite: {fileID: 21300000, guid: 6c53c68d74df63a4792a296a3030e0d3, type: 3}
   psiquicTowerSprite: {fileID: 21300000, guid: d028348a0d83f564baeecfeed75490c0, type: 3}
   heavyTowerSprite: {fileID: 21300000, guid: dfe144ffea944824f974f903a34fd04b, type: 3}
@@ -5689,8 +5691,6 @@ MonoBehaviour:
   isBetweenWaves: 0
   allWavesCleared: 0
   waveCount: 0
-  numberOfWaves: {fileID: 663822927}
-  actualWave: {fileID: 1777606004}
 --- !u!114 &1903685290
 MonoBehaviour:
   m_ObjectHideFlags: 0
