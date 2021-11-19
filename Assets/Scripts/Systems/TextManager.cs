@@ -200,13 +200,13 @@ public class TextManager : MonoBehaviour
         spanishDictionary.Add("lesson3", "Lección 3");
         spanishDictionary.Add("description3", "La rana pesada cuenta con una velocidad de disparo muy lenta, pero su alto alcance y su demoledor daño pueden ser decisivos.");
         spanishDictionary.Add("lesson4", "Lección 4");
-        spanishDictionary.Add("description4", "La rana banquera rehuye de combatir prefiere estar centrada en recaudar dinero para crear más defensas. Úsala sabiamente.");
+        spanishDictionary.Add("description4", "La rana banquera rehuye de combatir. Prefiere estar centrada en recaudar dinero para crear más defensas. Úsala sabiamente.");
         spanishDictionary.Add("lesson5", "Lección 5");
         spanishDictionary.Add("description5", "La rana aérea tiene la mira puesta en el horizonte. Los enemigos deberán tener siempre los pies en la tierra cerca de ella o sufrirán las consecuencias");
         spanishDictionary.Add("lesson6", "Lección 6");
         spanishDictionary.Add("description6", "¡BUM! será lo último que escucharán tus enemigos. Además esta seta mina trae un 2x1 porque dejará a los enemigos aturdidos y se moverán más lento.");
         spanishDictionary.Add("lesson7", "Lección 7");
-        spanishDictionary.Add("description7", "La rana enemiga común, tiene una esperanza de vida media y velocidad promedias. Veremos cuanto aguantan contra nuestras defensas");
+        spanishDictionary.Add("description7", "La rana enemiga común, tiene una esperanza de vida media y velocidad promedias. Veremos cuanto aguantan contra nuestras defensas.");
         spanishDictionary.Add("lesson8", "Lección 8");
         spanishDictionary.Add("description8", "Los enemigos tanques son lentos, pero aguantan muy bien los golpes. Sirven de escudo para el resto de enemigos asi que cuidado.");
         spanishDictionary.Add("lesson9", "Lección 9");

@@ -4459,7 +4459,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Level 1
+  m_text: Nivel 1
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 34cc7629239c81543a565c2190949044, type: 2}
   m_sharedMaterial: {fileID: 6307637555529785520, guid: 34cc7629239c81543a565c2190949044, type: 2}
@@ -5712,6 +5712,7 @@ MonoBehaviour:
   previousButton: {fileID: 428741182}
   nextButton: {fileID: 12881997}
   selectButton: {fileID: 1228711212}
+  levelText: {fileID: 966048658}
 --- !u!4 &1305970971
 Transform:
   m_ObjectHideFlags: 0

@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System;
 using System.Collections;
 using UnityEngine.UI;
+using TMPro;
 
 public class LevelSelector : MonoBehaviour
 {
@@ -22,6 +23,8 @@ public class LevelSelector : MonoBehaviour
     public Button previousButton;
     public Button nextButton;
     public Button selectButton;
+    public TMP_Text levelText;
+    private int levelNum;
 
     private void Awake()
     {
@@ -43,7 +46,8 @@ public class LevelSelector : MonoBehaviour
 
         if (!GameManager.instance.initiated)
             CreateWorldList();
-
+        levelNum = 1;
+        levelText.text = "Nivel " + (levelNum);
         GoTo(selectedWorld);
         DoneChanging();
     }
@@ -57,6 +61,8 @@ public class LevelSelector : MonoBehaviour
         if (!changing && selectedWorld < worlds.Length - 1)
         {
             changing = true;
+            levelNum++;
+            levelText.text = "Nivel " + (levelNum);
             GoTo(selectedWorld + 1);
         }
     }
@@ -65,6 +71,8 @@ public class LevelSelector : MonoBehaviour
         if (!changing && selectedWorld > 0)
         {
             changing = true;
+            levelNum--;
+            levelText.text = "Nivel " + (levelNum);
             GoTo(selectedWorld - 1);
         }
     }
