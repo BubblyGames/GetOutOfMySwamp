@@ -5643,7 +5643,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   infiniteHealth: 0
   infiniteMoney: 0
-  enableEnemySpawn: 0
+  enableEnemySpawn: 1
   enemy: 0
 --- !u!114 &1903685289
 MonoBehaviour:
