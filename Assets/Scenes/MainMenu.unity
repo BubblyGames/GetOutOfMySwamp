@@ -4647,8 +4647,8 @@ MonoBehaviour:
   towerName: {fileID: 0}
   upgradeCostText: {fileID: 0}
   basicTowerSprite: {fileID: 0}
-  slowTowerSprite: {fileID: 0}
-  areaTowerSprite: {fileID: 0}
+  psiquicTowerSprite: {fileID: 0}
+  heavyTowerSprite: {fileID: 0}
   bombTowerSprite: {fileID: 0}
   moneyStructureSprite: {fileID: 0}
   upgradeLevels: []
@@ -5040,10 +5040,10 @@ MonoBehaviour:
   - material: {fileID: 2100000, guid: 36777aadbcc269d4d944e83c116139ca, type: 2}
     lightColor: {r: 1, g: 1, b: 1, a: 1}
     backGroundColor: {r: 0.43529412, g: 0.99215686, b: 0.6627451, a: 1}
-  - material: {fileID: 2100000, guid: 4ac85a0dbbfd9cf46a95759e27d2db51, type: 2}
+  - material: {fileID: 2100000, guid: 4d005b899a034234fbb281b62c9ed4ab, type: 2}
     lightColor: {r: 1, g: 1, b: 1, a: 1}
     backGroundColor: {r: 1, g: 0.77254903, b: 0.41960785, a: 1}
-  - material: {fileID: 2100000, guid: 994b6bbd3a162e3499fd7d4d225fa73b, type: 2}
+  - material: {fileID: 2100000, guid: fadc17fafd02a9445a9c8dc63ccd7bbd, type: 2}
     lightColor: {r: 1, g: 1, b: 1, a: 1}
     backGroundColor: {r: 0.90588236, g: 0.49411765, b: 0.49803922, a: 1}
   - material: {fileID: 2100000, guid: cfa571efc57b7504d8c2953b8ec0d164, type: 2}

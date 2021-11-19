@@ -44,7 +44,6 @@ public class Path
         start = midPoints[0].cell.GetPosInt();
         end = midPoints[midPoints.Count() - 1].cell.GetPosInt();
 
-
         Node result = FindPathAstarWithMidpoints(world.GetCell(start), world.GetCell(end));
 
         //If result is null, a path couldn't be found and returns false so it tries another seed
@@ -139,7 +138,7 @@ public class Path
             }
             else
             {
-                 //Expands neightbors, (compute cost of each one) and add them to the list
+                //Expands neightbors, (compute cost of each one) and add them to the list
                 CellInfo[] neighbours = _world.GetNeighbours(current.cell);
                 //CellInfo[] neighboursWitCorners = _world.GetNeighbours(current.cell, true);
 
@@ -151,7 +150,7 @@ public class Path
                         current.isFloating = false;
                     }
 
-                    if (goals.Contains(neighbours[i]) && neighbours[i]!= end)
+                    if (goals.Contains(neighbours[i]) && neighbours[i] != end)
                     {
                         continue;
                     }
@@ -204,7 +203,6 @@ public class Path
                 }
             }
         }
-
         return null;
     }
 
@@ -229,7 +227,7 @@ public class Path
         int insertedMidpoints = 0;
         for (int i = 1; i < midpointsCopy.Count; i++)
         {
-            lastSept = i == midpointsCopy.Count - 1; //Is this the segment bewteen the last midpoint and the end?
+            lastSept = i == midpointsCopy.Count - 1 || i == 1; //Is this the segment bewteen the last midpoint and the end?
 
             Node result = null;
             midpoint = midpointsCopy[i];
@@ -237,7 +235,7 @@ public class Path
             int count = 0;
 
             //Tries 10 times to find a suitable midpoint
-            while (result == null && count < 10)
+            while (result == null && count < 30)
             {
                 if (world.CheckIfFloating(midpoint.cell))
                 {
@@ -247,7 +245,8 @@ public class Path
                     midpoint.cell = c;
                 }
 
-                if (!midpoint.cell.canWalk) {
+                if (!midpoint.cell.canWalk)
+                {
                     CellInfo c;
                     c = world.GetClosestWalkableCell(midpoint.cell);
                     c.normalInt = midpoint.cell.normalInt;
@@ -290,7 +289,7 @@ public class Path
             {
                 if (length > MAX_SEGMENT_LENGTH && count == length / 2)
                 {
-                    Debug.Log("New midpoint");
+                    //Debug.Log("New midpoint");
                     midPoints.Insert(i + insertedMidpoints, new Midpoint(n.cell, false));
                     insertedMidpoints++;
                 }
@@ -343,8 +342,7 @@ public class Path
 
         foreach (CellInfo c in cells)
         {
-            c.paths.Remove(this);
-            c.Reset();
+            c.RemovePath(this);
         }
 
         dirty = true;
@@ -359,8 +357,16 @@ public class Path
     {
         if (c.endZone)
         {
-            lastCell = world.GetCell(c.GetPosInt() + Vector3Int.down);
-            return Vector3Int.up;
+            if (c.y > world.size / 2)
+            {
+                lastCell = world.GetCell(c.GetPosInt() + Vector3Int.down);
+                return Vector3Int.up;
+            }
+            else
+            {
+                lastCell = world.GetCell(c.GetPosInt() + Vector3Int.up);
+                return Vector3Int.down;
+            }
         }
 
         Vector3Int result = Vector3Int.zero;

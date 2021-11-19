@@ -25,6 +25,7 @@ public class CubeWorldGenerator : MonoBehaviour
     public float rocksVisualReduction = 0.9f;
     public float rockSize = 3f;
     public int seed = 0;
+    List<CellInfo> emptyCells;
 
     public int numberOfMidpoints = 1;
 
@@ -40,6 +41,7 @@ public class CubeWorldGenerator : MonoBehaviour
     VoxelRenderer voxelRenderer;//Transforms the cells array into a mesh
 
     int endzoneRadious;
+    int swampRadious;
 
     #region SetUp
     private void Awake()
@@ -74,6 +76,7 @@ public class CubeWorldGenerator : MonoBehaviour
     void Start()
     {
         endzoneRadious = (int)(size / 3.5f);
+        swampRadious = (int)(endzoneRadious * .75f);
 
         bool success = false;
         int count = 0;
@@ -105,7 +108,7 @@ public class CubeWorldGenerator : MonoBehaviour
         }
 
         //While enough paths can't be created, it will try new seeds and restart the process
-        while (!success && count < 100)
+        while (!success && count < 5)
         {
             count++;
             Debug.Log("Attempt: " + count + " Seed: " + seed.ToString());
@@ -122,7 +125,7 @@ public class CubeWorldGenerator : MonoBehaviour
                 {
                     ClearDebugStuff();
                     seed = Mathf.RoundToInt(Random.value * 100000);//New seed
-                    wallDensity -= 0.05f;
+                    wallDensity -= 0.01f;
                 }
             }
             else
@@ -155,6 +158,7 @@ public class CubeWorldGenerator : MonoBehaviour
 
     void FillWorld()
     {
+        emptyCells = new List<CellInfo>();
         for (int i = 0; i < size; i++)
         {
             for (int j = 0; j < size; j++)
@@ -169,11 +173,16 @@ public class CubeWorldGenerator : MonoBehaviour
                     cell.isCloseToPath = false;
                     cell.hasStructure = false;
 
+                    //Maybe some day
+                    /*float distanceToCenter = Vector3.Distance(center.position, cell.GetPos());
+                    if (distanceToCenter > size / 2f)
+                        continue;*/
+
                     //Rock generation
                     float alpha = 1;
                     //float dist = Mathf.Sqrt(2 * size * size) - Mathf.Sqrt(Mathf.Pow(endX - i, 2f) + Mathf.Pow(endY - j, 2f));
 
-                    if (Vector3.Distance(end, new Vector3(i, j, k)) < endzoneRadious)
+                    if (Vector2.Distance(new Vector2(end.x, end.z), new Vector2(i, k)) < endzoneRadious)
                     {
                         alpha = 0;
                     }
@@ -182,10 +191,6 @@ public class CubeWorldGenerator : MonoBehaviour
                     bool isRock = perlin > (1 - ((wallDensity * rocksVisualReduction) * alpha));
                     bool isNotRockButActsLikeRock = perlin > (1 - (wallDensity * alpha));
 
-                    //Maybe some day
-                    /*float distanceToCenter = Vector3.Distance(center.position, cell.GetPos());
-                    if (distanceToCenter > size / 2f)
-                        continue;*/
 
                     if (isRock)
                     {
@@ -196,8 +201,14 @@ public class CubeWorldGenerator : MonoBehaviour
                     {
                         if (cell.isSurface)
                         {
-                            cell.canWalk = !isNotRockButActsLikeRock;
                             cell.blockType = BlockType.Air;
+                            if (isNotRockButActsLikeRock)
+                                cell.canWalk = false;
+                            else
+                            {
+                                cell.canWalk = true;
+                                emptyCells.Add(cell);
+                            }
                         }
                         else
                         {
@@ -256,22 +267,28 @@ public class CubeWorldGenerator : MonoBehaviour
         }
     }
 
-
-
     private void GenerateSwamp(int endX, int endY, int endZ)
     {
         for (int i = -endzoneRadious; i < endzoneRadious; i++)
         {
-            for (int j = size - 1; j > 0; j--)
+            for (int j = 0; j < size; j++)
             {
                 for (int k = -endzoneRadious; k < endzoneRadious; k++)
                 {
+                    Vector2 pos = new Vector2(endX + i, endZ + k);
+                    if (Vector2.Distance(new Vector2(end.x, end.z), pos) > endzoneRadious)
+                    {
+                        continue;
+                    }
+
                     cells[endX + i, j, endZ + k].endZone = true;
 
-                    if (Mathf.Abs(i) > endzoneRadious - 4 || Mathf.Abs(k) > endzoneRadious - 4)
+                    if (Mathf.Abs(i) > swampRadious/2 || Mathf.Abs(k) > swampRadious/2)
+                    {
                         continue;
+                    }
 
-                    if (j > size - 3)
+                    if (j > size - 3 || j == 1)
                     {
                         cells[endX + i, j, endZ + k].blockType = BlockType.Air;
                         cells[endX + i, j, endZ + k].canWalk = true;
@@ -280,11 +297,9 @@ public class CubeWorldGenerator : MonoBehaviour
                     {
                         cells[endX + i, j, endZ + k].blockType = BlockType.Swamp;
                         cells[endX + i, j, endZ + k].canWalk = true;
-                    }
-                    else if (j == 1)
-                    {
+                    }else if (j == 2) {
                         cells[endX + i, j, endZ + k].blockType = BlockType.Path;
-                        cells[endX + i, j, endZ + k].canWalk = false;
+                        cells[endX + i, j, endZ + k].canWalk = true;
                     }
                 }
             }
@@ -305,7 +320,7 @@ public class CubeWorldGenerator : MonoBehaviour
 
             if (!paths[i].initiated)//First time calculating a path
             {
-                //Random start position
+                /*//Random start position
                 paths[i].start.x = Random.Range(endX - endzoneRadious, endX + endzoneRadious);
                 paths[i].start.y = 0;
                 paths[i].start.z = Random.Range(endX - endzoneRadious, endX + endzoneRadious);
@@ -324,8 +339,9 @@ public class CubeWorldGenerator : MonoBehaviour
                 }
 
                 if (count >= 100)
-                    return false;
+                    return false;*/
 
+                paths[i].start = new Vector3Int(size / 2, 2, size / 2);
                 paths[i].AddMidpoint(new Midpoint(GetCell(paths[i].start), true));
                 for (int j = 0; j < numberOfMidpoints; j++)
                 {
@@ -351,7 +367,7 @@ public class CubeWorldGenerator : MonoBehaviour
         //Debug paths and midpoints
         ShowDebugStuff();
 
-        Debug.Log("Generating paths took: " + (Time.realtimeSinceStartup - startTime) + "s");
+        //Debug.Log("Generating paths took: " + (Time.realtimeSinceStartup - startTime) + "s");
         return true; //Success
     }
 
@@ -440,7 +456,8 @@ public class CubeWorldGenerator : MonoBehaviour
             }
             if (dirty)
             {
-                //yield return null;
+                UpdateMesh();
+                yield return null;
             }
         }
         UpdateMesh();
@@ -632,7 +649,6 @@ public class CubeWorldGenerator : MonoBehaviour
         int y = 1;
         int z = 1;
 
-
         int min = 10;
         int max = size - 11;
         //Debug.Log("Looking for a random midpoint...");
@@ -663,23 +679,25 @@ public class CubeWorldGenerator : MonoBehaviour
         }
         //Debug.Log("Midpoint found after " + count.ToString() + " attempts");
         onXFace = !onXFace;
+
         return cell;
     }
 
     public CellInfo GetCompletelyRandomCell()
     {
-        int x, y, z;
         CellInfo cell = null;
-
+        CellInfo currentCell;
         while (cell == null)
         {
-            x = Random.Range(0, size);
-            y = Random.Range(1, size - 2);
-            z = Random.Range(0, size);
 
-            if (cells[x, y, z].canWalk && !cells[x, y, z].endZone && !CheckIfFloating(cells[x, y, z]) &&
-                Path.FindPathAstar(this, new Node(cells[x, y, z]), GetCell(end.x, end.y, end.z), true) != null)
-                cell = cells[x, y, z];
+            int randomIdx = Random.Range(0, emptyCells.Count);
+            currentCell = emptyCells[randomIdx];
+
+            if (!currentCell.endZone &&
+                currentCell.y > 0 &&
+                currentCell.y < size - 1 &&
+                Path.FindPathAstar(this, new Node(currentCell), GetCell(end.x, end.y, end.z), true) != null)
+                cell = currentCell;
         }
         return cell;
     }
@@ -835,30 +853,35 @@ public class CubeWorldGenerator : MonoBehaviour
             Mathf.RoundToInt(dir.z));
 
         CellInfo newCell;
-        while (CheckIfFloating(cell))
+        int count = 0;
+        while (CheckIfFloating(cell) && count < 100)
         {
             newCell = GetCell(cell.GetPosInt() - dirInt);
 
             if (!newCell.canWalk)
             {
-                Vector3Int newDirInt = new Vector3Int(0, dirInt.y, dirInt.z);
+                Vector3Int newDirInt = new Vector3Int(dirInt.x, 0, 0);
                 newCell = GetCell(cell.GetPosInt() - newDirInt);
             }
 
             if (!newCell.canWalk)
             {
-                Vector3Int newDirInt = new Vector3Int(dirInt.x, 0, dirInt.z);
+                Vector3Int newDirInt = new Vector3Int(0, dirInt.y, 0);
                 newCell = GetCell(cell.GetPosInt() - newDirInt);
             }
 
             if (!newCell.canWalk)
             {
-                Vector3Int newDirInt = new Vector3Int(dirInt.x, dirInt.y, 0);
+                Vector3Int newDirInt = new Vector3Int(0, 0, dirInt.z);
                 newCell = GetCell(cell.GetPosInt() - newDirInt);
             }
 
             cell = newCell;
+            count++;
         }
+
+        if (count == 100)
+            Debug.Log("Wtf fix this a$ap");
 
         return cell;
     }

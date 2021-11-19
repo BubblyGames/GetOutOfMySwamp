@@ -5768,13 +5768,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   demo: 0
   size: 31
-  nPaths: 0
+  nPaths: 4
   canMergePaths: 0
   wallDensity: 0.4
   rocksVisualReduction: 0.8
   rockSize: 10
   seed: 0
-  numberOfMidpoints: 3
+  numberOfMidpoints: 1
   debugMidpoints: 1
   lineRendererPrefab: {fileID: 3920875017051324963, guid: ffef0eddca5eb324f94bad8de9cc038b, type: 3}
 --- !u!114 &1903685288
