@@ -13,3 +13,16 @@ public class Midpoint
         this.important = important;
     }
 }
+
+public class MidpointComparer : IComparer<Midpoint>
+{
+    public int Compare(Midpoint a, Midpoint b)
+    {
+        if (a.cell == b.cell)
+            return 0;
+        else
+        {
+            return 1;
+        }
+    }
+}

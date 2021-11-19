@@ -20,7 +20,7 @@ public class Path
                 return 0;
         }
     }
-    const int MAX_SEGMENT_LENGTH = 30;
+    const int MAX_SEGMENT_LENGTH = 100;
 
     public bool dirty = true;
     public bool initiated = false;
@@ -119,7 +119,7 @@ public class Path
         openList.Add(firstNode);
 
         int count = 0;
-        while (openList.Count > 0 && count < 10000)
+        while (openList.Count > 0 && count < 5000)
         {
             count++;
             //Sorting the list in "h" in increasing order
@@ -140,7 +140,6 @@ public class Path
             {
                 //Expands neightbors, (compute cost of each one) and add them to the list
                 CellInfo[] neighbours = _world.GetNeighbours(current.cell);
-                //CellInfo[] neighboursWitCorners = _world.GetNeighbours(current.cell, true);
 
                 current.isFloating = true;
                 for (int i = 0; i < neighbours.Length; i++)
@@ -290,8 +289,8 @@ public class Path
                 if (length > MAX_SEGMENT_LENGTH && count == length / 2)
                 {
                     //Debug.Log("New midpoint");
-                    midPoints.Insert(i + insertedMidpoints, new Midpoint(n.cell, false));
-                    insertedMidpoints++;
+                    if (InsertMidpoint(i + insertedMidpoints, new Midpoint(n.cell, false)))
+                        insertedMidpoints++;
                 }
 
                 closedList.Add(n);
@@ -314,10 +313,28 @@ public class Path
         return current;
     }
 
-    public void AddMidpoint(Midpoint midpoint)
+    #region Midpoints
+    public bool AddMidpoint(Midpoint midpoint)
     {
+        if (midPoints.Contains(midpoint))
+        {
+            return false;
+        }
         midPoints.Add(midpoint);
+        return true;
     }
+
+    public bool InsertMidpoint(int i, Midpoint midpoint)
+    {
+        if (midPoints.Contains(midpoint))
+        {
+            return false;
+        }
+        midPoints.Insert(i, midpoint);
+        return true;
+    }
+
+    #endregion
 
     public Vector3 GetStep(int idx) { return new Vector3(cells[idx].x, cells[idx].y, cells[idx].z); }
 

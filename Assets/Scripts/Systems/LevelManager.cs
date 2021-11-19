@@ -17,6 +17,8 @@ public class LevelManager : MonoBehaviour
 
     public static LevelManager instance;
 
+    public bool ready = false;
+
     //References
     [HideInInspector]
     public CubeWorldGenerator world;

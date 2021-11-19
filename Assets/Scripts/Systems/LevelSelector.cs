@@ -79,6 +79,7 @@ public class LevelSelector : MonoBehaviour
             worldInfo.canMergePaths = worlds[i].canMergePaths;
             worldInfo.wallDensity = worlds[i].wallDensity;
             worldInfo.rocksVisualReduction = worlds[i].rocksVisualReduction;
+            worldInfo.waterDensity = worlds[i].waterDensity;
             worldInfo.rockSize = worlds[i].rockSize;
             worldInfo.numberOfMidpoints = worlds[i].numberOfMidpoints;
             worldInfo.themeInfo = worlds[i].GetComponent<ThemeSelector>().themeInfo;

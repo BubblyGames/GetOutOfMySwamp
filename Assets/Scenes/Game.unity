@@ -5665,6 +5665,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a2e84d8d11f308f47860aa152f3a36e7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ready: 0
   world: {fileID: 0}
   floorLayer:
     serializedVersion: 2
@@ -5766,15 +5767,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 835b7f56cca299441ab8d78a438b21fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  demo: 0
   size: 31
-  nPaths: 4
-  canMergePaths: 0
   wallDensity: 0.4
   rocksVisualReduction: 0.8
-  rockSize: 10
+  rockSize: 26.94
+  waterDensity: 0.5
+  nPaths: 1
+  canMergePaths: 0
+  numberOfMidpoints: 0
   seed: 0
-  numberOfMidpoints: 1
+  waterMaterial: {fileID: 2100000, guid: f2bfe60c202150547be22d486a012286, type: 2}
+  demo: 0
   debugMidpoints: 1
   lineRendererPrefab: {fileID: 3920875017051324963, guid: ffef0eddca5eb324f94bad8de9cc038b, type: 3}
 --- !u!114 &1903685288
@@ -5789,9 +5792,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b74ea02730753d44f99324699b92aa51, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  infiniteHealth: 0
+  infiniteHealth: 1
   infiniteMoney: 0
-  enableEnemySpawn: 1
+  enableEnemySpawn: 0
   enemy: 0
 --- !u!114 &1903685289
 MonoBehaviour:
