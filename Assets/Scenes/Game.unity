@@ -5517,14 +5517,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a2e84d8d11f308f47860aa152f3a36e7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ready: 0
   world: {fileID: 0}
   floorLayer:
     serializedVersion: 2
     m_Bits: 128
   waterSplashPrefab: {fileID: 4964779859338955144, guid: da9a63bd877faf74db2fb8f6f899c1ca, type: 3}
-  waterSplashMaterial: {fileID: 2100000, guid: f2bfe60c202150547be22d486a012286, type: 2}
-  waterMaterial: {fileID: 2100000, guid: f2bfe60c202150547be22d486a012286, type: 2}
-  waterColor: {r: 0, g: 0, b: 0, a: 0}
+  waterSplashMaterial: {fileID: 2100000, guid: b69aabdbb83200d4e86cc4b07ec67723, type: 2}
   colors:
   - {r: 0, g: 0, b: 0, a: 0}
   - {r: 0, g: 0, b: 0, a: 0}
@@ -5618,15 +5617,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 835b7f56cca299441ab8d78a438b21fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  demo: 0
   size: 31
-  nPaths: 4
-  canMergePaths: 0
   wallDensity: 0.4
-  rocksVisualReduction: 0.8
-  rockSize: 10
+  rocksVisualReduction: 1
+  rockSize: 26.94
+  waterDensity: 0
+  nPaths: 1
+  canMergePaths: 0
+  numberOfMidpoints: 2
   seed: 0
-  numberOfMidpoints: 1
+  waterMaterial: {fileID: 2100000, guid: f2bfe60c202150547be22d486a012286, type: 2}
+  demo: 0
+  sphere: 0
   debugMidpoints: 1
   lineRendererPrefab: {fileID: 3920875017051324963, guid: ffef0eddca5eb324f94bad8de9cc038b, type: 3}
 --- !u!114 &1903685288

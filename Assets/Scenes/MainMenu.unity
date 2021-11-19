@@ -657,15 +657,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 835b7f56cca299441ab8d78a438b21fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  demo: 1
   size: 31
+  wallDensity: 0.286
+  rocksVisualReduction: 0.9
+  rockSize: 26
+  waterDensity: 0.15
   nPaths: 1
   canMergePaths: 0
-  wallDensity: 0.286
-  rocksVisualReduction: 0.8
-  rockSize: 26
-  seed: 2856
-  numberOfMidpoints: 4
+  numberOfMidpoints: 3
+  seed: 3246
+  waterMaterial: {fileID: 2100000, guid: f2bfe60c202150547be22d486a012286, type: 2}
+  demo: 1
+  sphere: 0
   debugMidpoints: 0
   lineRendererPrefab: {fileID: 3920875017051324963, guid: ffef0eddca5eb324f94bad8de9cc038b, type: 3}
 --- !u!64 &63313644
@@ -767,15 +770,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 835b7f56cca299441ab8d78a438b21fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  demo: 1
   size: 31
-  nPaths: 1
-  canMergePaths: 0
   wallDensity: 0.4
   rocksVisualReduction: 0.8
   rockSize: 26.94
-  seed: 2922
+  waterDensity: 0.5
+  nPaths: 1
+  canMergePaths: 0
   numberOfMidpoints: 3
+  seed: 2922
+  waterMaterial: {fileID: 2100000, guid: f2bfe60c202150547be22d486a012286, type: 2}
+  demo: 1
+  sphere: 0
   debugMidpoints: 0
   lineRendererPrefab: {fileID: 3920875017051324963, guid: ffef0eddca5eb324f94bad8de9cc038b, type: 3}
 --- !u!64 &85103257
@@ -987,15 +993,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 835b7f56cca299441ab8d78a438b21fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  demo: 1
   size: 31
-  nPaths: 3
-  canMergePaths: 1
   wallDensity: 0.55
   rocksVisualReduction: 1
   rockSize: 8.84
+  waterDensity: 0
+  nPaths: 3
+  canMergePaths: 0
+  numberOfMidpoints: 2
   seed: 6296
-  numberOfMidpoints: 1
+  waterMaterial: {fileID: 2100000, guid: f2bfe60c202150547be22d486a012286, type: 2}
+  demo: 1
+  sphere: 0
   debugMidpoints: 0
   lineRendererPrefab: {fileID: 3920875017051324963, guid: ffef0eddca5eb324f94bad8de9cc038b, type: 3}
 --- !u!64 &96266345
@@ -1282,15 +1291,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 835b7f56cca299441ab8d78a438b21fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  demo: 1
   size: 31
-  nPaths: 2
-  canMergePaths: 1
   wallDensity: 0.4
   rocksVisualReduction: 0.9
   rockSize: 14.82
+  waterDensity: 0
+  nPaths: 2
+  canMergePaths: 0
+  numberOfMidpoints: 3
   seed: 6172
-  numberOfMidpoints: 2
+  waterMaterial: {fileID: 2100000, guid: f2bfe60c202150547be22d486a012286, type: 2}
+  demo: 1
+  sphere: 0
   debugMidpoints: 0
   lineRendererPrefab: {fileID: 3920875017051324963, guid: ffef0eddca5eb324f94bad8de9cc038b, type: 3}
 --- !u!64 &140904418
@@ -2920,15 +2932,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 835b7f56cca299441ab8d78a438b21fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  demo: 1
   size: 31
-  nPaths: 4
-  canMergePaths: 1
   wallDensity: 0.5
   rocksVisualReduction: 1
   rockSize: 10.49
+  waterDensity: 0
+  nPaths: 4
+  canMergePaths: 0
+  numberOfMidpoints: 1
   seed: 6400
-  numberOfMidpoints: 0
+  waterMaterial: {fileID: 2100000, guid: f2bfe60c202150547be22d486a012286, type: 2}
+  demo: 1
+  sphere: 0
   debugMidpoints: 0
   lineRendererPrefab: {fileID: 3920875017051324963, guid: ffef0eddca5eb324f94bad8de9cc038b, type: 3}
 --- !u!64 &504795247
@@ -5068,10 +5083,10 @@ MonoBehaviour:
   - material: {fileID: 2100000, guid: 36777aadbcc269d4d944e83c116139ca, type: 2}
     lightColor: {r: 1, g: 1, b: 1, a: 1}
     backGroundColor: {r: 0.43529412, g: 0.99215686, b: 0.6627451, a: 1}
-  - material: {fileID: 2100000, guid: 4ac85a0dbbfd9cf46a95759e27d2db51, type: 2}
+  - material: {fileID: 2100000, guid: 4d005b899a034234fbb281b62c9ed4ab, type: 2}
     lightColor: {r: 1, g: 1, b: 1, a: 1}
     backGroundColor: {r: 1, g: 0.77254903, b: 0.41960785, a: 1}
-  - material: {fileID: 2100000, guid: 994b6bbd3a162e3499fd7d4d225fa73b, type: 2}
+  - material: {fileID: 2100000, guid: fadc17fafd02a9445a9c8dc63ccd7bbd, type: 2}
     lightColor: {r: 1, g: 1, b: 1, a: 1}
     backGroundColor: {r: 0.90588236, g: 0.49411765, b: 0.49803922, a: 1}
   - material: {fileID: 2100000, guid: cfa571efc57b7504d8c2953b8ec0d164, type: 2}

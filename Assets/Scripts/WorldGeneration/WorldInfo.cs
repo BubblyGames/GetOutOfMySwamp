@@ -12,6 +12,7 @@ public class WorldInfo
     public ThemeInfo themeInfo;
     public Wave[] waves;
     public bool canMergePaths;
+    internal float waterDensity;
 
     public WorldInfo() { }
 }
