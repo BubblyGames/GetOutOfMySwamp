@@ -153,9 +153,9 @@ public abstract class EnemyBehaviour : MonoBehaviour
 
     }
 
-    public void AreaDamage(int damage,float attackRange, int layerMask)
+    public void AreaDamage(int damage,float areaEffect, int layerMask)
     {
-        RaycastHit[] hits = Physics.SphereCastAll(transform.position, attackRange, transform.forward, attackRange, layerMask);
+        RaycastHit[] hits = Physics.SphereCastAll(transform.position, areaEffect, transform.forward, areaEffect, layerMask);
         for (int i = 0; i < hits.Length; i++)
         {
             EnemyBehaviour eb;
