@@ -212,8 +212,8 @@ MonoBehaviour:
   blockType: 1
   structureName: basicTower
   structureId: 0
-  fireRate: 1
-  damage: 10
+  fireRate: 2
+  damage: 6
   attackRange: 5
   Target: ground
   Range: medium

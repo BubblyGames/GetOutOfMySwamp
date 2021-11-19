@@ -273,9 +273,9 @@ MonoBehaviour:
   blockType: 1
   structureName: heavyTower
   structureId: 2
-  fireRate: 0.1
-  damage: 35
-  attackRange: 7
+  fireRate: 0.2
+  damage: 20
+  attackRange: 6
   Target: ground
   Range: large
   Damage: high
