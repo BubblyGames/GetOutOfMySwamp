@@ -47,7 +47,7 @@ public class LevelSelector : MonoBehaviour
         if (!GameManager.instance.initiated)
             CreateWorldList();
         levelNum = 1;
-        levelText.text = "Nivel " + (levelNum);
+        //levelText.text = "Nivel " + (levelNum);
         GoTo(selectedWorld);
         DoneChanging();
     }
@@ -62,7 +62,7 @@ public class LevelSelector : MonoBehaviour
         {
             changing = true;
             levelNum++;
-            levelText.text = "Nivel " + (levelNum);
+            levelText.text = levelNum.ToString();
             GoTo(selectedWorld + 1);
         }
     }
@@ -72,7 +72,7 @@ public class LevelSelector : MonoBehaviour
         {
             changing = true;
             levelNum--;
-            levelText.text = "Nivel " + (levelNum);
+            levelText.text = levelNum.ToString();
             GoTo(selectedWorld - 1);
         }
     }

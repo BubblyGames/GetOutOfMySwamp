@@ -75,7 +75,7 @@ public class TextManager : MonoBehaviour
         englishDictionary.Add("next", "Next");
         englishDictionary.Add("back", "Back");
         englishDictionary.Add("previous", "Previous");
-        englishDictionary.Add("select", "Select World");
+        englishDictionary.Add("select", "Begin");
         englishDictionary.Add("pause", "Pause");
         englishDictionary.Add("health", "Health");
         englishDictionary.Add("score", "Score");
@@ -93,6 +93,7 @@ public class TextManager : MonoBehaviour
         englishDictionary.Add("retry", "Retry");
         englishDictionary.Add("loose", "You lose!");
         englishDictionary.Add("win", "You win!");
+        englishDictionary.Add("level", "Level");
 
 
         //upgrade texts in english
@@ -123,21 +124,21 @@ public class TextManager : MonoBehaviour
 
         //descriptions of lessons in English
         englishDictionary.Add("lesson1", "Lesson 1");
-        englishDictionary.Add("description1", "The Basic Frog is the cheapest defense from all. However it's medium damage and range could save you when needed, son don't understimate it!");
+        englishDictionary.Add("description1", "The Basic Frog is the cheapest defense from all. However it's medium damage and range could save you when needed, son don't underestimate it!");
         englishDictionary.Add("lesson2", "Lesson 2");
-        englishDictionary.Add("description2", "Did anyone said Psiquic Frog? Combine this defense with others for amazing results thanks to it's delaying effect to enemies.");
+        englishDictionary.Add("description2", "Did anyone said Psiquic Frog? Combine this defense with others for amazing results thanks to it's delaying effect on enemies.");
         englishDictionary.Add("lesson3", "Lesson 3");
         englishDictionary.Add("description3", "Amazing damage makes up for the low range and slow fire rate. Let's make the pond shake!");
         englishDictionary.Add("lesson4", "Lesson 4");
-        englishDictionary.Add("description4", "Fighting? Nah. The Money Frog sees a golden future for you just let it financiate it.");
+        englishDictionary.Add("description4", "Fighting? Nah. The Money Frog sees a golden future for you. Just let it financiate it.");
         englishDictionary.Add("lesson5", "Lesson 5");
         englishDictionary.Add("description5", "The Aerial Frog is always on the moon, but it is settle for destroying flying enemies.");
         englishDictionary.Add("lesson6", "Lesson 6");
-        englishDictionary.Add("description6", "Is that... a mushroom? No, it's a MushBOOMB! Be careful it not only destroys, it also has a delay effect on enemies.");
+        englishDictionary.Add("description6", "Is that... a mushroom? No, it's a MushBOOMB! Be careful, it not only destroys, it also has a delay effect on enemies.");
         englishDictionary.Add("lesson7", "Lesson 7");
-        englishDictionary.Add("description7", "Basic Enemy unit. Medium life and speed makes it an easy target but be careful don't forget about them");
+        englishDictionary.Add("description7", "Basic Enemy unit. Medium life and speed makes it an easy target but be careful, don't forget about them");
         englishDictionary.Add("lesson8", "Lesson 8");
-        englishDictionary.Add("description8", "Tank Enemy is used as a shield for the other enemy units. Be careful it's huge life won't make them easy to kill.");
+        englishDictionary.Add("description8", "Tank Enemy is used as a shield for the other enemy units. Be careful, it's huge amount of life won't make them easy to kill.");
         englishDictionary.Add("lesson9", "Lesson 9");
         englishDictionary.Add("description9", "Horde Enemies are not brave enough to come alone. Besides, they are very fast so put an eye on them!");
 
@@ -164,6 +165,7 @@ public class TextManager : MonoBehaviour
         spanishDictionary.Add("retry", "Reintentar");
         spanishDictionary.Add("loose", "¡Has perdido!");
         spanishDictionary.Add("win", "¡Has ganado!");
+        spanishDictionary.Add("level", "Nivel");
 
         //upgrade texts in spanish
         spanishDictionary.Add("target", "Objetivo");
