@@ -12,7 +12,7 @@ public class Node
     public Vector3Int normal = Vector3Int.zero;
     public Vector3 dir = Vector3.zero;
 
-    public bool isCorner = false;
+    public bool isMidpoint = false;
 
     public Vector3 Position
     {
@@ -27,21 +27,18 @@ public class Node
         z = cell.z;
     }
 
-    public void ComputeFScore(int targetX, int targetY, int targetZ, int extra = 0)
+    public void ComputeFScore(int targetX, int targetY, int targetZ)
     {
-        h = Math.Abs(targetX - x) + Math.Abs(targetY - y) + Math.Abs(targetZ - z);
+        h = (Math.Abs(targetX - x) + Math.Abs(targetY - y) + Math.Abs(targetZ - z));
         if (Parent != null)
             g = Parent.g + 1;
 
-        f = (h - g) + extra;
+        f = h + g;
     }
-
-
 }
 
 public class NodeComparer : IComparer<Node>
 {
-    // Compares by Height, Length, and Width.
     public int Compare(Node a, Node b)
     {
         return a.f.CompareTo(b.f);

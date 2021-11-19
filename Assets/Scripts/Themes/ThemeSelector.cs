@@ -14,6 +14,7 @@ public class ThemeSelector : MonoBehaviour
             Debug.Log("null");
         }
         GetComponent<MeshRenderer>().material = themeInfo.material;
+        GetComponent<CubeWorldGenerator>().CreateWater();
     }
     public ThemeInfo GetThemeInfo()
     {

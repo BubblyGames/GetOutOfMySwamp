@@ -301,7 +301,7 @@ Ejemplo, torreta pesada:
 
 ### 6.3 Música
 
-El juego cuenta con una sola canción propia la cual se reproduce tanto en los menúes como durante la partida.
+El juego cuenta con una sola canción (autor: [Pascual Gázquez Compán](https://open.spotify.com/artist/7y2dfMVexZgClCIeiHd22f?si=Q2ch-_AVR8CC8a927irtxw&utm_source=copy-link)) la cual se reproduce tanto en los menúes como durante la partida.
 
 ### 6.4 Ambiente sonoro
 
