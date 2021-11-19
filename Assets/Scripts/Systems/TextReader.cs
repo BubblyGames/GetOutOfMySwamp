@@ -33,7 +33,7 @@ public class TextReader : MonoBehaviour
             Read();
         }
 
-        if (gameObject.name.Equals("LenguageButton"))
+        if (gameObject.name.Equals("LanguageButton"))
         {
             Button b;
             if (gameObject.TryGetComponent<Button>(out b))

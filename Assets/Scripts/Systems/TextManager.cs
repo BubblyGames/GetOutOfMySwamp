@@ -81,7 +81,7 @@ public class TextManager : MonoBehaviour
         englishDictionary.Add("score", "Score");
         englishDictionary.Add("money", "Money");
         englishDictionary.Add("settings", "Settings");
-        englishDictionary.Add("lenguage", "Language");
+        englishDictionary.Add("language", "Language");
         englishDictionary.Add("exit", "Exit");
         englishDictionary.Add("finish", "Finish");
         englishDictionary.Add("restart", "Restart");
@@ -152,7 +152,7 @@ public class TextManager : MonoBehaviour
         spanishDictionary.Add("score", "Puntuación");
         spanishDictionary.Add("money", "Dinero");
         spanishDictionary.Add("settings", "Ajustes");
-        spanishDictionary.Add("lenguage", "Idioma");
+        spanishDictionary.Add("language", "Idioma");
         spanishDictionary.Add("exit", "Salir");
         spanishDictionary.Add("finish", "Finalizar");
         spanishDictionary.Add("restart", "Reiniciar");

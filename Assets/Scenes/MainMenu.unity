@@ -4898,7 +4898,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &1149011574
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6837,7 +6837,7 @@ GameObject:
   - component: {fileID: 1556323991}
   - component: {fileID: 1556323990}
   m_Layer: 5
-  m_Name: LenguageButton
+  m_Name: LanguageButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6875,7 +6875,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e9b9a52f61abc874ea10f049443698bd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  key: lenguage
+  key: language
   textContainer: {fileID: 1771064117}
 --- !u!114 &1556323991
 MonoBehaviour:
