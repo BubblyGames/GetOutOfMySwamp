@@ -71,6 +71,10 @@ public class BulletBehaviour : MonoBehaviour
                     other.gameObject.GetComponent<EnemyBehaviour>().AreaDamage(damage, maxDistance, layerMask);
                     Destroy(gameObject);
                     break;
+                default:
+                    other.gameObject.GetComponent<EnemyBehaviour>().Hurt(damage);
+                    Destroy(gameObject);
+                    break;
             }
         }
         else if (other.gameObject.CompareTag("World"))
