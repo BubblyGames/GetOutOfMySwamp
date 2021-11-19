@@ -10,7 +10,7 @@ public class InputManager : MonoBehaviour
     bool choosingWhereToBuild = false; //A structure card has been selected
     bool zooming = false;//Is zooming
 
-    GameObject selectedCard;
+    [HideInInspector] public GameObject selectedCard;
 
     [SerializeField]
     private float mouseSensitivity = 3.0f;

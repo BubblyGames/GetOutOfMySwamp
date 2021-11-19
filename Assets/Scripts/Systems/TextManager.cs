@@ -85,13 +85,13 @@ public class TextManager : MonoBehaviour
         englishDictionary.Add("exit", "Exit");
         englishDictionary.Add("finish", "Finish");
         englishDictionary.Add("restart", "Restart");
-        englishDictionary.Add("pausedtext", "Pause Menu");
+        englishDictionary.Add("pausedtext", "Pause");
         englishDictionary.Add("continue", "Continue");
         englishDictionary.Add("round", "ROUND");
         englishDictionary.Add("credits", "Credits");
         englishDictionary.Add("nextLevel", "Next Level");
         englishDictionary.Add("retry", "Retry");
-        englishDictionary.Add("loose", "You loose!");
+        englishDictionary.Add("loose", "You lose!");
         englishDictionary.Add("win", "You win!");
 
 
@@ -144,19 +144,19 @@ public class TextManager : MonoBehaviour
         //Spanish 
         spanishDictionary.Add("play", "Jugar");
         spanishDictionary.Add("next", "Siguiente");
-        spanishDictionary.Add("back", "Atrás");
+        spanishDictionary.Add("back", "Volver");
         spanishDictionary.Add("previous", "Anterior");
-        spanishDictionary.Add("select", "Seleccionar Mundo");
+        spanishDictionary.Add("select", "Empezar");
         spanishDictionary.Add("pause", "Pausa");
         spanishDictionary.Add("health", "Vida");
-        spanishDictionary.Add("score", "Puntuación");
+        spanishDictionary.Add("score", "Score");
         spanishDictionary.Add("money", "Dinero");
         spanishDictionary.Add("settings", "Ajustes");
         spanishDictionary.Add("language", "Idioma");
         spanishDictionary.Add("exit", "Salir");
         spanishDictionary.Add("finish", "Finalizar");
         spanishDictionary.Add("restart", "Reiniciar");
-        spanishDictionary.Add("pausedtext", "Menu de Pausa");
+        spanishDictionary.Add("pausedtext", "Pausa");
         spanishDictionary.Add("continue", "Continuar");
         spanishDictionary.Add("round", "RONDA");
         spanishDictionary.Add("credits", "Créditos");

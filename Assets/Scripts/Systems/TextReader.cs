@@ -3,10 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using TMPro;
 
 public class TextReader : MonoBehaviour
 {
-    GameObject textManager;
+    TextManager textManager;
     public string key;
     public GameObject textContainer;
     private string _text;
@@ -25,7 +26,7 @@ public class TextReader : MonoBehaviour
         if (GameManager.instance == null)
             return;
 
-        textManager = GameManager.instance.gameObject;
+        textManager = FindObjectOfType<TextManager>();
 
         Subscribe();
         if (!key.Equals(""))
@@ -61,22 +62,22 @@ public class TextReader : MonoBehaviour
     public void Read()
     {
         if (textManager == null)
-            _text = "ERROR";
+            textManager = FindObjectOfType<TextManager>();
         else
             _text = textManager.GetComponent<TextManager>().currentDictionary[key];
 
 
         if (gameObject.name.Equals("hpText"))//Replace with keys when and if possible
         {
-            textContainer.GetComponent<Text>().text = levelManager.GetComponent<LevelStats>().GetCurrentBaseHealth().ToString();
+            textContainer.GetComponent<TextMeshProUGUI>().text = levelManager.GetComponent<LevelStats>().GetCurrentBaseHealth().ToString();
         }
         else if (gameObject.name.Equals("moneyText"))
         {
-            textContainer.GetComponent<Text>().text = levelManager.GetComponent<LevelStats>().GetCurrentMoney().ToString();
+            textContainer.GetComponent<TextMeshProUGUI>().text = levelManager.GetComponent<LevelStats>().GetCurrentMoney().ToString();
         }
         else
         {
-            textContainer.GetComponent<Text>().text = _text;
+            textContainer.GetComponent<TextMeshProUGUI>().text = _text;
         }
     }
 
