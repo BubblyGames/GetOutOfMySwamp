@@ -62,6 +62,12 @@ public class Path
         //midPoints.Clear();
         while (result != null)
         {
+            if (result.isFloating)
+            {
+                result = result.Parent;
+                continue;
+            }
+
             CellInfo cell = world.cells[result.x, result.y, result.z];
             cell.normalInt = GetNormalOf(cell);
 
@@ -233,8 +239,8 @@ public class Path
 
             int count = 0;
 
-            //Tries 10 times to find a suitable midpoint
-            while (result == null && count < 30)
+            //Tries x times to find a suitable midpoint
+            while (result == null && count < 3)
             {
                 if (world.CheckIfFloating(midpoint.cell))
                 {
@@ -244,15 +250,18 @@ public class Path
                     midpoint.cell = c;
                 }
 
-                if (!midpoint.cell.canWalk)
+                if (midpoint.cell != null)
                 {
-                    CellInfo c;
-                    c = world.GetClosestWalkableCell(midpoint.cell);
-                    c.normalInt = midpoint.cell.normalInt;
-                    midpoint.cell = c;
-                }
+                    if (!midpoint.cell.canWalk)
+                    {
+                        CellInfo c;
+                        c = world.GetClosestWalkableCell(midpoint.cell);
+                        c.normalInt = midpoint.cell.normalInt;
+                        midpoint.cell = c;
+                    }
 
-                result = Path.FindPathAstar(world, current, midpoint.cell, lastSept, closedList, goals);//
+                    result = Path.FindPathAstar(world, current, midpoint.cell, lastSept, closedList, goals);//
+                }
 
                 if (result == null)
                 {
@@ -284,7 +293,7 @@ public class Path
             int length = result.g - current.g;
             //Debug.Log("Segment " + i + " has a length of " + length);
 
-            while (n.Parent != current)
+            while (n.Parent != null && n.Parent != current)
             {
                 if (length > MAX_SEGMENT_LENGTH && count == length / 2)
                 {
@@ -316,7 +325,7 @@ public class Path
     #region Midpoints
     public bool AddMidpoint(Midpoint midpoint)
     {
-        if (midPoints.Contains(midpoint))
+        if (midPoints.Contains(midpoint) || midpoint.cell == null)
         {
             return false;
         }
@@ -441,6 +450,25 @@ public class Path
         return result;
     }
 
+    public static Vector3Int Vector3ToIntNormalized(Vector3 dir)
+    {
+        Vector3Int dirInt = new Vector3Int();
+        if (dir.x > 0)
+            dirInt.x = Mathf.RoundToInt(dir.x + 0.49f);
+        else
+            dirInt.x = Mathf.RoundToInt(dir.x - 0.49f);
 
+        if (dir.y > 0)
+            dirInt.y = Mathf.RoundToInt(dir.y + 0.49f);
+        else
+            dirInt.y = Mathf.RoundToInt(dir.y - 0.49f);
+
+        if (dir.z > 0)
+            dirInt.z = Mathf.RoundToInt(dir.z + 0.49f);
+        else
+            dirInt.z = Mathf.RoundToInt(dir.z - 0.49f);
+
+        return dirInt;
+    }
 
 }
