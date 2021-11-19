@@ -12,7 +12,7 @@ public class BulletBehaviour : MonoBehaviour
     [Header("Bullet Destruction")]
     [SerializeField] protected float maxDistance;
     [SerializeField] protected float distanceTravelled;
-
+    [SerializeField] protected float areaEffect;
 
     [Header("Bullet Effects")]
     [SerializeField] protected int actualEffect;
@@ -68,7 +68,7 @@ public class BulletBehaviour : MonoBehaviour
                     Destroy(gameObject);
                     break;
                 case 2:
-                    other.gameObject.GetComponent<EnemyBehaviour>().AreaDamage(damage, maxDistance, layerMask);
+                    other.gameObject.GetComponent<EnemyBehaviour>().AreaDamage(damage, areaEffect, layerMask);
                     Destroy(gameObject);
                     break;
                 default:
