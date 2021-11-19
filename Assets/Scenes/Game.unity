@@ -5806,11 +5806,11 @@ MonoBehaviour:
       - statToUpgrade: 1
         upgradeAddedValue: 0.1
   - structurePrefab: {fileID: 3250008881624491856, guid: d47e0467f382b7241aafc52e24236632, type: 3}
-    creationCost: 0
+    creationCost: 50
     upgradeMultiplicator: 1.1
     upgrades: []
   - structurePrefab: {fileID: 2711408889448630410, guid: 4cdbff3b4cc893847ad0a47225cd137b, type: 3}
-    creationCost: 400
+    creationCost: 250
     upgradeMultiplicator: 1.1
     upgrades: []
   - structurePrefab: {fileID: 4422750441095425187, guid: 7461b5dc79e93e44796d7af498e661aa, type: 3}

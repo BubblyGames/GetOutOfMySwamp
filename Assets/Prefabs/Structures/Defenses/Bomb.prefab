@@ -117,8 +117,8 @@ MonoBehaviour:
   structureName: bomb
   structureId: 3
   fireRate: 0
-  damage: 300
-  attackRange: 5
+  damage: 40
+  attackRange: 3
   Target: ground
   Range: medium
   Damage: high
