@@ -81,10 +81,16 @@ public class UIController : MonoBehaviour
             upgradeButtonImage = upgradeButton.GetComponent<Image>();
             structures = shopContainer.GetComponent<Shop>().defenseBlueprints;
         }
-        LevelManager.OnWaveCleared += UpdateWaveText;
+
     }
 
     private void Start()
+    {
+        LevelManager.OnWaveCleared += UpdateWaveText;
+        LevelManager.OnGameStart += SetWaveText;
+    }
+
+    private void SetWaveText()
     {
         numberOfWaves.text = WaveController.instance.waves.Length.ToString();
         currentWave.text = (WaveController.instance.waveCount + 1).ToString();
@@ -317,7 +323,51 @@ public class UIController : MonoBehaviour
         FPSText.text = Mathf.Round((1 / Time.deltaTime)).ToString(); //FpS 
     }
 
-    public void SetUpgradeMenu(int structureId, string structureName, int level, string target, string range, string fireRate, string damage, int moneyGiven)
+
+    public void SetUpgradeMenu(Structure structure) {
+        towerName.GetComponent<TextReader>().SetKey(structure.name);
+        if (structure.structureId != 4)
+        {
+            activateUpgradeTexts();
+            fixedTexts[0].GetComponent<TextReader>().SetKey("target");
+            statsTexts[0].GetComponent<TextReader>().SetKey(structure.Blueprint.targetDescription);
+            statsTexts[1].GetComponent<TextReader>().SetKey(structure.Blueprint.rangeDescription);
+            statsTexts[2].GetComponent<TextReader>().SetKey(structure.Blueprint.fireRateDescription);
+            statsTexts[3].GetComponent<TextReader>().SetKey(structure.Blueprint.damageDescription);
+
+        }
+        else
+        {
+            desactivateUpgradeTexts();
+            fixedTexts[0].SetActive(true);
+            statsTexts[0].SetActive(true);
+            fixedTexts[0].GetComponent<TextReader>().SetKey("moneyGathered");
+            //statsTexts[0].GetComponent<Text>().text = moneyGiven.ToString();
+        }
+
+        switch (structure.structureId)
+        {
+            case 0:
+                upgradeMenu.GetComponent<Image>().sprite = basicTowerSprite;
+                break;
+            case 1:
+                upgradeMenu.GetComponent<Image>().sprite = psiquicTowerSprite;
+                break;
+            case 2:
+                upgradeMenu.GetComponent<Image>().sprite = heavyTowerSprite;
+                break;
+            case 3:
+                upgradeMenu.GetComponent<Image>().sprite = bombTowerSprite;
+                break;
+            case 4:
+                upgradeMenu.GetComponent<Image>().sprite = moneyStructureSprite;
+                break;
+        }
+        upgradeButton.SetActive(true);
+        sellButton.SetActive(true);
+        UpdateUpgradeButton(structure.GetLevel(), structure.structureId);
+    }
+   /* public void SetUpgradeMenu(int structureId, string structureName, int level, string target, string range, string fireRate, string damage, int moneyGiven)
     {
         towerName.GetComponent<TextReader>().SetKey(structureName);
         if (structureId!=4)
@@ -419,7 +469,7 @@ public class UIController : MonoBehaviour
                 break;
 
         }
-    }
+    }*/
     
     public void UpdateUpgradeButton(int level, int structureId)
     {

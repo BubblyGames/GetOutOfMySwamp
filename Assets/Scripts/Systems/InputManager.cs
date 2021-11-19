@@ -165,12 +165,17 @@ public class InputManager : MonoBehaviour
                     break;
                 case "Structure":
 
-                    GameObject structureHitted = hit.collider.gameObject;
+                    Structure structureHitted = hit.collider.gameObject.GetComponent<Structure>();
                     //Interact with existing defenses
                     UIController.instance.ShowMenu(UIController.GameMenu.UpgradeMenu);
                     BuildManager.instance.SetSelectedStructure(structureHitted.GetComponent<Structure>());
                     //check the structure type
-                    switch (structureHitted.GetComponent<Structure>().structureId)
+
+
+
+                    UIController.instance.SetUpgradeMenu(structureHitted);
+
+                    /*switch (structureHitted.GetComponent<Structure>().structureId)
                     {
                         case 0:
                             ShootingDefenseBehaviour sfb = structureHitted.GetComponent<ShootingDefenseBehaviour>();
@@ -218,21 +223,20 @@ public class InputManager : MonoBehaviour
                                 bombB.GetFireRate(),
                                 bombB.GetDamage(), 0);
                             break;
-                    }
-    /*
-                    else if (structureHitted.GetComponent<Bomb>() != null)
-                    {
-                        UIController.instance.SetUpgradeMenu(3, structureHitted.GetComponent<Bomb>().GetStructureName(), structureHitted.GetComponent<Bomb>().GetLevel(), structureHitted.GetComponent<Bomb>().GetTarget(),
-                                structureHitted.GetComponent<Bomb>().GetRange(), structureHitted.GetComponent<Bomb>().GetFireRate(), structureHitted.GetComponent<Bomb>().GetDamage(), 0);
                     }*/
-                    
-                    break;
+                    /*
+                                    else if (structureHitted.GetComponent<Bomb>() != null)
+                                    {
+                                        UIController.instance.SetUpgradeMenu(3, structureHitted.GetComponent<Bomb>().GetStructureName(), structureHitted.GetComponent<Bomb>().GetLevel(), structureHitted.GetComponent<Bomb>().GetTarget(),
+                                                structureHitted.GetComponent<Bomb>().GetRange(), structureHitted.GetComponent<Bomb>().GetFireRate(), structureHitted.GetComponent<Bomb>().GetDamage(), 0);
+                                    }*/
 
+
+                    break;
                 case "Gatherer":
-                    GameObject gathererHitted = hit.collider.gameObject;
+                    Gatherer gathererHitted = hit.collider.gameObject.GetComponent<Gatherer>();
                     UIController.instance.ShowMenu(UIController.GameMenu.UpgradeMenu);
-                    UIController.instance.SetUpgradeMenu(4, gathererHitted.GetComponent<MoneyGatherer>().GetStructureName(), gathererHitted.GetComponent<MoneyGatherer>().GetLevel(), "", "", "", "",
-                        gathererHitted.GetComponent<MoneyGatherer>().GetResourceGatheredAmount());
+                    UIController.instance.SetUpgradeMenu(gathererHitted);
                     break;
                 default:
                     break;

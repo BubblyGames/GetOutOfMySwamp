@@ -4656,7 +4656,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1108740208
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4688,6 +4688,8 @@ MonoBehaviour:
   statsTexts: []
   towerName: {fileID: 0}
   upgradeCostText: {fileID: 0}
+  numberOfWaves: {fileID: 0}
+  currentWave: {fileID: 0}
   basicTowerSprite: {fileID: 0}
   psiquicTowerSprite: {fileID: 0}
   heavyTowerSprite: {fileID: 0}
