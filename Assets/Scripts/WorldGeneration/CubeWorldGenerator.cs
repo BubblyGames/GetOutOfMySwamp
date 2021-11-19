@@ -147,7 +147,8 @@ public class CubeWorldGenerator : MonoBehaviour
             //yield return null;
         }
 
-        if (LevelManager.instance) {
+        if (LevelManager.instance)
+        {
             CreateWater();
             LevelManager.instance.ready = true;
         }
@@ -178,8 +179,8 @@ public class CubeWorldGenerator : MonoBehaviour
         }
         else
         {
-        Texture2D t = (Texture2D)GetComponent<MeshRenderer>().material.mainTexture;
-        waterColor = t.GetPixel(21, 1);
+            Texture2D t = (Texture2D)GetComponent<MeshRenderer>().material.mainTexture;
+            waterColor = t.GetPixel(21, 1);
         }
 
         waterMaterial.color = new Color(waterColor.r, waterColor.g, waterColor.b, .5f);
@@ -367,7 +368,7 @@ public class CubeWorldGenerator : MonoBehaviour
     {
         float startTime = Time.realtimeSinceStartup;
 
-        if (Path.FindPathAstar(this, new Node(cells[size / 2, 0, size / 2]), GetCell(end), true) == null)
+        if (Path.FindPathAstar(this, new Node(cells[size / 2, 0, size / 2]), GetCell(end), true, canMergePaths) == null)
             return false;
 
         for (int i = 0; i < nPaths; i++)
@@ -404,6 +405,7 @@ public class CubeWorldGenerator : MonoBehaviour
                 {
                     //while (!paths[i].AddMidpoint(new Midpoint(GetRandomCellOnSurface(paths[i].midPoints[j].cell), false))) ;
                     while (!paths[i].AddMidpoint(new Midpoint(GetRandomCellWithRay(), false))) ;
+                    //paths[i].AddMidpoint(new Midpoint(GetCell(0,15,15), false)) ;
                 }
                 paths[i].AddMidpoint(new Midpoint(GetCell(end), true));
                 paths[i].initiated = true;
@@ -528,7 +530,7 @@ public class CubeWorldGenerator : MonoBehaviour
     public bool ReplaceInterestPoint(Vector3Int point)
     {
         Node start = new Node(GetCell(point));
-        Node result = Path.FindPathAstar(this, start, GetCell(end), true);
+        Node result = Path.FindPathAstar(this, start, GetCell(end), true, canMergePaths);
         if (result == null)
         {
             Debug.Log("Couldn't add interest point at: " + point.ToString());
@@ -548,7 +550,7 @@ public class CubeWorldGenerator : MonoBehaviour
                 float dist = Vector3.Distance(point, paths[p].midPoints[m].cell.GetPos());
                 if (dist < minDist)
                 {
-                    Node n = Path.FindPathAstar(this, new Node(paths[p].midPoints[m].cell), GetCell(point), true);
+                    Node n = Path.FindPathAstar(this, new Node(paths[p].midPoints[m].cell), GetCell(point), true, canMergePaths);
                     if (n != null)
                     {
                         //Found it!
@@ -587,7 +589,7 @@ public class CubeWorldGenerator : MonoBehaviour
     public bool AddInterestPoint(Vector3Int point)
     {
         Node start = new Node(GetCell(point));
-        Node result = Path.FindPathAstar(this, start, GetCell(end), true);
+        Node result = Path.FindPathAstar(this, start, GetCell(end), true, canMergePaths);
         if (result == null)
         {
             Debug.Log("Couldn't add interest point at: " + point.ToString());
@@ -607,7 +609,7 @@ public class CubeWorldGenerator : MonoBehaviour
                 float dist = Vector3.Distance(point, paths[p].midPoints[m].cell.GetPos());
                 if (dist < minDist)
                 {
-                    Node n = Path.FindPathAstar(this, new Node(paths[p].midPoints[m].cell), GetCell(point), true);
+                    Node n = Path.FindPathAstar(this, new Node(paths[p].midPoints[m].cell), GetCell(point), true, canMergePaths);
                     if (n != null)
                     {
                         //Found it!
@@ -623,7 +625,7 @@ public class CubeWorldGenerator : MonoBehaviour
         if (found)
         {
             //There's a midpoint close, so the point is added as a midpoint after it
-            Debug.Log("Valid midpoint");
+            ///Debug.Log("Valid midpoint");
             paths[bestP].dirty = true;//This path need to be recalculated
 
             if (paths[bestP].InsertMidpoint(bestM + 1, new Midpoint(GetCell(point), true)))
@@ -735,7 +737,7 @@ public class CubeWorldGenerator : MonoBehaviour
 
             currentCell = cells[x, y, z];
 
-            if (currentCell.canWalk && !currentCell.endZone && Path.FindPathAstar(this, new Node(currentCell), GetCell(end.x, end.y, end.z), true) != null)
+            if (currentCell.canWalk && !currentCell.endZone && Path.FindPathAstar(this, new Node(currentCell), GetCell(end.x, end.y, end.z), true, canMergePaths) != null)
                 cell = currentCell;
         }
         //Debug.Log("Midpoint found after " + count.ToString() + " attempts");
@@ -757,7 +759,7 @@ public class CubeWorldGenerator : MonoBehaviour
             if (!currentCell.endZone &&
                 currentCell.y > 0 &&
                 currentCell.y < size - 1 &&
-                Path.FindPathAstar(this, new Node(currentCell), GetCell(end.x, end.y, end.z), true) != null)
+                Path.FindPathAstar(this, new Node(currentCell), GetCell(end.x, end.y, end.z), true, canMergePaths) != null)
                 cell = currentCell;
         }
         return cell;
@@ -845,8 +847,9 @@ public class CubeWorldGenerator : MonoBehaviour
     /// </summary>
     /// <param name="cellindex">Checked position</param>
     /// <returns>If position is inside cube's bounds</returns>
-    public bool CheckCell(Vector3 cellindex, BlockType blocktype,Vector3 cellOnTop) {
-        return (cellindex.x >= 1 && cellindex.x < cells.GetLength(0)-1) &&
+    public bool CheckCell(Vector3 cellindex, BlockType blocktype, Vector3 cellOnTop)
+    {
+        return (cellindex.x >= 1 && cellindex.x < cells.GetLength(0) - 1) &&
             (cellindex.y >= 1 && cellindex.y < cells.GetLength(0) - 1) &&
             (cellindex.z >= 1 && cellindex.z < cells.GetLength(0) - 1) &&
             GetCell(Vector3Int.FloorToInt(cellindex)).structure == null &&

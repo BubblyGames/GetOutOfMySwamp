@@ -5618,13 +5618,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   size: 31
-  wallDensity: 0
+  wallDensity: 0.4
   rocksVisualReduction: 1
   rockSize: 26.94
   waterDensity: 0
   nPaths: 1
   canMergePaths: 0
-  numberOfMidpoints: 1
+  numberOfMidpoints: 2
   seed: 0
   waterMaterial: {fileID: 2100000, guid: f2bfe60c202150547be22d486a012286, type: 2}
   demo: 0

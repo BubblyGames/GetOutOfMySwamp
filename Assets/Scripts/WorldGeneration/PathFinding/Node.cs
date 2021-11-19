@@ -31,7 +31,7 @@ public class Node
     {
         h = (Math.Abs(targetX - x) + Math.Abs(targetY - y) + Math.Abs(targetZ - z));
         if (Parent != null)
-            g = Parent.g +1;
+            g = Parent.g + 1;
 
         f = h + g;
     }

@@ -102,7 +102,8 @@ public class Path
         return true;
     }
 
-    public static Node FindPathAstar(CubeWorldGenerator _world, Node firstNode, CellInfo end, bool lastStep = false, List<Node> excludedNodes = null, List<CellInfo> goals = null)
+    public static Node FindPathAstar(CubeWorldGenerator _world, Node firstNode, CellInfo end,
+        bool lastStep, bool canMergePaths, List<Node> excludedNodes = null, List<CellInfo> goals = null)
     {
         Node current;
 
@@ -168,43 +169,24 @@ public class Path
                 {
                     if (neighbour == null ||
                         !neighbour.canWalk ||
-                        (!lastStep && neighbour.endZone))//||(neighbour.isPath && !neighbour.endZone)
+                        (!lastStep && neighbour.endZone) ||
+                        (!neighbour.endZone && !canMergePaths && neighbour.isPath))//||(neighbour.isPath && !neighbour.endZone)
                         continue;
 
                     //if neighbour no esta en open
-                    bool IsInOpen = false;
-                    foreach (Node nf in openList)
-                    {
-                        if (nf.cell == neighbour)
-                        {
-                            IsInOpen = true;
-                            break;
-                        }
-                    }
-                    if (IsInOpen)
+                    if (openList.Any(node => node.cell == neighbour))
                         continue;
 
-                    bool IsInClosed = false;
-                    foreach (Node nf in closedList)
-                    {
-                        if (nf.cell == neighbour)
-                        {
-                            IsInClosed = true;
-                            break;
-                        }
-                    }
+                    if (closedList.Any(node => node.cell == neighbour))
+                        continue;
 
-                    if (!IsInOpen && !IsInClosed)
-                    {
-                        Node n = new Node(neighbour);
+                    Node n = new Node(neighbour);
 
-                        n.cell = _world.cells[n.x, n.y, n.z];
-                        n.Parent = current;
-                        n.ComputeFScore(end.x, end.y, end.z);
+                    n.cell = _world.cells[n.x, n.y, n.z];
+                    n.Parent = current;
+                    n.ComputeFScore(end.x, end.y, end.z);
 
-                        openList.Add(n);
-                    }
-
+                    openList.Add(n);
                 }
             }
         }
@@ -260,7 +242,7 @@ public class Path
                         midpoint.cell = c;
                     }
 
-                    result = Path.FindPathAstar(world, current, midpoint.cell, lastSept, closedList, goals);//
+                    result = Path.FindPathAstar(world, current, midpoint.cell, lastSept, world.canMergePaths, closedList, goals);//
                 }
 
                 if (result == null)
@@ -270,7 +252,8 @@ public class Path
                     //If a midpoint is important but the path can't be made, the path fails
                     if (midpoint.important)
                     {
-                        Debug.Log("Couldn't get to midpoint " + midpoint.cell.id + " (" + i + ")");
+                        Debug.Log("Couldn't get to midpoint: " + midpoint.cell.GetPosInt());
+                        midPoints = midpointsCopy;
                         return null;
                     }
 
@@ -283,6 +266,7 @@ public class Path
             if (result == null)
             {
                 //Debug.Log("Failed to find a way");
+                midPoints = midpointsCopy;
                 return null;
             }
 
@@ -325,8 +309,9 @@ public class Path
     #region Midpoints
     public bool AddMidpoint(Midpoint midpoint)
     {
-        if (midPoints.Contains(midpoint) || midpoint.cell == null)
+        if (midPoints.Contains(midpoint) || midpoint.cell == null)// midPoints.Any(mid => mid.cell == midpoint.cell)
         {
+            Debug.Log("Fuck you");
             return false;
         }
         midPoints.Add(midpoint);

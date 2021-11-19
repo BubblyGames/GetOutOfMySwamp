@@ -38,7 +38,7 @@ public class BuildManager : MonoBehaviour
         structureFundation = new List<Vector3Int>();
     }
 
-    public bool CheckIfCanBuild(RaycastHit hit, out Vector3 intPos )
+    public bool CheckIfCanBuild(RaycastHit hit, out Vector3 intPos)
     {
         //Position where structure will be build
         intPos = new Vector3(
@@ -73,7 +73,7 @@ public class BuildManager : MonoBehaviour
 
         selectedCell = LevelManager.instance.world.GetCell(intPosUnder);
         Vector3Int cubeForward = Vector3Int.zero;
-        
+
         if (hit.normal == Vector3Int.forward)
         {
             cubeForward = Vector3Int.right;
@@ -90,7 +90,7 @@ public class BuildManager : MonoBehaviour
         {
             cubeForward = Vector3Int.right;
         }
-        else if(hit.normal == Vector3Int.right)
+        else if (hit.normal == Vector3Int.right)
         {
             cubeForward = Vector3Int.up;
         }
@@ -108,11 +108,11 @@ public class BuildManager : MonoBehaviour
 
         for (int i = 0; i < structureSize; i++)
         {
-            for (int j = 0; j <structureSize; j++)
+            for (int j = 0; j < structureSize; j++)
             {
- 
-                Vector3 sizeChecker = intPosUnder + (cubeForward * i) + (cubeDotProduct * j) ;
-                Vector3 OnTopofSizeChecker = intPos + (cubeForward * i) + (cubeDotProduct * j) ;
+
+                Vector3 sizeChecker = intPosUnder + (cubeForward * i) + (cubeDotProduct * j);
+                Vector3 OnTopofSizeChecker = intPos + (cubeForward * i) + (cubeDotProduct * j);
                 if (!LevelManager.instance.world.CheckCell(sizeChecker, structureBlueprint.structurePrefab.GetComponent<Structure>().blockType, OnTopofSizeChecker))
                 {
                     //if it can be placed we delete dteh fundation list
@@ -126,7 +126,7 @@ public class BuildManager : MonoBehaviour
 
         if (structureSize > 1)
         {
-            currentConstructionPositionOffset =(hit.normal + cubeForward + cubeDotProduct) / structureSize;
+            currentConstructionPositionOffset = (hit.normal + cubeForward + cubeDotProduct) / structureSize;
 
         }
 
@@ -164,7 +164,6 @@ public class BuildManager : MonoBehaviour
         if (CheckIfCanBuild(hit, out pos))
         {
             pos += currentConstructionPositionOffset;
-            Debug.Log("Pos:"+pos);
             BuildStructure(pos, hit.normal);
         }
     }
@@ -237,9 +236,9 @@ public class BuildManager : MonoBehaviour
 
         //If we are putting a bomb, apart from creating the model, we set the cell's structure associated in which we are creating it
         Bomb b;
-        CellInfo cell = LevelManager.instance.world.GetCell((int)position.x, (int)position.y, (int)position.z);
         if (structure.TryGetComponent<Bomb>(out b))
         {
+            CellInfo cell = LevelManager.instance.world.GetCell((int)position.x, (int)position.y, (int)position.z);
             if (cell.GetStructure() == null)
             {
                 cell.SetStructure(b);
@@ -265,7 +264,7 @@ public class BuildManager : MonoBehaviour
             {
                 selectedCell.structure.UpgradeStrucrure(uIController);
             }
-            else if ( LevelStats.instance.CurrentMoney >= structureBlueprint.upgrades[selectedStructure.GetLevel()].cost)
+            else if (LevelStats.instance.CurrentMoney >= structureBlueprint.upgrades[selectedStructure.GetLevel()].cost)
             {
                 selectedStructure.UpgradeStrucrure(uIController);
                 LevelStats.instance.SpendMoney(structureBlueprint.creationCost);
