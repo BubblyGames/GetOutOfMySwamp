@@ -4,6 +4,7 @@ using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 
+[System.Serializable]
 public class CellInfo
 {
     public int x, y, z;
@@ -20,8 +21,8 @@ public class CellInfo
     //Path stuff
     public List<Path> paths = new List<Path>();
     public bool isPath = false;
-    internal bool isCloseToPath = false;
-    internal bool canWalk = true;
+    public bool isCloseToPath = false;
+    internal bool canWalk = false;
     internal bool endZone = false;
 
     public Vector3Int normalInt = Vector3Int.zero;

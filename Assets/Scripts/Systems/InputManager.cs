@@ -84,7 +84,7 @@ public class InputManager : MonoBehaviour
                 if (hit.collider.tag == "World")//If mouse is over world
                 {
                     //If can't build on selected cell, cursor turns red
-                    Vector3Int pos;
+                    Vector3 pos;
                     if (BuildManager.instance.CheckIfCanBuild(hit, out pos))
                     {
                         cursor.GetComponent<MeshRenderer>().material.color = Color.white;
@@ -96,7 +96,16 @@ public class InputManager : MonoBehaviour
 
                     //Cursor activates and moves to selected cell
                     cursor.SetActive(true);
+
+                   
                     cursor.transform.position = pos;
+                    int structureSize = BuildManager.instance.GetStructureSize();
+                    if (structureSize > 1)
+                    {
+                        cursor.transform.localScale = Vector3.one * structureSize;
+                        cursor.transform.position += BuildManager.instance.currentConstructionPositionOffset;
+
+                    }
                     cursor.transform.up = hit.normal;
                 }
                 //Card is hidden if poiting at anything in the world
@@ -159,7 +168,7 @@ public class InputManager : MonoBehaviour
                     GameObject structureHitted = hit.collider.gameObject;
                     //Interact with existing defenses
                     UIController.instance.ShowMenu(UIController.GameMenu.UpgradeMenu);
-
+                    BuildManager.instance.SetSelectedStructure(structureHitted.GetComponent<Structure>());
                     //check the structure type
                     switch (structureHitted.GetComponent<Structure>().structureId)
                     {
@@ -187,8 +196,8 @@ public class InputManager : MonoBehaviour
                                 sfb1.GetDamage(), 0);
                             break;
                         case 2:
-                            //If 
-                            ShootingDefenseBehaviour hdb = structureHitted.GetComponent<HeavyDefenseBehaviour>();
+                            //If its heavyTower
+                            ShootingDefenseBehaviour hdb = structureHitted.GetComponent<ShootingDefenseBehaviour>();
 
                             UIController.instance.SetUpgradeMenu(hdb.structureId,
                                 hdb.GetStructureName(),
@@ -216,7 +225,7 @@ public class InputManager : MonoBehaviour
                         UIController.instance.SetUpgradeMenu(3, structureHitted.GetComponent<Bomb>().GetStructureName(), structureHitted.GetComponent<Bomb>().GetLevel(), structureHitted.GetComponent<Bomb>().GetTarget(),
                                 structureHitted.GetComponent<Bomb>().GetRange(), structureHitted.GetComponent<Bomb>().GetFireRate(), structureHitted.GetComponent<Bomb>().GetDamage(), 0);
                     }*/
-                    BuildManager.instance.SetSelectedStructure(structureHitted.GetComponent<Structure>());
+                    
                     break;
 
                 case "Gatherer":

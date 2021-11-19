@@ -516,7 +516,7 @@ MonoBehaviour:
   startSpeed: 3
   currentSpeed: 0
   damage: 10
-  moneyValue: 10
+  moneyValue: 15
   scoreValue: 100
   isSlowed: 0
   slowIntensity: 0.25

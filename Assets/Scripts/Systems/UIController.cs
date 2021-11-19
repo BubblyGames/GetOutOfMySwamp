@@ -38,6 +38,7 @@ public class UIController : MonoBehaviour
     public Sprite heavyTowerSprite;
     public Sprite bombTowerSprite;
     public Sprite moneyStructureSprite;
+    public Sprite aerialStructureSprite;
     public List<Sprite> upgradeLevels;
 
     public GameObject shopContainer;

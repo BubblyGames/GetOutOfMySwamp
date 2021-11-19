@@ -10,7 +10,12 @@ public class Structure : MonoBehaviour
 
     public StructureBlueprint Blueprint { get => _blueprint; set => _blueprint = value; }
 
+    public int Size { get => size; set => size = value; }
+
     [Header("General stats")]
+    [SerializeField]
+    protected int size =1;
+
     [SerializeField]
     protected int health;
     [SerializeField]
@@ -18,12 +23,9 @@ public class Structure : MonoBehaviour
 
     [SerializeField]
     protected int level = 0;
-    [SerializeField]
     protected int maxLevel = 3;
-    [SerializeField]
     protected bool isMaxLevel = false;
 
-    [SerializeField]
     protected Vector3 normal;
 
     public BlockType blockType = BlockType.Grass;

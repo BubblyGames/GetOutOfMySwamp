@@ -153,6 +153,19 @@ public abstract class EnemyBehaviour : MonoBehaviour
 
     }
 
+    public void AreaDamage(int damage,float areaEffect, int layerMask)
+    {
+        RaycastHit[] hits = Physics.SphereCastAll(transform.position, areaEffect, transform.forward, areaEffect, layerMask);
+        for (int i = 0; i < hits.Length; i++)
+        {
+            EnemyBehaviour eb;
+            if (hits[i].collider.TryGetComponent<EnemyBehaviour>(out eb))
+            {
+                eb.Hurt(damage);
+            }
+        }
+    }
+
     public virtual void Die()
     {
         WaveController.instance.ReduceActiveEnemies(this);

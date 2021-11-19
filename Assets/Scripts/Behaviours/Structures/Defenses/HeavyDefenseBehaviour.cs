@@ -25,7 +25,7 @@ public class HeavyDefenseBehaviour : ShootingDefenseBehaviour
             EnemyBehaviour eb;
             if (hits[i].collider.TryGetComponent<EnemyBehaviour>(out eb))
             {
-                eb.slowAndDamage(damage);
+                eb.Hurt(damage);
             }
         }
     }
