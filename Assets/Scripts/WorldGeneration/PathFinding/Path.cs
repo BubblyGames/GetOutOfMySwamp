@@ -8,7 +8,7 @@ using UnityEngine.UI;
 //[System.Serializable]
 public class Path
 {
-    internal CellInfo[] cells;
+    internal CellInfo[] cells = new CellInfo[0];
     public List<Midpoint> midPoints = new List<Midpoint>();
     float spawnWait = 1f;
     float nextSpawnTime = 0;
@@ -264,8 +264,6 @@ public class Path
 
             while (n != current)
             {
-                Debug.Log(n.g);
-
                 if (!lastSept && count == length / 2)
                     newMidpoints.Add(new Midpoint(n.cell, false));
 

@@ -386,7 +386,7 @@ public class CubeWorldGenerator : MonoBehaviour
         return true;
     }
 
-    
+
     public void UpdateMesh()
     {
         GenerateMesh();
@@ -430,11 +430,12 @@ public class CubeWorldGenerator : MonoBehaviour
             }
             if (dirty)
             {
-                UpdateMesh();
-                yield return null;
+                //UpdateMesh();
+                //yield return null;
             }
         }
 
+        UpdateMesh();
         yield return null;
     }
     #endregion
@@ -764,8 +765,9 @@ public class CubeWorldGenerator : MonoBehaviour
     /// </summary>
     /// <param name="cellindex">Checked position</param>
     /// <returns>If position is inside cube's bounds</returns>
-    public bool CheckCell(Vector3 cellindex, BlockType blocktype,Vector3 cellOnTop) {
-        return (cellindex.x >= 1 && cellindex.x < cells.GetLength(0)-1) &&
+    public bool CheckCell(Vector3 cellindex, BlockType blocktype, Vector3 cellOnTop)
+    {
+        return (cellindex.x >= 1 && cellindex.x < cells.GetLength(0) - 1) &&
             (cellindex.y >= 1 && cellindex.y < cells.GetLength(0) - 1) &&
             (cellindex.z >= 1 && cellindex.z < cells.GetLength(0) - 1) &&
             GetCell(Vector3Int.FloorToInt(cellindex)).structure == null &&
