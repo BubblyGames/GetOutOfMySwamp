@@ -7,6 +7,7 @@ public class BulletBehaviour : MonoBehaviour
     protected int damage;
     protected float speed = 50f;
     protected Transform target;
+    private int layerMask = 1 << 6;
 
     [Header("Bullet Destruction")]
     [SerializeField] protected float maxDistance;
@@ -66,8 +67,8 @@ public class BulletBehaviour : MonoBehaviour
                     other.gameObject.GetComponent<EnemyBehaviour>().slowAndDamage(damage);
                     Destroy(gameObject);
                     break;
-                default:
-                    other.gameObject.GetComponent<EnemyBehaviour>().Hurt(damage);
+                case 2:
+                    other.gameObject.GetComponent<EnemyBehaviour>().AreaDamage(damage, maxDistance, layerMask);
                     Destroy(gameObject);
                     break;
             }

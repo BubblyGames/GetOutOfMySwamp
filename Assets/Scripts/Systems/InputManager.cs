@@ -196,8 +196,8 @@ public class InputManager : MonoBehaviour
                                 sfb1.GetDamage(), 0);
                             break;
                         case 2:
-                            //If 
-                            ShootingDefenseBehaviour hdb = structureHitted.GetComponent<HeavyDefenseBehaviour>();
+                            //If its heavyTower
+                            ShootingDefenseBehaviour hdb = structureHitted.GetComponent<ShootingDefenseBehaviour>();
 
                             UIController.instance.SetUpgradeMenu(hdb.structureId,
                                 hdb.GetStructureName(),
