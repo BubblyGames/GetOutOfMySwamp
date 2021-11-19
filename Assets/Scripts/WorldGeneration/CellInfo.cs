@@ -53,8 +53,9 @@ public class CellInfo
         return new Vector3Int(x, y, z);
     }
 
-    public void Reset()
+    public void RemovePath(Path p)
     {
+        paths.Remove(p);
         isPath = paths.Count > 0;
     }
 }
