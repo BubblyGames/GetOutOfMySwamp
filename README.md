@@ -281,22 +281,83 @@ Otros biomas:
 
 - **Personajes**
 
-La representación en el escenario tanto de las defensas como de los enemigos son modelos Voxel de dimensiones 16x16x16 voxeles.
+La representación en el escenario tanto de las defensas como de los enemigos son modelos Voxel de dimensiones 16x16x16 vóxeles.
 
 - Torre básica:
 
-![](https://lh5.googleusercontent.com/XNT-bL2hfcgTNgpkOQsYFB5iP4YnurFkLsm7gyMbDb4IRbBP2g8J4YSuQupDQS8a_RXvc7q3q0-2JE_9D7VLZQGJyOSh7ZMQV6bNyDTu0dnPl2kqX39gIiY5j7NxJEIa6T9gV-5U)
+![BasicaRender](https://user-images.githubusercontent.com/56488179/142732046-b22a2c75-6138-4ab9-9c17-e657d7c14cc4.png)
 
 - Torre pesada:
+
+![PesadaRender](https://user-images.githubusercontent.com/56488179/142732038-51339036-f17a-48cb-8eaa-c4de7f963801.png)
+
 - Torre psíquica:
+
+![VenenosaRender](https://user-images.githubusercontent.com/56488179/142732066-018798f5-6ca5-4c18-b5a4-cd1715ed443a.png)
+
 - Torre montañosa:
-- Enemigos:
 
-A su vez, la representación mediante cartas o pantallas de información es en gráficos 2D acorde a las descripciones de la estética general y al resto de elementos 2D.
+![AereaRender](https://user-images.githubusercontent.com/56488179/142732075-a73a68d8-8cca-4110-a8de-09a1d2f4313d.png)
 
-Ejemplo, torreta pesada:
+- Fábrica de dinero:
 
-![](https://lh4.googleusercontent.com/Dzd7nWF57Rs77VOYupw-UyEDxH8ne5-6BegqIbMsGoOlOjXHHTOmph_U8cBsECglTBBoB5a21ZOJfKTo5pBb2WBmR24A_NquxksyRXWxeH6uMW1kYXeZau0la7q7CbZvrNM9ieAf)
+![DineroRender](https://user-images.githubusercontent.com/56488179/142732084-a9c8d8bc-cd7e-4724-a1fc-59b2dfb11bc0.png)
+
+- Mina:
+
+![MinasRender](https://user-images.githubusercontent.com/56488179/142732128-960ccb57-7cff-42e8-b027-a23c91b36ad3.png)
+
+- **Enemigos**
+
+- Enemigo normal:
+
+![NormalRender](https://user-images.githubusercontent.com/56488179/142732143-1a939315-6f58-4d41-86ac-c3a0a8ee60f5.png)
+
+- Enemigo tanque:
+
+![TanqueRender](https://user-images.githubusercontent.com/56488179/142732147-72fafd0b-a07a-4a8c-b3b8-e4009980808a.png)
+
+- Enemigo horda:
+
+![HordaRender](https://user-images.githubusercontent.com/56488179/142732505-ff361669-72d7-46aa-8af5-75a9d16d0158.png)
+
+A su vez, la representación de las estadísticas de las torres se realiza mediante cartas o pantallas de información en gráficos 2D acorde a las descripciones de la estética general y al resto de elementos 2D.
+
+- Torreta pesada:
+
+![Pesada](https://user-images.githubusercontent.com/56488179/142732267-a5e0ec70-ef13-45e9-aa86-bce248feb8ce.png)
+
+- Torre básica:
+
+![Basica](https://user-images.githubusercontent.com/56488179/142732229-6aad8882-4bb4-4b40-bb74-40f4873d6bf8.png)
+
+- Torre psíquica:
+
+![Psíquica](https://user-images.githubusercontent.com/56488179/142732258-3350a5d7-4d75-4494-be7d-75a4ecb69431.png)
+
+- Torre aérea:
+
+![Aerea](https://user-images.githubusercontent.com/56488179/142732217-6d9702b9-d1e2-4d8d-b761-a5b9c89b57d9.png)
+
+- Fabrica de dinero:
+
+![Dinero](https://user-images.githubusercontent.com/56488179/142732221-19d4812b-b159-4f51-ba5f-78a539826fc0.png)
+
+- Mina:
+
+![Mina](https://user-images.githubusercontent.com/56488179/142732239-0a085ffa-8af6-4a25-bbe8-a9993a14e5a2.png)
+
+- Enemigo normal:
+
+![Normal](https://user-images.githubusercontent.com/56488179/142732438-6de3f781-a865-43dc-a8bd-4ea06148a52f.png)
+
+- Enemigo tanque:
+
+![Tanque](https://user-images.githubusercontent.com/56488179/142732443-690c01f2-9eda-4bd7-9e16-70a2a53217ba.png)
+
+- Enemigo horda:
+
+![Horda](https://user-images.githubusercontent.com/56488179/142732450-238aba64-f947-4ea5-aa23-d3785851458e.png)
 
 
 ### 6.3 Música
@@ -325,31 +386,31 @@ Para la interfaz se cuentan con 7 ventanas:
 
 - Menú principal:
 
-![Recurso 1](https://lh6.googleusercontent.com/rCV4rqVBA8GQbaqIftoS6yrzmLV9DwA7l6kJW7XkonW1ULULik42KtX_4j6akqnKth_PsSnr87lHH7DmWR3j8Hmg9wh0v4ivM9CVmDRlU_JMkhv9aXNCumx1oYIlLnnbNdzS2AiH)
+![menuPrinc](https://user-images.githubusercontent.com/56488179/142733247-62b3fdcd-5cf8-46d4-9e33-b49a61d4eded.png)
 
 - Ajustes:
 
-![Recurso 4](https://user-images.githubusercontent.com/56488179/138528974-991d5275-41b5-4bf1-a620-c50ca0b1f0b7.png)
+![menuAjustes](https://user-images.githubusercontent.com/56488179/142733250-f56553c5-ce54-4c9e-8209-1d37c487f0cf.png)
 
 - Tutoriales:
 
-![Recurso 8](https://user-images.githubusercontent.com/56488179/138528983-708fb63e-830f-4603-b29a-61109a15d99c.png)
+![lecciones](https://user-images.githubusercontent.com/56488179/142733258-dd5f7b79-a428-445a-9f06-598fa9c925ad.png)
 
 - Selector de nivel:
 
-![Recurso 9](https://user-images.githubusercontent.com/56488179/138529005-17654b79-0642-410d-97b6-890ab7c430d7.png)
+![selector](https://user-images.githubusercontent.com/56488179/142733268-f76abb40-b81f-41e0-905b-ca7fa8ee4514.png)
 
 - Menú de pausa:
 
-![Recurso 5](https://user-images.githubusercontent.com/56488179/138529015-26a65fcd-6918-43c8-b392-2fea20f42fd0.png)
+![pausa](https://user-images.githubusercontent.com/56488179/142733272-f20cfcfa-7c97-4a9e-b9ef-acfb8a989e93.png)
 
 - Final de nivel:
-- 
-![Recurso 6](https://user-images.githubusercontent.com/56488179/138529024-42a8e7bd-ff84-42a7-b9b5-fdfce59aea37.png)
+
+![finalPartida](https://user-images.githubusercontent.com/56488179/142733277-208c49be-3cda-45ea-8e91-2c07e6accdff.png)
 
 - Interfaz de juego:
 
-![Recurso 7](https://user-images.githubusercontent.com/56488179/138528992-09385b3c-c4b4-493f-b28d-f235ab558277.png)
+![ingame](https://user-images.githubusercontent.com/56488179/142733283-72d26e3a-f5b6-4af1-88d8-f42e7ad95a68.png)
 
 ### 7.2 Diagrama de flujo
 

@@ -139,7 +139,8 @@ public class WaveController : MonoBehaviour
 
                 timeVariable = Time.time + timeBetweenWaves;
                 waveCount++;
-                actualWave.text = waveCount.ToString();
+                if (waveCount < waves.Length)
+                    actualWave.text = (waveCount + 1).ToString();
             }
         }
 
