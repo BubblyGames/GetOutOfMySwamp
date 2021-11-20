@@ -19,7 +19,7 @@ public class ScoreSystem : MonoBehaviour
         //LevelManager.levelInstance.OnScoreIncremented += IncrementScore; //TODO: pass how much the score will increment
         LevelManager.OnGameStart += ResetScore;
     }
-
+    
     void IncrementScore(int quantity)
     {
         score += quantity;

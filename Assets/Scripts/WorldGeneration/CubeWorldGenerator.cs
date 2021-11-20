@@ -516,12 +516,13 @@ public class CubeWorldGenerator : MonoBehaviour
             }
             if (dirty)
             {
-                UpdateMesh();
-                yield return null;
+                //UpdateMesh();
+                //yield return null;
             }
         }
         UpdateMesh();
 
+        UpdateMesh();
         yield return null;
     }
     #endregion

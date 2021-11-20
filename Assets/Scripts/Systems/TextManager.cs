@@ -6,6 +6,8 @@ using UnityEngine.SceneManagement;
 
 public class TextManager : MonoBehaviour
 {
+    public static TextManager instance;
+
     private List<GameObject> subscribersMainScene;
     private List<GameObject> subscribersGameScene;
     private bool english = true;
@@ -17,6 +19,15 @@ public class TextManager : MonoBehaviour
 
     private void Awake()
     {
+        if (instance == null)
+        {
+            instance = this;
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+
         InitializeDictionaries();
         subscribersMainScene = new List<GameObject>();
         subscribersGameScene = new List<GameObject>();
