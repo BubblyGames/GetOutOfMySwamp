@@ -182,6 +182,10 @@ public class WaveController : MonoBehaviour
                         yield return null;
                     }
                     int pathId = Random.Range(0, WorldManager.instance.nPaths);
+                    if (p.enemyType.Equals("SkyEnemy"))
+                    {
+                        Debug.Log("a");
+                    }
                     enemySpawner.SpawnEnemy(p.enemyType, WorldManager.instance.paths[pathId]);
                     yield return new WaitForSeconds((1f / currentWave.spawnRate) + Random.Range(0f, randomRange)); //randomness between 
                 }

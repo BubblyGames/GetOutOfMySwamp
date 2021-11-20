@@ -2496,7 +2496,7 @@ MonoBehaviour:
     - enemyId: 4
       enemyPrefab: {fileID: 5803062399679311112, guid: edbebc9645c93bc47b4257b361fcc5b1, type: 3}
     - enemyId: 5
-      enemyPrefab: {fileID: 5803062399679311112, guid: edbebc9645c93bc47b4257b361fcc5b1, type: 3}
+      enemyPrefab: {fileID: 7091463197756375107, guid: dfb36d6922eade74e81ef7ea442e3ece, type: 3}
   audioManager: {fileID: 1474084401}
   currentWorldId: 0
   isMobile: 0

@@ -6,7 +6,7 @@ using UnityEngine;
 public abstract class DefenseBehaviour : Structure
 {
     [Tooltip("This layer will be used to check for enemys")]
-    protected int layerMask = 1 << 6;
+    protected int layerMask = 1 << 7;
 
     [SerializeField]
     [Tooltip("True if can hit enemies that are flying")]
