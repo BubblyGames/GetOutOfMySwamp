@@ -111,6 +111,7 @@ public class TextManager : MonoBehaviour
         englishDictionary.Add("win", "You win!");
         englishDictionary.Add("level", "Level");
         englishDictionary.Add("sound", "Sound");
+        englishDictionary.Add("lessons", "Lessons");
 
 
         //upgrade texts in english
@@ -162,6 +163,20 @@ public class TextManager : MonoBehaviour
         englishDictionary.Add("lesson9", "Lesson 9");
         englishDictionary.Add("description9", "Horde Enemies are not brave enough to come alone. Besides, they are very fast so put an eye on them!");
 
+        //descriptions of tutorial in English
+        englishDictionary.Add("tutorial1", "Build Defenses");
+        englishDictionary.Add("Tdescription1", "Press and drag one of the cards from the right side to the place where you want to build a new defense. Before placing it, the range of the tower is indicated.");
+        englishDictionary.Add("tutorial2", "Upgrade Defenses");
+        englishDictionary.Add("Tdescription2", "For upgrading a single tower, touch it and then press the upgrade button. When you upgrade a tower, its statistics will increase, making it more efficient.");
+        englishDictionary.Add("tutorial3", "The cube");
+        englishDictionary.Add("Tdescription3", "The Cube and the enemies routes are generated procedurally in each playthrough. The enemies will always appear in the lower face of the Cube.");
+        englishDictionary.Add("tutorial4", "Move the cube I");
+        englishDictionary.Add("Tdescription4", "To rotate the Cube, press and drag it using the mouse on PC or using a finger on mobile.");
+        englishDictionary.Add("tutorial5", "Move the cube II");
+        englishDictionary.Add("Tdescription5", "You can also zoom in and out, using the mouse wheel on PC or using two fingers on mobile.");
+        englishDictionary.Add("tutorial6", "Reach the goal");
+        englishDictionary.Add("Tdescription6", "The game’s objective consists in avoiding your health to reach 0 before eliminating all the enemies who are proceeding to the pond.");
+
         //Spanish 
         spanishDictionary.Add("play", "Jugar");
         spanishDictionary.Add("next", "Siguiente");
@@ -187,6 +202,7 @@ public class TextManager : MonoBehaviour
         spanishDictionary.Add("win", "¡Has ganado!");
         spanishDictionary.Add("level", "Nivel");
         spanishDictionary.Add("sound", "Sonido");
+        spanishDictionary.Add("lessons", "Lecciones");
 
         //upgrade texts in spanish
         spanishDictionary.Add("target", "Objetivo");
@@ -237,6 +253,20 @@ public class TextManager : MonoBehaviour
         spanishDictionary.Add("description8", "Los enemigos tanques son lentos, pero aguantan muy bien los golpes. Sirven de escudo para el resto de enemigos asi que cuidado.");
         spanishDictionary.Add("lesson9", "Lección 9");
         spanishDictionary.Add("description9", "Dicen que los cobardes atacan en grupo. Las ranas que van en hordas tienen poca vida, pero son muy escurridizas.¡Que no escape ni una!");
+
+        //tutorial spanish
+        spanishDictionary.Add("tutorial1", "Construir defensas");
+        spanishDictionary.Add("Tdescription1", "Presiona y arrastra una de las tarjetas del lateral derecho en la posición que quieras del cubo. Antes de hacerlo, podrás observar su área de alcance.");
+        spanishDictionary.Add("tutorial2", "Mejorar defensas");
+        spanishDictionary.Add("Tdescription2", "Para mejorar una torre, tócala y presiona el botón de mejorar. Al mejorar una torre aumentan las estadísticas de esta, volviéndose más eficaz.");
+        spanishDictionary.Add("tutorial3", "El cubo");
+        spanishDictionary.Add("Tdescription3", "El Cubo y los caminos de los enemigos se generan procedimentalmente en cada partida. Los enemigos siempre aparecerán en la cara inferior del cubo.");
+        spanishDictionary.Add("tutorial4", "Mover el cubo I");
+        spanishDictionary.Add("Tdescription4", "Para rotcar el cubo, presiona y arrastra usando el ratón en el PC o usando un dedo en el móvil.");
+        spanishDictionary.Add("tutorial5", "Mover el cubo II");
+        spanishDictionary.Add("Tdescription5", "Además, también puedes ampliar el cubo usando la rueda del ratón en el PC o usando dos dedos en el móvil.");
+        spanishDictionary.Add("tutorial6", "El objetivo");
+        spanishDictionary.Add("Tdescription6", "El objetivo de la partida consiste en evitar que tu vida llegue a 0 antes de acabar con todas las oleadas de enemigos que se dirigen al estanque.");
     }
 
     public void emptyGameobjectsList(bool restart)
