@@ -5,8 +5,8 @@ using UnityEngine;
 /*This tower deals damage in all enemys inside its radius of effect */
 public class AOEDefenseBehaviour : DefenseBehaviour
 {
-
-    private void Update()
+    public GameObject particles;
+    /*private void Update()
     {
         if (fireCountdown <= 0f)
         {
@@ -14,6 +14,15 @@ public class AOEDefenseBehaviour : DefenseBehaviour
             fireCountdown = 1f / fireRate;
         }
         fireCountdown -= Time.deltaTime;
+    }*/
+
+    private void Update()
+    {
+        if (Time.time > fireCountdown)
+        {
+            Attack();
+            fireCountdown = Time.time + ( 1f / fireRate);
+        }
     }
 
     protected override void Attack()
@@ -28,5 +37,7 @@ public class AOEDefenseBehaviour : DefenseBehaviour
                 eb.slowAndDamage(damage);
             }
         }
+
+        GameObject.Instantiate(particles, transform);
     }
 }

@@ -17,11 +17,11 @@ public class SpellBehaviour : Structure
         pos.y = (int)transform.position.y;
         pos.z = (int)transform.position.z;
 
-        LevelManager.instance.world.Explode(pos, range);
-
         GameObject p = GameObject.Instantiate(particles);
         p.transform.position = transform.position;
         p.transform.rotation = transform.rotation;
+
+        LevelManager.instance.world.Explode(pos, range);
 
         Destroy(gameObject);
     }

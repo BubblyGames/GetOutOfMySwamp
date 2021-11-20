@@ -9388,7 +9388,7 @@ MonoBehaviour:
     rangeDescription: low
     damageDescription: low
     fireRateDescription: medium
-  - structurePrefab: {fileID: 8305915707849881324, guid: df406671fc6064a4c978095ef361ebfd, type: 3}
+  - structurePrefab: {fileID: 5445150579504396128, guid: 34203a46bca1c2443b913193efffddec, type: 3}
     creationCost: 300
     upgradeMultiplicator: 1.2
     upgrades:

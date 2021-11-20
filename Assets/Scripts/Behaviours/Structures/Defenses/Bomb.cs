@@ -5,6 +5,7 @@ using UnityEngine;
 public class Bomb : DefenseBehaviour
 {
     public bool canBreakWorld = false;
+    public GameObject explosionParticles;
     public void Explode()
     {
 
@@ -18,6 +19,8 @@ public class Bomb : DefenseBehaviour
                 eb.slowAndDamage(damage);
             }
         }
+
+        GameObject.Instantiate(explosionParticles,transform.position,Quaternion.identity);
 
         if (canBreakWorld)
             LevelManager.instance.world.Explode(Vector3Int.RoundToInt(transform.position), 3);
