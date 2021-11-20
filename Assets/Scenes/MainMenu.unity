@@ -673,7 +673,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   waves:
   - packs:
-    - enemyType: 0
+    - enemyType: 5
       enemyAmount: 20
     - enemyType: 2
       enemyAmount: 1
