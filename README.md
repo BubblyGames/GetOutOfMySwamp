@@ -543,11 +543,12 @@ En general, en el grupo hay muy buen ambiente de trabajo, consiguen hacer todo e
 - Arreglar proporciones de las torres en el cubo: 18/11/2021
 - Dirigir correctamente la barra de vida de los enemigos hacia la camara del jugador: 16/11/2021
 - Portfolio actualizado en su nueva versión: 
+- Añadir estanque en el spawn de los enemigos: 19/11/2021
 
 ### 9.3 Hito 3: Gold
 
 - Pulir la generación de caminos en el cubo:
-- Añadir estanque en el spawn de los enemigos:
+- Dar nombres definitivos a las torres y enemigos:
 - Añadir animaciones a las torres:
 - Añadir efectos de partículas al disparo de la torre que ralentiza, a la entrada de los enemigos en el estanque y al caminar de los enemigos:
 - Añadir efectos de sonido a la muerte de los enemigos, a la llegada de estos al estanque del jugador y a la construcción y mejora de las torres:
