@@ -115,15 +115,9 @@ public class InputManager : MonoBehaviour
                     //Cursor activates and moves to selected cell
                     cursor.SetActive(true);
 
+                    cursor.transform.localScale = Vector3.one * BuildManager.instance.GetStructureSize(); ;
+                    cursor.transform.position = pos + BuildManager.instance.currentConstructionPositionOffset;
 
-                    cursor.transform.position = pos;
-                    int structureSize = BuildManager.instance.GetStructureSize();
-                    if (structureSize > 1)
-                    {
-                        cursor.transform.localScale = Vector3.one * structureSize;
-                        cursor.transform.position += BuildManager.instance.currentConstructionPositionOffset;
-
-                    }
                     cursor.transform.up = hit.normal;
                 }
                 //Card is hidden if poiting at anything in the world
@@ -176,9 +170,24 @@ public class InputManager : MonoBehaviour
                     mZCoord = Camera.main.WorldToScreenPoint(worldPos).z;
                     mOffset = worldPos - GetMouseAsWorldPoint(mousePosition);
 
+
+                    cursor.transform.localScale = Vector3.one * Shop.instance.selectedDefenseBlueprint.structurePrefab.GetComponent<Structure>().Size;
+
                     DefenseBehaviour db;
+                    SpellBehaviour sb;
                     if (Shop.instance.selectedDefenseBlueprint.structurePrefab.TryGetComponent<DefenseBehaviour>(out db))
-                        cursorBase.transform.localScale = new Vector3(2 * db.attackRange, 2 * db.attackRange, 1);
+                    {
+                        cursorBase.transform.localScale = new Vector3(2 * db.attackRange, 2 * db.attackRange, 1) / db.Size;
+                    }
+                    else if (Shop.instance.selectedDefenseBlueprint.structurePrefab.TryGetComponent<SpellBehaviour>(out sb))
+                    {
+                        cursorBase.transform.localScale = new Vector3(2 * sb.range, 2 * sb.range, 1) / sb.Size;
+                    }
+                    else
+                    {
+                        cursorBase.transform.localScale = Vector3.zero;
+                    }
+
 
                     break;
                 case "Structure":

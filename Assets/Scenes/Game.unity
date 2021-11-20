@@ -3005,6 +3005,8 @@ MonoBehaviour:
       enemyPrefab: {fileID: 2261941344971277516, guid: f4ca4a2b775f94b4187494af4829186e, type: 3}
     - enemyId: 2
       enemyPrefab: {fileID: 7991666902177097144, guid: 3e08db26345a218428538443214b6dd8, type: 3}
+    - enemyId: 5
+      enemyPrefab: {fileID: 7091463197756375107, guid: dfb36d6922eade74e81ef7ea442e3ece, type: 3}
 --- !u!4 &742249782
 Transform:
   m_ObjectHideFlags: 0
