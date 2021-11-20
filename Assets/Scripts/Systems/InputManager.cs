@@ -9,6 +9,8 @@ public class InputManager : MonoBehaviour
     public static InputManager instance;
     public bool choosingWhereToBuild = false; //A structure card has been selected
     bool zooming = false;//Is zooming
+    bool isMobile = false;
+    public bool forceMobile = false;
 
     [HideInInspector] public GameObject selectedCard;
 
@@ -28,6 +30,11 @@ public class InputManager : MonoBehaviour
     }
     void Start()
     {
+        if (GameManager.instance)
+            isMobile = forceMobile || GameManager.instance.checkPlatform();
+        else
+            isMobile = forceMobile;
+
         //If no cursor is assigned, a cube will be created and used
         if (cursor == null)
         {
@@ -97,26 +104,11 @@ public class InputManager : MonoBehaviour
                     //Cursor activates and moves to selected cell
                     cursor.SetActive(true);
 
-                   
-                    cursor.transform.position = pos;
-                    int structureSize = BuildManager.instance.GetStructureSize();
-                    if (structureSize > 1)
-                    {
-                        cursor.transform.localScale = Vector3.one * structureSize;
-                        cursor.transform.position += BuildManager.instance.currentConstructionPositionOffset;
-                    }
-                    else
-                    {
-                        cursor.transform.localScale = Vector3.one;
-                    }
+                    cursor.transform.localScale = Vector3.one * BuildManager.instance.GetStructureSize();
+                    cursor.transform.position = pos + BuildManager.instance.currentConstructionPositionOffset;
 
-                    GameObject structureGO = BuildManager.instance.StructureBlueprint.structurePrefab;
-                    DefenseBehaviour structureDB;
-                    if( structureGO.TryGetComponent<DefenseBehaviour>(out structureDB))
-                    {
-                        cursorBase.transform.localScale = new Vector3(structureDB.attackRange, structureDB.attackRange, 1);
-                    }
-                   
+
+
                     cursor.transform.up = hit.normal;
                 }
                 //Card is hidden if poiting at anything in the world
@@ -190,10 +182,27 @@ public class InputManager : MonoBehaviour
                     mZCoord = Camera.main.WorldToScreenPoint(worldPos).z;
                     mOffset = worldPos - GetMouseAsWorldPoint();
 
+
+                    cursor.transform.localScale = Vector3.one * Shop.instance.selectedDefenseBlueprint.structurePrefab.GetComponent<Structure>().Size;
+
+                    */
                     DefenseBehaviour db;
+                    SpellBehaviour sb;
                     if (Shop.instance.selectedDefenseBlueprint.structurePrefab.TryGetComponent<DefenseBehaviour>(out db))
                         cursorBase.transform.localScale = new Vector3(2 * db.attackRange, 2 * db.attackRange, 1);
-                    */
+                    {
+                        cursorBase.transform.localScale = new Vector3(2 * db.attackRange, 2 * db.attackRange, 1) / db.Size;
+                    }
+                    else if (Shop.instance.selectedDefenseBlueprint.structurePrefab.TryGetComponent<SpellBehaviour>(out sb))
+                    {
+                        cursorBase.transform.localScale = new Vector3(2 * sb.range, 2 * sb.range, 1) / sb.Size;
+                    }
+                    else
+                    {
+                        cursorBase.transform.localScale = Vector3.zero;
+                    }
+
+
                     break;
                 case "Structure":
 
@@ -203,62 +212,8 @@ public class InputManager : MonoBehaviour
                     UIController.instance.ShowMenu(UIController.GameMenu.UpgradeMenu);
                     BuildManager.instance.SetSelectedStructure(structureHitted.GetComponent<Structure>());
                     //check the structure type
-                    switch (structureHitted.GetComponent<Structure>().structureId)
-                    {
-                        case 0:
-                            ShootingDefenseBehaviour sfb = structureHitted.GetComponent<ShootingDefenseBehaviour>();
 
-                            UIController.instance.SetUpgradeMenu(sfb.structureId,
-                                sfb.GetStructureName(),
-                                sfb.GetLevel(),
-                                sfb.GetTarget(),
-                                sfb.GetRange(),
-                                sfb.GetFireRate(),
-                                sfb.GetDamage(), 0);
-                            break;
-                        case 1:
-                            //If slows down
-                            ShootingDefenseBehaviour sfb1= structureHitted.GetComponent<ShootingDefenseBehaviour>();
 
-                            UIController.instance.SetUpgradeMenu(sfb1.structureId,
-                                sfb1.GetStructureName(),
-                                sfb1.GetLevel(),
-                                sfb1.GetTarget(),
-                                sfb1.GetRange(),
-                                sfb1.GetFireRate(),
-                                sfb1.GetDamage(), 0);
-                            break;
-                        case 2:
-                            //If its heavyTower
-                            ShootingDefenseBehaviour hdb = structureHitted.GetComponent<ShootingDefenseBehaviour>();
-
-                            UIController.instance.SetUpgradeMenu(hdb.structureId,
-                                hdb.GetStructureName(),
-                                hdb.GetLevel(),
-                                hdb.GetTarget(),
-                                hdb.GetRange(),
-                                hdb.GetFireRate(),
-                                hdb.GetDamage(), 0);
-                            break;
-                        case 3:
-                            Bomb bombB = structureHitted.GetComponent<Bomb>();
-
-                            UIController.instance.SetUpgradeMenu(bombB.structureId,
-                                bombB.GetStructureName(),
-                                bombB.GetLevel(),
-                                bombB.GetTarget(),
-                                bombB.GetRange(),
-                                bombB.GetFireRate(),
-                                bombB.GetDamage(), 0);
-                            break;
-                    }
-    /*
-                    else if (structureHitted.GetComponent<Bomb>() != null)
-                    {
-                        UIController.instance.SetUpgradeMenu(3, structureHitted.GetComponent<Bomb>().GetStructureName(), structureHitted.GetComponent<Bomb>().GetLevel(), structureHitted.GetComponent<Bomb>().GetTarget(),
-                                structureHitted.GetComponent<Bomb>().GetRange(), structureHitted.GetComponent<Bomb>().GetFireRate(), structureHitted.GetComponent<Bomb>().GetDamage(), 0);
-                    }*/
-                    
                     break;
                 case "Gatherer":
                     Gatherer gathererHitted = hit.collider.gameObject.GetComponent<Gatherer>();
@@ -350,6 +305,23 @@ public class InputManager : MonoBehaviour
 
         // Convert it to world points
         return Camera.main.ScreenToWorldPoint(mousePoint);
+    }
+
+    public void MobileInput(bool b)
+    {
+        forceMobile = b;
+        if (GameManager.instance)
+            isMobile = forceMobile || GameManager.instance.checkPlatform();
+        else
+            isMobile = forceMobile;
+    }
+
+    private void OnValidate()
+    {
+        if (GameManager.instance)
+            isMobile = forceMobile || GameManager.instance.checkPlatform();
+        else
+            isMobile = forceMobile;
     }
 }
 //https://answers.unity.com/questions/1698508/detect-mobile-client-in-webgl.html?childToView=1698985#answer-1698985

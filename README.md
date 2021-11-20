@@ -158,6 +158,7 @@ Los niveles son semi procedimentales y se crean mediante una semilla.
 | TORRE PESADA   | Largo (7 ud) | Elevado (35 ud)| Proyectil ÁreaTT\*| Lento (0.1 ud)      | \-                                | 300    |
 | TORRE BÁSICA   | Medio (5 ud) | Medio (10 ud)  | IndividualTA-TT\* | Medio (1 ud)        | \-                                | 125    |
 | TORRE PSÍQUICA | Corto (3 ud) | Bajo (7 ud)    | Área TT\*         | Medio (1 ud)        | El enemigo se ralentiza           | 200    |
+| TORRE MONTAÑA  | Medio (x ud) | Bajo (x ud)    | IndividualTA-TT*  | Rápido (x ud)       | Prioriza ataque a enemigos aéreos |        |
 | TORRE ECONÓMICA| Nada         | Ninguno        | Ninguno           | Sin ataque          | Genera ingresos de forma pasiva   | 400    |
 | **TRAMPAS**    |              |                |                   |                     |                                   |        |
 | TRAMPA PANTANO | 1 Casilla    | \-             | ÁreaTT\*          | \-                  | Ralentiza                         | X      |
@@ -170,6 +171,7 @@ Nivel 1:
 | TORRE PESADA   | Largo (7 ud) | Elevado (70 ud)| Proyectil ÁreaTT\*| Lento (0.1 ud)      | \-                                | 150    |
 | TORRE BÁSICA   | Medio (5 ud) | Medio (12 ud)  | IndividualTA-TT\* | Medio (1.5 ud)      | \-                                | 50     |
 | TORRE PSÍQUICA | Corto (4 ud) | Bajo (8 ud)    | ÁreaTT\*          | Medio (1 ud)        | El enemigo se ralentiza           | 100    |
+| TORRE MONTAÑA  | Medio (x ud) | Bajo (x ud)    | IndividualTA-TT*  | Rápido (x ud)       | Prioriza ataque a enemigos aéreos |        |
 
 Nivel 2:
 | **TORRES**     | ALCANCE      | DAÑO           | OBJETIVO          | VELOCIDAD DE ATAQUE | EFECTO                            | COSTE  |
@@ -177,6 +179,7 @@ Nivel 2:
 | TORRE PESADA   | Largo (12 ud)| Elevado (70 ud)| Proyectil ÁreaTT\*| Lento (0.1 ud)      | \-                                | 200    |
 | TORRE BÁSICA   | Largo (8 ud) | Medio (14 ud)  | IndividualTA-TT\* | Medio (1.5 ud)      | \-                                | 100    |
 | TORRE PSÍQUICA | Medio (5 ud) | Medio (9 ud)   | ÁreaTT\*          | Medio (1 ud)        | El enemigo se ralentiza           | 150    |
+| TORRE MONTAÑA  | Medio (x ud) | Bajo (x ud)    | IndividualTA-TT*  | Rápido (x ud)       | Prioriza ataque a enemigos aéreos |        |
 
 Nivel 3:
 | **TORRES**     | ALCANCE      | DAÑO           | OBJETIVO          | VELOCIDAD DE ATAQUE | EFECTO                            | COSTE  |
@@ -184,6 +187,7 @@ Nivel 3:
 | TORRE PESADA   | Largo (12 ud)| Elevado (70 ud)| Proyectil ÁreaTT\*| Lento (0.2 ud)      | \-                                | 300    |
 | TORRE BÁSICA   | Largo (10 ud)| Medio (14 ud)  | IndividualTA-TT\* | Rápido (1.75 ud)    | \-                                | 150    |
 | TORRE PSÍQUICA | Medio (5 ud) | Medio (9 ud)   | ÁreaTT\*          | Medio (1.5 ud)      | El enemigo se ralentiza           | 200    |
+| TORRE MONTAÑA  | Medio (x ud) | Bajo (x ud)    | IndividualTA-TT*  | Rápido (x ud)       | Prioriza ataque a enemigos aéreos |        |
 
 \*TT: Ataques desde Tierra a objetivos Terrestres.
 TA: Ataques desde Tierra a objetivos Aéreos.
@@ -196,9 +200,6 @@ TA: Ataques desde Tierra a objetivos Aéreos.
 | TANQUE                      | 250  | Lenta                   | Terrestre - Pesada   |
 | HORDA                       |  25  | Media                   | Terrestre - Horda    | 
 
-### 4.7 Evento aleatorio
-
-**Proyectil:** Aleatoriamente se producirán explosiones en el mapa generando cráteres, destruyendo torres y enemigos y modificando la geometría del cubo, junto con el camino si impacta contra él. 
 
 ## 5. Trasfondo
 
@@ -226,9 +227,6 @@ Hay cinco niveles jugables, cada uno con su estética única: Pantano, Tundra, O
 - Quinto mapa: Nevado. Las huellas quedan marcadas en la nieve ante el paso de nuestras protagonistas, que se dirigen a una calentita charca. 
 
 
-## 
-
-
 ## 6. Arte
 
 
@@ -243,7 +241,7 @@ Con todo, la estética general del juego está basada en el minimalismo, con col
 
 Siguiendo en todo momento la línea estética general del juego, se diferencian diversos elementos del apartado visual:
 
-- **Escenario**.
+#### Escenario
 
 El escenario es un hexaedro regular o cubo, limitado por seis caras del mismo tamaño y generado a partir de unidades definidas en formato Voxel. Por la superficie del poliedro están repartidas zonas elevadas, zonas llanas y caminos, cada uno diferenciado por un color específico. Por último, una de las caras contiene la charca, es decir, el elemento a defender.
 
@@ -251,35 +249,37 @@ El escenario es un hexaedro regular o cubo, limitado por seis caras del mismo ta
 
 Así pues, en una primera instancia, se limitan los colores del escenario jugable a cuatro.
 
-Se planea incluir diversos biomas u escenarios jugables, cada uno de ellos basado en una paleta de colores diferenciada;
+Los biomas presentes son, como se han explicado antes, los siguientes:
 
-Bioma Pantano:
+**Bioma Pantano:**
+
+**Bioma Otoño:**
 
 ![](https://lh4.googleusercontent.com/TXgQWhpVlt83etDjwyYZxmVOVPrlITub35fW6DAcFtA7LPzNhg3M7nMgYrNafSEyJ20paOBGp5wyTFgmkCkk-GYfFl1u3ooGeAzqImXpHy3aheO0lrHU4wik3ZZYzqpsGvj-WL_Z)
 
 ![](https://lh5.googleusercontent.com/rK1Dd5JWwy1GxaCoPw6uzcGak2qy_9cbq-xHiRPymrxKhMh4TFVeFv0a6Zl4Uu91OFZW7Kf2yeLaik4JcB2CMBWRmC97kNLvhFVIq-XcEEPfvwAeC9l9Nj45nsOXgikCjeNt13u7)
 
 
-Bioma Ciudad:
+**Bioma Cerezo:**
 
 ![](https://lh6.googleusercontent.com/Z41MUXJ7gsGdB0-wqKRionSkHEM7b0xHw2xt5lHWmSbZVd8jw5R1l-QMfFdtzLF-Hmd7l831v-c1z9vijDtHBnatru3Xj26GpkPvsK-eWeHLULY_-Ki46UXsw2BF9tqVgKnxPi4j)
 
 ![](https://lh6.googleusercontent.com/ASA0QnjXO-dbM1D6dp4Rvd5GMp41v-_T6zwML90An7MpX2yYpfsXZUPi5RbpV2A0RamsDm2j-jmorlBmVXc9D14YAohFmSMxr7kL_hMfD1FGYAFQm1TlfeZ-4VzBPz0aG9ZEjoZT)
 
 
-Bioma Montaña:
+**Bioma Nevado:**
 
 ![](https://lh4.googleusercontent.com/BK7V2ioEAjoyQnGm7btwQTIIZejfD8ZpiHLmawmiaaD-DrBs647Yx6qjIlPKCiOrht3NV9W28lh3p_V5Z28jlGwWc9kJnl_4ULSFMy1FiRs9qizqyaVCPhjqrk78uTqrp3hNrKuE)
 
 ![](https://lh5.googleusercontent.com/AZ-85cmuXKm2jMr9DdmTxCduSSe7394JMhqrcEQBTV-8728i2_fs2FbrR8CIKmWwq_K4elSYTttiHMw3PbmvKVQ9ZpDRKNnWulx2wJtAUYUVHIer9HSS2pcDGWK6wAiTRKc8pArr)
 
-Otros biomas:
+**Bioma Tundra:**
 
 ![](https://lh5.googleusercontent.com/pCXfBnfKCp12tBGAqrz_iixI9uXFEhYbyeM49xcxCWKXDhxbzPcPPdqNF7SUs7KB145WxYBPg7mwlvkVP6AptwDWy7o2m8xY82EaDP3gtb4DAlJru1ZGoRPpUliR0CEQlaWqv1OD)
 
 ![](https://lh3.googleusercontent.com/sZM54ldy0WYvTPkmVwHaDWvQA5AxngABtHF8KJui1eTovgTu9EuEFM6PweAag9n3FWCKl7JXVbOHLXRHcAuTjNh3F2RRyddz6-hI7ra0Aa8PuNhc_57iba3Apb0qG1kBLFKADIUJ)
 
-- **Personajes**
+#### Personajes
 
 La representación en el escenario tanto de las defensas como de los enemigos son modelos Voxel de dimensiones 16x16x16 vóxeles.
 
@@ -307,7 +307,7 @@ La representación en el escenario tanto de las defensas como de los enemigos so
 
 ![MinasRender](https://user-images.githubusercontent.com/56488179/142732128-960ccb57-7cff-42e8-b027-a23c91b36ad3.png)
 
-- **Enemigos**
+#### Enemigos
 
 - Enemigo normal:
 
@@ -320,6 +320,8 @@ La representación en el escenario tanto de las defensas como de los enemigos so
 - Enemigo horda:
 
 ![HordaRender](https://user-images.githubusercontent.com/56488179/142732505-ff361669-72d7-46aa-8af5-75a9d16d0158.png)
+
+#### Iconos
 
 A su vez, la representación de las estadísticas de las torres se realiza mediante cartas o pantallas de información en gráficos 2D acorde a las descripciones de la estética general y al resto de elementos 2D.
 
@@ -366,23 +368,13 @@ El juego cuenta con una sola canción (autor: [Pascual Gázquez Compán](https:/
 
 ### 6.4 Ambiente sonoro
 
-El juego cuenta con efectos de sonido para la construcción de las torres y sus mejoras, para la muerte de las ranas enemigas y para cuando estas llegan a tu estanque, inflingiendote daño, todas cortesía de [Zapsplat](https://www.zapsplat.com/)
-
-El efecto de sonido de la construcción de las torres y de la mejora de estas es la misma. Es el sonido de unos ladrillos infantiles agitándose en una bolsa.
-El efecto de sonido de la muerte de las ranas consiste en el croar de una rana.
-El efecto de sonido cuando los enemigos llegan a tu estanque varía entre 3 efectos de sonido distintos: 
-- La agitación de una loción de bebé en un bote
-- 2 chapoteos distintos en el agua
-
-## 
-
 
 ## 7. Interfaz
 
 
-### 7.1 Diseños básicos de los menús
+### 7.1 Diseños de los menús
 
-Para la interfaz se cuentan con 7 ventanas:
+La interfaz del juego consta de 7 ventanas:
 
 - Menú principal:
 
@@ -422,16 +414,14 @@ Flujo de juego:
 
 ![](https://lh3.googleusercontent.com/aF1nWLFmWOgguDnGZoJvcOlg-Rg5idqPTJ36BbybrI7znmQiQz3duVFWYjOZu0G9ywJHTiWaXSx0U-r1mU3JT1imTOPqgxp3-cy9zKN_-aYHIY8eDtvKcv5eABgkfKF-SN-zxnpM=s1600)
 
-## 
 
 ## 8. Post-Mortems
 
+### 8.1 Post-Mortem de la etapa Alfa
 
-## 8.1 Post-Mortem de la etapa Alfa
+#### Autocríticas individuales
 
-## Autocríticas individuales
-
-### Gonzalo
+##### Gonzalo
 
 Debo de ser más duro. La gente ha llegado y en varias ocasiones han saltado a trabajar en tareas que todavía no tenían asignadas y que eran menos prioritarias para el proyecto que las que ya tenían asignadas en ese momento. También he tenido deslices con la programación de reuniones y el tratamiento de redes como olvidarme de fechas, elementos que debían estar presentes en las publicaciones, publicar en unas redes pero olvidarme de publicar en otras…
 
@@ -439,7 +429,7 @@ Lo bueno es que algunas cosas sí que he logrado corregirlas de distintas formas
 
 Tengo que mejorar mi atención o mis habilidades de gestión, en general. Aunque creo que parto de buen nivel. Ha sido una constante el comprobar los progresos del resto de miembros del equipo y me he adelantado con el planning de tareas para ver a quién podía encajar en qué tarea cuando terminara su actual, además de contar siempre con responsabilidades de los miembros fuera del proyecto para poder planear siguientes asignaciones de tareas o avances.
 
-### Joy
+##### Joy
 
 No considero que sea una persona que destaque en la creatividad así que generalmente suelo estar algo ausente en las tareas iniciales como puede ser el brainstorming para decidir sobre qué irá el juego, aunque luego sí soy bastante crítico si el tema elegido no es de mi agrado, cosa que no me parece justa.
 
@@ -447,24 +437,24 @@ Tras varias vueltas se acabó en una idea que tenía buena pinta. Estuve trabaja
 
 Creo que, en general, he hecho un buen trabajo, pero hay cosas en las que tenía que haberme molestado debido a que somos un estudio pequeño, como conocer el código que hacían mis compañeros en el equipo de programación y comunicar y expresar mejor las ideas diseñadas para que no hubiera desarrollos innecesarios.
 
-### Adrián
+##### Adrián
 
 Buena comunicación con el resto de los miembros y flujo constante. Trabajo realizado rápido y muy buena gestión del tiempo.
 
-#### A mejorar:
+###### A mejorar:
 
 - Seguir mejorando la comunicación e intentar hacerme oír más.
 - Seguir mejorando la gestión del tiempo para poder elaborar código más limpio de una vez en vez de tener que ponerlo bonito después de estar funcional.
 - Comentar más el código.
 - No retrasar las consultas de dudas.
 
-### Dani
+##### Dani
 
 Desde el primer momento no me entusiasmó excesivamente la idea de hacer un Tower Defense, pero viendo que el resto de mis compañeros estaban decididos, no me pude negar. Mi mayor preocupación era hacer un juego demasiado simple a nivel técnico, ya que consideraba que, teniendo en cuenta el equipo que teníamos, podíamos aspirar a hacer un juego bastante ambicioso. Al final acepté la idea, pero me propuse hacer un juego que, dentro de un género que no suele llamar la atención, destacara por ser innovador. Al final esto último resultó ser más difícil de lo que parecía.
 
 Terminada ya la Alpha me he dado cuenta de que desarrollar un juego completo y pulirlo a un nivel aceptable, por simple que sea el juego, siempre supone un reto. La generación procedimental del mundo y los caminos, de lo que principalmente me he encargado yo, me ha dado infinitos dolores de cabeza, aunque la satisfacción de verlo todo funcionando al final lo compensa.
 
-### Marta
+##### Marta
 
 A nivel personal:
 
@@ -472,15 +462,15 @@ A nivel personal:
 - Establecer buenos horarios de trabajo. Durante este tiempo de trabajo he sido capaz de establecer unos buenos horarios de trabajo sin llegar a sobreesforzarme. Esto me ha permitido sentirme bien conmigo misma y con el proyecto.
 - Problemas con mi pipeline de trabajo. A nivel personal, durante las primeras semanas me demoré más de lo necesario en realizar mis tareas debido a que me intentaba adaptar a lo que el resto del equipo me pedía sin tener en cuenta el flujo de trabajo (a nivel artístico) al que estoy acostumbrada. Esto me llevó a bloquearme en ciertos aspectos, sobre todo referentes al desarrollo conceptual del juego. La solución que propongo es adaptarme a las necesidades de mi equipo, pero sin dejar de tener en cuenta mi propia línea de trabajo de cara a establecer y definir las tareas y/o hitos. Además de esto, me gustaría que las tareas a realizar vinieran de un único canal para evitar problemas de comunicación o errores de prioridad.
 
-### Alberto
+##### Alberto
 
 Al inicio estaba bastante motivado con el proyecto porque había salido elegido un juego de estrategia, mi género favorito con diferencia, así que quería aplicar mi experiencia en hacer algo interesante. Después no solo había que compartir el rol de game designer sino que al final prácticamente el juego acabó siendo una decisión de todos. Esto, en realidad, a la larga es favorable para el grupo porque trabajamos todos en algo que más o menos nos gusta a todos, pero, siendo yo game designer principalmente, ¿Solo me encargo de escribir cuántas torres y enemigos hay y cómo funcionan? Cosa que también tenía que ser un consenso entre los dos game designers. Aún así creo que podría haber hecho un mayor ejercicio de creatividad para hacer un juego original, ya que lo del cubo no se nos ocurrió a los diseñadores tampoco.
 
 En conclusión, perdí bastante la motivación que tenía al empezar pero no considero que fuese motivo suficiente para no haber dado más de mí en crear alguna mecánica original.
 
-## Críticas de equipo
+#### Críticas de equipo
 
-### Productor
+##### Productor
 
 El equipo ha trabajado muy bien. Hemos salido de la Alfa con un juego bastante terminado en lo que a mecánicas se refiere, encima teniendo la procedimentalidad de por medio, algo que complicaba el asunto. A parte de lo mencionado más arriba, un problema que he visto (que va ligado a la cantidad de gente que somos y a circunstancias externas) ha sido el bajo rendimiento del equipo de arte comparado con otros equipos.
 
@@ -488,7 +478,7 @@ Ha habido bastante debate de ideas, algunos que se han alargado hasta otras fase
 
 También destacar que en el equipo de programación han estado brutales: han currado a destajo y han logrado tener muchas mecánicas y funcionalidades listas para la Alfa, algo que baja la intensidad de su trabajo para las siguientes etapas, ya que se centrarán en pulir errores y en expandir o implementar alguna funcionalidad/mecánica extra.
 
-### Programador 1
+##### Programador 1
 
 El trabajo ha sido fluido y sale bien. Hay un buen ambiente de trabajo y se siente el progreso de cada uno del equipo como propio gracias al Trello y las reuniones. Las reuniones semanales son un acierto, aunque posteriormente se debatirán algunos detalles.
 
@@ -496,11 +486,11 @@ Las reuniones deberían contar con un esquema previo y tratar sobre temas espec�
 
 Respecto a la corrección del trabajo de otros miembros mejor que editarlo directamente se cree más conveniente que se le comuniquen las ideas de mejora al encargado de esa tarea y sea él o ella quien realice las modificaciones. Todo esto para ahorrar tiempo y evitar errores inesperados.
 
-### Programador 2
+##### Programador 2
 
 Creo que hemos hecho un buen trabajo. Como equipo siento que en ciertos momentos nos ha faltado un poco de comunicación. Hemos tenido momentos de frustración por no entendernos o por querer hacer las cosas de formas distintas, pero al final el proyecto ha salido adelante más o menos como lo habíamos concebido, así que debemos considerarlo un éxito.
 
-### Programador 3
+##### Programador 3
 
 Considero que todo el equipo ha trabajado correctamente, cada equipo con sus altibajos por diferentes cuestiones:
 
@@ -512,7 +502,7 @@ El equipo de arte no ha tenido mucho trabajo para la alfa, un par de texturas y 
 
 El equipo de programación ha sido con diferencia el que más trabajo tenía, no ha habido crunch pero sí que ha tenido que dedicarle bastante tiempo tal vez más del debido. Ha sido un buen trabajo en el que cada uno de los integrantes se ha ido dedicando una tarea para avanzar lo más rápido posible, esto, aunque bastante efectivo para implementar la mayoría de las mecánicas si ha provocado de alguno de los integrantes usaran su libre albedrío para implementar las mecánicas como más le apetecía y provocando que otros tuvieran que ir detrás revisando ese trabajo.
 
-### Arte
+##### Arte
 
 A nivel de equipo:
 
@@ -522,7 +512,7 @@ A nivel de equipo:
 - Problemas de comunicación y falta de información. Al inicio hubo algunos problemas de comunicación entre las diferentes áreas de trabajo y, si bien pensaba que estaban solucionados, esta última semana de desarrollo se han manifestado nuevas incidencias propiciadas por confusiones evitables o faltas de información. Para solucionar esto, creo que sería necesario comunicar mejor cada una de las tareas realizadas y cada uno de los problemas que nos hemos podido encontrar, así como testear y/o revisar el trabajo de nuestros pares con más frecuencia.
 - Presencia en redes sociales. Me he quedado un poco con la sensación de que la presencia en redes sociales la hemos ido improvisando, principalmente por falta de tiempo y material. Creo que sería buena idea elaborar un calendario de contenido para las redes sociales y preparar cada publicación con antelación. Además, de esta forma todos los miembros del equipo estaríamos al tanto de cuáles van a ser las futuras publicaciones y podríamos aportar nuevas ideas, contenido u opiniones.
 
-### Diseño
+##### Diseño
 
 En general, en el grupo hay muy buen ambiente de trabajo, consiguen hacer todo estupendamente y a tiempo. En las decisiones grupales nadie discute como si tuviera 12 años y las reuniones son productivas, dentro de lo normal. Considero que soy el menos productivo o el que menos aporta al grupo
 
@@ -530,10 +520,8 @@ En general, en el grupo hay muy buen ambiente de trabajo, consiguen hacer todo e
 
 ### 8.3 Post-Mortem de la etapa Gold
 
-##
 
 ## 9. Hoja de ruta del desarrollo
-
 
 ### 9.1 Hito 1: Alfa
 
@@ -550,7 +538,7 @@ En general, en el grupo hay muy buen ambiente de trabajo, consiguen hacer todo e
 - Tutorial introductorio en el que se expliquen las mecánicas básicas:
 - Balanceo de las estadisticas de enemigos y torres para hacer el juego divertido y justo: 15/11/2021
 - Crear y meter en el juego los 3 modelos de enemigo y los 6 modelos de torre/defensa:
-- Nueva mecánica característica:
+- Nueva mecánica característica: No alcanzado
 - Añadir offset para la colocación de torres: 19/11/2021
 - Arreglar proporciones de las torres en el cubo: 18/11/2021
 - Dirigir correctamente la barra de vida de los enemigos hacia la camara del jugador: 16/11/2021

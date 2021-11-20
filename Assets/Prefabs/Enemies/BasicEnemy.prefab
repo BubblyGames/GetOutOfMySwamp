@@ -318,7 +318,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3314472768546886192}
-  m_Layer: 6
+  m_Layer: 7
   m_Name: Hb
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -426,7 +426,7 @@ GameObject:
   - component: {fileID: 8327201870911118399}
   - component: {fileID: 2685262137413674711}
   - component: {fileID: 4165739703014183546}
-  m_Layer: 6
+  m_Layer: 7
   m_Name: BasicEnemy
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -463,10 +463,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   startHealth: 40
   healthPoints: 0
-  startSpeed: 3
+  startSpeed: 2
   currentSpeed: 0
   damage: 10
-  moneyValue: 15
+  moneyValue: 8
   scoreValue: 100
   isSlowed: 0
   slowIntensity: 0.25

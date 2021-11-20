@@ -14,7 +14,7 @@ public class Structure : MonoBehaviour
 
     [Header("General stats")]
     [SerializeField]
-    protected int size =1;
+    protected int size = 1;
 
     [SerializeField]
     protected int health;
@@ -34,8 +34,8 @@ public class Structure : MonoBehaviour
 
     public void SetNormal(Vector3 normal)
     {
-       this.normal = normal;
-       transform.up = this.normal;
+        this.normal = normal;
+        transform.up = this.normal;
     }
 
     public virtual void UpgradeStrucrure(UIController uIController)
