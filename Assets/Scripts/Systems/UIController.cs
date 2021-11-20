@@ -46,7 +46,7 @@ public class UIController : MonoBehaviour
 
     public GameObject shopContainer;
     private int gameSceneId;
-    private Image upgradeButtonImage;
+    public Image upgradeButtonImage;
     private List<StructureBlueprint> structures;
 
     public enum GameMenu
@@ -80,6 +80,7 @@ public class UIController : MonoBehaviour
         if (gameSceneId == 1)
         {
             upgradeButtonImage = upgradeButton.GetComponent<Image>();
+            Debug.Log("Image:" + upgradeButtonImage);
             structures = shopContainer.GetComponent<Shop>().defenseBlueprints;
         }
 
@@ -487,7 +488,7 @@ public class UIController : MonoBehaviour
     
     public void UpdateUpgradeButton(int level, int structureId)
     {
-        upgradeButtonImage.sprite = upgradeLevels[level];
+        upgradeButtonImage.sprite = GameManager.instance.upgradeLevels[level];
         if (level < 3)
         {
             upgradeButton.GetComponent<Button>().interactable = true;
@@ -527,6 +528,14 @@ public class UIController : MonoBehaviour
             g.SetActive(true);
         }
     }
+
+    private void OnDestroy()
+    {
+        LevelManager.OnWaveCleared -= UpdateWaveText;
+        LevelManager.OnGameStart -= SetWaveText;
+        LevelManager.OnStructureUpgraded -= SetUpgradeButton;
+    }
+
 }
 
 

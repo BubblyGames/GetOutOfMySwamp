@@ -36,4 +36,9 @@ public class ScoreSystem : MonoBehaviour
     {
         scoreText.text = score.ToString();
     }
+
+    private void OnDestroy()
+    {
+        LevelManager.OnGameStart -= ResetScore;
+    }
 }
