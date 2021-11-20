@@ -6,6 +6,8 @@ using UnityEngine.SceneManagement;
 
 public class TextManager : MonoBehaviour
 {
+    public static TextManager instance;
+
     private List<GameObject> subscribersMainScene;
     private List<GameObject> subscribersGameScene;
     private bool english = true;
@@ -17,6 +19,15 @@ public class TextManager : MonoBehaviour
 
     private void Awake()
     {
+        if (instance == null)
+        {
+            instance = this;
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+
         InitializeDictionaries();
         subscribersMainScene = new List<GameObject>();
         subscribersGameScene = new List<GameObject>();
@@ -108,6 +119,8 @@ public class TextManager : MonoBehaviour
         englishDictionary.Add("damage", "Damage");
         englishDictionary.Add("fireRate", "Fire Rate");
         englishDictionary.Add("moneyGathered", "Money +");
+        englishDictionary.Add("sell", "Sell");
+        englishDictionary.Add("upgrade", "Upgrade");
 
         //defense stats in english
         englishDictionary.Add("air", "Air");
@@ -180,6 +193,8 @@ public class TextManager : MonoBehaviour
         spanishDictionary.Add("damage", "Daño");
         spanishDictionary.Add("fireRate", "Vel. Disparo");
         spanishDictionary.Add("moneyGathered", "Dinero +");
+        spanishDictionary.Add("sell", "Vender");
+        spanishDictionary.Add("upgrade", "Mejora");
 
 
         //defense stats in spanish
