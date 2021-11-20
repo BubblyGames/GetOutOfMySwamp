@@ -153,8 +153,20 @@ public class InputManager : MonoBehaviour
         mOffset = worldPos - GetMouseAsWorldPoint();
 
         DefenseBehaviour db;
+        SpellBehaviour sb;
+
         if (Shop.instance.selectedDefenseBlueprint.structurePrefab.TryGetComponent<DefenseBehaviour>(out db))
-            cursorBase.transform.localScale = new Vector3(2 * db.attackRange, 2 * db.attackRange, 1);
+        {
+            cursorBase.transform.localScale = new Vector3(2 * db.attackRange, 2 * db.attackRange, 1) / db.Size;
+        }
+        else if (Shop.instance.selectedDefenseBlueprint.structurePrefab.TryGetComponent<SpellBehaviour>(out sb))
+        {
+            cursorBase.transform.localScale = new Vector3(2 * sb.range, 2 * sb.range, 1) / sb.Size;
+        }
+        else
+        {
+            cursorBase.transform.localScale = Vector3.zero;
+        }
 
     }
     private void MouseDown()
@@ -167,40 +179,9 @@ public class InputManager : MonoBehaviour
             switch (hit.collider.tag)
             {
                 case "Card":
-                    /*choosingWhereToBuild = true;
-
-                    //Select clicked card
-                    selectedCard = hit.collider.gameObject;
-                    selectedCard.GetComponent<Collider>().enabled = false;
-
-                    //Select structure
-                    Shop.instance.setShopIndex(selectedCard.GetComponent<Card>().index);
-
-                    //Getting offset between camera and card
-                    defaultPos = selectedCard.transform.localPosition;
-                    worldPos = selectedCard.transform.position;
-                    mZCoord = Camera.main.WorldToScreenPoint(worldPos).z;
-                    mOffset = worldPos - GetMouseAsWorldPoint();
-
-
-                    cursor.transform.localScale = Vector3.one * Shop.instance.selectedDefenseBlueprint.structurePrefab.GetComponent<Structure>().Size;
-
-                    */
-                    DefenseBehaviour db;
-                    SpellBehaviour sb;
-                    if (Shop.instance.selectedDefenseBlueprint.structurePrefab.TryGetComponent<DefenseBehaviour>(out db))
-                        cursorBase.transform.localScale = new Vector3(2 * db.attackRange, 2 * db.attackRange, 1);
-                    {
-                        cursorBase.transform.localScale = new Vector3(2 * db.attackRange, 2 * db.attackRange, 1) / db.Size;
-                    }
-                    else if (Shop.instance.selectedDefenseBlueprint.structurePrefab.TryGetComponent<SpellBehaviour>(out sb))
-                    {
-                        cursorBase.transform.localScale = new Vector3(2 * sb.range, 2 * sb.range, 1) / sb.Size;
-                    }
-                    else
-                    {
-                        cursorBase.transform.localScale = Vector3.zero;
-                    }
+                   
+                    
+                    
 
 
                     break;

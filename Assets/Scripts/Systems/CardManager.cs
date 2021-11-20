@@ -20,9 +20,11 @@ public class CardManager : MonoBehaviour
         GetComponent<MeshRenderer>().enabled = false;
         for (int i = 0; i < materials.Count; i++)
         {
+
             GameObject card = GameObject.Instantiate(cardPrefab);
             card.transform.parent = transform;
-            card.GetComponent<Card>().SetupCard(i, materials[i], height, space, y);
+            Debug.Log("help");
+            //card.GetComponent<Card>().SetupCard(i, materials[i], height, space, y);
             cards.Add(card);
 
             /*GameObject card = GameObject.Instantiate(cardPrefab);

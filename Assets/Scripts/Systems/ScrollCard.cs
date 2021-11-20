@@ -8,6 +8,7 @@ public class ScrollCard : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDr
 {
     [SerializeField] GameObject cardToSpawn;
     [SerializeField] Material cardMaterial;
+    [SerializeField] Texture texture;
     [SerializeField] int indexCard;
     [SerializeField] RectTransform contentParent;
     private Image buttonSprite;
@@ -30,11 +31,11 @@ public class ScrollCard : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDr
     public void SpawnCard()
     {
         float cardPosInsideRect = ((transform.localPosition.y + transform.parent.localPosition.y)/ contentParent.sizeDelta.y);
-        Debug.Log(cardPosInsideRect);
+        //Debug.Log(cardPosInsideRect);
         Camera.main.transform.GetChild(2).localPosition = startParentPos + Vector3.up * (5.7f  * cardPosInsideRect);
 
         aux = Instantiate(cardToSpawn, new Vector3(0, -255 * cardPosInsideRect ,0), Quaternion.identity, Camera.main.transform.GetChild(2));
-        aux.GetComponent<Card>().SetupCard(indexCard, cardMaterial, 0, 0, 0);
+        aux.GetComponent<Card>().SetupCard(indexCard, texture, 0, 0, 0);
         aux.transform.LookAt(Camera.main.transform);
         aux.transform.localScale = new Vector3(aux.transform.localScale.x, aux.transform.localScale.y, aux.transform.localScale.z * -1);
         canvasgroup.alpha = 0.0f;

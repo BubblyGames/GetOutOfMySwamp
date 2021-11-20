@@ -7,12 +7,16 @@ public class Card : MonoBehaviour
 {
     public int index = 0;
 
-    public void SetupCard(int i, Material m, float height, float space, float y)
+    public void SetupCard(int i, Texture t, float height, float space, float y)
     {
         transform.localPosition = new Vector3(0, -i * (height + space) + y, -0.01f);
         transform.localRotation = Quaternion.identity;
-        GetComponent<MeshRenderer>().material = m;
         index = i;
+
+        Material newMaterial = new Material(GetComponent<MeshRenderer>().material);
+
+        newMaterial.mainTexture = t;
+        GetComponent<MeshRenderer>().material = newMaterial;
 
         if (GameManager.instance != null)
         {

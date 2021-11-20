@@ -554,7 +554,7 @@ RectTransform:
   m_Children:
   - {fileID: 476313601}
   m_Father: {fileID: 1256509563}
-  m_RootOrder: 5
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -586,9 +586,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cardToSpawn: {fileID: 8935117261002765910, guid: 4843d686fd24c0f40ba15d6a4dc577e5, type: 3}
-  cardMaterial: {fileID: 2100000, guid: e9711a34b67346349a676c83ac3c9a32, type: 2}
+  cardMaterial: {fileID: 0}
+  texture: {fileID: 2800000, guid: 7a386d8465c07604c99bc8137235803f, type: 3}
   indexCard: 5
-  contentParent: {fileID: 1387662651}
+  contentParent: {fileID: 1256509563}
 --- !u!114 &36173498
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -942,7 +943,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &57840774
 MonoBehaviour:
@@ -1464,7 +1465,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &327890052
 GameObject:
@@ -1934,9 +1935,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cardToSpawn: {fileID: 8935117261002765910, guid: 4843d686fd24c0f40ba15d6a4dc577e5, type: 3}
-  cardMaterial: {fileID: 2100000, guid: 543f281990743274cbf76dd270d37cb5, type: 2}
+  cardMaterial: {fileID: 0}
+  texture: {fileID: 2800000, guid: 42ace1f76f092284eb79ab05322801e7, type: 3}
   indexCard: 3
-  contentParent: {fileID: 1387662651}
+  contentParent: {fileID: 1256509563}
 --- !u!114 &398153289
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3626,7 +3628,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &752057384
 GameObject:
@@ -3790,7 +3792,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 1307362636}
   m_Direction: 2
   m_Value: 1
-  m_Size: 0.430696
+  m_Size: 0.43069598
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -4717,9 +4719,8 @@ RectTransform:
   m_Children:
   - {fileID: 139383908}
   - {fileID: 278685671}
-  - {fileID: 1732745670}
   m_Father: {fileID: 1317912951}
-  m_RootOrder: 6
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
@@ -6296,9 +6297,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cardToSpawn: {fileID: 8935117261002765910, guid: 4843d686fd24c0f40ba15d6a4dc577e5, type: 3}
-  cardMaterial: {fileID: 2100000, guid: db9ecb3b746c1224b96ebce2da87b0eb, type: 2}
+  cardMaterial: {fileID: 0}
+  texture: {fileID: 2800000, guid: 42013ccd03d3d3a4f919cc353e917dc4, type: 3}
   indexCard: 1
-  contentParent: {fileID: 1387662651}
+  contentParent: {fileID: 1256509563}
 --- !u!114 &1173124103
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6596,9 +6598,9 @@ RectTransform:
   - {fileID: 1557241889}
   - {fileID: 1173124100}
   - {fileID: 1754025119}
-  - {fileID: 1436934376}
-  - {fileID: 398153286}
   - {fileID: 36173495}
+  - {fileID: 398153286}
+  - {fileID: 1436934376}
   m_Father: {fileID: 2135133431}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -7018,7 +7020,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1180422146055169415, guid: bba5699992500f04092dd670b1f3d536, type: 3}
       propertyPath: m_RootOrder
-      value: 8
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 1180422146055169415, guid: bba5699992500f04092dd670b1f3d536, type: 3}
       propertyPath: m_AnchorMax.x
@@ -7204,13 +7206,14 @@ RectTransform:
   - {fileID: 33161374}
   - {fileID: 1387662651}
   - {fileID: 1051503566}
+  - {fileID: 1732745670}
   - {fileID: 957981274}
   - {fileID: 1738156961}
   - {fileID: 1316556282}
   - {fileID: 3538565076807928474}
   - {fileID: 1087118764266141308}
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -7246,7 +7249,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1328887940
 MonoBehaviour:
@@ -7595,7 +7598,7 @@ RectTransform:
   m_Children:
   - {fileID: 373560017}
   m_Father: {fileID: 1256509563}
-  m_RootOrder: 3
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -7627,9 +7630,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cardToSpawn: {fileID: 8935117261002765910, guid: 4843d686fd24c0f40ba15d6a4dc577e5, type: 3}
-  cardMaterial: {fileID: 2100000, guid: 55721add5ad05114298eb5c6154225ec, type: 2}
+  cardMaterial: {fileID: 0}
+  texture: {fileID: 2800000, guid: c5c965c2c28feb9488fef47aac22ad4f, type: 3}
   indexCard: 4
-  contentParent: {fileID: 1387662651}
+  contentParent: {fileID: 1256509563}
 --- !u!114 &1436934379
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8527,9 +8531,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cardToSpawn: {fileID: 8935117261002765910, guid: 4843d686fd24c0f40ba15d6a4dc577e5, type: 3}
-  cardMaterial: {fileID: 2100000, guid: 3753ade0373ef1a46b54984aae27f9f7, type: 2}
+  cardMaterial: {fileID: 0}
+  texture: {fileID: 2800000, guid: a97e782458e54a4479509183f70690dc, type: 3}
   indexCard: 0
-  contentParent: {fileID: 1387662651}
+  contentParent: {fileID: 1256509563}
 --- !u!225 &1557241894
 CanvasGroup:
   m_ObjectHideFlags: 0
@@ -8553,6 +8558,7 @@ GameObject:
   - component: {fileID: 1583022575}
   - component: {fileID: 1583022577}
   - component: {fileID: 1583022576}
+  - component: {fileID: 1690259543}
   m_Layer: 5
   m_Name: FPS
   m_TagString: Untagged
@@ -8650,8 +8656,8 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 168353975}
-  m_RootOrder: 0
+  m_Father: {fileID: 0}
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -8705,7 +8711,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1690259542}
-  - component: {fileID: 1690259543}
   m_Layer: 5
   m_Name: MobileToggle
   m_TagString: Untagged
@@ -8723,9 +8728,7 @@ RectTransform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 2, y: 2, z: 2}
-  m_Children:
-  - {fileID: 168353975}
-  - {fileID: 253286616}
+  m_Children: []
   m_Father: {fileID: 1738156961}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -8741,7 +8744,11 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1583022574}
-  m_CullTransparentMesh: 1
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 0}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1732745669
 GameObject:
   m_ObjectHideFlags: 0
@@ -8774,12 +8781,12 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1789545130}
-  m_Father: {fileID: 957981274}
-  m_RootOrder: 2
+  m_Father: {fileID: 1317912951}
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 1, y: 1}
-  m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -25.999939, y: -136}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 90, y: 96}
   m_SizeDelta: {x: 80, y: 86}
   m_Pivot: {x: 1, y: 1}
 --- !u!114 &1732745671
@@ -8925,8 +8932,9 @@ RectTransform:
   - {fileID: 1241069164}
   - {fileID: 883970909}
   - {fileID: 1289427400}
+  - {fileID: 1690259542}
   m_Father: {fileID: 1317912951}
-  m_RootOrder: 7
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -9126,9 +9134,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cardToSpawn: {fileID: 8935117261002765910, guid: 4843d686fd24c0f40ba15d6a4dc577e5, type: 3}
-  cardMaterial: {fileID: 2100000, guid: 087940d22f6226f40b86af3d8a810afe, type: 2}
+  cardMaterial: {fileID: 0}
+  texture: {fileID: 2800000, guid: e8f88bfc5484b994e822c3366e75171a, type: 3}
   indexCard: 2
-  contentParent: {fileID: 1387662651}
+  contentParent: {fileID: 1256509563}
 --- !u!114 &1754025122
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10193,7 +10202,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1903685284
 MonoBehaviour:
@@ -10496,10 +10505,22 @@ MonoBehaviour:
     rangeDescription: 
     damageDescription: 
     fireRateDescription: 
-  - structurePrefab: {fileID: 4422750441095425187, guid: 7461b5dc79e93e44796d7af498e661aa, type: 3}
+  - structurePrefab: {fileID: 2834612391340580073, guid: a36aa2268bfb923489ad10a4782958d3, type: 3}
     creationCost: 1
     upgradeMultiplicator: 1
-    upgrades: []
+    upgrades:
+    - cost: 0
+      stats: []
+    targetDescription: 
+    rangeDescription: 
+    damageDescription: 
+    fireRateDescription: 
+  - structurePrefab: {fileID: 919132149155446097, guid: 567571d4b49f4844ea2127e9ffba365e, type: 3}
+    creationCost: 1
+    upgradeMultiplicator: 1
+    upgrades:
+    - cost: 0
+      stats: []
     targetDescription: 
     rangeDescription: 
     damageDescription: 
@@ -12291,7 +12312,7 @@ RectTransform:
   - {fileID: 3538565075234769578}
   - {fileID: 8189202186883519579}
   m_Father: {fileID: 1317912951}
-  m_RootOrder: 9
+  m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -12551,7 +12572,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7539670085400212179, guid: fc31fd70b5945084fb72fefe99f91ba3, type: 3}
       propertyPath: m_RootOrder
-      value: 10
+      value: 11
       objectReference: {fileID: 0}
     - target: {fileID: 7539670085400212179, guid: fc31fd70b5945084fb72fefe99f91ba3, type: 3}
       propertyPath: m_AnchorMax.x
