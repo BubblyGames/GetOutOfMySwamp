@@ -122,8 +122,19 @@ public class InputManager : MonoBehaviour
                     {
                         cursor.transform.localScale = Vector3.one * structureSize;
                         cursor.transform.position += BuildManager.instance.currentConstructionPositionOffset;
-
                     }
+                    else
+                    {
+                        cursor.transform.localScale = Vector3.one;
+                    }
+
+                    GameObject structureGO = BuildManager.instance.StructureBlueprint.structurePrefab;
+                    DefenseBehaviour structureDB;
+                    if( structureGO.TryGetComponent<DefenseBehaviour>(out structureDB))
+                    {
+                        cursorBase.transform.localScale = new Vector3(structureDB.attackRange, structureDB.attackRange, 1);
+                    }
+                   
                     cursor.transform.up = hit.normal;
                 }
                 //Card is hidden if poiting at anything in the world

@@ -130,6 +130,10 @@ public class BuildManager : MonoBehaviour
             currentConstructionPositionOffset = (hit.normal + cubeForward + cubeDotProduct) / structureSize;
 
         }
+        else
+        {
+            currentConstructionPositionOffset = Vector3.zero;
+        }
 
         if (!canBuild /*|| selectedCell.blockType != structureBlueprint.structurePrefab.GetComponentInChildren<Structure>().blockType*/)
             return false;
