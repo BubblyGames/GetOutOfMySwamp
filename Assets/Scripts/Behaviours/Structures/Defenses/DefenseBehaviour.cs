@@ -8,6 +8,10 @@ public abstract class DefenseBehaviour : Structure
     [Tooltip("This layer will be used to check for enemys")]
     protected int layerMask = 1 << 6;
 
+    [SerializeField]
+    [Tooltip("True if can hit enemies that are flying")]
+    bool canHitSkyEnemies;
+
     [Header("Defense Stats")]
 
     [SerializeField]
@@ -28,11 +32,19 @@ public abstract class DefenseBehaviour : Structure
     [Tooltip("The radius of the sphere in which the defense detects an enemy")]
     internal float attackRange = 5f;
 
+
+
     public string Target;
     public string Range;
     public string Damage;
     public string FireRate;
 
+    private void Start()
+    {
+        //check if a tower 
+        if (canHitSkyEnemies)
+            layerMask = 9;
+    }
     public override void UpgradeStrucrure(UIController uIController)
     {
 

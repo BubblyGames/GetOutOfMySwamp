@@ -404,6 +404,28 @@ public class UIController : MonoBehaviour
                 upgradeButton.SetActive(false);
                 sellButton.SetActive(false);
                 break;
+            case 5:
+                upgradeMenu.GetComponent<Image>().sprite = aerialStructureSprite;
+                upgradeButton.SetActive(true);
+                sellButton.SetActive(true);
+                switch (level)
+                {
+                    case 0:
+                        UpdateUpgradeButton(0, 5);
+                        break;
+                    case 1:
+                        UpdateUpgradeButton(1, 5);
+                        break;
+                    case 2:
+                        UpdateUpgradeButton(2, 5);
+                        break;
+                    case 3:
+                        UpdateUpgradeButton(3, 5);
+                        break;
+
+                }
+                break;
+
 
         }
     }
