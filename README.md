@@ -155,9 +155,9 @@ Los niveles son semi procedimentales y se crean mediante una semilla.
 
 | **TORRES**     | ALCANCE      | DAÑO           | OBJETIVO          | VELOCIDAD DE ATAQUE | EFECTO                            | COSTE  |
 | -------------- | ---------    | -------------- | ----------------- | ------------------- | --------------------------------- |--------|
-| TORRE PESADA   | Largo (7 ud) | Elevado (35 ud)| ÁreaTT\*          | Lento (0.1 ud)      | \-                                | 300    |
+| TORRE PESADA   | Largo (7 ud) | Elevado (35 ud)| Proyectil ÁreaTT\*| Lento (0.1 ud)      | \-                                | 300    |
 | TORRE BÁSICA   | Medio (5 ud) | Medio (10 ud)  | IndividualTA-TT\* | Medio (1 ud)        | \-                                | 125    |
-| TORRE PSÍQUICA | Corto (3 ud) | Bajo (7 ud)    | IndividualTT\*    | Medio (1 ud)        | El enemigo se ralentiza           | 200    |
+| TORRE PSÍQUICA | Corto (3 ud) | Bajo (7 ud)    | Área TT\*         | Medio (1 ud)        | El enemigo se ralentiza           | 200    |
 | TORRE ECONÓMICA| Nada         | Ninguno        | Ninguno           | Sin ataque          | Genera ingresos de forma pasiva   | 400    |
 | **TRAMPAS**    |              |                |                   |                     |                                   |        |
 | TRAMPA PANTANO | 1 Casilla    | \-             | ÁreaTT\*          | \-                  | Ralentiza                         | X      |
@@ -167,23 +167,23 @@ Cada defensa del jugador se puede mejorar, por separado, hasta tres veces, aumen
 Nivel 1:
 | **TORRES**     | ALCANCE      | DAÑO           | OBJETIVO          | VELOCIDAD DE ATAQUE | EFECTO                            | COSTE  |
 | -------------- | ---------    | -------------- | ----------------- | ------------------- | --------------------------------- |--------|
-| TORRE PESADA   | Largo (7 ud) | Elevado (70 ud)| ÁreaTT\*          | Lento (0.1 ud)      | \-                                | 150    |
+| TORRE PESADA   | Largo (7 ud) | Elevado (70 ud)| Proyectil ÁreaTT\*| Lento (0.1 ud)      | \-                                | 150    |
 | TORRE BÁSICA   | Medio (5 ud) | Medio (12 ud)  | IndividualTA-TT\* | Medio (1.5 ud)      | \-                                | 50     |
-| TORRE PSÍQUICA | Corto (4 ud) | Bajo (8 ud)    | IndividualTT\*    | Medio (1 ud)        | El enemigo se ralentiza           | 100    |
+| TORRE PSÍQUICA | Corto (4 ud) | Bajo (8 ud)    | ÁreaTT\*          | Medio (1 ud)        | El enemigo se ralentiza           | 100    |
 
 Nivel 2:
 | **TORRES**     | ALCANCE      | DAÑO           | OBJETIVO          | VELOCIDAD DE ATAQUE | EFECTO                            | COSTE  |
 | -------------- | ---------    | -------------- | ----------------- | ------------------- | --------------------------------- |--------|
-| TORRE PESADA   | Largo (12 ud)| Elevado (70 ud)| ÁreaTT\*          | Lento (0.1 ud)      | \-                                | 200    |
+| TORRE PESADA   | Largo (12 ud)| Elevado (70 ud)| Proyectil ÁreaTT\*| Lento (0.1 ud)      | \-                                | 200    |
 | TORRE BÁSICA   | Largo (8 ud) | Medio (14 ud)  | IndividualTA-TT\* | Medio (1.5 ud)      | \-                                | 100    |
-| TORRE PSÍQUICA | Medio (5 ud) | Medio (9 ud)   | IndividualTT\*    | Medio (1 ud)        | El enemigo se ralentiza           | 150    |
+| TORRE PSÍQUICA | Medio (5 ud) | Medio (9 ud)   | ÁreaTT\*          | Medio (1 ud)        | El enemigo se ralentiza           | 150    |
 
 Nivel 3:
 | **TORRES**     | ALCANCE      | DAÑO           | OBJETIVO          | VELOCIDAD DE ATAQUE | EFECTO                            | COSTE  |
 | -------------- | ---------    | -------------- | ----------------- | ------------------- | --------------------------------- |--------|
-| TORRE PESADA   | Largo (12 ud)| Elevado (70 ud)| ÁreaTT\*          | Lento (0.2 ud)      | \-                                | 300    |
+| TORRE PESADA   | Largo (12 ud)| Elevado (70 ud)| Proyectil ÁreaTT\*| Lento (0.2 ud)      | \-                                | 300    |
 | TORRE BÁSICA   | Largo (10 ud)| Medio (14 ud)  | IndividualTA-TT\* | Rápido (1.75 ud)    | \-                                | 150    |
-| TORRE PSÍQUICA | Medio (5 ud) | Medio (9 ud)   | IndividualTT\*    | Medio (1.5 ud)      | El enemigo se ralentiza           | 200    |
+| TORRE PSÍQUICA | Medio (5 ud) | Medio (9 ud)   | ÁreaTT\*          | Medio (1.5 ud)      | El enemigo se ralentiza           | 200    |
 
 \*TT: Ataques desde Tierra a objetivos Terrestres.
 TA: Ataques desde Tierra a objetivos Aéreos.

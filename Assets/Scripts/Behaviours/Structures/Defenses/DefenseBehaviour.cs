@@ -28,10 +28,7 @@ public abstract class DefenseBehaviour : Structure
     [Tooltip("The radius of the sphere in which the defense detects an enemy")]
     internal float attackRange = 5f;
 
-    public string Target;
-    public string Range;
-    public string Damage;
-    public string FireRate;
+   
 
     public override void UpgradeStrucrure(UIController uIController)
     {
@@ -66,21 +63,5 @@ public abstract class DefenseBehaviour : Structure
         Gizmos.DrawWireSphere(transform.position, attackRange);
     }
 
-    public string GetTarget()
-    {
-        return Target;
-    }
-    public string GetRange()
-    {
-        return Range;
-    }
-    public string GetDamage()
-    {
-        return Damage;
-    }
-    public string GetFireRate()
-    {
-        return FireRate;
-    }
 
 }

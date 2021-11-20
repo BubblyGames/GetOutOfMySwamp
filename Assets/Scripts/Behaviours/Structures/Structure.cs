@@ -45,7 +45,7 @@ public class Structure : MonoBehaviour
             if (level < maxLevel)
             {
                 level++;
-                uIController.UpdateUpgradeButton(level,structureId);
+                //uIController.UpdateUpgradeButton(level,structureId);
             }
 
             if (level == maxLevel)
@@ -53,7 +53,7 @@ public class Structure : MonoBehaviour
                 isMaxLevel = true;
             }
         }
-        
+        LevelManager.instance.StructureGotUpgraded(level);
     }
 
     public int GetLevel()

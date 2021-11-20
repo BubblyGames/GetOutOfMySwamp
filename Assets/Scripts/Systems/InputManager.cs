@@ -104,8 +104,19 @@ public class InputManager : MonoBehaviour
                     {
                         cursor.transform.localScale = Vector3.one * structureSize;
                         cursor.transform.position += BuildManager.instance.currentConstructionPositionOffset;
-
                     }
+                    else
+                    {
+                        cursor.transform.localScale = Vector3.one;
+                    }
+
+                    GameObject structureGO = BuildManager.instance.StructureBlueprint.structurePrefab;
+                    DefenseBehaviour structureDB;
+                    if( structureGO.TryGetComponent<DefenseBehaviour>(out structureDB))
+                    {
+                        cursorBase.transform.localScale = new Vector3(structureDB.attackRange, structureDB.attackRange, 1);
+                    }
+                   
                     cursor.transform.up = hit.normal;
                 }
                 //Card is hidden if poiting at anything in the world
@@ -186,8 +197,9 @@ public class InputManager : MonoBehaviour
                     break;
                 case "Structure":
 
-                    GameObject structureHitted = hit.collider.gameObject;
+                    Structure structureHitted = hit.collider.gameObject.GetComponent<Structure>();
                     //Interact with existing defenses
+                    UIController.instance.SetUpgradeMenu(structureHitted);
                     UIController.instance.ShowMenu(UIController.GameMenu.UpgradeMenu);
                     BuildManager.instance.SetSelectedStructure(structureHitted.GetComponent<Structure>());
                     //check the structure type
@@ -248,12 +260,10 @@ public class InputManager : MonoBehaviour
                     }*/
                     
                     break;
-
                 case "Gatherer":
-                    GameObject gathererHitted = hit.collider.gameObject;
+                    Gatherer gathererHitted = hit.collider.gameObject.GetComponent<Gatherer>();
+                    UIController.instance.SetUpgradeMenu(gathererHitted);
                     UIController.instance.ShowMenu(UIController.GameMenu.UpgradeMenu);
-                    UIController.instance.SetUpgradeMenu(4, gathererHitted.GetComponent<MoneyGatherer>().GetStructureName(), gathererHitted.GetComponent<MoneyGatherer>().GetLevel(), "", "", "", "",
-                        gathererHitted.GetComponent<MoneyGatherer>().GetResourceGatheredAmount());
                     break;
                 default:
                     break;
