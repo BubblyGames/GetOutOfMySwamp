@@ -19,6 +19,8 @@ public class InputManager : MonoBehaviour
     private float scrollSensitivity = 15.0f;
     [SerializeField]
     private float pinchSensitivity = 15.0f;
+    [SerializeField]
+    private Vector3 offset;
     //Gameobject that will be placed where structure is about to be built
     public GameObject cursor;
     private GameObject cursorBase;
@@ -49,21 +51,19 @@ public class InputManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (!LevelManager.instance.ready)
+            return;
+
+        mousePosition = Input.mousePosition;
+
         if (isMobile)
         {
-            if (Input.touchCount > 0)
-            {
-                mousePosition = Input.GetTouch(0).position;
-                CheckPinch();
-            }
+            CheckPinch();
         }
         else
         {
-            mousePosition = Input.mousePosition;
             CameraBehaviour.instance.Zoom(Input.mouseScrollDelta.y * scrollSensitivity); //Zoom with mouse wheel
         }
-
-
 
         //Click
         if (Input.GetMouseButtonDown(0))
@@ -89,8 +89,13 @@ public class InputManager : MonoBehaviour
         if (choosingWhereToBuild)
         {
             //Casts a ray to find out where does the player want to place the structure
-            Ray ray = Camera.main.ScreenPointToRay(mousePosition);
-            RaycastHit hit = new RaycastHit();
+            Ray ray;
+            if (isMobile)
+                ray = Camera.main.ScreenPointToRay(mousePosition + offset);
+            else
+                ray = Camera.main.ScreenPointToRay(mousePosition);
+
+            RaycastHit hit;
 
             if (Physics.Raycast(ray, out hit, Mathf.Infinity))
             {
@@ -255,8 +260,13 @@ public class InputManager : MonoBehaviour
 
     private void MouseUp(Vector3 mousePosition)
     {
-        Ray ray = Camera.main.ScreenPointToRay(mousePosition);
-        RaycastHit hit = new RaycastHit();
+        Ray ray;
+        if (isMobile)
+            ray = Camera.main.ScreenPointToRay(mousePosition + offset);
+        else
+            ray = Camera.main.ScreenPointToRay(mousePosition);
+
+        RaycastHit hit;
 
         if (Physics.Raycast(ray, out hit, Mathf.Infinity))
         {
