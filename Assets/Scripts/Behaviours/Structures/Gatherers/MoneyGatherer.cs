@@ -13,7 +13,7 @@ public class MoneyGatherer : Gatherer
         if (timerToGetResource >= timeToGatherResource)
         {
             LevelStats.instance.getResource(0, resourceGatheredEachCicle);
-
+            TotalResourceGathered += resourceGatheredEachCicle;
             timerToGetResource = 0;
         }
     }

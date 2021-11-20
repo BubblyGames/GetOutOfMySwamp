@@ -1816,7 +1816,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 549071505}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 5.23, y: 3, z: 41.71}
+  m_LocalPosition: {x: 5.23, y: 1.95, z: 41.71}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 963194228}
@@ -1842,7 +1842,6 @@ MonoBehaviour:
   - {fileID: 2100000, guid: 087940d22f6226f40b86af3d8a810afe, type: 2}
   - {fileID: 2100000, guid: 543f281990743274cbf76dd270d37cb5, type: 2}
   - {fileID: 2100000, guid: 55721add5ad05114298eb5c6154225ec, type: 2}
-  - {fileID: 2100000, guid: 3c853b369a55b2245b1d5def8c7418ff, type: 2}
   - {fileID: 2100000, guid: df2b184d58d8ce849bc660fadfedd841, type: 2}
 --- !u!33 &549071508
 MeshFilter:
@@ -2493,7 +2492,7 @@ GameObject:
   - component: {fileID: 663822928}
   - component: {fileID: 663822927}
   m_Layer: 5
-  m_Name: totalRounds
+  m_Name: numberOfWaves
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3005,8 +3004,6 @@ MonoBehaviour:
       enemyPrefab: {fileID: 2261941344971277516, guid: f4ca4a2b775f94b4187494af4829186e, type: 3}
     - enemyId: 2
       enemyPrefab: {fileID: 7991666902177097144, guid: 3e08db26345a218428538443214b6dd8, type: 3}
-    - enemyId: 5
-      enemyPrefab: {fileID: 7091463197756375107, guid: dfb36d6922eade74e81ef7ea442e3ece, type: 3}
 --- !u!4 &742249782
 Transform:
   m_ObjectHideFlags: 0
@@ -3895,7 +3892,7 @@ RectTransform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 891366753}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1766098233}
@@ -6476,6 +6473,8 @@ MonoBehaviour:
   - {fileID: 1874567660}
   towerName: {fileID: 1029310091}
   upgradeCostText: {fileID: 327890052}
+  numberOfWaves: {fileID: 663822927}
+  currentWave: {fileID: 1777606004}
   basicTowerSprite: {fileID: 21300000, guid: 6c53c68d74df63a4792a296a3030e0d3, type: 3}
   psiquicTowerSprite: {fileID: 21300000, guid: d028348a0d83f564baeecfeed75490c0, type: 3}
   heavyTowerSprite: {fileID: 21300000, guid: dfe144ffea944824f974f903a34fd04b, type: 3}
@@ -8223,7 +8222,7 @@ GameObject:
   - component: {fileID: 1777606005}
   - component: {fileID: 1777606004}
   m_Layer: 5
-  m_Name: actualRound
+  m_Name: currentRound
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -9253,8 +9252,6 @@ MonoBehaviour:
   waves:
   - packs:
     - enemyType: 0
-      enemyAmount: 1
-    - enemyType: 5
       enemyAmount: 10
     spawnRate: 1
   - packs:
@@ -9279,8 +9276,6 @@ MonoBehaviour:
   isBetweenWaves: 0
   allWavesCleared: 0
   waveCount: 0
-  numberOfWaves: {fileID: 663822927}
-  actualWave: {fileID: 1777606004}
 --- !u!114 &1903685290
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9310,6 +9305,10 @@ MonoBehaviour:
     creationCost: 0
     upgradeMultiplicator: 0
     upgrades: []
+    targetDescription: 
+    rangeDescription: 
+    damageDescription: 
+    fireRateDescription: 
   selectedStructure: {fileID: 0}
   selectedCell:
     x: 0
@@ -9361,6 +9360,10 @@ MonoBehaviour:
         upgradeAddedValue: 0.25
       - statToUpgrade: 2
         upgradeAddedValue: 2
+    targetDescription: ground
+    rangeDescription: medium
+    damageDescription: medium
+    fireRateDescription: medium
   - structurePrefab: {fileID: 7137880238603071797, guid: 0d87b48302d7d6c4d88056ea6fb54a3d, type: 3}
     creationCost: 200
     upgradeMultiplicator: 1.3
@@ -9381,6 +9384,10 @@ MonoBehaviour:
       stats:
       - statToUpgrade: 1
         upgradeAddedValue: 0.5
+    targetDescription: ground
+    rangeDescription: low
+    damageDescription: low
+    fireRateDescription: medium
   - structurePrefab: {fileID: 8305915707849881324, guid: df406671fc6064a4c978095ef361ebfd, type: 3}
     creationCost: 300
     upgradeMultiplicator: 1.2
@@ -9397,33 +9404,51 @@ MonoBehaviour:
       stats:
       - statToUpgrade: 1
         upgradeAddedValue: 0.1
+    targetDescription: ground
+    rangeDescription: large
+    damageDescription: high
+    fireRateDescription: slow
   - structurePrefab: {fileID: 3250008881624491856, guid: d47e0467f382b7241aafc52e24236632, type: 3}
     creationCost: 50
     upgradeMultiplicator: 1.1
     upgrades: []
+    targetDescription: 
+    rangeDescription: 
+    damageDescription: 
+    fireRateDescription: 
   - structurePrefab: {fileID: 2711408889448630410, guid: 4cdbff3b4cc893847ad0a47225cd137b, type: 3}
     creationCost: 250
     upgradeMultiplicator: 1.1
-    upgrades: []
-  - structurePrefab: {fileID: 2834612391340580073, guid: a36aa2268bfb923489ad10a4782958d3, type: 3}
-    creationCost: 100
-    upgradeMultiplicator: 1.25
     upgrades:
-    - cost: 100
+    - cost: 0
+      stats:
+      - statToUpgrade: 0
+        upgradeAddedValue: 0
+    - cost: 0
       stats: []
-    - cost: 125
+    - cost: 0
       stats: []
-    - cost: 150
-      stats: []
+    targetDescription: 
+    rangeDescription: 
+    damageDescription: 
+    fireRateDescription: 
   - structurePrefab: {fileID: 4422750441095425187, guid: 7461b5dc79e93e44796d7af498e661aa, type: 3}
     creationCost: 1
     upgradeMultiplicator: 1
     upgrades: []
+    targetDescription: 
+    rangeDescription: 
+    damageDescription: 
+    fireRateDescription: 
   selectedDefenseBlueprint:
     structurePrefab: {fileID: 0}
     creationCost: 0
     upgradeMultiplicator: 0
     upgrades: []
+    targetDescription: 
+    rangeDescription: 
+    damageDescription: 
+    fireRateDescription: 
 --- !u!114 &1903685293
 MonoBehaviour:
   m_ObjectHideFlags: 0

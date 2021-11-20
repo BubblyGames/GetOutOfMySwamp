@@ -39,7 +39,7 @@ public class LevelStats : MonoBehaviour
         }
 
 
-        LevelManager.instance.OnDamageTaken += receiveDamage;
+        LevelManager.OnDamageTaken += receiveDamage;
         LevelManager.instance.OnEnemyKilled += getEnemyRewards;
     }
 

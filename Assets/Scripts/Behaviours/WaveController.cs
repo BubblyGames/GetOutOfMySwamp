@@ -32,8 +32,6 @@ public class WaveController : MonoBehaviour
 
     public int waveCount; // Wave its being played
 
-    public TextMeshProUGUI numberOfWaves;
-    public TextMeshProUGUI actualWave;
 
     ///public Text waveText;
 
@@ -61,8 +59,7 @@ public class WaveController : MonoBehaviour
 
     public void Start()
     {
-        numberOfWaves.text = waves.Length.ToString();
-        actualWave.text = (waveCount + 1).ToString();
+       
         isWaveActive = false;
         //isBetweenWaves = false;
 
@@ -139,8 +136,8 @@ public class WaveController : MonoBehaviour
 
                 timeVariable = Time.time + timeBetweenWaves;
                 waveCount++;
-                if (waveCount < waves.Length)
-                    actualWave.text = (waveCount + 1).ToString();
+                //broadcast to levelManager for it to dispatch wave completed event
+                LevelManager.instance.WaveCleared();
             }
         }
 
@@ -168,7 +165,6 @@ public class WaveController : MonoBehaviour
         }
         else
         {
-
 
             currentWave = waves[waveCount];
 

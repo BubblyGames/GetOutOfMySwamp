@@ -9,6 +9,9 @@ public class Gatherer : Structure
     protected int resourceGatheredEachCicle;
     [SerializeField] protected float timeToGatherResource; // Time when the next resources will be gathered
     [SerializeField] protected float timerToGetResource;
+    [SerializeField] private float totalResourceGathered;
+
+    public float TotalResourceGathered { get => totalResourceGathered; set => totalResourceGathered = value; }
 
     public override void UpgradeStrucrure(UIController uIController)
     {
