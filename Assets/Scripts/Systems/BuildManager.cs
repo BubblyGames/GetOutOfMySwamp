@@ -267,7 +267,7 @@ public class BuildManager : MonoBehaviour
         {
             if (CheatManager.instance.infiniteMoney)
             {
-                selectedCell.structure.UpgradeStrucrure(uIController);
+                SelectedStructure.UpgradeStrucrure(uIController);
             }
             else if (LevelStats.instance.CurrentMoney >= StructureBlueprint.upgrades[SelectedStructure.GetLevel()].cost)
             {

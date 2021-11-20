@@ -197,4 +197,10 @@ public class WaveController : MonoBehaviour
         enemySpawner.SpawnEnemy(enemyType, WorldManager.instance.paths[pathId]);
     }
 
+
+    private void OnDestroy()
+    {
+        LevelManager.OnGameStart -= StartWaves;
+        LevelManager.OnGameCompleted -= LevelCompleted;
+    }
 }

@@ -2498,8 +2498,12 @@ MonoBehaviour:
     - enemyId: 5
       enemyPrefab: {fileID: 5803062399679311112, guid: edbebc9645c93bc47b4257b361fcc5b1, type: 3}
   audioManager: {fileID: 1474084401}
+  upgradeLevels:
+  - {fileID: 21300000, guid: a655b2f44cde3b542b37a07a5df43a85, type: 3}
+  - {fileID: 21300000, guid: 7d9467091172b7a459d21f854fa1d33e, type: 3}
+  - {fileID: 21300000, guid: 0a5235c4f88ebda4ba1e0f9423950d8a, type: 3}
+  - {fileID: 21300000, guid: 24bff72e7482c1a459680b7aa6355cc8, type: 3}
   currentWorldId: 0
-  isMobile: 0
 --- !u!4 &429681862
 Transform:
   m_ObjectHideFlags: 0
@@ -5422,6 +5426,7 @@ MonoBehaviour:
   aerialStructureSprite: {fileID: 0}
   upgradeLevels: []
   shopContainer: {fileID: 0}
+  upgradeButtonImage: {fileID: 0}
   selectedMenu: 0
   FPSText: {fileID: 0}
 --- !u!4 &1108740209

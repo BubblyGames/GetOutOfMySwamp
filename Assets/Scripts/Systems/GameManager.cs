@@ -13,6 +13,8 @@ public class GameManager : MonoBehaviour
     public EnemyLibrary enemyLibrary;
     public AudioManager audioManager;
 
+    public List<Sprite> upgradeLevels;
+
     public int currentWorldId = 0;
     //list containing different level stats and enemies waves 
     internal List<WorldInfo> worldList = new List<WorldInfo>();

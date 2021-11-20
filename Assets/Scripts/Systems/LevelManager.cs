@@ -31,7 +31,7 @@ public class LevelManager : MonoBehaviour
     //Actions
     public static event Action OnGameStart, OnGameLost, OnGameCompleted, OnWaveCleared;
     public static event Action<int> OnDamageTaken, OnStructureUpgraded;
-    public event Action<int, int> OnEnemyKilled;
+
 
     //TODO: increment score when killing enemys.
     public LayerMask floorLayer;
