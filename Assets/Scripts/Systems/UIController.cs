@@ -32,6 +32,8 @@ public class UIController : MonoBehaviour
     public List<GameObject> statsTexts;
     public GameObject towerName;
     public GameObject upgradeCostText;
+    public TextMeshProUGUI numberOfWaves;
+    public TextMeshProUGUI currentWave;
 
     [Header("UpgradeMenu Sprites")]
     public Sprite basicTowerSprite;
@@ -44,7 +46,7 @@ public class UIController : MonoBehaviour
 
     public GameObject shopContainer;
     private int gameSceneId;
-    private Image upgradeButtonImage;
+    public Image upgradeButtonImage;
     private List<StructureBlueprint> structures;
 
     public enum GameMenu
@@ -78,9 +80,35 @@ public class UIController : MonoBehaviour
         if (gameSceneId == 1)
         {
             upgradeButtonImage = upgradeButton.GetComponent<Image>();
+            Debug.Log("Image:" + upgradeButtonImage);
             structures = shopContainer.GetComponent<Shop>().defenseBlueprints;
         }
-}
+
+    }
+
+    private void Start()
+    {
+        LevelManager.OnWaveCleared += UpdateWaveText;
+        LevelManager.OnGameStart += SetWaveText;
+        LevelManager.OnStructureUpgraded += SetUpgradeButton;
+    }
+
+
+    private void SetUpgradeButton(int level)
+    {
+        UpdateUpgradeButton(level, BuildManager.instance.SelectedStructure.structureId);
+    }
+
+    private void SetWaveText()
+    {
+        numberOfWaves.text = WaveController.instance.waves.Length.ToString();
+        currentWave.text = (WaveController.instance.waveCount + 1).ToString();
+    }
+
+    public void UpdateWaveText()
+    {
+        currentWave.GetComponent<TextMeshPro>().text = (WaveController.instance.waveCount + 1).ToString();
+    }
 
     public virtual void ShowMenu(GameMenu menu)
     {
@@ -89,18 +117,7 @@ public class UIController : MonoBehaviour
         switch (menu)
         {
             case GameMenu.UpgradeMenu:
-                /*if (upgradeMenu.activeSelf == false)
-                {
-                    upgradeMenu.SetActive(true);
-                    pauseMenu.SetActive(false);
-                }
-                else
-                {
-                    upgradeMenu.SetActive(false);
-                    pauseMenu.SetActive(false);
-                }*/
-
-                upgradeMenu.SetActive(!upgradeMenu.activeSelf);
+                upgradeMenu.SetActive(true);
                 pauseMenu.SetActive(false);
 
                 break;
@@ -113,7 +130,7 @@ public class UIController : MonoBehaviour
             case GameMenu.EndgameMenuLoose:
                 endgameMenuLoose.SetActive(true);
                 upgradeMenu.SetActive(false);
-                pauseMenu.SetActive(false); 
+                pauseMenu.SetActive(false);
                 pauseButton.SetActive(false);
                 Time.timeScale = 1;
                 break;
@@ -284,7 +301,7 @@ public class UIController : MonoBehaviour
 
     public void CloseUpgrade()
     {
-        ShowMenu(GameMenu.UpgradeMenu);
+        upgradeMenu.SetActive(false);
     }
 
     public void ShowTutorial()
@@ -300,21 +317,22 @@ public class UIController : MonoBehaviour
 
     private void Update()
     {
-        if(LevelManager.instance!=null)
-        FPSText.text = Mathf.Round((1 / Time.deltaTime)).ToString(); //FpS 
+        if (LevelManager.instance != null)
+            FPSText.text = Mathf.Round((1 / Time.deltaTime)).ToString(); //FpS 
     }
 
-    public void SetUpgradeMenu(int structureId, string structureName, int level, string target, string range, string fireRate, string damage, int moneyGiven)
+
+    public void SetUpgradeMenu(Structure structure)
     {
-        towerName.GetComponent<TextReader>().SetKey(structureName);
-        if (structureId!=4)
+        towerName.GetComponent<TextReader>().SetKey(structure.structureName);
+        if (structure.structureId != 4)
         {
             activateUpgradeTexts();
             fixedTexts[0].GetComponent<TextReader>().SetKey("target");
-            statsTexts[0].GetComponent<TextReader>().SetKey(target);
-            statsTexts[1].GetComponent<TextReader>().SetKey(range);
-            statsTexts[2].GetComponent<TextReader>().SetKey(fireRate);
-            statsTexts[3].GetComponent<TextReader>().SetKey(damage);
+            statsTexts[0].GetComponent<TextReader>().SetKey(structure.Blueprint.targetDescription);
+            statsTexts[1].GetComponent<TextReader>().SetKey(structure.Blueprint.rangeDescription);
+            statsTexts[2].GetComponent<TextReader>().SetKey(structure.Blueprint.fireRateDescription);
+            statsTexts[3].GetComponent<TextReader>().SetKey(structure.Blueprint.damageDescription);
 
         }
         else
@@ -323,107 +341,183 @@ public class UIController : MonoBehaviour
             fixedTexts[0].SetActive(true);
             statsTexts[0].SetActive(true);
             fixedTexts[0].GetComponent<TextReader>().SetKey("moneyGathered");
-            statsTexts[0].GetComponent<TextMeshProUGUI>().text = moneyGiven.ToString();
+            statsTexts[0].GetComponent<TextMeshProUGUI>().text = structure.gameObject.GetComponent<Gatherer>().TotalResourceGathered.ToString();
         }
 
-        switch (structureId)
+        switch (structure.structureId)
         {
             case 0:
                 upgradeMenu.GetComponent<Image>().sprite = basicTowerSprite;
-                upgradeButton.SetActive(true);
-                sellButton.SetActive(true);
-                switch (level)
-                {
-                    case 0:
-                        UpdateUpgradeButton(0, 0);
-                        break;
-                    case 1:
-                        UpdateUpgradeButton(1, 0);
-                        break;
-                    case 2:
-                        UpdateUpgradeButton(2, 0);
-                        break;
-                    case 3:
-                        UpdateUpgradeButton(3, 0);
-                        break;
-
-                }
                 break;
             case 1:
                 upgradeMenu.GetComponent<Image>().sprite = psiquicTowerSprite;
-                upgradeButton.SetActive(true);
-                sellButton.SetActive(true);
-                switch (level)
-                {
-                    case 0:
-                        UpdateUpgradeButton(0, 1);
-                        break;
-                    case 1:
-                        UpdateUpgradeButton(1, 1);
-                        break;
-                    case 2:
-                        UpdateUpgradeButton(2, 1);
-                        break;
-                    case 3:
-                        UpdateUpgradeButton(3, 1);
-                        break;
-
-                }
                 break;
             case 2:
                 upgradeMenu.GetComponent<Image>().sprite = heavyTowerSprite;
-                upgradeButton.SetActive(true);
-                sellButton.SetActive(true);
-                switch (level)
-                {
-                    case 0:
-                        UpdateUpgradeButton(0, 2);
-                        break;
-                    case 1:
-                        UpdateUpgradeButton(1, 2);
-                        break;
-                    case 2:
-                        UpdateUpgradeButton(2, 2);
-                        break;
-                    case 3:
-                        UpdateUpgradeButton(3, 2);
-                        break;
-
-                }
                 break;
             case 3:
                 upgradeMenu.GetComponent<Image>().sprite = bombTowerSprite;
-                upgradeButton.SetActive(false);
-                sellButton.SetActive(true);
-
-                fixedTexts[2].SetActive(false);
-                statsTexts[2].SetActive(false);
                 break;
             case 4:
                 upgradeMenu.GetComponent<Image>().sprite = moneyStructureSprite;
-                upgradeButton.SetActive(false);
-                sellButton.SetActive(false);
                 break;
+        }
+        upgradeButton.SetActive(true);
+        sellButton.SetActive(true);
+        UpdateUpgradeButton(structure.GetLevel(), structure.structureId);
 
+        if (structure.structureId == 4)
+        {
+            UpdateUpgradeButton(3, structure.structureId);
         }
     }
-    
+    /* public void SetUpgradeMenu(int structureId, string structureName, int level, string target, string range, string fireRate, string damage, int moneyGiven)
+     {
+         towerName.GetComponent<TextReader>().SetKey(structureName);
+         if (structureId!=4)
+         {
+             activateUpgradeTexts();
+             fixedTexts[0].GetComponent<TextReader>().SetKey("target");
+             statsTexts[0].GetComponent<TextReader>().SetKey(target);
+             statsTexts[1].GetComponent<TextReader>().SetKey(range);
+             statsTexts[2].GetComponent<TextReader>().SetKey(fireRate);
+             statsTexts[3].GetComponent<TextReader>().SetKey(damage);
+
+         }
+         else
+         {
+             desactivateUpgradeTexts();
+             fixedTexts[0].SetActive(true);
+             statsTexts[0].SetActive(true);
+             fixedTexts[0].GetComponent<TextReader>().SetKey("moneyGathered");
+             statsTexts[0].GetComponent<TextMeshProUGUI>().text = moneyGiven.ToString();
+         }
+
+         switch (structureId)
+         {
+             case 0:
+                 upgradeMenu.GetComponent<Image>().sprite = basicTowerSprite;
+                 upgradeButton.SetActive(true);
+                 sellButton.SetActive(true);
+                 switch (level)
+                 {
+                     case 0:
+                         UpdateUpgradeButton(0, 0);
+                         break;
+                     case 1:
+                         UpdateUpgradeButton(1, 0);
+                         break;
+                     case 2:
+                         UpdateUpgradeButton(2, 0);
+                         break;
+                     case 3:
+                         UpdateUpgradeButton(3, 0);
+                         break;
+
+                 }
+                 break;
+             case 1:
+                 upgradeMenu.GetComponent<Image>().sprite = psiquicTowerSprite;
+                 upgradeButton.SetActive(true);
+                 sellButton.SetActive(true);
+                 switch (level)
+                 {
+                     case 0:
+                         UpdateUpgradeButton(0, 1);
+                         break;
+                     case 1:
+                         UpdateUpgradeButton(1, 1);
+                         break;
+                     case 2:
+                         UpdateUpgradeButton(2, 1);
+                         break;
+                     case 3:
+                         UpdateUpgradeButton(3, 1);
+                         break;
+
+                 }
+                 break;
+             case 2:
+                 upgradeMenu.GetComponent<Image>().sprite = heavyTowerSprite;
+                 upgradeButton.SetActive(true);
+                 sellButton.SetActive(true);
+                 switch (level)
+                 {
+                     case 0:
+                         UpdateUpgradeButton(0, 2);
+                         break;
+                     case 1:
+                         UpdateUpgradeButton(1, 2);
+                         break;
+                     case 2:
+                         UpdateUpgradeButton(2, 2);
+                         break;
+                     case 3:
+                         UpdateUpgradeButton(3, 2);
+                         break;
+
+                 }
+                 break;
+             case 3:
+                 upgradeMenu.GetComponent<Image>().sprite = bombTowerSprite;
+                 upgradeButton.SetActive(false);
+                 sellButton.SetActive(true);
+
+                 fixedTexts[2].SetActive(false);
+                 statsTexts[2].SetActive(false);
+                 break;
+             case 4:
+                 upgradeMenu.GetComponent<Image>().sprite = moneyStructureSprite;
+                 upgradeButton.SetActive(false);
+                 sellButton.SetActive(false);
+                 break;
+             case 5:
+                 upgradeMenu.GetComponent<Image>().sprite = aerialStructureSprite;
+                 upgradeButton.SetActive(true);
+                 sellButton.SetActive(true);
+                 switch (level)
+                 {
+                     case 0:
+                         UpdateUpgradeButton(0, 5);
+                         break;
+                     case 1:
+                         UpdateUpgradeButton(1, 5);
+                         break;
+                     case 2:
+                         UpdateUpgradeButton(2, 5);
+                         break;
+                     case 3:
+                         UpdateUpgradeButton(3, 5);
+                         break;
+
+                 }
+                 break;
+
+
+         }
+     }*/
+
     public void UpdateUpgradeButton(int level, int structureId)
     {
-        upgradeButtonImage.sprite = upgradeLevels[level];
-        if (level < 3)
+        if (!GameManager.instance)
+            return;
+
+        upgradeButtonImage.sprite = GameManager.instance.upgradeLevels[level];
+        if (structures[structureId].upgrades.Length > 0 && level < structures[structureId].upgrades.Length)
         {
+            upgradeButton.GetComponent<Button>().interactable = true;
             upgradeCostText.GetComponent<TextMeshProUGUI>().text = structures[structureId].upgrades[level].cost.ToString();
         }
         else
         {
             upgradeCostText.GetComponent<TextMeshProUGUI>().text = "MAX";
+            upgradeButton.GetComponent<Button>().interactable = false;
         }
     }
 
     void desactivateUpgradeTexts()
     {
-        foreach(GameObject g in fixedTexts)
+        foreach (GameObject g in fixedTexts)
         {
             g.SetActive(false);
         }
@@ -448,6 +542,14 @@ public class UIController : MonoBehaviour
             g.SetActive(true);
         }
     }
+
+    private void OnDestroy()
+    {
+        LevelManager.OnWaveCleared -= UpdateWaveText;
+        LevelManager.OnGameStart -= SetWaveText;
+        LevelManager.OnStructureUpgraded -= SetUpgradeButton;
+    }
+
 }
 
 

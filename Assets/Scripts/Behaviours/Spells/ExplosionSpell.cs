@@ -5,6 +5,10 @@ using UnityEngine;
 public class ExplosionSpell : SpellBehaviour
 {
     // Start is called before the first frame update
+    public GameObject particles;
+    public int range = 5;
+    //public int size = 5;
+
     void Start()
     {
         Vector3Int pos = new Vector3Int();

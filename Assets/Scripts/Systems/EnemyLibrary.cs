@@ -37,5 +37,5 @@ public enum EnemyType
     TankEnemy,
     HordeEnemy,
     SpecialistEnemy,
-    FlyingEnemy
+    SkyEnemy
 }

@@ -29,9 +29,9 @@ public class LevelManager : MonoBehaviour
     private Shop shop;
 
     //Actions
-    public static event Action OnGameStart, OnGameLost, OnGameCompleted;
-    public event Action<int> OnDamageTaken;
-    public event Action<int, int> OnEnemyKilled;
+    public static event Action OnGameStart, OnGameLost, OnGameCompleted, OnWaveCleared;
+    public static event Action<int> OnDamageTaken, OnStructureUpgraded;
+
 
     //TODO: increment score when killing enemys.
     public LayerMask floorLayer;
@@ -60,6 +60,8 @@ public class LevelManager : MonoBehaviour
         buildManager = GetComponent<BuildManager>();
         shop = GetComponent<Shop>();
     }
+
+
 
     private void Start()
     {
@@ -113,6 +115,15 @@ public class LevelManager : MonoBehaviour
         UIController.instance.ShowMenu(UIController.GameMenu.EndgameMenuWin);
     }
 
+    public void WaveCleared()
+    {
+        OnWaveCleared?.Invoke();
+    }
+
+    public void StructureGotUpgraded(int level)
+    {
+        OnStructureUpgraded?.Invoke(level);
+    }
 }
 
 

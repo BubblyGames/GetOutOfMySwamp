@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 
 /*This tower deals damage in all enemys inside its radius of effect */
-public class HeavyDefenseBehaviour : ShootingDefenseBehaviour
+public class AOEDefenseBehaviour : DefenseBehaviour
 {
-
-    private void Update()
+    public GameObject particles;
+    /*private void Update()
     {
         if (fireCountdown <= 0f)
         {
@@ -14,6 +14,15 @@ public class HeavyDefenseBehaviour : ShootingDefenseBehaviour
             fireCountdown = 1f / fireRate;
         }
         fireCountdown -= Time.deltaTime;
+    }*/
+
+    private void Update()
+    {
+        if (Time.time > fireCountdown)
+        {
+            Attack();
+            fireCountdown = Time.time + ( 1f / fireRate);
+        }
     }
 
     protected override void Attack()
@@ -25,8 +34,10 @@ public class HeavyDefenseBehaviour : ShootingDefenseBehaviour
             EnemyBehaviour eb;
             if (hits[i].collider.TryGetComponent<EnemyBehaviour>(out eb))
             {
-                eb.Hurt(damage);
+                eb.slowAndDamage(damage);
             }
         }
+
+        GameObject.Instantiate(particles, transform);
     }
 }

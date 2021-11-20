@@ -140,6 +140,7 @@ public class TextManager : MonoBehaviour
         englishDictionary.Add("heavyTower", "Heavy Frog");
         englishDictionary.Add("bomb", "mushBOOMB");
         englishDictionary.Add("moneyGatherer", "Money Frog");
+        englishDictionary.Add("mountainTower", "Mountain Frog");
 
         //descriptions of lessons in English
         englishDictionary.Add("lesson1", "Lesson 1");
@@ -215,6 +216,7 @@ public class TextManager : MonoBehaviour
         spanishDictionary.Add("heavyTower", "Rana pesada");
         spanishDictionary.Add("bomb", "Seta Bomba");
         spanishDictionary.Add("moneyGatherer", "Rana banquera");
+        spanishDictionary.Add("mountainTower", "Rana montañera");
 
         //descriptions of lessons in Spanish
         spanishDictionary.Add("lesson1", "Lección 1");

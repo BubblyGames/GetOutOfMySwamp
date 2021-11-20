@@ -20,7 +20,7 @@ public abstract class EnemyBehaviour : MonoBehaviour
 
     [Header("Altered States")]
     [SerializeField] protected bool isSlowed;
-    [SerializeField] protected float slowIntensity = 0.25f;
+    [SerializeField] protected float slowIntensity = 0.66f;
     [SerializeField] protected float slowDuration; //Time is going to be slowed
     [SerializeField] protected float slowTimer = 0; //time left being slowed
 
