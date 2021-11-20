@@ -13,6 +13,7 @@ public class TextManager : MonoBehaviour
     public Dictionary<string, string> englishDictionary = new Dictionary<string, string>();
     public Dictionary<string, string> spanishDictionary = new Dictionary<string, string>();
     public Dictionary<string, string> currentDictionary;
+    public int currentLanguage;
 
     private void Awake()
     {
@@ -20,6 +21,7 @@ public class TextManager : MonoBehaviour
         subscribersMainScene = new List<GameObject>();
         subscribersGameScene = new List<GameObject>();
         currentDictionary = spanishDictionary;
+        currentLanguage = 1;
         english = false;
     }
 
@@ -53,18 +55,21 @@ public class TextManager : MonoBehaviour
         }
     }
 
-    public void ChangeLenguage()
+    public void ChangeLenguage(int languageid)
     {
-        if (english == false)
+        switch (languageid)
         {
-            english = true;
-            currentDictionary = englishDictionary;
+            case 0:
+                currentDictionary = englishDictionary;
+                break;
+            case 1:
+                currentDictionary = spanishDictionary;
+                break;
+            default:
+                currentDictionary = englishDictionary;
+                break;
         }
-        else
-        {
-            english = false;
-            currentDictionary = spanishDictionary;
-        }
+        currentLanguage = languageid;
         UpdateSubscribers();
     }
 
@@ -75,7 +80,7 @@ public class TextManager : MonoBehaviour
         englishDictionary.Add("next", "Next");
         englishDictionary.Add("back", "Back");
         englishDictionary.Add("previous", "Previous");
-        englishDictionary.Add("select", "Begin");
+        englishDictionary.Add("select", "Start");
         englishDictionary.Add("pause", "Pause");
         englishDictionary.Add("health", "Health");
         englishDictionary.Add("score", "Score");
@@ -94,6 +99,7 @@ public class TextManager : MonoBehaviour
         englishDictionary.Add("loose", "You lose!");
         englishDictionary.Add("win", "You win!");
         englishDictionary.Add("level", "Level");
+        englishDictionary.Add("sound", "Sound");
 
 
         //upgrade texts in english
@@ -101,7 +107,7 @@ public class TextManager : MonoBehaviour
         englishDictionary.Add("range", "Range");
         englishDictionary.Add("damage", "Damage");
         englishDictionary.Add("fireRate", "Fire Rate");
-        englishDictionary.Add("moneyGathered", "Money Given");
+        englishDictionary.Add("moneyGathered", "Money +");
 
         //defense stats in english
         englishDictionary.Add("air", "Air");
@@ -152,7 +158,7 @@ public class TextManager : MonoBehaviour
         spanishDictionary.Add("health", "Vida");
         spanishDictionary.Add("score", "Score");
         spanishDictionary.Add("money", "Dinero");
-        spanishDictionary.Add("settings", "Ajustes");
+        spanishDictionary.Add("settings", "Configuración");
         spanishDictionary.Add("language", "Idioma");
         spanishDictionary.Add("exit", "Salir");
         spanishDictionary.Add("finish", "Finalizar");
@@ -166,13 +172,14 @@ public class TextManager : MonoBehaviour
         spanishDictionary.Add("loose", "¡Has perdido!");
         spanishDictionary.Add("win", "¡Has ganado!");
         spanishDictionary.Add("level", "Nivel");
+        spanishDictionary.Add("sound", "Sonido");
 
         //upgrade texts in spanish
         spanishDictionary.Add("target", "Objetivo");
         spanishDictionary.Add("range", "Rango");
         spanishDictionary.Add("damage", "Daño");
-        spanishDictionary.Add("fireRate", "Velocidad Disparo");
-        spanishDictionary.Add("moneyGathered", "Dinero Dado");
+        spanishDictionary.Add("fireRate", "Vel. Disparo");
+        spanishDictionary.Add("moneyGathered", "Dinero +");
 
 
         //defense stats in spanish

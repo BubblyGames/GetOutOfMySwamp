@@ -34,7 +34,7 @@ public class TextReader : MonoBehaviour
             Read();
         }
 
-        if (gameObject.name.Equals("LanguageButton"))
+        /*if (gameObject.name.Equals("LanguageButton"))
         {
             Button b;
             if (gameObject.TryGetComponent<Button>(out b))
@@ -42,7 +42,7 @@ public class TextReader : MonoBehaviour
                 b.onClick.AddListener(ChangeLenguage);
             }
 
-        }
+        }*/
         if (gameObject.name.Equals("ExitButton") || gameObject.name.Equals("RestartButton") || gameObject.name.Equals("Select"))
         {
             Button b;
@@ -81,10 +81,10 @@ public class TextReader : MonoBehaviour
         }
     }
 
-    public void ChangeLenguage()
-    {
-        textManager.GetComponent<TextManager>().ChangeLenguage();
-    }
+    //public void ChangeLenguage()
+    //{
+       // textManager.GetComponent<TextManager>().ChangeLenguage();
+    //}
 
     public void EmptyLists()
     {
