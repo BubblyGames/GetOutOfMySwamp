@@ -165,7 +165,6 @@ public class WaveController : MonoBehaviour
         }
         else
         {
-
             currentWave = waves[waveCount];
 
             for (int i = 0; i < currentWave.packs.Length; i++)
