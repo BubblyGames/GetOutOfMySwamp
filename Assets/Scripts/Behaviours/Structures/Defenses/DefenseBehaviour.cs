@@ -6,7 +6,11 @@ using UnityEngine;
 public abstract class DefenseBehaviour : Structure
 {
     [Tooltip("This layer will be used to check for enemys")]
-    protected int layerMask = 1 << 6;
+    protected int layerMask = 1 << 7;
+
+    [SerializeField]
+    [Tooltip("True if can hit enemies that are flying")]
+    protected bool canHitSkyEnemies;
 
     [Header("Defense Stats")]
 
@@ -27,8 +31,6 @@ public abstract class DefenseBehaviour : Structure
     [SerializeField]
     [Tooltip("The radius of the sphere in which the defense detects an enemy")]
     internal float attackRange = 5f;
-
-   
 
     public override void UpgradeStrucrure(UIController uIController)
     {

@@ -2534,7 +2534,7 @@ MonoBehaviour:
     - enemyId: 4
       enemyPrefab: {fileID: 5803062399679311112, guid: edbebc9645c93bc47b4257b361fcc5b1, type: 3}
     - enemyId: 5
-      enemyPrefab: {fileID: 5803062399679311112, guid: edbebc9645c93bc47b4257b361fcc5b1, type: 3}
+      enemyPrefab: {fileID: 7091463197756375107, guid: dfb36d6922eade74e81ef7ea442e3ece, type: 3}
   audioManager: {fileID: 1474084401}
   upgradeLevels:
   - {fileID: 21300000, guid: a655b2f44cde3b542b37a07a5df43a85, type: 3}
@@ -5430,7 +5430,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1108740207}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d1277ebb788401445bad88337a5cac9a, type: 3}
   m_Name: 

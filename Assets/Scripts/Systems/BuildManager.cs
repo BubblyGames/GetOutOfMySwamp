@@ -41,25 +41,24 @@ public class BuildManager : MonoBehaviour
         structureFundation = new List<Vector3Int>();
     }
 
-    public bool CheckIfCanBuild(RaycastHit hit, out Vector3 intPos)
+    public bool CheckIfCanBuild(RaycastHit hit, out Vector3 outPos)
     {
         //Position where structure will be build
-        intPos = new Vector3(
+        Vector3Int intPos = new Vector3Int(
             Mathf.RoundToInt(hit.point.x + (hit.normal.x / 2)),
             Mathf.RoundToInt(hit.point.y + (hit.normal.y / 2)),
             Mathf.RoundToInt(hit.point.z + (hit.normal.z / 2)));
 
+        outPos = intPos;
 
+        //Check if player has enough money
+        if (!canBuild || (!CheatManager.instance.infiniteMoney && LevelStats.instance.CurrentMoney < structureBlueprint.creationCost))
+            return false;
 
-        if (!CheatManager.instance.infiniteMoney && LevelStats.instance.CurrentMoney < structureBlueprint.creationCost)
-                return false;
-        
-
-        //Spell will always be 
+        //Spell will always be created
         SpellBehaviour sb;
         if (StructureBlueprint.structurePrefab.TryGetComponent<SpellBehaviour>(out sb))
             return true;
-
 
         //Position of the block under the block where the structure will be built
         Vector3Int intPosUnder = new Vector3Int(
@@ -67,79 +66,75 @@ public class BuildManager : MonoBehaviour
             Mathf.RoundToInt(hit.point.y - (hit.normal.y / 2)),
             Mathf.RoundToInt(hit.point.z - (hit.normal.z / 2)));
 
-        //But for builidngs we need to check if the position is within the world bounds
+        //For builidngs we need to check if the position is within the world bounds
         if (!LevelManager.instance.world.IsPosInBounds(Vector3Int.FloorToInt(intPosUnder)))
             return false;
 
-
+        //Gets cell under structure
         selectedCell = LevelManager.instance.world.GetCell(intPosUnder);
-        Vector3Int cubeForward = Vector3Int.zero;
 
-        if (hit.normal == Vector3Int.forward)
-        {
-            cubeForward = Vector3Int.right;
-        }
-        else if (hit.normal == Vector3Int.up)
-        {
-            cubeForward = Vector3Int.forward;
-        }
-        else if (hit.normal == Vector3Int.back)
-        {
-            cubeForward = Vector3Int.up;
-        }
-        else if (hit.normal == Vector3Int.down)
-        {
-            cubeForward = Vector3Int.right;
-        }
-        else if (hit.normal == Vector3Int.right)
-        {
-            cubeForward = Vector3Int.up;
-        }
-        else if (hit.normal == Vector3Int.left)
-        {
-            cubeForward = Vector3Int.forward;
-        }
-
-        //empties fundation list cause ws dont want all of the past position just the ones behind the structure
-        structureFundation.Clear();
-
-        Vector3Int cubeDotProduct = Vector3Int.FloorToInt(Vector3.Cross(hit.normal, cubeForward));
-
-        int structureSize = StructureBlueprint.structurePrefab.GetComponent<Structure>().Size;
-
-        for (int i = 0; i < structureSize; i++)
-        {
-            for (int j = 0; j < structureSize; j++)
-            {
-
-                Vector3 sizeChecker = intPosUnder + (cubeForward * i) + (cubeDotProduct * j);
-                Vector3 OnTopofSizeChecker = intPos + (cubeForward * i) + (cubeDotProduct * j);
-                if (!LevelManager.instance.world.CheckCell(sizeChecker, StructureBlueprint.structurePrefab.GetComponent<Structure>().blockType, OnTopofSizeChecker))
-                {
-                    //if it can be placed we delete dteh fundation list
-                    structureFundation.Clear();
-                    return false;
-                }
-                else
-                    structureFundation.Add(Vector3Int.FloorToInt(sizeChecker)); // and if it is a good place to build we save those positions
-            }
-        }
-
+        //If structure is bigger than one block
+        int structureSize = structureBlueprint.structurePrefab.GetComponent<Structure>().Size;
         if (structureSize > 1)
         {
-            currentConstructionPositionOffset = (hit.normal + cubeForward + cubeDotProduct) / structureSize;
+            Vector3Int cubeForward = Vector3Int.zero;
 
+            if (hit.normal == Vector3Int.forward)
+            {
+                cubeForward = Vector3Int.right;
+            }
+            else if (hit.normal == Vector3Int.up)
+            {
+                cubeForward = Vector3Int.forward;
+            }
+            else if (hit.normal == Vector3Int.back)
+            {
+                cubeForward = Vector3Int.up;
+            }
+            else if (hit.normal == Vector3Int.down)
+            {
+                cubeForward = Vector3Int.right;
+            }
+            else if (hit.normal == Vector3Int.right)
+            {
+                cubeForward = Vector3Int.up;
+            }
+            else if (hit.normal == Vector3Int.left)
+            {
+                cubeForward = Vector3Int.forward;
+            }
+
+            //empties fundation list cause ws dont want all of the past position just the ones behind the structure
+            structureFundation.Clear();
+
+            Vector3Int cubeRight = Vector3Int.FloorToInt(Vector3.Cross(hit.normal, cubeForward));
+
+            for (int i = 0; i < structureSize; i++)
+            {
+                for (int j = 0; j < structureSize; j++)
+                {
+                    Vector3Int sizeChecker = intPosUnder + (cubeForward * i) + (cubeRight * j);
+                    Vector3Int OnTopofSizeChecker = intPos + (cubeForward * i) + (cubeRight * j);
+
+                    if (LevelManager.instance.world.CheckIfCanBuildInCell(sizeChecker, structureBlueprint.structurePrefab.GetComponent<Structure>().blockType, OnTopofSizeChecker))
+                    {
+                        //if it can be placed we delete dteh fundation list
+                        structureFundation.Clear();
+                        return false;
+                    }
+                    else
+                        structureFundation.Add(Vector3Int.FloorToInt(sizeChecker)); // and if it is a good place to build we save those positions
+                }
+            }
+            currentConstructionPositionOffset = (hit.normal + cubeForward + cubeRight) / structureSize;
         }
-        else
+        else if (selectedCell.blockType != structureBlueprint.structurePrefab.GetComponentInChildren<Structure>().blockType)
         {
             currentConstructionPositionOffset = Vector3.zero;
+            return false;
         }
 
-        if (!canBuild /*|| selectedCell.blockType != structureBlueprint.structurePrefab.GetComponentInChildren<Structure>().blockType*/)
-            return false;
-
         Gatherer g;
-
         bool isCloseToPath = true;
         foreach (Vector3 cellposition in structureFundation)
         {
@@ -160,7 +155,7 @@ public class BuildManager : MonoBehaviour
         //LevelManager.instance.world.AddInterestPoint(intPos);
 
 
-        return true && isCloseToPath;
+        return isCloseToPath;
     }
 
     public void PlaceObject(RaycastHit hit)

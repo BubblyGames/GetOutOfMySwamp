@@ -6,6 +6,7 @@ using UnityEngine;
 public class ShootingDefenseBehaviour : DefenseBehaviour
 {
     public Transform firePoint;
+    public GameObject cannon;
     [SerializeField] private EnemyBehaviour enemyTarget;
     [SerializeField] public float turnSpeed = 5f;
 
@@ -17,18 +18,24 @@ public class ShootingDefenseBehaviour : DefenseBehaviour
     {
         InvokeRepeating("UpdateTarget", 0f, 0.5f);
 
+        //checks if is a mountainTower for only atacking flying enemies
+        if (canHitSkyEnemies)
+        {
+            layerMask = 1 << 6;
+        }
+
     }
 
     void UpdateTarget()
     {
-         RaycastHit[] hits = Physics.SphereCastAll(transform.position, attackRange, transform.forward, attackRange, layerMask);
+        RaycastHit[] hits = Physics.SphereCastAll(transform.position, attackRange, transform.forward, attackRange, layerMask);
         if (hits.Length > 0)
         {
             float shortestDistance = Mathf.Infinity;
             EnemyBehaviour nearestEnemy = null;
             foreach (RaycastHit hit in hits)
             {
-                if (hit.collider.gameObject.tag =="Enemy")
+                if (hit.collider.gameObject.tag == "Enemy")
                 {
                     EnemyBehaviour enemy = hit.collider.gameObject.GetComponent<EnemyBehaviour>();
                     float distanceToEnemy = Vector3.Distance(transform.position, enemy.transform.position);
@@ -39,9 +46,9 @@ public class ShootingDefenseBehaviour : DefenseBehaviour
                     }
                 }
             }
-                
 
-            if (nearestEnemy !=null && shortestDistance <=attackRange)
+
+            if (nearestEnemy != null && shortestDistance <= attackRange)
             {
                 enemyTarget = nearestEnemy;
             }
@@ -59,7 +66,10 @@ public class ShootingDefenseBehaviour : DefenseBehaviour
             return;
         }
 
-        transform.LookAt(enemyTarget.transform,normal);
+        if (cannon != null)
+            cannon.transform.LookAt(enemyTarget.transform, normal);
+        else
+            transform.LookAt(enemyTarget.transform, normal);
 
         if (fireCountdown <= 0f)
         {
@@ -71,7 +81,6 @@ public class ShootingDefenseBehaviour : DefenseBehaviour
 
     protected override void Attack()
     {
-        
         BulletBehaviour bullet = Instantiate(bulletPrefab, firePoint.position, firePoint.rotation).GetComponent<BulletBehaviour>();
         bullet.SetBulletBehaviour(enemyTarget.gameObject.transform, this.damage, this.actualEffect, this.attackRange);
     }

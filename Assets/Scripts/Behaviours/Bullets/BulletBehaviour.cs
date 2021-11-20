@@ -5,9 +5,10 @@ using UnityEngine;
 public class BulletBehaviour : MonoBehaviour
 {
     protected int damage;
-    protected float speed = 50f;
+    public float speed = 50f;
     protected Transform target;
-    private int layerMask = 1 << 6;
+    private int layerMaskId = 1 << 6;
+    public LayerMask layerMask;
 
     [Header("Bullet Destruction")]
     [SerializeField] protected float maxDistance;
@@ -17,10 +18,12 @@ public class BulletBehaviour : MonoBehaviour
     [Header("Bullet Effects")]
     [SerializeField] protected int actualEffect;
 
+    public GameObject particles;
+
 
     void FixedUpdate()
     {
-        
+
         if (distanceTravelled >= maxDistance)
         {
             Destroy(gameObject);
@@ -61,6 +64,10 @@ public class BulletBehaviour : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Enemy"))
         {
+            if (particles != null)
+                GameObject.Instantiate(particles, transform.position, Quaternion.identity);
+
+
             switch (actualEffect)
             {
                 case 1:
@@ -68,7 +75,8 @@ public class BulletBehaviour : MonoBehaviour
                     Destroy(gameObject);
                     break;
                 case 2:
-                    other.gameObject.GetComponent<EnemyBehaviour>().AreaDamage(damage, areaEffect, layerMask);
+                    //other.gameObject.GetComponent<EnemyBehaviour>().AreaDamage(damage, areaEffect, layerMask);
+                    Explode();
                     Destroy(gameObject);
                     break;
                 default:
@@ -81,6 +89,21 @@ public class BulletBehaviour : MonoBehaviour
         {
             Destroy(gameObject);
         }
+    }
+
+    void Explode()
+    {
+
+        RaycastHit[] hits = Physics.SphereCastAll(transform.position, areaEffect, transform.forward, areaEffect, layerMask);
+        for (int i = 0; i < hits.Length; i++)
+        {
+            EnemyBehaviour eb;
+            if (hits[i].collider.TryGetComponent<EnemyBehaviour>(out eb))
+            {
+                eb.Hurt(damage);
+            }
+        }
+
     }
 
 }
