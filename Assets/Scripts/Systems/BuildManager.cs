@@ -267,7 +267,7 @@ public class BuildManager : MonoBehaviour
             else if (LevelStats.instance.CurrentMoney >= StructureBlueprint.upgrades[SelectedStructure.GetLevel()].cost)
             {
                 SelectedStructure.UpgradeStrucrure(uIController);
-                LevelStats.instance.SpendMoney(StructureBlueprint.creationCost);
+                LevelStats.instance.SpendMoney(StructureBlueprint.upgrades[SelectedStructure.GetLevel()].cost);
 
             }
             else
