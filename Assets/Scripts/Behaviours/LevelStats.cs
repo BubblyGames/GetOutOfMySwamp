@@ -40,7 +40,7 @@ public class LevelStats : MonoBehaviour
 
 
         LevelManager.OnDamageTaken += receiveDamage;
-        LevelManager.instance.OnEnemyKilled += getEnemyRewards;
+
     }
 
 
@@ -109,5 +109,11 @@ public class LevelStats : MonoBehaviour
     public int GetCurrentMoney()
     {
         return currentMoney;
+    }
+
+    private void OnDestroy()
+    {
+        LevelManager.OnDamageTaken -= receiveDamage;
+
     }
 }

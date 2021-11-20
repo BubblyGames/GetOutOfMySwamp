@@ -674,27 +674,65 @@ MonoBehaviour:
   waves:
   - packs:
     - enemyType: 0
-      enemyAmount: 20
+      enemyAmount: 10
+    - enemyType: 3
+      enemyAmount: 5
     - enemyType: 2
       enemyAmount: 1
+    - enemyType: 0
+      enemyAmount: 10
+    - enemyType: 3
+      enemyAmount: 5
+    spawnRate: 1
+  - packs:
+    - enemyType: 0
+      enemyAmount: 15
     - enemyType: 3
       enemyAmount: 10
+    - enemyType: 2
+      enemyAmount: 2
+    - enemyType: 0
+      enemyAmount: 5
+    - enemyType: 3
+      enemyAmount: 10
+    - enemyType: 2
+      enemyAmount: 2
+    - enemyType: 0
+      enemyAmount: 5
+    - enemyType: 3
+      enemyAmount: 20
     spawnRate: 1
   - packs:
     - enemyType: 0
+      enemyAmount: 5
+    - enemyType: 2
+      enemyAmount: 5
+    - enemyType: 3
+      enemyAmount: 10
+    - enemyType: 0
+      enemyAmount: 8
+    - enemyType: 2
+      enemyAmount: 6
+    - enemyType: 3
+      enemyAmount: 15
+    - enemyType: 2
+      enemyAmount: 5
+    - enemyType: 0
+      enemyAmount: 10
+    - enemyType: 3
       enemyAmount: 20
     - enemyType: 2
-      enemyAmount: 5
-    - enemyType: 3
-      enemyAmount: 40
-    spawnRate: 1
-  - packs:
+      enemyAmount: 10
     - enemyType: 0
+      enemyAmount: 20
+    - enemyType: 3
       enemyAmount: 30
     - enemyType: 2
-      enemyAmount: 5
+      enemyAmount: 10
+    - enemyType: 0
+      enemyAmount: 20
     - enemyType: 3
-      enemyAmount: 50
+      enemyAmount: 30
     spawnRate: 1
 --- !u!114 &63313641
 MonoBehaviour:
@@ -2498,6 +2536,11 @@ MonoBehaviour:
     - enemyId: 5
       enemyPrefab: {fileID: 7091463197756375107, guid: dfb36d6922eade74e81ef7ea442e3ece, type: 3}
   audioManager: {fileID: 1474084401}
+  upgradeLevels:
+  - {fileID: 21300000, guid: a655b2f44cde3b542b37a07a5df43a85, type: 3}
+  - {fileID: 21300000, guid: 7d9467091172b7a459d21f854fa1d33e, type: 3}
+  - {fileID: 21300000, guid: 0a5235c4f88ebda4ba1e0f9423950d8a, type: 3}
+  - {fileID: 21300000, guid: 24bff72e7482c1a459680b7aa6355cc8, type: 3}
   currentWorldId: 0
 --- !u!4 &429681862
 Transform:
@@ -5421,6 +5464,7 @@ MonoBehaviour:
   aerialStructureSprite: {fileID: 0}
   upgradeLevels: []
   shopContainer: {fileID: 0}
+  upgradeButtonImage: {fileID: 0}
   selectedMenu: 0
   FPSText: {fileID: 0}
 --- !u!4 &1108740209
