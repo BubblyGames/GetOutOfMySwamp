@@ -671,7 +671,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ac7bf40ea3cf0e04c93bf60bb60eb9d5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isMobile: 0
+  forceMobile: 0
   selectedCard: {fileID: 0}
   mouseSensitivity: 3
   scrollSensitivity: 15
@@ -7726,12 +7726,12 @@ GameObject:
   - component: {fileID: 1690259542}
   - component: {fileID: 1690259543}
   m_Layer: 5
-  m_Name: Toggle
+  m_Name: MobileToggle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1690259542
 RectTransform:
   m_ObjectHideFlags: 0
