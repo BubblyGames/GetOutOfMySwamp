@@ -32,8 +32,8 @@ public class UIController : MonoBehaviour
     public List<GameObject> statsTexts;
     public GameObject towerName;
     public GameObject upgradeCostText;
-    public Text numberOfWaves;
-    public Text currentWave;
+    public TextMeshProUGUI numberOfWaves;
+    public TextMeshProUGUI currentWave;
 
     [Header("UpgradeMenu Sprites")]
     public Sprite basicTowerSprite;
@@ -106,7 +106,7 @@ public class UIController : MonoBehaviour
 
     public void UpdateWaveText()
     {
-        currentWave.text = (WaveController.instance.waveCount + 1).ToString();
+        currentWave.GetComponent<TextMeshPro>().text = (WaveController.instance.waveCount + 1).ToString();
     }
 
     public virtual void ShowMenu(GameMenu menu)
@@ -127,7 +127,8 @@ public class UIController : MonoBehaviour
                     pauseMenu.SetActive(false);
                 }*/
 
-                upgradeMenu.SetActive(!upgradeMenu.activeSelf);
+                //upgradeMenu.SetActive(!upgradeMenu.activeSelf);
+                upgradeMenu.SetActive(true);
                 pauseMenu.SetActive(false);
 
                 break;
@@ -338,10 +339,10 @@ public class UIController : MonoBehaviour
         {
             activateUpgradeTexts();
             fixedTexts[0].GetComponent<TextReader>().SetKey("target");
-            statsTexts[0].GetComponent<TextReader>().SetKey(structure.Blueprint.targetDescription);
+            /*statsTexts[0].GetComponent<TextReader>().SetKey(structure.Blueprint.targetDescription);
             statsTexts[1].GetComponent<TextReader>().SetKey(structure.Blueprint.rangeDescription);
             statsTexts[2].GetComponent<TextReader>().SetKey(structure.Blueprint.fireRateDescription);
-            statsTexts[3].GetComponent<TextReader>().SetKey(structure.Blueprint.damageDescription);
+            statsTexts[3].GetComponent<TextReader>().SetKey(structure.Blueprint.damageDescription);*/
 
         }
         else
