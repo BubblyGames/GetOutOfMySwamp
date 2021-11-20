@@ -40,6 +40,8 @@ public class LevelManager : MonoBehaviour
 
     public Color[] colors;
 
+    public GameObject meteorPrefab;
+
     private void Awake()
     {
         if (instance == null)
@@ -72,13 +74,10 @@ public class LevelManager : MonoBehaviour
         waterSplashMaterial.color = colors[2].gamma;
     }
 
-    private void Update()
+    public void SpawnMeteor()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            GameObject waterSplash = GameObject.Instantiate(waterSplashPrefab);
-            waterSplash.transform.position = world.end;
-        }
+        CellInfo cell = world.GetRandomCellWithRay();
+        GameObject.Instantiate(meteorPrefab, cell.GetPos(), Quaternion.identity);
     }
 
 

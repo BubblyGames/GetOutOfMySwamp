@@ -9114,6 +9114,7 @@ MonoBehaviour:
   - {r: 0, g: 0, b: 0, a: 0}
   - {r: 0, g: 0, b: 0, a: 0}
   - {r: 0, g: 0, b: 0, a: 0}
+  meteorPrefab: {fileID: 4422750441095425187, guid: 9e9b00a8bb793dd4088c7a4c33e9528a, type: 3}
 --- !u!4 &1903685283
 Transform:
   m_ObjectHideFlags: 0
@@ -9400,7 +9401,7 @@ MonoBehaviour:
     creationCost: 250
     upgradeMultiplicator: 1.1
     upgrades: []
-  - structurePrefab: {fileID: 4422750441095425187, guid: 7461b5dc79e93e44796d7af498e661aa, type: 3}
+  - structurePrefab: {fileID: 4422750441095425187, guid: 9e9b00a8bb793dd4088c7a4c33e9528a, type: 3}
     creationCost: 1
     upgradeMultiplicator: 1
     upgrades: []
