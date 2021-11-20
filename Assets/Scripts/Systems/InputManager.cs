@@ -9,7 +9,8 @@ public class InputManager : MonoBehaviour
     public static InputManager instance;
     bool choosingWhereToBuild = false; //A structure card has been selected
     bool zooming = false;//Is zooming
-    public bool isMobile = false;
+    bool isMobile = false;
+    public bool forceMobile = false;
 
     [HideInInspector] public GameObject selectedCard;
 
@@ -33,6 +34,11 @@ public class InputManager : MonoBehaviour
     }
     void Start()
     {
+        if (GameManager.instance)
+            isMobile = forceMobile || GameManager.instance.checkPlatform();
+        else
+            isMobile = forceMobile;
+
         //If no cursor is assigned, a cube will be created and used
         if (cursor == null)
         {
@@ -118,8 +124,8 @@ public class InputManager : MonoBehaviour
                     cursor.transform.localScale = Vector3.one * BuildManager.instance.GetStructureSize(); ;
                     cursor.transform.position = pos + BuildManager.instance.currentConstructionPositionOffset;
 
-                                       
-                   
+
+
                     cursor.transform.up = hit.normal;
                 }
                 //Card is hidden if poiting at anything in the world
@@ -200,7 +206,7 @@ public class InputManager : MonoBehaviour
                     UIController.instance.ShowMenu(UIController.GameMenu.UpgradeMenu);
                     BuildManager.instance.SetSelectedStructure(structureHitted.GetComponent<Structure>());
                     //check the structure type
-                   
+
 
                     break;
                 case "Gatherer":
@@ -302,7 +308,19 @@ public class InputManager : MonoBehaviour
 
     public void MobileInput(bool b)
     {
-        isMobile = b;
+        forceMobile = b;
+        if (GameManager.instance)
+            isMobile = forceMobile || GameManager.instance.checkPlatform();
+        else
+            isMobile = forceMobile;
+    }
+
+    private void OnValidate()
+    {
+        if (GameManager.instance)
+            isMobile = forceMobile || GameManager.instance.checkPlatform();
+        else
+            isMobile = forceMobile;
     }
 }
 //https://answers.unity.com/questions/1698508/detect-mobile-client-in-webgl.html?childToView=1698985#answer-1698985
