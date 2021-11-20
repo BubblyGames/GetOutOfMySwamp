@@ -117,8 +117,8 @@ MonoBehaviour:
   blockType: 1
   structureName: psiquicTower
   structureId: 1
-  fireRate: 1.5
-  damage: 6
+  fireRate: 0.5
+  damage: 5
   attackRange: 4
   Target: ground
   Range: low
@@ -148,8 +148,8 @@ MonoBehaviour:
   blockType: 1
   structureName: psiquicTower
   structureId: 1
-  fireRate: 1.5
-  damage: 6
+  fireRate: 0.5
+  damage: 1
   attackRange: 5
   Target: ground
   Range: low

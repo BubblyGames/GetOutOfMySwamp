@@ -213,7 +213,7 @@ MonoBehaviour:
   structureName: basicTower
   structureId: 0
   fireRate: 2
-  damage: 6
+  damage: 14
   attackRange: 5
   Target: ground
   Range: medium
