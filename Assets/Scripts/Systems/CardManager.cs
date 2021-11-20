@@ -22,6 +22,11 @@ public class CardManager : MonoBehaviour
         {
             GameObject card = GameObject.Instantiate(cardPrefab);
             card.transform.parent = transform;
+            card.GetComponent<Card>().SetupCard(i, materials[i], height, space, y);
+            cards.Add(card);
+
+            /*GameObject card = GameObject.Instantiate(cardPrefab);
+            card.transform.parent = transform;
             card.transform.localPosition = new Vector3(0, -i *(height + space) + y, -0.01f);
             card.transform.localRotation = Quaternion.identity;
             card.GetComponent<MeshRenderer>().material = materials[i];
@@ -32,7 +37,7 @@ public class CardManager : MonoBehaviour
             {
                 GameObject back = card.transform.GetChild(0).gameObject;
                 back.GetComponent<MeshRenderer>().material.color = GameManager.instance.GetCurrentWorld().themeInfo.backGroundColor;
-            }
+            }*/
         }
     }
 

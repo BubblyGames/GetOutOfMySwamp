@@ -7,7 +7,7 @@ using UnityEngine.UI;
 public class InputManager : MonoBehaviour
 {
     public static InputManager instance;
-    bool choosingWhereToBuild = false; //A structure card has been selected
+    public bool choosingWhereToBuild = false; //A structure card has been selected
     bool zooming = false;//Is zooming
 
     [HideInInspector] public GameObject selectedCard;
@@ -120,7 +120,7 @@ public class InputManager : MonoBehaviour
                 selectedCard.transform.position = GetMouseAsWorldPoint() + mOffset;
             }
         }
-        else if (!zooming)
+        else if (!zooming && Input.mousePosition.x <= Screen.width*0.9f)
         {
             //If not zooming, camera will be moved
             CameraBehaviour.instance.Rotate(Input.GetAxis("Mouse X") * mouseSensitivity, Input.GetAxis("Mouse Y") * mouseSensitivity);
@@ -132,7 +132,28 @@ public class InputManager : MonoBehaviour
     private float mZCoord;
     private Vector3 defaultPos;
     private Vector3 worldPos;
+    public void SelectCard(GameObject card)
+    {
+        choosingWhereToBuild = true;
 
+        //Select clicked card
+        selectedCard = card;
+        selectedCard.GetComponent<Collider>().enabled = false;
+
+        //Select structure
+        Shop.instance.setShopIndex(selectedCard.GetComponent<Card>().index);
+
+        //Getting offset between camera and card
+        defaultPos = selectedCard.transform.localPosition;
+        worldPos = selectedCard.transform.position;
+        mZCoord = Camera.main.WorldToScreenPoint(worldPos).z;
+        mOffset = worldPos - GetMouseAsWorldPoint();
+
+        DefenseBehaviour db;
+        if (Shop.instance.selectedDefenseBlueprint.structurePrefab.TryGetComponent<DefenseBehaviour>(out db))
+            cursorBase.transform.localScale = new Vector3(2 * db.attackRange, 2 * db.attackRange, 1);
+
+    }
     private void MouseDown()
     {
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
@@ -143,7 +164,7 @@ public class InputManager : MonoBehaviour
             switch (hit.collider.tag)
             {
                 case "Card":
-                    choosingWhereToBuild = true;
+                    /*choosingWhereToBuild = true;
 
                     //Select clicked card
                     selectedCard = hit.collider.gameObject;
@@ -161,7 +182,7 @@ public class InputManager : MonoBehaviour
                     DefenseBehaviour db;
                     if (Shop.instance.selectedDefenseBlueprint.structurePrefab.TryGetComponent<DefenseBehaviour>(out db))
                         cursorBase.transform.localScale = new Vector3(2 * db.attackRange, 2 * db.attackRange, 1);
-
+                    */
                     break;
                 case "Structure":
 
