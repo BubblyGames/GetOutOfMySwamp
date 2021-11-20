@@ -4,6 +4,7 @@ using UnityEditor;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using TMPro;
 
 public class UIController : MonoBehaviour
 {
@@ -121,7 +122,7 @@ public class UIController : MonoBehaviour
                 upgradeMenu.SetActive(false);
                 pauseMenu.SetActive(false);
                 pauseButton.SetActive(false);
-                GameObject.Find("FinalScoreText").GetComponent<UnityEngine.UI.Text>().text = "Score: " + LevelStats.instance.currentScore;
+                GameObject.Find("FinalScoreText").GetComponent<TextMeshProUGUI>().text = "Score: " + LevelStats.instance.currentScore;
                 Time.timeScale = 1;
                 break;
             case GameMenu.Game:
@@ -322,7 +323,7 @@ public class UIController : MonoBehaviour
             fixedTexts[0].SetActive(true);
             statsTexts[0].SetActive(true);
             fixedTexts[0].GetComponent<TextReader>().SetKey("moneyGathered");
-            statsTexts[0].GetComponent<Text>().text = moneyGiven.ToString();
+            statsTexts[0].GetComponent<TextMeshProUGUI>().text = moneyGiven.ToString();
         }
 
         switch (structureId)
@@ -412,11 +413,11 @@ public class UIController : MonoBehaviour
         upgradeButtonImage.sprite = upgradeLevels[level];
         if (level < 3)
         {
-            upgradeCostText.GetComponent<Text>().text = structures[structureId].upgrades[level].cost.ToString();
+            upgradeCostText.GetComponent<TextMeshProUGUI>().text = structures[structureId].upgrades[level].cost.ToString();
         }
         else
         {
-            upgradeCostText.GetComponent<Text>().text = "MAX";
+            upgradeCostText.GetComponent<TextMeshProUGUI>().text = "MAX";
         }
     }
 

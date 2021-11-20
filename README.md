@@ -301,7 +301,7 @@ Ejemplo, torreta pesada:
 
 ### 6.3 Música
 
-El juego cuenta con una sola canción propia la cual se reproduce tanto en los menúes como durante la partida.
+El juego cuenta con una sola canción (autor: [Pascual Gázquez Compán](https://open.spotify.com/artist/7y2dfMVexZgClCIeiHd22f?si=Q2ch-_AVR8CC8a927irtxw&utm_source=copy-link)) la cual se reproduce tanto en los menúes como durante la partida.
 
 ### 6.4 Ambiente sonoro
 
@@ -366,7 +366,104 @@ Flujo de juego:
 ## 8. Post-Mortems
 
 
-### 8.1 Post-Mortem de la etapa Alfa
+## 8.1 Post-Mortem de la etapa Alfa
+
+## Autocríticas individuales
+
+### Gonzalo
+
+Debo de ser más duro. La gente ha llegado y en varias ocasiones han saltado a trabajar en tareas que todavía no tenían asignadas y que eran menos prioritarias para el proyecto que las que ya tenían asignadas en ese momento. También he tenido deslices con la programación de reuniones y el tratamiento de redes como olvidarme de fechas, elementos que debían estar presentes en las publicaciones, publicar en unas redes pero olvidarme de publicar en otras…
+
+Lo bueno es que algunas cosas sí que he logrado corregirlas de distintas formas, como ponerme recordatorios de las reuniones los días previos o mirar el GDD para asegurarme de que lo subía a las redes que teníamos pensadas, con la información como hastags debidamente puestos.
+
+Tengo que mejorar mi atención o mis habilidades de gestión, en general. Aunque creo que parto de buen nivel. Ha sido una constante el comprobar los progresos del resto de miembros del equipo y me he adelantado con el planning de tareas para ver a quién podía encajar en qué tarea cuando terminara su actual, además de contar siempre con responsabilidades de los miembros fuera del proyecto para poder planear siguientes asignaciones de tareas o avances.
+
+### Joy
+
+No considero que sea una persona que destaque en la creatividad así que generalmente suelo estar algo ausente en las tareas iniciales como puede ser el brainstorming para decidir sobre qué irá el juego, aunque luego sí soy bastante crítico si el tema elegido no es de mi agrado, cosa que no me parece justa.
+
+Tras varias vueltas se acabó en una idea que tenía buena pinta. Estuve trabajando en varios prototipos de movimiento que no me llevaron a ningún lado y que debí haber abandonado antes, por suerte otro de mis compañeros del equipo de programación sacó adelante un prototipo sobre el que ya se podía trabajar.
+
+Creo que, en general, he hecho un buen trabajo, pero hay cosas en las que tenía que haberme molestado debido a que somos un estudio pequeño, como conocer el código que hacían mis compañeros en el equipo de programación y comunicar y expresar mejor las ideas diseñadas para que no hubiera desarrollos innecesarios.
+
+### Adrián
+
+Buena comunicación con el resto de los miembros y flujo constante. Trabajo realizado rápido y muy buena gestión del tiempo.
+
+#### A mejorar:
+
+- Seguir mejorando la comunicación e intentar hacerme oír más.
+- Seguir mejorando la gestión del tiempo para poder elaborar código más limpio de una vez en vez de tener que ponerlo bonito después de estar funcional.
+- Comentar más el código.
+- No retrasar las consultas de dudas.
+
+### Dani
+
+Desde el primer momento no me entusiasmó excesivamente la idea de hacer un Tower Defense, pero viendo que el resto de mis compañeros estaban decididos, no me pude negar. Mi mayor preocupación era hacer un juego demasiado simple a nivel técnico, ya que consideraba que, teniendo en cuenta el equipo que teníamos, podíamos aspirar a hacer un juego bastante ambicioso. Al final acepté la idea, pero me propuse hacer un juego que, dentro de un género que no suele llamar la atención, destacara por ser innovador. Al final esto último resultó ser más difícil de lo que parecía.
+
+Terminada ya la Alpha me he dado cuenta de que desarrollar un juego completo y pulirlo a un nivel aceptable, por simple que sea el juego, siempre supone un reto. La generación procedimental del mundo y los caminos, de lo que principalmente me he encargado yo, me ha dado infinitos dolores de cabeza, aunque la satisfacción de verlo todo funcionando al final lo compensa.
+
+### Marta
+
+A nivel personal:
+
+- Ser capaz de expresar abiertamente mi opinión. Una de las cosas que más me ha costado siempre es ser capaz de expresar abiertamente mi opinión. Así que me alegro mucho de haber podido hacerlo en este grupo de trabajo
+- Establecer buenos horarios de trabajo. Durante este tiempo de trabajo he sido capaz de establecer unos buenos horarios de trabajo sin llegar a sobreesforzarme. Esto me ha permitido sentirme bien conmigo misma y con el proyecto.
+- Problemas con mi pipeline de trabajo. A nivel personal, durante las primeras semanas me demoré más de lo necesario en realizar mis tareas debido a que me intentaba adaptar a lo que el resto del equipo me pedía sin tener en cuenta el flujo de trabajo (a nivel artístico) al que estoy acostumbrada. Esto me llevó a bloquearme en ciertos aspectos, sobre todo referentes al desarrollo conceptual del juego. La solución que propongo es adaptarme a las necesidades de mi equipo, pero sin dejar de tener en cuenta mi propia línea de trabajo de cara a establecer y definir las tareas y/o hitos. Además de esto, me gustaría que las tareas a realizar vinieran de un único canal para evitar problemas de comunicación o errores de prioridad.
+
+### Alberto
+
+Al inicio estaba bastante motivado con el proyecto porque había salido elegido un juego de estrategia, mi género favorito con diferencia, así que quería aplicar mi experiencia en hacer algo interesante. Después no solo había que compartir el rol de game designer sino que al final prácticamente el juego acabó siendo una decisión de todos. Esto, en realidad, a la larga es favorable para el grupo porque trabajamos todos en algo que más o menos nos gusta a todos, pero, siendo yo game designer principalmente, ¿Solo me encargo de escribir cuántas torres y enemigos hay y cómo funcionan? Cosa que también tenía que ser un consenso entre los dos game designers. Aún así creo que podría haber hecho un mayor ejercicio de creatividad para hacer un juego original, ya que lo del cubo no se nos ocurrió a los diseñadores tampoco.
+
+En conclusión, perdí bastante la motivación que tenía al empezar pero no considero que fuese motivo suficiente para no haber dado más de mí en crear alguna mecánica original.
+
+## Críticas de equipo
+
+### Productor
+
+El equipo ha trabajado muy bien. Hemos salido de la Alfa con un juego bastante terminado en lo que a mecánicas se refiere, encima teniendo la procedimentalidad de por medio, algo que complicaba el asunto. A parte de lo mencionado más arriba, un problema que he visto (que va ligado a la cantidad de gente que somos y a circunstancias externas) ha sido el bajo rendimiento del equipo de arte comparado con otros equipos.
+
+Ha habido bastante debate de ideas, algunos que se han alargado hasta otras fases (como es el caso del nombre) o que han ralentizado un poco el desarrollo por alargarse más de lo debido (como fue decidir el tipo de juego y la temática que queríamos abordar). Pero no han sido debates duros, lo cual no ha perjudicado a la sensación de equipo. El equipo, en general, debería de mirar más el GDD, ya que surgen dudas o malentendidos sobre elementos que ya están descritos en el documento.
+
+También destacar que en el equipo de programación han estado brutales: han currado a destajo y han logrado tener muchas mecánicas y funcionalidades listas para la Alfa, algo que baja la intensidad de su trabajo para las siguientes etapas, ya que se centrarán en pulir errores y en expandir o implementar alguna funcionalidad/mecánica extra.
+
+### Programador 1
+
+El trabajo ha sido fluido y sale bien. Hay un buen ambiente de trabajo y se siente el progreso de cada uno del equipo como propio gracias al Trello y las reuniones. Las reuniones semanales son un acierto, aunque posteriormente se debatirán algunos detalles.
+
+Las reuniones deberían contar con un esquema previo y tratar sobre temas específicos en vez de tantas generales para hacerlas más útiles y concisas. También tener fechas de entrega de tareas, siempre teniendo en cuenta la disponibilidad de cada persona, pero tener plazos fijados.
+
+Respecto a la corrección del trabajo de otros miembros mejor que editarlo directamente se cree más conveniente que se le comuniquen las ideas de mejora al encargado de esa tarea y sea él o ella quien realice las modificaciones. Todo esto para ahorrar tiempo y evitar errores inesperados.
+
+### Programador 2
+
+Creo que hemos hecho un buen trabajo. Como equipo siento que en ciertos momentos nos ha faltado un poco de comunicación. Hemos tenido momentos de frustración por no entendernos o por querer hacer las cosas de formas distintas, pero al final el proyecto ha salido adelante más o menos como lo habíamos concebido, así que debemos considerarlo un éxito.
+
+### Programador 3
+
+Considero que todo el equipo ha trabajado correctamente, cada equipo con sus altibajos por diferentes cuestiones:
+
+El equipo de dirección ha trabajado bien encargándose de que todos fuéramos cumpliendo las tareas y organizando una serie de reuniones semanales para ver cómo iban avanzando los equipos.
+
+El equipo de diseño ha hecho un buen trabajo rellenando el GDD con las ideas y mecánicas que decidimos implementar en las reuniones.
+
+El equipo de arte no ha tenido mucho trabajo para la alfa, un par de texturas y modelos han entrado en esta versión. Para compensar el bajo nivel de requerimientos si han trabajado en concepts para avanzar para la siguiente versión.
+
+El equipo de programación ha sido con diferencia el que más trabajo tenía, no ha habido crunch pero sí que ha tenido que dedicarle bastante tiempo tal vez más del debido. Ha sido un buen trabajo en el que cada uno de los integrantes se ha ido dedicando una tarea para avanzar lo más rápido posible, esto, aunque bastante efectivo para implementar la mayoría de las mecánicas si ha provocado de alguno de los integrantes usaran su libre albedrío para implementar las mecánicas como más le apetecía y provocando que otros tuvieran que ir detrás revisando ese trabajo.
+
+### Arte
+
+A nivel de equipo:
+
+- Correcta asignación de roles. Considero que tenemos un equipo muy compensado y que la asignación de roles ha sido acertada, sobre todo la elección de un productor y Scrum Master, figura que a menudo se ha olvidado o dejado de lado en otros proyectos de ámbito universitario.
+- Idea de juego adecuada. La idea de juego quedó muy clara para todos desde un inicio y hemos sabido establecer un buen scope dado el tiempo y los recursos disponibles.
+- Buen ambiente y asertividad. El ambiente de trabajo ha sido muy bueno, todo el mundo ha dado su opinión de manera asertiva y eso ha facilitado una correcta comunicación y exposición de las ideas. En este aspecto me he sentido muy cómoda, me alegro de que todos seamos capaces de expresarnos libremente y espero que sigamos haciéndolo.
+- Problemas de comunicación y falta de información. Al inicio hubo algunos problemas de comunicación entre las diferentes áreas de trabajo y, si bien pensaba que estaban solucionados, esta última semana de desarrollo se han manifestado nuevas incidencias propiciadas por confusiones evitables o faltas de información. Para solucionar esto, creo que sería necesario comunicar mejor cada una de las tareas realizadas y cada uno de los problemas que nos hemos podido encontrar, así como testear y/o revisar el trabajo de nuestros pares con más frecuencia.
+- Presencia en redes sociales. Me he quedado un poco con la sensación de que la presencia en redes sociales la hemos ido improvisando, principalmente por falta de tiempo y material. Creo que sería buena idea elaborar un calendario de contenido para las redes sociales y preparar cada publicación con antelación. Además, de esta forma todos los miembros del equipo estaríamos al tanto de cuáles van a ser las futuras publicaciones y podríamos aportar nuevas ideas, contenido u opiniones.
+
+### Diseño
+
+En general, en el grupo hay muy buen ambiente de trabajo, consiguen hacer todo estupendamente y a tiempo. En las decisiones grupales nadie discute como si tuviera 12 años y las reuniones son productivas, dentro de lo normal. Considero que soy el menos productivo o el que menos aporta al grupo
 
 ### 8.2 Post-Mortem de la etapa Beta
 

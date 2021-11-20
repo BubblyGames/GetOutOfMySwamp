@@ -11,7 +11,7 @@ public class InputManager : MonoBehaviour
     bool zooming = false;//Is zooming
     public bool isMobile = false;
 
-    GameObject selectedCard;
+    [HideInInspector] public GameObject selectedCard;
 
     [SerializeField]
     private float mouseSensitivity = 3.0f;
