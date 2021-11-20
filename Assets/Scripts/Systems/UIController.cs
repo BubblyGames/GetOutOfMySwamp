@@ -88,6 +88,13 @@ public class UIController : MonoBehaviour
     {
         LevelManager.OnWaveCleared += UpdateWaveText;
         LevelManager.OnGameStart += SetWaveText;
+        LevelManager.OnStructureUpgraded += SetUpgradeButton;
+    }
+
+
+    private void SetUpgradeButton(int level)
+    {
+        UpdateUpgradeButton(level, BuildManager.instance.SelectedStructure.structureId);
     }
 
     private void SetWaveText()
@@ -325,7 +332,7 @@ public class UIController : MonoBehaviour
 
 
     public void SetUpgradeMenu(Structure structure) {
-        towerName.GetComponent<TextReader>().SetKey(structure.name);
+        towerName.GetComponent<TextReader>().SetKey(structure.structureName);
         if (structure.structureId != 4)
         {
             activateUpgradeTexts();
