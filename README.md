@@ -299,7 +299,7 @@ La representación en el escenario tanto de las defensas como de los enemigos so
 
 ![AereaRender](https://user-images.githubusercontent.com/56488179/142732075-a73a68d8-8cca-4110-a8de-09a1d2f4313d.png)
 
-- Fabrica de dinero:
+- Fábrica de dinero:
 
 ![DineroRender](https://user-images.githubusercontent.com/56488179/142732084-a9c8d8bc-cd7e-4724-a1fc-59b2dfb11bc0.png)
 
