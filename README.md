@@ -386,31 +386,31 @@ Para la interfaz se cuentan con 7 ventanas:
 
 - Menú principal:
 
-![Recurso 1](https://lh6.googleusercontent.com/rCV4rqVBA8GQbaqIftoS6yrzmLV9DwA7l6kJW7XkonW1ULULik42KtX_4j6akqnKth_PsSnr87lHH7DmWR3j8Hmg9wh0v4ivM9CVmDRlU_JMkhv9aXNCumx1oYIlLnnbNdzS2AiH)
+![menuPrinc](https://user-images.githubusercontent.com/56488179/142733247-62b3fdcd-5cf8-46d4-9e33-b49a61d4eded.png)
 
 - Ajustes:
 
-![Recurso 4](https://user-images.githubusercontent.com/56488179/138528974-991d5275-41b5-4bf1-a620-c50ca0b1f0b7.png)
+![menuAjustes](https://user-images.githubusercontent.com/56488179/142733250-f56553c5-ce54-4c9e-8209-1d37c487f0cf.png)
 
 - Tutoriales:
 
-![Recurso 8](https://user-images.githubusercontent.com/56488179/138528983-708fb63e-830f-4603-b29a-61109a15d99c.png)
+![lecciones](https://user-images.githubusercontent.com/56488179/142733258-dd5f7b79-a428-445a-9f06-598fa9c925ad.png)
 
 - Selector de nivel:
 
-![Recurso 9](https://user-images.githubusercontent.com/56488179/138529005-17654b79-0642-410d-97b6-890ab7c430d7.png)
+![selector](https://user-images.githubusercontent.com/56488179/142733268-f76abb40-b81f-41e0-905b-ca7fa8ee4514.png)
 
 - Menú de pausa:
 
-![Recurso 5](https://user-images.githubusercontent.com/56488179/138529015-26a65fcd-6918-43c8-b392-2fea20f42fd0.png)
+![pausa](https://user-images.githubusercontent.com/56488179/142733272-f20cfcfa-7c97-4a9e-b9ef-acfb8a989e93.png)
 
 - Final de nivel:
-- 
-![Recurso 6](https://user-images.githubusercontent.com/56488179/138529024-42a8e7bd-ff84-42a7-b9b5-fdfce59aea37.png)
+
+![finalPartida](https://user-images.githubusercontent.com/56488179/142733277-208c49be-3cda-45ea-8e91-2c07e6accdff.png)
 
 - Interfaz de juego:
 
-![Recurso 7](https://user-images.githubusercontent.com/56488179/138528992-09385b3c-c4b4-493f-b28d-f235ab558277.png)
+![ingame](https://user-images.githubusercontent.com/56488179/142733283-72d26e3a-f5b6-4af1-88d8-f42e7ad95a68.png)
 
 ### 7.2 Diagrama de flujo
 
