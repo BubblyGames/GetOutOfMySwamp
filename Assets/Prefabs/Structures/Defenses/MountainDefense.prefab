@@ -114,7 +114,7 @@ MonoBehaviour:
   health: 0
   canLoseHealth: 0
   level: 0
-  blockType: 1
+  blockType: 2
   structureName: mountainTower
   structureId: 5
   canHitSkyEnemies: 1
