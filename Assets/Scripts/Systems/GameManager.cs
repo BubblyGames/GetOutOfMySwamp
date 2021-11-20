@@ -1,7 +1,9 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.InteropServices;
 using UnityEngine;
+
 
 public class GameManager : MonoBehaviour
 {
@@ -15,7 +17,8 @@ public class GameManager : MonoBehaviour
     //list containing different level stats and enemies waves 
     internal List<WorldInfo> worldList = new List<WorldInfo>();
     internal bool initiated = false;
-    public bool isMobile = false;
+    [DllImport("__Internal")]
+    private static extern bool IsMobile();
 
     private void Awake()
     {
@@ -34,6 +37,14 @@ public class GameManager : MonoBehaviour
     void Start() 
     {
         AudioManager.instance.Play("mainMenuSong");//Pls change asap
+        if (checkPlatform())
+        {
+            Console.WriteLine("is mobile");
+        }
+        else
+        {
+            Console.WriteLine("not mobile");
+        }
     }
 
     public void SetNextLevelWorld(int nextWorld)
@@ -62,6 +73,16 @@ public class GameManager : MonoBehaviour
 
     public void RequestMeteor()
     {
+
+    }
+
+    public bool checkPlatform()
+    {
+        Debug.Log(SystemInfo.deviceModel);
+#if !UNITY_EDITOR && UNITY_WEBGL
+             return IsMobile();
+#endif
+        return false;
 
     }
 }
