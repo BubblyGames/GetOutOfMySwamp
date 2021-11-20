@@ -17,6 +17,12 @@ public class ShootingDefenseBehaviour : DefenseBehaviour
     {
         InvokeRepeating("UpdateTarget", 0f, 0.5f);
 
+        //checks if is a mountainTower for only atacking flying enemies
+        if (canHitSkyEnemies)
+        {
+            layerMask = 9;
+        }
+
     }
 
     void UpdateTarget()

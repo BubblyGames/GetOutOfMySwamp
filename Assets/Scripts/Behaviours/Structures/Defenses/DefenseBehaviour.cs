@@ -10,7 +10,7 @@ public abstract class DefenseBehaviour : Structure
 
     [SerializeField]
     [Tooltip("True if can hit enemies that are flying")]
-    bool canHitSkyEnemies;
+    protected bool canHitSkyEnemies;
 
     [Header("Defense Stats")]
 
@@ -39,12 +39,6 @@ public abstract class DefenseBehaviour : Structure
     public string Damage;
     public string FireRate;
 
-    private void Start()
-    {
-        //check if a tower 
-        if (canHitSkyEnemies)
-            layerMask = 9;
-    }
     public override void UpgradeStrucrure(UIController uIController)
     {
 
