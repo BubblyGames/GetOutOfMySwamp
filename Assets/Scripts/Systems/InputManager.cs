@@ -7,7 +7,7 @@ using UnityEngine.UI;
 public class InputManager : MonoBehaviour
 {
     public static InputManager instance;
-    bool choosingWhereToBuild = false; //A structure card has been selected
+    public bool choosingWhereToBuild = false; //A structure card has been selected
     bool zooming = false;//Is zooming
     bool isMobile = false;
     public bool forceMobile = false;
@@ -20,13 +20,9 @@ public class InputManager : MonoBehaviour
     private float scrollSensitivity = 15.0f;
     [SerializeField]
     private float pinchSensitivity = 15.0f;
-    [SerializeField]
-    private Vector3 offset;
     //Gameobject that will be placed where structure is about to be built
     public GameObject cursor;
     private GameObject cursorBase;
-
-    Vector3 mousePosition = new Vector3();
 
     private void Awake()
     {
@@ -57,51 +53,38 @@ public class InputManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (!LevelManager.instance.ready)
-            return;
-
-        mousePosition = Input.mousePosition;
-
-        if (isMobile)
-        {
-            CheckPinch();
-        }
-        else
-        {
-            CameraBehaviour.instance.Zoom(Input.mouseScrollDelta.y * scrollSensitivity); //Zoom with mouse wheel
-        }
+        //Zoom
+        CheckPinch();
+        CameraBehaviour.instance.Zoom(Input.mouseScrollDelta.y * scrollSensitivity); //Zoom with mouse wheel
 
         //Click
         if (Input.GetMouseButtonDown(0))
         {
-            MouseDown(mousePosition);
+            MouseDown();
         }
 
         //Click release
         if (Input.GetMouseButtonUp(0))
         {
-            MouseUp(mousePosition);
+            MouseUp();
         }
 
         //Drag
         if (Input.GetMouseButton(0))
         {
-            MouseDrag(mousePosition);
+            MouseDrag();
         }
+
+
     }
 
-    private void MouseDrag(Vector3 mousePosition)
+    private void MouseDrag()
     {
         if (choosingWhereToBuild)
         {
             //Casts a ray to find out where does the player want to place the structure
-            Ray ray;
-            if (isMobile)
-                ray = Camera.main.ScreenPointToRay(mousePosition + offset);
-            else
-                ray = Camera.main.ScreenPointToRay(mousePosition);
-
-            RaycastHit hit;
+            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+            RaycastHit hit = new RaycastHit();
 
             if (Physics.Raycast(ray, out hit, Mathf.Infinity))
             {
@@ -121,7 +104,7 @@ public class InputManager : MonoBehaviour
                     //Cursor activates and moves to selected cell
                     cursor.SetActive(true);
 
-                    cursor.transform.localScale = Vector3.one * BuildManager.instance.GetStructureSize(); ;
+                    cursor.transform.localScale = Vector3.one * BuildManager.instance.GetStructureSize();
                     cursor.transform.position = pos + BuildManager.instance.currentConstructionPositionOffset;
 
 
@@ -137,10 +120,10 @@ public class InputManager : MonoBehaviour
                 cursor.SetActive(false);
                 selectedCard.SetActive(true);
                 //Card is moved with mouse
-                selectedCard.transform.position = GetMouseAsWorldPoint(mousePosition) + mOffset;
+                selectedCard.transform.position = GetMouseAsWorldPoint() + mOffset;
             }
         }
-        else if (!zooming)
+        else if (!zooming && Input.mousePosition.x <= Screen.width*0.9f)
         {
             //If not zooming, camera will be moved
             CameraBehaviour.instance.Rotate(Input.GetAxis("Mouse X") * mouseSensitivity, Input.GetAxis("Mouse Y") * mouseSensitivity);
@@ -152,10 +135,43 @@ public class InputManager : MonoBehaviour
     private float mZCoord;
     private Vector3 defaultPos;
     private Vector3 worldPos;
-
-    private void MouseDown(Vector3 mousePosition)
+    public void SelectCard(GameObject card)
     {
-        Ray ray = Camera.main.ScreenPointToRay(mousePosition);
+        choosingWhereToBuild = true;
+
+        //Select clicked card
+        selectedCard = card;
+        selectedCard.GetComponent<Collider>().enabled = false;
+
+        //Select structure
+        Shop.instance.setShopIndex(selectedCard.GetComponent<Card>().index);
+
+        //Getting offset between camera and card
+        defaultPos = selectedCard.transform.localPosition;
+        worldPos = selectedCard.transform.position;
+        mZCoord = Camera.main.WorldToScreenPoint(worldPos).z;
+        mOffset = worldPos - GetMouseAsWorldPoint();
+
+        DefenseBehaviour db;
+        SpellBehaviour sb;
+
+        if (Shop.instance.selectedDefenseBlueprint.structurePrefab.TryGetComponent<DefenseBehaviour>(out db))
+        {
+            cursorBase.transform.localScale = new Vector3(2 * db.attackRange, 2 * db.attackRange, 1) / db.Size;
+        }
+        else if (Shop.instance.selectedDefenseBlueprint.structurePrefab.TryGetComponent<SpellBehaviour>(out sb))
+        {
+            cursorBase.transform.localScale = new Vector3(2 * sb.range, 2 * sb.range, 1) / sb.Size;
+        }
+        else
+        {
+            cursorBase.transform.localScale = Vector3.zero;
+        }
+
+    }
+    private void MouseDown()
+    {
+        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         RaycastHit hit = new RaycastHit();
 
         if (Physics.Raycast(ray, out hit, Mathf.Infinity))
@@ -163,38 +179,9 @@ public class InputManager : MonoBehaviour
             switch (hit.collider.tag)
             {
                 case "Card":
-                    choosingWhereToBuild = true;
-
-                    //Select clicked card
-                    selectedCard = hit.collider.gameObject;
-                    selectedCard.GetComponent<Collider>().enabled = false;
-
-                    //Select structure
-                    Shop.instance.setShopIndex(selectedCard.GetComponent<Card>().index);
-
-                    //Getting offset between camera and card
-                    defaultPos = selectedCard.transform.localPosition;
-                    worldPos = selectedCard.transform.position;
-                    mZCoord = Camera.main.WorldToScreenPoint(worldPos).z;
-                    mOffset = worldPos - GetMouseAsWorldPoint(mousePosition);
-
-
-                    cursor.transform.localScale = Vector3.one * Shop.instance.selectedDefenseBlueprint.structurePrefab.GetComponent<Structure>().Size;
-
-                    DefenseBehaviour db;
-                    SpellBehaviour sb;
-                    if (Shop.instance.selectedDefenseBlueprint.structurePrefab.TryGetComponent<DefenseBehaviour>(out db))
-                    {
-                        cursorBase.transform.localScale = new Vector3(2 * db.attackRange, 2 * db.attackRange, 1) / db.Size;
-                    }
-                    else if (Shop.instance.selectedDefenseBlueprint.structurePrefab.TryGetComponent<SpellBehaviour>(out sb))
-                    {
-                        cursorBase.transform.localScale = new Vector3(2 * sb.range, 2 * sb.range, 1) / sb.Size;
-                    }
-                    else
-                    {
-                        cursorBase.transform.localScale = Vector3.zero;
-                    }
+                   
+                    
+                    
 
 
                     break;
@@ -220,15 +207,10 @@ public class InputManager : MonoBehaviour
         }
     }
 
-    private void MouseUp(Vector3 mousePosition)
+    private void MouseUp()
     {
-        Ray ray;
-        if (isMobile)
-            ray = Camera.main.ScreenPointToRay(mousePosition + offset);
-        else
-            ray = Camera.main.ScreenPointToRay(mousePosition);
-
-        RaycastHit hit;
+        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        RaycastHit hit = new RaycastHit();
 
         if (Physics.Raycast(ray, out hit, Mathf.Infinity))
         {
@@ -294,10 +276,10 @@ public class InputManager : MonoBehaviour
         return true;
     }
 
-    private Vector3 GetMouseAsWorldPoint(Vector3 mousePosition)
+    private Vector3 GetMouseAsWorldPoint()
     {
         // Pixel coordinates of mouse (x,y)
-        Vector3 mousePoint = mousePosition;
+        Vector3 mousePoint = Input.mousePosition;
 
         // z coordinate of game object on screen
         mousePoint.z = mZCoord;

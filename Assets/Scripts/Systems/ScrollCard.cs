@@ -4,34 +4,64 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
 
-public class ScrollCard : MonoBehaviour, IDragHandler, IBeginDragHandler
+public class ScrollCard : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragHandler
 {
     [SerializeField] GameObject cardToSpawn;
+    [SerializeField] Material cardMaterial;
+    [SerializeField] Texture texture;
+    [SerializeField] int indexCard;
+    [SerializeField] RectTransform contentParent;
     private Image buttonSprite;
+    private CanvasGroup canvasgroup;
+    private GameObject aux;
 
     private InputManager inputManager;
+
+    private Vector3 startParentPos;
 
     // Start is called before the first frame update
     void Start()
     {
         buttonSprite = GetComponent<Image>();
         inputManager = FindObjectOfType<InputManager>();
+        canvasgroup = GetComponent<CanvasGroup>();
+
+        startParentPos = Camera.main.transform.GetChild(2).localPosition;
     }
     public void SpawnCard()
     {
-        GameObject aux = Instantiate(cardToSpawn);
-        buttonSprite.color = new Color(1, 1, 1, 0);
+        float cardPosInsideRect = ((transform.localPosition.y + transform.parent.localPosition.y)/ contentParent.sizeDelta.y);
+        //Debug.Log(cardPosInsideRect);
+        Camera.main.transform.GetChild(2).localPosition = startParentPos + Vector3.up * (5.7f  * cardPosInsideRect);
 
-        inputManager.selectedCard = aux;
+        aux = Instantiate(cardToSpawn, new Vector3(0, -255 * cardPosInsideRect ,0), Quaternion.identity, Camera.main.transform.GetChild(2));
+        aux.GetComponent<Card>().SetupCard(indexCard, texture, 0, 0, 0);
+        aux.transform.LookAt(Camera.main.transform);
+        aux.transform.localScale = new Vector3(aux.transform.localScale.x, aux.transform.localScale.y, aux.transform.localScale.z * -1);
+        canvasgroup.alpha = 0.0f;
+        canvasgroup.interactable = false;
+
+        inputManager.SelectCard(aux);
     }
 
     public void OnDrag(PointerEventData eventData)
     {
-        Debug.Log("patata");
+        Vector3 cardpos = Camera.main.ScreenToViewportPoint(Input.mousePosition);
+        aux.transform.position = new Vector3(cardpos.x, cardpos.y, 40);
     }
 
     public void OnBeginDrag(PointerEventData eventData)
     {
         SpawnCard();
+    }
+
+    public void OnEndDrag(PointerEventData eventData)
+    {
+        if (canvasgroup.interactable == false)
+        {
+            canvasgroup.alpha = 1;
+            canvasgroup.interactable = true;
+            GameObject.Destroy(aux);
+        }
     }
 }
