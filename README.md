@@ -319,7 +319,7 @@ La representación en el escenario tanto de las defensas como de los enemigos so
 
 - Enemigo horda:
 
-![Horda](https://user-images.githubusercontent.com/56488179/142732137-b8d198a7-ebde-4a24-ad32-86136bb6851b.png)
+![HordaRender](https://user-images.githubusercontent.com/56488179/142732505-ff361669-72d7-46aa-8af5-75a9d16d0158.png)
 
 A su vez, la representación de las estadísticas de las torres se realiza mediante cartas o pantallas de información en gráficos 2D acorde a las descripciones de la estética general y al resto de elementos 2D.
 
