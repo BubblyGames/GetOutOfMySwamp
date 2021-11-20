@@ -485,13 +485,13 @@ En general, en el grupo hay muy buen ambiente de trabajo, consiguen hacer todo e
 
 ### 9.2 Hito 2: Beta
 
-- Interfaz implementada con estructura final y arte de GUI final:
+- Interfaz implementada con estructura final y arte de GUI final: 19/11/2021
 - Tutorial introductorio en el que se expliquen las mecánicas básicas:
 - Balanceo de las estadisticas de enemigos y torres para hacer el juego divertido y justo: 15/11/2021
-- Crear y meter en el juego los 6 modelos de enemigo y los 5 modelos de torre/defensa:
+- Crear y meter en el juego los 3 modelos de enemigo y los 6 modelos de torre/defensa:
 - Nueva mecánica característica:
-- Añadir offset para la colocación de torres:
-- Arreglar proporciones de las torres en el cubo:
+- Añadir offset para la colocación de torres: 19/11/2021
+- Arreglar proporciones de las torres en el cubo: 18/11/2021
 - Dirigir correctamente la barra de vida de los enemigos hacia la camara del jugador: 16/11/2021
 - Portfolio actualizado en su nueva versión: 
 

@@ -108,6 +108,8 @@ public class TextManager : MonoBehaviour
         englishDictionary.Add("damage", "Damage");
         englishDictionary.Add("fireRate", "Fire Rate");
         englishDictionary.Add("moneyGathered", "Money +");
+        englishDictionary.Add("sell", "Sell");
+        englishDictionary.Add("upgrade", "Upgrade");
 
         //defense stats in english
         englishDictionary.Add("air", "Air");
@@ -181,6 +183,8 @@ public class TextManager : MonoBehaviour
         spanishDictionary.Add("damage", "Daño");
         spanishDictionary.Add("fireRate", "Vel. Disparo");
         spanishDictionary.Add("moneyGathered", "Dinero +");
+        spanishDictionary.Add("sell", "Vender");
+        spanishDictionary.Add("upgrade", "Mejora");
 
 
         //defense stats in spanish
