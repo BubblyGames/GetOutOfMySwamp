@@ -3892,7 +3892,7 @@ RectTransform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 891366753}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1766098233}
@@ -9419,7 +9419,15 @@ MonoBehaviour:
   - structurePrefab: {fileID: 2711408889448630410, guid: 4cdbff3b4cc893847ad0a47225cd137b, type: 3}
     creationCost: 250
     upgradeMultiplicator: 1.1
-    upgrades: []
+    upgrades:
+    - cost: 0
+      stats:
+      - statToUpgrade: 0
+        upgradeAddedValue: 0
+    - cost: 0
+      stats: []
+    - cost: 0
+      stats: []
     targetDescription: 
     rangeDescription: 
     damageDescription: 

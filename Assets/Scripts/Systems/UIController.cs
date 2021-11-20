@@ -312,7 +312,7 @@ public class UIController : MonoBehaviour
 
     public void CloseUpgrade()
     {
-        ShowMenu(GameMenu.UpgradeMenu);
+        upgradeMenu.SetActive(false);
     }
 
     public void ShowTutorial()
@@ -339,10 +339,10 @@ public class UIController : MonoBehaviour
         {
             activateUpgradeTexts();
             fixedTexts[0].GetComponent<TextReader>().SetKey("target");
-            /*statsTexts[0].GetComponent<TextReader>().SetKey(structure.Blueprint.targetDescription);
+            statsTexts[0].GetComponent<TextReader>().SetKey(structure.Blueprint.targetDescription);
             statsTexts[1].GetComponent<TextReader>().SetKey(structure.Blueprint.rangeDescription);
             statsTexts[2].GetComponent<TextReader>().SetKey(structure.Blueprint.fireRateDescription);
-            statsTexts[3].GetComponent<TextReader>().SetKey(structure.Blueprint.damageDescription);*/
+            statsTexts[3].GetComponent<TextReader>().SetKey(structure.Blueprint.damageDescription);
 
         }
         else
@@ -351,7 +351,7 @@ public class UIController : MonoBehaviour
             fixedTexts[0].SetActive(true);
             statsTexts[0].SetActive(true);
             fixedTexts[0].GetComponent<TextReader>().SetKey("moneyGathered");
-            //statsTexts[0].GetComponent<Text>().text = moneyGiven.ToString();
+            statsTexts[0].GetComponent<TextMeshProUGUI>().text = structure.gameObject.GetComponent<Gatherer>().TotalResourceGathered.ToString();
         }
 
         switch (structure.structureId)
@@ -375,6 +375,11 @@ public class UIController : MonoBehaviour
         upgradeButton.SetActive(true);
         sellButton.SetActive(true);
         UpdateUpgradeButton(structure.GetLevel(), structure.structureId);
+
+        if (structure.structureId ==4)
+        {
+            UpdateUpgradeButton(3, structure.structureId);
+        }
     }
    /* public void SetUpgradeMenu(int structureId, string structureName, int level, string target, string range, string fireRate, string damage, int moneyGiven)
     {
@@ -485,11 +490,13 @@ public class UIController : MonoBehaviour
         upgradeButtonImage.sprite = upgradeLevels[level];
         if (level < 3)
         {
+            upgradeButton.GetComponent<Button>().interactable = true;
             upgradeCostText.GetComponent<TextMeshProUGUI>().text = structures[structureId].upgrades[level].cost.ToString();
         }
         else
         {
             upgradeCostText.GetComponent<TextMeshProUGUI>().text = "MAX";
+            upgradeButton.GetComponent<Button>().interactable = false;
         }
     }
 
