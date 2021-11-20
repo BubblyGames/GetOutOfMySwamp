@@ -218,6 +218,18 @@ public class InputManager : MonoBehaviour
                                 bombB.GetFireRate(),
                                 bombB.GetDamage(), 0);
                             break;
+                        case 5:
+                            //If its mountainTower
+                            ShootingDefenseBehaviour adb = structureHitted.GetComponent<ShootingDefenseBehaviour>();
+
+                            UIController.instance.SetUpgradeMenu(adb.structureId,
+                                adb.GetStructureName(),
+                                adb.GetLevel(),
+                                adb.GetTarget(),
+                                adb.GetRange(),
+                                adb.GetFireRate(),
+                                adb.GetDamage(), 0);
+                            break;
                     }
     /*
                     else if (structureHitted.GetComponent<Bomb>() != null)

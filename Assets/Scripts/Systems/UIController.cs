@@ -89,17 +89,6 @@ public class UIController : MonoBehaviour
         switch (menu)
         {
             case GameMenu.UpgradeMenu:
-                /*if (upgradeMenu.activeSelf == false)
-                {
-                    upgradeMenu.SetActive(true);
-                    pauseMenu.SetActive(false);
-                }
-                else
-                {
-                    upgradeMenu.SetActive(false);
-                    pauseMenu.SetActive(false);
-                }*/
-
                 upgradeMenu.SetActive(!upgradeMenu.activeSelf);
                 pauseMenu.SetActive(false);
 

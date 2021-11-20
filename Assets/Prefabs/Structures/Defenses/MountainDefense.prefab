@@ -118,10 +118,10 @@ MonoBehaviour:
   structureName: mountainTower
   structureId: 5
   canHitSkyEnemies: 1
-  fireRate: 2
-  damage: 6
+  fireRate: 7
+  damage: 3
   attackRange: 5
-  Target: sky
+  Target: air
   Range: medium
   Damage: low
   FireRate: fast
