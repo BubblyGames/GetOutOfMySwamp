@@ -535,7 +535,7 @@ En general, en el grupo hay muy buen ambiente de trabajo, consiguen hacer todo e
 ### 9.2 Hito 2: Beta
 
 - Interfaz implementada con estructura final y arte de GUI final: 19/11/2021
-- Tutorial introductorio en el que se expliquen las mecánicas básicas:
+- Tutorial introductorio en el que se expliquen las mecánicas básicas: 20/11/2021
 - Balanceo de las estadisticas de enemigos y torres para hacer el juego divertido y justo: 15/11/2021
 - Crear y meter en el juego los 3 modelos de enemigo y los 6 modelos de torre/defensa:
 - Nueva mecánica característica: No alcanzado
