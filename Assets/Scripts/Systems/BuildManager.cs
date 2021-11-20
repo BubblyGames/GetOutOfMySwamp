@@ -9,9 +9,11 @@ public class BuildManager : MonoBehaviour
     public static BuildManager instance;
     [SerializeField]
     private StructureBlueprint structureBlueprint = null; //Structure is going to be built
+    public StructureBlueprint StructureBlueprint { get => structureBlueprint; set => structureBlueprint = value; }
 
     [SerializeField]
     private Structure selectedStructure; //Already Built structure 
+    public Structure SelectedStructure { get => selectedStructure; set => selectedStructure = value; }
 
     [SerializeField]
     private CellInfo selectedCell;
@@ -24,6 +26,7 @@ public class BuildManager : MonoBehaviour
 
     public bool canBuild;//Checks if a structure is selected to be built
     public Vector3 currentConstructionPositionOffset;
+
 
     private void Awake()
     {
@@ -54,7 +57,7 @@ public class BuildManager : MonoBehaviour
 
         //Spell will always be 
         SpellBehaviour sb;
-        if (structureBlueprint.structurePrefab.TryGetComponent<SpellBehaviour>(out sb))
+        if (StructureBlueprint.structurePrefab.TryGetComponent<SpellBehaviour>(out sb))
             return true;
 
 
@@ -102,7 +105,7 @@ public class BuildManager : MonoBehaviour
 
         Vector3Int cubeDotProduct = Vector3Int.FloorToInt(Vector3.Cross(hit.normal, cubeForward));
 
-        int structureSize = structureBlueprint.structurePrefab.GetComponent<Structure>().Size;
+        int structureSize = StructureBlueprint.structurePrefab.GetComponent<Structure>().Size;
 
         for (int i = 0; i < structureSize; i++)
         {
@@ -111,7 +114,7 @@ public class BuildManager : MonoBehaviour
 
                 Vector3 sizeChecker = intPosUnder + (cubeForward * i) + (cubeDotProduct * j);
                 Vector3 OnTopofSizeChecker = intPos + (cubeForward * i) + (cubeDotProduct * j);
-                if (!LevelManager.instance.world.CheckCell(sizeChecker, structureBlueprint.structurePrefab.GetComponent<Structure>().blockType, OnTopofSizeChecker))
+                if (!LevelManager.instance.world.CheckCell(sizeChecker, StructureBlueprint.structurePrefab.GetComponent<Structure>().blockType, OnTopofSizeChecker))
                 {
                     //if it can be placed we delete dteh fundation list
                     structureFundation.Clear();
@@ -127,6 +130,10 @@ public class BuildManager : MonoBehaviour
             currentConstructionPositionOffset = (hit.normal + cubeForward + cubeDotProduct) / structureSize;
 
         }
+        else
+        {
+            currentConstructionPositionOffset = Vector3.zero;
+        }
 
         if (!canBuild /*|| selectedCell.blockType != structureBlueprint.structurePrefab.GetComponentInChildren<Structure>().blockType*/)
             return false;
@@ -137,7 +144,7 @@ public class BuildManager : MonoBehaviour
         foreach (Vector3 cellposition in structureFundation)
         {
             if (!LevelManager.instance.world.GetCell(Vector3Int.FloorToInt(cellposition)).isCloseToPath &&
-            structureBlueprint.structurePrefab.TryGetComponent<Gatherer>(out g))
+            StructureBlueprint.structurePrefab.TryGetComponent<Gatherer>(out g))
             {
                 //set not close to path
                 isCloseToPath = false;
@@ -168,27 +175,27 @@ public class BuildManager : MonoBehaviour
 
     public void SetSelectedStructure(Structure structure)
     {
-        selectedStructure = structure;
-        structureBlueprint = selectedStructure.Blueprint;
+        SelectedStructure = structure;
+        StructureBlueprint = SelectedStructure.Blueprint;
         selectedCell = null;
 
     }
 
     public int GetStructureSize()
     {
-        return structureBlueprint.structurePrefab.GetComponent<Structure>().Size;
+        return StructureBlueprint.structurePrefab.GetComponent<Structure>().Size;
     }
 
     public void SelectCell(CellInfo cell)
     {
         selectedCell = cell;
-        selectedStructure = null;
-        structureBlueprint = null;
+        SelectedStructure = null;
+        StructureBlueprint = null;
     }
 
     public void SelectStructureToBuild(StructureBlueprint defense)
     {
-        structureBlueprint = defense;
+        StructureBlueprint = defense;
         selectedCell = null;
         canBuild = true;
     }
@@ -205,10 +212,10 @@ public class BuildManager : MonoBehaviour
             CreateTowerOnCell(position, normal);
             ResetCanBuild(); // after building an structure you have to select another one to be able to place it
         }
-        else if (LevelStats.instance.CurrentMoney >= structureBlueprint.creationCost)
+        else if (LevelStats.instance.CurrentMoney >= StructureBlueprint.creationCost)
         {
             CreateTowerOnCell(position, normal);
-            LevelStats.instance.SpendMoney(structureBlueprint.creationCost);
+            LevelStats.instance.SpendMoney(StructureBlueprint.creationCost);
             ResetCanBuild(); // after building an structure you have to select another one to be able to place it
         }
         else
@@ -220,11 +227,11 @@ public class BuildManager : MonoBehaviour
 
     public void CreateTowerOnCell(Vector3 position, Vector3 normal)
     {
-        GameObject structureGO = Instantiate(structureBlueprint.structurePrefab, position, Quaternion.Euler(normal));
+        GameObject structureGO = Instantiate(StructureBlueprint.structurePrefab, position, Quaternion.Euler(normal));
         Structure structure = structureGO.GetComponentInChildren<Structure>();
         structure.gameObject.transform.localScale *= structure.Size;
         structure.SetNormal(normal);
-        structure.Blueprint = structureBlueprint;
+        structure.Blueprint = StructureBlueprint;
 
         //THIS SHOULDN'T BE NECESSARY
         //if (!LevelManager.instance.world.IsPosInBounds(position))
@@ -243,7 +250,7 @@ public class BuildManager : MonoBehaviour
             }
         }
 
-        int structureSize = structureBlueprint.structurePrefab.GetComponent<Structure>().Size;
+        int structureSize = StructureBlueprint.structurePrefab.GetComponent<Structure>().Size;
 
         for (int i = 0; i < structureFundation.Count; i++)
         {
@@ -256,16 +263,16 @@ public class BuildManager : MonoBehaviour
 
     public void UpgradeStructure()
     {
-        if (selectedStructure.GetLevel() < 3)
+        if (SelectedStructure.GetLevel() < 3)
         {
             if (CheatManager.instance.infiniteMoney)
             {
                 selectedCell.structure.UpgradeStrucrure(uIController);
             }
-            else if (LevelStats.instance.CurrentMoney >= structureBlueprint.upgrades[selectedStructure.GetLevel()].cost)
+            else if (LevelStats.instance.CurrentMoney >= StructureBlueprint.upgrades[SelectedStructure.GetLevel()].cost)
             {
-                selectedStructure.UpgradeStrucrure(uIController);
-                LevelStats.instance.SpendMoney(structureBlueprint.creationCost);
+                SelectedStructure.UpgradeStrucrure(uIController);
+                LevelStats.instance.SpendMoney(StructureBlueprint.creationCost);
 
             }
             else
@@ -278,9 +285,9 @@ public class BuildManager : MonoBehaviour
 
     public void SellStructure()
     {
-        Debug.Log("Selling: " + selectedStructure.name);
+        Debug.Log("Selling: " + SelectedStructure.name);
         UIController.instance.ShowMenu(UIController.GameMenu.Game);
-        selectedStructure.Sell();
+        SelectedStructure.Sell();
         //selectedCell.structure = null;
         LevelStats.instance.EarnMoney(50);
     }

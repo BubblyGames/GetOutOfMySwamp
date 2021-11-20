@@ -10,6 +10,11 @@ public class StructureBlueprint
     public float upgradeMultiplicator;
     public Upgrade[] upgrades;
 
+    public string targetDescription;
+    public string rangeDescription;
+    public string damageDescription;
+    public string fireRateDescription;
+
 }
 
 [System.Serializable]
