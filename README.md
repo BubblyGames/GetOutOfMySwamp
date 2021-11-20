@@ -368,8 +368,6 @@ El juego cuenta con una sola canción (autor: [Pascual Gázquez Compán](https:/
 
 ### 6.4 Ambiente sonoro
 
-El juego cuenta con efectos de sonido para la construcción de las torres y sus mejoras, para la muerte de las ranas enemigas y para cuando estas llegan a tu estanque, inflingiendote daño, todas cortesía de [Zapsplat](https://www.zapsplat.com/)
-
 
 ## 7. Interfaz
 
