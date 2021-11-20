@@ -9,8 +9,9 @@ public class InputManager : MonoBehaviour
     public static InputManager instance;
     bool choosingWhereToBuild = false; //A structure card has been selected
     bool zooming = false;//Is zooming
+    public bool isMobile = false;
 
-    GameObject selectedCard;
+    [HideInInspector] public GameObject selectedCard;
 
     [SerializeField]
     private float mouseSensitivity = 3.0f;
@@ -18,9 +19,13 @@ public class InputManager : MonoBehaviour
     private float scrollSensitivity = 15.0f;
     [SerializeField]
     private float pinchSensitivity = 15.0f;
+    [SerializeField]
+    private Vector3 offset;
     //Gameobject that will be placed where structure is about to be built
     public GameObject cursor;
     private GameObject cursorBase;
+
+    Vector3 mousePosition = new Vector3();
 
     private void Awake()
     {
@@ -46,38 +51,51 @@ public class InputManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //Zoom
-        CheckPinch();
-        CameraBehaviour.instance.Zoom(Input.mouseScrollDelta.y * scrollSensitivity); //Zoom with mouse wheel
+        if (!LevelManager.instance.ready)
+            return;
+
+        mousePosition = Input.mousePosition;
+
+        if (isMobile)
+        {
+            CheckPinch();
+        }
+        else
+        {
+            CameraBehaviour.instance.Zoom(Input.mouseScrollDelta.y * scrollSensitivity); //Zoom with mouse wheel
+        }
 
         //Click
         if (Input.GetMouseButtonDown(0))
         {
-            MouseDown();
+            MouseDown(mousePosition);
         }
 
         //Click release
         if (Input.GetMouseButtonUp(0))
         {
-            MouseUp();
+            MouseUp(mousePosition);
         }
 
         //Drag
         if (Input.GetMouseButton(0))
         {
-            MouseDrag();
+            MouseDrag(mousePosition);
         }
-
-
     }
 
-    private void MouseDrag()
+    private void MouseDrag(Vector3 mousePosition)
     {
         if (choosingWhereToBuild)
         {
             //Casts a ray to find out where does the player want to place the structure
-            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-            RaycastHit hit = new RaycastHit();
+            Ray ray;
+            if (isMobile)
+                ray = Camera.main.ScreenPointToRay(mousePosition + offset);
+            else
+                ray = Camera.main.ScreenPointToRay(mousePosition);
+
+            RaycastHit hit;
 
             if (Physics.Raycast(ray, out hit, Mathf.Infinity))
             {
@@ -97,7 +115,7 @@ public class InputManager : MonoBehaviour
                     //Cursor activates and moves to selected cell
                     cursor.SetActive(true);
 
-                   
+
                     cursor.transform.position = pos;
                     int structureSize = BuildManager.instance.GetStructureSize();
                     if (structureSize > 1)
@@ -117,7 +135,7 @@ public class InputManager : MonoBehaviour
                 cursor.SetActive(false);
                 selectedCard.SetActive(true);
                 //Card is moved with mouse
-                selectedCard.transform.position = GetMouseAsWorldPoint() + mOffset;
+                selectedCard.transform.position = GetMouseAsWorldPoint(mousePosition) + mOffset;
             }
         }
         else if (!zooming)
@@ -133,9 +151,9 @@ public class InputManager : MonoBehaviour
     private Vector3 defaultPos;
     private Vector3 worldPos;
 
-    private void MouseDown()
+    private void MouseDown(Vector3 mousePosition)
     {
-        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        Ray ray = Camera.main.ScreenPointToRay(mousePosition);
         RaycastHit hit = new RaycastHit();
 
         if (Physics.Raycast(ray, out hit, Mathf.Infinity))
@@ -156,7 +174,7 @@ public class InputManager : MonoBehaviour
                     defaultPos = selectedCard.transform.localPosition;
                     worldPos = selectedCard.transform.position;
                     mZCoord = Camera.main.WorldToScreenPoint(worldPos).z;
-                    mOffset = worldPos - GetMouseAsWorldPoint();
+                    mOffset = worldPos - GetMouseAsWorldPoint(mousePosition);
 
                     DefenseBehaviour db;
                     if (Shop.instance.selectedDefenseBlueprint.structurePrefab.TryGetComponent<DefenseBehaviour>(out db))
@@ -190,7 +208,7 @@ public class InputManager : MonoBehaviour
                             break;
                         case 1:
                             //If slows down
-                            ShootingDefenseBehaviour sfb1= structureHitted.GetComponent<ShootingDefenseBehaviour>();
+                            ShootingDefenseBehaviour sfb1 = structureHitted.GetComponent<ShootingDefenseBehaviour>();
 
                             UIController.instance.SetUpgradeMenu(sfb1.structureId,
                                 sfb1.GetStructureName(),
@@ -244,10 +262,15 @@ public class InputManager : MonoBehaviour
         }
     }
 
-    private void MouseUp()
+    private void MouseUp(Vector3 mousePosition)
     {
-        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-        RaycastHit hit = new RaycastHit();
+        Ray ray;
+        if (isMobile)
+            ray = Camera.main.ScreenPointToRay(mousePosition + offset);
+        else
+            ray = Camera.main.ScreenPointToRay(mousePosition);
+
+        RaycastHit hit;
 
         if (Physics.Raycast(ray, out hit, Mathf.Infinity))
         {
@@ -313,16 +336,21 @@ public class InputManager : MonoBehaviour
         return true;
     }
 
-    private Vector3 GetMouseAsWorldPoint()
+    private Vector3 GetMouseAsWorldPoint(Vector3 mousePosition)
     {
         // Pixel coordinates of mouse (x,y)
-        Vector3 mousePoint = Input.mousePosition;
+        Vector3 mousePoint = mousePosition;
 
         // z coordinate of game object on screen
         mousePoint.z = mZCoord;
 
         // Convert it to world points
         return Camera.main.ScreenToWorldPoint(mousePoint);
+    }
+
+    public void MobileInput(bool b)
+    {
+        isMobile = b;
     }
 }
 //https://answers.unity.com/questions/1698508/detect-mobile-client-in-webgl.html?childToView=1698985#answer-1698985

@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class LevelStats : MonoBehaviour
 {
@@ -10,8 +11,9 @@ public class LevelStats : MonoBehaviour
 
     [Header("Text References")]
     public Text hpText;
-    public Text moneyText;
-    public Text scoreText;
+    public Image hpBar;
+    public TextMeshProUGUI moneyText;
+    public TextMeshProUGUI scoreText;
 
     [Header("Level Stats")]
     [SerializeField] private int startBaseHealthPoints = 100; //Starting Health points the defenders base have
@@ -75,6 +77,7 @@ public class LevelStats : MonoBehaviour
         currentBaseHealthPoints -= damageTaken;
         currentBaseHealthPoints = Mathf.Max(0, currentBaseHealthPoints);
         hpText.text = currentBaseHealthPoints.ToString();
+        hpBar.fillAmount = (float) currentBaseHealthPoints / (float) startBaseHealthPoints;
     }
 
     public void SpendMoney(int quantity)

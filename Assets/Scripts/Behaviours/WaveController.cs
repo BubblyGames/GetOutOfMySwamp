@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 
 //TODO: End wave system
@@ -30,7 +31,6 @@ public class WaveController : MonoBehaviour
     public bool allWavesCleared;
 
     public int waveCount; // Wave its being played
-
 
 
     ///public Text waveText;

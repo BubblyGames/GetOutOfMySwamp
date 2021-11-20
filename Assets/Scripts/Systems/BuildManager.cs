@@ -51,20 +51,15 @@ public class BuildManager : MonoBehaviour
 
 
 
-        if (!CheatManager.instance.infiniteMoney)
-        {
-            if (LevelStats.instance.CurrentMoney < StructureBlueprint.creationCost)
+        if (!CheatManager.instance.infiniteMoney && LevelStats.instance.CurrentMoney < structureBlueprint.creationCost)
                 return false;
-        }
+        
 
         //Spell will always be 
         SpellBehaviour sb;
         if (StructureBlueprint.structurePrefab.TryGetComponent<SpellBehaviour>(out sb))
             return true;
 
-        //But for builidngs we need to check if the position is within the world bounds
-        if (!LevelManager.instance.world.IsPosInBounds(Vector3Int.FloorToInt(intPos)))
-            return false;
 
         //Position of the block under the block where the structure will be built
         Vector3Int intPosUnder = new Vector3Int(
@@ -72,6 +67,9 @@ public class BuildManager : MonoBehaviour
             Mathf.RoundToInt(hit.point.y - (hit.normal.y / 2)),
             Mathf.RoundToInt(hit.point.z - (hit.normal.z / 2)));
 
+        //But for builidngs we need to check if the position is within the world bounds
+        if (!LevelManager.instance.world.IsPosInBounds(Vector3Int.FloorToInt(intPosUnder)))
+            return false;
 
 
         selectedCell = LevelManager.instance.world.GetCell(intPosUnder);

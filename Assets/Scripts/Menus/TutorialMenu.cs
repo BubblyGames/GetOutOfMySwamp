@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class TutorialMenu : MonoBehaviour
 {
@@ -16,8 +17,8 @@ public class TutorialMenu : MonoBehaviour
     public GameObject headerTextReader;
     public GameObject descTextReader;
 
-    public Text headerContainer;
-    public Text descriptionContainer;
+    public TextMeshProUGUI headerContainer;
+    public TextMeshProUGUI descriptionContainer;
     public Image imageContainer;
     public List<Sprite> lessonImages;
 
