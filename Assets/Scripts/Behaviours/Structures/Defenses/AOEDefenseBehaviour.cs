@@ -25,7 +25,7 @@ public class AOEDefenseBehaviour : DefenseBehaviour
             EnemyBehaviour eb;
             if (hits[i].collider.TryGetComponent<EnemyBehaviour>(out eb))
             {
-                eb.Hurt(damage);
+                eb.slowAndDamage(damage);
             }
         }
     }
