@@ -199,6 +199,8 @@ public class InputManager : MonoBehaviour
                     UIController.instance.SetUpgradeMenu(structureHitted);
                     UIController.instance.ShowMenu(UIController.GameMenu.UpgradeMenu);
                     BuildManager.instance.SetSelectedStructure(structureHitted.GetComponent<Structure>());
+                    //check the structure type
+                   
 
                     break;
                 case "Gatherer":
