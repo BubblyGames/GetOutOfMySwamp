@@ -66,7 +66,7 @@ public class TextManager : MonoBehaviour
         }
     }
 
-    public void ChangeLenguage(int languageid)
+    public void ChangeLanguage(int languageid)
     {
         switch (languageid)
         {
@@ -185,7 +185,7 @@ public class TextManager : MonoBehaviour
         spanishDictionary.Add("select", "Empezar");
         spanishDictionary.Add("pause", "Pausa");
         spanishDictionary.Add("health", "Vida");
-        spanishDictionary.Add("score", "Score");
+        spanishDictionary.Add("score", "Puntuación");
         spanishDictionary.Add("money", "Dinero");
         spanishDictionary.Add("settings", "Configuración");
         spanishDictionary.Add("language", "Idioma");

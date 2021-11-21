@@ -3847,6 +3847,7 @@ GameObject:
   - component: {fileID: 795210836}
   - component: {fileID: 795210835}
   - component: {fileID: 795210834}
+  - component: {fileID: 795210837}
   m_Layer: 5
   m_Name: Upgrade Button
   m_TagString: Untagged
@@ -3969,6 +3970,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 795210832}
   m_CullTransparentMesh: 1
+--- !u!114 &795210837
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 795210832}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9b9a52f61abc874ea10f049443698bd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  key: upgrade
+  textContainer: {fileID: 1040095943}
 --- !u!1 &806991750
 GameObject:
   m_ObjectHideFlags: 0
@@ -8559,7 +8574,6 @@ GameObject:
   - component: {fileID: 1583022575}
   - component: {fileID: 1583022577}
   - component: {fileID: 1583022576}
-  - component: {fileID: 1690259543}
   m_Layer: 5
   m_Name: FPS
   m_TagString: Untagged
@@ -8593,7 +8607,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1583022574}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
   m_Name: 
@@ -8738,18 +8752,6 @@ RectTransform:
   m_AnchoredPosition: {x: 204.9, y: 67.79}
   m_SizeDelta: {x: 160, y: 20}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &1690259543
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1583022574}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 0}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1732745669
 GameObject:
   m_ObjectHideFlags: 0
@@ -9600,6 +9602,7 @@ GameObject:
   - component: {fileID: 1792218507}
   - component: {fileID: 1792218506}
   - component: {fileID: 1792218505}
+  - component: {fileID: 1792218508}
   m_Layer: 5
   m_Name: Sell Button
   m_TagString: Untagged
@@ -9721,6 +9724,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1792218503}
   m_CullTransparentMesh: 1
+--- !u!114 &1792218508
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1792218503}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9b9a52f61abc874ea10f049443698bd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  key: sell
+  textContainer: {fileID: 1121659744}
 --- !u!1 &1818190456
 GameObject:
   m_ObjectHideFlags: 0
@@ -10191,6 +10208,7 @@ MonoBehaviour:
   - {r: 0, g: 0, b: 0, a: 0}
   - {r: 0, g: 0, b: 0, a: 0}
   - {r: 0, g: 0, b: 0, a: 0}
+  meteorPrefab: {fileID: 4422750441095425187, guid: 9e9b00a8bb793dd4088c7a4c33e9528a, type: 3}
 --- !u!4 &1903685283
 Transform:
   m_ObjectHideFlags: 0
@@ -10350,6 +10368,7 @@ MonoBehaviour:
   isBetweenWaves: 0
   allWavesCleared: 0
   waveCount: 0
+  waveEndTimer: 0
 --- !u!114 &1903685290
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10414,40 +10433,34 @@ MonoBehaviour:
   defenseBlueprints:
   - structurePrefab: {fileID: 7137880238603071797, guid: e1fa9704af9f5114992d5229e61c2040, type: 3}
     creationCost: 125
-    upgradeMultiplicator: 1.5
+    upgradeMultiplicator: 1
     upgrades:
     - cost: 50
       stats:
       - statToUpgrade: 0
         upgradeAddedValue: 2
-      - statToUpgrade: 1
-        upgradeAddedValue: 0.5
     - cost: 100
       stats:
       - statToUpgrade: 0
         upgradeAddedValue: 2
       - statToUpgrade: 2
-        upgradeAddedValue: 3
+        upgradeAddedValue: 1
     - cost: 150
       stats:
       - statToUpgrade: 1
-        upgradeAddedValue: 0.25
-      - statToUpgrade: 2
-        upgradeAddedValue: 2
+        upgradeAddedValue: 0.2
     targetDescription: ground
     rangeDescription: medium
     damageDescription: medium
     fireRateDescription: medium
   - structurePrefab: {fileID: 7137880238603071797, guid: 0d87b48302d7d6c4d88056ea6fb54a3d, type: 3}
     creationCost: 200
-    upgradeMultiplicator: 1.3
+    upgradeMultiplicator: 1
     upgrades:
     - cost: 100
       stats:
       - statToUpgrade: 0
-        upgradeAddedValue: 1
-      - statToUpgrade: 2
-        upgradeAddedValue: 1
+        upgradeAddedValue: 2
     - cost: 150
       stats:
       - statToUpgrade: 0
@@ -10457,23 +10470,23 @@ MonoBehaviour:
     - cost: 200
       stats:
       - statToUpgrade: 1
-        upgradeAddedValue: 0.5
+        upgradeAddedValue: 0.2
     targetDescription: ground
     rangeDescription: low
     damageDescription: low
     fireRateDescription: medium
   - structurePrefab: {fileID: 5445150579504396128, guid: 34203a46bca1c2443b913193efffddec, type: 3}
     creationCost: 300
-    upgradeMultiplicator: 1.2
+    upgradeMultiplicator: 1
     upgrades:
     - cost: 150
       stats:
       - statToUpgrade: 0
-        upgradeAddedValue: 35
+        upgradeAddedValue: 5
     - cost: 200
       stats:
       - statToUpgrade: 2
-        upgradeAddedValue: 5
+        upgradeAddedValue: 2
     - cost: 300
       stats:
       - statToUpgrade: 1
@@ -10484,7 +10497,7 @@ MonoBehaviour:
     fireRateDescription: slow
   - structurePrefab: {fileID: 3250008881624491856, guid: d47e0467f382b7241aafc52e24236632, type: 3}
     creationCost: 50
-    upgradeMultiplicator: 1.1
+    upgradeMultiplicator: 1
     upgrades: []
     targetDescription: 
     rangeDescription: 
@@ -10492,26 +10505,30 @@ MonoBehaviour:
     fireRateDescription: 
   - structurePrefab: {fileID: 2711408889448630410, guid: 4cdbff3b4cc893847ad0a47225cd137b, type: 3}
     creationCost: 250
-    upgradeMultiplicator: 1.1
-    upgrades:
-    - cost: 0
-      stats:
-      - statToUpgrade: 0
-        upgradeAddedValue: 0
-    - cost: 0
-      stats: []
-    - cost: 0
-      stats: []
+    upgradeMultiplicator: 1
+    upgrades: []
     targetDescription: 
     rangeDescription: 
     damageDescription: 
     fireRateDescription: 
   - structurePrefab: {fileID: 2834612391340580073, guid: a36aa2268bfb923489ad10a4782958d3, type: 3}
-    creationCost: 1
+    creationCost: 175
     upgradeMultiplicator: 1
     upgrades:
-    - cost: 0
-      stats: []
+    - cost: 75
+      stats:
+      - statToUpgrade: 0
+        upgradeAddedValue: 1
+    - cost: 125
+      stats:
+      - statToUpgrade: 2
+        upgradeAddedValue: 1
+    - cost: 200
+      stats:
+      - statToUpgrade: 0
+        upgradeAddedValue: 1
+      - statToUpgrade: 1
+        upgradeAddedValue: 2
     targetDescription: 
     rangeDescription: 
     damageDescription: 

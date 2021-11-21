@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SpellBehaviour : Structure
+public class ExplosionSpell : SpellBehaviour
 {
     // Start is called before the first frame update
     public GameObject particles;
@@ -17,18 +17,12 @@ public class SpellBehaviour : Structure
         pos.y = (int)transform.position.y;
         pos.z = (int)transform.position.z;
 
+        LevelManager.instance.world.Explode(pos, range);
+
         GameObject p = GameObject.Instantiate(particles);
         p.transform.position = transform.position;
         p.transform.rotation = transform.rotation;
 
-        LevelManager.instance.world.Explode(pos, range);
-
         Destroy(gameObject);
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
     }
 }

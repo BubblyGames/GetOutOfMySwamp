@@ -75,7 +75,11 @@ public class InputManager : MonoBehaviour
             MouseDrag();
         }
 
-
+        //Test
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            LevelManager.instance.SpawnMeteor();
+        }
     }
 
     private void MouseDrag()
