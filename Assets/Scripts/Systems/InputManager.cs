@@ -53,6 +53,9 @@ public class InputManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (!LevelManager.instance.ready)
+            return;
+
         //Zoom
         CheckPinch();
         CameraBehaviour.instance.Zoom(Input.mouseScrollDelta.y * scrollSensitivity); //Zoom with mouse wheel
