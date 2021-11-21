@@ -3792,7 +3792,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 1307362636}
   m_Direction: 2
   m_Value: 1
-  m_Size: 0.430696
+  m_Size: 0.43069604
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -10337,6 +10337,7 @@ MonoBehaviour:
   isBetweenWaves: 0
   allWavesCleared: 0
   waveCount: 0
+  waveEndTimer: 0
 --- !u!114 &1903685290
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10401,40 +10402,34 @@ MonoBehaviour:
   defenseBlueprints:
   - structurePrefab: {fileID: 7137880238603071797, guid: e1fa9704af9f5114992d5229e61c2040, type: 3}
     creationCost: 125
-    upgradeMultiplicator: 1.5
+    upgradeMultiplicator: 1
     upgrades:
     - cost: 50
       stats:
       - statToUpgrade: 0
         upgradeAddedValue: 2
-      - statToUpgrade: 1
-        upgradeAddedValue: 0.5
     - cost: 100
       stats:
       - statToUpgrade: 0
         upgradeAddedValue: 2
       - statToUpgrade: 2
-        upgradeAddedValue: 3
+        upgradeAddedValue: 1
     - cost: 150
       stats:
       - statToUpgrade: 1
-        upgradeAddedValue: 0.25
-      - statToUpgrade: 2
-        upgradeAddedValue: 2
+        upgradeAddedValue: 0.2
     targetDescription: ground
     rangeDescription: medium
     damageDescription: medium
     fireRateDescription: medium
   - structurePrefab: {fileID: 7137880238603071797, guid: 0d87b48302d7d6c4d88056ea6fb54a3d, type: 3}
     creationCost: 200
-    upgradeMultiplicator: 1.3
+    upgradeMultiplicator: 1
     upgrades:
     - cost: 100
       stats:
       - statToUpgrade: 0
-        upgradeAddedValue: 1
-      - statToUpgrade: 2
-        upgradeAddedValue: 1
+        upgradeAddedValue: 2
     - cost: 150
       stats:
       - statToUpgrade: 0
@@ -10444,23 +10439,23 @@ MonoBehaviour:
     - cost: 200
       stats:
       - statToUpgrade: 1
-        upgradeAddedValue: 0.5
+        upgradeAddedValue: 0.2
     targetDescription: ground
     rangeDescription: low
     damageDescription: low
     fireRateDescription: medium
   - structurePrefab: {fileID: 5445150579504396128, guid: 34203a46bca1c2443b913193efffddec, type: 3}
     creationCost: 300
-    upgradeMultiplicator: 1.2
+    upgradeMultiplicator: 1
     upgrades:
     - cost: 150
       stats:
       - statToUpgrade: 0
-        upgradeAddedValue: 35
+        upgradeAddedValue: 5
     - cost: 200
       stats:
       - statToUpgrade: 2
-        upgradeAddedValue: 5
+        upgradeAddedValue: 2
     - cost: 300
       stats:
       - statToUpgrade: 1
@@ -10471,7 +10466,7 @@ MonoBehaviour:
     fireRateDescription: slow
   - structurePrefab: {fileID: 3250008881624491856, guid: d47e0467f382b7241aafc52e24236632, type: 3}
     creationCost: 50
-    upgradeMultiplicator: 1.1
+    upgradeMultiplicator: 1
     upgrades: []
     targetDescription: 
     rangeDescription: 
@@ -10479,26 +10474,30 @@ MonoBehaviour:
     fireRateDescription: 
   - structurePrefab: {fileID: 2711408889448630410, guid: 4cdbff3b4cc893847ad0a47225cd137b, type: 3}
     creationCost: 250
-    upgradeMultiplicator: 1.1
-    upgrades:
-    - cost: 0
-      stats:
-      - statToUpgrade: 0
-        upgradeAddedValue: 0
-    - cost: 0
-      stats: []
-    - cost: 0
-      stats: []
+    upgradeMultiplicator: 1
+    upgrades: []
     targetDescription: 
     rangeDescription: 
     damageDescription: 
     fireRateDescription: 
   - structurePrefab: {fileID: 2834612391340580073, guid: a36aa2268bfb923489ad10a4782958d3, type: 3}
-    creationCost: 1
+    creationCost: 175
     upgradeMultiplicator: 1
     upgrades:
-    - cost: 0
-      stats: []
+    - cost: 75
+      stats:
+      - statToUpgrade: 0
+        upgradeAddedValue: 1
+    - cost: 125
+      stats:
+      - statToUpgrade: 2
+        upgradeAddedValue: 1
+    - cost: 200
+      stats:
+      - statToUpgrade: 0
+        upgradeAddedValue: 1
+      - statToUpgrade: 1
+        upgradeAddedValue: 2
     targetDescription: 
     rangeDescription: 
     damageDescription: 

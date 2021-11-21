@@ -123,7 +123,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   startHealth: 25
   healthPoints: 0
-  startSpeed: 4
+  startSpeed: 3
   currentSpeed: 0
   damage: 15
   moneyValue: 3
