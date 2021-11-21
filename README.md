@@ -148,7 +148,7 @@ El juego cuenta con cinco mapas, diferenciados a nivel visual y en la generació
 
 Los niveles son semi procedimentales y se crean mediante una semilla.
 
-Pantano:
+**Pantano:
 
 Cantidad de enemigos por ronda:
 | **ENEMIGOS**                | RONDA 1 | RONDA 2 | RONDA 3 |
@@ -158,7 +158,7 @@ Cantidad de enemigos por ronda:
 | HORDA                       |  5      |   40    |   105   |
 | AÉREO                       |  3      |   5     |   31    |
 
-Tundra:
+**Tundra:
 
 Cantidad de enemigos por ronda:
 | **ENEMIGOS**                | RONDA 1 | RONDA 2 | RONDA 3 | RONDA 4 | RONDA 5 |
@@ -168,35 +168,35 @@ Cantidad de enemigos por ronda:
 | HORDA                       |  25     |   35    |   40    |   40    |   40    |
 | AÉREO                       |  5      |   8     |   10    |   10    |   30    |
 
-Otoño:
+**Otoño:
 
 Cantidad de enemigos por ronda: PENDIENTE
-| **ENEMIGOS**                | RONDA 1 | RONDA 2 | RONDA 3 | RONDA 4 | RONDA 5 |
-| --------------------------- | ------- | ------- |-------- | ------- | ------- |
-| NORMAL                      |  16     |   23    |   25    |   25    |   45    |
-| TANQUE                      |  9      |   12    |   15    |   15    |   35    |
-| HORDA                       |  25     |   35    |   40    |   40    |   40    |
-| AÉREO                       |  5      |   8     |   10    |   10    |   30    |
+| **ENEMIGOS**                | RONDA 1 | RONDA 2 | RONDA 3 | 
+| --------------------------- | ------- | ------- |-------- |
+| NORMAL                      |  10     |   15    |   40    |
+| TANQUE                      |  2      |   10    |   15    |
+| HORDA                       |  10     |   20    |   40    |
+| AÉREO                       |  1      |   6     |   35    |
 
-Cerezo:
-
-Cantidad de enemigos por ronda: PENDIENTE
-| **ENEMIGOS**                | RONDA 1 | RONDA 2 | RONDA 3 | RONDA 4 | RONDA 5 |
-| --------------------------- | ------- | ------- |-------- | ------- | ------- |
-| NORMAL                      |       |       |       |       |       |
-| TANQUE                      |        |       |       |       |       |
-| HORDA                       |       |       |       |       |       |
-| AÉREO                       |        |        |       |       |       |
-
-Nevado:
+**Cerezo:
 
 Cantidad de enemigos por ronda: PENDIENTE
-| **ENEMIGOS**                | RONDA 1 | RONDA 2 | RONDA 3 | RONDA 4 | RONDA 5 |
-| --------------------------- | ------- | ------- |-------- | ------- | ------- |
-| NORMAL                      |  16     |   23    |   25    |   25    |   45    |
-| TANQUE                      |  9      |   12    |   15    |   15    |   35    |
-| HORDA                       |  25     |   35    |   40    |   40    |   40    |
-| AÉREO                       |  5      |   8     |   10    |   10    |   30    |
+| **ENEMIGOS**                | RONDA 1 | RONDA 2 | RONDA 3 | RONDA 4 |
+| --------------------------- | ------- | ------- |-------- | ------- |
+| NORMAL                      |   15    |   21    |   51    |   48    |
+| TANQUE                      |   3     |   6     |   18    |   26    |
+| HORDA                       |   15    |   39    |   60    |   45    |
+| AÉREO                       |   1     |   9     |   33    |   33    |
+
+**Nevado:
+
+Cantidad de enemigos por ronda: PENDIENTE
+| **ENEMIGOS**                | RONDA 1 | RONDA 2 | RONDA 3 | RONDA 4 |
+| --------------------------- | ------- | ------- |-------- | ------- |
+| NORMAL                      |   60    |   40    |   80    |   80    |
+| TANQUE                      |   4     |   16    |   40    |   60    |
+| HORDA                       |   30    |   40    |   80    |   120   |
+| AÉREO                       |   4     |   16    |   40    |   40    |
 
 
 ### 4.5 Torres y trampas
@@ -209,7 +209,7 @@ Cantidad de enemigos por ronda: PENDIENTE
 | TORRE MONTAÑA  | Largo (7 ud) | Bajo (3 ud)    | Individual TA\*   | Rápido (5 ud)       | 15  | \-                               | 175    |
 | TORRE ECONÓMICA| Nada         | Ninguno        | Ninguno           | Sin ataque          |     | Genera ingresos de forma pasiva  | 250    |
 | **TRAMPAS**    |              |                |                   |                     |     |                                  |        |
-| TRAMPA PANTANO | Corto (3 ud) | Elevado (40 ud)| Área TT\*         | \-                  |     | Ralentiza al enemigo             | 50     |
+| TRAMPA PANTANO | Corto (3 ud) | Elevado (40 ud)| Área TT\*         | De un solo uso      |     | Ralentiza al enemigo             | 50     |
 
 Cada defensa del jugador se puede mejorar, por separado, hasta tres veces, aumentando con estas mejoras las estadísticas de dicha defensa y haciéndola más eficaz en combate.
 
@@ -306,6 +306,8 @@ Los biomas presentes son, como se han explicado antes, los siguientes:
 
 **Bioma Pantano:**
 
+![](https://user-images.githubusercontent.com/56488179/142772843-781fb10b-653b-4e5f-b81f-d4c036336efb.png)
+
 **Bioma Otoño:**
 
 ![](https://lh4.googleusercontent.com/TXgQWhpVlt83etDjwyYZxmVOVPrlITub35fW6DAcFtA7LPzNhg3M7nMgYrNafSEyJ20paOBGp5wyTFgmkCkk-GYfFl1u3ooGeAzqImXpHy3aheO0lrHU4wik3ZZYzqpsGvj-WL_Z)
@@ -348,7 +350,7 @@ La representación en el escenario tanto de las defensas como de los enemigos so
 
 ![VenenosaRender](https://user-images.githubusercontent.com/56488179/142732066-018798f5-6ca5-4c18-b5a4-cd1715ed443a.png)
 
-- Torre montañosa:
+- Torre montaña:
 
 ![AereaRender](https://user-images.githubusercontent.com/56488179/142732075-a73a68d8-8cca-4110-a8de-09a1d2f4313d.png)
 
@@ -374,6 +376,10 @@ La representación en el escenario tanto de las defensas como de los enemigos so
 
 ![HordaRender](https://user-images.githubusercontent.com/56488179/142732505-ff361669-72d7-46aa-8af5-75a9d16d0158.png)
 
+- Enemigo volador:
+
+![AereoRender](https://user-images.githubusercontent.com/56488179/142773898-0e065091-fb06-48d8-9853-527115f4e0dc.png)
+
 #### Iconos
 
 A su vez, la representación de las estadísticas de las torres se realiza mediante cartas o pantallas de información en gráficos 2D acorde a las descripciones de la estética general y al resto de elementos 2D.
@@ -390,7 +396,7 @@ A su vez, la representación de las estadísticas de las torres se realiza media
 
 ![Psíquica](https://user-images.githubusercontent.com/56488179/142732258-3350a5d7-4d75-4494-be7d-75a4ecb69431.png)
 
-- Torre aérea:
+- Torre montaña:
 
 ![Aerea](https://user-images.githubusercontent.com/56488179/142732217-6d9702b9-d1e2-4d8d-b761-a5b9c89b57d9.png)
 
@@ -414,6 +420,9 @@ A su vez, la representación de las estadísticas de las torres se realiza media
 
 ![Horda](https://user-images.githubusercontent.com/56488179/142732450-238aba64-f947-4ea5-aa23-d3785851458e.png)
 
+- Enemigo volador:
+
+![Aereo](https://user-images.githubusercontent.com/56488179/142773870-f647b0ed-0cb2-446b-b71a-fbb24b6bc1cd.png)
 
 ### 6.3 Música
 
