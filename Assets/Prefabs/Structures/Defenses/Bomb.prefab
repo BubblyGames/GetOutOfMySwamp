@@ -146,7 +146,7 @@ MonoBehaviour:
   blockType: 0
   structureName: bomb
   structureId: 3
-  canHitSkyEnemies: 0
+  canHitSkyEnemies: 1
   fireRate: 0
   damage: 40
   attackRange: 3
