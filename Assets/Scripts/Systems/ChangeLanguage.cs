@@ -17,7 +17,7 @@ public class ChangeLanguage : MonoBehaviour
 
         this.currentLanguage = TextManager.instance.currentLanguage;
         languageText.text = languages[currentLanguage];
-        TextManager.instance.ChangeLenguage(currentLanguage);
+        TextManager.instance.ChangeLanguage(currentLanguage);
     }
     public void NextLanguage()
     {
@@ -30,7 +30,7 @@ public class ChangeLanguage : MonoBehaviour
             currentLanguage = 0;
         }
         languageText.text = languages[currentLanguage];
-        TextManager.instance.ChangeLenguage(currentLanguage);
+        TextManager.instance.ChangeLanguage(currentLanguage);
     }
 
     public void PreviousLanguage()
@@ -44,6 +44,6 @@ public class ChangeLanguage : MonoBehaviour
             currentLanguage = languages.Count - 1;
         }
         languageText.text = languages[currentLanguage];
-        TextManager.instance.ChangeLenguage(currentLanguage);
+        TextManager.instance.ChangeLanguage(currentLanguage);
     }
 }
