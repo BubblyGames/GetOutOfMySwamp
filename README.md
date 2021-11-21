@@ -205,7 +205,7 @@ Cantidad de enemigos por ronda:
 | -------------- | ---------    | -------------- | ----------------- | ------------------- | --- | -------------------------------- |--------|
 | TORRE PESADA   | Largo (6 ud) | Elevado (30 ud)| Proy Área TT\*    | Lento (0.1 ud)      |  6  | \-                               | 300    |
 | TORRE BÁSICA   | Medio (5 ud) | Medio (14 ud)  | Individual TT\*   | Medio (2 ud)        | 28  | \-                               | 125    |
-| TORRE PSÍQUICA | Corto (4 ud) | Bajo (3 ud)    | Área TT\*         | Lento (0.5 ud)      | 0.9 | Ralentiza al enemigo             | 200    |
+| TORRE PSÍQUICA | Corto (4 ud) | Bajo (3 ud)    | Área TT\*         | Lento (0.3 ud)      | 0.9 | Ralentiza al enemigo             | 200    |
 | TORRE MONTAÑA  | Largo (7 ud) | Bajo (3 ud)    | Individual TA\*   | Rápido (5 ud)       | 15  | \-                               | 175    |
 | TORRE ECONÓMICA| Nada         | Ninguno        | Ninguno           | Sin ataque          |     | Genera ingresos de forma pasiva  | 250    |
 | **TRAMPAS**    |              |                |                   |                     |     |                                  |        |
@@ -247,7 +247,7 @@ Nivel 3:
 | NORMAL                      |  40  | Media (2 ud)            | Terrestre - Normal   |     8      |
 | TANQUE                      |  250 | Lenta (1.5 ud)          | Terrestre - Pesada   |     20     |
 | HORDA                       |  25  | Rápida (4 ud)           | Terrestre - Horda    |     3      |
-| AÉREO                       |  25  | Media (3 ud)            | Aérea - Normal       |     15     |
+| AÉREO                       |  30  | Media (3 ud)            | Aérea - Normal       |     15     |
 
 
 ## 5. Trasfondo
@@ -306,7 +306,9 @@ Los biomas presentes son, como se han explicado antes, los siguientes:
 
 **Bioma Pantano:**
 
-![](https://user-images.githubusercontent.com/56488179/142772843-781fb10b-653b-4e5f-b81f-d4c036336efb.png)
+![](https://user-images.githubusercontent.com/56488179/142777057-986df292-81c3-43f9-9842-efd53bd7c35f.png)
+
+![](https://user-images.githubusercontent.com/56488179/142777051-af2f45b9-2ccb-4790-a5c1-a07466fc1b29.png)
 
 **Bioma Otoño:**
 
@@ -441,7 +443,7 @@ La interfaz del juego consta de 7 ventanas:
 
 - Menú principal:
 
-![menuPrinc](https://user-images.githubusercontent.com/56488179/142733247-62b3fdcd-5cf8-46d4-9e33-b49a61d4eded.png)
+![menuPrinc](https://user-images.githubusercontent.com/56488179/142777098-17abb069-96f6-4e93-a960-d05407b42c2a.png)
 
 - Ajustes:
 
@@ -605,7 +607,7 @@ En general, en el grupo hay muy buen ambiente de trabajo, consiguen hacer todo e
 - Añadir offset para la colocación de torres: 19/11/2021
 - Arreglar proporciones de las torres en el cubo: 18/11/2021
 - Dirigir correctamente la barra de vida de los enemigos hacia la camara del jugador: 16/11/2021
-- Portfolio actualizado en su nueva versión: 
+- Portfolio actualizado en su nueva versión: 21/11/2021
 - Añadir estanque en el spawn de los enemigos: 19/11/2021
 
 ### 9.3 Hito 3: Gold
