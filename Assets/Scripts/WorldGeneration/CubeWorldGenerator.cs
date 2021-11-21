@@ -474,8 +474,6 @@ public class CubeWorldGenerator : MonoBehaviour
     public bool UpdateWorld()
     {
         Debug.Log("Single thread update");
-        if (thread != null && thread.IsAlive)
-            thread.Join();
 
         ClearDebugStuff();
         UpdateMesh();
