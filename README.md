@@ -607,7 +607,7 @@ En general, en el grupo hay muy buen ambiente de trabajo, consiguen hacer todo e
 - Añadir offset para la colocación de torres: 19/11/2021
 - Arreglar proporciones de las torres en el cubo: 18/11/2021
 - Dirigir correctamente la barra de vida de los enemigos hacia la camara del jugador: 16/11/2021
-- Portfolio actualizado en su nueva versión: 
+- Portfolio actualizado en su nueva versión: 21/11/2021
 - Añadir estanque en el spawn de los enemigos: 19/11/2021
 
 ### 9.3 Hito 3: Gold
