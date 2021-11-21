@@ -163,7 +163,7 @@ public class WaveController : MonoBehaviour
     {
         activeEnemies++;
         enemies.Add(enemy);
-        Debug.Log("Enemy added: " + activeEnemies);
+        //Debug.Log("Enemy added: " + activeEnemies);
     }
 
     public void ReduceActiveEnemies(EnemyBehaviour enemy)
