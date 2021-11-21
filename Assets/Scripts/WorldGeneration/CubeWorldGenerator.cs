@@ -49,6 +49,11 @@ public class CubeWorldGenerator : MonoBehaviour
     int endzoneRadious;
     int swampRadious;
 
+
+
+
+
+
     #region SetUp
     private void Awake()
     {
@@ -116,6 +121,7 @@ public class CubeWorldGenerator : MonoBehaviour
         CreateWorld();
     }
 
+    UpdateJob updateJob = new UpdateJob();
     public void CreateWorld()
     {
         bool success = false;
@@ -156,22 +162,16 @@ public class CubeWorldGenerator : MonoBehaviour
         }
 
 
-        if (parallelUpdate)
+        if (parallelUpdate)//
         {
+            StartCoroutine(ShowPathsCoroutine());
             //ShowPaths();
             //UpdateWorldParallel();
-            UpdateMesh();
-            thread = new System.Threading.Thread(
-                     () =>
-                     {
-                         ShowPathsParallel();
-                         updating = false;
-                     }
-                     );
-            thread.Start();
+            ///UpdateMesh();
+            //updateJob.Schedule();
         }
         else
-            StartCoroutine(ShowPathsCoroutine());
+            ShowPaths();
         //yield return null;
     }
 
@@ -476,8 +476,6 @@ public class CubeWorldGenerator : MonoBehaviour
     public bool UpdateWorld()
     {
         Debug.Log("Single thread update");
-        if (thread != null && thread.IsAlive)
-            thread.Join();
 
         ClearDebugStuff();
         UpdateMesh();
@@ -494,43 +492,35 @@ public class CubeWorldGenerator : MonoBehaviour
         return true;
     }
 
-    bool updating = false;
+    public bool updating = false;
     bool newMeshReady = false;
-    System.Threading.Thread thread;
+
 
     public bool UpdateWorldParallel()
     {
-        Debug.Log("Parallel update");
         if (updating)
         {
-            thread.Join();
+            Debug.Log("Already updating");
+            return false;
         }
+        Debug.Log("Parallel update");
 
         updating = true;
 
         ClearDebugStuff();
-        StopAllCoroutines();
+        UpdateMesh();
+        if (!GeneratePaths())
+        {
+            //Debug paths and midpoints
+            ShowDebugStuff();
+            return false;
+        }
 
-        //UpdateMesh();
-        //UpdateJob updateJob = new UpdateJob();
-        //updateJob.Schedule();
+        updateJob.Schedule();
 
-        thread = new System.Threading.Thread(
-                 () =>
-                 {
-                     GeneratePaths();
+        ShowDebugStuff();
 
-                     ShowPathsParallel();
-
-                     //GenerateMesh();
-                     //newMeshReady = true;
-
-                     updating = false;
-                 }
-                 );
-        thread.Start();
-
-
+        ///updating = false;
 
         return true;
     }
@@ -564,6 +554,8 @@ public class CubeWorldGenerator : MonoBehaviour
                 }
             }
         }
+        UpdateMesh();
+
         LevelManager.instance.ready = true;
     }
 
@@ -606,7 +598,7 @@ public class CubeWorldGenerator : MonoBehaviour
 
 
     int maxPathLegth = -1;
-    void ShowPathsParallel()
+    public void ShowPathsParallel()
     {
         for (int i = 0; i < paths.Count; i++)
         {
@@ -621,8 +613,10 @@ public class CubeWorldGenerator : MonoBehaviour
             if (newMeshReady)
                 continue;
 
+
             if (ShowNextPathStep(j))
             {
+                Debug.Log("Step: " + j);
                 //System.Threading.Thread.Sleep(100);
                 GenerateMesh();
                 newMeshReady = true;
@@ -1334,7 +1328,9 @@ public struct UpdateJob : IJob
     public void Execute()
     {
         //LevelManager.instance.world.UpdateWorld();
-        Debug.Log("Job running");
+        LevelManager.instance.world.ShowPathsParallel();
+
+        LevelManager.instance.world.updating = false;
     }
 }
 
