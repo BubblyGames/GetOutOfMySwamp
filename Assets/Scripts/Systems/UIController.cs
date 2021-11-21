@@ -16,8 +16,10 @@ public class UIController : MonoBehaviour
     public GameObject settingsMenu;
     public GameObject settingsButton;
     public GameObject tutorialMenu;
+    public GameObject gameTutorialMenu;
     public GameObject creditsMenu;
     public GameObject creditsButton;
+    
 
     [Header("GameScene Menus")]
     public GameObject upgradeMenu;
@@ -58,6 +60,7 @@ public class UIController : MonoBehaviour
         Game,
         Settings,
         Tutorial,
+        GameTutorial,
         Credits
     }
 
@@ -164,6 +167,7 @@ public class UIController : MonoBehaviour
                         endgameMenuWin.SetActive(false);
                         pauseButton.SetActive(false);
                         tutorialMenu.SetActive(false);
+                        gameTutorialMenu.SetActive(false);
                         Time.timeScale = 0;
                     }
                     else
@@ -186,6 +190,7 @@ public class UIController : MonoBehaviour
                         endgameMenuWin.SetActive(false);
                         pauseButton.SetActive(true);
                         tutorialMenu.SetActive(false);
+                        gameTutorialMenu.SetActive(false);
                         Time.timeScale = 1;
                     }
                     else
@@ -218,6 +223,18 @@ public class UIController : MonoBehaviour
                 else
                 {
                     creditsMenu.SetActive(true);
+                    settingsMenu.SetActive(false);
+                }
+                break;
+            case GameMenu.GameTutorial:
+                if (gameTutorialMenu.activeSelf == true)
+                {
+                    gameTutorialMenu.SetActive(false);
+                    settingsMenu.SetActive(true);
+                }
+                else
+                {
+                    gameTutorialMenu.SetActive(true);
                     settingsMenu.SetActive(false);
                 }
                 break;
@@ -309,6 +326,10 @@ public class UIController : MonoBehaviour
         ShowMenu(GameMenu.Tutorial);
     }
 
+    public void ShowGameTutorial()
+    {
+        ShowMenu(GameMenu.GameTutorial);
+    }
     public void ShowCredits()
     {
         ShowMenu(GameMenu.Credits);
