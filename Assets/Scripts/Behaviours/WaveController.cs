@@ -33,6 +33,10 @@ public class WaveController : MonoBehaviour
     public int waveCount; // Wave its being played
 
 
+    private float waveEndThreshold = 2f;
+    [SerializeField]
+    private float waveEndTimer;
+
     ///public Text waveText;
 
     EnemySpawner enemySpawner;
@@ -94,8 +98,6 @@ public class WaveController : MonoBehaviour
 
     void Update()
     {
-
-
         if (isGameOver)
         {
             isBetweenWaves = false;
@@ -116,6 +118,7 @@ public class WaveController : MonoBehaviour
             {
                 isBetweenWaves = false;
                 isWaveActive = true;
+                waveEndTimer = 0f;
                 spawncoroutine = StartCoroutine(SpawnWave());
                 return;
             }
@@ -131,13 +134,26 @@ public class WaveController : MonoBehaviour
 
             if (activeEnemies <= 0)
             {
-                isBetweenWaves = true;
-                isWaveActive = false;
+                waveEndTimer += Time.deltaTime;
+                if (waveEndTimer >= waveEndThreshold)
+                {
+                    waveCount++;
+                    
+                    if (waveCount+1 > waves.Length)
+                    {
+                        LevelManager.instance.LevelCompleted();
+                        allWavesCleared = true;
+                        return;
+                    }
+                    LevelManager.instance.WaveCleared();
+                    isBetweenWaves = true;
+                    isWaveActive = false;
+                    timeVariable = Time.time + timeBetweenWaves;
+                }
 
-                timeVariable = Time.time + timeBetweenWaves;
-                waveCount++;
+
                 //broadcast to levelManager for it to dispatch wave completed event
-                LevelManager.instance.WaveCleared();
+
             }
         }
 
@@ -147,54 +163,51 @@ public class WaveController : MonoBehaviour
     {
         activeEnemies++;
         enemies.Add(enemy);
+        Debug.Log("Enemy added: " + activeEnemies);
     }
 
     public void ReduceActiveEnemies(EnemyBehaviour enemy)
     {
         activeEnemies--;
+        activeEnemies= Mathf.Max(activeEnemies, 0);
         enemies.Remove(enemy);
+        Debug.Log("Enemy reduced: " + activeEnemies);
+
     }
 
     IEnumerator SpawnWave()
     {
         Wave currentWave = new Wave();
-        if (waveCount >= waves.Length)
+        currentWave = waves[waveCount];
+
+        for (int i = 0; i < currentWave.packs.Length; i++)
         {
-            LevelManager.instance.LevelCompleted();
-
-        }
-        else
-        {
-
-            currentWave = waves[waveCount];
-
-            for (int i = 0; i < currentWave.packs.Length; i++)
+            Pack p = currentWave.packs[i];
+            for (int j = 0; j < p.enemyAmount; j++)
             {
-                Pack p = currentWave.packs[i];
-                for (int j = 0; j < p.enemyAmount; j++)
+                //loop used to stop spawining for testing
+                while (CheatManager.instance != null && !CheatManager.instance.enableEnemySpawn)
                 {
-                    //loop used to stop spawining for testing
-                    while (CheatManager.instance != null && !CheatManager.instance.enableEnemySpawn)
-                    {
-                        yield return null;
-                    }
-                    int pathId = Random.Range(0, WorldManager.instance.nPaths);
-                    if (p.enemyType.Equals("SkyEnemy"))
-                    {
-                        Debug.Log("a");
-                    }
-                    enemySpawner.SpawnEnemy(p.enemyType, WorldManager.instance.paths[pathId]);
-                    yield return new WaitForSeconds((1f / currentWave.spawnRate) + Random.Range(0f, randomRange)); //randomness between 
+                    yield return null;
                 }
+                int pathId = Random.Range(0, WorldManager.instance.nPaths);
+                if (p.enemyType.Equals("SkyEnemy"))
+                {
+                    Debug.Log("a");
+                }
+                enemySpawner.SpawnEnemy(p.enemyType, WorldManager.instance.paths[pathId]);
+                waveEndTimer = 0;
+
+                yield return new WaitForSeconds((1f / currentWave.spawnRate) + Random.Range(0f, randomRange)); //randomness between 
             }
         }
     }
 
-    /*void StopSpawning()
-    {
-        StopCoroutine("SpawnWave");
- 
-    }*/
+        /*void StopSpawning()
+        {
+            StopCoroutine("SpawnWave");
+
+        }*/
     public void TestSpawnEnemy(EnemyType enemyType)
     {
         int pathId = Random.Range(0, WorldManager.instance.nPaths);
