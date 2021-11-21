@@ -32,6 +32,7 @@ public class CubeWorldGenerator : MonoBehaviour
     public int seed = 0;
     internal Vector3Int end;
     internal Transform center;
+    Vector3 centerPosition;
 
     [Header("Extra")]
     public Material waterMaterial;
@@ -57,6 +58,7 @@ public class CubeWorldGenerator : MonoBehaviour
         worldCenter.transform.position = transform.position + (Vector3.one * ((size - 1) / 2f)); //set center too middle of the cube
         worldCenter.transform.parent = transform;
         center = worldCenter.transform;
+        centerPosition = center.position;
 
         if (!demo && GameManager.instance != null)
         {
@@ -153,7 +155,23 @@ public class CubeWorldGenerator : MonoBehaviour
             LevelManager.instance.ready = true;
         }
 
-        StartCoroutine(ShowPathsCoroutine());
+
+        if (parallelUpdate)
+        {
+            //ShowPaths();
+            //UpdateWorldParallel();
+            UpdateMesh();
+            thread = new System.Threading.Thread(
+                     () =>
+                     {
+                         ShowPathsParallel();
+                         updating = false;
+                     }
+                     );
+            thread.Start();
+        }
+        else
+            StartCoroutine(ShowPathsCoroutine());
         //yield return null;
     }
 
@@ -366,7 +384,7 @@ public class CubeWorldGenerator : MonoBehaviour
 
     private bool GeneratePaths()
     {
-        float startTime = Time.realtimeSinceStartup;
+        //float startTime = Time.realtimeSinceStartup;
 
         if (Path.FindPathAstar(this, new Node(cells[size / 2, 0, size / 2]), GetCell(end), true, canMergePaths) == null)
             return false;
@@ -424,8 +442,7 @@ public class CubeWorldGenerator : MonoBehaviour
             //StartCoroutine(ShowPath(paths[i]));
         }
 
-        //Debug paths and midpoints
-        ShowDebugStuff();
+
 
         //Debug.Log("Generating paths took: " + (Time.realtimeSinceStartup - startTime) + "s");
         return true; //Success
@@ -434,43 +451,91 @@ public class CubeWorldGenerator : MonoBehaviour
     #endregion
 
     #region UpdateWorld
-    bool updating = false;
-    bool hasNewChanges = false;
 
+    public bool parallelUpdate = false;
     public bool CallUpdateWorld()
     {
-        if (!updating)
-        {
-            ClearDebugStuff();
-            StopAllCoroutines();
-            UpdateMesh();
-            //UpdateJob updateJob = new UpdateJob();
-            //updateJob.Schedule();
-            if (!demo && !GeneratePaths())
-            {
-                ShowDebugStuff();
-            }
-
-            ShowPaths();
-
-        }
+        if (parallelUpdate)
+            UpdateWorldParallel();
         else
-        {
-            hasNewChanges = true;
-        }
+            UpdateWorld();
+
+        return true;
+    }
+
+    public bool CallUpdateWorld(bool _parallelUpdate)
+    {
+        if (_parallelUpdate)
+            UpdateWorldParallel();
+        else
+            UpdateWorld();
+
         return true;
     }
 
     public bool UpdateWorld()
     {
+        Debug.Log("Single thread update");
+        if (thread != null && thread.IsAlive)
+            thread.Join();
+
+        ClearDebugStuff();
+        UpdateMesh();
         if (!GeneratePaths())
         {
-
+            //Debug paths and midpoints
+            ShowDebugStuff();
             return false;
         }
+        ShowPaths();
+        UpdateMesh();
+        ShowDebugStuff();
 
         return true;
     }
+
+    bool updating = false;
+    bool newMeshReady = false;
+    System.Threading.Thread thread;
+
+    public bool UpdateWorldParallel()
+    {
+        Debug.Log("Parallel update");
+        if (updating)
+        {
+            thread.Join();
+        }
+
+        updating = true;
+
+        ClearDebugStuff();
+        StopAllCoroutines();
+
+        //UpdateMesh();
+        //UpdateJob updateJob = new UpdateJob();
+        //updateJob.Schedule();
+
+        thread = new System.Threading.Thread(
+                 () =>
+                 {
+                     GeneratePaths();
+
+                     ShowPathsParallel();
+
+                     //GenerateMesh();
+                     //newMeshReady = true;
+
+                     updating = false;
+                 }
+                 );
+        thread.Start();
+
+
+
+        return true;
+    }
+
+
 
 
     public void UpdateMesh()
@@ -487,7 +552,19 @@ public class CubeWorldGenerator : MonoBehaviour
 
     public void ShowPaths()
     {
-        StartCoroutine(ShowPathsCoroutine());
+        foreach (Path p in paths)
+        {
+            foreach (CellInfo ce in p.cells)
+            {
+                CellInfo c = GetCellUnder(ce);
+                if (c.blockType != BlockType.Path && c.blockType != BlockType.Swamp)
+                {
+                    c.canWalk = false;
+                    c.blockType = BlockType.Path;
+                }
+            }
+        }
+        LevelManager.instance.ready = true;
     }
 
     IEnumerator ShowPathsCoroutine()
@@ -516,15 +593,65 @@ public class CubeWorldGenerator : MonoBehaviour
             }
             if (dirty)
             {
-                //UpdateMesh();
-                //yield return null;
+                UpdateMesh();
+                yield return null;
             }
         }
         UpdateMesh();
-
-        UpdateMesh();
+        LevelManager.instance.ready = true;
         yield return null;
     }
+
+
+
+
+    int maxPathLegth = -1;
+    void ShowPathsParallel()
+    {
+        for (int i = 0; i < paths.Count; i++)
+        {
+            maxPathLegth = Mathf.Max(maxPathLegth, paths[i].Length);
+        }
+
+        maxPathLegth--;
+
+        int j = 0;
+        while (j < maxPathLegth)
+        {
+            if (newMeshReady)
+                continue;
+
+            if (ShowNextPathStep(j))
+            {
+                //System.Threading.Thread.Sleep(100);
+                GenerateMesh();
+                newMeshReady = true;
+            }
+            j++;
+        }
+    }
+
+    public bool ShowNextPathStep(int current)
+    {
+        bool somePathsAreDirty = false;
+        for (int i = 0; i < paths.Count; i++)
+        {
+            if (current < paths[i].Length - 1)
+            {
+                CellInfo c = GetCellUnder(paths[i].GetCell(current));
+                if (c.blockType != BlockType.Path && c.blockType != BlockType.Swamp)
+                {
+                    somePathsAreDirty = true;
+                    c.canWalk = false;
+                    c.blockType = BlockType.Path;
+                }
+            }
+        }
+        return somePathsAreDirty;
+    }
+
+
+
     #endregion
 
     #region Gameplay
@@ -658,6 +785,7 @@ public class CubeWorldGenerator : MonoBehaviour
     {
         List<Path> affectedPaths = new List<Path>();
         List<CellInfo> affectedCells = new List<CellInfo>();
+        bool anyPathDirty = false;
 
         for (int i = -radius; i <= radius; i++)
         {
@@ -682,6 +810,7 @@ public class CubeWorldGenerator : MonoBehaviour
                             foreach (Path p in c.paths)
                             {
                                 p.dirty = true;
+                                anyPathDirty = true;
                             }
 
                             c.blockType = BlockType.Air;
@@ -751,10 +880,11 @@ public class CubeWorldGenerator : MonoBehaviour
     {
         CellInfo cell = null;
         CellInfo currentCell;
+        System.Random rand = new System.Random();
         while (cell == null)
         {
 
-            int randomIdx = Random.Range(0, emptyCells.Count);
+            int randomIdx = rand.Next(0, emptyCells.Count - 1);
             currentCell = emptyCells[randomIdx];
 
             if (!currentCell.endZone &&
@@ -781,7 +911,7 @@ public class CubeWorldGenerator : MonoBehaviour
 
             RaycastHit hit;
             Vector3 pos = c.GetPos();
-            Physics.Raycast(pos, center.position - pos, out hit, Mathf.Infinity);
+            Physics.Raycast(pos, centerPosition - pos, out hit, Mathf.Infinity);
 
             Vector3Int intPos = new Vector3Int(
                 Mathf.RoundToInt(hit.point.x + (hit.normal.x / 2)),
@@ -1128,6 +1258,19 @@ public class CubeWorldGenerator : MonoBehaviour
 #if UNITY_EDITOR
     private void Update()
     {
+        if (newMeshReady)
+        {
+            voxelRenderer.RenderMesh(meshData);
+            newMeshReady = false;
+
+            //Debug paths and midpoints
+            if (!demo)
+            {
+                //ShowDebugStuff();
+            }
+        }
+
+
         if (Input.GetKeyDown(KeyCode.I))
         {
             Debug.Log("Adding random interest point");
