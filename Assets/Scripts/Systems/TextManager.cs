@@ -66,7 +66,7 @@ public class TextManager : MonoBehaviour
         }
     }
 
-    public void ChangeLenguage(int languageid)
+    public void ChangeLanguage(int languageid)
     {
         switch (languageid)
         {
