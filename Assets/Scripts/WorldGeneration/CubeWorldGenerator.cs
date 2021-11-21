@@ -50,8 +50,8 @@ public class CubeWorldGenerator : MonoBehaviour
     int swampRadious;
 
 
-    SimpleUpdateJob simpleUpdateJob = new SimpleUpdateJob();
-    UpdateJob updateJob = new UpdateJob();
+    //SimpleUpdateJob simpleUpdateJob = new SimpleUpdateJob();
+    //UpdateJob updateJob = new UpdateJob();
 
     #region SetUp
     private void Awake()
@@ -131,26 +131,21 @@ public class CubeWorldGenerator : MonoBehaviour
             Debug.Log("Attempt: " + count + " Seed: " + seed.ToString());
             GenerateWorld();//Choose the blocktype of each cell
             UpdateMesh();
-            if (!demo)
-            {
-                foreach (Path p in paths)
-                {
-                    p.dirty = true;
-                }
+            if (demo)
+                return;
 
-                success = GeneratePaths();//Tries to create paths
-                if (!success)
-                {
-                    ClearDebugStuff();
-                    seed = Mathf.RoundToInt(Random.value * 100000);//New seed
-                    wallDensity -= 0.01f;
-                }
-            }
-            else
+            foreach (Path p in paths)
             {
-                success = true;
+                p.dirty = true;
             }
-            //yield return null;
+
+            success = GeneratePaths();//Tries to create paths
+            if (!success)
+            {
+                ClearDebugStuff();
+                seed = Mathf.RoundToInt(Random.value * 100000);//New seed
+                wallDensity -= 0.01f;
+            }
         }
 
         if (LevelManager.instance)
@@ -159,18 +154,7 @@ public class CubeWorldGenerator : MonoBehaviour
             LevelManager.instance.ready = true;
         }
 
-
-        if (parallelUpdate)
-        {
-            //ShowPaths();
-            //UpdateWorldParallel();
-            UpdateMesh();
-            updating = true;
-            simpleUpdateJob.Schedule();
-        }
-        else
-            StartCoroutine(ShowPathsCoroutine());
-        //yield return null;
+        CallUpdateWorld();
     }
 
     public void CreateWater()
@@ -448,188 +432,6 @@ public class CubeWorldGenerator : MonoBehaviour
 
     #endregion
 
-    #region UpdateWorld
-
-    public bool parallelUpdate = false;
-    public bool CallUpdateWorld()
-    {
-        if (parallelUpdate)
-            UpdateWorldParallel();
-        else
-            UpdateWorld();
-
-        return true;
-    }
-
-    public bool CallUpdateWorld(bool _parallelUpdate)
-    {
-        if (_parallelUpdate)
-            UpdateWorldParallel();
-        else
-            UpdateWorld();
-
-        return true;
-    }
-
-    public bool UpdateWorld()
-    {
-        Debug.Log("Single thread update");
-
-        ClearDebugStuff();
-        UpdateMesh();
-        if (!GeneratePaths())
-        {
-            //Debug paths and midpoints
-            ShowDebugStuff();
-            return false;
-        }
-        ShowPaths();
-        UpdateMesh();
-        ShowDebugStuff();
-
-        return true;
-    }
-
-    public bool updating = false;
-    public bool newMeshReady = false;
-
-    public bool UpdateWorldParallel()
-    {
-        Debug.Log("Parallel update");
-        if (updating)
-        {
-            Debug.Log("Still working!");
-            return false;
-        }
-
-        updating = true;
-
-        ClearDebugStuff();
-
-        updateJob.Schedule();
-
-        return true;
-    }
-
-
-
-
-    public void UpdateMesh()
-    {
-        GenerateMesh();
-        voxelRenderer.RenderMesh(meshData);
-    }
-
-    public void UpdateMeshSingleBlock()
-    {
-        GenerateMesh();
-        voxelRenderer.RenderMesh(meshData);
-    }
-
-    public void ShowPaths()
-    {
-        foreach (Path p in paths)
-        {
-            foreach (CellInfo ce in p.cells)
-            {
-                CellInfo c = GetCellUnder(ce);
-                if (c.blockType != BlockType.Path && c.blockType != BlockType.Swamp)
-                {
-                    c.canWalk = false;
-                    c.blockType = BlockType.Path;
-                }
-            }
-        }
-        LevelManager.instance.ready = true;
-    }
-
-    IEnumerator ShowPathsCoroutine()
-    {
-        int max = 0;
-        for (int i = 0; i < paths.Count; i++)
-        {
-            max = Mathf.Max(max, paths[i].Length);
-        }
-
-        for (int i = 0; i < max; i++)
-        {
-            bool dirty = false;
-            for (int j = 0; j < paths.Count; j++)
-            {
-                if (i < paths[j].Length - 1)
-                {
-                    CellInfo c = GetCellUnder(paths[j].GetCell(i));
-                    if (c.blockType != BlockType.Path && c.blockType != BlockType.Swamp)
-                    {
-                        dirty = true;
-                        c.canWalk = false;
-                        c.blockType = BlockType.Path;
-                    }
-                }
-            }
-            if (dirty)
-            {
-                UpdateMesh();
-                yield return null;
-            }
-        }
-        UpdateMesh();
-        LevelManager.instance.ready = true;
-        yield return null;
-    }
-
-
-
-
-    int maxPathLegth = -1;
-    public void ShowPathsParallel()
-    {
-        for (int i = 0; i < paths.Count; i++)
-        {
-            maxPathLegth = Mathf.Max(maxPathLegth, paths[i].Length);
-        }
-
-        maxPathLegth--;
-
-        int j = 0;
-        while (j < maxPathLegth)
-        {
-            if (newMeshReady)
-                continue;
-
-            if (ShowNextPathStep(j))
-            {
-                //Debug.Log("Showing step: " + j);
-                //System.Threading.Thread.Sleep(100);
-                GenerateMesh();
-                newMeshReady = true;
-            }
-            j++;
-        }
-    }
-
-    public bool ShowNextPathStep(int current)
-    {
-        bool somePathsAreDirty = false;
-        for (int i = 0; i < paths.Count; i++)
-        {
-            if (current < paths[i].Length - 1)
-            {
-                CellInfo c = GetCellUnder(paths[i].GetCell(current));
-                if (c.blockType != BlockType.Path && c.blockType != BlockType.Swamp)
-                {
-                    somePathsAreDirty = true;
-                    c.canWalk = false;
-                    c.blockType = BlockType.Path;
-                }
-            }
-        }
-        return somePathsAreDirty;
-    }
-
-
-
-    #endregion
 
     #region Gameplay
     public bool ReplaceInterestPoint(Vector3Int point)
@@ -1243,8 +1045,229 @@ public class CubeWorldGenerator : MonoBehaviour
     #endregion
 
 
+    #region UpdateWorld
+
+    public bool parallelUpdate = false;
+    public bool CallUpdateWorld()
+    {
+        if (parallelUpdate)
+            UpdateWorldParallel();
+        else
+            UpdateWorld();
+
+        return true;
+    }
+
+    public bool CallUpdateWorld(bool _parallelUpdate)
+    {
+        if (_parallelUpdate)
+            UpdateWorldParallel();
+        else
+            UpdateWorld();
+
+        return true;
+    }
+
+    public bool UpdateWorld()
+    {
+        Debug.Log("Single thread update");
+
+        ClearDebugStuff();
+        UpdateMesh();
+        if (!GeneratePaths())
+        {
+            //Debug paths and midpoints
+            ShowDebugStuff();
+            return false;
+        }
+        ShowPaths();
+        UpdateMesh();
+        ShowDebugStuff();
+        //LevelManager.instance.ready = true;
+
+        return true;
+    }
+
+    public void UpdateMesh()
+    {
+        GenerateMesh();
+        voxelRenderer.RenderMesh(meshData);
+    }
+
+    public void UpdateMeshSingleBlock()
+    {
+        GenerateMesh();
+        voxelRenderer.RenderMesh(meshData);
+    }
+
+    public void ShowPaths()
+    {
+        foreach (Path p in paths)
+        {
+            foreach (CellInfo ce in p.cells)
+            {
+                CellInfo c = GetCellUnder(ce);
+                if (c.blockType != BlockType.Path && c.blockType != BlockType.Swamp)
+                {
+                    c.canWalk = false;
+                    c.blockType = BlockType.Path;
+                }
+            }
+        }
+    }
+
+    IEnumerator ShowPathsCoroutine()
+    {
+        int max = 0;
+        for (int i = 0; i < paths.Count; i++)
+        {
+            max = Mathf.Max(max, paths[i].Length);
+        }
+
+        for (int i = 0; i < max; i++)
+        {
+            bool dirty = false;
+            for (int j = 0; j < paths.Count; j++)
+            {
+                if (i < paths[j].Length - 1)
+                {
+                    CellInfo c = GetCellUnder(paths[j].GetCell(i));
+                    if (c.blockType != BlockType.Path && c.blockType != BlockType.Swamp)
+                    {
+                        dirty = true;
+                        c.canWalk = false;
+                        c.blockType = BlockType.Path;
+                    }
+                }
+            }
+            if (dirty)
+            {
+                UpdateMesh();
+                yield return null;
+            }
+        }
+        UpdateMesh();
+        LevelManager.instance.ready = true;
+        yield return null;
+    }
+
+
+
+
+    int maxPathLegth = -1;
+    public void ShowPathsParallel()
+    {
+        int j = 0;
+        while (j < maxPathLegth)
+        {
+            if (newMeshReady)
+                continue;
+
+            if (ShowNextPathStep(j))
+            {
+                //Debug.Log("Showing step: " + j);
+                //System.Threading.Thread.Sleep(100);
+                GenerateMesh();
+                newMeshReady = true;
+            }
+            j++;
+        }
+    }
+
+    public bool ShowNextPathStep(int current)
+    {
+        bool somePathsAreDirty = false;
+        for (int i = 0; i < paths.Count; i++)
+        {
+            if (current < paths[i].Length - 1)
+            {
+                CellInfo c = GetCellUnder(paths[i].GetCell(current));
+                if (c.blockType != BlockType.Path && c.blockType != BlockType.Swamp)
+                {
+                    somePathsAreDirty = true;
+                    c.canWalk = false;
+                    c.blockType = BlockType.Path;
+                }
+            }
+        }
+        return somePathsAreDirty;
+    }
+
+
+    internal bool updating = false;
+    internal bool newMeshReady = false;
+    int cellsUpdated = 0;
+
+    bool allPathsShown = false;
+
+    public bool UpdateWorldParallel()
+    {
+        Debug.Log("Parallel update");
+        if (updating)
+        {
+            Debug.Log("Still working!");
+            return false;
+        }
+
+        updating = true;
+        cellsUpdated = 0;
+        allPathsShown = false;
+
+        ClearDebugStuff();
+
+        //Generate paths
+        GeneratePaths();
+
+        //Find length of longest path
+        for (int i = 0; i < paths.Count; i++)
+        {
+            maxPathLegth = Mathf.Max(maxPathLegth, paths[i].Length);
+        }
+        maxPathLegth--;
+
+        return true;
+    }
+
+    #endregion
+
+    int skips = 0;
+    public int maxSkips = 5;
+    private void FixedUpdate()
+    {
+        skips++;
+        if (skips > maxSkips && parallelUpdate && updating)
+        {
+            skips = 0;
+            if (!allPathsShown)
+            {
+                //Showing paths
+                if (cellsUpdated >= maxPathLegth)
+                {
+                    Debug.Log("All paths shown");
+                    allPathsShown = true;
+                }
+                else
+                {
+                    while (cellsUpdated <= maxPathLegth && !ShowNextPathStep(cellsUpdated))
+                    {
+                        cellsUpdated++;
+                        //Debug.Log("Step: " + cellsUpdated);
+                    }
+                    cellsUpdated++;
+                    UpdateMesh();
+                }
+            }
+
+            updating = !allPathsShown;
+        }
+    }
+
+#if UNITY_EDITOR
     private void Update()
     {
+        
+
+        //For real multithreading purposes
         if (newMeshReady)
         {
             Debug.Log("Showing new mesh");
@@ -1259,7 +1282,6 @@ public class CubeWorldGenerator : MonoBehaviour
             }
         }
 
-#if UNITY_EDITOR
         if (Input.GetKeyDown(KeyCode.I))
         {
             Debug.Log("Adding random interest point");
@@ -1277,10 +1299,8 @@ public class CubeWorldGenerator : MonoBehaviour
             Debug.Log("Random explosion");
             Explode(GetCompletelyRandomCell().GetPosInt(), 15);
         }
-#endif
     }
 
-#if UNITY_EDITOR
     private void OnDrawGizmos()
     {
         if (!Application.isPlaying) return;
@@ -1319,7 +1339,7 @@ public class CubeWorldGenerator : MonoBehaviour
 
 
 // Job adding two floating point values together
-public struct SimpleUpdateJob : IJob
+/*public struct SimpleUpdateJob : IJob
 {
     public void Execute()
     {
@@ -1349,5 +1369,5 @@ public struct UpdateJob : IJob
         LevelManager.instance.world.updating = false;
 
     }
-}
+}*/
 
