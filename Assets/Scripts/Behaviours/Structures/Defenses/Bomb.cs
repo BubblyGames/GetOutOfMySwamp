@@ -6,15 +6,6 @@ public class Bomb : DefenseBehaviour
 {
     public bool canBreakWorld = false;
     public GameObject explosionParticles;
-
-    private void Start()
-    {
-        //checks if is a mountainTower for only atacking flying enemies
-        if (canHitSkyEnemies)
-        {
-            layerMask = 1 << 6;
-        }
-    }
     public void Explode()
     {
 
