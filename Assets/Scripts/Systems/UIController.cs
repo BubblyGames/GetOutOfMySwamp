@@ -107,8 +107,7 @@ public class UIController : MonoBehaviour
 
     public void UpdateWaveText()
     {
-        if(WaveController.instance.waveCount<WaveController.instance.waves.Length)
-            currentWave.GetComponent<TextMeshProUGUI>().text = (WaveController.instance.waveCount + 1).ToString();
+        currentWave.GetComponent<TextMeshProUGUI>().text = (WaveController.instance.waveCount + 1).ToString();
     }
 
     public virtual void ShowMenu(GameMenu menu)
