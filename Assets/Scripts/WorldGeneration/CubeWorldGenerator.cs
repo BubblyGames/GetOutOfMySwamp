@@ -80,7 +80,9 @@ public class CubeWorldGenerator : MonoBehaviour
             RenderSettings.skybox.SetColor("_Tint", worldInfo.themeInfo.backGroundColor);
 
             debugMidpoints = false;
+            parallelUpdate = parallelUpdate && !GameManager.instance.isMobile();
         }
+
     }
     #endregion
 
@@ -151,10 +153,9 @@ public class CubeWorldGenerator : MonoBehaviour
         if (LevelManager.instance)
         {
             CreateWater();
-            LevelManager.instance.ready = true;
         }
 
-        CallUpdateWorld();
+        CallUpdateWorld(false);
     }
 
     public void CreateWater()
@@ -607,6 +608,50 @@ public class CubeWorldGenerator : MonoBehaviour
         }
 
         CallUpdateWorld();
+    }
+
+    public void SoftExplode(Vector3Int pos, int radius)
+    {
+        List<Path> affectedPaths = new List<Path>();
+        List<CellInfo> affectedCells = new List<CellInfo>();
+
+
+        for (int i = -radius; i <= radius; i++)
+        {
+            for (int j = -radius; j <= radius; j++)
+            {
+                for (int k = -radius; k <= radius; k++)
+                {
+                    int x = pos.x + i;
+                    int y = pos.y + j;
+                    int z = pos.z + k;
+
+                    if (IsPosInBounds(x, y, z))
+                    {
+                        Vector3Int newPos = new Vector3Int(x, y, z);
+                        CellInfo c = cells[x, y, z];
+
+                        if (c.endZone || c.isCore || c.isPath || c.blockType == BlockType.Path || c.structure != null)// || cells[x, y, z].blockType == BlockType.Rock)
+                            continue;
+
+                        if (Vector3Int.Distance(pos, newPos) <= radius)
+                        {
+                            c.blockType = BlockType.Air;
+                            c.canWalk = true;
+                            if (c.structure)
+                            {
+                                Destroy(c.structure.gameObject);
+                                c.structure = null;
+                                c.hasStructure = false;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        
+        UpdateMesh();
     }
     #endregion
 
@@ -1148,7 +1193,6 @@ public class CubeWorldGenerator : MonoBehaviour
             }
         }
         UpdateMesh();
-        LevelManager.instance.ready = true;
         yield return null;
     }
 
@@ -1239,37 +1283,46 @@ public class CubeWorldGenerator : MonoBehaviour
         if (skips > maxSkips && parallelUpdate && updating)
         {
             skips = 0;
-            if (!allPathsShown)
+            for (int i = 0; i < maxSkips; i++)
             {
-                //Showing paths
-                if (cellsUpdated >= maxPathLegth)
+                if (!allPathsShown)
                 {
-                    Debug.Log("All paths shown");
-                    allPathsShown = true;
-                }
-                else
-                {
-                    while (cellsUpdated <= maxPathLegth && !ShowNextPathStep(cellsUpdated))
+                    //Showing paths
+                    if (cellsUpdated >= maxPathLegth)
                     {
-                        cellsUpdated++;
-                        //Debug.Log("Step: " + cellsUpdated);
+                        Debug.Log("All paths shown");
+                        allPathsShown = true;
                     }
-                    cellsUpdated++;
-                    UpdateMesh();
+                    else
+                    {
+                        while (cellsUpdated <= maxPathLegth && !ShowNextPathStep(cellsUpdated))
+                        {
+                            cellsUpdated++;
+                            //Debug.Log("Step: " + cellsUpdated);
+                        }
+                        cellsUpdated++;
+                        newMeshReady = true;
+                    }
                 }
             }
 
             updating = !allPathsShown;
+        }
+
+        if (newMeshReady)
+        {
+            UpdateMesh();
+            newMeshReady = false;
         }
     }
 
 #if UNITY_EDITOR
     private void Update()
     {
-        
+
 
         //For real multithreading purposes
-        if (newMeshReady)
+        /*if (newMeshReady)
         {
             Debug.Log("Showing new mesh");
 
@@ -1281,7 +1334,7 @@ public class CubeWorldGenerator : MonoBehaviour
             {
                 //ShowDebugStuff();
             }
-        }
+        }*/
 
         if (Input.GetKeyDown(KeyCode.I))
         {
@@ -1298,7 +1351,7 @@ public class CubeWorldGenerator : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.E))
         {
             Debug.Log("Random explosion");
-            Explode(GetCompletelyRandomCell().GetPosInt(), 15);
+            SoftExplode(GetCompletelyRandomCell().GetPosInt(), 15);
         }
     }
 

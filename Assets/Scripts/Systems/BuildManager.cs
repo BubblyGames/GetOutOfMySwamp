@@ -20,10 +20,8 @@ public class BuildManager : MonoBehaviour
 
     public List<Vector3Int> structureFundation;
 
-
     public bool canBuild;//Checks if a structure is selected to be built
     public Vector3 currentConstructionPositionOffset;
-
 
     private void Awake()
     {
@@ -246,8 +244,8 @@ public class BuildManager : MonoBehaviour
 
         for (int i = 0; i < structureFundation.Count; i++)
         {
-            LevelManager.instance.world.GetCell(structureFundation[0]).SetStructure(structure);
-            structureFundation.Remove(structureFundation[0]);
+            LevelManager.instance.world.GetCell(structureFundation[i]).SetStructure(structure);
+            structureFundation.Remove(structureFundation[i]);
         }
 
         //cell.SetStructure(structure);

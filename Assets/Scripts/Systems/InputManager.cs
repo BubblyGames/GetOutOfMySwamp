@@ -11,6 +11,9 @@ public class InputManager : MonoBehaviour
     bool zooming = false;//Is zooming
     bool isMobile = false;
     public bool forceMobile = false;
+    public Vector3 offset;
+    public Vector3 mousePosition;
+    public Color wrongColor;
 
     [HideInInspector] public GameObject selectedCard;
 
@@ -31,7 +34,7 @@ public class InputManager : MonoBehaviour
     void Start()
     {
         if (GameManager.instance)
-            isMobile = forceMobile || GameManager.instance.checkPlatform();
+            isMobile = forceMobile || GameManager.instance.isMobile();
         else
             isMobile = forceMobile;
 
@@ -53,8 +56,12 @@ public class InputManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (!LevelManager.instance.ready)
-            return;
+        if (isMobile && Input.touchCount > 0)
+        {
+            mousePosition = Input.touches[0].position;
+        }
+        else
+            mousePosition = Input.mousePosition;
 
         //Zoom
         CheckPinch();
@@ -67,7 +74,7 @@ public class InputManager : MonoBehaviour
         }
 
         //Click release
-        if (Input.GetMouseButtonUp(0))
+        if (Input.GetMouseButtonUp(0) && !isMobile)
         {
             MouseUp();
         }
@@ -90,7 +97,11 @@ public class InputManager : MonoBehaviour
         if (choosingWhereToBuild)
         {
             //Casts a ray to find out where does the player want to place the structure
-            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+            Ray ray;
+            if (isMobile)
+                ray = Camera.main.ScreenPointToRay(mousePosition + offset);
+            else
+                ray = Camera.main.ScreenPointToRay(mousePosition);
             RaycastHit hit = new RaycastHit();
 
             if (Physics.Raycast(ray, out hit, Mathf.Infinity))
@@ -105,7 +116,7 @@ public class InputManager : MonoBehaviour
                     }
                     else
                     {
-                        cursor.GetComponent<MeshRenderer>().material.color = Color.red;
+                        cursor.GetComponent<MeshRenderer>().material.color = wrongColor;
                     }
 
                     //Cursor activates and moves to selected cell
@@ -130,7 +141,7 @@ public class InputManager : MonoBehaviour
                 selectedCard.transform.position = GetMouseAsWorldPoint() + mOffset;
             }
         }
-        else if (!zooming && Input.mousePosition.x <= Screen.width*0.9f)
+        else if (!zooming && Input.mousePosition.x <= Screen.width * 0.9f)
         {
             //If not zooming, camera will be moved
             CameraBehaviour.instance.Rotate(Input.GetAxis("Mouse X") * mouseSensitivity, Input.GetAxis("Mouse Y") * mouseSensitivity);
@@ -186,9 +197,9 @@ public class InputManager : MonoBehaviour
             switch (hit.collider.tag)
             {
                 case "Card":
-                   
-                    
-                    
+
+
+
 
 
                     break;
@@ -215,9 +226,13 @@ public class InputManager : MonoBehaviour
         }
     }
 
-    private void MouseUp()
+    public void MouseUp()
     {
-        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        Ray ray;
+        if (isMobile)
+            ray = Camera.main.ScreenPointToRay(mousePosition + offset);
+        else
+            ray = Camera.main.ScreenPointToRay(mousePosition);
         RaycastHit hit = new RaycastHit();
 
         if (Physics.Raycast(ray, out hit, Mathf.Infinity))
@@ -245,6 +260,7 @@ public class InputManager : MonoBehaviour
             selectedCard = null;
             choosingWhereToBuild = false;
             cursor.SetActive(false);
+
         }
     }
 
@@ -300,7 +316,7 @@ public class InputManager : MonoBehaviour
     {
         forceMobile = b;
         if (GameManager.instance)
-            isMobile = forceMobile || GameManager.instance.checkPlatform();
+            isMobile = forceMobile || GameManager.instance.isMobile();
         else
             isMobile = forceMobile;
     }
@@ -308,7 +324,7 @@ public class InputManager : MonoBehaviour
     private void OnValidate()
     {
         if (GameManager.instance)
-            isMobile = forceMobile || GameManager.instance.checkPlatform();
+            isMobile = forceMobile || GameManager.instance.isMobile();
         else
             isMobile = forceMobile;
     }

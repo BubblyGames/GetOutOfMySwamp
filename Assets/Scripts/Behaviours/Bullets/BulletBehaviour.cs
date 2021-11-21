@@ -87,6 +87,8 @@ public class BulletBehaviour : MonoBehaviour
         }
         else if (other.gameObject.CompareTag("World"))
         {
+            if(actualEffect == 2)
+                Explode();
             Destroy(gameObject);
         }
     }

@@ -12,7 +12,7 @@ public class Bomb : DefenseBehaviour
         //checks if is a mountainTower for only atacking flying enemies
         if (canHitSkyEnemies)
         {
-            layerMask = 1 << 6;
+            layerMask = 1 << 7;
         }
     }
     public void Explode()
@@ -32,7 +32,7 @@ public class Bomb : DefenseBehaviour
         GameObject.Instantiate(explosionParticles,transform.position,Quaternion.identity);
 
         if (canBreakWorld)
-            LevelManager.instance.world.Explode(Vector3Int.RoundToInt(transform.position), 3);
+            LevelManager.instance.world.SoftExplode(Vector3Int.RoundToInt(transform.position), (int)attackRange);
 
         Destroy(gameObject);
     }

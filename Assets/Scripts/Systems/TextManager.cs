@@ -145,39 +145,39 @@ public class TextManager : MonoBehaviour
 
         //descriptions of lessons in English
         englishDictionary.Add("lesson1", "Lesson 1");
-        englishDictionary.Add("description1", "The Basic Frog is the cheapest defense from all. However it's medium damage and range could save you when needed, son don't underestimate it!");
+        englishDictionary.Add("description1", "The Basic Frog is the cheapest defense from all. However its medium damage and range could save you when needed, so don't underestimate it!");
         englishDictionary.Add("lesson2", "Lesson 2");
-        englishDictionary.Add("description2", "Did anyone said Psiquic Frog? Combine this defense with others for amazing results thanks to it's delaying effect on enemies.");
+        englishDictionary.Add("description2", "Did anyone say Psiquic Frog? Combine this defense with others for amazing results thanks to its delaying effect on enemies.");
         englishDictionary.Add("lesson3", "Lesson 3");
         englishDictionary.Add("description3", "Amazing damage makes up for the low range and slow fire rate. Let's make the pond shake!");
         englishDictionary.Add("lesson4", "Lesson 4");
         englishDictionary.Add("description4", "Fighting? Nah. The Money Frog sees a golden future for you. Just let it financiate it.");
         englishDictionary.Add("lesson5", "Lesson 5");
-        englishDictionary.Add("description5", "The Aerial Frog is always on the moon, but it is settle for destroying flying enemies.");
+        englishDictionary.Add("description5", "The Aerial Frog is always on the moon, but no flying enemies will escape from it.");
         englishDictionary.Add("lesson6", "Lesson 6");
         englishDictionary.Add("description6", "Is that... a mushroom? No, it's a MushBOOMB! Be careful, it not only destroys, it also has a delay effect on enemies.");
         englishDictionary.Add("lesson7", "Lesson 7");
-        englishDictionary.Add("description7", "Basic Enemy unit. Medium life and speed makes it an easy target but be careful, don't forget about them");
+        englishDictionary.Add("description7", "Basic Enemy unit. Medium life and speed makes them an easy target. But be careful, don't forget about them!");
         englishDictionary.Add("lesson8", "Lesson 8");
-        englishDictionary.Add("description8", "Tank Enemy is used as a shield for the other enemy units. Be careful, it's huge amount of life won't make them easy to kill.");
+        englishDictionary.Add("description8", "Tank Enemies are used as shields for the other enemy units. Their huge amount of life won't make them easy to kill.");
         englishDictionary.Add("lesson9", "Lesson 9");
         englishDictionary.Add("description9", "Horde Enemies are not brave enough to come alone. Besides, they are very fast so put an eye on them!");
         englishDictionary.Add("lesson10", "Lesson 10");
-        englishDictionary.Add("description10", "From the sky another kind of dirty frogs are approaching, more difficult to reach. Get a mountain tower quickly, don't lose them.");
+        englishDictionary.Add("description10", "From the sky another kind of dirty frogs are approaching, more difficult to reach. Get a mountain tower quickly, don't miss them!");
 
         //descriptions of tutorial in English
         englishDictionary.Add("tutorial1", "Build Defenses");
-        englishDictionary.Add("Tdescription1", "Press and drag one of the cards from the right side to the place where you want to build a new defense. Before placing it, the range of the tower is indicated.");
+        englishDictionary.Add("Tdescription1", "Click and drag a card from the right side to the world to build a new defense. Before dropping it, the range of the tower is shown.");
         englishDictionary.Add("tutorial2", "Upgrade Defenses");
-        englishDictionary.Add("Tdescription2", "For upgrading a single tower, touch it and then press the upgrade button. When you upgrade a tower, its statistics will increase, making it more efficient.");
+        englishDictionary.Add("Tdescription2", "For upgrading a single tower, click it and then press the upgrade button. When you upgrade a tower, its statistics will increase, making it more efficient.");
         englishDictionary.Add("tutorial3", "The cube");
-        englishDictionary.Add("Tdescription3", "The Cube and the enemies routes are generated procedurally in each playthrough. The enemies will always appear in the lower face of the Cube.");
+        englishDictionary.Add("Tdescription3", "The Cube and the enemies routes are generated procedurally every time you play. The enemies will always appear in the lower face of the Cube.");
         englishDictionary.Add("tutorial4", "Move the cube I");
-        englishDictionary.Add("Tdescription4", "To rotate the Cube, press and drag it using the mouse on PC or using a finger on mobile.");
+        englishDictionary.Add("Tdescription4", "To rotate the Cube, click and drag.");
         englishDictionary.Add("tutorial5", "Move the cube II");
         englishDictionary.Add("Tdescription5", "You can also zoom in and out, using the mouse wheel on PC or using two fingers on mobile.");
         englishDictionary.Add("tutorial6", "Reach the goal");
-        englishDictionary.Add("Tdescription6", "The game’s objective consists in avoiding your health to reach 0 before eliminating all the enemies who are proceeding to the pond.");
+        englishDictionary.Add("Tdescription6", "The game’s objective is to defend your pond from all the approching enemies. If they get in the pond, you'll loose some health. If you loose all of your health, it's game over.");
 
         //Spanish 
         spanishDictionary.Add("play", "Jugar");
@@ -238,7 +238,7 @@ public class TextManager : MonoBehaviour
 
         //descriptions of lessons in Spanish
         spanishDictionary.Add("lesson1", "Lección 1");
-        spanishDictionary.Add("description1", "La rana básica es la defensa más barata, pero no por ello menos útil. Su nivel de ataque medio combinado con su velocidad media de ataque puede salvarte de muchos apuros.");
+        spanishDictionary.Add("description1", "La rana básica es la defensa más barata, pero no por ello la menos útil. Su nivel de ataque medio combinado con su velocidad media de ataque puede salvarte de muchos apuros.");
         spanishDictionary.Add("lesson2", "Lección 2");
         spanishDictionary.Add("description2", "La rana psíquica es la defensa perfecta contra enemigos rápidos. Aunque tiene poco rango y daño, su efecto ralentizador combinado con otras defensas puede darte la victoria.");
         spanishDictionary.Add("lesson3", "Lección 3");
@@ -246,7 +246,7 @@ public class TextManager : MonoBehaviour
         spanishDictionary.Add("lesson4", "Lección 4");
         spanishDictionary.Add("description4", "La rana banquera rehuye de combatir. Prefiere estar centrada en recaudar dinero para crear más defensas. Úsala sabiamente.");
         spanishDictionary.Add("lesson5", "Lección 5");
-        spanishDictionary.Add("description5", "La rana aérea tiene la mira puesta en el horizonte. Los enemigos deberán tener siempre los pies en la tierra cerca de ella o sufrirán las consecuencias");
+        spanishDictionary.Add("description5", "La rana aérea tiene la mira puesta en el horizonte. Los enemigos deberán tener siempre los pies en la tierra cerca de ella o sufrirán las consecuencias.");
         spanishDictionary.Add("lesson6", "Lección 6");
         spanishDictionary.Add("description6", "¡BUM! será lo último que escucharán tus enemigos. Además esta seta mina trae un 2x1 porque dejará a los enemigos aturdidos y se moverán más lento.");
         spanishDictionary.Add("lesson7", "Lección 7");
