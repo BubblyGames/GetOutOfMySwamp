@@ -443,7 +443,7 @@ La interfaz del juego consta de 7 ventanas:
 
 - Menú principal:
 
-![menuPrinc](https://user-images.githubusercontent.com/56488179/142733247-62b3fdcd-5cf8-46d4-9e33-b49a61d4eded.png)
+![menuPrinc](https://user-images.githubusercontent.com/56488179/142777098-17abb069-96f6-4e93-a960-d05407b42c2a.png)
 
 - Ajustes:
 
