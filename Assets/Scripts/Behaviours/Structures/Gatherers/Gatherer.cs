@@ -13,9 +13,9 @@ public class Gatherer : Structure
 
     public float TotalResourceGathered { get => totalResourceGathered; set => totalResourceGathered = value; }
 
-    public override void UpgradeStrucrure(UIController uIController)
+    public override void UpgradeStrucrure()
     {
-        base.UpgradeStrucrure(uIController);
+        base.UpgradeStrucrure();
 
         this.timeToGatherResource = this.timeToGatherResource * 0.2f;
         this.resourceGatheredEachCicle += 2;

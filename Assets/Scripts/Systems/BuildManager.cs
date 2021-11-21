@@ -18,9 +18,6 @@ public class BuildManager : MonoBehaviour
     [SerializeField]
     private CellInfo selectedCell;
 
-    [SerializeField]
-    private UIController uIController;
-
     public List<Vector3Int> structureFundation;
 
 
@@ -262,12 +259,12 @@ public class BuildManager : MonoBehaviour
         {
             if (CheatManager.instance.infiniteMoney)
             {
-                SelectedStructure.UpgradeStrucrure(uIController);
+                SelectedStructure.UpgradeStrucrure();
             }
             else if (LevelStats.instance.CurrentMoney >= SelectedStructure.Blueprint.upgrades[SelectedStructure.GetLevel()].cost)
             {
                 LevelStats.instance.SpendMoney(SelectedStructure.Blueprint.upgrades[SelectedStructure.GetLevel()].cost);
-                SelectedStructure.UpgradeStrucrure(uIController);
+                SelectedStructure.UpgradeStrucrure();
 
             }
             else
