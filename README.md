@@ -148,7 +148,7 @@ El juego cuenta con cinco mapas, diferenciados a nivel visual y en la generació
 
 Los niveles son semi procedimentales y se crean mediante una semilla.
 
-**Pantano:
+**Pantano:**
 
 Cantidad de enemigos por ronda:
 | **ENEMIGOS**                | RONDA 1 | RONDA 2 | RONDA 3 |
@@ -158,7 +158,7 @@ Cantidad de enemigos por ronda:
 | HORDA                       |  5      |   40    |   105   |
 | AÉREO                       |  3      |   5     |   31    |
 
-**Tundra:
+**Tundra:**
 
 Cantidad de enemigos por ronda:
 | **ENEMIGOS**                | RONDA 1 | RONDA 2 | RONDA 3 | RONDA 4 | RONDA 5 |
@@ -168,7 +168,7 @@ Cantidad de enemigos por ronda:
 | HORDA                       |  25     |   35    |   40    |   40    |   40    |
 | AÉREO                       |  5      |   8     |   10    |   10    |   30    |
 
-**Otoño:
+**Otoño:**
 
 Cantidad de enemigos por ronda: PENDIENTE
 | **ENEMIGOS**                | RONDA 1 | RONDA 2 | RONDA 3 | 
@@ -178,7 +178,7 @@ Cantidad de enemigos por ronda: PENDIENTE
 | HORDA                       |  10     |   20    |   40    |
 | AÉREO                       |  1      |   6     |   35    |
 
-**Cerezo:
+**Cerezo:**
 
 Cantidad de enemigos por ronda: PENDIENTE
 | **ENEMIGOS**                | RONDA 1 | RONDA 2 | RONDA 3 | RONDA 4 |
@@ -188,7 +188,7 @@ Cantidad de enemigos por ronda: PENDIENTE
 | HORDA                       |   15    |   39    |   60    |   45    |
 | AÉREO                       |   1     |   9     |   33    |   33    |
 
-**Nevado:
+**Nevado:**
 
 Cantidad de enemigos por ronda: PENDIENTE
 | **ENEMIGOS**                | RONDA 1 | RONDA 2 | RONDA 3 | RONDA 4 |
