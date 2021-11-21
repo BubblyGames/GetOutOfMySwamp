@@ -205,7 +205,7 @@ Cantidad de enemigos por ronda:
 | -------------- | ---------    | -------------- | ----------------- | ------------------- | --- | -------------------------------- |--------|
 | TORRE PESADA   | Largo (6 ud) | Elevado (30 ud)| Proy Área TT\*    | Lento (0.1 ud)      |  6  | \-                               | 300    |
 | TORRE BÁSICA   | Medio (5 ud) | Medio (14 ud)  | Individual TT\*   | Medio (2 ud)        | 28  | \-                               | 125    |
-| TORRE PSÍQUICA | Corto (4 ud) | Bajo (3 ud)    | Área TT\*         | Lento (0.5 ud)      | 0.9 | Ralentiza al enemigo             | 200    |
+| TORRE PSÍQUICA | Corto (4 ud) | Bajo (3 ud)    | Área TT\*         | Lento (0.3 ud)      | 0.9 | Ralentiza al enemigo             | 200    |
 | TORRE MONTAÑA  | Largo (7 ud) | Bajo (3 ud)    | Individual TA\*   | Rápido (5 ud)       | 15  | \-                               | 175    |
 | TORRE ECONÓMICA| Nada         | Ninguno        | Ninguno           | Sin ataque          |     | Genera ingresos de forma pasiva  | 250    |
 | **TRAMPAS**    |              |                |                   |                     |     |                                  |        |
@@ -247,7 +247,7 @@ Nivel 3:
 | NORMAL                      |  40  | Media (2 ud)            | Terrestre - Normal   |     8      |
 | TANQUE                      |  250 | Lenta (1.5 ud)          | Terrestre - Pesada   |     20     |
 | HORDA                       |  25  | Rápida (4 ud)           | Terrestre - Horda    |     3      |
-| AÉREO                       |  25  | Media (3 ud)            | Aérea - Normal       |     15     |
+| AÉREO                       |  30  | Media (3 ud)            | Aérea - Normal       |     15     |
 
 
 ## 5. Trasfondo
