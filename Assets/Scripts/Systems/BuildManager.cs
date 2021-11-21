@@ -264,10 +264,10 @@ public class BuildManager : MonoBehaviour
             {
                 SelectedStructure.UpgradeStrucrure(uIController);
             }
-            else if (LevelStats.instance.CurrentMoney >= StructureBlueprint.upgrades[SelectedStructure.GetLevel()].cost)
+            else if (LevelStats.instance.CurrentMoney >= SelectedStructure.Blueprint.upgrades[SelectedStructure.GetLevel()].cost)
             {
+                LevelStats.instance.SpendMoney(SelectedStructure.Blueprint.upgrades[SelectedStructure.GetLevel()].cost);
                 SelectedStructure.UpgradeStrucrure(uIController);
-                LevelStats.instance.SpendMoney(StructureBlueprint.upgrades[SelectedStructure.GetLevel()].cost);
 
             }
             else
