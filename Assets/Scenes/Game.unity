@@ -10440,7 +10440,7 @@ MonoBehaviour:
   debugMidpoints: 1
   lineRendererPrefab: {fileID: 3920875017051324963, guid: ffef0eddca5eb324f94bad8de9cc038b, type: 3}
   parallelUpdate: 1
-  updating: 0
+  maxSkips: 5
 --- !u!114 &1903685288
 MonoBehaviour:
   m_ObjectHideFlags: 0
