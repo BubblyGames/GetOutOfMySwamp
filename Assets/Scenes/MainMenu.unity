@@ -917,10 +917,10 @@ MonoBehaviour:
   wallDensity: 0.286
   rocksVisualReduction: 0.9
   rockSize: 26
-  waterDensity: 0.15
+  waterDensity: 0.3
   nPaths: 1
   canMergePaths: 0
-  numberOfMidpoints: 3
+  numberOfMidpoints: 2
   seed: 3246
   waterMaterial: {fileID: 2100000, guid: f2bfe60c202150547be22d486a012286, type: 2}
   demo: 1
@@ -1032,10 +1032,10 @@ MonoBehaviour:
   wallDensity: 0.4
   rocksVisualReduction: 0.8
   rockSize: 26.94
-  waterDensity: 0.5
+  waterDensity: 0.4
   nPaths: 1
   canMergePaths: 0
-  numberOfMidpoints: 3
+  numberOfMidpoints: 2
   seed: 2922
   waterMaterial: {fileID: 2100000, guid: f2bfe60c202150547be22d486a012286, type: 2}
   demo: 1
@@ -1335,7 +1335,7 @@ MonoBehaviour:
   wallDensity: 0.55
   rocksVisualReduction: 1
   rockSize: 8.84
-  waterDensity: 0
+  waterDensity: 0.1
   nPaths: 3
   canMergePaths: 0
   numberOfMidpoints: 2
@@ -1648,10 +1648,10 @@ MonoBehaviour:
   wallDensity: 0.4
   rocksVisualReduction: 0.9
   rockSize: 14.82
-  waterDensity: 0
+  waterDensity: 0.2
   nPaths: 2
-  canMergePaths: 1
-  numberOfMidpoints: 3
+  canMergePaths: 0
+  numberOfMidpoints: 2
   seed: 6172
   waterMaterial: {fileID: 2100000, guid: f2bfe60c202150547be22d486a012286, type: 2}
   demo: 1

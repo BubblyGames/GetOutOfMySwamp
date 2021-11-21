@@ -631,7 +631,7 @@ public class CubeWorldGenerator : MonoBehaviour
                         Vector3Int newPos = new Vector3Int(x, y, z);
                         CellInfo c = cells[x, y, z];
 
-                        if (c.endZone || c.isCore || c.isPath || c.blockType == BlockType.Path)// || cells[x, y, z].blockType == BlockType.Rock)
+                        if (c.endZone || c.isCore || c.isPath || c.blockType == BlockType.Path || c.structure != null)// || cells[x, y, z].blockType == BlockType.Rock)
                             continue;
 
                         if (Vector3Int.Distance(pos, newPos) <= radius)

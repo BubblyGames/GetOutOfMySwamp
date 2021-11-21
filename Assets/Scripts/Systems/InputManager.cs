@@ -13,6 +13,7 @@ public class InputManager : MonoBehaviour
     public bool forceMobile = false;
     public Vector3 offset;
     public Vector3 mousePosition;
+    public Color wrongColor;
 
     [HideInInspector] public GameObject selectedCard;
 
@@ -115,7 +116,7 @@ public class InputManager : MonoBehaviour
                     }
                     else
                     {
-                        cursor.GetComponent<MeshRenderer>().material.color = Color.red;
+                        cursor.GetComponent<MeshRenderer>().material.color = wrongColor;
                     }
 
                     //Cursor activates and moves to selected cell
