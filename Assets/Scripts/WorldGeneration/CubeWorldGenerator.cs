@@ -776,9 +776,10 @@ public class CubeWorldGenerator : MonoBehaviour
     public bool CheckIfCanBuildInCell(Vector3Int cellindex, BlockType blocktype, Vector3Int cellOnTop)
     {
         return ((IsPosInBounds(cellOnTop) && //If cell above is in bounds
-                       GetCell(cellOnTop).blockType != BlockType.Air) //And isn't air
-                        || (IsPosInBounds(cellindex) && //Or cell below is in bounds
-                        GetCell(cellindex).blockType != blocktype));//And block type doesn't match
+                        GetCell(cellOnTop).blockType != BlockType.Air) ||  //And isn't air
+                        (IsPosInBounds(cellindex) && //Or cell below is in bounds
+                        GetCell(cellindex).blockType != blocktype) ||//And block type doesn't match
+                        GetCell(cellindex).structure != null); // and cell has no structure
     }
 
     public Vector3Int GetFaceNormal(CellInfo cellInfo)
