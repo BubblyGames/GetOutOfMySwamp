@@ -162,6 +162,8 @@ public class TextManager : MonoBehaviour
         englishDictionary.Add("description8", "Tank Enemy is used as a shield for the other enemy units. Be careful, it's huge amount of life won't make them easy to kill.");
         englishDictionary.Add("lesson9", "Lesson 9");
         englishDictionary.Add("description9", "Horde Enemies are not brave enough to come alone. Besides, they are very fast so put an eye on them!");
+        englishDictionary.Add("lesson10", "Lesson 10");
+        englishDictionary.Add("description10", "From the sky another kind of dirty frogs are approaching, more difficult to reach. Get a mountain tower quickly, don't lose them.");
 
         //descriptions of tutorial in English
         englishDictionary.Add("tutorial1", "Build Defenses");
@@ -185,7 +187,7 @@ public class TextManager : MonoBehaviour
         spanishDictionary.Add("select", "Empezar");
         spanishDictionary.Add("pause", "Pausa");
         spanishDictionary.Add("health", "Vida");
-        spanishDictionary.Add("score", "Puntuación");
+        spanishDictionary.Add("score", "Puntos");
         spanishDictionary.Add("money", "Dinero");
         spanishDictionary.Add("settings", "Configuración");
         spanishDictionary.Add("language", "Idioma");
@@ -253,6 +255,8 @@ public class TextManager : MonoBehaviour
         spanishDictionary.Add("description8", "Los enemigos tanques son lentos, pero aguantan muy bien los golpes. Sirven de escudo para el resto de enemigos asi que cuidado.");
         spanishDictionary.Add("lesson9", "Lección 9");
         spanishDictionary.Add("description9", "Dicen que los cobardes atacan en grupo. Las ranas que van en hordas tienen poca vida, pero son muy escurridizas.¡Que no escape ni una!");
+        spanishDictionary.Add("lesson10", "Lección 10");
+        spanishDictionary.Add("description10", "Desde el cielo se acercan otro tipo de ranas sucias, más difíciles de alcanzar. Pilla una torre montañosa rápido, no las vayas a perder.");
 
         //tutorial spanish
         spanishDictionary.Add("tutorial1", "Construir defensas");

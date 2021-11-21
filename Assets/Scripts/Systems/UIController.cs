@@ -11,7 +11,6 @@ public class UIController : MonoBehaviour
     public static UIController instance;
 
     [Header("MainScene Menus")]
-    public GameObject tittleText;
     public GameObject playButton;
     public GameObject settingsMenu;
     public GameObject settingsButton;
@@ -175,7 +174,6 @@ public class UIController : MonoBehaviour
                         settingsMenu.SetActive(true);
                         playButton.SetActive(false);
                         settingsButton.SetActive(false);
-                        tittleText.SetActive(false);
                     }
                 }
                 else
@@ -198,7 +196,6 @@ public class UIController : MonoBehaviour
                         settingsMenu.SetActive(false);
                         playButton.SetActive(true);
                         settingsButton.SetActive(true);
-                        tittleText.SetActive(true);
                     }
                 }
                 break;

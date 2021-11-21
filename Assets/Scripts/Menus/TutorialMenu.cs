@@ -48,7 +48,7 @@ public class TutorialMenu : MonoBehaviour
 
     public void nextLesson()
     {
-        if (lesson <= 8)
+        if (lesson <= 9)
         {
             lesson++;
             UpdateKeys();
