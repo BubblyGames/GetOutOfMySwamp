@@ -1504,11 +1504,43 @@ MonoBehaviour:
   waves:
   - packs:
     - enemyType: 0
+      enemyAmount: 10
+    - enemyType: 2
+      enemyAmount: 2
+    - enemyType: 3
+      enemyAmount: 10
+    - enemyType: 5
+      enemyAmount: 1
+    spawnRate: 1
+  - packs:
+    - enemyType: 0
+      enemyAmount: 15
+    - enemyType: 2
+      enemyAmount: 4
+    - enemyType: 3
+      enemyAmount: 20
+    - enemyType: 2
+      enemyAmount: 6
+    - enemyType: 5
+      enemyAmount: 6
+    spawnRate: 1
+  - packs:
+    - enemyType: 0
       enemyAmount: 20
     - enemyType: 2
       enemyAmount: 5
     - enemyType: 3
-      enemyAmount: 40
+      enemyAmount: 20
+    - enemyType: 5
+      enemyAmount: 15
+    - enemyType: 2
+      enemyAmount: 10
+    - enemyType: 0
+      enemyAmount: 20
+    - enemyType: 5
+      enemyAmount: 20
+    - enemyType: 3
+      enemyAmount: 20
     spawnRate: 1
 --- !u!114 &140904415
 MonoBehaviour:
@@ -1552,7 +1584,7 @@ MonoBehaviour:
   rockSize: 14.82
   waterDensity: 0
   nPaths: 2
-  canMergePaths: 0
+  canMergePaths: 1
   numberOfMidpoints: 3
   seed: 6172
   waterMaterial: {fileID: 2100000, guid: f2bfe60c202150547be22d486a012286, type: 2}
