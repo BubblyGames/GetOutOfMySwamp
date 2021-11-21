@@ -17,8 +17,8 @@ public class Bomb : DefenseBehaviour
     }
     public void Explode()
     {
-
-        RaycastHit[] hits = Physics.SphereCastAll(transform.position, attackRange, transform.forward, attackRange, layerMask);
+        LayerMask mask = LayerMask.GetMask("Enemy");
+        RaycastHit[] hits = Physics.SphereCastAll(transform.position, attackRange, transform.forward, attackRange, mask);
         ////Debug.Log("Boom: " + hits.Length);
         for (int i = 0; i < hits.Length; i++)
         {
