@@ -161,9 +161,11 @@ public class CubeWorldGenerator : MonoBehaviour
             //ShowPaths();
             //UpdateWorldParallel();
             UpdateMesh();
+            updating = true;
             thread = new System.Threading.Thread(
                      () =>
                      {
+                         Debug.Log("Painting paths for the first time");
                          ShowPathsParallel();
                          updating = false;
                      }
@@ -494,7 +496,7 @@ public class CubeWorldGenerator : MonoBehaviour
         return true;
     }
 
-    bool updating = false;
+    public bool updating = false;
     bool newMeshReady = false;
     System.Threading.Thread thread;
 
@@ -503,7 +505,8 @@ public class CubeWorldGenerator : MonoBehaviour
         Debug.Log("Parallel update");
         if (updating)
         {
-            thread.Join();
+            Debug.Log("Still working!");
+            thread.Abort();
         }
 
         updating = true;
@@ -522,8 +525,8 @@ public class CubeWorldGenerator : MonoBehaviour
 
                      ShowPathsParallel();
 
-                     //GenerateMesh();
-                     //newMeshReady = true;
+                     GenerateMesh();
+                     newMeshReady = true;
 
                      updating = false;
                  }
@@ -606,7 +609,7 @@ public class CubeWorldGenerator : MonoBehaviour
 
 
     int maxPathLegth = -1;
-    void ShowPathsParallel()
+    public void ShowPathsParallel()
     {
         for (int i = 0; i < paths.Count; i++)
         {
@@ -623,6 +626,7 @@ public class CubeWorldGenerator : MonoBehaviour
 
             if (ShowNextPathStep(j))
             {
+                Debug.Log("Showing step: " + j);
                 //System.Threading.Thread.Sleep(100);
                 GenerateMesh();
                 newMeshReady = true;
@@ -898,6 +902,12 @@ public class CubeWorldGenerator : MonoBehaviour
 
     public CellInfo GetRandomCellWithRay(CellInfo cell = null)
     {
+        if (parallelUpdate)
+        {
+
+        }
+
+
         CellInfo selectedCell = null;
         int count = 0;
         while (selectedCell == null && count < 10)
@@ -1055,48 +1065,52 @@ public class CubeWorldGenerator : MonoBehaviour
 
     public CellInfo GetCellUnderWithGravity(CellInfo cell)
     {
-        return GetRandomCellWithRay(cell);
+        if (!parallelUpdate)
+            return GetRandomCellWithRay(cell);
 
+        CellInfo currentCell = cell;
         CellInfo newCell;
-        int count = 0;
-        while (CheckIfFloating(cell) && count < size)
-        {
-            Vector3 dir = (cell.GetPos() - center.position);
 
+        int count = 0;
+        while (count < size)
+        {
+            Vector3 dir = (currentCell.GetPos() - center.position);
             Vector3Int dirInt = Path.Vector3ToIntNormalized(dir);
 
-            newCell = GetCell(cell.GetPosInt() - dirInt);
+            //Get cell under
+            newCell = GetCell(currentCell.GetPosInt() - dirInt);
 
+            //If can't walk try different directions
             if (!newCell.canWalk)
             {
                 Vector3Int newDirInt = new Vector3Int(dirInt.x, 0, 0);
-                newCell = GetCell(cell.GetPosInt() - newDirInt);
+                newCell = GetCell(currentCell.GetPosInt() - newDirInt);
             }
 
             if (!newCell.canWalk)
             {
                 Vector3Int newDirInt = new Vector3Int(0, dirInt.y, 0);
-                newCell = GetCell(cell.GetPosInt() - newDirInt);
+                newCell = GetCell(currentCell.GetPosInt() - newDirInt);
             }
 
             if (!newCell.canWalk)
             {
                 Vector3Int newDirInt = new Vector3Int(0, 0, dirInt.z);
-                newCell = GetCell(cell.GetPosInt() - newDirInt);
+                newCell = GetCell(currentCell.GetPosInt() - newDirInt);
             }
 
-            cell = newCell;
-            //Debug.Log(cell.GetPos());
+            if (newCell.canWalk && !CheckIfFloating(newCell))
+            {
+                return newCell;
+            }
+
+            currentCell = newCell;
+
             count++;
         }
 
-        if (count == size)
-        {
-            Debug.Log("Wtf fix this a$ap: " + cell.GetPos());
-            return GetRandomCellWithRay(cell);
-        }
-
-        return cell;
+        Debug.Log("Wtf fix this a$ap: " + cell.GetPos());
+        return GetCompletelyRandomCell();
     }
 
     internal CellInfo GetClosestWalkableCell(CellInfo cell)
@@ -1255,11 +1269,13 @@ public class CubeWorldGenerator : MonoBehaviour
     }
     #endregion
 
-#if UNITY_EDITOR
+
     private void Update()
     {
         if (newMeshReady)
         {
+            Debug.Log("Showing new mesh");
+
             voxelRenderer.RenderMesh(meshData);
             newMeshReady = false;
 
@@ -1270,7 +1286,7 @@ public class CubeWorldGenerator : MonoBehaviour
             }
         }
 
-
+#if UNITY_EDITOR
         if (Input.GetKeyDown(KeyCode.I))
         {
             Debug.Log("Adding random interest point");
@@ -1288,9 +1304,10 @@ public class CubeWorldGenerator : MonoBehaviour
             Debug.Log("Random explosion");
             Explode(GetCompletelyRandomCell().GetPosInt(), 15);
         }
+#endif
     }
 
-
+#if UNITY_EDITOR
     private void OnDrawGizmos()
     {
         if (!Application.isPlaying) return;
@@ -1335,6 +1352,9 @@ public struct UpdateJob : IJob
     {
         //LevelManager.instance.world.UpdateWorld();
         Debug.Log("Job running");
+        LevelManager.instance.world.ShowPathsParallel();
+
+        LevelManager.instance.world.updating = false;
     }
 }
 

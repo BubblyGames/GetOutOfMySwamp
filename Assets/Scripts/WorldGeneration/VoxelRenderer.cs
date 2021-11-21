@@ -11,6 +11,7 @@ public class VoxelRenderer : MonoBehaviour
     Mesh mesh;
     MeshFilter meshFilter;
     MeshCollider meshCollider;
+    private static System.Threading.Mutex mut = new System.Threading.Mutex();
 
     private void Awake()
     {
@@ -21,6 +22,7 @@ public class VoxelRenderer : MonoBehaviour
 
     public void RenderMesh(MeshData meshData)
     {
+        mut.WaitOne();
         mesh.Clear();
 
         mesh.subMeshCount = 2;
@@ -40,5 +42,6 @@ public class VoxelRenderer : MonoBehaviour
         collisionMesh.RecalculateNormals();
 
         meshCollider.sharedMesh = collisionMesh;
+        mut.ReleaseMutex();
     }
 }
