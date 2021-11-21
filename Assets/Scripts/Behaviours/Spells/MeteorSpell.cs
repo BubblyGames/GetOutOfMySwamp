@@ -10,6 +10,7 @@ public class MeteorSpell : SpellBehaviour
     public float time = 3f;
     float delta = 0;
     Vector3 startPos;
+    public int damage = 30;
     void Start()
     {
         Vector3 dir = transform.position - LevelManager.instance.world.center.position;
@@ -35,7 +36,18 @@ public class MeteorSpell : SpellBehaviour
             pos.y = (int)transform.position.y;
             pos.z = (int)transform.position.z;
 
-            LevelManager.instance.world.Explode(pos, range);
+            LevelManager.instance.world.SoftExplode(pos, range);
+
+            RaycastHit[] hits = Physics.SphereCastAll(transform.position, range, transform.forward, range);
+            ////Debug.Log("Boom: " + hits.Length);
+            for (int i = 0; i < hits.Length; i++)
+            {
+                EnemyBehaviour eb;
+                if (hits[i].collider.TryGetComponent<EnemyBehaviour>(out eb))
+                {
+                    eb.slowAndDamage(damage);
+                }
+            }
 
             GameObject p = GameObject.Instantiate(particles);
             p.transform.position = transform.position;

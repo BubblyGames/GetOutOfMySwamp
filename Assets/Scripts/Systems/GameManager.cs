@@ -39,7 +39,7 @@ public class GameManager : MonoBehaviour
     void Start() 
     {
         AudioManager.instance.Play("mainMenuSong");//Pls change asap
-        if (checkPlatform())
+        if (isMobile())
         {
             Console.WriteLine("is mobile");
         }
@@ -78,7 +78,7 @@ public class GameManager : MonoBehaviour
 
     }
 
-    public bool checkPlatform()
+    public bool isMobile()
     {
         Debug.Log(SystemInfo.deviceModel);
 #if !UNITY_EDITOR && UNITY_WEBGL

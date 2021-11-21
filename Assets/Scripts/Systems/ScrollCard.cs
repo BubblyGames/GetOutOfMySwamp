@@ -63,5 +63,6 @@ public class ScrollCard : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDr
             canvasgroup.interactable = true;
             GameObject.Destroy(aux);
         }
+        InputManager.instance.MouseUp();
     }
 }

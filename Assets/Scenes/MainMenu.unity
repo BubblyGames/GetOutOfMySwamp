@@ -917,16 +917,18 @@ MonoBehaviour:
   wallDensity: 0.286
   rocksVisualReduction: 0.9
   rockSize: 26
-  waterDensity: 0.15
+  waterDensity: 0.3
   nPaths: 1
   canMergePaths: 0
-  numberOfMidpoints: 3
+  numberOfMidpoints: 2
   seed: 3246
   waterMaterial: {fileID: 2100000, guid: f2bfe60c202150547be22d486a012286, type: 2}
   demo: 1
   sphere: 0
   debugMidpoints: 0
   lineRendererPrefab: {fileID: 3920875017051324963, guid: ffef0eddca5eb324f94bad8de9cc038b, type: 3}
+  parallelUpdate: 0
+  maxSkips: 5
 --- !u!64 &63313644
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -1033,13 +1035,15 @@ MonoBehaviour:
   waterDensity: 0.5
   nPaths: 1
   canMergePaths: 0
-  numberOfMidpoints: 3
+  numberOfMidpoints: 2
   seed: 2922
   waterMaterial: {fileID: 2100000, guid: f2bfe60c202150547be22d486a012286, type: 2}
   demo: 1
   sphere: 0
   debugMidpoints: 0
   lineRendererPrefab: {fileID: 3920875017051324963, guid: ffef0eddca5eb324f94bad8de9cc038b, type: 3}
+  parallelUpdate: 0
+  maxSkips: 5
 --- !u!64 &85103257
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -1331,7 +1335,7 @@ MonoBehaviour:
   wallDensity: 0.55
   rocksVisualReduction: 1
   rockSize: 8.84
-  waterDensity: 0
+  waterDensity: 0.1
   nPaths: 3
   canMergePaths: 0
   numberOfMidpoints: 2
@@ -1341,6 +1345,8 @@ MonoBehaviour:
   sphere: 0
   debugMidpoints: 0
   lineRendererPrefab: {fileID: 3920875017051324963, guid: ffef0eddca5eb324f94bad8de9cc038b, type: 3}
+  parallelUpdate: 0
+  maxSkips: 5
 --- !u!64 &96266345
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -1550,16 +1556,18 @@ MonoBehaviour:
   wallDensity: 0.4
   rocksVisualReduction: 0.9
   rockSize: 14.82
-  waterDensity: 0
+  waterDensity: 0.2
   nPaths: 2
   canMergePaths: 0
-  numberOfMidpoints: 3
+  numberOfMidpoints: 2
   seed: 6172
   waterMaterial: {fileID: 2100000, guid: f2bfe60c202150547be22d486a012286, type: 2}
   demo: 1
   sphere: 0
   debugMidpoints: 0
   lineRendererPrefab: {fileID: 3920875017051324963, guid: ffef0eddca5eb324f94bad8de9cc038b, type: 3}
+  parallelUpdate: 0
+  maxSkips: 5
 --- !u!64 &140904418
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -3650,7 +3658,7 @@ MonoBehaviour:
   wallDensity: 0.5
   rocksVisualReduction: 1
   rockSize: 10.49
-  waterDensity: 0
+  waterDensity: 0.1
   nPaths: 4
   canMergePaths: 0
   numberOfMidpoints: 1
@@ -3660,6 +3668,8 @@ MonoBehaviour:
   sphere: 0
   debugMidpoints: 0
   lineRendererPrefab: {fileID: 3920875017051324963, guid: ffef0eddca5eb324f94bad8de9cc038b, type: 3}
+  parallelUpdate: 0
+  maxSkips: 5
 --- !u!64 &504795247
 MeshCollider:
   m_ObjectHideFlags: 0
