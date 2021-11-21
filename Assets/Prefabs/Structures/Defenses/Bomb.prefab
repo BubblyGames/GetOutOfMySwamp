@@ -146,9 +146,9 @@ MonoBehaviour:
   blockType: 0
   structureName: bomb
   structureId: 3
-  canHitSkyEnemies: 0
+  canHitSkyEnemies: 1
   fireRate: 0
-  damage: 20
+  damage: 40
   attackRange: 3
   canBreakWorld: 0
   explosionParticles: {fileID: 4964779859338955144, guid: 8a2ab21b4543bb14ebee8f6ff1221879, type: 3}

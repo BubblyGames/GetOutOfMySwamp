@@ -39,7 +39,7 @@ public class TextReader : MonoBehaviour
             Button b;
             if (gameObject.TryGetComponent<Button>(out b))
             {
-                b.onClick.AddListener(ChangeLenguage);
+                b.onClick.AddListener(ChangeLanguage);
             }
 
         }*/
@@ -81,9 +81,9 @@ public class TextReader : MonoBehaviour
         }
     }
 
-    //public void ChangeLenguage()
+    //public void ChangeLanguage()
     //{
-       // textManager.GetComponent<TextManager>().ChangeLenguage();
+       // textManager.GetComponent<TextManager>().ChangeLanguage();
     //}
 
     public void EmptyLists()

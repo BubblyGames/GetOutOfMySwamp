@@ -119,8 +119,8 @@ MonoBehaviour:
   structureName: psiquicTower
   structureId: 1
   canHitSkyEnemies: 0
-  fireRate: 0.1
-  damage: 6
+  fireRate: 0.5
+  damage: 3
   attackRange: 4
   firePoint: {fileID: 1127500018515762662}
   cannon: {fileID: 0}
@@ -148,8 +148,8 @@ MonoBehaviour:
   structureName: psiquicTower
   structureId: 1
   canHitSkyEnemies: 0
-  fireRate: 0.5
-  damage: 8
+  fireRate: 0.3
+  damage: 3
   attackRange: 5
   particles: {fileID: 4964779859338955144, guid: ccc31fd69f4d6a842929870e848f5030, type: 3}
 --- !u!1 &8505893711344014288
