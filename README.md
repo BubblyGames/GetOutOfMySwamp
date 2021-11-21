@@ -306,7 +306,9 @@ Los biomas presentes son, como se han explicado antes, los siguientes:
 
 **Bioma Pantano:**
 
-![](https://user-images.githubusercontent.com/56488179/142772843-781fb10b-653b-4e5f-b81f-d4c036336efb.png)
+![](https://user-images.githubusercontent.com/56488179/142777057-986df292-81c3-43f9-9842-efd53bd7c35f.png)
+
+![](https://user-images.githubusercontent.com/56488179/142777051-af2f45b9-2ccb-4790-a5c1-a07466fc1b29.png)
 
 **Bioma Otoño:**
 
