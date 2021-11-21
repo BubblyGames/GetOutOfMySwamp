@@ -3704,11 +3704,73 @@ MonoBehaviour:
   waves:
   - packs:
     - enemyType: 0
-      enemyAmount: 50
-    - enemyType: 3
-      enemyAmount: 100
+      enemyAmount: 40
     - enemyType: 2
-      enemyAmount: 5
+      enemyAmount: 4
+    - enemyType: 3
+      enemyAmount: 20
+    - enemyType: 5
+      enemyAmount: 4
+    - enemyType: 0
+      enemyAmount: 20
+    - enemyType: 3
+      enemyAmount: 10
+    spawnRate: 1
+  - packs:
+    - enemyType: 2
+      enemyAmount: 12
+    - enemyType: 0
+      enemyAmount: 40
+    - enemyType: 2
+      enemyAmount: 4
+    - enemyType: 3
+      enemyAmount: 40
+    - enemyType: 5
+      enemyAmount: 16
+    spawnRate: 1
+  - packs:
+    - enemyType: 0
+      enemyAmount: 40
+    - enemyType: 2
+      enemyAmount: 12
+    - enemyType: 5
+      enemyAmount: 24
+    - enemyType: 0
+      enemyAmount: 40
+    - enemyType: 2
+      enemyAmount: 4
+    - enemyType: 3
+      enemyAmount: 40
+    - enemyType: 5
+      enemyAmount: 16
+    - enemyType: 2
+      enemyAmount: 24
+    - enemyType: 3
+      enemyAmount: 40
+    spawnRate: 1
+  - packs:
+    - enemyType: 2
+      enemyAmount: 20
+    - enemyType: 0
+      enemyAmount: 40
+    - enemyType: 3
+      enemyAmount: 40
+    - enemyType: 5
+      enemyAmount: 24
+    - enemyType: 2
+      enemyAmount: 12
+    - enemyType: 0
+      enemyAmount: 40
+    - enemyType: 2
+      enemyAmount: 4
+    - enemyType: 3
+      enemyAmount: 40
+    - enemyType: 5
+      enemyAmount: 16
+    - enemyType: 2
+      enemyAmount: 24
+    - enemyType: 3
+      enemyAmount: 40
     spawnRate: 1
 --- !u!114 &504795244
 MonoBehaviour:
