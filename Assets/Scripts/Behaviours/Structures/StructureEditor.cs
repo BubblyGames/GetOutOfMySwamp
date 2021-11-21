@@ -13,7 +13,7 @@ public class StructureEditor : Editor
         Structure structureScript = (Structure) target;
         if (GUILayout.Button("Upgrade Structure"))
         {
-            structureScript.UpgradeStrucrure(uIController);
+            structureScript.UpgradeStrucrure();
         }
     }
 }
