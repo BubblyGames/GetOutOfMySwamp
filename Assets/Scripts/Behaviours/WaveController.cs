@@ -68,8 +68,8 @@ public class WaveController : MonoBehaviour
         //isBetweenWaves = false;
 
         waveCount = 0;
-
-        timeVariable = Time.time + (timeBeforeRoundStarts);
+        //TODO: Unhardcode pre rounds start timer
+        timeVariable = Time.time + (timeBeforeRoundStarts *3 );
 
         //LevelManager.OnGameLost += StopSpawning;
         LevelManager.OnGameCompleted += LevelCompleted;

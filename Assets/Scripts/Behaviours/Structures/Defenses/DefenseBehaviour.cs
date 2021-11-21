@@ -32,7 +32,7 @@ public abstract class DefenseBehaviour : Structure
     [Tooltip("The radius of the sphere in which the defense detects an enemy")]
     internal float attackRange = 5f;
 
-    public override void UpgradeStrucrure(UIController uIController)
+    public override void UpgradeStrucrure()
     {
 
         if (!isMaxLevel)
@@ -55,7 +55,7 @@ public abstract class DefenseBehaviour : Structure
                 }
             }
         }
-        base.UpgradeStrucrure(uIController);
+        base.UpgradeStrucrure();
 
     }
     protected virtual void Attack() { }

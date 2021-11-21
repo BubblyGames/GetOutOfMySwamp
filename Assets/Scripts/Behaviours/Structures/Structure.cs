@@ -38,7 +38,7 @@ public class Structure : MonoBehaviour
         transform.up = this.normal;
     }
 
-    public virtual void UpgradeStrucrure(UIController uIController)
+    public virtual void UpgradeStrucrure()
     {
         if (!isMaxLevel)
         {

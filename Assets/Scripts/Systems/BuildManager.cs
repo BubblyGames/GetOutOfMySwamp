@@ -18,9 +18,6 @@ public class BuildManager : MonoBehaviour
     [SerializeField]
     private CellInfo selectedCell;
 
-    [SerializeField]
-    private UIController uIController;
-
     public List<Vector3Int> structureFundation;
 
 
@@ -104,7 +101,7 @@ public class BuildManager : MonoBehaviour
                 cubeForward = Vector3Int.forward;
             }
 
-            //empties fundation list cause ws dont want all of the past position just the ones behind the structure
+            //empties fundation list cause we dont want all saved position just the ones under the structure
             structureFundation.Clear();
 
             Vector3Int cubeRight = Vector3Int.FloorToInt(Vector3.Cross(hit.normal, cubeForward));
@@ -118,7 +115,7 @@ public class BuildManager : MonoBehaviour
 
                     if (LevelManager.instance.world.CheckIfCanBuildInCell(sizeChecker, structureBlueprint.structurePrefab.GetComponent<Structure>().blockType, OnTopofSizeChecker))
                     {
-                        //if it can be placed we delete dteh fundation list
+                        //if it can be placed we delete fundation list
                         structureFundation.Clear();
                         return false;
                     }
@@ -262,12 +259,12 @@ public class BuildManager : MonoBehaviour
         {
             if (CheatManager.instance.infiniteMoney)
             {
-                SelectedStructure.UpgradeStrucrure(uIController);
+                SelectedStructure.UpgradeStrucrure();
             }
-            else if (LevelStats.instance.CurrentMoney >= StructureBlueprint.upgrades[SelectedStructure.GetLevel()].cost)
+            else if (LevelStats.instance.CurrentMoney >= SelectedStructure.Blueprint.upgrades[SelectedStructure.GetLevel()].cost)
             {
                 LevelStats.instance.SpendMoney(StructureBlueprint.upgrades[SelectedStructure.GetLevel()].cost);
-                SelectedStructure.UpgradeStrucrure(uIController);
+                SelectedStructure.UpgradeStrucrure();
             }
             else
             {
