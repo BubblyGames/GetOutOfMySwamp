@@ -170,7 +170,7 @@ Cantidad de enemigos por ronda:
 
 **Otoño:**
 
-Cantidad de enemigos por ronda: PENDIENTE
+Cantidad de enemigos por ronda: 
 | **ENEMIGOS**                | RONDA 1 | RONDA 2 | RONDA 3 | 
 | --------------------------- | ------- | ------- |-------- |
 | NORMAL                      |  10     |   15    |   40    |
@@ -180,7 +180,7 @@ Cantidad de enemigos por ronda: PENDIENTE
 
 **Cerezo:**
 
-Cantidad de enemigos por ronda: PENDIENTE
+Cantidad de enemigos por ronda: 
 | **ENEMIGOS**                | RONDA 1 | RONDA 2 | RONDA 3 | RONDA 4 |
 | --------------------------- | ------- | ------- |-------- | ------- |
 | NORMAL                      |   15    |   21    |   51    |   48    |
@@ -190,7 +190,7 @@ Cantidad de enemigos por ronda: PENDIENTE
 
 **Nevado:**
 
-Cantidad de enemigos por ronda: PENDIENTE
+Cantidad de enemigos por ronda: 
 | **ENEMIGOS**                | RONDA 1 | RONDA 2 | RONDA 3 | RONDA 4 |
 | --------------------------- | ------- | ------- |-------- | ------- |
 | NORMAL                      |   60    |   40    |   80    |   80    |
