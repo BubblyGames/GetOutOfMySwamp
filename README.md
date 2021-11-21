@@ -445,7 +445,7 @@ La interfaz del juego consta de 7 ventanas:
 
 - Ajustes:
 
-![menuAjustes](https://user-images.githubusercontent.com/56488179/142733250-f56553c5-ce54-4c9e-8209-1d37c487f0cf.png)
+![menuAjustes](https://user-images.githubusercontent.com/56488179/142775932-6e72387a-2e4e-412e-9064-0d2783f9c809.png)
 
 - Tutoriales:
 
