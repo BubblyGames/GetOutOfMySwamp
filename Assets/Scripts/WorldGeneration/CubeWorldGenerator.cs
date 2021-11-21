@@ -32,6 +32,7 @@ public class CubeWorldGenerator : MonoBehaviour
     public int seed = 0;
     internal Vector3Int end;
     internal Transform center;
+    Vector3 centerPosition;
 
     [Header("Extra")]
     public Material waterMaterial;
@@ -48,6 +49,10 @@ public class CubeWorldGenerator : MonoBehaviour
     int endzoneRadious;
     int swampRadious;
 
+
+    //SimpleUpdateJob simpleUpdateJob = new SimpleUpdateJob();
+    //UpdateJob updateJob = new UpdateJob();
+
     #region SetUp
     private void Awake()
     {
@@ -57,6 +62,7 @@ public class CubeWorldGenerator : MonoBehaviour
         worldCenter.transform.position = transform.position + (Vector3.one * ((size - 1) / 2f)); //set center too middle of the cube
         worldCenter.transform.parent = transform;
         center = worldCenter.transform;
+        centerPosition = center.position;
 
         if (!demo && GameManager.instance != null)
         {
@@ -125,26 +131,21 @@ public class CubeWorldGenerator : MonoBehaviour
             Debug.Log("Attempt: " + count + " Seed: " + seed.ToString());
             GenerateWorld();//Choose the blocktype of each cell
             UpdateMesh();
-            if (!demo)
-            {
-                foreach (Path p in paths)
-                {
-                    p.dirty = true;
-                }
+            if (demo)
+                return;
 
-                success = GeneratePaths();//Tries to create paths
-                if (!success)
-                {
-                    ClearDebugStuff();
-                    seed = Mathf.RoundToInt(Random.value * 100000);//New seed
-                    wallDensity -= 0.01f;
-                }
-            }
-            else
+            foreach (Path p in paths)
             {
-                success = true;
+                p.dirty = true;
             }
-            //yield return null;
+
+            success = GeneratePaths();//Tries to create paths
+            if (!success)
+            {
+                ClearDebugStuff();
+                seed = Mathf.RoundToInt(Random.value * 100000);//New seed
+                wallDensity -= 0.01f;
+            }
         }
 
         if (LevelManager.instance)
@@ -153,8 +154,7 @@ public class CubeWorldGenerator : MonoBehaviour
             LevelManager.instance.ready = true;
         }
 
-        StartCoroutine(ShowPathsCoroutine());
-        //yield return null;
+        CallUpdateWorld();
     }
 
     public void CreateWater()
@@ -272,7 +272,7 @@ public class CubeWorldGenerator : MonoBehaviour
         }
     }
 
-    void GenerateMesh()
+    public void GenerateMesh()
     {
         meshData.Clear();
         for (int i = 0; i < size; i++)
@@ -364,9 +364,9 @@ public class CubeWorldGenerator : MonoBehaviour
         }
     }
 
-    private bool GeneratePaths()
+    public bool GeneratePaths()
     {
-        float startTime = Time.realtimeSinceStartup;
+        //float startTime = Time.realtimeSinceStartup;
 
         if (Path.FindPathAstar(this, new Node(cells[size / 2, 0, size / 2]), GetCell(end), true, canMergePaths) == null)
             return false;
@@ -424,8 +424,7 @@ public class CubeWorldGenerator : MonoBehaviour
             //StartCoroutine(ShowPath(paths[i]));
         }
 
-        //Debug paths and midpoints
-        ShowDebugStuff();
+
 
         //Debug.Log("Generating paths took: " + (Time.realtimeSinceStartup - startTime) + "s");
         return true; //Success
@@ -433,99 +432,6 @@ public class CubeWorldGenerator : MonoBehaviour
 
     #endregion
 
-    #region UpdateWorld
-    bool updating = false;
-    bool hasNewChanges = false;
-
-    public bool CallUpdateWorld()
-    {
-        if (!updating)
-        {
-            ClearDebugStuff();
-            StopAllCoroutines();
-            UpdateMesh();
-            //UpdateJob updateJob = new UpdateJob();
-            //updateJob.Schedule();
-            if (!demo && !GeneratePaths())
-            {
-                ShowDebugStuff();
-            }
-
-            ShowPaths();
-
-        }
-        else
-        {
-            hasNewChanges = true;
-        }
-        return true;
-    }
-
-    public bool UpdateWorld()
-    {
-        if (!GeneratePaths())
-        {
-
-            return false;
-        }
-
-        return true;
-    }
-
-
-    public void UpdateMesh()
-    {
-        GenerateMesh();
-        voxelRenderer.RenderMesh(meshData);
-    }
-
-    public void UpdateMeshSingleBlock()
-    {
-        GenerateMesh();
-        voxelRenderer.RenderMesh(meshData);
-    }
-
-    public void ShowPaths()
-    {
-        StartCoroutine(ShowPathsCoroutine());
-    }
-
-    IEnumerator ShowPathsCoroutine()
-    {
-        int max = 0;
-        for (int i = 0; i < paths.Count; i++)
-        {
-            max = Mathf.Max(max, paths[i].Length);
-        }
-
-        for (int i = 0; i < max; i++)
-        {
-            bool dirty = false;
-            for (int j = 0; j < paths.Count; j++)
-            {
-                if (i < paths[j].Length - 1)
-                {
-                    CellInfo c = GetCellUnder(paths[j].GetCell(i));
-                    if (c.blockType != BlockType.Path && c.blockType != BlockType.Swamp)
-                    {
-                        dirty = true;
-                        c.canWalk = false;
-                        c.blockType = BlockType.Path;
-                    }
-                }
-            }
-            if (dirty)
-            {
-                //UpdateMesh();
-                //yield return null;
-            }
-        }
-        UpdateMesh();
-
-        UpdateMesh();
-        yield return null;
-    }
-    #endregion
 
     #region Gameplay
     public bool ReplaceInterestPoint(Vector3Int point)
@@ -658,6 +564,7 @@ public class CubeWorldGenerator : MonoBehaviour
     {
         List<Path> affectedPaths = new List<Path>();
         List<CellInfo> affectedCells = new List<CellInfo>();
+        bool anyPathDirty = false;
 
         for (int i = -radius; i <= radius; i++)
         {
@@ -682,6 +589,7 @@ public class CubeWorldGenerator : MonoBehaviour
                             foreach (Path p in c.paths)
                             {
                                 p.dirty = true;
+                                anyPathDirty = true;
                             }
 
                             c.blockType = BlockType.Air;
@@ -751,10 +659,11 @@ public class CubeWorldGenerator : MonoBehaviour
     {
         CellInfo cell = null;
         CellInfo currentCell;
+        System.Random rand = new System.Random();
         while (cell == null)
         {
 
-            int randomIdx = Random.Range(0, emptyCells.Count);
+            int randomIdx = rand.Next(0, emptyCells.Count - 1);
             currentCell = emptyCells[randomIdx];
 
             if (!currentCell.endZone &&
@@ -768,6 +677,12 @@ public class CubeWorldGenerator : MonoBehaviour
 
     public CellInfo GetRandomCellWithRay(CellInfo cell = null)
     {
+        if (parallelUpdate)
+        {
+
+        }
+
+
         CellInfo selectedCell = null;
         int count = 0;
         while (selectedCell == null && count < 10)
@@ -781,7 +696,7 @@ public class CubeWorldGenerator : MonoBehaviour
 
             RaycastHit hit;
             Vector3 pos = c.GetPos();
-            Physics.Raycast(pos, center.position - pos, out hit, Mathf.Infinity);
+            Physics.Raycast(pos, centerPosition - pos, out hit, Mathf.Infinity);
 
             Vector3Int intPos = new Vector3Int(
                 Mathf.RoundToInt(hit.point.x + (hit.normal.x / 2)),
@@ -861,9 +776,10 @@ public class CubeWorldGenerator : MonoBehaviour
     public bool CheckIfCanBuildInCell(Vector3Int cellindex, BlockType blocktype, Vector3Int cellOnTop)
     {
         return ((IsPosInBounds(cellOnTop) && //If cell above is in bounds
-                       GetCell(cellOnTop).blockType != BlockType.Air) //And isn't air
-                        || (IsPosInBounds(cellindex) && //Or cell below is in bounds
-                        GetCell(cellindex).blockType != blocktype));//And block type doesn't match
+                        GetCell(cellOnTop).blockType != BlockType.Air) ||  //And isn't air
+                        (IsPosInBounds(cellindex) && //Or cell below is in bounds
+                        GetCell(cellindex).blockType != blocktype) ||//And block type doesn't match
+                        GetCell(cellindex).structure != null); // and cell has no structure
     }
 
     public Vector3Int GetFaceNormal(CellInfo cellInfo)
@@ -925,48 +841,52 @@ public class CubeWorldGenerator : MonoBehaviour
 
     public CellInfo GetCellUnderWithGravity(CellInfo cell)
     {
-        return GetRandomCellWithRay(cell);
+        if (!parallelUpdate)
+            return GetRandomCellWithRay(cell);
 
+        CellInfo currentCell = cell;
         CellInfo newCell;
-        int count = 0;
-        while (CheckIfFloating(cell) && count < size)
-        {
-            Vector3 dir = (cell.GetPos() - center.position);
 
+        int count = 0;
+        while (count < size)
+        {
+            Vector3 dir = (currentCell.GetPos() - center.position);
             Vector3Int dirInt = Path.Vector3ToIntNormalized(dir);
 
-            newCell = GetCell(cell.GetPosInt() - dirInt);
+            //Get cell under
+            newCell = GetCell(currentCell.GetPosInt() - dirInt);
 
+            //If can't walk try different directions
             if (!newCell.canWalk)
             {
                 Vector3Int newDirInt = new Vector3Int(dirInt.x, 0, 0);
-                newCell = GetCell(cell.GetPosInt() - newDirInt);
+                newCell = GetCell(currentCell.GetPosInt() - newDirInt);
             }
 
             if (!newCell.canWalk)
             {
                 Vector3Int newDirInt = new Vector3Int(0, dirInt.y, 0);
-                newCell = GetCell(cell.GetPosInt() - newDirInt);
+                newCell = GetCell(currentCell.GetPosInt() - newDirInt);
             }
 
             if (!newCell.canWalk)
             {
                 Vector3Int newDirInt = new Vector3Int(0, 0, dirInt.z);
-                newCell = GetCell(cell.GetPosInt() - newDirInt);
+                newCell = GetCell(currentCell.GetPosInt() - newDirInt);
             }
 
-            cell = newCell;
-            //Debug.Log(cell.GetPos());
+            if (newCell.canWalk && !CheckIfFloating(newCell))
+            {
+                return newCell;
+            }
+
+            currentCell = newCell;
+
             count++;
         }
 
-        if (count == size)
-        {
-            Debug.Log("Wtf fix this a$ap: " + cell.GetPos());
-            return GetRandomCellWithRay(cell);
-        }
-
-        return cell;
+        Debug.Log("Wtf fix this a$ap: " + cell.GetPos());
+        return GetCompletelyRandomCell();
     }
 
     internal CellInfo GetClosestWalkableCell(CellInfo cell)
@@ -1125,9 +1045,244 @@ public class CubeWorldGenerator : MonoBehaviour
     }
     #endregion
 
+
+    #region UpdateWorld
+
+    public bool parallelUpdate = false;
+    public bool CallUpdateWorld()
+    {
+        if (parallelUpdate)
+            UpdateWorldParallel();
+        else
+            UpdateWorld();
+
+        return true;
+    }
+
+    public bool CallUpdateWorld(bool _parallelUpdate)
+    {
+        if (_parallelUpdate)
+            UpdateWorldParallel();
+        else
+            UpdateWorld();
+
+        return true;
+    }
+
+    public bool UpdateWorld()
+    {
+        Debug.Log("Single thread update");
+
+        ClearDebugStuff();
+        UpdateMesh();
+        if (!GeneratePaths())
+        {
+            //Debug paths and midpoints
+            ShowDebugStuff();
+            return false;
+        }
+        ShowPaths();
+        UpdateMesh();
+        ShowDebugStuff();
+        //LevelManager.instance.ready = true;
+
+        return true;
+    }
+
+    public void UpdateMesh()
+    {
+        GenerateMesh();
+        voxelRenderer.RenderMesh(meshData);
+    }
+
+    public void UpdateMeshSingleBlock()
+    {
+        GenerateMesh();
+        voxelRenderer.RenderMesh(meshData);
+    }
+
+    public void ShowPaths()
+    {
+        foreach (Path p in paths)
+        {
+            foreach (CellInfo ce in p.cells)
+            {
+                CellInfo c = GetCellUnder(ce);
+                if (c.blockType != BlockType.Path && c.blockType != BlockType.Swamp)
+                {
+                    c.canWalk = false;
+                    c.blockType = BlockType.Path;
+                }
+            }
+        }
+    }
+
+    IEnumerator ShowPathsCoroutine()
+    {
+        int max = 0;
+        for (int i = 0; i < paths.Count; i++)
+        {
+            max = Mathf.Max(max, paths[i].Length);
+        }
+
+        for (int i = 0; i < max; i++)
+        {
+            bool dirty = false;
+            for (int j = 0; j < paths.Count; j++)
+            {
+                if (i < paths[j].Length - 1)
+                {
+                    CellInfo c = GetCellUnder(paths[j].GetCell(i));
+                    if (c.blockType != BlockType.Path && c.blockType != BlockType.Swamp)
+                    {
+                        dirty = true;
+                        c.canWalk = false;
+                        c.blockType = BlockType.Path;
+                    }
+                }
+            }
+            if (dirty)
+            {
+                UpdateMesh();
+                yield return null;
+            }
+        }
+        UpdateMesh();
+        LevelManager.instance.ready = true;
+        yield return null;
+    }
+
+
+
+
+    int maxPathLegth = -1;
+    public void ShowPathsParallel()
+    {
+        int j = 0;
+        while (j < maxPathLegth)
+        {
+            if (newMeshReady)
+                continue;
+
+            if (ShowNextPathStep(j))
+            {
+                //Debug.Log("Showing step: " + j);
+                //System.Threading.Thread.Sleep(100);
+                GenerateMesh();
+                newMeshReady = true;
+            }
+            j++;
+        }
+    }
+
+    public bool ShowNextPathStep(int current)
+    {
+        bool somePathsAreDirty = false;
+        for (int i = 0; i < paths.Count; i++)
+        {
+            if (current < paths[i].Length - 1)
+            {
+                CellInfo c = GetCellUnder(paths[i].GetCell(current));
+                if (c.blockType != BlockType.Path && c.blockType != BlockType.Swamp)
+                {
+                    somePathsAreDirty = true;
+                    c.canWalk = false;
+                    c.blockType = BlockType.Path;
+                }
+            }
+        }
+        return somePathsAreDirty;
+    }
+
+
+    internal bool updating = false;
+    internal bool newMeshReady = false;
+    int cellsUpdated = 0;
+
+    bool allPathsShown = false;
+
+    public bool UpdateWorldParallel()
+    {
+        Debug.Log("Parallel update");
+        if (updating)
+        {
+            Debug.Log("Still working!");
+            return false;
+        }
+
+        updating = true;
+        cellsUpdated = 0;
+        allPathsShown = false;
+
+        ClearDebugStuff();
+
+        //Generate paths
+        GeneratePaths();
+
+        //Find length of longest path
+        for (int i = 0; i < paths.Count; i++)
+        {
+            maxPathLegth = Mathf.Max(maxPathLegth, paths[i].Length);
+        }
+        maxPathLegth--;
+
+        return true;
+    }
+
+    #endregion
+
+    int skips = 0;
+    public int maxSkips = 5;
+    private void FixedUpdate()
+    {
+        skips++;
+        if (skips > maxSkips && parallelUpdate && updating)
+        {
+            skips = 0;
+            if (!allPathsShown)
+            {
+                //Showing paths
+                if (cellsUpdated >= maxPathLegth)
+                {
+                    Debug.Log("All paths shown");
+                    allPathsShown = true;
+                }
+                else
+                {
+                    while (cellsUpdated <= maxPathLegth && !ShowNextPathStep(cellsUpdated))
+                    {
+                        cellsUpdated++;
+                        //Debug.Log("Step: " + cellsUpdated);
+                    }
+                    cellsUpdated++;
+                    UpdateMesh();
+                }
+            }
+
+            updating = !allPathsShown;
+        }
+    }
+
 #if UNITY_EDITOR
     private void Update()
     {
+        
+
+        //For real multithreading purposes
+        if (newMeshReady)
+        {
+            Debug.Log("Showing new mesh");
+
+            voxelRenderer.RenderMesh(meshData);
+            newMeshReady = false;
+
+            //Debug paths and midpoints
+            if (!demo)
+            {
+                //ShowDebugStuff();
+            }
+        }
+
         if (Input.GetKeyDown(KeyCode.I))
         {
             Debug.Log("Adding random interest point");
@@ -1146,7 +1301,6 @@ public class CubeWorldGenerator : MonoBehaviour
             Explode(GetCompletelyRandomCell().GetPosInt(), 15);
         }
     }
-
 
     private void OnDrawGizmos()
     {
@@ -1186,12 +1340,35 @@ public class CubeWorldGenerator : MonoBehaviour
 
 
 // Job adding two floating point values together
+/*public struct SimpleUpdateJob : IJob
+{
+    public void Execute()
+    {
+        //LevelManager.instance.world.UpdateWorld();
+        Debug.Log("Simple job running");
+        LevelManager.instance.world.ShowPathsParallel();
+
+        LevelManager.instance.world.updating = false;
+    }
+}
+
 public struct UpdateJob : IJob
 {
     public void Execute()
     {
         //LevelManager.instance.world.UpdateWorld();
         Debug.Log("Job running");
+        LevelManager.instance.world.GeneratePaths();
+        LevelManager.instance.world.ShowPathsParallel();
+
+        //Wait for previous meshdata to be read
+        while (LevelManager.instance.world.newMeshReady) { }
+
+        LevelManager.instance.world.GenerateMesh();
+        LevelManager.instance.world.newMeshReady = true;
+
+        LevelManager.instance.world.updating = false;
+
     }
-}
+}*/
 

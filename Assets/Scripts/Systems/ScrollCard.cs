@@ -7,7 +7,7 @@ using UnityEngine.EventSystems;
 public class ScrollCard : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragHandler
 {
     [SerializeField] GameObject cardToSpawn;
-    [SerializeField] Material cardMaterial;
+    //[SerializeField] Material cardMaterial;
     [SerializeField] Texture texture;
     [SerializeField] int indexCard;
     [SerializeField] RectTransform contentParent;

@@ -68,8 +68,8 @@ public class WaveController : MonoBehaviour
         //isBetweenWaves = false;
 
         waveCount = 0;
-
-        timeVariable = Time.time + (timeBeforeRoundStarts);
+        //TODO: Unhardcode pre rounds start timer
+        timeVariable = Time.time + (timeBeforeRoundStarts *3 );
 
         //LevelManager.OnGameLost += StopSpawning;
         LevelManager.OnGameCompleted += LevelCompleted;
@@ -163,7 +163,7 @@ public class WaveController : MonoBehaviour
     {
         activeEnemies++;
         enemies.Add(enemy);
-        Debug.Log("Enemy added: " + activeEnemies);
+        //Debug.Log("Enemy added: " + activeEnemies);
     }
 
     public void ReduceActiveEnemies(EnemyBehaviour enemy)

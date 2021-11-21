@@ -53,6 +53,9 @@ public class InputManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (!LevelManager.instance.ready)
+            return;
+
         //Zoom
         CheckPinch();
         CameraBehaviour.instance.Zoom(Input.mouseScrollDelta.y * scrollSensitivity); //Zoom with mouse wheel
@@ -193,15 +196,16 @@ public class InputManager : MonoBehaviour
 
                     Structure structureHitted = hit.collider.gameObject.GetComponent<Structure>();
                     //Interact with existing defenses
+                    BuildManager.instance.SetSelectedStructure(structureHitted);
                     UIController.instance.SetUpgradeMenu(structureHitted);
                     UIController.instance.ShowMenu(UIController.GameMenu.UpgradeMenu);
-                    BuildManager.instance.SetSelectedStructure(structureHitted.GetComponent<Structure>());
                     //check the structure type
 
 
                     break;
                 case "Gatherer":
                     Gatherer gathererHitted = hit.collider.gameObject.GetComponent<Gatherer>();
+                    BuildManager.instance.SetSelectedStructure(gathererHitted);
                     UIController.instance.SetUpgradeMenu(gathererHitted);
                     UIController.instance.ShowMenu(UIController.GameMenu.UpgradeMenu);
                     break;
