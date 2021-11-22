@@ -13,6 +13,7 @@ public class InputManager : MonoBehaviour
     public bool forceMobile = false;
     public Vector3 offset;
     public Vector3 mousePosition;
+    Vector3 lastMousePosition;
     public Color wrongColor;
 
     [HideInInspector] public GameObject selectedCard;
@@ -56,16 +57,20 @@ public class InputManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        lastMousePosition = mousePosition;
         if (isMobile && Input.touchCount > 0)
         {
             mousePosition = Input.touches[0].position;
+            CheckPinch();
         }
         else
+        {
             mousePosition = Input.mousePosition;
+            //Zoom
+            CameraBehaviour.instance.Zoom(Input.mouseScrollDelta.y * scrollSensitivity); //Zoom with mouse wheel
+        }
 
-        //Zoom
-        CheckPinch();
-        CameraBehaviour.instance.Zoom(Input.mouseScrollDelta.y * scrollSensitivity); //Zoom with mouse wheel
+
 
         //Click
         if (Input.GetMouseButtonDown(0))
@@ -144,6 +149,9 @@ public class InputManager : MonoBehaviour
         else if (!zooming && Input.mousePosition.x <= Screen.width * 0.9f)
         {
             //If not zooming, camera will be moved
+            if (Mathf.Abs(Input.GetAxis("Mouse X")) > 30 || Mathf.Abs(Input.GetAxis("Mouse Y")) > 30)
+                return;
+
             CameraBehaviour.instance.Rotate(Input.GetAxis("Mouse X") * mouseSensitivity, Input.GetAxis("Mouse Y") * mouseSensitivity);
         }
     }
