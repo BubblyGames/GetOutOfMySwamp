@@ -43,7 +43,7 @@ El modelo de monetización dependerá del desempeño económico del producto una
 
 Nuestro cliente se trata de una persona con una fuerte presencia del arte en su vida. Es una persona sencilla, amable, dulce y optimista, la cual quiere o la gustaría poder dedicarse al arte y vivir de ello, siendo reconocida por más gente del gremio aunque para ello debe competir contra gente con talento en una situación laboral un tanto delicada.
 
-![nuestroMapa](https://user-images.githubusercontent.com/56488179/138941794-d059db82-28a3-4edf-8668-2a979de50dbb.png)
+![nuestroMapa](https://user-images.githubusercontent.com/56488179/143439029-8711e076-5dd3-4320-b65a-d5e297a39fff.png)
 
 ### 2.2 Mapa de lienzo
 
