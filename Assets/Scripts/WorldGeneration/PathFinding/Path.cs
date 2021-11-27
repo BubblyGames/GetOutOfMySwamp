@@ -102,99 +102,10 @@ public class Path
         return true;
     }
 
-    public static Node FindPathAstar(CubeWorldGenerator _world, Node firstNode, CellInfo end,
-        bool lastStep, bool canMergePaths, List<Node> excludedNodes = null, List<CellInfo> goals = null)
-    {
-        Node current;
-
-        NodeComparer nodeComparer = new NodeComparer();
-        //SortedSet<Node> openList = new SortedSet<Node>(nodeComparer);
-        List<Node> openList = new List<Node>();
-        List<Node> closedList = new List<Node>();
-
-        if (excludedNodes != null)
-            closedList.AddRange(excludedNodes);
-
-        if (goals == null)
-            goals = new List<CellInfo>();
-
-        //SortedSet<Node> sortedList = new SortedSet<Node>();
-
-        //First node, with starting position and null parent
-        firstNode.ComputeFScore(end.x, end.y, end.z);
-        current = firstNode;
-        openList.Add(firstNode);
-
-        int count = 0;
-        while (openList.Count > 0 && count < 5000)
-        {
-            count++;
-            //Sorting the list in "h" in increasing order
-            openList.Sort(nodeComparer);
-
-            //Check lists's first node
-            //current = openList.Min;
-
-            current = openList[0];
-            closedList.Add(current);
-            openList.Remove(current);
-
-            if (current.cell == end)//If first node is goal,returns current Node3D
-            {
-                return current;
-            }
-            else
-            {
-                //Expands neightbors, (compute cost of each one) and add them to the list
-                CellInfo[] neighbours = _world.GetNeighbours(current.cell);
-
-                current.isFloating = true;
-                for (int i = 0; i < neighbours.Length; i++)
-                {
-                    if (neighbours[i].blockType != BlockType.Air || current.cell.endZone)
-                    {
-                        current.isFloating = false;
-                    }
-
-                    if (goals.Contains(neighbours[i]) && neighbours[i] != end)
-                    {
-                        continue;
-                    }
-                }
-
-                if (current.isFloating && current.Parent != null && current.Parent.isFloating)
-                    continue;
-
-                foreach (CellInfo neighbour in neighbours)
-                {
-                    if (neighbour == null ||
-                        !neighbour.canWalk ||
-                        (!lastStep && neighbour.endZone) ||
-                        (!neighbour.endZone && !canMergePaths && neighbour.isPath))//||(neighbour.isPath && !neighbour.endZone)
-                        continue;
-
-                    //if neighbour no esta en open
-                    if (openList.Any(node => node.cell == neighbour))
-                        continue;
-
-                    if (closedList.Any(node => node.cell == neighbour))
-                        continue;
-
-                    Node n = new Node(neighbour);
-
-                    n.cell = _world.cells[n.x, n.y, n.z];
-                    n.Parent = current;
-                    n.ComputeFScore(end.x, end.y, end.z);
-
-                    openList.Add(n);
-                }
-            }
-        }
-        return null;
-    }
-
     Node FindPathAstarWithMidpoints(CellInfo start, CellInfo end)
     {
+        float startTime = Time.realtimeSinceStartup;
+
         List<Node> closedList = new List<Node>();
         List<Midpoint> midpointsCopy = new List<Midpoint>(midPoints);
 
@@ -222,7 +133,7 @@ public class Path
             int count = 0;
 
             //Tries x times to find a suitable midpoint
-            while (result == null && count < 3)
+            while (result == null && count < 2)
             {
                 if (world.CheckIfFloating(midpoint.cell))
                 {
@@ -300,10 +211,108 @@ public class Path
             current = result;
         }
 
-        ///midPoints = midpointsCopy;
+        //midPoints = midpointsCopy;
+
+        Debug.Log("Path " + id + " took: " + (Time.realtimeSinceStartup - startTime) + "s");
 
         //Final step is finding the actual end
         return current;
+    }
+
+    public static Node FindPathAstar(CubeWorldGenerator _world, Node firstNode, CellInfo end,
+        bool lastStep, bool canMergePaths, List<Node> excludedNodes = null, List<CellInfo> goals = null)
+    {
+        float startTime = Time.realtimeSinceStartup;
+
+        Node current;
+
+        NodeComparer nodeComparer = new NodeComparer();
+        //SortedSet<Node> openList = new SortedSet<Node>(nodeComparer);
+        List<Node> openList = new List<Node>();
+        List<Node> closedList = new List<Node>();
+
+        if (excludedNodes != null)
+            closedList.AddRange(excludedNodes);
+
+        if (goals == null)
+            goals = new List<CellInfo>();
+
+        //SortedSet<Node> sortedList = new SortedSet<Node>();
+
+        //First node, with starting position and null parent
+        firstNode.ComputeFScore(end.x, end.y, end.z);
+        current = firstNode;
+        openList.Add(firstNode);
+
+        int count = 0;
+        while (openList.Count > 0 && count < 5000)
+        {
+            count++;
+            //Sorting the list in "h" in increasing order
+            openList.Sort(nodeComparer);
+
+            //Check lists's first node
+            //current = openList.Min;
+
+            current = openList[0];
+            closedList.Add(current);
+            openList.Remove(current);
+
+            if (current.cell == end)//If first node is goal,returns current Node3D
+            {
+                Debug.Log("Got there in " + (Time.realtimeSinceStartup - startTime) + "s");
+                return current;
+            }
+            else
+            {
+                //Expands neightbors, (compute cost of each one) and add them to the list
+                CellInfo[] neighbours = _world.GetNeighbours(current.cell);
+
+                current.isFloating = true;
+                for (int i = 0; i < neighbours.Length; i++)
+                {
+                    if (neighbours[i].blockType != BlockType.Air || current.cell.endZone)
+                    {
+                        current.isFloating = false;
+                    }
+
+                    if (goals.Contains(neighbours[i]) && neighbours[i] != end)
+                    {
+                        continue;
+                    }
+                }
+
+                if (current.isFloating && current.Parent != null && current.Parent.isFloating)
+                    continue;
+
+                foreach (CellInfo neighbour in neighbours)
+                {
+                    if (neighbour == null ||
+                        !neighbour.canWalk ||
+                        (!lastStep && neighbour.endZone) ||
+                        (!neighbour.endZone && !canMergePaths && neighbour.isPath))//||(neighbour.isPath && !neighbour.endZone)
+                        continue;
+
+                    //if neighbour no esta en open
+                    if (openList.Any(node => node.cell == neighbour))
+                        continue;
+
+                    if (closedList.Any(node => node.cell == neighbour))
+                        continue;
+
+                    Node n = new Node(neighbour);
+
+                    n.cell = _world.cells[n.x, n.y, n.z];
+                    n.Parent = current;
+                    n.ComputeFScore(end.x, end.y, end.z);
+
+                    openList.Add(n);
+                }
+            }
+        }
+
+        Debug.LogWarning("Couldn't get there and spent " + (Time.realtimeSinceStartup - startTime) + "s");
+        return null;
     }
 
     #region Midpoints
@@ -332,8 +341,6 @@ public class Path
 
     public Vector3 GetStep(int idx) { return new Vector3(cells[idx].x, cells[idx].y, cells[idx].z); }
 
-
-
     internal CellInfo GetCell(int idx)
     {
         return cells[idx];
@@ -344,7 +351,7 @@ public class Path
         enemies.Add(enemy);
     }
 
-    public void Reset()
+    public void Empty()
     {
         foreach (EnemyBehaviour e in enemies)
         {
@@ -361,7 +368,14 @@ public class Path
         enemies.Clear();
     }
 
-
+    public void Reset()
+    {
+        cells = new CellInfo[0];
+        midPoints = new List<Midpoint>();
+        firstTime = true;
+        dirty = true;
+        initiated = false;
+    }
 
     CellInfo lastCell;
     Vector3Int GetNormalOf(CellInfo c)
@@ -455,5 +469,4 @@ public class Path
 
         return dirInt;
     }
-
 }

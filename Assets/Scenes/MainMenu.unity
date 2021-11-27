@@ -4848,6 +4848,18 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 1921975916628525554, guid: bba5699992500f04092dd670b1f3d536, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: -2914503216214332612, guid: b0b83a753321b5f44988440aef71ac3e, type: 3}
+    - target: {fileID: 1921975916628525554, guid: bba5699992500f04092dd670b1f3d536, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 9023868662224991215, guid: bba5699992500f04092dd670b1f3d536, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bba5699992500f04092dd670b1f3d536, type: 3}
 --- !u!1 &812749453
@@ -7442,7 +7454,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: b6db7a2a52ad833469113d1be916a333, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 5e0499c45b6d9ac428dfe20b01c22a4a, type: 3}
   m_Type: 0
   m_PreserveAspect: 1
   m_FillCenter: 1

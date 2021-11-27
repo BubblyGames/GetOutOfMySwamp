@@ -40,6 +40,11 @@ public class LevelManager : MonoBehaviour
 
     public GameObject meteorPrefab;
 
+    public bool ready = false;
+
+    Image fadeImage;
+    GameObject loadingIcon;
+
     private void Awake()
     {
         if (instance == null)
@@ -57,9 +62,19 @@ public class LevelManager : MonoBehaviour
         levelStats = GetComponent<LevelStats>();
         buildManager = GetComponent<BuildManager>();
         shop = GetComponent<Shop>();
+        fadeImage = GameObject.Find("FadeImage").GetComponent<Image>();
+        loadingIcon = fadeImage.gameObject.transform.GetChild(0).gameObject;
+
+        loadingIcon.SetActive(true);
+        fadeImage.enabled = true;
+
+        if (GameManager.instance != null)
+        {
+            Debug.Log("Loading level: " + GameManager.instance.currentWorldId);
+            WorldInfo worldInfo = GameManager.instance.GetCurrentWorld();
+            fadeImage.color = worldInfo.themeInfo.backGroundColor;
+        }
     }
-
-
 
     private void Start()
     {
@@ -101,6 +116,30 @@ public class LevelManager : MonoBehaviour
             GameOver();
         }
     }
+
+    public void StartGame()
+    {
+        loadingIcon.SetActive(false);
+        StartCoroutine(StartGameCoroutine());
+    }
+
+    IEnumerator StartGameCoroutine()
+    {
+        ready = true;
+        Color color = fadeImage.color;
+
+        yield return new WaitForSeconds(0.5f);
+
+        for (float t = 1; t > 0; t -= Time.deltaTime)
+        {
+            fadeImage.color = new Color(color.r, color.g, color.b, Mathf.Lerp(0, 1, t));
+            yield return null;
+        }
+        fadeImage.enabled = false;
+
+        yield return null;
+    }
+
 
     public void GameOver()
     {

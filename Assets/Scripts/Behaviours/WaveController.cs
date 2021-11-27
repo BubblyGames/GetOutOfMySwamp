@@ -180,6 +180,11 @@ public class WaveController : MonoBehaviour
         Wave currentWave = new Wave();
         currentWave = waves[waveCount];
 
+        while (!LevelManager.instance.ready)
+        {
+            yield return null;
+        }
+
         for (int i = 0; i < currentWave.packs.Length; i++)
         {
             Pack p = currentWave.packs[i];
@@ -195,6 +200,8 @@ public class WaveController : MonoBehaviour
                 {
                     Debug.Log("a");
                 }
+                if (!WorldManager.instance.paths[pathId].initiated)
+                    continue;
                 enemySpawner.SpawnEnemy(p.enemyType, WorldManager.instance.paths[pathId]);
                 waveEndTimer = 0;
 

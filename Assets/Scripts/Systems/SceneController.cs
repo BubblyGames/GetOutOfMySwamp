@@ -42,7 +42,7 @@ public class SceneController : MonoBehaviour
         //TO DO: find a better way to do this
         fader = GameObject.Find("FadeImage").GetComponent<Image>();
         fader.enabled = true;
-        for (float t = 0; t < 1; t += Time.deltaTime / duration)
+        for (float t = 0; t <= 1; t += Time.deltaTime / duration)
         {
             fader.color = new Color(fadeColor.r, fadeColor.g, fadeColor.b, Mathf.Lerp(0, 1, t));
             yield return null;

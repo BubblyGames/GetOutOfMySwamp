@@ -52,6 +52,10 @@ public class CameraBehaviour : MonoBehaviour
 
     void Update()
     {
+        if (!LevelManager.instance.ready)
+            return;
+            
+
         // Apply clamping for x rotation 
         _rotationX = Mathf.Clamp(_rotationX, _rotationXMinMax.x, _rotationXMinMax.y);
 
@@ -74,8 +78,8 @@ public class CameraBehaviour : MonoBehaviour
     {
         if (freeMovement && Input.GetButton("Fire1"))
         {
-            _rotationY += mouseX ;
-            _rotationX -= mouseY ;
+            _rotationY += mouseX;
+            _rotationX -= mouseY;
         }
     }
 
