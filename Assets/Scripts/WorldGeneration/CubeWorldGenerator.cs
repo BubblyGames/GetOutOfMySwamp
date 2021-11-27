@@ -168,16 +168,10 @@ public class CubeWorldGenerator : MonoBehaviour
 
                 yield return null;
 
-                if (paths[i].FindPath())
-                {
-                    paths[i].initiated = true;
-                }
-                else
-                {
-                    success = false;
-                    yield return null;
-                    break;
-                }
+                float startTime = Time.realtimeSinceStartup;
+
+                paths[i].FindPath();
+                Debug.Log("Path " + i + " took: " + (Time.realtimeSinceStartup - startTime) + "s");
 
                 yield return null;
             }

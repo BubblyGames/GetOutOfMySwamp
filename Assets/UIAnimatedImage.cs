@@ -17,18 +17,16 @@ public class UIAnimatedImage : MonoBehaviour
     void Start()
     {
         image = GetComponent<Image>();
-        timer = Time.realtimeSinceStartup + duration;
+        timer = Time.time + duration;
     }
     private void Update()
     {
         //(timer += Time.deltaTime) >= (duration / sprites.Length)
-        /*if (Time.realtimeSinceStartup > timer)
+        if (Time.time > timer)
         {
             timer = Time.time + duration;
             image.sprite = sprites[index];
             index = (index + 1) % sprites.Length;
-        }*/
-        image.sprite = sprites[index];
-        index = (index + 1) % sprites.Length;
+        }
     }
 }
