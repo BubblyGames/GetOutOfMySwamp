@@ -73,11 +73,6 @@ public class GameManager : MonoBehaviour
         RenderSettings.skybox.SetColor("_Tint", Color.white);
     }
 
-    public void RequestMeteor()
-    {
-
-    }
-
     public bool isMobile()
     {
         Debug.Log(SystemInfo.deviceModel);

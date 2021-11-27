@@ -4008,7 +4008,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 1307362636}
   m_Direction: 2
   m_Value: 1
-  m_Size: 0.41120008
+  m_Size: 0.4112001
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -10522,7 +10522,7 @@ MonoBehaviour:
   sphere: 0
   debugMidpoints: 1
   lineRendererPrefab: {fileID: 3920875017051324963, guid: ffef0eddca5eb324f94bad8de9cc038b, type: 3}
-  parallelUpdate: 0
+  updateMethod: 0
   maxSkips: 5
 --- !u!114 &1903685288
 MonoBehaviour:

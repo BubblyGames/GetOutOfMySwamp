@@ -778,7 +778,7 @@ MonoBehaviour:
   sphere: 0
   debugMidpoints: 0
   lineRendererPrefab: {fileID: 3920875017051324963, guid: ffef0eddca5eb324f94bad8de9cc038b, type: 3}
-  parallelUpdate: 0
+  updateMethod: 0
   maxSkips: 5
 --- !u!64 &63313644
 MeshCollider:
@@ -893,7 +893,7 @@ MonoBehaviour:
   sphere: 0
   debugMidpoints: 0
   lineRendererPrefab: {fileID: 3920875017051324963, guid: ffef0eddca5eb324f94bad8de9cc038b, type: 3}
-  parallelUpdate: 0
+  updateMethod: 0
   maxSkips: 5
 --- !u!64 &85103257
 MeshCollider:
@@ -1183,7 +1183,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   size: 31
-  wallDensity: 0.55
+  wallDensity: 0.5
   rocksVisualReduction: 1
   rockSize: 8.84
   waterDensity: 0.1
@@ -1196,7 +1196,7 @@ MonoBehaviour:
   sphere: 0
   debugMidpoints: 0
   lineRendererPrefab: {fileID: 3920875017051324963, guid: ffef0eddca5eb324f94bad8de9cc038b, type: 3}
-  parallelUpdate: 0
+  updateMethod: 0
   maxSkips: 5
 --- !u!64 &96266345
 MeshCollider:
@@ -1509,7 +1509,7 @@ MonoBehaviour:
   sphere: 0
   debugMidpoints: 0
   lineRendererPrefab: {fileID: 3920875017051324963, guid: ffef0eddca5eb324f94bad8de9cc038b, type: 3}
-  parallelUpdate: 0
+  updateMethod: 0
   maxSkips: 5
 --- !u!64 &140904418
 MeshCollider:
@@ -3260,7 +3260,7 @@ MonoBehaviour:
   sphere: 0
   debugMidpoints: 0
   lineRendererPrefab: {fileID: 3920875017051324963, guid: ffef0eddca5eb324f94bad8de9cc038b, type: 3}
-  parallelUpdate: 0
+  updateMethod: 0
   maxSkips: 5
 --- !u!64 &504795247
 MeshCollider:
