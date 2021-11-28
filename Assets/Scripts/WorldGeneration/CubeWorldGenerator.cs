@@ -170,7 +170,21 @@ public class CubeWorldGenerator : MonoBehaviour
 
                 float startTime = Time.realtimeSinceStartup;
 
-                paths[i].FindPath();
+                paths[i].Initialize();
+
+                while (paths[i].HasNextStep())
+                {
+                    if (!paths[i].GoToNextMidpoint())
+                    {
+                        success = false;
+                        break;
+                    }
+                    yield return null;
+                }
+
+                if (success)
+                    paths[i].SavePath();
+
                 Debug.Log("Path " + i + " took: " + (Time.realtimeSinceStartup - startTime) + "s");
 
                 yield return null;
@@ -411,8 +425,8 @@ public class CubeWorldGenerator : MonoBehaviour
     {
         //float startTime = Time.realtimeSinceStartup;
 
-        if (Path.FindPathAstar(this, new Node(cells[size / 2, 0, size / 2]), GetCell(end), true, canMergePaths) == null)
-            return false;
+        //if (Path.FindPathAstar(this, new Node(cells[size / 2, 0, size / 2]), GetCell(end), true, canMergePaths) == null)
+            //return false;
 
         for (int i = 0; i < nPaths; i++)
         {

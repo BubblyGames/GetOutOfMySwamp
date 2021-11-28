@@ -104,6 +104,9 @@ public class Path
 
     public void SavePath()
     {
+        if (result == null)
+            return;
+
         result.normal = Vector3Int.up;
         lastCell = world.GetCellUnder(result.cell);
 
@@ -273,7 +276,7 @@ public class Path
         openList.Add(firstNode);
 
         int count = 0;
-        while (openList.Count > 0 && count < 5000)
+        while (openList.Count > 0 && count < 1000)
         {
             count++;
             //Sorting the list in "h" in increasing order
