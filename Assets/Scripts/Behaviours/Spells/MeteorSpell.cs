@@ -36,7 +36,7 @@ public class MeteorSpell : SpellBehaviour
             pos.y = (int)transform.position.y;
             pos.z = (int)transform.position.z;
 
-            LevelManager.instance.world.SoftExplode(pos, range);
+            LevelManager.instance.world.Explode(pos, range);
 
             RaycastHit[] hits = Physics.SphereCastAll(transform.position, range, transform.forward, range);
             ////Debug.Log("Boom: " + hits.Length);

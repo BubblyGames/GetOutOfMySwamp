@@ -57,6 +57,9 @@ public class InputManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (!LevelManager.instance.ready)
+            return;
+
         lastMousePosition = mousePosition;
         if (isMobile && Input.touchCount > 0)
         {
@@ -130,9 +133,11 @@ public class InputManager : MonoBehaviour
                     cursor.transform.localScale = Vector3.one * BuildManager.instance.GetStructureSize();
                     cursor.transform.position = pos + BuildManager.instance.currentConstructionPositionOffset;
 
-
-
                     cursor.transform.up = hit.normal;
+                }
+                else
+                {
+                    cursor.GetComponent<MeshRenderer>().material.color = wrongColor;
                 }
                 //Card is hidden if poiting at anything in the world
                 selectedCard.SetActive(false);

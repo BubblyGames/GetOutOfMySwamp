@@ -171,7 +171,7 @@ public class WaveController : MonoBehaviour
         activeEnemies--;
         activeEnemies= Mathf.Max(activeEnemies, 0);
         enemies.Remove(enemy);
-        Debug.Log("Enemy reduced: " + activeEnemies);
+        //Debug.Log("Enemy reduced: " + activeEnemies);
 
     }
 
@@ -179,6 +179,11 @@ public class WaveController : MonoBehaviour
     {
         Wave currentWave = new Wave();
         currentWave = waves[waveCount];
+
+        while (!LevelManager.instance.ready)
+        {
+            yield return new WaitForSeconds(1);
+        }
 
         for (int i = 0; i < currentWave.packs.Length; i++)
         {
@@ -195,6 +200,8 @@ public class WaveController : MonoBehaviour
                 {
                     Debug.Log("a");
                 }
+                if (!WorldManager.instance.paths[pathId].initiated)
+                    continue;
                 enemySpawner.SpawnEnemy(p.enemyType, WorldManager.instance.paths[pathId]);
                 waveEndTimer = 0;
 

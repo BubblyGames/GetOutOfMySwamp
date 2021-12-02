@@ -611,6 +611,7 @@ GameObject:
   - component: {fileID: 63313641}
   - component: {fileID: 63313640}
   - component: {fileID: 63313639}
+  - component: {fileID: 63313647}
   m_Layer: 0
   m_Name: World 1
   m_TagString: Untagged
@@ -778,7 +779,7 @@ MonoBehaviour:
   sphere: 0
   debugMidpoints: 0
   lineRendererPrefab: {fileID: 3920875017051324963, guid: ffef0eddca5eb324f94bad8de9cc038b, type: 3}
-  parallelUpdate: 0
+  updateMethod: 0
   maxSkips: 5
 --- !u!64 &63313644
 MeshCollider:
@@ -843,6 +844,24 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 63313637}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &63313647
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 63313637}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2ef17eb86c47daf47800fdfb8653d4bf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  wait: 0.3
+  increase: 0.5
+  animateSeed: 1
+  animateWallDensity: 0
+  animateRockSize: 0
+  animateWaterDensity: 0
 --- !u!1 &85103255
 GameObject:
   m_ObjectHideFlags: 0
@@ -860,6 +879,7 @@ GameObject:
   - component: {fileID: 85103262}
   - component: {fileID: 85103263}
   - component: {fileID: 85103264}
+  - component: {fileID: 85103265}
   m_Layer: 0
   m_Name: World 2
   m_TagString: Untagged
@@ -893,7 +913,7 @@ MonoBehaviour:
   sphere: 0
   debugMidpoints: 0
   lineRendererPrefab: {fileID: 3920875017051324963, guid: ffef0eddca5eb324f94bad8de9cc038b, type: 3}
-  parallelUpdate: 0
+  updateMethod: 0
   maxSkips: 5
 --- !u!64 &85103257
 MeshCollider:
@@ -1108,6 +1128,24 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   theme: 1
+--- !u!114 &85103265
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 85103255}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2ef17eb86c47daf47800fdfb8653d4bf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  wait: 0.02
+  increase: 0.5
+  animateSeed: 0
+  animateWallDensity: 0
+  animateRockSize: 1
+  animateWaterDensity: 0
 --- !u!1 &96266340
 GameObject:
   m_ObjectHideFlags: 0
@@ -1125,6 +1163,7 @@ GameObject:
   - component: {fileID: 96266342}
   - component: {fileID: 96266348}
   - component: {fileID: 96266349}
+  - component: {fileID: 96266350}
   m_Layer: 0
   m_Name: World 4
   m_TagString: Untagged
@@ -1183,9 +1222,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   size: 31
-  wallDensity: 0.55
+  wallDensity: 0.5
   rocksVisualReduction: 1
-  rockSize: 8.84
+  rockSize: 10
   waterDensity: 0.1
   nPaths: 3
   canMergePaths: 0
@@ -1196,7 +1235,7 @@ MonoBehaviour:
   sphere: 0
   debugMidpoints: 0
   lineRendererPrefab: {fileID: 3920875017051324963, guid: ffef0eddca5eb324f94bad8de9cc038b, type: 3}
-  parallelUpdate: 0
+  updateMethod: 0
   maxSkips: 5
 --- !u!64 &96266345
 MeshCollider:
@@ -1355,6 +1394,24 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   theme: 3
+--- !u!114 &96266350
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 96266340}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2ef17eb86c47daf47800fdfb8653d4bf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  wait: 0.15
+  increase: 0.1
+  animateSeed: 0
+  animateWallDensity: 0
+  animateRockSize: 0
+  animateWaterDensity: 1
 --- !u!1 &140904411
 GameObject:
   m_ObjectHideFlags: 0
@@ -1372,6 +1429,7 @@ GameObject:
   - component: {fileID: 140904415}
   - component: {fileID: 140904414}
   - component: {fileID: 140904413}
+  - component: {fileID: 140904421}
   m_Layer: 0
   m_Name: World 3
   m_TagString: Untagged
@@ -1509,7 +1567,7 @@ MonoBehaviour:
   sphere: 0
   debugMidpoints: 0
   lineRendererPrefab: {fileID: 3920875017051324963, guid: ffef0eddca5eb324f94bad8de9cc038b, type: 3}
-  parallelUpdate: 0
+  updateMethod: 0
   maxSkips: 5
 --- !u!64 &140904418
 MeshCollider:
@@ -1574,6 +1632,24 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 140904411}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &140904421
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 140904411}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2ef17eb86c47daf47800fdfb8653d4bf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  wait: 0.15
+  increase: 0.1
+  animateSeed: 0
+  animateWallDensity: 1
+  animateRockSize: 0
+  animateWaterDensity: 0
 --- !u!1 &164165822
 GameObject:
   m_ObjectHideFlags: 0
@@ -3260,7 +3336,7 @@ MonoBehaviour:
   sphere: 0
   debugMidpoints: 0
   lineRendererPrefab: {fileID: 3920875017051324963, guid: ffef0eddca5eb324f94bad8de9cc038b, type: 3}
-  parallelUpdate: 0
+  updateMethod: 0
   maxSkips: 5
 --- !u!64 &504795247
 MeshCollider:
@@ -4847,6 +4923,18 @@ PrefabInstance:
     - target: {fileID: 1180422146055169418, guid: bba5699992500f04092dd670b1f3d536, type: 3}
       propertyPath: m_IsActive
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1921975916628525554, guid: bba5699992500f04092dd670b1f3d536, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: -2914503216214332612, guid: b0b83a753321b5f44988440aef71ac3e, type: 3}
+    - target: {fileID: 1921975916628525554, guid: bba5699992500f04092dd670b1f3d536, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 9023868662224991215, guid: bba5699992500f04092dd670b1f3d536, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bba5699992500f04092dd670b1f3d536, type: 3}
@@ -7134,6 +7222,18 @@ MonoBehaviour:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 1
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1228711212}
+        m_TargetAssemblyTypeName: UnityEngine.UI.Selectable, UnityEngine.UI
+        m_MethodName: set_interactable
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
