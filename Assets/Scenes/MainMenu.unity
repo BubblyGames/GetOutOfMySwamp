@@ -611,6 +611,7 @@ GameObject:
   - component: {fileID: 63313641}
   - component: {fileID: 63313640}
   - component: {fileID: 63313639}
+  - component: {fileID: 63313647}
   m_Layer: 0
   m_Name: World 1
   m_TagString: Untagged
@@ -843,6 +844,24 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 63313637}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &63313647
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 63313637}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2ef17eb86c47daf47800fdfb8653d4bf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  wait: 0.3
+  increase: 0.5
+  animateSeed: 1
+  animateWallDensity: 0
+  animateRockSize: 0
+  animateWaterDensity: 0
 --- !u!1 &85103255
 GameObject:
   m_ObjectHideFlags: 0
@@ -860,6 +879,7 @@ GameObject:
   - component: {fileID: 85103262}
   - component: {fileID: 85103263}
   - component: {fileID: 85103264}
+  - component: {fileID: 85103265}
   m_Layer: 0
   m_Name: World 2
   m_TagString: Untagged
@@ -1108,6 +1128,24 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   theme: 1
+--- !u!114 &85103265
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 85103255}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2ef17eb86c47daf47800fdfb8653d4bf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  wait: 0.02
+  increase: 0.5
+  animateSeed: 0
+  animateWallDensity: 0
+  animateRockSize: 1
+  animateWaterDensity: 0
 --- !u!1 &96266340
 GameObject:
   m_ObjectHideFlags: 0
@@ -1125,6 +1163,7 @@ GameObject:
   - component: {fileID: 96266342}
   - component: {fileID: 96266348}
   - component: {fileID: 96266349}
+  - component: {fileID: 96266350}
   m_Layer: 0
   m_Name: World 4
   m_TagString: Untagged
@@ -1185,7 +1224,7 @@ MonoBehaviour:
   size: 31
   wallDensity: 0.5
   rocksVisualReduction: 1
-  rockSize: 8.84
+  rockSize: 10
   waterDensity: 0.1
   nPaths: 3
   canMergePaths: 0
@@ -1355,6 +1394,24 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   theme: 3
+--- !u!114 &96266350
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 96266340}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2ef17eb86c47daf47800fdfb8653d4bf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  wait: 0.15
+  increase: 0.1
+  animateSeed: 0
+  animateWallDensity: 0
+  animateRockSize: 0
+  animateWaterDensity: 1
 --- !u!1 &140904411
 GameObject:
   m_ObjectHideFlags: 0
@@ -1372,6 +1429,7 @@ GameObject:
   - component: {fileID: 140904415}
   - component: {fileID: 140904414}
   - component: {fileID: 140904413}
+  - component: {fileID: 140904421}
   m_Layer: 0
   m_Name: World 3
   m_TagString: Untagged
@@ -1574,6 +1632,24 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 140904411}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &140904421
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 140904411}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2ef17eb86c47daf47800fdfb8653d4bf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  wait: 0.15
+  increase: 0.1
+  animateSeed: 0
+  animateWallDensity: 1
+  animateRockSize: 0
+  animateWaterDensity: 0
 --- !u!1 &164165822
 GameObject:
   m_ObjectHideFlags: 0
@@ -7150,6 +7226,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 1228711212}
+        m_TargetAssemblyTypeName: UnityEngine.UI.Selectable, UnityEngine.UI
+        m_MethodName: set_interactable
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1228711213
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7454,7 +7542,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 5e0499c45b6d9ac428dfe20b01c22a4a, type: 3}
+  m_Sprite: {fileID: 21300000, guid: b6db7a2a52ad833469113d1be916a333, type: 3}
   m_Type: 0
   m_PreserveAspect: 1
   m_FillCenter: 1

@@ -82,7 +82,6 @@ public class UIController : MonoBehaviour
         if (gameSceneId == 1)
         {
             upgradeButtonImage = upgradeButton.GetComponent<Image>();
-            Debug.Log("Image:" + upgradeButtonImage);
             structures = shopContainer.GetComponent<Shop>().defenseBlueprints;
         }
 

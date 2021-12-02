@@ -10518,9 +10518,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   size: 31
-  wallDensity: 0.4
+  wallDensity: 0.7
   rocksVisualReduction: 1
-  rockSize: 26.94
+  rockSize: 15
   waterDensity: 0
   nPaths: 4
   canMergePaths: 0
@@ -10532,7 +10532,7 @@ MonoBehaviour:
   debugMidpoints: 1
   lineRendererPrefab: {fileID: 3920875017051324963, guid: ffef0eddca5eb324f94bad8de9cc038b, type: 3}
   updateMethod: 0
-  maxSkips: 5
+  maxSkips: 1
 --- !u!114 &1903685288
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -33,7 +33,7 @@ public class Path
 
     internal CellInfo[] cells = new CellInfo[0];
     public List<Midpoint> midPoints = new List<Midpoint>();
-    List<Midpoint> midpointsCopy;
+    List<Midpoint> midpointsCopy = new List<Midpoint>();
     List<EnemyBehaviour> enemies = new List<EnemyBehaviour>();
 
     List<Node> closedList;
@@ -97,7 +97,7 @@ public class Path
             return false;
 
         SavePath();
-        Debug.Log("Path " + id + " took: " + (Time.realtimeSinceStartup - startTime) + "s");
+        //Debug.Log("Path " + id + " took: " + (Time.realtimeSinceStartup - startTime) + "s");
 
         return true;
     }
@@ -105,7 +105,10 @@ public class Path
     public void SavePath()
     {
         if (result == null)
+        {
+            midPoints = midpointsCopy;
             return;
+        }
 
         result.normal = Vector3Int.up;
         lastCell = world.GetCellUnder(result.cell);
@@ -175,7 +178,8 @@ public class Path
             {
                 CellInfo c;
                 c = world.GetCellUnderWithGravity(midpoint.cell);
-                c.normalInt = midpoint.cell.normalInt;
+                if (c != null)
+                    c.normalInt = midpoint.cell.normalInt;
                 midpoint.cell = c;
             }
 
@@ -194,13 +198,12 @@ public class Path
 
             if (current == null)
             {
-                Debug.Log("This should never happen");
+                //Debug.Log("This should never happen");
 
                 //If a midpoint is important but the path can't be made, the path fails
                 if (midpoint.important)
                 {
-                    Debug.Log("Couldn't get to midpoint: " + midpoint.cell.GetPosInt());
-                    midPoints = midpointsCopy;
+                    //Debug.Log("Couldn't get to midpoint: " + midpoint.cell.GetPosInt());
                     result = null;
                     return false;
                 }
@@ -213,7 +216,6 @@ public class Path
         if (current == null)
         {
             //Debug.Log("Failed to find a way");
-            midPoints = midpointsCopy;
             result = null;
             return false;
         }
@@ -291,7 +293,7 @@ public class Path
 
             if (current.cell == end)//If first node is goal,returns current Node3D
             {
-                Debug.Log("Got there in " + (Time.realtimeSinceStartup - startTime) + "s");
+                //Debug.Log("Got there in " + (Time.realtimeSinceStartup - startTime) + "s");
                 return current;
             }
             else
@@ -321,7 +323,7 @@ public class Path
                     if (neighbour == null ||
                         !neighbour.canWalk ||
                         (!lastStep && neighbour.endZone) ||
-                        (!neighbour.endZone && !canMergePaths && neighbour.isPath))//||(neighbour.isPath && !neighbour.endZone)
+                        (!canMergePaths && !neighbour.endZone && neighbour.isPath && current.cell.isPath))//||(neighbour.isPath && !neighbour.endZone)
                         continue;
 
                     //if neighbour no esta en open
@@ -342,7 +344,7 @@ public class Path
             }
         }
 
-        Debug.LogWarning("Couldn't get there and spent " + (Time.realtimeSinceStartup - startTime) + "s");
+        //Debug.LogWarning("Couldn't get there and spent " + (Time.realtimeSinceStartup - startTime) + "s");
         return null;
     }
 
@@ -401,8 +403,9 @@ public class Path
 
     public void Reset()
     {
-        cells = new CellInfo[0];
-        midPoints = new List<Midpoint>();
+        cells = null;
+        midPoints.Clear();
+        midpointsCopy.Clear();
         firstTime = true;
         dirty = true;
         initiated = false;
