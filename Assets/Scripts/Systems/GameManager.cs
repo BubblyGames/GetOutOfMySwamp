@@ -75,7 +75,7 @@ public class GameManager : MonoBehaviour
 
     public bool isMobile()
     {
-        Debug.Log(SystemInfo.deviceModel);
+        //Debug.Log(SystemInfo.deviceModel);
 #if !UNITY_EDITOR && UNITY_WEBGL
              return IsMobile();
 #endif
