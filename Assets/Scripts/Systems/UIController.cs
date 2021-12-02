@@ -448,6 +448,11 @@ public class UIController : MonoBehaviour
         }
     }
 
+    public void SetUpgradeMenuActive(bool active)
+    {
+        upgradeMenu.SetActive(active);
+    }
+
     private void OnDestroy()
     {
         LevelManager.OnWaveCleared -= UpdateWaveText;

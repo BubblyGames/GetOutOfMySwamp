@@ -21,6 +21,7 @@ public class StructureBlueprint
 public class Upgrade
 {
     public int cost;
+    public int maintenanceCostIncrease;
     public Stats[] stats;
   
 }

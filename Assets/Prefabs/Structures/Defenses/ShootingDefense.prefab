@@ -111,7 +111,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   size: 2
-  health: 0
+  health: 100
   canLoseHealth: 0
   level: 0
   blockType: 1
@@ -121,6 +121,7 @@ MonoBehaviour:
   fireRate: 2
   damage: 14
   attackRange: 5
+  maintenanceCost: 5
   firePoint: {fileID: 1127500018515762662}
   cannon: {fileID: 0}
   enemyTarget: {fileID: 0}

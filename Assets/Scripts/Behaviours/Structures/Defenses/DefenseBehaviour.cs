@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -32,6 +33,13 @@ public abstract class DefenseBehaviour : Structure
     [Tooltip("The radius of the sphere in which the defense detects an enemy")]
     internal float attackRange = 5f;
 
+    [SerializeField]
+    [Tooltip("How much gold will be spent each second in keeping this defense active")]
+    protected int maintenanceCost = 5;
+    protected float maintenanceCountdown = 1f;
+    [SerializeField]
+    protected int healthPenalty = 5;
+
     public override void UpgradeStrucrure()
     {
 
@@ -54,6 +62,7 @@ public abstract class DefenseBehaviour : Structure
                         break;
                 }
             }
+            maintenanceCost += Blueprint.upgrades[level].maintenanceCostIncrease;
         }
         base.UpgradeStrucrure();
 
@@ -65,5 +74,37 @@ public abstract class DefenseBehaviour : Structure
         Gizmos.DrawWireSphere(transform.position, attackRange);
     }
 
+    private void FixedUpdate()
+    {
+        maintenanceCountdown -= Time.deltaTime;
+        if (maintenanceCountdown <=0f)
+        {
+            TowerMaintenance();
+            maintenanceCountdown = 1f;
+        }
+    }
 
+    private void TowerMaintenance()
+    {
+        if (!CheatManager.instance.infiniteMoney)
+        {
+            if (LevelStats.instance.currentMoney >= maintenanceCost)
+            {
+                LevelStats.instance.SpendMoney(maintenanceCost);
+            }
+            else
+            {
+                health -= healthPenalty;
+                if (health <= 0f)
+                {
+                    if (BuildManager.instance.SelectedStructure.gameObject == gameObject)
+                    {
+                        UIController.instance.SetUpgradeMenuActive(false);
+                    }
+                    Destroy(gameObject);
+                    
+                }
+            }
+        }
+    }
 }

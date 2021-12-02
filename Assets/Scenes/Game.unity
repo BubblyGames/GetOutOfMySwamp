@@ -10658,16 +10658,19 @@ MonoBehaviour:
     upgradeMultiplicator: 1
     upgrades:
     - cost: 50
+      maintenanceCostIncrease: 5
       stats:
       - statToUpgrade: 0
         upgradeAddedValue: 2
     - cost: 100
+      maintenanceCostIncrease: 5
       stats:
       - statToUpgrade: 0
         upgradeAddedValue: 2
       - statToUpgrade: 2
         upgradeAddedValue: 1
     - cost: 150
+      maintenanceCostIncrease: 5
       stats:
       - statToUpgrade: 1
         upgradeAddedValue: 0.2
@@ -10680,16 +10683,19 @@ MonoBehaviour:
     upgradeMultiplicator: 1
     upgrades:
     - cost: 100
+      maintenanceCostIncrease: 5
       stats:
       - statToUpgrade: 0
         upgradeAddedValue: 2
     - cost: 150
+      maintenanceCostIncrease: 5
       stats:
       - statToUpgrade: 0
         upgradeAddedValue: 1
       - statToUpgrade: 2
         upgradeAddedValue: 1
     - cost: 200
+      maintenanceCostIncrease: 5
       stats:
       - statToUpgrade: 1
         upgradeAddedValue: 0.2
@@ -10702,14 +10708,17 @@ MonoBehaviour:
     upgradeMultiplicator: 1
     upgrades:
     - cost: 150
+      maintenanceCostIncrease: 5
       stats:
       - statToUpgrade: 0
         upgradeAddedValue: 5
     - cost: 200
+      maintenanceCostIncrease: 5
       stats:
       - statToUpgrade: 2
         upgradeAddedValue: 2
     - cost: 300
+      maintenanceCostIncrease: 5
       stats:
       - statToUpgrade: 1
         upgradeAddedValue: 0.1
@@ -10738,14 +10747,17 @@ MonoBehaviour:
     upgradeMultiplicator: 1
     upgrades:
     - cost: 75
+      maintenanceCostIncrease: 5
       stats:
       - statToUpgrade: 0
         upgradeAddedValue: 1
     - cost: 125
+      maintenanceCostIncrease: 5
       stats:
       - statToUpgrade: 2
         upgradeAddedValue: 1
     - cost: 200
+      maintenanceCostIncrease: 5
       stats:
       - statToUpgrade: 0
         upgradeAddedValue: 1
