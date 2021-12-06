@@ -152,3 +152,4 @@ MonoBehaviour:
   attackRange: 4
   canBreakWorld: 1
   explosionParticles: {fileID: 4964779859338955144, guid: 8a2ab21b4543bb14ebee8f6ff1221879, type: 3}
+  soundName: bombSound

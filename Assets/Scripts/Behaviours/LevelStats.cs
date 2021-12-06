@@ -4,6 +4,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using DG.Tweening;
+
 
 public class LevelStats : MonoBehaviour
 {
@@ -12,6 +14,7 @@ public class LevelStats : MonoBehaviour
     [Header("Text References")]
     public Text hpText;
     public Image hpBar;
+    public Image hpBarBG;
     public TextMeshProUGUI moneyText;
     public TextMeshProUGUI scoreText;
 
@@ -55,8 +58,11 @@ public class LevelStats : MonoBehaviour
 
     public void getEnemyRewards(int moneyReward, int scoreReward)
     {
+        
         currentMoney += moneyReward;
         moneyText.text = currentMoney.ToString();
+        
+
         currentScore += scoreReward;
         scoreText.text =currentScore.ToString();
     }
@@ -68,28 +74,51 @@ public class LevelStats : MonoBehaviour
             case 0:
                 currentMoney += amount;
                 moneyText.text = currentMoney.ToString();
+                
                 break;
         }
     }
 
     public void receiveDamage(int damageTaken)
     {
-        currentBaseHealthPoints -= damageTaken;
-        currentBaseHealthPoints = Mathf.Max(0, currentBaseHealthPoints);
-        hpText.text = currentBaseHealthPoints.ToString();
-        hpBar.fillAmount = (float) currentBaseHealthPoints / (float) startBaseHealthPoints;
+        Sequence damage = DOTween.Sequence();
+        damage.Append(hpBarBG.DOColor(new Color(1, 0, 0), 0.5f));
+        damage.AppendCallback(() =>
+        {
+            currentBaseHealthPoints -= damageTaken;
+            currentBaseHealthPoints = Mathf.Max(0, currentBaseHealthPoints);
+            hpText.text = currentBaseHealthPoints.ToString();
+            hpBar.fillAmount = (float)currentBaseHealthPoints / (float)startBaseHealthPoints;
+        });
+        damage.Append(hpBarBG.DOColor(new Color(1, 1, 1), 0.7f));
+
     }
 
     public void SpendMoney(int quantity)
     {
-        currentMoney -= quantity;
-        moneyText.text =currentMoney.ToString();
+        Color colorMoneyText = moneyText.color;
+        Sequence moneyS = DOTween.Sequence();
+        moneyS.Append(moneyText.DOColor(new Color(1, 0, 0), 0.5f));
+        moneyS.AppendCallback(() =>
+        {
+            currentMoney -= quantity;
+            moneyText.text = currentMoney.ToString();
+        });
+        moneyS.Append(moneyText.DOColor(colorMoneyText, 0.5f));
+        
     }
 
     public void EarnMoney(int quantity)
     {
-        currentMoney += quantity;
-        moneyText.text =currentMoney.ToString();
+        Color colorMoneyText = moneyText.color;
+        Sequence moneyS = DOTween.Sequence();
+        moneyS.Append(moneyText.DOColor(new Color(0, 0.7f, 0), 0.5f));
+        moneyS.AppendCallback(() =>
+        {
+            currentMoney += quantity;
+            moneyText.text = currentMoney.ToString();
+        });
+        moneyS.Append(moneyText.DOColor(colorMoneyText, 0.5f));
     }
 
     public void UpdateScoreText()
