@@ -9295,6 +9295,12 @@ MonoBehaviour:
     pitch: 1
     loop: 0
     source: {fileID: 0}
+  - name: buildSound
+    clip: {fileID: 8300000, guid: 67ded0934e7bf154db10f8dedb6b611e, type: 3}
+    volume: 1
+    pitch: 1.25
+    loop: 0
+    source: {fileID: 0}
 --- !u!1 &1475002164 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 5019994791990721949, guid: 809100f64aeef954a9fa36457977eee9, type: 3}
