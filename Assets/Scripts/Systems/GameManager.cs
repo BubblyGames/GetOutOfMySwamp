@@ -22,6 +22,9 @@ public class GameManager : MonoBehaviour
     [DllImport("__Internal")]
     private static extern bool IsMobile();
 
+    PlayerData playerData;
+    public LevelSelector levelSelector;
+
     private void Awake()
     {
         if (instance == null)
@@ -47,6 +50,7 @@ public class GameManager : MonoBehaviour
         {
             Console.WriteLine("not mobile");
         }
+        LoadData();
     }
 
     public void SetNextLevelWorld(int nextWorld)
@@ -81,5 +85,26 @@ public class GameManager : MonoBehaviour
 #endif
         return false;
 
+    }
+
+    public void SaveData()
+    {
+        PersistenceManager.SaveData(playerData);
+    }
+
+    public void LoadData()
+    {
+        playerData = PersistenceManager.LoadData();
+        if (playerData == null)
+        {
+            playerData = new PlayerData(this);
+            SaveData();
+            playerData.alreadyCreated = false;
+            Debug.Log("SAVE DATA FOUND: " + playerData.alreadyCreated);
+        }
+        else
+        {
+            Debug.Log("DATA ALREADY EXISTS: "+playerData.worldScores.Count);
+        }
     }
 }
