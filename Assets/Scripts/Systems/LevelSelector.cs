@@ -25,6 +25,8 @@ public class LevelSelector : MonoBehaviour
     public Button selectButton;
     public TMP_Text levelText;
     private int levelNum;
+    public List<int> worldScores;
+    public GameManager gameManager;
 
     private void Awake()
     {
@@ -40,6 +42,9 @@ public class LevelSelector : MonoBehaviour
 
     private void Start()
     {
+
+        worldScores = GameManager.instance.playerData.worldScores;
+
         ThemeInfo startTheme = worlds[0].GetComponent<ThemeSelector>().GetThemeInfo();
         RenderSettings.skybox.SetColor("_Tint", startTheme.backGroundColor);
         FindObjectOfType<Light>().color = startTheme.lightColor;

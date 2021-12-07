@@ -7,7 +7,6 @@ public class PlayerData
 {
     public List<int> worldScores= new List<int>();
     public bool alreadyCreated = true;
-
     ///sumary
     ///Array that contains booleans that indicate if a tower has been used for the first time.
     ///If false, tutorial will spawn in first used
@@ -17,11 +16,13 @@ public class PlayerData
 
     public PlayerData(GameManager gameManager)
     {
+
         for (int i = 0; i < gameManager.levelSelector.worlds.Length; i++)
         {
             worldScores.Add(-1);
         }
         defenses = new bool[6];
+
     }
 
     /// <summary>

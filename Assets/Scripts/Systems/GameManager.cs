@@ -22,7 +22,7 @@ public class GameManager : MonoBehaviour
     [DllImport("__Internal")]
     private static extern bool IsMobile();
 
-    PlayerData playerData;
+    public PlayerData playerData;
     public LevelSelector levelSelector;
 
     private void Awake()
@@ -30,14 +30,13 @@ public class GameManager : MonoBehaviour
         if (instance == null)
         {
             instance = this;
+            LoadData();
         }
         else
         {
             Destroy(gameObject);
         }
-
         DontDestroyOnLoad(gameObject);
-        LoadData();
     }
 
     void Start() 
@@ -84,7 +83,6 @@ public class GameManager : MonoBehaviour
              return IsMobile();
 #endif
         return false;
-
     }
 
     public void SaveData()
@@ -95,7 +93,7 @@ public class GameManager : MonoBehaviour
     public void LoadData()
     {
         playerData = PersistenceManager.LoadData();
-        if (playerData == null)
+        if (playerData== null)
         {
             playerData = new PlayerData(this);
             SaveData();
@@ -104,7 +102,7 @@ public class GameManager : MonoBehaviour
         }
         else
         {
-            Debug.Log("DATA ALREADY EXISTS: "+playerData.worldScores.Count);
+            Debug.Log("DATA ALREADY EXISTS: " + playerData.worldScores.Count);
         }
     }
 }
