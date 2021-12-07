@@ -134,7 +134,7 @@ public class UIController : MonoBehaviour
                 pauseMenu.SetActive(false);
                 pauseButton.SetActive(false);
                 Time.timeScale = 1;
-                LevelManager.ready = false;
+                LevelManager.instance.ready = false;
                 break;
             case GameMenu.EndgameMenuWin:
                 endgameMenuWin.SetActive(true);
@@ -143,7 +143,7 @@ public class UIController : MonoBehaviour
                 pauseButton.SetActive(false);
                 GameObject.Find("FinalScoreText").GetComponent<TextMeshProUGUI>().text = LevelStats.instance.currentScore.ToString();
                 Time.timeScale = 1;
-                LevelManager.ready = false;
+                LevelManager.instance.ready = false;
                 break;
             case GameMenu.Game:
                 shopMenu.SetActive(true);
@@ -251,7 +251,7 @@ public class UIController : MonoBehaviour
     {
         //Restarts game
         Time.timeScale = 1;
-        LevelManager.ready = true;
+        LevelManager.instance.ready = true;
         if (SceneController.instance)
         {
             SceneController.instance.LoadScene(SceneManager.GetActiveScene().buildIndex);
@@ -280,7 +280,7 @@ public class UIController : MonoBehaviour
     {
         //Goes to next level
         Time.timeScale = 1;
-        LevelManager.ready = true;
+        LevelManager.instance.ready = true;
         if (SceneController.instance && GameManager.instance.IncreaseCurrentWorldId())
         {
             SceneController.instance.LoadScene(1);
