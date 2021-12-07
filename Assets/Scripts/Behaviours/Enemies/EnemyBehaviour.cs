@@ -54,6 +54,7 @@ public abstract class EnemyBehaviour : MonoBehaviour
     private Vector3 _smoothVelocity = Vector3.zero;
     void Update()
     {
+        if (!LevelManager.ready) return;
         if (path == null)
             return;
 

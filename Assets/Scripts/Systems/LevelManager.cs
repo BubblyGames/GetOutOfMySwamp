@@ -42,7 +42,6 @@ public class LevelManager : MonoBehaviour
     List<Vector3Int> deathPositions = new List<Vector3Int>();
     public int deathsNeededToSpawnMeteor = 10;
 
-
     Image fadeImage;
     GameObject loadingIcon;
 
