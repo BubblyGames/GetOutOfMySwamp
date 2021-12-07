@@ -27,7 +27,8 @@ public class LevelSelector : MonoBehaviour
     private int levelNum;
     public List<int> worldScores;
     public GameManager gameManager;
-
+    public Image stars;
+    public List<Sprite> starsSprites;
     private void Awake()
     {
         if (instance == null)
@@ -42,7 +43,6 @@ public class LevelSelector : MonoBehaviour
 
     private void Start()
     {
-
         worldScores = GameManager.instance.playerData.worldScores;
 
         ThemeInfo startTheme = worlds[0].GetComponent<ThemeSelector>().GetThemeInfo();
@@ -52,6 +52,7 @@ public class LevelSelector : MonoBehaviour
         if (!GameManager.instance.initiated)
             CreateWorldList();
         levelNum = 1;
+        stars.sprite = starsSprites[levelNum-1];
         //levelText.text = "Nivel " + (levelNum);
         GoTo(selectedWorld);
         DoneChanging();
@@ -69,6 +70,7 @@ public class LevelSelector : MonoBehaviour
             levelNum++;
             levelText.text = levelNum.ToString();
             GoTo(selectedWorld + 1);
+            stars.sprite = starsSprites[gameManager.playerData.worldScores[levelNum-1]];
         }
     }
     public void PreviousWorld()
@@ -79,6 +81,7 @@ public class LevelSelector : MonoBehaviour
             levelNum--;
             levelText.text = levelNum.ToString();
             GoTo(selectedWorld - 1);
+            stars.sprite = starsSprites[gameManager.playerData.worldScores[levelNum-1]];
         }
     }
 
@@ -119,12 +122,14 @@ public class LevelSelector : MonoBehaviour
             case 0:
                 levelSelectPanel.SetActive(false);
                 mainMenuPanel.SetActive(true);
-                //MainMenuCamera.instance.MoveRight();
+                //MainMenuCamera.instance.MoveRight(); 
                 break;
             case 1:
                 mainMenuPanel.SetActive(false);
                 levelSelectPanel.SetActive(true);
                 //MainMenuCamera.instance.MoveLeft();
+                gameManager.LoadData();
+                gameManager.levelSelector.stars.sprite = gameManager.levelSelector.starsSprites[gameManager.playerData.worldScores[0]];
                 break;
             default:
                 break;

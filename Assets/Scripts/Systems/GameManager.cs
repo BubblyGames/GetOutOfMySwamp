@@ -4,7 +4,6 @@ using System.Collections.Generic;
 using System.Runtime.InteropServices;
 using UnityEngine;
 
-
 public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
@@ -30,7 +29,7 @@ public class GameManager : MonoBehaviour
         if (instance == null)
         {
             instance = this;
-            LoadData();
+            //LoadData();
         }
         else
         {

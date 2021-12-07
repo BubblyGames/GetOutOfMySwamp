@@ -10,7 +10,7 @@ public class PersistenceManager
         BinaryFormatter formatter = new BinaryFormatter();
         string path = Application.persistentDataPath + "/player.txt";
         FileStream stream = new FileStream(path, FileMode.Create);
-        PlayerData data = new PlayerData(gameManager);
+        PlayerData data = gameManager.playerData;
 
         formatter.Serialize(stream, data);
         stream.Close();
