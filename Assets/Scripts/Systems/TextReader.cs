@@ -56,7 +56,7 @@ public class TextReader : MonoBehaviour
     public void Subscribe()
     {
         if (textManager != null)
-            textManager.GetComponent<TextManager>().Subscribe(gameObject, SceneManager.GetActiveScene().name);
+            textManager.GetComponent<TextManager>().Subscribe(this.gameObject, SceneManager.GetActiveScene().name);
     }
 
     public void Read()

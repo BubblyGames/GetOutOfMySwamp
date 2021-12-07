@@ -40,7 +40,7 @@ public class LevelManager : MonoBehaviour
 
     public GameObject meteorPrefab;
 
-    public bool ready = false;
+    public static bool ready = false;
 
     Image fadeImage;
     GameObject loadingIcon;
