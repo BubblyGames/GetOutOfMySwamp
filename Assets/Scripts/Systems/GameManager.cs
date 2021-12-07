@@ -37,6 +37,7 @@ public class GameManager : MonoBehaviour
         }
 
         DontDestroyOnLoad(gameObject);
+        LoadData();
     }
 
     void Start() 
@@ -50,7 +51,6 @@ public class GameManager : MonoBehaviour
         {
             Console.WriteLine("not mobile");
         }
-        LoadData();
     }
 
     public void SetNextLevelWorld(int nextWorld)
