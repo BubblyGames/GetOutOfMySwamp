@@ -47,7 +47,6 @@ public class BuildManager : MonoBehaviour
 
         outPos = intPos;
 
-        if (!LevelManager.instance.world.IsPosInBounds(intPos)) return false;
         //Check if player has enough money
         if (!canBuild || (!CheatManager.instance.infiniteMoney && LevelStats.instance.CurrentMoney < structureBlueprint.creationCost))
             return false;
