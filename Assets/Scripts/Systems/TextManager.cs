@@ -29,8 +29,11 @@ public class TextManager : MonoBehaviour
         }
 
         InitializeDictionaries();
-        subscribersMainScene = new List<GameObject>();
-        subscribersGameScene = new List<GameObject>();
+        /*if(subscribersGameScene==null && subscribersMainScene == null)
+        {*/
+            subscribersMainScene = new List<GameObject>();
+            subscribersGameScene = new List<GameObject>();
+        //}
         currentDictionary = spanishDictionary;
         currentLanguage = 1;
         english = false;
@@ -58,10 +61,18 @@ public class TextManager : MonoBehaviour
     {
         if (sceneName.Equals("MainMenu"))
         {
+            /*if (subscribersMainScene == null)
+            {
+                subscribersMainScene = new List<GameObject>();
+            }*/
             subscribersMainScene.Add(reader);
         }
         else
         {
+            /*if(subscribersGameScene == null)
+            {
+                subscribersGameScene = new List<GameObject>();
+            }*/
             subscribersGameScene.Add(reader);
         }
     }
@@ -104,7 +115,7 @@ public class TextManager : MonoBehaviour
         englishDictionary.Add("pausedtext", "Pause");
         englishDictionary.Add("continue", "Continue");
         englishDictionary.Add("round", "ROUND");
-        englishDictionary.Add("credits", "Credits");
+        //englishDictionary.Add("credits", "Credits");
         englishDictionary.Add("nextLevel", "Next Level");
         englishDictionary.Add("retry", "Retry");
         englishDictionary.Add("loose", "You lose!");
@@ -123,6 +134,18 @@ public class TextManager : MonoBehaviour
         englishDictionary.Add("sell", "Sell");
         englishDictionary.Add("upgrade", "Upgrade");
 
+        //credits text in english
+        englishDictionary.Add("credits", "Credits");
+        englishDictionary.Add("developed", "Developed by:");
+        englishDictionary.Add("gonzalo", "Producer, Designer, Marketing");
+        englishDictionary.Add("marta", "Artist");
+        englishDictionary.Add("alberto", "Designer");
+        englishDictionary.Add("daniel", "Programmer");
+        englishDictionary.Add("adrian", "Programmer, Marketing");
+        englishDictionary.Add("joy", "Programmer");
+        englishDictionary.Add("thanks", "Thanks to");
+
+
         //defense stats in english
         englishDictionary.Add("air", "Air");
         englishDictionary.Add("ground", "Ground");
@@ -136,34 +159,34 @@ public class TextManager : MonoBehaviour
 
         //structures names in english 
         englishDictionary.Add("towerName", "Tower Name");
-        englishDictionary.Add("basicTower", "Basic Frog");
-        englishDictionary.Add("psiquicTower", "Psiquic Frog");
-        englishDictionary.Add("heavyTower", "Heavy Frog");
+        englishDictionary.Add("basicTower", "Gepe");
+        englishDictionary.Add("psiquicTower", "Beerhouse");
+        englishDictionary.Add("heavyTower", "Batracius");
         englishDictionary.Add("bomb", "mushBOOMB");
-        englishDictionary.Add("moneyGatherer", "Money Frog");
-        englishDictionary.Add("mountainTower", "Mountain Frog");
+        englishDictionary.Add("moneyGatherer", "Broker");
+        englishDictionary.Add("mountainTower", "Albatro");
 
         //descriptions of lessons in English
         englishDictionary.Add("lesson1", "Lesson 1");
-        englishDictionary.Add("description1", "The Basic Frog is the cheapest defense from all. However its medium damage and range could save you when needed, so don't underestimate it!");
+        englishDictionary.Add("description1", "Ali and Oli are the cheapest defense from all. However its medium damage and range could save you when needed, so don't underestimate it!");
         englishDictionary.Add("lesson2", "Lesson 2");
-        englishDictionary.Add("description2", "Did anyone say Psiquic Frog? Combine this defense with others for amazing results thanks to its delaying effect on enemies.");
+        englishDictionary.Add("description2", "Did anyone say House? No, it's Beerhouse! Combine this defense with others for amazing results thanks to its delaying effect on enemies.");
         englishDictionary.Add("lesson3", "Lesson 3");
-        englishDictionary.Add("description3", "Amazing damage makes up for the low range and slow fire rate. Let's make the pond shake!");
+        englishDictionary.Add("description3", "Amazing damage makes up for the low range and slow fire rate Batracius does. Let's make the pond shake!");
         englishDictionary.Add("lesson4", "Lesson 4");
-        englishDictionary.Add("description4", "Fighting? Nah. The Money Frog sees a golden future for you. Just let it financiate it.");
+        englishDictionary.Add("description4", "Fighting? Nah. Broker sees a golden future for you. Just let it financiate it.");
         englishDictionary.Add("lesson5", "Lesson 5");
-        englishDictionary.Add("description5", "The Aerial Frog is always on the moon, but no flying enemies will escape from it.");
+        englishDictionary.Add("description5", "Albatro is always looking to the moon, but no flying enemies will escape from it. Just place him on the rocks, please.");
         englishDictionary.Add("lesson6", "Lesson 6");
-        englishDictionary.Add("description6", "Is that... a mushroom? No, it's a MushBOOMB! Be careful, it not only destroys, it also has a delay effect on enemies.");
+        englishDictionary.Add("description6", "Is that... a mushroom? No, it's a MushBOOMB! Be careful, it not only destroys, it also has a delaying effect on enemies.");
         englishDictionary.Add("lesson7", "Lesson 7");
-        englishDictionary.Add("description7", "Basic Enemy unit. Medium life and speed makes them an easy target. But be careful, don't forget about them!");
+        englishDictionary.Add("description7", "Gepe. Medium life and speed makes him an easy target. But be careful, don't forget about him!");
         englishDictionary.Add("lesson8", "Lesson 8");
-        englishDictionary.Add("description8", "Tank Enemies are used as shields for the other enemy units. Their huge amount of life won't make them easy to kill.");
+        englishDictionary.Add("description8", "Gunther is used as shield by the other enemy units. Its huge amount of life won't make them easy to kill.");
         englishDictionary.Add("lesson9", "Lesson 9");
-        englishDictionary.Add("description9", "Horde Enemies are not brave enough to come alone. Besides, they are very fast so put an eye on them!");
+        englishDictionary.Add("description9", "The Wilsons are not brave enough to come alone. Besides, they are very fast so put an eye on them!");
         englishDictionary.Add("lesson10", "Lesson 10");
-        englishDictionary.Add("description10", "From the sky another kind of dirty frogs are approaching, more difficult to reach. Get a mountain tower quickly, don't miss them!");
+        englishDictionary.Add("description10", "From the sky another kind of dirty frogs are approaching, more difficult to reach, named Doolittle. Get an Albatro quickly, don't miss them!");
 
         //descriptions of tutorial in English
         englishDictionary.Add("tutorial1", "Build Defenses");
@@ -177,7 +200,7 @@ public class TextManager : MonoBehaviour
         englishDictionary.Add("tutorial5", "Move the cube II");
         englishDictionary.Add("Tdescription5", "You can also zoom in and out, using the mouse wheel on PC or using two fingers on mobile.");
         englishDictionary.Add("tutorial6", "Reach the goal");
-        englishDictionary.Add("Tdescription6", "The game’s objective is to defend your pond from all the approching enemies. If they get in the pond, you'll loose some health. If you loose all of your health, it's game over.");
+        englishDictionary.Add("Tdescription6", "The game’s objective is to defend your pond from all the approching enemies. If they get in the pond, you'll loose some health. If you lose all of your health, it's game over.");
 
         //Spanish 
         spanishDictionary.Add("play", "Jugar");
@@ -197,7 +220,7 @@ public class TextManager : MonoBehaviour
         spanishDictionary.Add("pausedtext", "Pausa");
         spanishDictionary.Add("continue", "Continuar");
         spanishDictionary.Add("round", "RONDA");
-        spanishDictionary.Add("credits", "Créditos");
+        //spanishDictionary.Add("credits", "Créditos");
         spanishDictionary.Add("nextLevel", "Siguiente nivel");
         spanishDictionary.Add("retry", "Reintentar");
         spanishDictionary.Add("loose", "¡Has perdido!");
@@ -227,36 +250,47 @@ public class TextManager : MonoBehaviour
         spanishDictionary.Add("fast", "Rápido");
         spanishDictionary.Add("high", "Alto");
 
+        //credits text in spanish
+        spanishDictionary.Add("credits", "Créditos");
+        spanishDictionary.Add("developed", "Desarrollado por:");
+        spanishDictionary.Add("gonzalo", "Productor, Diseñador, Publicidad");
+        spanishDictionary.Add("marta", "Artista");
+        spanishDictionary.Add("alberto", "Diseñador");
+        spanishDictionary.Add("daniel", "Programador");
+        spanishDictionary.Add("adrian", "Programador, Publicidad");
+        spanishDictionary.Add("joy", "Programador");
+        spanishDictionary.Add("thanks", "Agradecimientos");
+
         //structures names in spanish 
         spanishDictionary.Add("towerName", "Nombre Torre");
-        spanishDictionary.Add("basicTower", "Rana básica");
-        spanishDictionary.Add("psiquicTower", "Rana Psíquica");
-        spanishDictionary.Add("heavyTower", "Rana pesada");
-        spanishDictionary.Add("bomb", "Seta Bomba");
-        spanishDictionary.Add("moneyGatherer", "Rana banquera");
-        spanishDictionary.Add("mountainTower", "Rana montañera");
+        spanishDictionary.Add("basicTower", "Flor y Fleta");
+        spanishDictionary.Add("psiquicTower", "Beerhouse");
+        spanishDictionary.Add("heavyTower", "Batracius");
+        spanishDictionary.Add("bomb", "Petaseta");
+        spanishDictionary.Add("moneyGatherer", "Especulio");
+        spanishDictionary.Add("mountainTower", "Albatro");
 
         //descriptions of lessons in Spanish
         spanishDictionary.Add("lesson1", "Lección 1");
-        spanishDictionary.Add("description1", "La rana básica es la defensa más barata, pero no por ello la menos útil. Su nivel de ataque medio combinado con su velocidad media de ataque puede salvarte de muchos apuros.");
+        spanishDictionary.Add("description1", "Las Hermanas Flor y Fleta son la defensa más barata, pero no por ello la menos útil. Su nivel de ataque medio combinado con su velocidad media de ataque puede salvarte de muchos apuros.");
         spanishDictionary.Add("lesson2", "Lección 2");
-        spanishDictionary.Add("description2", "La rana psíquica es la defensa perfecta contra enemigos rápidos. Aunque tiene poco rango y daño, su efecto ralentizador combinado con otras defensas puede darte la victoria.");
+        spanishDictionary.Add("description2", "Beerhouse es la defensa perfecta contra enemigos rápidos. Aunque tiene poco rango y daño, su efecto ralentizador, combinado con otras defensas, puede darte la victoria.");
         spanishDictionary.Add("lesson3", "Lección 3");
-        spanishDictionary.Add("description3", "La rana pesada cuenta con una velocidad de disparo muy lenta, pero su alto alcance y su demoledor daño pueden ser decisivos.");
+        spanishDictionary.Add("description3", "Batracius cuenta con una velocidad de disparo muy lenta, pero su alto alcance y su demoledor daño directo pueden ser decisivos. Y aunque no de en el blanco, no pasa nada. El impacto tambien hace daño en área.");
         spanishDictionary.Add("lesson4", "Lección 4");
-        spanishDictionary.Add("description4", "La rana banquera rehuye de combatir. Prefiere estar centrada en recaudar dinero para crear más defensas. Úsala sabiamente.");
+        spanishDictionary.Add("description4", "Especulio rehuye de combatir. Prefiere estar centrado en recaudar dinero para mantener en funcionamiento las defensas ya construídas. Úsalo sabiamente.");
         spanishDictionary.Add("lesson5", "Lección 5");
-        spanishDictionary.Add("description5", "La rana aérea tiene la mira puesta en el horizonte. Los enemigos deberán tener siempre los pies en la tierra cerca de ella o sufrirán las consecuencias.");
+        spanishDictionary.Add("description5", "Albatro espera, colocado sobre las rocas y apuntando al cielo. Los enemigos deberán tener siempre los pies en la tierra cerca de él o sufrirán las consecuencias.");
         spanishDictionary.Add("lesson6", "Lección 6");
-        spanishDictionary.Add("description6", "¡BUM! será lo último que escucharán tus enemigos. Además esta seta mina trae un 2x1 porque dejará a los enemigos aturdidos y se moverán más lento.");
+        spanishDictionary.Add("description6", "¡BUM! será lo último que escucharán tus enemigos. Además Petaseta trae un 2x1 porque dejará a los enemigos aturdidos y se moverán más lento (si sobreviven).");
         spanishDictionary.Add("lesson7", "Lección 7");
-        spanishDictionary.Add("description7", "La rana enemiga común, tiene una esperanza de vida media y velocidad promedias. Veremos cuanto aguantan contra nuestras defensas.");
+        spanishDictionary.Add("description7", "Gepe tiene una esperanza de vida media y velocidad promedias, aunque no te confíes. Veremos cuanto aguanta contra nuestras defensas.");
         spanishDictionary.Add("lesson8", "Lección 8");
-        spanishDictionary.Add("description8", "Los enemigos tanques son lentos, pero aguantan muy bien los golpes. Sirven de escudo para el resto de enemigos asi que cuidado.");
+        spanishDictionary.Add("description8", "Gunther es lento, pesado, pero aguanta muy bien los golpes. Sirve de escudo para el resto de enemigos asi que cuidado.");
         spanishDictionary.Add("lesson9", "Lección 9");
-        spanishDictionary.Add("description9", "Dicen que los cobardes atacan en grupo. Las ranas que van en hordas tienen poca vida, pero son muy escurridizas.¡Que no escape ni una!");
+        spanishDictionary.Add("description9", "Dicen que los cobardes atacan en grupo. Los Hermanos Zuleta son esos cobardes. Tienen poca vida, pero son muy escurridizas. ¡Que no escape ni uno!");
         spanishDictionary.Add("lesson10", "Lección 10");
-        spanishDictionary.Add("description10", "Desde el cielo se acercan otro tipo de ranas sucias, más difíciles de alcanzar. Pilla una torre montañosa rápido, no las vayas a perder.");
+        spanishDictionary.Add("description10", "Desde el cielo se acerca otro tipo de rana sucia, más difícil de alcanzar. Su nombre es Doolittle, que no Stuart. Pilla un Albatro rápido, no las vayas a perder.");
 
         //tutorial spanish
         spanishDictionary.Add("tutorial1", "Construir defensas");
@@ -266,7 +300,7 @@ public class TextManager : MonoBehaviour
         spanishDictionary.Add("tutorial3", "El cubo");
         spanishDictionary.Add("Tdescription3", "El Cubo y los caminos de los enemigos se generan procedimentalmente en cada partida. Los enemigos siempre aparecerán en la cara inferior del cubo.");
         spanishDictionary.Add("tutorial4", "Mover el cubo I");
-        spanishDictionary.Add("Tdescription4", "Para rotcar el cubo, presiona y arrastra usando el ratón en el PC o usando un dedo en el móvil.");
+        spanishDictionary.Add("Tdescription4", "Para rotar el cubo, presiona y arrastra usando el ratón en el PC o usando un dedo en el móvil.");
         spanishDictionary.Add("tutorial5", "Mover el cubo II");
         spanishDictionary.Add("Tdescription5", "Además, también puedes ampliar el cubo usando la rueda del ratón en el PC o usando dos dedos en el móvil.");
         spanishDictionary.Add("tutorial6", "El objetivo");
