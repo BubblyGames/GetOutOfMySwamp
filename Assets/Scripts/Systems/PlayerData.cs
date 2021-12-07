@@ -19,7 +19,7 @@ public class PlayerData
 
         for (int i = 0; i < gameManager.levelSelector.worlds.Length; i++)
         {
-            worldScores.Add(-1);
+            worldScores.Add(0);
         }
         defenses = new bool[6];
 
