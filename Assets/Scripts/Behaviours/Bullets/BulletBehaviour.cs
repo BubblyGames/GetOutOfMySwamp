@@ -76,6 +76,7 @@ public class BulletBehaviour : MonoBehaviour
                     break;
                 case 2:
                     //other.gameObject.GetComponent<EnemyBehaviour>().AreaDamage(damage, areaEffect, layerMask);
+                    other.gameObject.GetComponent<EnemyBehaviour>().Hurt(damage);
                     Explode();
                     Destroy(gameObject);
                     break;
@@ -87,7 +88,7 @@ public class BulletBehaviour : MonoBehaviour
         }
         else if (other.gameObject.CompareTag("World"))
         {
-            if(actualEffect == 2)
+            if (actualEffect == 2)
                 Explode();
             Destroy(gameObject);
         }
@@ -102,7 +103,7 @@ public class BulletBehaviour : MonoBehaviour
             EnemyBehaviour eb;
             if (hits[i].collider.TryGetComponent<EnemyBehaviour>(out eb))
             {
-                eb.Hurt(damage);
+                eb.Hurt(damage / 4);
             }
         }
 
