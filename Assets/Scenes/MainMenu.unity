@@ -2646,6 +2646,7 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 0a5235c4f88ebda4ba1e0f9423950d8a, type: 3}
   - {fileID: 21300000, guid: 24bff72e7482c1a459680b7aa6355cc8, type: 3}
   currentWorldId: 0
+  levelSelector: {fileID: 1305970970}
 --- !u!4 &429681862
 Transform:
   m_ObjectHideFlags: 0
