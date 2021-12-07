@@ -57,7 +57,7 @@ public class InputManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (!LevelManager.ready)
+        if (!LevelManager.instance.ready)
             return;
 
         lastMousePosition = mousePosition;

@@ -52,7 +52,7 @@ public class CameraBehaviour : MonoBehaviour
 
     void Update()
     {
-        if (!LevelManager.ready)
+        if (!LevelManager.instance.ready)
             return;
             
 
