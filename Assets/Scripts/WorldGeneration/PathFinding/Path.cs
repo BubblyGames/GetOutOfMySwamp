@@ -48,9 +48,6 @@ public class Path
     int insertedMidpoints = 0;
     int currentStep = 1;
 
-
-
-
     public Path(CubeWorldGenerator world)
     {
         this.world = world;

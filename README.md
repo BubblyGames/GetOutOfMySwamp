@@ -149,14 +149,14 @@ Algunos enemigos cuentan con un nombre alternativo en inglés.
 
 |   **ESPAÑOL**   |   **INGLÉS**  |
 | --------------- | ------------- |
-| MISCO           | MISCO         |
+| GEPE            | GEPE          |
 | GUNTHER         | GUNTHER       |
 | HERMANOS ZULETA | THE WILSONS   |
 | DOOLITTLE       | DOOLITTLE     |
 
 | **ENEMIGOS**                | VIDA | VELOCIDAD DE MOVIMIENTO | TIPO                 | RECOMPENSA |
 | --------------------------- | ---- | ----------------------- | -------------------- | ---------- |
-| MISCO (NORMAL)              |  40  | Media (2 ud)            | Terrestre - Normal   |     8      |
+| GEPE (NORMAL)               |  40  | Media (2 ud)            | Terrestre - Normal   |     8      |
 | GUNTHER (TANQUE)            |  250 | Lenta (1.5 ud)          | Terrestre - Pesada   |     20     |
 | HERMANOS ZULETA (HORDA)     |  25  | Rápida (4 ud)           | Terrestre - Horda    |     3      |
 | DOOLITTLE (AÉREO)           |  30  | Media (3 ud)            | Aérea - Normal       |     15     |
@@ -174,41 +174,41 @@ Algunas torres cuentan con un nombre alternativo en inglés.
 | ESPECULIO             | BROKER        |
 | PETASETA              | MUSHBOMB      |
 
-| **TORRES**                          | ALCANCE      | DAÑO           | OBJETIVO          | VELOCIDAD DE ATAQUE | DPS | EFECTO                           | COSTE  |
-| ----------------------------------- | ---------    | -------------- | ----------------- | ------------------- | --- | -------------------------------- |--------|
-| BATRACIUS (PESADA)                  | Largo (6 ud) | Elevado (30 ud)| Proy Área TT\*    | Lento (0.1 ud)      |  6  | \-                               | 300    |
-| HERMANAS FLOR Y FLETA (BÁSICA)      | Medio (5 ud) | Medio (14 ud)  | Individual TT\*   | Medio (2 ud)        | 28  | \-                               | 125    |
-| BEERHOUSE (PSÍQUICA)                | Corto (4 ud) | Bajo (3 ud)    | Área TT\*         | Lento (0.3 ud)      | 0.9 | Ralentiza al enemigo             | 200    |
-| ALBATRO (ANTI-AÉREA)                | Largo (7 ud) | Bajo (3 ud)    | Individual TA\*   | Rápido (5 ud)       | 15  | \-                               | 175    |
-| ESPECULIO (ECONÓMICA)               | Nada         | Ninguno        | Ninguno           | Sin ataque          |     | Genera ingresos de forma pasiva  | 250    |
-| **TRAMPAS**                         |              |                |                   |                     |     |                                  |        |
-| PETASETA (PANTANO)                  | Corto (3 ud) | Elevado (40 ud)| Área TT\*         | De un solo uso      |     | Ralentiza al enemigo             | 50     |
+| **TORRES**                     | ALCANCE      | DAÑO                           | OBJETIVO          | VELOCIDAD DE ATAQUE | DPS | EFECTO                           | COSTE  |
+| ------------------------------ | ---------    | ------------------------------ | ----------------- | ------------------- | --- | -------------------------------- |--------|
+| BATRACIUS (PESADA)             | Largo (6 ud) | Elevado ( DIR 30 ud  AREA 7 ud)| Proy Área TT\*    | Lento (0.1 ud)      |  6  | \-                               | 300    |
+| HERMANAS FLOR Y FLETA (BÁSICA) | Medio (5 ud) | Medio (14 ud)                  | Individual TT\*   | Medio (2 ud)        | 28  | \-                               | 125    |
+| BEERHOUSE (PSÍQUICA)           | Corto (4 ud) | Bajo (3 ud)                    | Área TT\*         | Lento (0.3 ud)      | 0.9 | Ralentiza al enemigo             | 200    |
+| ALBATRO (ANTI-AÉREA)           | Largo (7 ud) | Bajo (3 ud)                    | Individual TA\*   | Rápido (5 ud)       | 15  | \-                               | 175    |
+| ESPECULIO (ECONÓMICA)          | Nada         | Ninguno                        | Ninguno           | Sin ataque          |     | Genera ingresos de forma pasiva  | 250    |
+| **TRAMPAS**                    |              |                                |                   |                     |     |                                  |        |
+| PETASETA (PANTANO)             | Corto (3 ud) | Elevado (40 ud)                | Área TT\*         | De un solo uso      |     | Ralentiza al enemigo             | 50     |
 
 Cada defensa del jugador se puede mejorar, por separado, hasta tres veces, aumentando con estas mejoras las estadísticas de dicha defensa y haciéndola más eficaz en combate.
 
 Nivel 1:
-| **TORRES**              | ALCANCE      | DAÑO           | OBJETIVO          | VELOCIDAD DE ATAQUE | DPS | EFECTO                           | COSTE  |
-| ----------------------- | ---------    | -------------- | ----------------- | ------------------- | --- | -------------------------------- |--------|
-| BATRACIUS (PESADA)      | Largo (6 ud) | Elevado (35 ud)| Proy Área TT\*    | Lento (0.2 ud)      | 7   | \-                               | 150    |
-| FLOR Y FLETA (BÁSICA)   | Medio (5 ud) | Medio (16 ud)  | Individual TT\*   | Medio (2 ud)        | 32  | \-                               | 50     |
-| BEERHOUSE (PSÍQUICA)    | Corto (4 ud) | Bajo (5 ud)    | Área TT\*         | Lento (0.3 ud)      | 1.5 | Ralentiza al enemigo             | 100    |
-| ALBATRO (ANTI-AÉREA)    | Largo (7 ud) | Bajo (4 ud)    | Individual TA\*   | Rápido (5 ud)       | 20  | \-                               | 75     |
+| **TORRES**              | ALCANCE      | DAÑO                          | OBJETIVO          | VELOCIDAD DE ATAQUE | DPS | EFECTO                           | COSTE  |
+| ----------------------- | ------------ | ----------------------------- | ----------------- | ------------------- | --- | -------------------------------- |--------|
+| BATRACIUS (PESADA)      | Largo (6 ud) | Elevado (DIR 35 ud AREA 9 ud) | Proy Área TT\*    | Lento (0.2 ud)      | 7   | \-                               | 150    |
+| FLOR Y FLETA (BÁSICA)   | Medio (5 ud) | Medio (16 ud)                 | Individual TT\*   | Medio (2 ud)        | 32  | \-                               | 50     |
+| BEERHOUSE (PSÍQUICA)    | Corto (4 ud) | Bajo (5 ud)                   | Área TT\*         | Lento (0.3 ud)      | 1.5 | Ralentiza al enemigo             | 100    |
+| ALBATRO (ANTI-AÉREA)    | Largo (7 ud) | Bajo (4 ud)                   | Individual TA\*   | Rápido (5 ud)       | 20  | \-                               | 75     |
 
 Nivel 2:
-| **TORRES**             | ALCANCE      | DAÑO           | OBJETIVO          | VELOCIDAD DE ATAQUE | DPS | EFECTO                            | COSTE  |
-| ---------------------- | ---------    | -------------- | ----------------- | ------------------- | --- | --------------------------------- |--------|
-| BATRACIUS (PESADA)     | Largo (8 ud) | Elevado (35 ud)| Proy Área TT\*    | Lento (0.2 ud)      |  7  | \-                                | 200    |
-| FLOR Y FLETA (BÁSICA)  | Largo (6 ud) | Medio (18 ud)  | Individual TT\*   | Medio (2 ud)        |  36 | \-                                | 100    |
-| BEERHOUSE (PSÍQUICA)   | Medio (5 ud) | Bajo (6 ud)    | Área TT\*         | Lento (0.3 ud)      | 1.8 | Ralentiza al enemigo              | 150    |
-| ALBATRO (ANTI-AÉREA)   | Largo (8 ud) | Bajo (4 ud)    | Individual TA\*   | Rápido (5 ud)       |  20 | \-                                | 125    |
+| **TORRES**             | ALCANCE      | DAÑO                          | OBJETIVO          | VELOCIDAD DE ATAQUE | DPS | EFECTO                            | COSTE  |
+| ---------------------- | ---------    | ----------------------------- | ----------------- | ------------------- | --- | --------------------------------- |--------|
+| BATRACIUS (PESADA)     | Largo (8 ud) | Elevado (DIR 35 ud AREA 9 ud) | Proy Área TT\*    | Lento (0.2 ud)      |  7  | \-                                | 200    |
+| FLOR Y FLETA (BÁSICA)  | Largo (6 ud) | Medio (18 ud)                 | Individual TT\*   | Medio (2 ud)        |  36 | \-                                | 100    |
+| BEERHOUSE (PSÍQUICA)   | Medio (5 ud) | Bajo (6 ud)                   | Área TT\*         | Lento (0.3 ud)      | 1.8 | Ralentiza al enemigo              | 150    |
+| ALBATRO (ANTI-AÉREA)   | Largo (8 ud) | Bajo (4 ud)                   | Individual TA\*   | Rápido (5 ud)       |  20 | \-                                | 125    |
 
 Nivel 3:
-| **TORRES**             | ALCANCE      | DAÑO           | OBJETIVO          | VELOCIDAD DE ATAQUE | DPS  | EFECTO                            | COSTE  |
-| ---------------------- | ---------    | -------------- | ----------------- | ------------------- | ---- | --------------------------------- |--------|
-| BATRACIUS (PESADA)     | Largo (8 ud) | Elevado (35 ud)| Proy Área TT\*    | Lento (0.3 ud)      | 10.5 | \-                                | 300    |
-| FLOR Y FLETA (BÁSICA)  | Largo (6 ud) | Medio (18 ud)  | Individual TT\*   | Medio (2.2 ud)      | 39.6 | \-                                | 150    |
-| BEERHOUSE (PSÍQUICA)   | Medio (5 ud) | Bajo (6 ud)    | Área TT\*         | Lento (0.5 ud)      | 3    | Ralentiza al enemigo              | 200    |
-| ALBATRO (ANTI-AÉREA)   | Largo (8 ud) | Bajo (5 ud)    | Individual TA\*   | Rápido (7 ud)       | 35   | \-                                | 200    |
+| **TORRES**             | ALCANCE      | DAÑO                          | OBJETIVO          | VELOCIDAD DE ATAQUE | DPS  | EFECTO                            | COSTE  |
+| ---------------------- | ---------    | ----------------------------- | ----------------- | ------------------- | ---- | --------------------------------- |--------|
+| BATRACIUS (PESADA)     | Largo (8 ud) | Elevado (DIR 35 ud AREA 9 ud) | Proy Área TT\*    | Lento (0.3 ud)      | 10.5 | \-                                | 300    |
+| FLOR Y FLETA (BÁSICA)  | Largo (6 ud) | Medio (18 ud)                 | Individual TT\*   | Medio (2.2 ud)      | 39.6 | \-                                | 150    |
+| BEERHOUSE (PSÍQUICA)   | Medio (5 ud) | Bajo (6 ud)                   | Área TT\*         | Lento (0.5 ud)      | 3    | Ralentiza al enemigo              | 200    |
+| ALBATRO (ANTI-AÉREA)   | Largo (8 ud) | Bajo (5 ud)                   | Individual TA\*   | Rápido (7 ud)       | 35   | \-                                | 200    |
 
 \*TT: Ataques desde Tierra a objetivos Terrestres.
 \*TA: Ataques desde Tierra a objetivos Aéreos.

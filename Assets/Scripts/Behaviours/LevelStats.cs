@@ -145,4 +145,9 @@ public class LevelStats : MonoBehaviour
         LevelManager.OnDamageTaken -= receiveDamage;
 
     }
+
+    public int GetStartBaseHealth()
+    {
+        return startBaseHealthPoints;
+    }
 }

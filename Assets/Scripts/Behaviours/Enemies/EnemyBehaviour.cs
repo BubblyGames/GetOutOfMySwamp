@@ -54,6 +54,7 @@ public abstract class EnemyBehaviour : MonoBehaviour
     private Vector3 _smoothVelocity = Vector3.zero;
     void Update()
     {
+        if (!LevelManager.instance.ready) return;
         if (path == null)
             return;
 
@@ -170,6 +171,7 @@ public abstract class EnemyBehaviour : MonoBehaviour
     {
         WaveController.instance.ReduceActiveEnemies(this);
         LevelStats.instance.getEnemyRewards(this.moneyValue, this.scoreValue);
+        LevelManager.instance.AddDeathPosition(path.GetStep(nextIndexPath));
         //Particles and sound
 
         Destroy(gameObject);

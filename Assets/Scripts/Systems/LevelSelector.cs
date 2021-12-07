@@ -25,7 +25,10 @@ public class LevelSelector : MonoBehaviour
     public Button selectButton;
     public TMP_Text levelText;
     private int levelNum;
-
+    public List<int> worldScores;
+    public GameManager gameManager;
+    public Image stars;
+    public List<Sprite> starsSprites;
     private void Awake()
     {
         if (instance == null)
@@ -40,6 +43,8 @@ public class LevelSelector : MonoBehaviour
 
     private void Start()
     {
+        worldScores = GameManager.instance.playerData.worldScores;
+
         ThemeInfo startTheme = worlds[0].GetComponent<ThemeSelector>().GetThemeInfo();
         RenderSettings.skybox.SetColor("_Tint", startTheme.backGroundColor);
         FindObjectOfType<Light>().color = startTheme.lightColor;
@@ -47,6 +52,7 @@ public class LevelSelector : MonoBehaviour
         if (!GameManager.instance.initiated)
             CreateWorldList();
         levelNum = 1;
+        stars.sprite = starsSprites[levelNum-1];
         //levelText.text = "Nivel " + (levelNum);
         GoTo(selectedWorld);
         DoneChanging();
@@ -64,6 +70,7 @@ public class LevelSelector : MonoBehaviour
             levelNum++;
             levelText.text = levelNum.ToString();
             GoTo(selectedWorld + 1);
+            stars.sprite = starsSprites[gameManager.playerData.worldScores[selectedWorld]];
         }
     }
     public void PreviousWorld()
@@ -74,6 +81,7 @@ public class LevelSelector : MonoBehaviour
             levelNum--;
             levelText.text = levelNum.ToString();
             GoTo(selectedWorld - 1);
+            stars.sprite = starsSprites[gameManager.playerData.worldScores[selectedWorld]];
         }
     }
 
