@@ -52,7 +52,7 @@ public class LevelSelector : MonoBehaviour
         if (!GameManager.instance.initiated)
             CreateWorldList();
         levelNum = 1;
-        stars.sprite = starsSprites[levelNum-1];
+        stars.sprite = starsSprites[selectedWorld];
         //levelText.text = "Nivel " + (levelNum);
         GoTo(selectedWorld);
         DoneChanging();
@@ -68,20 +68,21 @@ public class LevelSelector : MonoBehaviour
         {
             changing = true;
             levelNum++;
-            levelText.text = levelNum.ToString();
+            levelText.text = (selectedWorld + 2).ToString();
             GoTo(selectedWorld + 1);
-            stars.sprite = starsSprites[gameManager.playerData.worldScores[levelNum-1]];
+            stars.sprite = starsSprites[gameManager.playerData.worldScores[levelNum - 1]];
         }
     }
+
     public void PreviousWorld()
     {
         if (!changing && selectedWorld > 0)
         {
             changing = true;
             levelNum--;
-            levelText.text = levelNum.ToString();
+            levelText.text = selectedWorld.ToString();
             GoTo(selectedWorld - 1);
-            stars.sprite = starsSprites[gameManager.playerData.worldScores[levelNum-1]];
+            stars.sprite = starsSprites[gameManager.playerData.worldScores[levelNum - 1]];
         }
     }
 
@@ -153,7 +154,8 @@ public class LevelSelector : MonoBehaviour
         if (selectedWorld > 0)
             previousButton.interactable = true;
 
-        selectButton.interactable = true;
+        if (selectedWorld == 0 || (selectedWorld > 0 && gameManager.playerData.worldScores[selectedWorld - 1] > 0))
+            selectButton.interactable = true;
     }
 
     IEnumerator GoToCube(int nextIdx)
