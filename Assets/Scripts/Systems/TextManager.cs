@@ -115,7 +115,6 @@ public class TextManager : MonoBehaviour
         englishDictionary.Add("pausedtext", "Pause");
         englishDictionary.Add("continue", "Continue");
         englishDictionary.Add("round", "ROUND");
-        //englishDictionary.Add("credits", "Credits");
         englishDictionary.Add("nextLevel", "Next Level");
         englishDictionary.Add("retry", "Retry");
         englishDictionary.Add("loose", "You lose!");
@@ -220,7 +219,6 @@ public class TextManager : MonoBehaviour
         spanishDictionary.Add("pausedtext", "Pausa");
         spanishDictionary.Add("continue", "Continuar");
         spanishDictionary.Add("round", "RONDA");
-        //spanishDictionary.Add("credits", "Créditos");
         spanishDictionary.Add("nextLevel", "Siguiente nivel");
         spanishDictionary.Add("retry", "Reintentar");
         spanishDictionary.Add("loose", "¡Has perdido!");
