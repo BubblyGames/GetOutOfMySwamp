@@ -1181,7 +1181,7 @@ public class CubeWorldGenerator : MonoBehaviour
             foreach (CellInfo ce in p.cells)
             {
                 CellInfo c = GetCellUnder(ce);
-                if (c.blockType != BlockType.Path && c.blockType != BlockType.Swamp)
+                if (c!= null && c.blockType != BlockType.Path && c.blockType != BlockType.Swamp)
                 {
                     c.canWalk = false;
                     c.blockType = BlockType.Path;
