@@ -118,4 +118,5 @@ MonoBehaviour:
   particles: {fileID: 4964779859338955144, guid: 8a2ab21b4543bb14ebee8f6ff1221879, type: 3}
   range: 5
   meteorPrefab: {fileID: 4689128850287469916, guid: 99b0dacda868c994b859a4610546e56b, type: 3}
+  damage: 30
   time: 3

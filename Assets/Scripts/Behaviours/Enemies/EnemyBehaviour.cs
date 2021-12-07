@@ -170,6 +170,7 @@ public abstract class EnemyBehaviour : MonoBehaviour
     {
         WaveController.instance.ReduceActiveEnemies(this);
         LevelStats.instance.getEnemyRewards(this.moneyValue, this.scoreValue);
+        LevelManager.instance.AddDeathPosition(path.GetStep(nextIndexPath));
         //Particles and sound
 
         Destroy(gameObject);

@@ -14,8 +14,10 @@ using UnityEngine.UI;
 
 public class LevelManager : MonoBehaviour
 {
-
     public static LevelManager instance;
+
+    [HideInInspector]
+    public bool ready = false;
 
     //References
     [HideInInspector]
@@ -30,17 +32,16 @@ public class LevelManager : MonoBehaviour
     public static event Action OnGameStart, OnGameLost, OnGameCompleted, OnWaveCleared;
     public static event Action<int> OnDamageTaken, OnStructureUpgraded;
 
-
     //TODO: increment score when killing enemys.
     public LayerMask floorLayer;
     public GameObject waterSplashPrefab;
     public Material waterSplashMaterial;
-
     public Color[] colors;
 
     public GameObject meteorPrefab;
+    List<Vector3Int> deathPositions = new List<Vector3Int>();
+    public int deathsNeededToSpawnMeteor = 10;
 
-    public bool ready = false;
 
     Image fadeImage;
     GameObject loadingIcon;
@@ -160,6 +161,23 @@ public class LevelManager : MonoBehaviour
     public void StructureGotUpgraded(int level)
     {
         OnStructureUpgraded?.Invoke(level);
+    }
+
+    private void Update()
+    {
+        if (deathPositions.Count > deathsNeededToSpawnMeteor)
+        {
+            Vector3Int pos = deathPositions.GroupBy(i => i).OrderByDescending(grp => grp.Count())
+      .Select(grp => grp.Key).First();
+
+            GameObject.Instantiate(meteorPrefab, pos, Quaternion.identity);
+            deathPositions.Clear();
+        }
+    }
+
+    public void AddDeathPosition(Vector3 pos)
+    {
+        deathPositions.Add(Vector3Int.FloorToInt(pos));
     }
 }
 
