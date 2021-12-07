@@ -180,7 +180,7 @@ public class WaveController : MonoBehaviour
         Wave currentWave = new Wave();
         currentWave = waves[waveCount];
 
-        while (!LevelManager.instance.ready)
+        while (!LevelManager.ready)
         {
             yield return new WaitForSeconds(1);
         }

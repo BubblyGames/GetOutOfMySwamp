@@ -38,6 +38,7 @@ public class BuildManager : MonoBehaviour
 
     public bool CheckIfCanBuild(RaycastHit hit, out Vector3 outPos)
     {
+
         //Position where structure will be build
         Vector3Int intPos = new Vector3Int(
             Mathf.RoundToInt(hit.point.x + (hit.normal.x / 2)),
@@ -46,6 +47,7 @@ public class BuildManager : MonoBehaviour
 
         outPos = intPos;
 
+        if (!LevelManager.instance.world.IsPosInBounds(intPos)) return false;
         //Check if player has enough money
         if (!canBuild || (!CheatManager.instance.infiniteMoney && LevelStats.instance.CurrentMoney < structureBlueprint.creationCost))
             return false;
