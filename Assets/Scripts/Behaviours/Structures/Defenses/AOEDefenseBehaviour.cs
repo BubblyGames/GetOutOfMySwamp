@@ -18,6 +18,9 @@ public class AOEDefenseBehaviour : DefenseBehaviour
 
     private void Update()
     {
+        if (!isWorking)
+            return;
+
         if (Time.time > fireCountdown)
         {
             Attack();

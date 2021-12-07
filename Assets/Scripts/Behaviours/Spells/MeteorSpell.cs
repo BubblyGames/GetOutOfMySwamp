@@ -109,6 +109,11 @@ public class MeteorSpell : SpellBehaviour
             p.transform.position = transform.position;
             p.transform.rotation = transform.rotation;
 
+            ParticleSystem pa = meteor.transform.GetChild(0).GetComponent<ParticleSystem>();
+            pa.loop = false;
+
+            pa.transform.parent = null;
+
             Destroy(meteor);
             Destroy(gameObject);
 
