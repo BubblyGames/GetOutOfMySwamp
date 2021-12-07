@@ -168,7 +168,7 @@ public class TextManager : MonoBehaviour
 
         //descriptions of lessons in English
         englishDictionary.Add("lesson1", "Lesson 1");
-        englishDictionary.Add("description1", "Ali and Oli are the cheapest defense from all. However its medium damage and range could save you when needed, so don't underestimate it!");
+        englishDictionary.Add("description1", "Ali and Oli are the cheapest defense of them all. However, its medium damage and range could save you when needed, so don't underestimate it!");
         englishDictionary.Add("lesson2", "Lesson 2");
         englishDictionary.Add("description2", "Did anyone say House? No, it's Beerhouse! Combine this defense with others for amazing results thanks to its delaying effect on enemies.");
         englishDictionary.Add("lesson3", "Lesson 3");
@@ -178,11 +178,11 @@ public class TextManager : MonoBehaviour
         englishDictionary.Add("lesson5", "Lesson 5");
         englishDictionary.Add("description5", "Albatro is always looking to the moon, but no flying enemies will escape from it. Just place him on the rocks, please.");
         englishDictionary.Add("lesson6", "Lesson 6");
-        englishDictionary.Add("description6", "Is that... a mushroom? No, it's a MushBOOMB! Be careful, it not only destroys, it also has a delaying effect on enemies.");
+        englishDictionary.Add("description6", "Is that... a mushroom? No, it's a MushBOOMB! Be careful, it doesn't only destroys, but it also has a delaying effect on enemies.");
         englishDictionary.Add("lesson7", "Lesson 7");
         englishDictionary.Add("description7", "Gepe. Medium life and speed makes him an easy target. But be careful, don't forget about him!");
         englishDictionary.Add("lesson8", "Lesson 8");
-        englishDictionary.Add("description8", "Gunther is used as shield by the other enemy units. Its huge amount of life won't make them easy to kill.");
+        englishDictionary.Add("description8", "Gunther is used as shield by the other enemy units. Its huge amount of health won't make them easy to kill.");
         englishDictionary.Add("lesson9", "Lesson 9");
         englishDictionary.Add("description9", "The Wilsons are not brave enough to come alone. Besides, they are very fast so put an eye on them!");
         englishDictionary.Add("lesson10", "Lesson 10");
@@ -200,7 +200,7 @@ public class TextManager : MonoBehaviour
         englishDictionary.Add("tutorial5", "Move the cube II");
         englishDictionary.Add("Tdescription5", "You can also zoom in and out, using the mouse wheel on PC or using two fingers on mobile.");
         englishDictionary.Add("tutorial6", "Reach the goal");
-        englishDictionary.Add("Tdescription6", "The game’s objective is to defend your pond from all the approching enemies. If they get in the pond, you'll loose some health. If you lose all of your health, it's game over.");
+        englishDictionary.Add("Tdescription6", "The game’s objective is to defend your pond from all the approching enemies. If they get in the pond, you'll lose some health. If you lose all of your health, it's game over.");
 
         //Spanish 
         spanishDictionary.Add("play", "Jugar");
