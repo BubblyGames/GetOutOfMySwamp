@@ -283,7 +283,12 @@ public class CubeWorldGenerator : MonoBehaviour
                     //Maybe some day
                     float distanceToCenter = Vector3.Distance(center.position, cell.GetPos());
                     if (sphere && distanceToCenter > size / 2f)
+                    {
+                        cell.blockType = BlockType.Air;
+                        cell.canWalk = true;
+                        emptyCells.Add(cell);
                         continue;
+                    }
 
                     //Rock generation
                     float alpha = 1;

@@ -61,10 +61,8 @@ public class ShootingDefenseBehaviour : DefenseBehaviour
 
     protected void Update()
     {
-        if (enemyTarget == null)
-        {
+        if (!isWorking || enemyTarget == null)
             return;
-        }
 
         if (cannon != null)
             cannon.transform.LookAt(enemyTarget.transform, normal);

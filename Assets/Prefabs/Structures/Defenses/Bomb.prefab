@@ -140,7 +140,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   size: 1
-  health: 0
+  health: 100
   canLoseHealth: 0
   level: 0
   blockType: 0
@@ -150,6 +150,7 @@ MonoBehaviour:
   fireRate: 0
   damage: 40
   attackRange: 4
+  maintenanceCost: 5
   canBreakWorld: 1
   explosionParticles: {fileID: 4964779859338955144, guid: 8a2ab21b4543bb14ebee8f6ff1221879, type: 3}
   soundName: bombSound

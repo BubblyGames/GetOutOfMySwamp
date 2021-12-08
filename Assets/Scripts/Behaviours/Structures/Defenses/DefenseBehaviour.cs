@@ -1,6 +1,8 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 /*Basic Defense Class, all kind of defenses from towers to land mines, etc etc, wille inherit from this*/
 public abstract class DefenseBehaviour : Structure
@@ -32,6 +34,15 @@ public abstract class DefenseBehaviour : Structure
     [Tooltip("The radius of the sphere in which the defense detects an enemy")]
     internal float attackRange = 5f;
 
+    [SerializeField]
+    [Tooltip("How much gold will be spent each second in keeping this defense active")]
+    protected int maintenanceCost = 1;
+    protected float maintenanceCountdown = 1f;
+
+    protected bool isWorking = true;
+    [SerializeField]
+    protected Image notWorkingImage;
+
     public override void UpgradeStrucrure()
     {
 
@@ -54,16 +65,47 @@ public abstract class DefenseBehaviour : Structure
                         break;
                 }
             }
+            maintenanceCost += Blueprint.upgrades[level].maintenanceCostIncrease;
         }
         base.UpgradeStrucrure();
 
     }
     protected virtual void Attack() { }
 
+#if UNITY_EDITOR
     private void OnDrawGizmos()
     {
         Gizmos.DrawWireSphere(transform.position, attackRange);
     }
+#endif
 
+    private void FixedUpdate()
+    {
+        maintenanceCountdown -= Time.deltaTime;
+        if (maintenanceCountdown <= 0f)
+        {
+            TowerMaintenance();
+            maintenanceCountdown = 1f;
+        }
+    }
 
+    private void TowerMaintenance()
+    {
+        if (CheatManager.instance.infiniteMoney)
+            return;
+
+        if (LevelStats.instance.currentMoney >= maintenanceCost)
+        {
+            LevelStats.instance.SpendMoney(maintenanceCost);
+            isWorking = true;
+            if (notWorkingImage != null)
+                notWorkingImage.enabled = false;
+        }
+        else
+        {
+            isWorking = false;
+            if (notWorkingImage != null)
+                notWorkingImage.enabled = true;
+        }
+    }
 }

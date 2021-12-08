@@ -17,11 +17,6 @@ public class Structure : MonoBehaviour
     protected int size = 1;
 
     [SerializeField]
-    protected int health;
-    [SerializeField]
-    protected bool canLoseHealth;
-
-    [SerializeField]
     protected int level = 0;
     protected int maxLevel = 3;
     protected bool isMaxLevel = false;
