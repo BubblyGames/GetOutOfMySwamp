@@ -23,6 +23,8 @@ public class BuildManager : MonoBehaviour
     public bool canBuild;//Checks if a structure is selected to be built
     public Vector3 currentConstructionPositionOffset;
 
+    private AudioManager audiomanager;
+
     private void Awake()
     {
         if (instance == null)
@@ -223,6 +225,14 @@ public class BuildManager : MonoBehaviour
         structure.gameObject.transform.localScale *= structure.Size;
         structure.SetNormal(normal);
         structure.Blueprint = StructureBlueprint;
+
+        //Sound
+        if (audiomanager == null)
+        {
+            audiomanager = FindObjectOfType<AudioManager>();
+        }
+        audiomanager.Play("buildSound");
+        // ---
 
         //THIS SHOULDN'T BE NECESSARY
         //if (!LevelManager.instance.world.IsPosInBounds(position))
