@@ -7164,16 +7164,16 @@ MonoBehaviour:
   themes:
   - material: {fileID: 2100000, guid: 9d2697eb6a4f80a48abb3b7c62b67118, type: 2}
     lightColor: {r: 1, g: 1, b: 1, a: 1}
-    backGroundColor: {r: 0.7019608, g: 0.8627451, b: 0.8666667, a: 1}
+    backGroundColor: {r: 0.68823427, g: 0.8962264, b: 0.88399154, a: 1}
   - material: {fileID: 2100000, guid: 36777aadbcc269d4d944e83c116139ca, type: 2}
     lightColor: {r: 1, g: 1, b: 1, a: 1}
-    backGroundColor: {r: 0.43529412, g: 0.99215686, b: 0.6627451, a: 1}
+    backGroundColor: {r: 0.6313726, g: 0.8862745, b: 0.6835822, a: 1}
   - material: {fileID: 2100000, guid: 4d005b899a034234fbb281b62c9ed4ab, type: 2}
     lightColor: {r: 1, g: 1, b: 1, a: 1}
-    backGroundColor: {r: 1, g: 0.77254903, b: 0.41960785, a: 1}
+    backGroundColor: {r: 1, g: 0.82100415, b: 0.5647059, a: 1}
   - material: {fileID: 2100000, guid: fadc17fafd02a9445a9c8dc63ccd7bbd, type: 2}
     lightColor: {r: 1, g: 1, b: 1, a: 1}
-    backGroundColor: {r: 0.90588236, g: 0.49411765, b: 0.49803922, a: 1}
+    backGroundColor: {r: 1, g: 0.7751495, b: 0.76862746, a: 1}
   - material: {fileID: 2100000, guid: cfa571efc57b7504d8c2953b8ec0d164, type: 2}
     lightColor: {r: 1, g: 1, b: 1, a: 1}
     backGroundColor: {r: 0.29411766, g: 0.20784314, b: 0.33333334, a: 1}

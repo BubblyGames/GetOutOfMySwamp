@@ -88,6 +88,7 @@ GameObject:
   - component: {fileID: 3986587458488321381}
   - component: {fileID: 1921975916628525554}
   - component: {fileID: 5111593255086320528}
+  - component: {fileID: 7644489846286358631}
   m_Layer: 5
   m_Name: LoadIcon
   m_TagString: Untagged
@@ -170,3 +171,15 @@ MonoBehaviour:
   - {fileID: -3243969905789220278, guid: b0b83a753321b5f44988440aef71ac3e, type: 3}
   - {fileID: -2240947139059371774, guid: b0b83a753321b5f44988440aef71ac3e, type: 3}
   - {fileID: -9038400482918282348, guid: b0b83a753321b5f44988440aef71ac3e, type: 3}
+--- !u!114 &7644489846286358631
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9023868662224991215}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dae42aef9d45a294fbee7ba039ecdf49, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
