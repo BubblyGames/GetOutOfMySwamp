@@ -34,8 +34,16 @@ public class PlayerData
         defenses[index] = true;
     }
 
-    public void SaveScore(int index, int score)
+    public bool SaveScore(int index, int score)
     {
-        worldScores[index] = score;
+        if (score > worldScores[index])
+        {
+            worldScores[index] = score;
+            return true;
+        }
+        else
+        {
+            return false;
+        }
     }
 }

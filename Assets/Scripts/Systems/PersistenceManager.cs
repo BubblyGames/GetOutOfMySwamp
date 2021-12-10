@@ -37,8 +37,8 @@ public class PersistenceManager
 
     public static void SaveScoreData(PlayerData playerData, int index, int score)
     {
-        playerData.SaveScore(index, score);
-        SaveData(playerData);
+        bool canSaveData= playerData.SaveScore(index, score);
+        if(canSaveData)SaveData(playerData);
     }
 
     public static void SaveDefenseUsedData(PlayerData playerData, int index)
