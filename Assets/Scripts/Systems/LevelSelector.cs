@@ -70,7 +70,14 @@ public class LevelSelector : MonoBehaviour
             levelNum++;
             levelText.text = (selectedWorld + 2).ToString();
             GoTo(selectedWorld + 1);
-            stars.sprite = starsSprites[gameManager.playerData.worldScores[levelNum - 1]];
+            if (gameManager.playerData.worldScores[levelNum - 1] == -1)
+            {
+                stars.sprite = starsSprites[0];
+            }
+            else
+            {
+                stars.sprite = starsSprites[gameManager.playerData.worldScores[levelNum - 1]];
+            }
         }
     }
 
@@ -82,7 +89,14 @@ public class LevelSelector : MonoBehaviour
             levelNum--;
             levelText.text = selectedWorld.ToString();
             GoTo(selectedWorld - 1);
-            stars.sprite = starsSprites[gameManager.playerData.worldScores[levelNum - 1]];
+            if (gameManager.playerData.worldScores[levelNum - 1] == -1)
+            {
+                stars.sprite = starsSprites[0];
+            }
+            else
+            {
+                stars.sprite = starsSprites[gameManager.playerData.worldScores[levelNum - 1]];
+            }
         }
     }
 
@@ -130,7 +144,14 @@ public class LevelSelector : MonoBehaviour
                 levelSelectPanel.SetActive(true);
                 //MainMenuCamera.instance.MoveLeft();
                 gameManager.LoadData();
-                gameManager.levelSelector.stars.sprite = gameManager.levelSelector.starsSprites[gameManager.playerData.worldScores[0]];
+                if (gameManager.playerData.worldScores[0] == -1)
+                {
+                    gameManager.levelSelector.stars.sprite = gameManager.levelSelector.starsSprites[0];
+                }
+                else
+                {
+                    gameManager.levelSelector.stars.sprite = gameManager.levelSelector.starsSprites[gameManager.playerData.worldScores[0]];
+                }
                 break;
             default:
                 break;
