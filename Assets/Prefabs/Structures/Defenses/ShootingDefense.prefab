@@ -121,6 +121,7 @@ MonoBehaviour:
   damage: 14
   attackRange: 5
   maintenanceCost: 1
+  isWorking: 1
   notWorkingImage: {fileID: 8865485761996466727}
   firePoint: {fileID: 1127500018515762662}
   cannon: {fileID: 0}
@@ -212,6 +213,34 @@ PrefabInstance:
     - target: {fileID: 3926289605861443938, guid: 8c022ede4b599d446b41bc0e7adbfaa7, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8267565418889678950, guid: 8c022ede4b599d446b41bc0e7adbfaa7, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8267565418889678950, guid: 8c022ede4b599d446b41bc0e7adbfaa7, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8267565418889678950, guid: 8c022ede4b599d446b41bc0e7adbfaa7, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 6388906839533808407}
+    - target: {fileID: 8267565418889678950, guid: 8c022ede4b599d446b41bc0e7adbfaa7, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8267565418889678950, guid: 8c022ede4b599d446b41bc0e7adbfaa7, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: Repair
+      objectReference: {fileID: 0}
+    - target: {fileID: 8267565418889678950, guid: 8c022ede4b599d446b41bc0e7adbfaa7, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: DefenseBehaviour, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 8267565418889678950, guid: 8c022ede4b599d446b41bc0e7adbfaa7, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8c022ede4b599d446b41bc0e7adbfaa7, type: 3}

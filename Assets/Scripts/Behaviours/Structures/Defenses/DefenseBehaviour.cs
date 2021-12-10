@@ -39,13 +39,12 @@ public abstract class DefenseBehaviour : Structure
     protected int maintenanceCost = 1;
     protected float maintenanceCountdown = 1f;
 
-    protected bool isWorking = true;
+    public bool isWorking = true;
     [SerializeField]
     protected Image notWorkingImage;
 
     public override void UpgradeStrucrure()
     {
-
         if (!isMaxLevel)
         {
             foreach (Stats stats in Blueprint.upgrades[level].stats)
@@ -67,9 +66,10 @@ public abstract class DefenseBehaviour : Structure
             }
             maintenanceCost += Blueprint.upgrades[level].maintenanceCostIncrease;
         }
-        base.UpgradeStrucrure();
 
+        base.UpgradeStrucrure();
     }
+
     protected virtual void Attack() { }
 
 #if UNITY_EDITOR
@@ -94,18 +94,25 @@ public abstract class DefenseBehaviour : Structure
         if (CheatManager.instance.infiniteMoney)
             return;
 
-        if (LevelStats.instance.currentMoney >= maintenanceCost)
+        if (isWorking && LevelStats.instance.currentMoney >= maintenanceCost)
         {
             LevelStats.instance.SpendMoney(maintenanceCost);
-            isWorking = true;
-            if (notWorkingImage != null)
-                notWorkingImage.enabled = false;
         }
         else
         {
             isWorking = false;
             if (notWorkingImage != null)
                 notWorkingImage.enabled = true;
+        }
+    }
+
+    public void Repair()
+    {
+        if (!isWorking && LevelStats.instance.currentMoney >= maintenanceCost)
+        {
+            isWorking = true;
+            if (notWorkingImage != null)
+                notWorkingImage.enabled = false;
         }
     }
 }
