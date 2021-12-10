@@ -118,9 +118,9 @@ MonoBehaviour:
   structureId: 0
   canHitSkyEnemies: 0
   fireRate: 2
-  damage: 14
+  damage: 8
   attackRange: 5
-  maintenanceCost: 1
+  maintenanceCost: 5
   notWorkingImage: {fileID: 8865485761996466727}
   firePoint: {fileID: 1127500018515762662}
   cannon: {fileID: 0}

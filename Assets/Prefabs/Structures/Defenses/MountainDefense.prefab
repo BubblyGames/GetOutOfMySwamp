@@ -69,7 +69,7 @@ MonoBehaviour:
   fireRate: 5
   damage: 3
   attackRange: 8
-  maintenanceCost: 1
+  maintenanceCost: 7
   notWorkingImage: {fileID: 971406230304917065}
   firePoint: {fileID: 5475787786454904890}
   cannon: {fileID: 0}

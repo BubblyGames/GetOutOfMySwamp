@@ -120,7 +120,7 @@ MonoBehaviour:
   fireRate: 0.3
   damage: 3
   attackRange: 5
-  maintenanceCost: 1
+  maintenanceCost: 8
   notWorkingImage: {fileID: 2003906363269010859}
   particles: {fileID: 4964779859338955144, guid: ccc31fd69f4d6a842929870e848f5030, type: 3}
 --- !u!1 &8505893711344014288

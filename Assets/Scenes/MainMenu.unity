@@ -689,75 +689,43 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   waves:
   - packs:
-    - enemyType: 0
-      enemyAmount: 10
-    - enemyType: 3
-      enemyAmount: 5
-    - enemyType: 2
-      enemyAmount: 1
-    - enemyType: 0
-      enemyAmount: 10
-    - enemyType: 5
-      enemyAmount: 3
-    spawnRate: 1
-  - packs:
-    - enemyType: 0
-      enemyAmount: 15
-    - enemyType: 3
-      enemyAmount: 10
-    - enemyType: 2
-      enemyAmount: 2
-    - enemyType: 5
-      enemyAmount: 5
-    - enemyType: 0
-      enemyAmount: 5
-    - enemyType: 3
-      enemyAmount: 10
-    - enemyType: 2
-      enemyAmount: 2
-    - enemyType: 0
-      enemyAmount: 5
-    - enemyType: 3
-      enemyAmount: 20
-    spawnRate: 1
-  - packs:
-    - enemyType: 0
-      enemyAmount: 5
-    - enemyType: 2
-      enemyAmount: 5
-    - enemyType: 3
-      enemyAmount: 10
-    - enemyType: 0
+    - spawnTime: 0
+      enemyType: 0
       enemyAmount: 8
-    - enemyType: 2
-      enemyAmount: 6
-    - enemyType: 3
-      enemyAmount: 15
-    - enemyType: 5
-      enemyAmount: 6
-    - enemyType: 2
+      spawnRate: 0.6
+      spawned: 0
+    - spawnTime: 3
+      enemyType: 2
+      enemyAmount: 2
+      spawnRate: 0.4
+      spawned: 0
+  - packs:
+    - spawnTime: 0
+      enemyType: 0
       enemyAmount: 5
-    - enemyType: 0
+      spawnRate: 0.6
+      spawned: 0
+    - spawnTime: 5
+      enemyType: 3
+      enemyAmount: 5
+      spawnRate: 2
+      spawned: 0
+    - spawnTime: 10
+      enemyType: 2
+      enemyAmount: 4
+      spawnRate: 0.4
+      spawned: 0
+    - spawnTime: 14
+      enemyType: 0
       enemyAmount: 10
-    - enemyType: 5
-      enemyAmount: 10
-    - enemyType: 3
-      enemyAmount: 20
-    - enemyType: 2
-      enemyAmount: 10
-    - enemyType: 0
-      enemyAmount: 20
-    - enemyType: 3
-      enemyAmount: 30
-    - enemyType: 2
-      enemyAmount: 10
-    - enemyType: 0
-      enemyAmount: 20
-    - enemyType: 5
-      enemyAmount: 15
-    - enemyType: 3
-      enemyAmount: 30
-    spawnRate: 1
+      spawnRate: 0.6
+      spawned: 0
+  - packs:
+    - spawnTime: 0
+      enemyType: 0
+      enemyAmount: 5
+      spawnRate: 0
+      spawned: 0
 --- !u!114 &63313641
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1059,91 +1027,200 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   waves:
   - packs:
-    - enemyType: 0
+    - spawnTime: 0
+      enemyType: 0
       enemyAmount: 6
-    - enemyType: 2
+      spawnRate: 0
+      spawned: 0
+    - spawnTime: 0
+      enemyType: 2
       enemyAmount: 3
-    - enemyType: 3
+      spawnRate: 0
+      spawned: 0
+    - spawnTime: 0
+      enemyType: 3
       enemyAmount: 10
-    - enemyType: 0
+      spawnRate: 0
+      spawned: 0
+    - spawnTime: 0
+      enemyType: 0
       enemyAmount: 10
-    - enemyType: 5
+      spawnRate: 0
+      spawned: 0
+    - spawnTime: 0
+      enemyType: 5
       enemyAmount: 5
-    - enemyType: 2
+      spawnRate: 0
+      spawned: 0
+    - spawnTime: 0
+      enemyType: 2
       enemyAmount: 6
-    - enemyType: 3
+      spawnRate: 0
+      spawned: 0
+    - spawnTime: 0
+      enemyType: 3
       enemyAmount: 15
-    spawnRate: 1
+      spawnRate: 0
+      spawned: 0
   - packs:
-    - enemyType: 0
+    - spawnTime: 0
+      enemyType: 0
       enemyAmount: 9
-    - enemyType: 2
+      spawnRate: 0
+      spawned: 0
+    - spawnTime: 0
+      enemyType: 2
       enemyAmount: 4
-    - enemyType: 3
+      spawnRate: 0
+      spawned: 0
+    - spawnTime: 0
+      enemyType: 3
       enemyAmount: 15
-    - enemyType: 0
+      spawnRate: 0
+      spawned: 0
+    - spawnTime: 0
+      enemyType: 0
       enemyAmount: 14
-    - enemyType: 5
+      spawnRate: 0
+      spawned: 0
+    - spawnTime: 0
+      enemyType: 5
       enemyAmount: 8
-    - enemyType: 2
+      spawnRate: 0
+      spawned: 0
+    - spawnTime: 0
+      enemyType: 2
       enemyAmount: 8
-    - enemyType: 3
+      spawnRate: 0
+      spawned: 0
+    - spawnTime: 0
+      enemyType: 3
       enemyAmount: 20
-    spawnRate: 1
+      spawnRate: 0
+      spawned: 0
   - packs:
-    - enemyType: 0
+    - spawnTime: 0
+      enemyType: 0
       enemyAmount: 10
-    - enemyType: 2
+      spawnRate: 0
+      spawned: 0
+    - spawnTime: 0
+      enemyType: 2
       enemyAmount: 5
-    - enemyType: 3
+      spawnRate: 0
+      spawned: 0
+    - spawnTime: 0
+      enemyType: 3
       enemyAmount: 20
-    - enemyType: 0
+      spawnRate: 0
+      spawned: 0
+    - spawnTime: 0
+      enemyType: 0
       enemyAmount: 15
-    - enemyType: 5
+      spawnRate: 0
+      spawned: 0
+    - spawnTime: 0
+      enemyType: 5
       enemyAmount: 10
-    - enemyType: 2
+      spawnRate: 0
+      spawned: 0
+    - spawnTime: 0
+      enemyType: 2
       enemyAmount: 10
-    - enemyType: 3
+      spawnRate: 0
+      spawned: 0
+    - spawnTime: 0
+      enemyType: 3
       enemyAmount: 20
-    spawnRate: 1
+      spawnRate: 0
+      spawned: 0
   - packs:
-    - enemyType: 0
+    - spawnTime: 0
+      enemyType: 0
       enemyAmount: 10
-    - enemyType: 2
+      spawnRate: 0
+      spawned: 0
+    - spawnTime: 0
+      enemyType: 2
       enemyAmount: 5
-    - enemyType: 3
+      spawnRate: 0
+      spawned: 0
+    - spawnTime: 0
+      enemyType: 3
       enemyAmount: 20
-    - enemyType: 0
+      spawnRate: 0
+      spawned: 0
+    - spawnTime: 0
+      enemyType: 0
       enemyAmount: 15
-    - enemyType: 5
+      spawnRate: 0
+      spawned: 0
+    - spawnTime: 0
+      enemyType: 5
       enemyAmount: 10
-    - enemyType: 2
+      spawnRate: 0
+      spawned: 0
+    - spawnTime: 0
+      enemyType: 2
       enemyAmount: 10
-    - enemyType: 3
+      spawnRate: 0
+      spawned: 0
+    - spawnTime: 0
+      enemyType: 3
       enemyAmount: 20
-    spawnRate: 1
+      spawnRate: 0
+      spawned: 0
   - packs:
-    - enemyType: 0
+    - spawnTime: 0
+      enemyType: 0
       enemyAmount: 15
-    - enemyType: 2
+      spawnRate: 0
+      spawned: 0
+    - spawnTime: 0
+      enemyType: 2
       enemyAmount: 10
-    - enemyType: 3
+      spawnRate: 0
+      spawned: 0
+    - spawnTime: 0
+      enemyType: 3
       enemyAmount: 20
-    - enemyType: 0
+      spawnRate: 0
+      spawned: 0
+    - spawnTime: 0
+      enemyType: 0
       enemyAmount: 10
-    - enemyType: 5
+      spawnRate: 0
+      spawned: 0
+    - spawnTime: 0
+      enemyType: 5
       enemyAmount: 10
-    - enemyType: 2
+      spawnRate: 0
+      spawned: 0
+    - spawnTime: 0
+      enemyType: 2
       enemyAmount: 10
-    - enemyType: 5
+      spawnRate: 0
+      spawned: 0
+    - spawnTime: 0
+      enemyType: 5
       enemyAmount: 20
-    - enemyType: 2
+      spawnRate: 0
+      spawned: 0
+    - spawnTime: 0
+      enemyType: 2
       enemyAmount: 15
-    - enemyType: 0
+      spawnRate: 0
+      spawned: 0
+    - spawnTime: 0
+      enemyType: 0
       enemyAmount: 20
-    - enemyType: 3
+      spawnRate: 0
+      spawned: 0
+    - spawnTime: 0
+      enemyType: 3
       enemyAmount: 20
-    spawnRate: 1
+      spawnRate: 0
+      spawned: 0
 --- !u!114 &85103264
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1343,73 +1420,159 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   waves:
   - packs:
-    - enemyType: 0
+    - spawnTime: 0
+      enemyType: 0
       enemyAmount: 15
-    - enemyType: 2
+      spawnRate: 0
+      spawned: 0
+    - spawnTime: 0
+      enemyType: 2
       enemyAmount: 3
-    - enemyType: 3
+      spawnRate: 0
+      spawned: 0
+    - spawnTime: 0
+      enemyType: 3
       enemyAmount: 15
-    - enemyType: 5
+      spawnRate: 0
+      spawned: 0
+    - spawnTime: 0
+      enemyType: 5
       enemyAmount: 1
-    spawnRate: 1
+      spawnRate: 0
+      spawned: 0
   - packs:
-    - enemyType: 0
+    - spawnTime: 0
+      enemyType: 0
       enemyAmount: 21
-    - enemyType: 2
+      spawnRate: 0
+      spawned: 0
+    - spawnTime: 0
+      enemyType: 2
       enemyAmount: 6
-    - enemyType: 5
+      spawnRate: 0
+      spawned: 0
+    - spawnTime: 0
+      enemyType: 5
       enemyAmount: 9
-    - enemyType: 3
+      spawnRate: 0
+      spawned: 0
+    - spawnTime: 0
+      enemyType: 3
       enemyAmount: 30
-    - enemyType: 3
+      spawnRate: 0
+      spawned: 0
+    - spawnTime: 0
+      enemyType: 3
       enemyAmount: 9
-    spawnRate: 1
+      spawnRate: 0
+      spawned: 0
   - packs:
-    - enemyType: 0
+    - spawnTime: 0
+      enemyType: 0
       enemyAmount: 21
-    - enemyType: 2
+      spawnRate: 0
+      spawned: 0
+    - spawnTime: 0
+      enemyType: 2
       enemyAmount: 6
-    - enemyType: 3
+      spawnRate: 0
+      spawned: 0
+    - spawnTime: 0
+      enemyType: 3
       enemyAmount: 30
-    - enemyType: 5
+      spawnRate: 0
+      spawned: 0
+    - spawnTime: 0
+      enemyType: 5
       enemyAmount: 18
-    - enemyType: 2
+      spawnRate: 0
+      spawned: 0
+    - spawnTime: 0
+      enemyType: 2
       enemyAmount: 12
-    - enemyType: 0
+      spawnRate: 0
+      spawned: 0
+    - spawnTime: 0
+      enemyType: 0
       enemyAmount: 30
-    - enemyType: 5
+      spawnRate: 0
+      spawned: 0
+    - spawnTime: 0
+      enemyType: 5
       enemyAmount: 15
-    - enemyType: 3
+      spawnRate: 0
+      spawned: 0
+    - spawnTime: 0
+      enemyType: 3
       enemyAmount: 30
-    spawnRate: 1
+      spawnRate: 0
+      spawned: 0
   - packs:
-    - enemyType: 0
+    - spawnTime: 0
+      enemyType: 0
       enemyAmount: 12
-    - enemyType: 2
+      spawnRate: 0
+      spawned: 0
+    - spawnTime: 0
+      enemyType: 2
       enemyAmount: 4
-    - enemyType: 3
+      spawnRate: 0
+      spawned: 0
+    - spawnTime: 0
+      enemyType: 3
       enemyAmount: 15
-    - enemyType: 5
+      spawnRate: 0
+      spawned: 0
+    - spawnTime: 0
+      enemyType: 5
       enemyAmount: 6
-    - enemyType: 0
+      spawnRate: 0
+      spawned: 0
+    - spawnTime: 0
+      enemyType: 0
       enemyAmount: 12
-    - enemyType: 2
+      spawnRate: 0
+      spawned: 0
+    - spawnTime: 0
+      enemyType: 2
       enemyAmount: 4
-    - enemyType: 0
+      spawnRate: 0
+      spawned: 0
+    - spawnTime: 0
+      enemyType: 0
       enemyAmount: 12
-    - enemyType: 2
+      spawnRate: 0
+      spawned: 0
+    - spawnTime: 0
+      enemyType: 2
       enemyAmount: 6
-    - enemyType: 5
+      spawnRate: 0
+      spawned: 0
+    - spawnTime: 0
+      enemyType: 5
       enemyAmount: 12
-    - enemyType: 0
+      spawnRate: 0
+      spawned: 0
+    - spawnTime: 0
+      enemyType: 0
       enemyAmount: 12
-    - enemyType: 2
+      spawnRate: 0
+      spawned: 0
+    - spawnTime: 0
+      enemyType: 2
       enemyAmount: 12
-    - enemyType: 5
+      spawnRate: 0
+      spawned: 0
+    - spawnTime: 0
+      enemyType: 5
       enemyAmount: 15
-    - enemyType: 3
+      spawnRate: 0
+      spawned: 0
+    - spawnTime: 0
+      enemyType: 3
       enemyAmount: 30
-    spawnRate: 1
+      spawnRate: 0
+      spawned: 0
 --- !u!114 &96266349
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1507,45 +1670,93 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   waves:
   - packs:
-    - enemyType: 0
+    - spawnTime: 0
+      enemyType: 0
       enemyAmount: 10
-    - enemyType: 2
+      spawnRate: 0
+      spawned: 0
+    - spawnTime: 0
+      enemyType: 2
       enemyAmount: 2
-    - enemyType: 3
+      spawnRate: 0
+      spawned: 0
+    - spawnTime: 0
+      enemyType: 3
       enemyAmount: 10
-    - enemyType: 5
+      spawnRate: 0
+      spawned: 0
+    - spawnTime: 0
+      enemyType: 5
       enemyAmount: 1
-    spawnRate: 1
+      spawnRate: 0
+      spawned: 0
   - packs:
-    - enemyType: 0
+    - spawnTime: 0
+      enemyType: 0
       enemyAmount: 15
-    - enemyType: 2
+      spawnRate: 0
+      spawned: 0
+    - spawnTime: 0
+      enemyType: 2
       enemyAmount: 4
-    - enemyType: 3
+      spawnRate: 0
+      spawned: 0
+    - spawnTime: 0
+      enemyType: 3
       enemyAmount: 20
-    - enemyType: 2
+      spawnRate: 0
+      spawned: 0
+    - spawnTime: 0
+      enemyType: 2
       enemyAmount: 6
-    - enemyType: 5
+      spawnRate: 0
+      spawned: 0
+    - spawnTime: 0
+      enemyType: 5
       enemyAmount: 6
-    spawnRate: 1
+      spawnRate: 0
+      spawned: 0
   - packs:
-    - enemyType: 0
+    - spawnTime: 0
+      enemyType: 0
       enemyAmount: 20
-    - enemyType: 2
+      spawnRate: 0
+      spawned: 0
+    - spawnTime: 0
+      enemyType: 2
       enemyAmount: 5
-    - enemyType: 3
+      spawnRate: 0
+      spawned: 0
+    - spawnTime: 0
+      enemyType: 3
       enemyAmount: 20
-    - enemyType: 5
+      spawnRate: 0
+      spawned: 0
+    - spawnTime: 0
+      enemyType: 5
       enemyAmount: 15
-    - enemyType: 2
+      spawnRate: 0
+      spawned: 0
+    - spawnTime: 0
+      enemyType: 2
       enemyAmount: 10
-    - enemyType: 0
+      spawnRate: 0
+      spawned: 0
+    - spawnTime: 0
+      enemyType: 0
       enemyAmount: 20
-    - enemyType: 5
+      spawnRate: 0
+      spawned: 0
+    - spawnTime: 0
+      enemyType: 5
       enemyAmount: 20
-    - enemyType: 3
+      spawnRate: 0
+      spawned: 0
+    - spawnTime: 0
+      enemyType: 3
       enemyAmount: 20
-    spawnRate: 1
+      spawnRate: 0
+      spawned: 0
 --- !u!114 &140904415
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3331,75 +3542,164 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   waves:
   - packs:
-    - enemyType: 0
+    - spawnTime: 0
+      enemyType: 0
       enemyAmount: 40
-    - enemyType: 2
+      spawnRate: 0
+      spawned: 0
+    - spawnTime: 0
+      enemyType: 2
       enemyAmount: 4
-    - enemyType: 3
+      spawnRate: 0
+      spawned: 0
+    - spawnTime: 0
+      enemyType: 3
       enemyAmount: 20
-    - enemyType: 5
+      spawnRate: 0
+      spawned: 0
+    - spawnTime: 0
+      enemyType: 5
       enemyAmount: 4
-    - enemyType: 0
+      spawnRate: 0
+      spawned: 0
+    - spawnTime: 0
+      enemyType: 0
       enemyAmount: 20
-    - enemyType: 3
+      spawnRate: 0
+      spawned: 0
+    - spawnTime: 0
+      enemyType: 3
       enemyAmount: 10
-    spawnRate: 1
+      spawnRate: 0
+      spawned: 0
   - packs:
-    - enemyType: 2
+    - spawnTime: 0
+      enemyType: 2
       enemyAmount: 12
-    - enemyType: 0
+      spawnRate: 0
+      spawned: 0
+    - spawnTime: 0
+      enemyType: 0
       enemyAmount: 40
-    - enemyType: 2
+      spawnRate: 0
+      spawned: 0
+    - spawnTime: 0
+      enemyType: 2
       enemyAmount: 4
-    - enemyType: 3
+      spawnRate: 0
+      spawned: 0
+    - spawnTime: 0
+      enemyType: 3
       enemyAmount: 40
-    - enemyType: 5
+      spawnRate: 0
+      spawned: 0
+    - spawnTime: 0
+      enemyType: 5
       enemyAmount: 16
-    spawnRate: 1
+      spawnRate: 0
+      spawned: 0
   - packs:
-    - enemyType: 0
+    - spawnTime: 0
+      enemyType: 0
       enemyAmount: 40
-    - enemyType: 2
+      spawnRate: 0
+      spawned: 0
+    - spawnTime: 0
+      enemyType: 2
       enemyAmount: 12
-    - enemyType: 5
+      spawnRate: 0
+      spawned: 0
+    - spawnTime: 0
+      enemyType: 5
       enemyAmount: 24
-    - enemyType: 0
+      spawnRate: 0
+      spawned: 0
+    - spawnTime: 0
+      enemyType: 0
       enemyAmount: 40
-    - enemyType: 2
+      spawnRate: 0
+      spawned: 0
+    - spawnTime: 0
+      enemyType: 2
       enemyAmount: 4
-    - enemyType: 3
+      spawnRate: 0
+      spawned: 0
+    - spawnTime: 0
+      enemyType: 3
       enemyAmount: 40
-    - enemyType: 5
+      spawnRate: 0
+      spawned: 0
+    - spawnTime: 0
+      enemyType: 5
       enemyAmount: 16
-    - enemyType: 2
+      spawnRate: 0
+      spawned: 0
+    - spawnTime: 0
+      enemyType: 2
       enemyAmount: 24
-    - enemyType: 3
+      spawnRate: 0
+      spawned: 0
+    - spawnTime: 0
+      enemyType: 3
       enemyAmount: 40
-    spawnRate: 1
+      spawnRate: 0
+      spawned: 0
   - packs:
-    - enemyType: 2
+    - spawnTime: 0
+      enemyType: 2
       enemyAmount: 20
-    - enemyType: 0
+      spawnRate: 0
+      spawned: 0
+    - spawnTime: 0
+      enemyType: 0
       enemyAmount: 40
-    - enemyType: 3
+      spawnRate: 0
+      spawned: 0
+    - spawnTime: 0
+      enemyType: 3
       enemyAmount: 40
-    - enemyType: 5
+      spawnRate: 0
+      spawned: 0
+    - spawnTime: 0
+      enemyType: 5
       enemyAmount: 24
-    - enemyType: 2
+      spawnRate: 0
+      spawned: 0
+    - spawnTime: 0
+      enemyType: 2
       enemyAmount: 12
-    - enemyType: 0
+      spawnRate: 0
+      spawned: 0
+    - spawnTime: 0
+      enemyType: 0
       enemyAmount: 40
-    - enemyType: 2
+      spawnRate: 0
+      spawned: 0
+    - spawnTime: 0
+      enemyType: 2
       enemyAmount: 4
-    - enemyType: 3
+      spawnRate: 0
+      spawned: 0
+    - spawnTime: 0
+      enemyType: 3
       enemyAmount: 40
-    - enemyType: 5
+      spawnRate: 0
+      spawned: 0
+    - spawnTime: 0
+      enemyType: 5
       enemyAmount: 16
-    - enemyType: 2
+      spawnRate: 0
+      spawned: 0
+    - spawnTime: 0
+      enemyType: 2
       enemyAmount: 24
-    - enemyType: 3
+      spawnRate: 0
+      spawned: 0
+    - spawnTime: 0
+      enemyType: 3
       enemyAmount: 40
-    spawnRate: 1
+      spawnRate: 0
+      spawned: 0
 --- !u!114 &504795244
 MonoBehaviour:
   m_ObjectHideFlags: 0
