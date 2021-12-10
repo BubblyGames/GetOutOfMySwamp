@@ -4021,8 +4021,8 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1307362637}
   m_HandleRect: {fileID: 1307362636}
   m_Direction: 2
-  m_Value: 0.9999999
-  m_Size: 0.41120008
+  m_Value: 1
+  m_Size: 0.4112001
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -10630,7 +10630,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b74ea02730753d44f99324699b92aa51, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  infiniteHealth: 0
+  infiniteHealth: 1
   infiniteMoney: 0
   enableEnemySpawn: 1
   enemy: 0
@@ -10651,22 +10651,38 @@ MonoBehaviour:
   randomRange: 0.25
   waves:
   - packs:
-    - enemyType: 0
+    - spawnTime: 0
+      enemyType: 0
       enemyAmount: 10
-    spawnRate: 1
-  - packs:
-    - enemyType: 2
+      spawned: 0
+    - spawnTime: 0.5
+      enemyType: 2
       enemyAmount: 2
-    - enemyType: 3
-      enemyAmount: 5
+      spawned: 0
     spawnRate: 1
   - packs:
-    - enemyType: 2
-      enemyAmount: 3
-    - enemyType: 0
+    - spawnTime: 0
+      enemyType: 0
+      enemyAmount: 20
+      spawned: 0
+    - spawnTime: 3
+      enemyType: 3
       enemyAmount: 5
-    - enemyType: 3
+      spawned: 0
+    spawnRate: 1
+  - packs:
+    - spawnTime: 0
+      enemyType: 2
+      enemyAmount: 3
+      spawned: 0
+    - spawnTime: 0
+      enemyType: 0
+      enemyAmount: 5
+      spawned: 0
+    - spawnTime: 0
+      enemyType: 3
       enemyAmount: 10
+      spawned: 0
     spawnRate: 1
   timeBetweenWaves: 5
   timeBeforeRoundStarts: 3

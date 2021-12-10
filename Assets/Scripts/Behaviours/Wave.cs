@@ -15,7 +15,9 @@ public class Wave
 [System.Serializable]
 public class Pack
 {
-
+    public float spawnTime;
     public EnemyType enemyType;
     public int enemyAmount; // Number of enemys will be spawned
+    [HideInInspector]
+    public bool spawned;
 }
