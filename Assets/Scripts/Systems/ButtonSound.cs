@@ -7,18 +7,14 @@ public class ButtonSound : MonoBehaviour
 {
     [SerializeField] public string soundName;
     private Button button;
-    private AudioManager audiomanager;
-    
+
     void Start()
     {
         button = GetComponent<Button>();
         button.onClick.AddListener(() =>
         {
-            if (audiomanager == null)
-            {
-                audiomanager = FindObjectOfType<AudioManager>();
-            }
-            audiomanager.Play(soundName);
+            if (AudioManager.instance)
+                AudioManager.instance.Play(soundName);
         });
     }
 
