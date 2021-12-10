@@ -104,6 +104,9 @@ public class UIController : MonoBehaviour
         if (gameSceneId == 0 || !GameManager.instance)
             return;
 
+        RectTransform rectTransform = basicTowerCard.GetComponentInParent<RectTransform>();
+        VerticalLayoutGroup verticalLayout = basicTowerCard.GetComponentInParent<VerticalLayoutGroup>();
+
         WorldInfo w = GameManager.instance.GetCurrentWorld();
         GameObject[] cards = new GameObject[] {
         basicTowerCard,
@@ -121,32 +124,33 @@ public class UIController : MonoBehaviour
         w.MoneyDef,
         w.AerealDef};
 
-        int removed = 0;
         List<ScrollCard> sCards = new List<ScrollCard>();
         for (int i = 0; i < 6; i++)
         {
             if (!cardsAllowed[i])
             {
                 Destroy(cards[i]);
-                removed++;
             }
             else
                 sCards.Add(cards[i].GetComponent<ScrollCard>());
         }
 
         scrollCards = sCards.ToArray();
+
+        //rectTransform.sizeDelta = new Vector2(218, (float)scrollCards.Length * (262 + verticalLayout.spacing));
+
     }
 
     public void UpdateCardCosts()
     {
         foreach (ScrollCard s in scrollCards)
         {
+            if (!s)
+                continue;
             TextMeshProUGUI t = s.transform.GetChild(0).gameObject.GetComponent<TextMeshProUGUI>();
             t.text = Shop.instance.defenseBlueprints[s.indexCard].CreationCost.ToString();
         }
     }
-
-
 
     private void SetUpgradeButton(int level)
     {
