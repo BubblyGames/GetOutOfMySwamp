@@ -8,6 +8,9 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
 
+    public bool fullgame = false;
+    public int freeWorlds = 1;
+
     [SerializeField]
     public EnemyLibrary enemyLibrary;
     public AudioManager audioManager;

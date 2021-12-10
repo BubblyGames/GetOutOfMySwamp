@@ -190,6 +190,12 @@ public class LevelSelector : MonoBehaviour
         if (selectedWorld > 0)
             previousButton.interactable = true;
 
+        if(!GameManager.instance.fullgame && selectedWorld >= GameManager.instance.freeWorlds)
+        {
+            Debug.Log("Pay me bitch");
+            return;
+        }
+
         if (selectedWorld == 0 || (selectedWorld > 0 && gameManager.playerData.worldScores[selectedWorld - 1] > 0))
             selectButton.interactable = true;
     }
