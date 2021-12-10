@@ -120,7 +120,15 @@ public class LevelSelector : MonoBehaviour
             worldInfo.rockSize = worlds[i].rockSize;
             worldInfo.numberOfMidpoints = worlds[i].numberOfMidpoints;
             worldInfo.themeInfo = worlds[i].GetComponent<ThemeSelector>().themeInfo;
-            worldInfo.waves = worlds[i].GetComponent<WaveInfo>().waves;
+            WaveInfo wave = worlds[i].GetComponent<WaveInfo>();
+            worldInfo.waves = wave.waves;
+            worldInfo.basicDef = wave.basicDef;
+            worldInfo.HeavyDef = wave.HeavyDef;
+            worldInfo.MoneyDef = wave.MoneyDef;
+            worldInfo.PoisonDef = wave.PoisonDef;
+            worldInfo.AerealDef = wave.AerealDef;
+            worldInfo.Bomb = wave.Bomb;
+
             GameManager.instance.worldList.Add(worldInfo);
         }
         GameManager.instance.initiated = true;
@@ -195,7 +203,7 @@ public class LevelSelector : MonoBehaviour
 
     void LoadEnemiesSprites()
     {
-        WaveInfo selectedWorldInfo = worlds[levelNum-1].gameObject.GetComponent<WaveInfo>();
+        WaveInfo selectedWorldInfo = worlds[levelNum - 1].gameObject.GetComponent<WaveInfo>();
         List<bool> enemiesInfo = selectedWorldInfo.enemiesInLevel;
         int currentContainer = 0;
         for (int i = 0; i < enemiesInfo.Count; i++)
@@ -211,7 +219,7 @@ public class LevelSelector : MonoBehaviour
 
     void LoadDefensesSprites()
     {
-        WaveInfo selectedWorldInfo = worlds[levelNum-1].gameObject.GetComponent<WaveInfo>();
+        WaveInfo selectedWorldInfo = worlds[levelNum - 1].gameObject.GetComponent<WaveInfo>();
         List<bool> defensesInfo = selectedWorldInfo.defensesInLevel;
         int currentContainer = 0;
         for (int i = 0; i < defensesInfo.Count; i++)

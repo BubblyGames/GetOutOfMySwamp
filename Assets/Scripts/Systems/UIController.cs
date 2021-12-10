@@ -18,7 +18,7 @@ public class UIController : MonoBehaviour
     public GameObject gameTutorialMenu;
     public GameObject creditsMenu;
     public GameObject creditsButton;
-    
+
 
     [Header("GameScene Menus")]
     public GameObject upgradeMenu;
@@ -49,6 +49,14 @@ public class UIController : MonoBehaviour
     private int gameSceneId;
     public Image upgradeButtonImage;
     private List<StructureBlueprint> structures;
+
+    [Header("Cards")]
+    public GameObject basicTowerCard;
+    public GameObject psiquicTowerCard;
+    public GameObject heavyTowerCard;
+    public GameObject bombTowerCard;
+    public GameObject moneyStructureCard;
+    public GameObject aerialStructureCard;
 
     public enum GameMenu
     {
@@ -87,13 +95,62 @@ public class UIController : MonoBehaviour
 
     }
 
+    public ScrollCard[] scrollCards;
     private void Start()
     {
         LevelManager.OnWaveCleared += UpdateWaveText;
         LevelManager.OnGameStart += SetWaveText;
         LevelManager.OnStructureUpgraded += SetUpgradeButton;
+        if (gameSceneId == 0 || !GameManager.instance)
+            return;
+
+        RectTransform rectTransform = basicTowerCard.GetComponentInParent<RectTransform>();
+        VerticalLayoutGroup verticalLayout = basicTowerCard.GetComponentInParent<VerticalLayoutGroup>();
+
+        WorldInfo w = GameManager.instance.GetCurrentWorld();
+        GameObject[] cards = new GameObject[] {
+        basicTowerCard,
+        psiquicTowerCard,
+        heavyTowerCard,
+        bombTowerCard,
+        moneyStructureCard,
+        aerialStructureCard};
+
+        bool[] cardsAllowed = new bool[] {
+        w.basicDef,
+        w.PoisonDef,
+        w.HeavyDef,
+        w.Bomb,
+        w.MoneyDef,
+        w.AerealDef};
+
+        List<ScrollCard> sCards = new List<ScrollCard>();
+        for (int i = 0; i < 6; i++)
+        {
+            if (!cardsAllowed[i])
+            {
+                Destroy(cards[i]);
+            }
+            else
+                sCards.Add(cards[i].GetComponent<ScrollCard>());
+        }
+
+        scrollCards = sCards.ToArray();
+
+        //rectTransform.sizeDelta = new Vector2(218, (float)scrollCards.Length * (262 + verticalLayout.spacing));
+
     }
 
+    public void UpdateCardCosts()
+    {
+        foreach (ScrollCard s in scrollCards)
+        {
+            if (!s)
+                continue;
+            TextMeshProUGUI t = s.transform.GetChild(0).gameObject.GetComponent<TextMeshProUGUI>();
+            t.text = Shop.instance.defenseBlueprints[s.indexCard].CreationCost.ToString();
+        }
+    }
 
     private void SetUpgradeButton(int level)
     {
@@ -341,7 +398,7 @@ public class UIController : MonoBehaviour
         if (LevelManager.instance != null)
             FPSText.text = Mathf.Round((1 / Time.deltaTime)).ToString(); //FpS 
 
-        if(upgradeMenu.activeSelf && BuildManager.instance.SelectedStructure.structureId == 4)
+        if (upgradeMenu.activeSelf && BuildManager.instance.SelectedStructure.structureId == 4)
         {
             statsTexts[0].GetComponent<TextMeshProUGUI>().text = BuildManager.instance.SelectedStructure.gameObject.GetComponent<Gatherer>().TotalResourceGathered.ToString();
         }
@@ -375,7 +432,7 @@ public class UIController : MonoBehaviour
         }
         else
         {
-            SetActiveUpgradeTexts(false,-1);
+            SetActiveUpgradeTexts(false, -1);
             fixedTexts[0].SetActive(true);
             statsTexts[0].SetActive(true);
             fixedTexts[0].GetComponent<TextReader>().SetKey("moneyGathered");
@@ -412,7 +469,7 @@ public class UIController : MonoBehaviour
             UpdateUpgradeButton(3, structure.structureId);
         }
     }
-   
+
 
     public void UpdateUpgradeButton(int level, int structureId)
     {
