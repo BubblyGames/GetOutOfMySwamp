@@ -16,7 +16,6 @@ public class LevelStats : MonoBehaviour
     public Image hpBar;
     public Image hpBarBG;
     public TextMeshProUGUI moneyText;
-    public TextMeshProUGUI scoreText;
 
     [Header("Level Stats")]
     [SerializeField] private int startBaseHealthPoints = 100; //Starting Health points the defenders base have
@@ -55,7 +54,6 @@ public class LevelStats : MonoBehaviour
         currentMoney = startMoney;
         hpText.text = currentBaseHealthPoints.ToString();
         moneyText.text = currentMoney.ToString();
-        scoreText.text = currentScore.ToString();
     }
 
     public void getEnemyRewards(int moneyReward, int scoreReward)
@@ -66,7 +64,6 @@ public class LevelStats : MonoBehaviour
         
 
         currentScore += scoreReward;
-        scoreText.text =currentScore.ToString();
     }
 
     public void getResource(int resourceId, int amount)
@@ -125,7 +122,7 @@ public class LevelStats : MonoBehaviour
 
     public void UpdateScoreText()
     {
-        scoreText.text =currentScore.ToString();
+        //scoreText.text =currentScore.ToString();
     }
 
     public int GetCurrentScore()
