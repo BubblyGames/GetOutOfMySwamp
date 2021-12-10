@@ -122,6 +122,7 @@ public class TextManager : MonoBehaviour
         englishDictionary.Add("level", "Level");
         englishDictionary.Add("sound", "Sound");
         englishDictionary.Add("lessons", "Lessons");
+        englishDictionary.Add("levelInfoText", "Natural habitat of:");
 
 
         //upgrade texts in english
@@ -226,6 +227,7 @@ public class TextManager : MonoBehaviour
         spanishDictionary.Add("level", "Nivel");
         spanishDictionary.Add("sound", "Sonido");
         spanishDictionary.Add("lessons", "Lecciones");
+        spanishDictionary.Add("levelInfoText", "Hábitat natural de:");
 
         //upgrade texts in spanish
         spanishDictionary.Add("target", "Objetivo");

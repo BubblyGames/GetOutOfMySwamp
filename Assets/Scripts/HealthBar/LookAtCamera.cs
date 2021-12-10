@@ -6,6 +6,6 @@ public class LookAtCamera : MonoBehaviour
 {
     void Update()
     {
-        transform.rotation = Quaternion.LookRotation(CameraBehaviour.instance.gameObject.transform.position - transform.position);
+        transform.rotation = Quaternion.LookRotation(CameraBehaviour.instance.gameObject.transform.position - transform.position, transform.parent.up);
     }
 }
