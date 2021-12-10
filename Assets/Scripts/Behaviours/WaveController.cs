@@ -16,13 +16,14 @@ public class WaveController : MonoBehaviour
     public List<EnemyBehaviour> enemies;
 
     private Coroutine spawncoroutine;
-
-    [Range(0f, 0.5f)]
-    public float randomRange = 0.25f;
     public Wave[] waves;
+    public int waveCount; // Wave its being played
+    private float waveTimer;
 
+    [Header("State Machine")]
     public float timeBetweenWaves = 5f;
     public float timeBeforeRoundStarts = 3f;
+    [HideInInspector]
     public float timeVariable;
 
     public bool isGameOver = false;
@@ -30,15 +31,10 @@ public class WaveController : MonoBehaviour
     public bool isBetweenWaves;
     public bool allWavesCleared;
 
-    public int waveCount; // Wave its being played
-    private float waveTimer;
-
 
     private float waveEndThreshold = 2f;
-    [SerializeField]
     private float waveEndTimer;
 
-    ///public Text waveText;
 
     EnemySpawner enemySpawner;
 
@@ -252,7 +248,7 @@ public class WaveController : MonoBehaviour
             enemySpawner.SpawnEnemy(pack.enemyType, WorldManager.instance.paths[pathId]);
             waveEndTimer = 0;
 
-            yield return new WaitForSeconds((1f / wave.spawnRate) + Random.Range(0f, randomRange)); //randomness between 
+            yield return new WaitForSeconds(1f / wave.spawnRate); 
         }
     }
 
