@@ -705,11 +705,6 @@ MonoBehaviour:
       enemyAmount: 5
       spawnRate: 0.6
       spawned: 0
-    - spawnTime: 5
-      enemyType: 3
-      enemyAmount: 5
-      spawnRate: 2
-      spawned: 0
     - spawnTime: 10
       enemyType: 2
       enemyAmount: 4
@@ -722,18 +717,33 @@ MonoBehaviour:
       spawned: 0
   - packs:
     - spawnTime: 0
+      enemyType: 2
+      enemyAmount: 5
+      spawnRate: 0.4
+      spawned: 0
+    - spawnTime: 3
       enemyType: 0
       enemyAmount: 5
-      spawnRate: 0
+      spawnRate: 0.6
       spawned: 0
-  basicEn: 0
-  HeavyEn: 0
+    - spawnTime: 14
+      enemyType: 0
+      enemyAmount: 5
+      spawnRate: 2
+      spawned: 0
+    - spawnTime: 16
+      enemyType: 2
+      enemyAmount: 3
+      spawnRate: 2
+      spawned: 0
+  basicEn: 1
+  HeavyEn: 1
   HordeEn: 0
   SkateEn: 0
   AerealEn: 0
-  basicDef: 0
+  basicDef: 1
   HeavyDef: 0
-  MoneyDef: 0
+  MoneyDef: 1
   PoisonDef: 0
   AerealDef: 0
   Bomb: 0
