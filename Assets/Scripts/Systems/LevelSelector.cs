@@ -24,11 +24,13 @@ public class LevelSelector : MonoBehaviour
     public Button nextButton;
     public Button selectButton;
     public TMP_Text levelText;
+    public TMP_Text levelTextLevelInfo;
     private int levelNum;
     public List<int> worldScores;
     public GameManager gameManager;
     public Image stars;
     public List<Sprite> starsSprites;
+    public LevelInfoMenu LevelInfoMenu;
     private void Awake()
     {
         if (instance == null)
@@ -69,6 +71,7 @@ public class LevelSelector : MonoBehaviour
             changing = true;
             levelNum++;
             levelText.text = (selectedWorld + 2).ToString();
+            levelTextLevelInfo.text = levelText.text;
             GoTo(selectedWorld + 1);
             if (gameManager.playerData.worldScores[levelNum - 1] == -1)
             {
@@ -78,6 +81,7 @@ public class LevelSelector : MonoBehaviour
             {
                 stars.sprite = starsSprites[gameManager.playerData.worldScores[levelNum - 1]];
             }
+            ChangeLevelInfoSprites();
         }
     }
 
@@ -88,6 +92,7 @@ public class LevelSelector : MonoBehaviour
             changing = true;
             levelNum--;
             levelText.text = selectedWorld.ToString();
+            levelTextLevelInfo.text = levelText.text;
             GoTo(selectedWorld - 1);
             if (gameManager.playerData.worldScores[levelNum - 1] == -1)
             {
@@ -97,6 +102,7 @@ public class LevelSelector : MonoBehaviour
             {
                 stars.sprite = starsSprites[gameManager.playerData.worldScores[levelNum - 1]];
             }
+            ChangeLevelInfoSprites();
         }
     }
 
@@ -152,6 +158,7 @@ public class LevelSelector : MonoBehaviour
                 {
                     gameManager.levelSelector.stars.sprite = gameManager.levelSelector.starsSprites[gameManager.playerData.worldScores[0]];
                 }
+                ChangeLevelInfoSprites();
                 break;
             default:
                 break;
@@ -177,6 +184,45 @@ public class LevelSelector : MonoBehaviour
 
         if (selectedWorld == 0 || (selectedWorld > 0 && gameManager.playerData.worldScores[selectedWorld - 1] > 0))
             selectButton.interactable = true;
+    }
+
+    void ChangeLevelInfoSprites()
+    {
+        LevelInfoMenu.DisableAllContainers();
+        LoadDefensesSprites();
+        LoadEnemiesSprites();
+    }
+
+    void LoadEnemiesSprites()
+    {
+        WaveInfo selectedWorldInfo = worlds[levelNum-1].gameObject.GetComponent<WaveInfo>();
+        List<bool> enemiesInfo = selectedWorldInfo.enemiesInLevel;
+        int currentContainer = 0;
+        for (int i = 0; i < enemiesInfo.Count; i++)
+        {
+            if (enemiesInfo[i])
+            {
+                LevelInfoMenu.enemiesSpritesContainers[currentContainer].enabled = true;
+                LevelInfoMenu.enemiesSpritesContainers[currentContainer].sprite = LevelInfoMenu.enemiesSprites[i];
+                currentContainer++;
+            }
+        }
+    }
+
+    void LoadDefensesSprites()
+    {
+        WaveInfo selectedWorldInfo = worlds[levelNum-1].gameObject.GetComponent<WaveInfo>();
+        List<bool> defensesInfo = selectedWorldInfo.defensesInLevel;
+        int currentContainer = 0;
+        for (int i = 0; i < defensesInfo.Count; i++)
+        {
+            if (defensesInfo[i])
+            {
+                LevelInfoMenu.DefensesSpritesContainers[currentContainer].enabled = true;
+                LevelInfoMenu.DefensesSpritesContainers[currentContainer].sprite = LevelInfoMenu.DefensesSprites[i];
+                currentContainer++;
+            }
+        }
     }
 
     IEnumerator GoToCube(int nextIdx)
