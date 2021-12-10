@@ -726,6 +726,17 @@ MonoBehaviour:
       enemyAmount: 5
       spawnRate: 0
       spawned: 0
+  basicEn: 0
+  HeavyEn: 0
+  HordeEn: 0
+  SkateEn: 0
+  AerealEn: 0
+  basicDef: 0
+  HeavyDef: 0
+  MoneyDef: 0
+  PoisonDef: 0
+  AerealDef: 0
+  Bomb: 0
 --- !u!114 &63313641
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1221,6 +1232,17 @@ MonoBehaviour:
       enemyAmount: 20
       spawnRate: 0
       spawned: 0
+  basicEn: 0
+  HeavyEn: 0
+  HordeEn: 0
+  SkateEn: 0
+  AerealEn: 0
+  basicDef: 0
+  HeavyDef: 0
+  MoneyDef: 0
+  PoisonDef: 0
+  AerealDef: 0
+  Bomb: 0
 --- !u!114 &85103264
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1573,6 +1595,17 @@ MonoBehaviour:
       enemyAmount: 30
       spawnRate: 0
       spawned: 0
+  basicEn: 0
+  HeavyEn: 0
+  HordeEn: 0
+  SkateEn: 0
+  AerealEn: 0
+  basicDef: 0
+  HeavyDef: 0
+  MoneyDef: 0
+  PoisonDef: 0
+  AerealDef: 0
+  Bomb: 0
 --- !u!114 &96266349
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1757,6 +1790,17 @@ MonoBehaviour:
       enemyAmount: 20
       spawnRate: 0
       spawned: 0
+  basicEn: 0
+  HeavyEn: 0
+  HordeEn: 0
+  SkateEn: 0
+  AerealEn: 0
+  basicDef: 0
+  HeavyDef: 0
+  MoneyDef: 0
+  PoisonDef: 0
+  AerealDef: 0
+  Bomb: 0
 --- !u!114 &140904415
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4065,6 +4109,17 @@ MonoBehaviour:
       enemyAmount: 40
       spawnRate: 0
       spawned: 0
+  basicEn: 0
+  HeavyEn: 0
+  HordeEn: 0
+  SkateEn: 0
+  AerealEn: 0
+  basicDef: 0
+  HeavyDef: 0
+  MoneyDef: 0
+  PoisonDef: 0
+  AerealDef: 0
+  Bomb: 0
 --- !u!114 &504795244
 MonoBehaviour:
   m_ObjectHideFlags: 0
