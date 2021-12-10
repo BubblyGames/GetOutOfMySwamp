@@ -50,7 +50,7 @@ public class BuildManager : MonoBehaviour
         outPos = intPos;
 
         //Check if player has enough money
-        if (!canBuild || (!CheatManager.instance.infiniteMoney && LevelStats.instance.CurrentMoney < structureBlueprint.creationCost))
+        if (!canBuild || (!CheatManager.instance.infiniteMoney && LevelStats.instance.CurrentMoney < structureBlueprint.CreationCost))
             return false;
 
         //Spell will always be created
@@ -205,10 +205,10 @@ public class BuildManager : MonoBehaviour
             CreateTowerOnCell(position, normal);
             ResetCanBuild(); // after building an structure you have to select another one to be able to place it
         }
-        else if (LevelStats.instance.CurrentMoney >= StructureBlueprint.creationCost)
+        else if (LevelStats.instance.CurrentMoney >= StructureBlueprint.CreationCost)
         {
             CreateTowerOnCell(position, normal);
-            LevelStats.instance.SpendMoney(StructureBlueprint.creationCost);
+            LevelStats.instance.SpendMoney(StructureBlueprint.CreationCost);
             ResetCanBuild(); // after building an structure you have to select another one to be able to place it
         }
         else

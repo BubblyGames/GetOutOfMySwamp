@@ -765,7 +765,7 @@ MonoBehaviour:
   AerealEn: 0
   basicDef: 1
   HeavyDef: 0
-  MoneyDef: 0
+  MoneyDef: 1
   PoisonDef: 0
   AerealDef: 0
   Bomb: 1
@@ -7398,8 +7398,15 @@ MonoBehaviour:
   upgradeLevels: []
   shopContainer: {fileID: 0}
   upgradeButtonImage: {fileID: 0}
+  basicTowerCard: {fileID: 0}
+  psiquicTowerCard: {fileID: 0}
+  heavyTowerCard: {fileID: 0}
+  bombTowerCard: {fileID: 0}
+  moneyStructureCard: {fileID: 0}
+  aerialStructureCard: {fileID: 0}
   selectedMenu: 0
   FPSText: {fileID: 0}
+  scrollCards: []
 --- !u!4 &1108740209
 Transform:
   m_ObjectHideFlags: 0

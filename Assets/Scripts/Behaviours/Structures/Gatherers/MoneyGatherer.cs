@@ -5,6 +5,11 @@ using UnityEngine.UI;
 
 public class MoneyGatherer : Gatherer
 {
+    private void Start()
+    {
+        LevelStats.instance.numberOfSpeculios++;
+        UIController.instance.UpdateCardCosts();
+    }
 
     void Update()
     {
@@ -18,4 +23,11 @@ public class MoneyGatherer : Gatherer
         }
     }
 
+    private void OnDestroy()
+    {
+        if (!Application.isPlaying)
+            return;
+        LevelStats.instance.numberOfSpeculios--;
+        UIController.instance.UpdateCardCosts();
+    }
 }

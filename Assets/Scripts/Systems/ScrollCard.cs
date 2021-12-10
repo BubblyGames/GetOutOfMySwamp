@@ -9,7 +9,7 @@ public class ScrollCard : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDr
     [SerializeField] GameObject cardToSpawn;
     //[SerializeField] Material cardMaterial;
     [SerializeField] Texture texture;
-    [SerializeField] int indexCard;
+    [SerializeField] public int indexCard;
     [SerializeField] RectTransform contentParent;
     private Image buttonSprite;
     private CanvasGroup canvasgroup;

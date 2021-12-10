@@ -6928,9 +6928,9 @@ MonoBehaviour:
     m_Top: 0
     m_Bottom: 0
   m_ChildAlignment: 0
-  m_Spacing: 0
+  m_Spacing: 30
   m_ChildForceExpandWidth: 1
-  m_ChildForceExpandHeight: 1
+  m_ChildForceExpandHeight: 0
   m_ChildControlWidth: 0
   m_ChildControlHeight: 0
   m_ChildScaleWidth: 0
@@ -7493,8 +7493,15 @@ MonoBehaviour:
   - {fileID: 0}
   shopContainer: {fileID: 1903685281}
   upgradeButtonImage: {fileID: 0}
+  basicTowerCard: {fileID: 1557241888}
+  psiquicTowerCard: {fileID: 1173124099}
+  heavyTowerCard: {fileID: 1754025118}
+  bombTowerCard: {fileID: 398153285}
+  moneyStructureCard: {fileID: 1436934375}
+  aerialStructureCard: {fileID: 36173494}
   selectedMenu: 0
   FPSText: {fileID: 1583022576}
+  scrollCards: []
 --- !u!1 &1357775384
 GameObject:
   m_ObjectHideFlags: 0
@@ -10891,6 +10898,7 @@ MonoBehaviour:
   startMoney: 1000
   currentMoney: 0
   currentScore: 0
+  numberOfSpeculios: 0
 --- !u!64 &1903685294
 MeshCollider:
   m_ObjectHideFlags: 0
