@@ -767,7 +767,7 @@ MonoBehaviour:
   HeavyDef: 0
   MoneyDef: 1
   PoisonDef: 0
-  AerealDef: 0
+  AerealDef: 1
   Bomb: 1
 --- !u!114 &63313641
 MonoBehaviour:
@@ -2135,9 +2135,9 @@ MonoBehaviour:
   DefensesSprites:
   - {fileID: 21300000, guid: 9a25c84fef474fe4386e7b70159744e4, type: 3}
   - {fileID: 21300000, guid: 17dacd79bf628884eaa57716130c11b2, type: 3}
-  - {fileID: 21300000, guid: 712d16dcce599f045bcbeca8b3a3dbeb, type: 3}
-  - {fileID: 21300000, guid: e4f0dfdfc9eeb4a489fc1531a1f7f6db, type: 3}
   - {fileID: 21300000, guid: c35ce3ed60cefde4eb33d320004920cd, type: 3}
+  - {fileID: 21300000, guid: e4f0dfdfc9eeb4a489fc1531a1f7f6db, type: 3}
+  - {fileID: 21300000, guid: 712d16dcce599f045bcbeca8b3a3dbeb, type: 3}
   - {fileID: 21300000, guid: 219639f0c24bc8f4688525287bf8c9f1, type: 3}
 --- !u!1 &206237437
 GameObject:
