@@ -227,11 +227,8 @@ public class BuildManager : MonoBehaviour
         structure.Blueprint = StructureBlueprint;
 
         //Sound
-        if (audiomanager == null)
-        {
-            audiomanager = FindObjectOfType<AudioManager>();
-        }
-        audiomanager.Play("buildSound");
+        if(AudioManager.instance)
+            AudioManager.instance.Play("buildSound");
         // ---
 
         //THIS SHOULDN'T BE NECESSARY
