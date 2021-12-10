@@ -248,7 +248,7 @@ public class WaveController : MonoBehaviour
             enemySpawner.SpawnEnemy(pack.enemyType, WorldManager.instance.paths[pathId]);
             waveEndTimer = 0;
 
-            yield return new WaitForSeconds(1f / wave.spawnRate); 
+            yield return new WaitForSeconds(1f / pack.spawnRate); 
         }
     }
 
