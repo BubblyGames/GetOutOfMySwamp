@@ -3722,7 +3722,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 1307362636}
   m_Direction: 2
   m_Value: 1
-  m_Size: 0.3918402
+  m_Size: 0.39184016
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -11295,6 +11295,26 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 434369811004939452, guid: fc31fd70b5945084fb72fefe99f91ba3, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: -93.861
+      objectReference: {fileID: 0}
+    - target: {fileID: 434369811004939452, guid: fc31fd70b5945084fb72fefe99f91ba3, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 46.931
+      objectReference: {fileID: 0}
+    - target: {fileID: 434369811004939452, guid: fc31fd70b5945084fb72fefe99f91ba3, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 5.237
+      objectReference: {fileID: 0}
+    - target: {fileID: 981231996588346773, guid: fc31fd70b5945084fb72fefe99f91ba3, type: 3}
+      propertyPath: m_text
+      value: Reintentar
+      objectReference: {fileID: 0}
+    - target: {fileID: 981231996588346773, guid: fc31fd70b5945084fb72fefe99f91ba3, type: 3}
+      propertyPath: m_margin.x
+      value: -9.311569
+      objectReference: {fileID: 0}
     - target: {fileID: 1004863337451159140, guid: fc31fd70b5945084fb72fefe99f91ba3, type: 3}
       propertyPath: levelStats
       value: 
@@ -11311,6 +11331,14 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 1328887940}
+    - target: {fileID: 6143162169025983735, guid: fc31fd70b5945084fb72fefe99f91ba3, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 382
+      objectReference: {fileID: 0}
+    - target: {fileID: 6143162169025983735, guid: fc31fd70b5945084fb72fefe99f91ba3, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 154
+      objectReference: {fileID: 0}
     - target: {fileID: 7650059350171277356, guid: fc31fd70b5945084fb72fefe99f91ba3, type: 3}
       propertyPath: levelStats
       value: 
