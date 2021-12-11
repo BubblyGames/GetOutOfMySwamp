@@ -224,7 +224,7 @@ Los niveles son semi procedimentales y se crean mediante una semilla.
 Cantidad de enemigos por ronda:
 | **ENEMIGOS**                | RONDA 1 | RONDA 2 | RONDA 3 |
 | --------------------------- | ------- | ------- |---------|
-| MISCO (NORMAL)              |  20     |   25    |   63    | 
+| GEPE (NORMAL)               |  20     |   25    |   63    | 
 | GUNTHER (TANQUE)            |  1      |   4     |   36    |
 | HERMANOS ZULETA (HORDA)     |  5      |   40    |   105   |
 | DOLITTLE (AÉREO)            |  3      |   5     |   31    |
@@ -234,7 +234,7 @@ Cantidad de enemigos por ronda:
 Cantidad de enemigos por ronda:
 | **ENEMIGOS**                | RONDA 1 | RONDA 2 | RONDA 3 | RONDA 4 | RONDA 5 |
 | --------------------------- | ------- | ------- |-------- | ------- | ------- |
-| MISCO (NORMAL)              |  16     |   23    |   25    |   25    |   45    |
+| GEPE (NORMAL)               |  16     |   23    |   25    |   25    |   45    |
 | GUNTHER (TANQUE)            |  9      |   12    |   15    |   15    |   35    |
 | HERMANOS ZULETA (HORDA)     |  25     |   35    |   40    |   40    |   40    |
 | DOLITTLE (AÉREO)            |  5      |   8     |   10    |   10    |   30    |
@@ -244,7 +244,7 @@ Cantidad de enemigos por ronda:
 Cantidad de enemigos por ronda: 
 | **ENEMIGOS**                | RONDA 1 | RONDA 2 | RONDA 3 | 
 | --------------------------- | ------- | ------- |-------- |
-| MISCO (NORMAL)              |  10     |   15    |   40    |
+| GEPE (NORMAL)               |  10     |   15    |   40    |
 | GUNTHER (TANQUE)            |  2      |   10    |   15    |
 | HERMANOS ZULETA (HORDA)     |  10     |   20    |   40    |
 | DOLITTLE (AÉREO)            |  1      |   6     |   35    |
@@ -254,7 +254,7 @@ Cantidad de enemigos por ronda:
 Cantidad de enemigos por ronda: 
 | **ENEMIGOS**                | RONDA 1 | RONDA 2 | RONDA 3 | RONDA 4 |
 | --------------------------- | ------- | ------- |-------- | ------- |
-| MISCO (NORMAL)              |   15    |   21    |   51    |   48    |
+| GEPE (NORMAL)               |   15    |   21    |   51    |   48    |
 | GUNTHER (TANQUE)            |   3     |   6     |   18    |   26    |
 | HERMANOS ZULETA (HORDA)     |   15    |   39    |   60    |   45    |
 | DOLITTLE (AÉREO)            |   1     |   9     |   33    |   33    |
@@ -264,7 +264,7 @@ Cantidad de enemigos por ronda:
 Cantidad de enemigos por ronda: 
 | **ENEMIGOS**                | RONDA 1 | RONDA 2 | RONDA 3 | RONDA 4 |
 | --------------------------- | ------- | ------- |-------- | ------- |
-| MISCO (NORMAL)              |   60    |   40    |   80    |   80    |
+| GEPE (NORMAL)               |   60    |   40    |   80    |   80    |
 | GUNTHER (TANQUE)            |   4     |   16    |   40    |   60    |
 | HERMANOS ZULETA (HORDA)     |   30    |   40    |   80    |   120   |
 | DOLITTLE (AÉREO)            |   4     |   16    |   40    |   40    |
