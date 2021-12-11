@@ -14,5 +14,12 @@ public class WorldInfo
     public bool canMergePaths;
     internal float waterDensity;
 
+    public bool basicDef;
+    public bool HeavyDef;
+    public bool MoneyDef;
+    public bool PoisonDef;
+    public bool AerealDef;
+    public bool Bomb;
+
     public WorldInfo() { }
 }

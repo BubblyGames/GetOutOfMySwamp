@@ -305,7 +305,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 461274310}
-  m_RootOrder: 2
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0.5}
   m_AnchorMax: {x: 1, y: 0.5}
@@ -2277,12 +2277,12 @@ RectTransform:
   - {fileID: 233936679}
   - {fileID: 1228711211}
   m_Father: {fileID: 461274310}
-  m_RootOrder: 7
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 398, y: -39}
-  m_SizeDelta: {x: -1151.7006, y: -335.781}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 452.84, y: 0}
+  m_SizeDelta: {x: 834.29944, y: 744.219}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &189901116
 MonoBehaviour:
@@ -2885,7 +2885,7 @@ RectTransform:
   m_Children:
   - {fileID: 1481585999}
   m_Father: {fileID: 461274310}
-  m_RootOrder: 4
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -3202,7 +3202,7 @@ RectTransform:
   m_LocalScale: {x: -1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 461274310}
-  m_RootOrder: 1
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.5}
   m_AnchorMax: {x: 0, y: 0.5}
@@ -3346,6 +3346,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ed4c9917d9219d2408719abcb2b6c7cb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  fullgame: 1
+  freeWorlds: 1
   enemyLibrary:
     enemyPrefabs:
     - enemyId: 0
@@ -3629,13 +3631,13 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 966944798}
-  - {fileID: 428741181}
-  - {fileID: 12881996}
   - {fileID: 610975886}
   - {fileID: 279629277}
   - {fileID: 1468900998}
   - {fileID: 778113232}
   - {fileID: 189901115}
+  - {fileID: 428741181}
+  - {fileID: 12881996}
   - {fileID: 1004702548}
   m_Father: {fileID: 772753159}
   m_RootOrder: 2
@@ -4313,7 +4315,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 461274310}
-  m_RootOrder: 3
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
@@ -5310,7 +5312,7 @@ MonoBehaviour:
   m_ScaleFactor: 1
   m_ReferenceResolution: {x: 1920, y: 1080}
   m_ScreenMatchMode: 0
-  m_MatchWidthOrHeight: 1
+  m_MatchWidthOrHeight: 0.5
   m_PhysicalUnit: 3
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
@@ -5543,7 +5545,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 461274310}
-  m_RootOrder: 6
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0.5}
   m_AnchorMax: {x: 1, y: 0.5}
@@ -7708,8 +7710,15 @@ MonoBehaviour:
   upgradeLevels: []
   shopContainer: {fileID: 0}
   upgradeButtonImage: {fileID: 0}
+  basicTowerCard: {fileID: 0}
+  psiquicTowerCard: {fileID: 0}
+  heavyTowerCard: {fileID: 0}
+  bombTowerCard: {fileID: 0}
+  moneyStructureCard: {fileID: 0}
+  aerialStructureCard: {fileID: 0}
   selectedMenu: 0
   FPSText: {fileID: 0}
+  scrollCards: []
 --- !u!4 &1108740209
 Transform:
   m_ObjectHideFlags: 0
@@ -8436,10 +8445,10 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 36
+  m_fontSize: 35.1
   m_fontSizeBase: 36
   m_fontWeight: 400
-  m_enableAutoSizing: 0
+  m_enableAutoSizing: 1
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 0
@@ -10679,7 +10688,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 461274310}
-  m_RootOrder: 5
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
@@ -11394,8 +11403,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 39.212, y: 4.8015}
-  m_SizeDelta: {x: -78.423, y: -9.603}
+  m_AnchoredPosition: {x: 42.468, y: 4.8015}
+  m_SizeDelta: {x: -126.174, y: -9.603}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1595015461
 MonoBehaviour:
@@ -11444,14 +11453,14 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 70
+  m_fontSize: 72
   m_fontSizeBase: 70
   m_fontWeight: 400
-  m_enableAutoSizing: 0
+  m_enableAutoSizing: 1
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 0
-  m_HorizontalAlignment: 2
+  m_HorizontalAlignment: 1
   m_VerticalAlignment: 512
   m_textAlignment: 65535
   m_characterSpacing: 0
@@ -14771,7 +14780,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f6174b804f1249c4cac63a7acfd0e368, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  offset: {x: 17, y: 150, z: -300}
+  offset: {x: 20, y: 150, z: -300}
 --- !u!108 &3517679019175129668
 Light:
   m_ObjectHideFlags: 0
