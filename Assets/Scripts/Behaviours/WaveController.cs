@@ -17,7 +17,7 @@ public class WaveController : MonoBehaviour
 
     private Coroutine spawncoroutine;
     public Wave[] waves;
-    public int waveCount; // Wave its being played
+    public int currentWave; // Wave that's being played
     private float waveTimer;
 
     [Header("State Machine")]
@@ -64,7 +64,7 @@ public class WaveController : MonoBehaviour
         isWaveActive = false;
         //isBetweenWaves = false;
 
-        waveCount = 0;
+        currentWave = 0;
         //TODO: Unhardcode pre rounds start timer
         timeVariable = Time.time + (timeBeforeRoundStarts *3 );
 
@@ -139,9 +139,9 @@ public class WaveController : MonoBehaviour
                 waveEndTimer += Time.deltaTime;
                 if (waveEndTimer >= waveEndThreshold)
                 {
-                    waveCount++;
+                    currentWave++;
                     
-                    if (waveCount+1 > waves.Length)
+                    if (currentWave+1 > waves.Length)
                     {
                         LevelManager.instance.LevelCompleted();
                         allWavesCleared = true;
@@ -163,7 +163,7 @@ public class WaveController : MonoBehaviour
 
     private bool CheckSpawn()
     {
-        Wave currentWave = waves[waveCount];
+        Wave currentWave = waves[currentWave];
         foreach (Pack pack in currentWave.packs)
         {
             if (!pack.spawned && waveTimer >= pack.spawnTime)

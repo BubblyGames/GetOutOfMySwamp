@@ -161,12 +161,12 @@ public class UIController : MonoBehaviour
     private void SetWaveText()
     {
         numberOfWaves.text = WaveController.instance.waves.Length.ToString();
-        currentWave.text = (WaveController.instance.waveCount + 1).ToString();
+        currentWave.text = (WaveController.instance.currentWave + 1).ToString();
     }
 
     public void UpdateWaveText()
     {
-        currentWave.GetComponent<TextMeshProUGUI>().text = (WaveController.instance.waveCount + 1).ToString();
+        currentWave.GetComponent<TextMeshProUGUI>().text = (WaveController.instance.currentWave + 1).ToString();
     }
 
     public virtual void ShowMenu(GameMenu menu)
