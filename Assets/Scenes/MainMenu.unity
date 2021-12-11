@@ -1136,42 +1136,6 @@ MonoBehaviour:
       enemyAmount: 10
       spawnRate: 2
       spawned: 0
-  - packs:
-    - spawnTime: 0
-      enemyType: 0
-      enemyAmount: 15
-      spawnRate: 0.25
-      spawned: 0
-    - spawnTime: 5
-      enemyType: 2
-      enemyAmount: 5
-      spawnRate: 0.1
-      spawned: 0
-    - spawnTime: 10
-      enemyType: 3
-      enemyAmount: 5
-      spawnRate: 2
-      spawned: 0
-    - spawnTime: 30
-      enemyType: 3
-      enemyAmount: 5
-      spawnRate: 2
-      spawned: 0
-    - spawnTime: 50
-      enemyType: 3
-      enemyAmount: 5
-      spawnRate: 2
-      spawned: 0
-    - spawnTime: 50
-      enemyType: 2
-      enemyAmount: 5
-      spawnRate: 0.5
-      spawned: 0
-    - spawnTime: 40
-      enemyType: 0
-      enemyAmount: 10
-      spawnRate: 0.6
-      spawned: 0
   basicEn: 1
   HeavyEn: 1
   HordeEn: 1
@@ -1522,7 +1486,7 @@ MonoBehaviour:
     - spawnTime: 0
       enemyType: 0
       enemyAmount: 10
-      spawnRate: 0
+      spawnRate: 0.6
       spawned: 0
   - packs:
     - spawnTime: 0
