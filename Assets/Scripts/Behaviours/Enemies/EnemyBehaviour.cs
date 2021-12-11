@@ -42,7 +42,7 @@ public abstract class EnemyBehaviour : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        healthPoints = startHealth;
+        healthPoints = startHealth + Mathf.RoundToInt(0.1f * startHealth * WaveController.instance.currentWave);
         currentSpeed = startSpeed;
         healthBar.setMaxHealth(startHealth);
     }
@@ -154,7 +154,7 @@ public abstract class EnemyBehaviour : MonoBehaviour
 
     }
 
-    public void AreaDamage(int damage,float areaEffect, int layerMask)
+    public void AreaDamage(int damage, float areaEffect, int layerMask)
     {
         RaycastHit[] hits = Physics.SphereCastAll(transform.position, areaEffect, transform.forward, areaEffect, layerMask);
         for (int i = 0; i < hits.Length; i++)

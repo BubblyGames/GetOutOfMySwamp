@@ -608,9 +608,16 @@ public class CubeWorldGenerator : MonoBehaviour
 
     public void Explode(Vector3Int pos, int radius)
     {
-        List<Path> affectedPaths = new List<Path>();
-        List<CellInfo> affectedCells = new List<CellInfo>();
-        bool anyPathDirty = false;
+        RaycastHit[] hits = Physics.SphereCastAll(pos, radius, transform.forward, radius);
+
+        for (int i = 0; i < hits.Length; i++)
+        {
+            if (hits[i].collider.TryGetComponent<Structure>(out Structure structure))
+            {
+                Vector3Int sPos = Vector3Int.FloorToInt(structure.transform.position);
+                //Neighbours
+            }
+        }
 
         for (int i = -radius; i <= radius; i++)
         {
@@ -635,7 +642,6 @@ public class CubeWorldGenerator : MonoBehaviour
                             foreach (Path p in c.paths)
                             {
                                 p.dirty = true;
-                                anyPathDirty = true;
                             }
 
                             c.blockType = BlockType.Air;

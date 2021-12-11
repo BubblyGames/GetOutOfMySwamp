@@ -35,6 +35,7 @@ public class UIController : MonoBehaviour
     public GameObject upgradeCostText;
     public TextMeshProUGUI numberOfWaves;
     public TextMeshProUGUI currentWave;
+    public GameObject lesson;
 
     [Header("UpgradeMenu Sprites")]
     public Sprite basicTowerSprite;
@@ -160,12 +161,12 @@ public class UIController : MonoBehaviour
     private void SetWaveText()
     {
         numberOfWaves.text = WaveController.instance.waves.Length.ToString();
-        currentWave.text = (WaveController.instance.waveCount + 1).ToString();
+        currentWave.text = (WaveController.instance.currentWave + 1).ToString();
     }
 
     public void UpdateWaveText()
     {
-        currentWave.GetComponent<TextMeshProUGUI>().text = (WaveController.instance.waveCount + 1).ToString();
+        currentWave.GetComponent<TextMeshProUGUI>().text = (WaveController.instance.currentWave + 1).ToString();
     }
 
     public virtual void ShowMenu(GameMenu menu)
@@ -519,6 +520,11 @@ public class UIController : MonoBehaviour
         LevelManager.OnWaveCleared -= UpdateWaveText;
         LevelManager.OnGameStart -= SetWaveText;
         LevelManager.OnStructureUpgraded -= SetUpgradeButton;
+    }
+
+    public void ShowLesson()
+    {
+        lesson.SetActive(true);
     }
 
 }
