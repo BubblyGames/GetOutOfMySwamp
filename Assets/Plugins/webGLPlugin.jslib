@@ -1,4 +1,3 @@
-Assets/Plugins/WebGL/webGlPlugin.jslib
 var webGlPlugin = {
     ForceHorizontal: function()
     {
