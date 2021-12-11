@@ -119,7 +119,11 @@ public class TextManager : MonoBehaviour
         englishDictionary.Add("retry", "Retry");
         englishDictionary.Add("loose", "You lose!");
         englishDictionary.Add("win", "You win!");
-        englishDictionary.Add("level", "Level");
+        englishDictionary.Add("level1", "Pond");
+        englishDictionary.Add("level2", "Tundra");
+        englishDictionary.Add("level3", "Autumn");
+        englishDictionary.Add("level4", "Cherry");
+        englishDictionary.Add("level5", "Snow");
         englishDictionary.Add("sound", "Sound");
         englishDictionary.Add("lessons", "Lessons");
         englishDictionary.Add("levelInfoText", "Natural habitat of:");
@@ -224,7 +228,11 @@ public class TextManager : MonoBehaviour
         spanishDictionary.Add("retry", "Reintentar");
         spanishDictionary.Add("loose", "¡Has perdido!");
         spanishDictionary.Add("win", "¡Has ganado!");
-        spanishDictionary.Add("level", "Nivel");
+        spanishDictionary.Add("level1", "Pantano");
+        spanishDictionary.Add("level2", "Tundra");
+        spanishDictionary.Add("level3", "Otoño");
+        spanishDictionary.Add("level4", "Cerezo");
+        spanishDictionary.Add("level5", "Nevado");
         spanishDictionary.Add("sound", "Sonido");
         spanishDictionary.Add("lessons", "Lecciones");
         spanishDictionary.Add("levelInfoText", "Hábitat natural de:");

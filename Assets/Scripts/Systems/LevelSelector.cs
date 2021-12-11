@@ -25,6 +25,8 @@ public class LevelSelector : MonoBehaviour
     public Button selectButton;
     public TMP_Text levelText;
     public TMP_Text levelTextLevelInfo;
+    public GameObject levelName;
+    private TextReader textScript;
     private int levelNum;
     public List<int> worldScores;
     public GameManager gameManager;
@@ -47,6 +49,7 @@ public class LevelSelector : MonoBehaviour
     {
         worldScores = GameManager.instance.playerData.worldScores;
 
+        textScript = levelName.GetComponent<TextReader>();
         ThemeInfo startTheme = worlds[0].GetComponent<ThemeSelector>().GetThemeInfo();
         RenderSettings.skybox.SetColor("_Tint", startTheme.backGroundColor);
         FindObjectOfType<Light>().color = startTheme.lightColor;
@@ -70,6 +73,7 @@ public class LevelSelector : MonoBehaviour
         {
             changing = true;
             levelNum++;
+            textScript.SetKey("level" + levelNum);
             levelText.text = (selectedWorld + 2).ToString();
             levelTextLevelInfo.text = levelText.text;
             GoTo(selectedWorld + 1);
@@ -91,6 +95,7 @@ public class LevelSelector : MonoBehaviour
         {
             changing = true;
             levelNum--;
+            textScript.SetKey("level" + levelNum);
             levelText.text = selectedWorld.ToString();
             levelTextLevelInfo.text = levelText.text;
             GoTo(selectedWorld - 1);
