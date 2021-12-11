@@ -492,9 +492,9 @@ La interfaz del juego consta de 7 ventanas:
 
 ![menuAjustes](https://user-images.githubusercontent.com/56488179/142775932-6e72387a-2e4e-412e-9064-0d2783f9c809.png)
 
-- Tutoriales:
+- Tutoriales y lecciones:
 
-![lecciones](https://user-images.githubusercontent.com/56488179/142733258-dd5f7b79-a428-445a-9f06-598fa9c925ad.png)
+![tutoriales](https://user-images.githubusercontent.com/56488179/145688593-163b0c1d-86a7-4cc3-818e-97a516bbd2e4.png)
 
 - Selector de nivel:
 
