@@ -91,8 +91,8 @@ Los costes del trabajo consisten en los salarios de programadores, gestores, art
 
 La campaña de publicidad se va a desarrollar en 4 plataformas distintas: Twitter, Reddit, Itch.io y YouTube.
 La estrategia general consiste en captar a gente a través de Reddit y Twitter para redirigirles a Itch.io, donde encontrarán más información sobre el juego. Mientras YouTube actúa como plataforma dedicada a mostrar de manera extensa el juego.
-- Twitter: subir fotos de elementos de arte, videos gameplay y más elementos del juego, incluyendo en el mensaje un enlace a la página de Itch.io. Se aprovecharán hastags del mundo indie (#ScreenshotSaturday, #indiegame, #indiedev y #indiesp) para conseguir más alcance en el público adecuado.
-- Reddit: lo mismo que en Twitter, pero se subirán a subreddits del mundo indie para tener más alcance. En este caso se subirán contenidos a r/IndieGaming, a r/indiegames, a r/frogs y a r/frogsandtoads.
+- Twitter: subir fotos de elementos de arte, videos gameplay y más elementos del juego, incluyendo en el mensaje un enlace a la página de Itch.io. Se aprovecharán hastags del mundo indie (#ScreenshotSaturday, #indiegame, #indiedev y #indiesp) para conseguir más alcance en el público adecuado. El contenido aquí se sube en castellano.
+- Reddit: lo mismo que en Twitter, pero se subirán a subreddits del mundo indie para tener más alcance. En este caso se subirán contenidos a r/IndieGaming, a r/indiegames, a r/frogs y a r/frogsandtoads. El contenido aquí se sube en inglés.
 - YouTube: subir versiones extendidas de los vídeos publicados en el resto de redes. Indicar tipo de contenido mostrado en el vídeo.
 - Itch.io: subir DevBlogs hablando del desarrollo del juego en cada etapa. Comentar los aspectos más relevantes de cada equipo.
 
@@ -224,7 +224,7 @@ Los niveles son semi procedimentales y se crean mediante una semilla.
 Cantidad de enemigos por ronda:
 | **ENEMIGOS**                | RONDA 1 | RONDA 2 | RONDA 3 |
 | --------------------------- | ------- | ------- |---------|
-| MISCO (NORMAL)              |  20     |   25    |   63    | 
+| GEPE (NORMAL)               |  20     |   25    |   63    | 
 | GUNTHER (TANQUE)            |  1      |   4     |   36    |
 | HERMANOS ZULETA (HORDA)     |  5      |   40    |   105   |
 | DOLITTLE (AÉREO)            |  3      |   5     |   31    |
@@ -234,7 +234,7 @@ Cantidad de enemigos por ronda:
 Cantidad de enemigos por ronda:
 | **ENEMIGOS**                | RONDA 1 | RONDA 2 | RONDA 3 | RONDA 4 | RONDA 5 |
 | --------------------------- | ------- | ------- |-------- | ------- | ------- |
-| MISCO (NORMAL)              |  16     |   23    |   25    |   25    |   45    |
+| GEPE (NORMAL)               |  16     |   23    |   25    |   25    |   45    |
 | GUNTHER (TANQUE)            |  9      |   12    |   15    |   15    |   35    |
 | HERMANOS ZULETA (HORDA)     |  25     |   35    |   40    |   40    |   40    |
 | DOLITTLE (AÉREO)            |  5      |   8     |   10    |   10    |   30    |
@@ -244,7 +244,7 @@ Cantidad de enemigos por ronda:
 Cantidad de enemigos por ronda: 
 | **ENEMIGOS**                | RONDA 1 | RONDA 2 | RONDA 3 | 
 | --------------------------- | ------- | ------- |-------- |
-| MISCO (NORMAL)              |  10     |   15    |   40    |
+| GEPE (NORMAL)               |  10     |   15    |   40    |
 | GUNTHER (TANQUE)            |  2      |   10    |   15    |
 | HERMANOS ZULETA (HORDA)     |  10     |   20    |   40    |
 | DOLITTLE (AÉREO)            |  1      |   6     |   35    |
@@ -254,7 +254,7 @@ Cantidad de enemigos por ronda:
 Cantidad de enemigos por ronda: 
 | **ENEMIGOS**                | RONDA 1 | RONDA 2 | RONDA 3 | RONDA 4 |
 | --------------------------- | ------- | ------- |-------- | ------- |
-| MISCO (NORMAL)              |   15    |   21    |   51    |   48    |
+| GEPE (NORMAL)               |   15    |   21    |   51    |   48    |
 | GUNTHER (TANQUE)            |   3     |   6     |   18    |   26    |
 | HERMANOS ZULETA (HORDA)     |   15    |   39    |   60    |   45    |
 | DOLITTLE (AÉREO)            |   1     |   9     |   33    |   33    |
@@ -264,7 +264,7 @@ Cantidad de enemigos por ronda:
 Cantidad de enemigos por ronda: 
 | **ENEMIGOS**                | RONDA 1 | RONDA 2 | RONDA 3 | RONDA 4 |
 | --------------------------- | ------- | ------- |-------- | ------- |
-| MISCO (NORMAL)              |   60    |   40    |   80    |   80    |
+| GEPE (NORMAL)               |   60    |   40    |   80    |   80    |
 | GUNTHER (TANQUE)            |   4     |   16    |   40    |   60    |
 | HERMANOS ZULETA (HORDA)     |   30    |   40    |   80    |   120   |
 | DOLITTLE (AÉREO)            |   4     |   16    |   40    |   40    |
