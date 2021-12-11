@@ -24,11 +24,15 @@ public class GameManager : MonoBehaviour
     [DllImport("__Internal")]
     private static extern bool IsMobile();
 
+    [DllImport("__Internal")]
+    private static extern bool ForceHorizontal();
+
     public PlayerData playerData;
     public LevelSelector levelSelector;
 
     private void Awake()
     {
+
         if (instance == null)
         {
             instance = this;
@@ -46,6 +50,7 @@ public class GameManager : MonoBehaviour
         AudioManager.instance.Play("mainMenuSong");//Pls change asap
         if (isMobile())
         {
+            ForceHorizontal();
             Console.WriteLine("is mobile");
         }
         else
