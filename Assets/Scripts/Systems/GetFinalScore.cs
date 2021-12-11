@@ -6,10 +6,18 @@ using UnityEngine.UI;
 
 public class GetFinalScore : MonoBehaviour
 {
-    public GameObject score;
-    public GameObject container;
+    public LevelStats levelStats;
+    public Image container;
+    public List<Sprite> starSprites;
     void Start()
     {
-        container.GetComponent<TextMeshProUGUI>().text = score.GetComponent<TextMeshProUGUI>().text;
+        if (levelStats.GetCurrentBaseHealth() == levelStats.GetStartBaseHealth())
+        {
+            container.sprite = starSprites[2];
+        }
+        else if (levelStats.GetCurrentBaseHealth() >= levelStats.GetStartBaseHealth() / 2)
+        {
+            container.sprite = starSprites[1];
+        }
     }
 }

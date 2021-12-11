@@ -16,13 +16,14 @@ public class WaveController : MonoBehaviour
     public List<EnemyBehaviour> enemies;
 
     private Coroutine spawncoroutine;
-
-    [Range(0f, 0.5f)]
-    public float randomRange = 0.25f;
     public Wave[] waves;
+    public int waveCount; // Wave its being played
+    private float waveTimer;
 
+    [Header("State Machine")]
     public float timeBetweenWaves = 5f;
     public float timeBeforeRoundStarts = 3f;
+    [HideInInspector]
     public float timeVariable;
 
     public bool isGameOver = false;
@@ -30,14 +31,10 @@ public class WaveController : MonoBehaviour
     public bool isBetweenWaves;
     public bool allWavesCleared;
 
-    public int waveCount; // Wave its being played
-
 
     private float waveEndThreshold = 2f;
-    [SerializeField]
     private float waveEndTimer;
 
-    ///public Text waveText;
 
     EnemySpawner enemySpawner;
 
@@ -119,18 +116,23 @@ public class WaveController : MonoBehaviour
                 isBetweenWaves = false;
                 isWaveActive = true;
                 waveEndTimer = 0f;
-                spawncoroutine = StartCoroutine(SpawnWave());
+
+                //spawncoroutine = StartCoroutine(SpawnWave());
                 return;
             }
         }
         else if (isWaveActive)
         {
 
+            waveTimer += Time.deltaTime;
+
             //if spawn is not enabled timer for next wave should not run
             if (CheatManager.instance != null && !CheatManager.instance.enableEnemySpawn)
             {
                 return;
             }
+
+            CheckSpawn();
 
             if (activeEnemies <= 0)
             {
@@ -159,6 +161,20 @@ public class WaveController : MonoBehaviour
 
     }
 
+    private bool CheckSpawn()
+    {
+        Wave currentWave = waves[waveCount];
+        foreach (Pack pack in currentWave.packs)
+        {
+            if (!pack.spawned && waveTimer >= pack.spawnTime)
+            {
+                spawncoroutine = StartCoroutine(SpawnPack(currentWave,pack));
+            }
+        }
+
+        return false;
+    }
+
     public void AddToActiveEnemies(EnemyBehaviour enemy)
     {
         activeEnemies++;
@@ -175,7 +191,7 @@ public class WaveController : MonoBehaviour
 
     }
 
-    IEnumerator SpawnWave()
+    /*IEnumerator SpawnWave()
     {
         Wave currentWave = new Wave();
         currentWave = waves[waveCount];
@@ -208,13 +224,35 @@ public class WaveController : MonoBehaviour
                 yield return new WaitForSeconds((1f / currentWave.spawnRate) + Random.Range(0f, randomRange)); //randomness between 
             }
         }
-    }
+    }*/
 
         /*void StopSpawning()
         {
             StopCoroutine("SpawnWave");
 
         }*/
+
+    IEnumerator SpawnPack(Wave wave, Pack pack)
+    {
+        pack.spawned = true;
+        for (int i = 0; i < pack.enemyAmount; i++)
+        {
+            while (CheatManager.instance != null && !CheatManager.instance.enableEnemySpawn)
+            {
+                yield return null;
+            }
+
+            int pathId = Random.Range(0, WorldManager.instance.nPaths);
+            if (!WorldManager.instance.paths[pathId].initiated)
+                continue;
+            enemySpawner.SpawnEnemy(pack.enemyType, WorldManager.instance.paths[pathId]);
+            waveEndTimer = 0;
+
+            yield return new WaitForSeconds(1f / pack.spawnRate); 
+        }
+    }
+
+
     public void TestSpawnEnemy(EnemyType enemyType)
     {
         int pathId = Random.Range(0, WorldManager.instance.nPaths);
