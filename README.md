@@ -498,6 +498,7 @@ La interfaz del juego consta de 7 ventanas:
 
 - Selector de nivel:
 
+![selector](https://user-images.githubusercontent.com/56488179/145688515-77d838c0-0ae2-4671-88bc-15110b4b011e.png)
 
 - Menú de pausa:
 
@@ -505,8 +506,11 @@ La interfaz del juego consta de 7 ventanas:
 
 - Final de nivel:
 
+![fin](https://user-images.githubusercontent.com/56488179/145688516-f4260b40-7683-4dd8-a802-e34389ce4602.png)
 
 - Interfaz de juego:
+
+![ingame](https://user-images.githubusercontent.com/56488179/145688519-3930746a-2461-476f-8f4f-77863fed6f75.png)
 
 
 ### 7.2 Diagrama de flujo
