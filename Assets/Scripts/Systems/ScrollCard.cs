@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
 
-public class ScrollCard : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragHandler
+public class ScrollCard : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragHandler, IPointerClickHandler
 {
     [SerializeField] GameObject cardToSpawn;
     //[SerializeField] Material cardMaterial;
@@ -30,16 +30,17 @@ public class ScrollCard : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDr
     }
     public void SpawnCard()
     {
-        float cardPosInsideRect = ((transform.localPosition.y + transform.parent.localPosition.y)/ contentParent.sizeDelta.y);
+        float cardPosInsideRect = ((transform.localPosition.y + transform.parent.localPosition.y) / contentParent.sizeDelta.y);
         //Debug.Log(cardPosInsideRect);
-        Camera.main.transform.GetChild(2).localPosition = startParentPos + Vector3.up * (5.7f  * cardPosInsideRect);
+        Camera.main.transform.GetChild(2).localPosition = startParentPos + Vector3.up * (5.7f * cardPosInsideRect);
 
-        aux = Instantiate(cardToSpawn, new Vector3(0, -255 * cardPosInsideRect ,0), Quaternion.identity, Camera.main.transform.GetChild(2));
+        aux = Instantiate(cardToSpawn, new Vector3(0, -255 * cardPosInsideRect, 0), Quaternion.identity, Camera.main.transform.GetChild(2));
         aux.GetComponent<Card>().SetupCard(indexCard, texture, 0, 0, 0);
-        aux.transform.LookAt(Camera.main.transform);
-        aux.transform.localScale = new Vector3(aux.transform.localScale.x, aux.transform.localScale.y, aux.transform.localScale.z * -1);
+        //aux.transform.LookAt(Camera.main.transform.position);
+        aux.transform.localScale = new Vector3(aux.transform.localScale.x, aux.transform.localScale.y, aux.transform.localScale.z);
         canvasgroup.alpha = 0.0f;
         canvasgroup.interactable = false;
+        aux.name = "//////////////";
 
         inputManager.SelectCard(aux);
     }
@@ -64,5 +65,10 @@ public class ScrollCard : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDr
             GameObject.Destroy(aux);
         }
         InputManager.instance.MouseUp();
+    }
+
+    public void OnPointerClick(PointerEventData eventData)
+    {
+        UIController.instance.ShowLesson();
     }
 }

@@ -5,31 +5,29 @@
 
 
 
-Versión 0.5
+Versión 1.0
 
 
 
 
 ## 1. Introducción
 
-
 ### 1.1 Descripción breve del concepto
 
-Tower defense 3D en un mapa cúbico con vista isométrica sobre ranas defendiendo su charco.
+Tower Defense 3D en un mapa cúbico en perspectiva sobre ranas defendiendo su charco.
 
 
 ### 1.2 Descripción breve de la historia y personajes
 
-En un mundo cúbico hay dos grupos de ranas en caras opuestas de éste, las ranas del estanque sucio y mugriento quieren arrebatarle el estanque de las ranas limpias porque el suyo ya no es habitable. Las ranas del charco limpio las expulsarán con todos los recursos al alcance de sus ancas.
+En un mundo cúbico hay dos grupos de ranas en caras opuestas de éste, las ranas del estanque sucio y mugriento quieren arrebatarle el estanque a las ranas limpias porque el suyo ya no es habitable. Las ranas del charco limpio las expulsarán con todos los recursos al alcance de sus ancas.
 
 
 ### 1.3 Propósito, público objetivo y plataformas
 
-Se desarrolla para navegadores web y móviles, dirigido es para todos los públicos. El objetivo del juego es defender tu estanque de la invasión de ranitas sucias.
+Se desarrolla para navegadores web y móviles y está dirigido a todos los públicos, aunque su target principal es gente la cual no busca experiencias demasiado complicadas. El objetivo del juego es defender tu estanque de la invasión de ranas sucias.
 
 
 ## 2. Monetización
-
 
 ### 2.1 Tipo de modelo de monetización
 
@@ -41,7 +39,7 @@ El modelo de monetización dependerá del desempeño económico del producto una
 
 ![Ruta-Pesimista 2](https://user-images.githubusercontent.com/56488179/140507410-1169a49a-f06d-49c8-95d5-5bfa44343184.jpg)
 
-Nuestro cliente se trata de una persona con una fuerte presencia del arte en su vida. Es una persona sencilla, amable, dulce y optimista, la cual quiere o la gustaría poder dedicarse al arte y vivir de ello, siendo reconocida por más gente del gremio aunque para ello debe competir contra gente con talento en una situación laboral un tanto delicada.
+Nuestro cliente objetivo se trata de una persona a la cual le gustan las cosas monas y adorables y que, a la hora de jugar, busca experiencias simples o sencillas de entender.
 
 ![nuestroMapa](https://user-images.githubusercontent.com/56488179/143439029-8711e076-5dd3-4320-b65a-d5e297a39fff.png)
 
@@ -49,11 +47,8 @@ Nuestro cliente se trata de una persona con una fuerte presencia del arte en su 
 
 ![lienzo_Beta](https://user-images.githubusercontent.com/56488179/140507434-c524ac65-eed2-472b-8f6d-7883491391b7.png)
 
-### 2.3 Tablas de productos y precios
-
 
 ## 3. Planificación y Costes
-
 
 ### 3.1 El equipo humano
 
@@ -98,12 +93,12 @@ La estrategia general consiste en captar a gente a través de Reddit y Twitter p
 
 En el caso de las plataformas de Twitter, Reddit y YouTube se subirán elementos los días con más público en cada plataforma (sábados en el caso de Twitter). Para Itch.io se subirán los DevBlogs el último día de cada fase de desarrollo.
 
-## 4. Mecánicas de Juego y Elementos de Juego
 
+## 4. Mecánicas de Juego y Elementos de Juego
 
 ### 4.1 Descripción detallada del concepto de juego
 
-Es un tower defense 3D con vista isométrica en un mapa cúbico. El origen de los enemigos y la meta están en caras opuestas y tienen que recorrer una serie de caminos pasando por el resto de caras para llegar al final. Los caminos serán semi procedimentales, así que el jugador tendrá en primera instancia que familiarizarse con el mapa que le tocó para defenderlo adecuadamente. Los enemigos aparecen por oleadas con una dificultad que aumenta progresivamente, tanto por un aumento de número como por diversidad de tipos de enemigos. Defender satisfactoriamente tiene una recompensa económica para poder seguir expandiendo las defensas y mejorar las ya existentes. Todas las torres aparecen disponibles desde un inicio y el único factor limitante será su precio. Si una rana enemiga consigue llegar al final se reduce una cantidad determinada de vida hasta que llegue a 0 y se acabe la partida.
+Es un Tower Defense 3D en perspectiva en un mapa cúbico. El origen de los enemigos y la meta están en caras opuestas y tienen que recorrer una serie de caminos pasando por el resto de caras para llegar al final. Los caminos serán semi procedimentales, así que el jugador tendrá en primera instancia que familiarizarse con el mapa que le tocó para defenderlo adecuadamente. Los enemigos aparecen por oleadas con una dificultad que aumenta progresivamente, tanto por un aumento de número como por diversidad de tipos de enemigos, además de que su vida se incrementa. Defender satisfactoriamente tiene una recompensa económica para poder seguir expandiendo las defensas y mejorar las ya existentes. Según el nivel aparecerán uno u otros enemigos, al igual que estarán disponibles solo algunos tipos de torres. Estas pueden ser mejoradas para mejorar su desempeño. Si una rana enemiga consigue llegar al final se reduce una cantidad de vida en función del tipo de enemigo hasta que llegue a 0. La partida puede terminar con el jugador derrotado al perder toda la vida o victorioso tras acabar con todos los enemigos.
 
 
 ### 4.2 Descripción detallada de las mecánicas de juego
@@ -112,36 +107,40 @@ Es un tower defense 3D con vista isométrica en un mapa cúbico. El origen de lo
 
 #### 4.2.1 Victoria y derrota
 
-Para ganar la partida se ha de defender un número determinado de oleadas y con la vida igual o superior a uno. El número de oleadas defendidas y por defender estará en pantalla al inicio de cada ronda. Si llegan a la meta un número de enemigos igual a la cantidad de vidas la partida se acaba.
+Para ganar la partida el jugador se ha de defender un número determinado de oleadas y con la vida igual o superior a uno. El número de oleadas defendidas y por defender estarán en pantalla al inicio de cada ronda. Si llegan a tu estanque suficientes enemigos como para bajar la vida a 0, acaba la partida. En función de la cantidad de vida con la que acabe el jugador la partida, conseguirá de 0 a 3 estrellas:
+- 0 estrellas si no completa el nivel o muere en el intento.
+- 1 estrella si termina el nivel con menos del 50% de vida.
+- 2 estrellas si termina con un porcentaje de vida entre 50% y 99%
+- 3 estrellas si termina sin recibir daño.
 
 
 #### 4.2.2 Mapa
 
 El mapa tiene forma de cubo, con sus seis caras siendo terreno jugable. Las caras visibles serán de una a tres, dependiendo de la rotación del cubo que elija el jugador. El cubo se puede rotar en cualquier momento de la partida menos cuando se coloca una torre.
 
-En el mapa hay tres tipos de casillas: Casillas de camino, por las que los enemigos transitan y se pueden poner trampas; Casillas de terreno construible, donde se podrá poner cualquier tipo de torre; y casillas obstáculo, en las que no puede haber camino ni estructuras.
+En el mapa hay tres tipos de casillas: Casillas de camino, por las que los enemigos transitan y se pueden poner trampas; Casillas de terreno construible, donde se podrá poner cualquier tipo de torre; y casillas obstáculo, en las que no puede haber camino ni estructuras, salvo Albatro.
 
 
 #### 4.2.3 Economía
 
-El juego comienza con una cantidad determinada de monedas para poner las torres iniciales. Una vez iniciada la partida, la fuente de ingresos será la derrota de los enemigos y el edificio que genera monedas. El dinero conseguido del edificio será usado para mantener en funcionamiento el resto de torres colocadas por el jugador. De no haber ninguna torre de dinero o de no haber suficientes, las torres no funcionarán, dejando de atacar a los enemigos. El dinero conseguido de la derrota de enemigos será usado para construir nuevas torres y mejorar las torres ya existentes.
+El juego comienza con una cantidad determinada de monedas para poner las torres iniciales. Una vez iniciada la partida, hay 2 fuentes de ingreso: el dinero otorgado por la derrota de enemigos y el dinero generado con la rana de dinero (Especulio). 
+El dinero conseguido se usa para mantener en funcionamiento las torres del jugador y para que éste pueda comprar más torres y mejorar las ya existentes. En caso de construir más torres o de mejorar las ya existentes, será necesario construir más Especulios para poder mantenerlas todas en funcionamiento. De no haber ningún Especulio o de no haber suficientes, las torres no funcionarán, dejando de atacar a los enemigos y teniendo que activarlas manualmente una vez se cuente con suficiente dinero.
 
-Las torres se pueden vender, consiguiendo un pequeño porcentaje de dinero a cambio.
+Las torres se pueden vender, consiguiendo un pequeño porcentaje de dinero a cambio. Si una torre es destruída por la catapulta enemiga, también se recupera un porcentaje de dinero.
 
 
 #### 4.2.4 Defensas y enemigos
 
-Existen dos tipos de defensas: Las torres y las trampas. Las torres tienen alcance, daño, velocidad de ataque y éstos pueden ser individuales o en área o tener efectos de estado sobre los enemigos. Se puede construir en cualquier lugar menos caminos y rocas, a excepción de la torre económica que solo se puede poner adyacente al camino. Además, tienen tres niveles de mejoras para aumentar sus estadísticas. Luego están las trampas, las cuales se colocan en el camino del enemigo, tienen daño, durabilidad y pueden tener efecto.
+Existen dos tipos de defensas: Las torres y las trampas. Las torres tienen alcance, daño, velocidad de ataque y éstos pueden ser individuales o en área o tener efectos de estado sobre los enemigos. Se puede construir en cualquier lugar menos caminos y rocas, a excepción de Especulio, que solo se puede poner adyacente al camino y de Albatro, que solo puede ser construído sobre las rocas. Además, tienen tres niveles de mejoras para aumentar sus estadísticas, salvo Especulio. Luego están las trampas, las cuales se colocan en el camino del enemigo, tienen daño y pueden tener efecto. Éstas no se pueden mejorar.
 
-Por otro lado están los enemigos, con características de vida y velocidad de movimiento. Aparecen por oleadas y aumentan en número conforme avanzas en la partida. Tienen diferentes roles en función de sus estadísticas, siendo los roles unidad básica, tanque y horda, explicadas más adelante en el apartado Enemigos.
-
+Por otro lado están los enemigos, con características de vida y velocidad de movimiento. Aparecen por oleadas y aumentan en número conforme avanzas en la partida, además de que su vida se incrementa. Tienen diferentes roles en función de sus estadísticas, siendo los roles unidad básica, tanque, horda y aéreo, explicadas más adelante en el apartado Enemigos.
 
 ![](https://lh6.googleusercontent.com/XyZfstCSw-DLWgamwydXli8vhxtgT-UwKJedln-d8n8b128AX2uwMAu_ZfEi14CkXv6f0j37Y27lFRzzMlJHlza6lMVwx9gM2rYwonhWBWuMDhGatPP_NvB05I83jCBoDTnug5R2=s1600)
 
 
 ### 4.3 Controles
 
-El jugador durante la partida tendrá dos tareas principales, vigilar el mapa para saber el estado de la partida y colocar defensas. Para vigilar el mapa podrá rotarlo con click (pulsar en el caso de móvil) y arrastrar. Luego para poner las torres será exactamente el mismo input, click y arrastrar desde la tarjeta de la torre hasta la posición en la que desee ponerla.
+El jugador durante la partida tendrá dos tareas principales: vigilar el mapa para saber el estado de la partida y colocar y mejorar defensas. Para vigilar el mapa podrá rotarlo con click (pulsar en el caso de móvil) y arrastrar. Luego para poner las torres será exactamente el mismo input, click y arrastrar desde la tarjeta de la torre hasta la posición en la que desee ponerla, contando con un offset en la versión de mobiles para poder colocar mejor la torre.
 
 ### 4.4 Enemigos
 
@@ -160,6 +159,8 @@ Algunos enemigos cuentan con un nombre alternativo en inglés.
 | GUNTHER (TANQUE)            |  250 | Lenta (1.5 ud)          | Terrestre - Pesada   |     20     |
 | HERMANOS ZULETA (HORDA)     |  25  | Rápida (4 ud)           | Terrestre - Horda    |     3      |
 | DOOLITTLE (AÉREO)           |  30  | Media (3 ud)            | Aérea - Normal       |     15     |
+
+Además, los enemigos lanzarán proyectiles desde su estanque a aquellas zonas en las cuales haya taponamiento de enemigos, destruyendo las defensas del jugador y alterando la figura del cubo, obligando al jugador a adapatarse e improvisar.
 
 ### 4.5 Torres y trampas
 
@@ -217,7 +218,7 @@ Nivel 3:
 
 El juego cuenta con cinco mapas, diferenciados a nivel visual y en la generación del terreno. El objetivo en todos ellos es defender tu estanque de las tropas enemigas.
 
-Los niveles son semi procedimentales y se crean mediante una semilla.
+Los niveles son semi procedimentales y se crean mediante una semilla. En función del nivel estarán disponibles unas torres u otras y aparecerán unos u otros enemigos. A medida que se avanza de nivel, empezarán a aparecer todos los tipos de enemigos y de torres, aumentando la dificultad del juego.
 
 **Pantano:**
 
@@ -226,8 +227,10 @@ Cantidad de enemigos por ronda:
 | --------------------------- | ------- | ------- |---------|
 | GEPE (NORMAL)               |  20     |   25    |   63    | 
 | GUNTHER (TANQUE)            |  1      |   4     |   36    |
-| HERMANOS ZULETA (HORDA)     |  5      |   40    |   105   |
-| DOLITTLE (AÉREO)            |  3      |   5     |   31    |
+
+Torres disponibles en el nivel:
+- Hermanas Flor Y Fleta
+- Especulio
 
 **Tundra:**
 
@@ -236,8 +239,13 @@ Cantidad de enemigos por ronda:
 | --------------------------- | ------- | ------- |-------- | ------- | ------- |
 | GEPE (NORMAL)               |  16     |   23    |   25    |   25    |   45    |
 | GUNTHER (TANQUE)            |  9      |   12    |   15    |   15    |   35    |
-| HERMANOS ZULETA (HORDA)     |  25     |   35    |   40    |   40    |   40    |
 | DOLITTLE (AÉREO)            |  5      |   8     |   10    |   10    |   30    |
+
+Torres disponibles en el nivel:
+- Hermanas Flor y Fleta
+- Batracius
+- Especulio
+- Beerhouse
 
 **Otoño:**
 
@@ -249,6 +257,9 @@ Cantidad de enemigos por ronda:
 | HERMANOS ZULETA (HORDA)     |  10     |   20    |   40    |
 | DOLITTLE (AÉREO)            |  1      |   6     |   35    |
 
+Torres disponibles en el nivel:
+- Todas
+
 **Cerezo:**
 
 Cantidad de enemigos por ronda: 
@@ -258,6 +269,9 @@ Cantidad de enemigos por ronda:
 | GUNTHER (TANQUE)            |   3     |   6     |   18    |   26    |
 | HERMANOS ZULETA (HORDA)     |   15    |   39    |   60    |   45    |
 | DOLITTLE (AÉREO)            |   1     |   9     |   33    |   33    |
+
+Torres disponibles en el nivel:
+- Todas
 
 **Nevado:**
 
@@ -269,9 +283,11 @@ Cantidad de enemigos por ronda:
 | HERMANOS ZULETA (HORDA)     |   30    |   40    |   80    |   120   |
 | DOLITTLE (AÉREO)            |   4     |   16    |   40    |   40    |
 
+Torres disponibles en el nivel:
+- Todas
+
 
 ## 5. Trasfondo
-
 
 ### 5.1 Descripción detallada de la historia y la trama
 
@@ -302,10 +318,9 @@ Hay cinco niveles jugables, cada uno con su estética única: Pantano, Tundra, O
 
 ## 6. Arte
 
-
 ### 6.1 Estética general del juego
 
-Los gráficos del juego son principalmente 3D, de estética y técnica Voxel Art, tanto para el escenario como para la representación física de defensas y enemigos. Por otro lado, todo lo relacionado con la interfaz, el HUD y otros elementos varios (cartas de personajes, información adicional, etc) son en 2D.
+Los gráficos del juego son principalmente 3D, de estética y técnica Voxel Art, tanto para el escenario como para la representación física de defensas y enemigos y sus efectos. Por otro lado, todo lo relacionado con la interfaz, el HUD y otros elementos varios (cartas de personajes, información adicional, etc) son en 2D.
 
 Con todo, la estética general del juego está basada en el minimalismo, con colores planos y suaves, es decir, no muy saturados y con alta luminosidad.
 
@@ -316,7 +331,7 @@ Siguiendo en todo momento la línea estética general del juego, se diferencian 
 
 #### Escenario
 
-El escenario es un hexaedro regular o cubo, limitado por seis caras del mismo tamaño y generado a partir de unidades definidas en formato Voxel. Por la superficie del poliedro están repartidas zonas elevadas, zonas llanas y caminos, cada uno diferenciado por un color específico. Por último, una de las caras contiene la charca, es decir, el elemento a defender.
+El escenario es un hexaedro regular o cubo, limitado por seis caras del mismo tamaño y generado a partir de unidades definidas en formato Voxel. Por la superficie del poliedro están repartidas zonas elevadas, zonas llanas y caminos, cada uno diferenciado por un color específico. Por último, una de las caras contiene la charca, es decir, el elemento a defender y otra cara, la opuesta, contiene el punto de partida de los enemigos.
 
 ![](https://lh5.googleusercontent.com/1pp7M7gs_g1WoIg_xEuAlbCaI-q7GpncsJo5DxNHqUQL1ByV5s9OGFHVqFiTTYkGQAjDMign6c0eZUf87mPH5SDK2_bB-pbNMn-9uj5dNo75ePGSPz11JoL5_9HwieehbhHEpByZ)
 
@@ -360,89 +375,89 @@ Los biomas presentes son, como se han explicado antes, los siguientes:
 
 La representación en el escenario tanto de las defensas como de los enemigos son modelos Voxel de dimensiones 16x16x16 vóxeles.
 
-- Torre básica:
+- Hermanas Flor y Fleta:
 
 ![BasicaRender](https://user-images.githubusercontent.com/56488179/142732046-b22a2c75-6138-4ab9-9c17-e657d7c14cc4.png)
 
-- Torre pesada:
+- Batracius:
 
 ![PesadaRender](https://user-images.githubusercontent.com/56488179/142732038-51339036-f17a-48cb-8eaa-c4de7f963801.png)
 
-- Torre psíquica:
+- Beerhouse:
 
 ![VenenosaRender](https://user-images.githubusercontent.com/56488179/142732066-018798f5-6ca5-4c18-b5a4-cd1715ed443a.png)
 
-- Torre montaña:
+- Albatro:
 
 ![AereaRender](https://user-images.githubusercontent.com/56488179/142732075-a73a68d8-8cca-4110-a8de-09a1d2f4313d.png)
 
-- Fábrica de dinero:
+- Especulio:
 
 ![DineroRender](https://user-images.githubusercontent.com/56488179/142732084-a9c8d8bc-cd7e-4724-a1fc-59b2dfb11bc0.png)
 
-- Mina:
+- Petaseta:
 
 ![MinasRender](https://user-images.githubusercontent.com/56488179/142732128-960ccb57-7cff-42e8-b027-a23c91b36ad3.png)
 
 #### Enemigos
 
-- Enemigo normal:
+- Gepe:
 
 ![NormalRender](https://user-images.githubusercontent.com/56488179/142732143-1a939315-6f58-4d41-86ac-c3a0a8ee60f5.png)
 
-- Enemigo tanque:
+- Gunther:
 
 ![TanqueRender](https://user-images.githubusercontent.com/56488179/142732147-72fafd0b-a07a-4a8c-b3b8-e4009980808a.png)
 
-- Enemigo horda:
+- Hermanos Zuleta:
 
 ![HordaRender](https://user-images.githubusercontent.com/56488179/142732505-ff361669-72d7-46aa-8af5-75a9d16d0158.png)
 
-- Enemigo volador:
+- Doolittle:
 
 ![AereoRender](https://user-images.githubusercontent.com/56488179/142773898-0e065091-fb06-48d8-9853-527115f4e0dc.png)
 
 #### Iconos
 
-A su vez, la representación de las estadísticas de las torres se realiza mediante cartas o pantallas de información en gráficos 2D acorde a las descripciones de la estética general y al resto de elementos 2D.
+A su vez, la representación de las estadísticas de las torres se realiza mediante cartas o pantallas de información en gráficos 2D, acorde a las descripciones de la estética general y al resto de elementos 2D.
 
-- Torreta pesada:
+- Batracius:
 
 ![Pesada](https://user-images.githubusercontent.com/56488179/142732267-a5e0ec70-ef13-45e9-aa86-bce248feb8ce.png)
 
-- Torre básica:
+- Hermanas Flor y Fleta:
 
 ![Basica](https://user-images.githubusercontent.com/56488179/142732229-6aad8882-4bb4-4b40-bb74-40f4873d6bf8.png)
 
-- Torre psíquica:
+- Beerhouse:
 
 ![Psíquica](https://user-images.githubusercontent.com/56488179/142732258-3350a5d7-4d75-4494-be7d-75a4ecb69431.png)
 
-- Torre montaña:
+- Albatro:
 
 ![Aerea](https://user-images.githubusercontent.com/56488179/142732217-6d9702b9-d1e2-4d8d-b761-a5b9c89b57d9.png)
 
-- Fabrica de dinero:
+- Especulio:
 
 ![Dinero](https://user-images.githubusercontent.com/56488179/142732221-19d4812b-b159-4f51-ba5f-78a539826fc0.png)
 
-- Mina:
+- Petaseta:
 
 ![Mina](https://user-images.githubusercontent.com/56488179/142732239-0a085ffa-8af6-4a25-bbe8-a9993a14e5a2.png)
 
-- Enemigo normal:
+- Gepe:
 
 ![Normal](https://user-images.githubusercontent.com/56488179/142732438-6de3f781-a865-43dc-a8bd-4ea06148a52f.png)
 
-- Enemigo tanque:
+- Gunther:
 
 ![Tanque](https://user-images.githubusercontent.com/56488179/142732443-690c01f2-9eda-4bd7-9e16-70a2a53217ba.png)
 
-- Enemigo horda:
+- Hermanos Zuleta:
 
 ![Horda](https://user-images.githubusercontent.com/56488179/142732450-238aba64-f947-4ea5-aa23-d3785851458e.png)
 
-- Enemigo volador:
+- Doolittle:
 
 ![Aereo](https://user-images.githubusercontent.com/56488179/142773870-f647b0ed-0cb2-446b-b71a-fbb24b6bc1cd.png)
 
@@ -453,9 +468,13 @@ El juego cuenta con una sola canción (autor: [Pascual Gázquez Compán](https:/
 
 ### 6.4 Ambiente sonoro
 
+Se cuentan con efectos de sonido para la interacción con los elementos de la interfaz.
+Estos son usados cuando:
+- jdi
+- 
+
 
 ## 7. Interfaz
-
 
 ### 7.1 Diseños de los menús
 
@@ -469,25 +488,26 @@ La interfaz del juego consta de 7 ventanas:
 
 ![menuAjustes](https://user-images.githubusercontent.com/56488179/142775932-6e72387a-2e4e-412e-9064-0d2783f9c809.png)
 
-- Tutoriales:
+- Tutoriales y lecciones:
 
-![lecciones](https://user-images.githubusercontent.com/56488179/142733258-dd5f7b79-a428-445a-9f06-598fa9c925ad.png)
+![tutoriales](https://user-images.githubusercontent.com/56488179/145688593-163b0c1d-86a7-4cc3-818e-97a516bbd2e4.png)
 
 - Selector de nivel:
 
-![selector](https://user-images.githubusercontent.com/56488179/142733268-f76abb40-b81f-41e0-905b-ca7fa8ee4514.png)
+![selector](https://user-images.githubusercontent.com/56488179/145688515-77d838c0-0ae2-4671-88bc-15110b4b011e.png)
 
 - Menú de pausa:
 
-![pausa](https://user-images.githubusercontent.com/56488179/142733272-f20cfcfa-7c97-4a9e-b9ef-acfb8a989e93.png)
+![pausa](https://user-images.githubusercontent.com/56488179/145688558-e7282bfc-1786-483f-b5ea-65eaab04fb1f.png)
 
 - Final de nivel:
 
-![finalPartida](https://user-images.githubusercontent.com/56488179/142733277-208c49be-3cda-45ea-8e91-2c07e6accdff.png)
+![fin](https://user-images.githubusercontent.com/56488179/145688516-f4260b40-7683-4dd8-a802-e34389ce4602.png)
 
 - Interfaz de juego:
 
-![ingame](https://user-images.githubusercontent.com/56488179/142733283-72d26e3a-f5b6-4af1-88d8-f42e7ad95a68.png)
+![ingame](https://user-images.githubusercontent.com/56488179/145688519-3930746a-2461-476f-8f4f-77863fed6f75.png)
+
 
 ### 7.2 Diagrama de flujo
 
@@ -603,6 +623,10 @@ En general, en el grupo hay muy buen ambiente de trabajo, consiguen hacer todo e
 
 ### 8.2 Post-Mortem de la etapa Beta
 
+#### Autocríticas individuales
+
+#### Críticas de equipo
+
 ### 8.3 Post-Mortem de la etapa Gold
 
 
@@ -632,12 +656,16 @@ En general, en el grupo hay muy buen ambiente de trabajo, consiguen hacer todo e
 
 ### 9.3 Hito 3: Gold
 
-- Pulir la generación de caminos en el cubo:
-- Dar nombres definitivos a las torres y enemigos:
-- Añadir elementos restantes a la interfaz:
-- Añadir animaciones a las torres:
-- Añadir efectos de partículas al disparo de la torre que ralentiza, a la entrada de los enemigos en el estanque y al caminar de los enemigos:
-- Añadir efectos de sonido a la muerte de los enemigos, a la llegada de estos al estanque del jugador y a la construcción y mejora de las torres:
+- Pulir la generación de caminos en el cubo: 9/12/2021
+- Dar nombres definitivos a las torres y enemigos: 29/11/2021
+- Cambiar modelo de puntuación: 10/12/2021
+- Aumentar la accesibilidad de los tutoriales: 
+- Ajustar curva de dificultad: 
+- Proyectiles enemigos en tapones de enemigos: 7/12/2021
+- Añadir elementos restantes a la interfaz: 10/12/2021
+- Añadir animaciones a las torres: 11/12/2021
+- Añadir efectos de partículas a las torres: 9/12/2021
+- Añadir efectos de sonido a la interfaz: 9/12/2021
 
 ### 9.4 Fecha de lanzamiento
 
