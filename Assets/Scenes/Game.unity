@@ -4797,16 +4797,16 @@ Camera:
   m_FOVAxisMode: 0
   m_SensorSize: {x: 36, y: 24}
   m_LensShift: {x: 0, y: 0}
-  m_FocalLength: 100
+  m_FocalLength: 24
   m_NormalizedViewPortRect:
     serializedVersion: 2
     x: 0
     y: 0
     width: 1
     height: 1
-  near clip plane: 0.3
-  far clip plane: 1000
-  field of view: 13.685547
+  near clip plane: 0.2
+  far clip plane: 500
+  field of view: 53.130104
   orthographic: 0
   orthographic size: 20
   m_Depth: -1
@@ -4855,8 +4855,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _target: {fileID: 0}
   _distanceFromTarget: 300
-  maxDistance: 350
-  minDistance: 75
+  maxDistance: 80
+  minDistance: 40
   _smoothTime: 0.2
   _rotationXMinMax: {x: -90, y: 90}
   freeMovement: 1
@@ -10322,26 +10322,46 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   activeEnemies: 0
   enemies: []
-  randomRange: 0.25
   waves:
   - packs:
-    - enemyType: 0
+    - spawnTime: 0
+      enemyType: 0
       enemyAmount: 10
-    spawnRate: 1
-  - packs:
-    - enemyType: 2
+      spawnRate: 0
+      spawned: 0
+    - spawnTime: 0.5
+      enemyType: 2
       enemyAmount: 2
-    - enemyType: 3
-      enemyAmount: 5
-    spawnRate: 1
+      spawnRate: 0
+      spawned: 0
   - packs:
-    - enemyType: 2
-      enemyAmount: 3
-    - enemyType: 0
+    - spawnTime: 0
+      enemyType: 0
+      enemyAmount: 20
+      spawnRate: 0
+      spawned: 0
+    - spawnTime: 3
+      enemyType: 3
       enemyAmount: 5
-    - enemyType: 3
+      spawnRate: 0
+      spawned: 0
+  - packs:
+    - spawnTime: 0
+      enemyType: 2
+      enemyAmount: 3
+      spawnRate: 0
+      spawned: 0
+    - spawnTime: 0
+      enemyType: 0
+      enemyAmount: 5
+      spawnRate: 0
+      spawned: 0
+    - spawnTime: 0
+      enemyType: 3
       enemyAmount: 10
-    spawnRate: 1
+      spawnRate: 0
+      spawned: 0
+  waveCount: 0
   timeBetweenWaves: 5
   timeBeforeRoundStarts: 3
   timeVariable: 0
@@ -10349,8 +10369,6 @@ MonoBehaviour:
   isWaveActive: 0
   isBetweenWaves: 0
   allWavesCleared: 0
-  waveCount: 0
-  waveEndTimer: 0
 --- !u!114 &1903685290
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10417,12 +10435,12 @@ MonoBehaviour:
     upgradeMultiplicator: 1
     upgrades:
     - cost: 50
-      maintenanceCostIncrease: 5
+      maintenanceCostIncrease: 2
       stats:
       - statToUpgrade: 0
         upgradeAddedValue: 2
     - cost: 100
-      maintenanceCostIncrease: 5
+      maintenanceCostIncrease: 9
       stats:
       - statToUpgrade: 0
         upgradeAddedValue: 2
@@ -10442,19 +10460,17 @@ MonoBehaviour:
     upgradeMultiplicator: 1
     upgrades:
     - cost: 100
-      maintenanceCostIncrease: 5
+      maintenanceCostIncrease: 3
       stats:
       - statToUpgrade: 0
         upgradeAddedValue: 2
     - cost: 150
-      maintenanceCostIncrease: 5
+      maintenanceCostIncrease: 3
       stats:
-      - statToUpgrade: 0
-        upgradeAddedValue: 1
       - statToUpgrade: 2
         upgradeAddedValue: 1
     - cost: 200
-      maintenanceCostIncrease: 5
+      maintenanceCostIncrease: 4
       stats:
       - statToUpgrade: 1
         upgradeAddedValue: 0.2
@@ -10467,20 +10483,20 @@ MonoBehaviour:
     upgradeMultiplicator: 1
     upgrades:
     - cost: 150
-      maintenanceCostIncrease: 5
+      maintenanceCostIncrease: 4
       stats:
       - statToUpgrade: 0
         upgradeAddedValue: 5
     - cost: 200
-      maintenanceCostIncrease: 5
+      maintenanceCostIncrease: 4
       stats:
       - statToUpgrade: 2
         upgradeAddedValue: 2
     - cost: 300
-      maintenanceCostIncrease: 5
+      maintenanceCostIncrease: 4
       stats:
       - statToUpgrade: 1
-        upgradeAddedValue: 0.1
+        upgradeAddedValue: 0.2
     targetDescription: ground
     rangeDescription: large
     damageDescription: high
@@ -10506,17 +10522,17 @@ MonoBehaviour:
     upgradeMultiplicator: 1
     upgrades:
     - cost: 75
-      maintenanceCostIncrease: 5
+      maintenanceCostIncrease: 3
       stats:
       - statToUpgrade: 0
         upgradeAddedValue: 1
     - cost: 125
-      maintenanceCostIncrease: 5
+      maintenanceCostIncrease: 2
       stats:
       - statToUpgrade: 2
         upgradeAddedValue: 1
     - cost: 200
-      maintenanceCostIncrease: 5
+      maintenanceCostIncrease: 3
       stats:
       - statToUpgrade: 0
         upgradeAddedValue: 1
