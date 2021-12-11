@@ -502,7 +502,7 @@ La interfaz del juego consta de 7 ventanas:
 
 - Menú de pausa:
 
-![pausa](https://user-images.githubusercontent.com/56488179/142733272-f20cfcfa-7c97-4a9e-b9ef-acfb8a989e93.png)
+![pausa](https://user-images.githubusercontent.com/56488179/145688558-e7282bfc-1786-483f-b5ea-65eaab04fb1f.png)
 
 - Final de nivel:
 
