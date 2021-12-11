@@ -227,8 +227,6 @@ Cantidad de enemigos por ronda:
 | --------------------------- | ------- | ------- |---------|
 | GEPE (NORMAL)               |  20     |   25    |   63    | 
 | GUNTHER (TANQUE)            |  1      |   4     |   36    |
-| HERMANOS ZULETA (HORDA)     |  5      |   40    |   105   |
-| DOLITTLE (AÉREO)            |  3      |   5     |   31    |
 
 Torres disponibles en el nivel:
 - Hermanas Flor Y Fleta
@@ -241,12 +239,13 @@ Cantidad de enemigos por ronda:
 | --------------------------- | ------- | ------- |-------- | ------- | ------- |
 | GEPE (NORMAL)               |  16     |   23    |   25    |   25    |   45    |
 | GUNTHER (TANQUE)            |  9      |   12    |   15    |   15    |   35    |
-| HERMANOS ZULETA (HORDA)     |  25     |   35    |   40    |   40    |   40    |
 | DOLITTLE (AÉREO)            |  5      |   8     |   10    |   10    |   30    |
 
 Torres disponibles en el nivel:
-- 
-- 
+- Hermanas Flor y Fleta
+- Batracius
+- Especulio
+- Beerhouse
 
 **Otoño:**
 
@@ -259,8 +258,7 @@ Cantidad de enemigos por ronda:
 | DOLITTLE (AÉREO)            |  1      |   6     |   35    |
 
 Torres disponibles en el nivel:
-- 
-- 
+- Todas
 
 **Cerezo:**
 
@@ -273,8 +271,7 @@ Cantidad de enemigos por ronda:
 | DOLITTLE (AÉREO)            |   1     |   9     |   33    |   33    |
 
 Torres disponibles en el nivel:
-- 
-- 
+- Todas
 
 **Nevado:**
 
@@ -287,8 +284,7 @@ Cantidad de enemigos por ronda:
 | DOLITTLE (AÉREO)            |   4     |   16    |   40    |   40    |
 
 Torres disponibles en el nivel:
-- 
-- 
+- Todas
 
 
 ## 5. Trasfondo
@@ -492,21 +488,25 @@ La interfaz del juego consta de 7 ventanas:
 
 ![menuAjustes](https://user-images.githubusercontent.com/56488179/142775932-6e72387a-2e4e-412e-9064-0d2783f9c809.png)
 
-- Tutoriales:
+- Tutoriales y lecciones:
 
-![lecciones](https://user-images.githubusercontent.com/56488179/142733258-dd5f7b79-a428-445a-9f06-598fa9c925ad.png)
+![tutoriales](https://user-images.githubusercontent.com/56488179/145688593-163b0c1d-86a7-4cc3-818e-97a516bbd2e4.png)
 
 - Selector de nivel:
 
+![selector](https://user-images.githubusercontent.com/56488179/145688515-77d838c0-0ae2-4671-88bc-15110b4b011e.png)
 
 - Menú de pausa:
 
-![pausa](https://user-images.githubusercontent.com/56488179/142733272-f20cfcfa-7c97-4a9e-b9ef-acfb8a989e93.png)
+![pausa](https://user-images.githubusercontent.com/56488179/145688558-e7282bfc-1786-483f-b5ea-65eaab04fb1f.png)
 
 - Final de nivel:
 
+![fin](https://user-images.githubusercontent.com/56488179/145688516-f4260b40-7683-4dd8-a802-e34389ce4602.png)
 
 - Interfaz de juego:
+
+![ingame](https://user-images.githubusercontent.com/56488179/145688519-3930746a-2461-476f-8f4f-77863fed6f75.png)
 
 
 ### 7.2 Diagrama de flujo
