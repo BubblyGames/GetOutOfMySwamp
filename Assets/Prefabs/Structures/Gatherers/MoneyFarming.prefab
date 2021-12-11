@@ -60,14 +60,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   size: 2
-  health: 100
-  canLoseHealth: 1
   level: 0
   blockType: 1
   structureName: moneyGatherer
   structureId: 4
-  resourceGatheredEachCicle: 15
-  timeToGatherResource: 3
+  resourceGatheredEachCicle: 40
+  timeToGatherResource: 1
   timerToGetResource: 0
   totalResourceGathered: 0
 --- !u!1001 &3898851561876392558

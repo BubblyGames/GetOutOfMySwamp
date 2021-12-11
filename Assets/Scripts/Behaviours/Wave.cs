@@ -6,16 +6,18 @@ using UnityEngine;
 public class Wave
 {
     public Pack[] packs;
-    public float spawnRate; //Speed between enemy spawns
-
-    
+    //public float spawnRate; //Speed between enemy spawns
 
 }
 
 [System.Serializable]
 public class Pack
 {
-
+    public float spawnTime;
     public EnemyType enemyType;
     public int enemyAmount; // Number of enemys will be spawned
+    public float spawnRate;
+
+    [HideInInspector]
+    public bool spawned;
 }
