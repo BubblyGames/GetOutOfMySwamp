@@ -691,50 +691,45 @@ MonoBehaviour:
   - packs:
     - spawnTime: 0
       enemyType: 0
-      enemyAmount: 8
-      spawnRate: 0.6
-      spawned: 0
-    - spawnTime: 3
-      enemyType: 2
-      enemyAmount: 2
-      spawnRate: 0.4
-      spawned: 0
-  - packs:
-    - spawnTime: 0
-      enemyType: 0
-      enemyAmount: 5
-      spawnRate: 0.6
-      spawned: 0
-    - spawnTime: 10
-      enemyType: 2
-      enemyAmount: 4
-      spawnRate: 0.4
-      spawned: 0
-    - spawnTime: 14
-      enemyType: 0
       enemyAmount: 10
       spawnRate: 0.6
       spawned: 0
   - packs:
     - spawnTime: 0
+      enemyType: 0
+      enemyAmount: 8
+      spawnRate: 0.6
+      spawned: 0
+    - spawnTime: 10
       enemyType: 2
-      enemyAmount: 5
+      enemyAmount: 2
+      spawnRate: 0.4
+      spawned: 0
+    - spawnTime: 35
+      enemyType: 0
+      enemyAmount: 8
+      spawnRate: 0.6
+      spawned: 0
+  - packs:
+    - spawnTime: 0
+      enemyType: 2
+      enemyAmount: 2
       spawnRate: 0.4
       spawned: 0
     - spawnTime: 3
       enemyType: 0
+      enemyAmount: 8
+      spawnRate: 0.6
+      spawned: 0
+    - spawnTime: 25
+      enemyType: 0
       enemyAmount: 5
       spawnRate: 0.6
       spawned: 0
-    - spawnTime: 14
-      enemyType: 0
-      enemyAmount: 5
-      spawnRate: 2
-      spawned: 0
-    - spawnTime: 16
+    - spawnTime: 20
       enemyType: 2
       enemyAmount: 3
-      spawnRate: 2
+      spawnRate: 0.4
       spawned: 0
   basicEn: 1
   HeavyEn: 1
@@ -1242,15 +1237,15 @@ MonoBehaviour:
       enemyAmount: 20
       spawnRate: 0
       spawned: 0
-  basicEn: 0
-  HeavyEn: 0
-  HordeEn: 0
+  basicEn: 1
+  HeavyEn: 1
+  HordeEn: 1
   SkateEn: 0
   AerealEn: 0
-  basicDef: 0
-  HeavyDef: 0
-  MoneyDef: 0
-  PoisonDef: 0
+  basicDef: 1
+  HeavyDef: 1
+  MoneyDef: 1
+  PoisonDef: 1
   AerealDef: 0
   Bomb: 0
 --- !u!114 &85103264
