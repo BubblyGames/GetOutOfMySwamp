@@ -28,6 +28,8 @@ public class InputManager : MonoBehaviour
     public GameObject cursor;
     private GameObject cursorBase;
 
+   
+
     private void Awake()
     {
         instance = this;
@@ -73,8 +75,6 @@ public class InputManager : MonoBehaviour
             CameraBehaviour.instance.Zoom(Input.mouseScrollDelta.y * scrollSensitivity); //Zoom with mouse wheel
         }
 
-
-
         //Click
         if (Input.GetMouseButtonDown(0))
         {
@@ -91,12 +91,6 @@ public class InputManager : MonoBehaviour
         if (Input.GetMouseButton(0))
         {
             MouseDrag();
-        }
-
-        //Test
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            LevelManager.instance.SpawnMeteor();
         }
     }
 
@@ -209,13 +203,6 @@ public class InputManager : MonoBehaviour
         {
             switch (hit.collider.tag)
             {
-                case "Card":
-
-
-
-
-
-                    break;
                 case "Structure":
 
                     Structure structureHitted = hit.collider.gameObject.GetComponent<Structure>();
@@ -224,7 +211,6 @@ public class InputManager : MonoBehaviour
                     UIController.instance.SetUpgradeMenu(structureHitted);
                     UIController.instance.ShowMenu(UIController.GameMenu.UpgradeMenu);
                     //check the structure type
-
 
                     break;
                 case "Gatherer":
@@ -273,7 +259,6 @@ public class InputManager : MonoBehaviour
             selectedCard = null;
             choosingWhereToBuild = false;
             cursor.SetActive(false);
-
         }
     }
 
