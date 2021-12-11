@@ -227,8 +227,6 @@ Cantidad de enemigos por ronda:
 | --------------------------- | ------- | ------- |---------|
 | GEPE (NORMAL)               |  20     |   25    |   63    | 
 | GUNTHER (TANQUE)            |  1      |   4     |   36    |
-| HERMANOS ZULETA (HORDA)     |  5      |   40    |   105   |
-| DOLITTLE (AÉREO)            |  3      |   5     |   31    |
 
 Torres disponibles en el nivel:
 - Hermanas Flor Y Fleta
@@ -241,12 +239,13 @@ Cantidad de enemigos por ronda:
 | --------------------------- | ------- | ------- |-------- | ------- | ------- |
 | GEPE (NORMAL)               |  16     |   23    |   25    |   25    |   45    |
 | GUNTHER (TANQUE)            |  9      |   12    |   15    |   15    |   35    |
-| HERMANOS ZULETA (HORDA)     |  25     |   35    |   40    |   40    |   40    |
 | DOLITTLE (AÉREO)            |  5      |   8     |   10    |   10    |   30    |
 
 Torres disponibles en el nivel:
-- 
-- 
+- Hermanas Flor y Fleta
+- Batracius
+- Especulio
+- Beerhouse
 
 **Otoño:**
 
@@ -259,8 +258,7 @@ Cantidad de enemigos por ronda:
 | DOLITTLE (AÉREO)            |  1      |   6     |   35    |
 
 Torres disponibles en el nivel:
-- 
-- 
+- Todas
 
 **Cerezo:**
 
@@ -273,8 +271,7 @@ Cantidad de enemigos por ronda:
 | DOLITTLE (AÉREO)            |   1     |   9     |   33    |   33    |
 
 Torres disponibles en el nivel:
-- 
-- 
+- Todas
 
 **Nevado:**
 
@@ -287,8 +284,7 @@ Cantidad de enemigos por ronda:
 | DOLITTLE (AÉREO)            |   4     |   16    |   40    |   40    |
 
 Torres disponibles en el nivel:
-- 
-- 
+- Todas
 
 
 ## 5. Trasfondo
