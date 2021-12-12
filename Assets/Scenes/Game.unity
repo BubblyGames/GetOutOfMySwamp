@@ -10143,14 +10143,6 @@ MonoBehaviour:
     rangeDescription: large
     damageDescription: high
     fireRateDescription: slow
-  - structurePrefab: {fileID: 3250008881624491856, guid: d47e0467f382b7241aafc52e24236632, type: 3}
-    creationCost: 50
-    upgradeMultiplicator: 1
-    upgrades: []
-    targetDescription: ground
-    rangeDescription: low
-    damageDescription: high
-    fireRateDescription: 
   - structurePrefab: {fileID: 2711408889448630410, guid: 4cdbff3b4cc893847ad0a47225cd137b, type: 3}
     creationCost: 250
     upgradeMultiplicator: 1
@@ -10184,6 +10176,14 @@ MonoBehaviour:
     rangeDescription: large
     damageDescription: low
     fireRateDescription: high
+  - structurePrefab: {fileID: 3250008881624491856, guid: d47e0467f382b7241aafc52e24236632, type: 3}
+    creationCost: 50
+    upgradeMultiplicator: 1
+    upgrades: []
+    targetDescription: ground
+    rangeDescription: low
+    damageDescription: high
+    fireRateDescription: 
   - structurePrefab: {fileID: 4422750441095425187, guid: 9e9b00a8bb793dd4088c7a4c33e9528a, type: 3}
     creationCost: 1
     upgradeMultiplicator: 1
