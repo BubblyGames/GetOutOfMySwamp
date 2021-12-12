@@ -13,6 +13,7 @@ public class Node
     public Vector3 dir = Vector3.zero;
 
     public bool isMidpoint = false;
+    public Midpoint midpoint;
 
     public Vector3 Position
     {

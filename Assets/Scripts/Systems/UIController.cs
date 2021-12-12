@@ -515,7 +515,8 @@ public class UIController : MonoBehaviour
 
     public void SetUpgradeMenuActive(bool active)
     {
-        upgradeMenu.SetActive(active);
+        if (upgradeMenu)
+            upgradeMenu.SetActive(active);
     }
 
     private void OnDestroy()

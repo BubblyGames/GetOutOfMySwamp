@@ -74,6 +74,7 @@ public class ScrollCard : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDr
 
     public void ShowTowerData()
     {
-        UIController.instance.ShowTowerData(indexCard);
+        if (!aux)
+            UIController.instance.ShowTowerData(indexCard);
     }
 }
