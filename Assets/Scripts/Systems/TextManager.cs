@@ -172,26 +172,26 @@ public class TextManager : MonoBehaviour
         englishDictionary.Add("mountainTower", "Albatro");
 
         //descriptions of lessons in English
-        englishDictionary.Add("lesson1", "Lesson 1");
-        englishDictionary.Add("description1", "Ali and Oli are the cheapest defense of them all. However, its medium damage and range could save you when needed, so don't underestimate it!");
-        englishDictionary.Add("lesson2", "Lesson 2");
-        englishDictionary.Add("description2", "Did anyone say House? No, it's Beerhouse! Combine this defense with others for amazing results thanks to its delaying effect on enemies.");
-        englishDictionary.Add("lesson3", "Lesson 3");
-        englishDictionary.Add("description3", "Amazing damage makes up for the low range and slow fire rate Batracius does. Let's make the pond shake!");
-        englishDictionary.Add("lesson4", "Lesson 4");
-        englishDictionary.Add("description4", "Fighting? Nah. Broker sees a golden future for you. Just let it financiate it.");
-        englishDictionary.Add("lesson5", "Lesson 5");
-        englishDictionary.Add("description5", "Albatro is always looking to the moon, but no flying enemies will escape from it. Just place him on the rocks, please.");
-        englishDictionary.Add("lesson6", "Lesson 6");
-        englishDictionary.Add("description6", "Is that... a mushroom? No, it's a MushBOOMB! Be careful, it doesn't only destroys, but it also has a delaying effect on enemies.");
-        englishDictionary.Add("lesson7", "Lesson 7");
-        englishDictionary.Add("description7", "Gepe. Medium life and speed makes him an easy target. But be careful, don't forget about him!");
-        englishDictionary.Add("lesson8", "Lesson 8");
-        englishDictionary.Add("description8", "Gunther is used as shield by the other enemy units. Its huge amount of health won't make them easy to kill.");
-        englishDictionary.Add("lesson9", "Lesson 9");
-        englishDictionary.Add("description9", "The Wilsons are not brave enough to come alone. Besides, they are very fast so put an eye on them!");
-        englishDictionary.Add("lesson10", "Lesson 10");
-        englishDictionary.Add("description10", "From the sky another kind of dirty frogs are approaching, more difficult to reach, named Doolittle. Get an Albatro quickly, don't miss them!");
+        englishDictionary.Add("lesson0", "Lesson 1");
+        englishDictionary.Add("description0", "Ali and Oli are the cheapest defense of them all. However, its medium damage and range could save you when needed, so don't underestimate it!");
+        englishDictionary.Add("lesson1", "Lesson 2");
+        englishDictionary.Add("description1", "Did anyone say House? No, it's Beerhouse! Combine this defense with others for amazing results thanks to its delaying effect on enemies.");
+        englishDictionary.Add("lesson2", "Lesson 3");
+        englishDictionary.Add("description2", "Amazing damage makes up for the low range and slow fire rate Batracius does. Let's make the pond shake!");
+        englishDictionary.Add("lesson3", "Lesson 4");
+        englishDictionary.Add("description3", "Fighting? Nah. Broker sees a golden future for you. Just let it financiate it.");
+        englishDictionary.Add("lesson4", "Lesson 5");
+        englishDictionary.Add("description4", "Albatro is always looking to the moon, but no flying enemies will escape from it. Just place him on the rocks, please.");
+        englishDictionary.Add("lesson5", "Lesson 6");
+        englishDictionary.Add("description5", "Is that... a mushroom? No, it's a MushBOOMB! Be careful, it doesn't only destroys, but it also has a delaying effect on enemies.");
+        englishDictionary.Add("lesson6", "Lesson 7");
+        englishDictionary.Add("description6", "Gepe. Medium life and speed makes him an easy target. But be careful, don't forget about him!");
+        englishDictionary.Add("lesson7", "Lesson 8");
+        englishDictionary.Add("description7", "Gunther is used as shield by the other enemy units. Its huge amount of health won't make them easy to kill.");
+        englishDictionary.Add("lesson8", "Lesson 9");
+        englishDictionary.Add("description8", "The Wilsons are not brave enough to come alone. Besides, they are very fast so put an eye on them!");
+        englishDictionary.Add("lesson9", "Lesson 10");
+        englishDictionary.Add("description9", "From the sky another kind of dirty frogs are approaching, more difficult to reach, named Doolittle. Get an Albatro quickly, don't miss them!");
 
         //descriptions of tutorial in English
         englishDictionary.Add("tutorial1", "Build Defenses");
@@ -283,25 +283,25 @@ public class TextManager : MonoBehaviour
         spanishDictionary.Add("mountainTower", "Albatro");
 
         //descriptions of lessons in Spanish
-        spanishDictionary.Add("lesson1", "Lección 1");
-        spanishDictionary.Add("description1", "Las Hermanas Flor y Fleta son la defensa más barata, pero no por ello la menos útil. Su nivel de ataque medio combinado con su velocidad media de ataque puede salvarte de muchos apuros.");
-        spanishDictionary.Add("lesson2", "Lección 2");
-        spanishDictionary.Add("description2", "Beerhouse es la defensa perfecta contra enemigos rápidos. Aunque tiene poco rango y daño, su efecto ralentizador, combinado con otras defensas, puede darte la victoria.");
-        spanishDictionary.Add("lesson3", "Lección 3");
-        spanishDictionary.Add("description3", "Batracius cuenta con una velocidad de disparo muy lenta, pero su alto alcance y su demoledor daño directo pueden ser decisivos. Y aunque no de en el blanco, no pasa nada. El impacto tambien hace daño en área.");
-        spanishDictionary.Add("lesson4", "Lección 4");
-        spanishDictionary.Add("description4", "Especulio rehuye de combatir. Prefiere estar centrado en recaudar dinero para mantener en funcionamiento las defensas ya construídas. Úsalo sabiamente.");
-        spanishDictionary.Add("lesson5", "Lección 5");
-        spanishDictionary.Add("description5", "Albatro espera, colocado sobre las rocas y apuntando al cielo. Los enemigos deberán tener siempre los pies en la tierra cerca de él o sufrirán las consecuencias.");
-        spanishDictionary.Add("lesson6", "Lección 6");
-        spanishDictionary.Add("description6", "¡BUM! será lo último que escucharán tus enemigos. Además Petaseta trae un 2x1 porque dejará a los enemigos aturdidos y se moverán más lento (si sobreviven).");
-        spanishDictionary.Add("lesson7", "Lección 7");
-        spanishDictionary.Add("description7", "Gepe tiene una esperanza de vida media y velocidad promedias, aunque no te confíes. Veremos cuanto aguanta contra nuestras defensas.");
-        spanishDictionary.Add("lesson8", "Lección 8");
-        spanishDictionary.Add("description8", "Gunther es lento, pesado, pero aguanta muy bien los golpes. Sirve de escudo para el resto de enemigos asi que cuidado.");
+        spanishDictionary.Add("lesson0", "Lección 1");
+        spanishDictionary.Add("description0", "Las Hermanas Flor y Fleta son la defensa más barata, pero no por ello la menos útil. Su nivel de ataque medio combinado con su velocidad media de ataque puede salvarte de muchos apuros.");
+        spanishDictionary.Add("lesson1", "Lección 2");
+        spanishDictionary.Add("description1", "Beerhouse es la defensa perfecta contra enemigos rápidos. Aunque tiene poco rango y daño, su efecto ralentizador, combinado con otras defensas, puede darte la victoria.");
+        spanishDictionary.Add("lesson2", "Lección 3");
+        spanishDictionary.Add("description2", "Batracius cuenta con una velocidad de disparo muy lenta, pero su alto alcance y su demoledor daño directo pueden ser decisivos. Y aunque no de en el blanco, no pasa nada. El impacto tambien hace daño en área.");
+        spanishDictionary.Add("lesson3", "Lección 4");
+        spanishDictionary.Add("description3", "Especulio rehuye de combatir. Prefiere estar centrado en recaudar dinero para mantener en funcionamiento las defensas ya construídas. Úsalo sabiamente.");
+        spanishDictionary.Add("lesson4", "Lección 5");
+        spanishDictionary.Add("description4", "Albatro espera, colocado sobre las rocas y apuntando al cielo. Los enemigos deberán tener siempre los pies en la tierra cerca de él o sufrirán las consecuencias.");
+        spanishDictionary.Add("lesson5", "Lección 6");
+        spanishDictionary.Add("description5", "¡BUM! será lo último que escucharán tus enemigos. Además Petaseta trae un 2x1 porque dejará a los enemigos aturdidos y se moverán más lento (si sobreviven).");
+        spanishDictionary.Add("lesson6", "Lección 7");
+        spanishDictionary.Add("description6", "Gepe tiene una esperanza de vida media y velocidad promedias, aunque no te confíes. Veremos cuanto aguanta contra nuestras defensas.");
+        spanishDictionary.Add("lesson7", "Lección 8");
+        spanishDictionary.Add("description7", "Gunther es lento, pesado, pero aguanta muy bien los golpes. Sirve de escudo para el resto de enemigos asi que cuidado.");
+        spanishDictionary.Add("lesson8", "Lección 9");
+        spanishDictionary.Add("description8", "Dicen que los cobardes atacan en grupo. Los Hermanos Zuleta son esos cobardes. Tienen poca vida, pero son muy escurridizas. ¡Que no escape ni uno!");
         spanishDictionary.Add("lesson9", "Lección 9");
-        spanishDictionary.Add("description9", "Dicen que los cobardes atacan en grupo. Los Hermanos Zuleta son esos cobardes. Tienen poca vida, pero son muy escurridizas. ¡Que no escape ni uno!");
-        spanishDictionary.Add("lesson10", "Lección 10");
         spanishDictionary.Add("description10", "Desde el cielo se acerca otro tipo de rana sucia, más difícil de alcanzar. Su nombre es Doolittle, que no Stuart. Pilla un Albatro rápido, no las vayas a perder.");
 
         //tutorial spanish
