@@ -33,6 +33,8 @@ public class LevelSelector : MonoBehaviour
     public Image stars;
     public List<Sprite> starsSprites;
     public LevelInfoMenu LevelInfoMenu;
+    [SerializeField] public Image candao;
+    
     private void Awake()
     {
         if (instance == null)
@@ -197,12 +199,18 @@ public class LevelSelector : MonoBehaviour
 
         if(!GameManager.instance.fullgame && selectedWorld >= GameManager.instance.freeWorlds)
         {
-            Debug.Log("Pay me bitch");
+            candao.enabled = true;
+            //Debug.Log("Pay me bitch");
             return;
+        }
+        else
+        {
+            candao.enabled = false;
         }
 
         if (selectedWorld == 0 || (selectedWorld > 0 && gameManager.playerData.worldScores[selectedWorld - 1] > 0))
             selectButton.interactable = true;
+        
     }
 
     void ChangeLevelInfoSprites()
