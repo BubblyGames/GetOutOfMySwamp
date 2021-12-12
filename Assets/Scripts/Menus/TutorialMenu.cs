@@ -27,7 +27,7 @@ public class TutorialMenu : MonoBehaviour
     {
         fixTextHeader = "lesson";
         fixTextDescription = "description";
-        lesson = 1;
+        lesson = 0;
         UpdateKeys();
         UpdateImages();
 
@@ -42,7 +42,7 @@ public class TutorialMenu : MonoBehaviour
 
     public void nextLesson()
     {
-        if (lesson <= 9)
+        if (lesson <= 8)
         {
             lesson++;
             UpdateKeys();
@@ -52,7 +52,7 @@ public class TutorialMenu : MonoBehaviour
 
     public void previousLesson()
     {
-        if (lesson >= 2)
+        if (lesson >= 1)
         {
             lesson--;
             UpdateKeys();
@@ -75,7 +75,7 @@ public class TutorialMenu : MonoBehaviour
 
     public void UpdateImages()
     {
-        imageContainer.sprite = lessonImages[lesson - 1];
+        imageContainer.sprite = lessonImages[lesson];
     }
 
     public void StartWithSpecificKey(int key)
