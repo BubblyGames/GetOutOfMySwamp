@@ -56,6 +56,7 @@ public abstract class EnemyBehaviour : MonoBehaviour
     {
         if (path == null)
             return;
+        if (LevelManager.instance.gameFinished) return;
 
         if (nextIndexPath >= path.Length) { Destroy(this.gameObject); return; }
 
