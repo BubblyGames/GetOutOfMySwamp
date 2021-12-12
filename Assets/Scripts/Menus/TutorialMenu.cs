@@ -6,13 +6,13 @@ using TMPro;
 
 public class TutorialMenu : MonoBehaviour
 {
-    private string fixTextHeader;
-    private string fixTextDescription;
-    private int lesson;
-    private string keyHeader;
-    private string keyDesc;
-    private string lessonText;
-    private string headerText;
+    protected string fixTextHeader;
+    protected string fixTextDescription;
+    protected int lesson;
+    protected string keyHeader;
+    protected string keyDesc;
+    protected string lessonText;
+    protected string headerText;
 
     public GameObject headerTextReader;
     public GameObject descTextReader;
@@ -40,7 +40,7 @@ public class TutorialMenu : MonoBehaviour
         UpdateTexts();
     }
 
-    public void nextLesson()
+    public virtual void nextLesson()
     {
         if (lesson <= 8)
         {
@@ -50,7 +50,7 @@ public class TutorialMenu : MonoBehaviour
         }
     }
 
-    public void previousLesson()
+    public virtual void previousLesson()
     {
         if (lesson >= 1)
         {
@@ -60,7 +60,7 @@ public class TutorialMenu : MonoBehaviour
         }
     }
 
-    public void UpdateKeys()
+    public virtual void UpdateKeys()
     {
         keyHeader = fixTextHeader + (lesson+1);
         keyDesc = fixTextDescription + (lesson+1);
