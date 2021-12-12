@@ -231,7 +231,7 @@ MonoBehaviour:
   structureId: 0
   canHitSkyEnemies: 0
   fireRate: 2
-  damage: 8
+  damage: 10
   attackRange: 5
   maintenanceCost: 5
   isWorking: 1

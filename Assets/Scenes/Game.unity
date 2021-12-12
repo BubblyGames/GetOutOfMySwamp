@@ -9002,6 +9002,10 @@ PrefabInstance:
       propertyPath: m_CullTransparentMesh
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5019994793284634193, guid: 809100f64aeef954a9fa36457977eee9, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5019994793284634206, guid: 809100f64aeef954a9fa36457977eee9, type: 3}
       propertyPath: m_SizeDelta.x
       value: 549.952
@@ -10990,7 +10994,9 @@ MonoBehaviour:
       stats:
       - statToUpgrade: 1
         upgradeAddedValue: 0.2
-    sellValues: 050000000a0000000f00000014000000
+      - statToUpgrade: 0
+        upgradeAddedValue: 2
+    sellValues: 3c0000005500000087000000d2000000
     targetDescription: ground
     rangeDescription: medium
     damageDescription: medium
@@ -11014,10 +11020,10 @@ MonoBehaviour:
       stats:
       - statToUpgrade: 1
         upgradeAddedValue: 0.2
-    sellValues: 00000000000000000000000000000000
+    sellValues: 6400000096000000e100000045010000
     targetDescription: ground
     rangeDescription: low
-    damageDescription: low
+    damageDescription: short
     fireRateDescription: medium
   - structurePrefab: {fileID: 5445150579504396128, guid: 34203a46bca1c2443b913193efffddec, type: 3}
     creationCost: 300
@@ -11038,16 +11044,16 @@ MonoBehaviour:
       stats:
       - statToUpgrade: 1
         upgradeAddedValue: 0.3
-    sellValues: 00000000000000000000000000000000
+    sellValues: 96000000e10000004501000081010000
     targetDescription: ground
-    rangeDescription: large
-    damageDescription: high
+    rangeDescription: high
+    damageDescription: large
     fireRateDescription: slow
   - structurePrefab: {fileID: 2711408889448630410, guid: 4cdbff3b4cc893847ad0a47225cd137b, type: 3}
     creationCost: 250
     upgradeMultiplicator: 1
     upgrades: []
-    sellValues: 00000000
+    sellValues: 7d000000
     targetDescription: 
     rangeDescription: 
     damageDescription: 
@@ -11073,19 +11079,19 @@ MonoBehaviour:
         upgradeAddedValue: 1
       - statToUpgrade: 1
         upgradeAddedValue: 2
-    sellValues: 00000000000000000000000000000000
+    sellValues: 550000007d000000a000000004010000
     targetDescription: air
-    rangeDescription: large
-    damageDescription: low
+    rangeDescription: low
+    damageDescription: large
     fireRateDescription: high
   - structurePrefab: {fileID: 3250008881624491856, guid: d47e0467f382b7241aafc52e24236632, type: 3}
     creationCost: 50
     upgradeMultiplicator: 1
     upgrades: []
-    sellValues: 00000000
+    sellValues: 19000000
     targetDescription: ground
-    rangeDescription: low
-    damageDescription: high
+    rangeDescription: high
+    damageDescription: short
     fireRateDescription: 
   - structurePrefab: {fileID: 4422750441095425187, guid: 9e9b00a8bb793dd4088c7a4c33e9528a, type: 3}
     creationCost: 1

@@ -27,6 +27,9 @@ public class GameManager : MonoBehaviour
     [DllImport("__Internal")]
     private static extern bool ForceHorizontal();
 
+    [DllImport("__Internal")]
+    private static extern bool customCheck();
+
     public PlayerData playerData;
     public LevelSelector levelSelector;
 
