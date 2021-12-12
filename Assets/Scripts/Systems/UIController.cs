@@ -527,6 +527,11 @@ public class UIController : MonoBehaviour
         lesson.SetActive(true);
     }
 
+    public void ShowTowerData(int index)
+    {
+        lesson.SetActive(true);
+        lesson.GetComponent<TutorialMenu>().StartWithSpecificKey(index);
+    }
 }
 
 

@@ -77,4 +77,12 @@ public class TutorialMenu : MonoBehaviour
     {
         imageContainer.sprite = lessonImages[lesson - 1];
     }
+
+    public void StartWithSpecificKey(int key)
+    {
+        lesson = key;
+        UpdateKeys();
+        UpdateImages();
+        UpdateTexts();
+    }
 }
