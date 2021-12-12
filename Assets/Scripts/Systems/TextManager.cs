@@ -127,6 +127,7 @@ public class TextManager : MonoBehaviour
         englishDictionary.Add("sound", "Sound");
         englishDictionary.Add("lessons", "Lessons");
         englishDictionary.Add("levelInfoText", "Natural habitat of:");
+        
 
 
         //upgrade texts in english
@@ -147,7 +148,10 @@ public class TextManager : MonoBehaviour
         englishDictionary.Add("daniel", "Programmer");
         englishDictionary.Add("adrian", "Programmer, Marketing");
         englishDictionary.Add("joy", "Programmer");
-        englishDictionary.Add("thanks", "Thanks to");
+        englishDictionary.Add("music", "Music by:");
+        englishDictionary.Add("resources", "Resources");
+        englishDictionary.Add("sounds", "SFX:");
+        englishDictionary.Add("VFX", "Base VFX by:");
 
 
         //defense stats in english
@@ -271,7 +275,10 @@ public class TextManager : MonoBehaviour
         spanishDictionary.Add("daniel", "Programador");
         spanishDictionary.Add("adrian", "Programador, Publicidad");
         spanishDictionary.Add("joy", "Programador");
-        spanishDictionary.Add("thanks", "Agradecimientos");
+        spanishDictionary.Add("music", "Musica por:");
+        spanishDictionary.Add("resources", "Recursos");
+        spanishDictionary.Add("sounds", "SFX:");
+        spanishDictionary.Add("VFX", "Base VFX por:");
 
         //structures names in spanish 
         spanishDictionary.Add("towerName", "Nombre Torre");
@@ -318,7 +325,7 @@ public class TextManager : MonoBehaviour
         spanishDictionary.Add("tutorial6", "El objetivo");
         spanishDictionary.Add("Tdescription6", "El <b><color=#C27203>objetivo de la partida</color></b> consiste en <b><color=#C27203>evitar que tu vida llegue a 0</color></b> antes de acabar con todas las <b><color=#C27203>oleadas</color></b> de enemigos que se dirigen al estanque.");
         spanishDictionary.Add("tutorial7", "Catapulta");
-        spanishDictionary.Add("Tdescription7", "En el caso de que crear un <b><color=#C27203>tapón de torres</color></b> de tal manera que los enemigos les cueste avanzar en un camino, estos lanzarán desde su estanque un <b><color=#C27203>proyectil</color></b>, rompiendo tus defensas y destruyendo parte del cubo");
+        spanishDictionary.Add("Tdescription7", "En el caso de que crear un <b><color=#C27203>tapón de torres</color></b> de tal manera que los enemigos les cueste avanzar en un camino, estos lanzarán desde su estanque un <b><color=#C27203>proyectil</color></b>, rompiendo tus defensas y destruyendo parte del cubo.");
     }
 
     public void emptyGameobjectsList(bool restart)

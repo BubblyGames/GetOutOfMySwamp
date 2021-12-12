@@ -131,7 +131,7 @@ Las torres se pueden vender, consiguiendo un pequeño porcentaje de dinero a cam
 
 #### 4.2.4 Defensas y enemigos
 
-Existen dos tipos de defensas: Las torres y las trampas. Las torres tienen alcance, daño, velocidad de ataque y éstos pueden ser individuales o en área o tener efectos de estado sobre los enemigos. Se puede construir en cualquier lugar menos caminos y rocas, a excepción de Especulio, que solo se puede poner adyacente al camino y de Albatro, que solo puede ser construído sobre las rocas. Además, tienen tres niveles de mejoras para aumentar sus estadísticas, salvo Especulio. Luego están las trampas, las cuales se colocan en el camino del enemigo, tienen daño y pueden tener efecto. Éstas no se pueden mejorar.
+Existen dos tipos de defensas: Las torres y las trampas. Las torres tienen alcance, daño, velocidad de ataque y éstas pueden ser individuales o en área o tener efectos de estado sobre los enemigos. Se puede construir en cualquier lugar menos caminos y rocas, a excepción de Especulio, que solo se puede poner adyacente al camino y de Albatro, que solo puede ser construído sobre las rocas. Además, tienen tres niveles de mejoras para aumentar sus estadísticas, salvo Especulio. Luego están las trampas, las cuales se colocan en el camino del enemigo, tienen daño y pueden tener efecto. Éstas no se pueden mejorar.
 
 Por otro lado están los enemigos, con características de vida y velocidad de movimiento. Aparecen por oleadas y aumentan en número conforme avanzas en la partida, además de que su vida se incrementa. Tienen diferentes roles en función de sus estadísticas, siendo los roles unidad básica, tanque, horda y aéreo, explicadas más adelante en el apartado Enemigos.
 
@@ -140,7 +140,8 @@ Por otro lado están los enemigos, con características de vida y velocidad de m
 
 ### 4.3 Controles
 
-El jugador durante la partida tendrá dos tareas principales: vigilar el mapa para saber el estado de la partida y colocar y mejorar defensas. Para vigilar el mapa podrá rotarlo con click (pulsar en el caso de móvil) y arrastrar. Luego para poner las torres será exactamente el mismo input, click y arrastrar desde la tarjeta de la torre hasta la posición en la que desee ponerla, contando con un offset en la versión de mobiles para poder colocar mejor la torre.
+El jugador durante la partida tendrá dos tareas principales: vigilar el mapa para saber el estado de la partida y colocar y mejorar defensas. Para vigilar el mapa podrá rotarlo con click (pulsar en el caso de móvil) y arrastrar. Luego para poner las torres será exactamente el mismo input, click y arrastrar desde la tarjeta de la torre hasta la posición en la que desee ponerla, contando con un offset en la versión de mobiles para poder colocar mejor la torre. Si el jugador lo desea podrá vender una torre clickando primero sobre la torre y después dándole al botón de defender. Para mejorar una torre, primero debe seleccionarla y después darle al botón de mejora.
+El jugador puede acceder a las lecciones de las torres durante la partida dándole al botón con una I que aparece sobre cada carta antes de colocarla.
 
 ### 4.4 Enemigos
 
@@ -153,11 +154,13 @@ Algunos enemigos cuentan con un nombre alternativo en inglés.
 | HERMANOS ZULETA | THE WILSONS   |
 | DOOLITTLE       | DOOLITTLE     |
 
+A medida que van pasando las rondas de un nivel, la vida de los enemigos se incrementa en un 10%.
+
 | **ENEMIGOS**                | VIDA | VELOCIDAD DE MOVIMIENTO | TIPO                 | RECOMPENSA |
 | --------------------------- | ---- | ----------------------- | -------------------- | ---------- |
-| GEPE (NORMAL)               |  40  | Media (2 ud)            | Terrestre - Normal   |     8      |
-| GUNTHER (TANQUE)            |  250 | Lenta (1.5 ud)          | Terrestre - Pesada   |     20     |
-| HERMANOS ZULETA (HORDA)     |  25  | Rápida (4 ud)           | Terrestre - Horda    |     3      |
+| GEPE (NORMAL)               |  40  | Media (2 ud)            | Terrestre - Normal   |      8     |
+| GUNTHER (TANQUE)            | 200  | Lenta (1.5 ud)          | Terrestre - Pesada   |     20     |
+| HERMANOS ZULETA (HORDA)     |  25  | Media (3 ud)            | Terrestre - Horda    |      3     |
 | DOOLITTLE (AÉREO)           |  30  | Media (3 ud)            | Aérea - Normal       |     15     |
 
 Además, los enemigos lanzarán proyectiles desde su estanque a aquellas zonas en las cuales haya taponamiento de enemigos, destruyendo las defensas del jugador y alterando la figura del cubo, obligando al jugador a adapatarse e improvisar.
@@ -175,41 +178,41 @@ Algunas torres cuentan con un nombre alternativo en inglés.
 | ESPECULIO             | BROKER        |
 | PETASETA              | MUSHBOMB      |
 
-| **TORRES**                     | ALCANCE      | DAÑO                           | OBJETIVO          | VELOCIDAD DE ATAQUE | DPS | EFECTO                           | COSTE  |
-| ------------------------------ | ---------    | ------------------------------ | ----------------- | ------------------- | --- | -------------------------------- |--------|
-| BATRACIUS (PESADA)             | Largo (6 ud) | Elevado ( DIR 30 ud  AREA 7 ud)| Proy Área TT\*    | Lento (0.1 ud)      |  6  | \-                               | 300    |
-| HERMANAS FLOR Y FLETA (BÁSICA) | Medio (5 ud) | Medio (14 ud)                  | Individual TT\*   | Medio (2 ud)        | 28  | \-                               | 125    |
-| BEERHOUSE (PSÍQUICA)           | Corto (4 ud) | Bajo (3 ud)                    | Área TT\*         | Lento (0.3 ud)      | 0.9 | Ralentiza al enemigo             | 200    |
-| ALBATRO (ANTI-AÉREA)           | Largo (7 ud) | Bajo (3 ud)                    | Individual TA\*   | Rápido (5 ud)       | 15  | \-                               | 175    |
-| ESPECULIO (ECONÓMICA)          | Nada         | Ninguno                        | Ninguno           | Sin ataque          |     | Genera ingresos de forma pasiva  | 250    |
-| **TRAMPAS**                    |              |                                |                   |                     |     |                                  |        |
-| PETASETA (PANTANO)             | Corto (3 ud) | Elevado (40 ud)                | Área TT\*         | De un solo uso      |     | Ralentiza al enemigo             | 50     |
+| **TORRES**                     | ALCANCE      | DAÑO                           | OBJETIVO          | VELOCIDAD DE ATAQUE | MANTENIMIENTO | EFECTO                           | COSTE  |
+| ------------------------------ | ---------    | ------------------------------ | ----------------- | ------------------- | ------------- | -------------------------------- |--------|
+| BATRACIUS (PESADA)             | Largo (6 ud) | Elevado ( DIR 30 ud  AREA 7 ud)| Proy Área TT\*    | Lento (0.3 ud)      |      8        | \-                               | 300    |
+| HERMANAS FLOR Y FLETA (BÁSICA) | Medio (5 ud) | Medio (8 ud)                   | Individual TT\*   | Medio (2 ud)        |      5        | \-                               | 125    |
+| BEERHOUSE (PSÍQUICA)           | Corto (4 ud) | Bajo (3 ud)                    | Área TT\*         | Lento (0.3 ud)      |      8        | Ralentiza al enemigo             | 200    |
+| ALBATRO (ANTI-AÉREA)           | Largo (7 ud) | Bajo (3 ud)                    | Individual TA\*   | Rápido (5 ud)       |      7        | \-                               | 175    |
+| ESPECULIO (ECONÓMICA)          | Nada         | Ninguno                        | Ninguno           | Sin ataque          |               | Genera ingresos de forma pasiva  | 250    |
+| **TRAMPAS**                    |              |                                |                   |                     |               |                                  |        |
+| PETASETA (PANTANO)             | Corto (3 ud) | Elevado (40 ud)                | Área TT\*         | De un solo uso      |               | Ralentiza al enemigo             | 50     |
 
 Cada defensa del jugador se puede mejorar, por separado, hasta tres veces, aumentando con estas mejoras las estadísticas de dicha defensa y haciéndola más eficaz en combate.
 
 Nivel 1:
-| **TORRES**              | ALCANCE      | DAÑO                          | OBJETIVO          | VELOCIDAD DE ATAQUE | DPS | EFECTO                           | COSTE  |
-| ----------------------- | ------------ | ----------------------------- | ----------------- | ------------------- | --- | -------------------------------- |--------|
-| BATRACIUS (PESADA)      | Largo (6 ud) | Elevado (DIR 35 ud AREA 9 ud) | Proy Área TT\*    | Lento (0.2 ud)      | 7   | \-                               | 150    |
-| FLOR Y FLETA (BÁSICA)   | Medio (5 ud) | Medio (16 ud)                 | Individual TT\*   | Medio (2 ud)        | 32  | \-                               | 50     |
-| BEERHOUSE (PSÍQUICA)    | Corto (4 ud) | Bajo (5 ud)                   | Área TT\*         | Lento (0.3 ud)      | 1.5 | Ralentiza al enemigo             | 100    |
-| ALBATRO (ANTI-AÉREA)    | Largo (7 ud) | Bajo (4 ud)                   | Individual TA\*   | Rápido (5 ud)       | 20  | \-                               | 75     |
+| **TORRES**              | ALCANCE      | DAÑO                          | OBJETIVO          | VELOCIDAD DE ATAQUE | MANTENIMIENTO | EFECTO                           | COSTE  |
+| ----------------------- | ------------ | ----------------------------- | ----------------- | ------------------- | ------------- | -------------------------------- |--------|
+| BATRACIUS (PESADA)      | Largo (6 ud) | Elevado (DIR 40 ud AREA 10 ud)| Proy Área TT\*    | Lento (0.3 ud)      |     12        | \-                               | 150    |
+| FLOR Y FLETA (BÁSICA)   | Medio (5 ud) | Medio (12 ud)                 | Individual TT\*   | Medio (2 ud)        |     7         | \-                               | 50     |
+| BEERHOUSE (PSÍQUICA)    | Corto (4 ud) | Bajo (5 ud)                   | Área TT\*         | Lento (0.3 ud)      |     12        | Ralentiza al enemigo             | 100    |
+| ALBATRO (ANTI-AÉREA)    | Largo (7 ud) | Bajo (4 ud)                   | Individual TA\*   | Rápido (5 ud)       |     10        | \-                               | 75     |
 
 Nivel 2:
-| **TORRES**             | ALCANCE      | DAÑO                          | OBJETIVO          | VELOCIDAD DE ATAQUE | DPS | EFECTO                            | COSTE  |
-| ---------------------- | ---------    | ----------------------------- | ----------------- | ------------------- | --- | --------------------------------- |--------|
-| BATRACIUS (PESADA)     | Largo (8 ud) | Elevado (DIR 35 ud AREA 9 ud) | Proy Área TT\*    | Lento (0.2 ud)      |  7  | \-                                | 200    |
-| FLOR Y FLETA (BÁSICA)  | Largo (6 ud) | Medio (18 ud)                 | Individual TT\*   | Medio (2 ud)        |  36 | \-                                | 100    |
-| BEERHOUSE (PSÍQUICA)   | Medio (5 ud) | Bajo (6 ud)                   | Área TT\*         | Lento (0.3 ud)      | 1.8 | Ralentiza al enemigo              | 150    |
-| ALBATRO (ANTI-AÉREA)   | Largo (8 ud) | Bajo (4 ud)                   | Individual TA\*   | Rápido (5 ud)       |  20 | \-                                | 125    |
+| **TORRES**             | ALCANCE      | DAÑO                          | OBJETIVO          | VELOCIDAD DE ATAQUE | MANTENIMIENTO | EFECTO                            | COSTE  |
+| ---------------------- | ---------    | ----------------------------- | ----------------- | ------------------- | ------------- | --------------------------------- |--------|
+| BATRACIUS (PESADA)     | Largo (8 ud) | Elevado (DIR 40 ud AREA 10 ud)| Proy Área TT\*    | Lento (0.3 ud)      |      13       | \-                                | 200    |
+| FLOR Y FLETA (BÁSICA)  | Largo (6 ud) | Medio (14 ud)                 | Individual TT\*   | Medio (2 ud)        |      9        | \-                                | 100    |
+| BEERHOUSE (PSÍQUICA)   | Medio (5 ud) | Bajo (6 ud)                   | Área TT\*         | Lento (0.3 ud)      |      14       | Ralentiza al enemigo              | 150    |
+| ALBATRO (ANTI-AÉREA)   | Largo (8 ud) | Bajo (4 ud)                   | Individual TA\*   | Rápido (5 ud)       |      12       | \-                                | 125    |
 
 Nivel 3:
-| **TORRES**             | ALCANCE      | DAÑO                          | OBJETIVO          | VELOCIDAD DE ATAQUE | DPS  | EFECTO                            | COSTE  |
-| ---------------------- | ---------    | ----------------------------- | ----------------- | ------------------- | ---- | --------------------------------- |--------|
-| BATRACIUS (PESADA)     | Largo (8 ud) | Elevado (DIR 35 ud AREA 9 ud) | Proy Área TT\*    | Lento (0.3 ud)      | 10.5 | \-                                | 300    |
-| FLOR Y FLETA (BÁSICA)  | Largo (6 ud) | Medio (18 ud)                 | Individual TT\*   | Medio (2.2 ud)      | 39.6 | \-                                | 150    |
-| BEERHOUSE (PSÍQUICA)   | Medio (5 ud) | Bajo (6 ud)                   | Área TT\*         | Lento (0.5 ud)      | 3    | Ralentiza al enemigo              | 200    |
-| ALBATRO (ANTI-AÉREA)   | Largo (8 ud) | Bajo (5 ud)                   | Individual TA\*   | Rápido (7 ud)       | 35   | \-                                | 200    |
+| **TORRES**             | ALCANCE      | DAÑO                          | OBJETIVO          | VELOCIDAD DE ATAQUE | MANTENIMIENTO  | EFECTO                            | COSTE  |
+| ---------------------- | ---------    | ----------------------------- | ----------------- | ------------------- | -------------- | --------------------------------- |--------|
+| BATRACIUS (PESADA)     | Largo (8 ud) | Elevado (DIR 40 ud AREA 10 ud)| Proy Área TT\*    | Lento (0.6 ud)      |      16        | \-                                | 300    |
+| FLOR Y FLETA (BÁSICA)  | Largo (6 ud) | Medio (16 ud)                 | Individual TT\*   | Medio (2.2 ud)      |      11        | \-                                | 150    |
+| BEERHOUSE (PSÍQUICA)   | Medio (5 ud) | Bajo (6 ud)                   | Área TT\*         | Lento (0.5 ud)      |      16        | Ralentiza al enemigo              | 200    |
+| ALBATRO (ANTI-AÉREA)   | Largo (8 ud) | Bajo (5 ud)                   | Individual TA\*   | Rápido (7 ud)       |      15        | \-                                | 200    |
 
 \*TT: Ataques desde Tierra a objetivos Terrestres.
 \*TA: Ataques desde Tierra a objetivos Aéreos.
@@ -225,8 +228,8 @@ Los niveles son semi procedimentales y se crean mediante una semilla. En funció
 Cantidad de enemigos por ronda:
 | **ENEMIGOS**                | RONDA 1 | RONDA 2 | RONDA 3 |
 | --------------------------- | ------- | ------- |---------|
-| GEPE (NORMAL)               |  20     |   25    |   63    | 
-| GUNTHER (TANQUE)            |  1      |   4     |   36    |
+| GEPE (NORMAL)               |  10     |   16    |   13    | 
+| GUNTHER (TANQUE)            |   0     |    2    |    5    |
 
 Torres disponibles en el nivel:
 - Hermanas Flor Y Fleta
@@ -235,11 +238,11 @@ Torres disponibles en el nivel:
 **Tundra:**
 
 Cantidad de enemigos por ronda:
-| **ENEMIGOS**                | RONDA 1 | RONDA 2 | RONDA 3 | RONDA 4 | RONDA 5 |
-| --------------------------- | ------- | ------- |-------- | ------- | ------- |
-| GEPE (NORMAL)               |  16     |   23    |   25    |   25    |   45    |
-| GUNTHER (TANQUE)            |  9      |   12    |   15    |   15    |   35    |
-| DOLITTLE (AÉREO)            |  5      |   8     |   10    |   10    |   30    |
+| **ENEMIGOS**                | RONDA 1 | RONDA 2 | RONDA 3 | RONDA 4 | 
+| --------------------------- | ------- | ------- |-------- | ------- |
+| GEPE (NORMAL)               |  5      |   13    |   20    |   15    |
+| GUNTHER (TANQUE)            |  1      |    2    |   10    |   13    |
+| HERMANOS ZULETA (HORDA)     |  6      |    5    |   15    |   20    |
 
 Torres disponibles en el nivel:
 - Hermanas Flor y Fleta
@@ -250,12 +253,12 @@ Torres disponibles en el nivel:
 **Otoño:**
 
 Cantidad de enemigos por ronda: 
-| **ENEMIGOS**                | RONDA 1 | RONDA 2 | RONDA 3 | 
-| --------------------------- | ------- | ------- |-------- |
-| GEPE (NORMAL)               |  10     |   15    |   40    |
-| GUNTHER (TANQUE)            |  2      |   10    |   15    |
-| HERMANOS ZULETA (HORDA)     |  10     |   20    |   40    |
-| DOLITTLE (AÉREO)            |  1      |   6     |   35    |
+| **ENEMIGOS**                | RONDA 1 | RONDA 2 | RONDA 3 | RONDA 4 | RONDA 5 |
+| --------------------------- | ------- | ------- |-------- | ------- | ------- |
+| GEPE (NORMAL)               |  10     |   15    |   8     |   18    |    8    |
+| GUNTHER (TANQUE)            |   0     |    2    |   6     |    3    |    4    |
+| HERMANOS ZULETA (HORDA)     |   0     |    0    |   6     |    8    |    8    |
+| DOLITTLE (AÉREO)            |   3     |    6    |   5     |   10    |    8    |
 
 Torres disponibles en el nivel:
 - Todas
@@ -263,25 +266,25 @@ Torres disponibles en el nivel:
 **Cerezo:**
 
 Cantidad de enemigos por ronda: 
-| **ENEMIGOS**                | RONDA 1 | RONDA 2 | RONDA 3 | RONDA 4 |
-| --------------------------- | ------- | ------- |-------- | ------- |
-| GEPE (NORMAL)               |   15    |   21    |   51    |   48    |
-| GUNTHER (TANQUE)            |   3     |   6     |   18    |   26    |
-| HERMANOS ZULETA (HORDA)     |   15    |   39    |   60    |   45    |
-| DOLITTLE (AÉREO)            |   1     |   9     |   33    |   33    |
+| **ENEMIGOS**                | RONDA 1 | RONDA 2 | RONDA 3 | RONDA 4 | RONDA 5 |
+| --------------------------- | ------- | ------- |-------- | ------- | ------- |
+| GEPE (NORMAL)               |   12    |   12    |   10    |   10    |    10   |
+| GUNTHER (TANQUE)            |    3    |    5    |    4    |    4    |     6   |
+| HERMANOS ZULETA (HORDA)     |    0    |   12    |   10    |   15    |   10    |
+| DOLITTLE (AÉREO)            |    4    |    6    |    8    |   10    |   10    |
 
 Torres disponibles en el nivel:
 - Todas
 
-**Nevado:**
+**Amatista:**
 
 Cantidad de enemigos por ronda: 
-| **ENEMIGOS**                | RONDA 1 | RONDA 2 | RONDA 3 | RONDA 4 |
-| --------------------------- | ------- | ------- |-------- | ------- |
-| GEPE (NORMAL)               |   60    |   40    |   80    |   80    |
-| GUNTHER (TANQUE)            |   4     |   16    |   40    |   60    |
-| HERMANOS ZULETA (HORDA)     |   30    |   40    |   80    |   120   |
-| DOLITTLE (AÉREO)            |   4     |   16    |   40    |   40    |
+| **ENEMIGOS**                | RONDA 1 | RONDA 2 | RONDA 3 | RONDA 4 | RONDA 5 |
+| --------------------------- | ------- | ------- |-------- | ------- | ------- |
+| GEPE (NORMAL)               |   15    |   12    |   10    |   12    |   12    |
+| GUNTHER (TANQUE)            |    3    |    6    |    6    |    6    |    8    |
+| HERMANOS ZULETA (HORDA)     |    0    |   15    |   10    |   20    |   10    |
+| DOLITTLE (AÉREO)            |    0    |    6    |    8    |   10    |   10    |
 
 Torres disponibles en el nivel:
 - Todas
@@ -313,7 +316,7 @@ Hay cinco niveles jugables, cada uno con su estética única: Pantano, Tundra, O
 
 - Cuarto mapa: Cerezo. Los cerezos anuncian la llegada de la primavera con su lluvia de pétalos rosas, dando al campo un color jovial y acompañando a una plácida mañana soleada.
 
-- Quinto mapa: Nevado. Las huellas quedan marcadas en la nieve ante el paso de nuestras protagonistas, que se dirigen a una calentita charca. 
+- Quinto mapa: Amatista. Las huellas quedan marcadas en la nieve ante el paso de nuestras protagonistas, que se dirigen a una calentita charca. 
 
 
 ## 6. Arte
@@ -461,6 +464,8 @@ A su vez, la representación de las estadísticas de las torres se realiza media
 
 ![Aereo](https://user-images.githubusercontent.com/56488179/142773870-f647b0ed-0cb2-446b-b71a-fbb24b6bc1cd.png)
 
+Parte de los efectos de partículas han sido desarrollados por el equipo y otra parte sacados de los assets de Unity, cuyo autor es RetroVistas (https://assetstore.unity.com/packages/vfx/particles/cartoon-fx-free-pack-169179). 
+
 ### 6.3 Música
 
 El juego cuenta con una sola canción (autor: [Pascual Gázquez Compán](https://open.spotify.com/artist/7y2dfMVexZgClCIeiHd22f?si=Q2ch-_AVR8CC8a927irtxw&utm_source=copy-link)) la cual se reproduce tanto en los menúes como durante la partida.
@@ -468,10 +473,13 @@ El juego cuenta con una sola canción (autor: [Pascual Gázquez Compán](https:/
 
 ### 6.4 Ambiente sonoro
 
-Se cuentan con efectos de sonido para la interacción con los elementos de la interfaz.
+Se cuentan con distintos efectos de sonido para la interacción con los elementos de la interfaz.
 Estos son usados cuando:
-- jdi
-- 
+- Se interacciona con un botón de la interfaz para "avanzar"
+- Se interacciona con un botón de la interfaz para "dar marcha atrás"
+- Se coloca una torre
+
+Los efectos de sonido han sido sacados de Zapslat (https://www.zapsplat.com/)
 
 
 ## 7. Interfaz
@@ -741,8 +749,8 @@ El juego ha salido bastante bien de la fase Beta. Casi todos los elementos que t
 - Pulir la generación de caminos en el cubo: 9/12/2021
 - Dar nombres definitivos a las torres y enemigos: 29/11/2021
 - Cambiar modelo de puntuación: 10/12/2021
-- Aumentar la accesibilidad de los tutoriales: 
-- Ajustar curva de dificultad: 
+- Aumentar la accesibilidad de los tutoriales: 12/12/2021
+- Ajustar curva de dificultad: 12/12/2021
 - Proyectiles enemigos en tapones de enemigos: 7/12/2021
 - Añadir elementos restantes a la interfaz: 10/12/2021
 - Añadir animaciones a las torres: 11/12/2021
