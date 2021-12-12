@@ -160,6 +160,7 @@ public class TextManager : MonoBehaviour
         englishDictionary.Add("slow", "Slow");
         englishDictionary.Add("fast", "Fast");
         englishDictionary.Add("high", "High");
+        englishDictionary.Add("short", "Short");
 
         //structures names in english 
         englishDictionary.Add("towerName", "Tower Name");
@@ -205,6 +206,8 @@ public class TextManager : MonoBehaviour
         englishDictionary.Add("Tdescription5", "You can also zoom in and out, using the mouse wheel on PC or using two fingers on mobile.");
         englishDictionary.Add("tutorial6", "Reach the goal");
         englishDictionary.Add("Tdescription6", "The game’s objective is to defend your pond from all the approching enemies. If they get in the pond, you'll lose some health. If you lose all of your health, it's game over.");
+        englishDictionary.Add("tutorial7", "Catapult");
+        englishDictionary.Add("Tdescription7", "If you deploy your turrets in a way that the enemies can't advance in a route, they will throw a proyectile to your towers, destroying them and also part of the cube.");
 
         //Spanish 
         spanishDictionary.Add("play", "Jugar");
@@ -257,6 +260,7 @@ public class TextManager : MonoBehaviour
         spanishDictionary.Add("slow", "Lento");
         spanishDictionary.Add("fast", "Rápido");
         spanishDictionary.Add("high", "Alto");
+        spanishDictionary.Add("short", "Corto");
 
         //credits text in spanish
         spanishDictionary.Add("credits", "Créditos");
@@ -313,6 +317,8 @@ public class TextManager : MonoBehaviour
         spanishDictionary.Add("Tdescription5", "Además, también puedes ampliar el cubo usando la rueda del ratón en el PC o usando dos dedos en el móvil.");
         spanishDictionary.Add("tutorial6", "El objetivo");
         spanishDictionary.Add("Tdescription6", "El objetivo de la partida consiste en evitar que tu vida llegue a 0 antes de acabar con todas las oleadas de enemigos que se dirigen al estanque.");
+        spanishDictionary.Add("tutorial7", "Catapulta");
+        spanishDictionary.Add("Tdescription7", "En el caso de que crear un tapón de torres de tal manera que los enemigos les cueste avanzar en un camino, estos lanzarán desde su estanque un proyectil, rompiendo tus defensas y destruyendo parte del cubo");
     }
 
     public void emptyGameobjectsList(bool restart)
