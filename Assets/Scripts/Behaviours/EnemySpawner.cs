@@ -32,7 +32,8 @@ public class EnemySpawner : MonoBehaviour
             enemyPrefab = TemporalLibrary.instance.enemyLibrary.GetPrefabByIdentificator(enemyId);
         }
 
-        Instantiate(enemyPrefab, path.GetStep(0), Quaternion.identity).GetComponent<EnemyBehaviour>().SetPath(path);
-        WaveController.instance.AddToActiveEnemies(enemyPrefab.GetComponent<EnemyBehaviour>());
+        GameObject enemy = Instantiate(enemyPrefab, path.GetStep(0), Quaternion.identity);
+        enemy.GetComponent<EnemyBehaviour>().SetPath(path);
+        WaveController.instance.AddToActiveEnemies(enemy.GetComponent<EnemyBehaviour>());
     }
 }

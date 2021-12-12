@@ -12,8 +12,8 @@ public class WaveController : MonoBehaviour
 {
     public static WaveController instance;
 
-    public int activeEnemies = 0;
     public List<EnemyBehaviour> enemies;
+    public int activeEnemies => enemies.Count;
 
     private Coroutine spawncoroutine;
     public Wave[] waves;
@@ -161,7 +161,7 @@ public class WaveController : MonoBehaviour
 
     }
 
-    private bool CheckSpawn()
+    private void CheckSpawn()
     {
         Wave wave = waves[currentWave];
         foreach (Pack pack in wave.packs)
@@ -171,21 +171,19 @@ public class WaveController : MonoBehaviour
                 spawncoroutine = StartCoroutine(SpawnPack(wave, pack));
             }
         }
-
-        return false;
     }
 
     public void AddToActiveEnemies(EnemyBehaviour enemy)
     {
-        activeEnemies++;
+        //activeEnemies++;
         enemies.Add(enemy);
         //Debug.Log("Enemy added: " + activeEnemies);
     }
 
     public void ReduceActiveEnemies(EnemyBehaviour enemy)
     {
-        activeEnemies--;
-        activeEnemies = Mathf.Max(activeEnemies, 0);
+        //activeEnemies--;
+        //activeEnemies = Mathf.Max(activeEnemies, 0);
         enemies.Remove(enemy);
         //Debug.Log("Enemy reduced: " + activeEnemies);
 
@@ -264,5 +262,14 @@ public class WaveController : MonoBehaviour
     {
         LevelManager.OnGameStart -= StartWaves;
         LevelManager.OnGameCompleted -= LevelCompleted;
+
+        foreach (Wave wave in waves)
+        {
+            foreach (Pack pack in wave.packs)
+            {
+                pack.spawned = false;
+            }
+        }
     }
+
 }

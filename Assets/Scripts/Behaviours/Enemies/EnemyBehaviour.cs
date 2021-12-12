@@ -114,8 +114,8 @@ public abstract class EnemyBehaviour : MonoBehaviour
             {
                 //Damage
                 LevelManager.instance.dealDamageToBase(this.damage);
-                Destroy(this.gameObject);
                 WaveController.instance.ReduceActiveEnemies(this);
+                Destroy(this.gameObject);
             }
         }
     }
