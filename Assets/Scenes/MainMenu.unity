@@ -3828,11 +3828,6 @@ MonoBehaviour:
       spawnRate: 0.5
       spawned: 0
     - spawnTime: 10
-      enemyType: 5
-      enemyAmount: 6
-      spawnRate: 0.5
-      spawned: 0
-    - spawnTime: 10
       enemyType: 2
       enemyAmount: 3
       spawnRate: 0.5
