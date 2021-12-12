@@ -118,9 +118,12 @@ public abstract class DefenseBehaviour : Structure
 
     private void OnDestroy()
     {
-        if (BuildManager.instance.SelectedStructure == this)
+        if (UIController.instance)
         {
-            UIController.instance.SetUpgradeMenuActive(false);
+            if (BuildManager.instance.SelectedStructure == this)
+            {
+                UIController.instance.SetUpgradeMenuActive(false);
+            }
         }
     }
 }
