@@ -464,6 +464,8 @@ A su vez, la representación de las estadísticas de las torres se realiza media
 
 ![Aereo](https://user-images.githubusercontent.com/56488179/142773870-f647b0ed-0cb2-446b-b71a-fbb24b6bc1cd.png)
 
+Parte de los efectos de partículas han sido desarrollados por el equipo y otra parte sacados de los assets de Unity, cuyo autor es RetroVistas (https://assetstore.unity.com/packages/vfx/particles/cartoon-fx-free-pack-169179). 
+
 ### 6.3 Música
 
 El juego cuenta con una sola canción (autor: [Pascual Gázquez Compán](https://open.spotify.com/artist/7y2dfMVexZgClCIeiHd22f?si=Q2ch-_AVR8CC8a927irtxw&utm_source=copy-link)) la cual se reproduce tanto en los menúes como durante la partida.
@@ -476,6 +478,8 @@ Estos son usados cuando:
 - Se interacciona con un botón de la interfaz para "avanzar"
 - Se interacciona con un botón de la interfaz para "dar marcha atrás"
 - Se coloca una torre
+
+Los efectos de sonido han sido sacados de Zapslat (https://www.zapsplat.com/)
 
 
 ## 7. Interfaz
