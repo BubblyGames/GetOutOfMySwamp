@@ -4029,13 +4029,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   size: 31
-  wallDensity: 0.5
-  rocksVisualReduction: 1
+  wallDensity: 0.603
+  rocksVisualReduction: 0.919
   rockSize: 10.49
-  waterDensity: 0
+  waterDensity: 0.101
   nPaths: 4
-  canMergePaths: 0
-  numberOfMidpoints: 1
+  canMergePaths: 1
+  numberOfMidpoints: 2
   seed: 6400
   waterMaterial: {fileID: 2100000, guid: f2bfe60c202150547be22d486a012286, type: 2}
   demo: 1
