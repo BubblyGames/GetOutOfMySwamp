@@ -165,7 +165,7 @@ public class CubeWorldGenerator : MonoBehaviour
                 }
                 paths[i].AddMidpoint(new Midpoint(GetCell(end), true));
 
-                paths[i].Initialize();
+                paths[i].Prepare();
 
                 int c = 0;
                 while (paths[i].HasNextStep() && c < 20)
@@ -185,12 +185,14 @@ public class CubeWorldGenerator : MonoBehaviour
                     success = false;
                 }
 
+                if (!paths[i].SavePath())
+                    success = false;
+
                 if (!success)
                 {
                     break;
                 }
 
-                paths[i].SavePath();
             }
 
 
@@ -664,7 +666,7 @@ public class CubeWorldGenerator : MonoBehaviour
         CallUpdateWorld();
     }
 
-   
+
     #endregion
 
     #region Getters
@@ -1164,7 +1166,7 @@ public class CubeWorldGenerator : MonoBehaviour
             foreach (CellInfo ce in p.cells)
             {
                 CellInfo c = GetCellUnder(ce);
-                if (c!= null && c.blockType != BlockType.Path && c.blockType != BlockType.Swamp)
+                if (c != null && c.blockType != BlockType.Path && c.blockType != BlockType.Swamp)
                 {
                     c.canWalk = false;
                     c.blockType = BlockType.Path;
