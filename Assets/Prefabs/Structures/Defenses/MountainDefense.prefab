@@ -64,7 +64,7 @@ MonoBehaviour:
   level: 0
   blockType: 2
   structureName: mountainTower
-  structureId: 5
+  structureId: 4
   canHitSkyEnemies: 1
   fireRate: 5
   damage: 3
