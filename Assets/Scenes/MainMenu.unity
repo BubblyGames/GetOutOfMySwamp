@@ -1064,7 +1064,7 @@ MonoBehaviour:
       enemyAmount: 5
       spawnRate: 0.4
       spawned: 0
-    - spawnTime: 5
+    - spawnTime: 10
       enemyType: 3
       enemyAmount: 5
       spawnRate: 2
@@ -1348,12 +1348,12 @@ MonoBehaviour:
   - packs:
     - spawnTime: 0
       enemyType: 0
-      enemyAmount: 15
+      enemyAmount: 12
       spawnRate: 0.5
       spawned: 0
     - spawnTime: 10
       enemyType: 5
-      enemyAmount: 6
+      enemyAmount: 4
       spawnRate: 0.5
       spawned: 0
     - spawnTime: 10
@@ -1364,7 +1364,7 @@ MonoBehaviour:
   - packs:
     - spawnTime: 0
       enemyType: 3
-      enemyAmount: 15
+      enemyAmount: 12
       spawnRate: 0.3
       spawned: 0
     - spawnTime: 5
@@ -1374,7 +1374,7 @@ MonoBehaviour:
       spawned: 0
     - spawnTime: 0
       enemyType: 2
-      enemyAmount: 4
+      enemyAmount: 3
       spawnRate: 0.6
       spawned: 0
     - spawnTime: 5
@@ -1395,7 +1395,7 @@ MonoBehaviour:
   - packs:
     - spawnTime: 0
       enemyType: 2
-      enemyAmount: 6
+      enemyAmount: 4
       spawnRate: 0.2
       spawned: 0
     - spawnTime: 5
@@ -1416,12 +1416,12 @@ MonoBehaviour:
   - packs:
     - spawnTime: 0
       enemyType: 0
-      enemyAmount: 12
+      enemyAmount: 10
       spawnRate: 0.3
       spawned: 0
     - spawnTime: 0
       enemyType: 2
-      enemyAmount: 6
+      enemyAmount: 4
       spawnRate: 0.3
       spawned: 0
     - spawnTime: 10
@@ -1431,14 +1431,29 @@ MonoBehaviour:
       spawned: 0
     - spawnTime: 15
       enemyType: 3
-      enemyAmount: 20
+      enemyAmount: 15
       spawnRate: 2
       spawned: 0
   - packs:
     - spawnTime: 0
       enemyType: 0
-      enemyAmount: 12
-      spawnRate: 0
+      enemyAmount: 10
+      spawnRate: 0.3
+      spawned: 0
+    - spawnTime: 0
+      enemyType: 2
+      enemyAmount: 6
+      spawnRate: 0.2
+      spawned: 0
+    - spawnTime: 0
+      enemyType: 5
+      enemyAmount: 10
+      spawnRate: 0.25
+      spawned: 0
+    - spawnTime: 0
+      enemyType: 3
+      enemyAmount: 10
+      spawnRate: 0.25
       spawned: 0
   basicEn: 1
   HeavyEn: 1
@@ -3809,32 +3824,107 @@ MonoBehaviour:
   - packs:
     - spawnTime: 0
       enemyType: 0
-      enemyAmount: 40
-      spawnRate: 0
+      enemyAmount: 15
+      spawnRate: 0.5
+      spawned: 0
+    - spawnTime: 10
+      enemyType: 2
+      enemyAmount: 3
+      spawnRate: 0.5
+      spawned: 0
+  - packs:
+    - spawnTime: 0
+      enemyType: 3
+      enemyAmount: 15
+      spawnRate: 0.3
+      spawned: 0
+    - spawnTime: 5
+      enemyType: 0
+      enemyAmount: 6
+      spawnRate: 0.4
+      spawned: 0
+    - spawnTime: 0
+      enemyType: 2
+      enemyAmount: 4
+      spawnRate: 0.6
+      spawned: 0
+    - spawnTime: 5
+      enemyType: 5
+      enemyAmount: 6
+      spawnRate: 0.5
+      spawned: 0
+    - spawnTime: 10
+      enemyType: 0
+      enemyAmount: 6
+      spawnRate: 0.6
+      spawned: 0
+    - spawnTime: 10
+      enemyType: 2
+      enemyAmount: 2
+      spawnRate: 0.4
       spawned: 0
   - packs:
     - spawnTime: 0
       enemyType: 2
-      enemyAmount: 12
-      spawnRate: 0
+      enemyAmount: 6
+      spawnRate: 0.2
+      spawned: 0
+    - spawnTime: 5
+      enemyType: 5
+      enemyAmount: 8
+      spawnRate: 0.4
+      spawned: 0
+    - spawnTime: 10
+      enemyType: 0
+      enemyAmount: 10
+      spawnRate: 0.6
+      spawned: 0
+    - spawnTime: 15
+      enemyType: 3
+      enemyAmount: 10
+      spawnRate: 1
       spawned: 0
   - packs:
     - spawnTime: 0
       enemyType: 0
-      enemyAmount: 40
-      spawnRate: 0
+      enemyAmount: 12
+      spawnRate: 0.3
+      spawned: 0
+    - spawnTime: 0
+      enemyType: 2
+      enemyAmount: 6
+      spawnRate: 0.3
+      spawned: 0
+    - spawnTime: 10
+      enemyType: 5
+      enemyAmount: 10
+      spawnRate: 1
+      spawned: 0
+    - spawnTime: 15
+      enemyType: 3
+      enemyAmount: 20
+      spawnRate: 2
       spawned: 0
   - packs:
     - spawnTime: 0
-      enemyType: 2
-      enemyAmount: 20
-      spawnRate: 0
+      enemyType: 0
+      enemyAmount: 12
+      spawnRate: 0.3
       spawned: 0
-  - packs:
     - spawnTime: 0
       enemyType: 2
-      enemyAmount: 20
-      spawnRate: 0
+      enemyAmount: 8
+      spawnRate: 0.2
+      spawned: 0
+    - spawnTime: 0
+      enemyType: 5
+      enemyAmount: 10
+      spawnRate: 0.25
+      spawned: 0
+    - spawnTime: 0
+      enemyType: 3
+      enemyAmount: 10
+      spawnRate: 0.25
       spawned: 0
   basicEn: 1
   HeavyEn: 1
@@ -6852,6 +6942,17 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 5019994793483360252, guid: 809100f64aeef954a9fa36457977eee9, type: 3}
   m_PrefabInstance: {fileID: 4169412794221986153}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &991896027 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3033594766834045289, guid: 809100f64aeef954a9fa36457977eee9, type: 3}
+  m_PrefabInstance: {fileID: 4169412794221986153}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 991896026}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6fe89087958c44f428641850f0896c96, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!224 &991896029 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 5019994793483360251, guid: 809100f64aeef954a9fa36457977eee9, type: 3}
@@ -7390,7 +7491,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1108740207}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d1277ebb788401445bad88337a5cac9a, type: 3}
   m_Name: 
@@ -14621,12 +14722,20 @@ PrefabInstance:
       value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 5019994791990721947, guid: 809100f64aeef954a9fa36457977eee9, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 991896027}
+    - target: {fileID: 5019994791990721947, guid: 809100f64aeef954a9fa36457977eee9, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
       value: 
       objectReference: {fileID: 1474084401}
     - target: {fileID: 5019994791990721947, guid: 809100f64aeef954a9fa36457977eee9, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_CallState
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5019994791990721947, guid: 809100f64aeef954a9fa36457977eee9, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: previousLesson
       objectReference: {fileID: 0}
     - target: {fileID: 5019994791990721947, guid: 809100f64aeef954a9fa36457977eee9, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
@@ -14693,12 +14802,20 @@ PrefabInstance:
       value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 5019994793157094935, guid: 809100f64aeef954a9fa36457977eee9, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 991896027}
+    - target: {fileID: 5019994793157094935, guid: 809100f64aeef954a9fa36457977eee9, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
       value: 
       objectReference: {fileID: 1474084401}
     - target: {fileID: 5019994793157094935, guid: 809100f64aeef954a9fa36457977eee9, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_CallState
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5019994793157094935, guid: 809100f64aeef954a9fa36457977eee9, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: nextLesson
       objectReference: {fileID: 0}
     - target: {fileID: 5019994793157094935, guid: 809100f64aeef954a9fa36457977eee9, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName

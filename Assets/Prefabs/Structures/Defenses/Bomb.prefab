@@ -147,8 +147,8 @@ MonoBehaviour:
   canHitSkyEnemies: 1
   fireRate: 0
   damage: 40
-  attackRange: 4
-  maintenanceCost: 5
+  attackRange: 3
+  maintenanceCost: 0
   isWorking: 1
   notWorkingImage: {fileID: 0}
   canBreakWorld: 0

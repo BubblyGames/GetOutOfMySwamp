@@ -13,13 +13,17 @@ public class MoneyGatherer : Gatherer
 
     void Update()
     {
-        timerToGetResource += Time.deltaTime;
-   
-        if (timerToGetResource >= timeToGatherResource)
+        if (!LevelManager.instance.gameFinished)
         {
-            LevelStats.instance.getResource(0, resourceGatheredEachCicle);
-            TotalResourceGathered += resourceGatheredEachCicle;
-            timerToGetResource = 0;
+
+            timerToGetResource += Time.deltaTime;
+
+            if (timerToGetResource >= timeToGatherResource)
+            {
+                LevelStats.instance.getResource(0, resourceGatheredEachCicle);
+                TotalResourceGathered += resourceGatheredEachCicle;
+                timerToGetResource = 0;
+            }
         }
     }
 

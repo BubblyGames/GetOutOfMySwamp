@@ -566,7 +566,7 @@ RectTransform:
   m_Children:
   - {fileID: 476313601}
   m_Father: {fileID: 1256509563}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -1768,7 +1768,7 @@ RectTransform:
   m_Children:
   - {fileID: 42572939}
   m_Father: {fileID: 1256509563}
-  m_RootOrder: 4
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -1801,7 +1801,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cardToSpawn: {fileID: 8935117261002765910, guid: 4843d686fd24c0f40ba15d6a4dc577e5, type: 3}
   texture: {fileID: 2800000, guid: 42ace1f76f092284eb79ab05322801e7, type: 3}
-  indexCard: 3
+  indexCard: 6
   contentParent: {fileID: 1256509563}
 --- !u!114 &398153289
 MonoBehaviour:
@@ -3892,7 +3892,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 1307362636}
   m_Direction: 2
   m_Value: 1
-  m_Size: 0.3918402
+  m_Size: 0.42149583
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -5975,7 +5975,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cardToSpawn: {fileID: 8935117261002765910, guid: 4843d686fd24c0f40ba15d6a4dc577e5, type: 3}
   texture: {fileID: 2800000, guid: 42013ccd03d3d3a4f919cc353e917dc4, type: 3}
-  indexCard: 1
+  indexCard: 2
   contentParent: {fileID: 1256509563}
 --- !u!114 &1173124103
 MonoBehaviour:
@@ -6289,9 +6289,9 @@ RectTransform:
   - {fileID: 1557241889}
   - {fileID: 1173124100}
   - {fileID: 1754025119}
+  - {fileID: 1436934376}
   - {fileID: 36173495}
   - {fileID: 398153286}
-  - {fileID: 1436934376}
   - {fileID: 2057995394}
   m_Father: {fileID: 2135133431}
   m_RootOrder: 0
@@ -7242,7 +7242,7 @@ RectTransform:
   m_Children:
   - {fileID: 373560017}
   m_Father: {fileID: 1256509563}
-  m_RootOrder: 5
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -8081,7 +8081,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cardToSpawn: {fileID: 8935117261002765910, guid: 4843d686fd24c0f40ba15d6a4dc577e5, type: 3}
   texture: {fileID: 2800000, guid: a97e782458e54a4479509183f70690dc, type: 3}
-  indexCard: 0
+  indexCard: 1
   contentParent: {fileID: 1256509563}
 --- !u!225 &1557241894
 CanvasGroup:
@@ -8816,7 +8816,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cardToSpawn: {fileID: 8935117261002765910, guid: 4843d686fd24c0f40ba15d6a4dc577e5, type: 3}
   texture: {fileID: 2800000, guid: e8f88bfc5484b994e822c3366e75171a, type: 3}
-  indexCard: 2
+  indexCard: 3
   contentParent: {fileID: 1256509563}
 --- !u!114 &1754025122
 MonoBehaviour:
@@ -9875,6 +9875,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ready: 0
+  gameFinished: 0
   world: {fileID: 0}
   floorLayer:
     serializedVersion: 2
@@ -10184,7 +10185,7 @@ MonoBehaviour:
       maintenanceCostIncrease: 3
       stats:
       - statToUpgrade: 0
-        upgradeAddedValue: 5
+        upgradeAddedValue: 10
     - cost: 200
       maintenanceCostIncrease: 3
       stats:
@@ -10194,7 +10195,7 @@ MonoBehaviour:
       maintenanceCostIncrease: 3
       stats:
       - statToUpgrade: 1
-        upgradeAddedValue: 0.4
+        upgradeAddedValue: 0.3
     targetDescription: ground
     rangeDescription: large
     damageDescription: high
@@ -10954,7 +10955,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &2057995394
 RectTransform:
   m_ObjectHideFlags: 0
@@ -10970,9 +10971,9 @@ RectTransform:
   m_Father: {fileID: 1256509563}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 108.5, y: -1797.692}
   m_SizeDelta: {x: 217, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!225 &2057995395
@@ -11001,7 +11002,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cardToSpawn: {fileID: 8935117261002765910, guid: 4843d686fd24c0f40ba15d6a4dc577e5, type: 3}
   texture: {fileID: 2800000, guid: 185c9779cf37db04ca55ac1114b27d2b, type: 3}
-  indexCard: 6
+  indexCard: 7
   contentParent: {fileID: 1256509563}
 --- !u!114 &2057995397
 MonoBehaviour:

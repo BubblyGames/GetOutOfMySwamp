@@ -70,6 +70,6 @@ public class ScrollCard : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDr
     public void OnPointerClick(PointerEventData eventData)
     {
         if (!aux)
-            UIController.instance.ShowLesson();
+            UIController.instance.ShowTowerData(indexCard);
     }
 }
