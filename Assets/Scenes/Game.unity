@@ -9886,7 +9886,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: de5e705979053174191d48ecc5925842, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  activeEnemies: 0
   enemies: []
   waves:
   - packs:
