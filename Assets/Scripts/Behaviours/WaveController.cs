@@ -12,12 +12,12 @@ public class WaveController : MonoBehaviour
 {
     public static WaveController instance;
 
-    public int activeEnemies = 0;
     public List<EnemyBehaviour> enemies;
+    public int activeEnemies => enemies.Count;
 
     private Coroutine spawncoroutine;
     public Wave[] waves;
-    public int waveCount; // Wave its being played
+    public int currentWave; // Wave that's being played
     private float waveTimer;
 
     [Header("State Machine")]
@@ -60,13 +60,13 @@ public class WaveController : MonoBehaviour
 
     public void Start()
     {
-       
+
         isWaveActive = false;
         //isBetweenWaves = false;
 
-        waveCount = 0;
+        currentWave = 0;
         //TODO: Unhardcode pre rounds start timer
-        timeVariable = Time.time + (timeBeforeRoundStarts *3 );
+        timeVariable = Time.time + (timeBeforeRoundStarts * 3);
 
         //LevelManager.OnGameLost += StopSpawning;
         LevelManager.OnGameCompleted += LevelCompleted;
@@ -116,7 +116,7 @@ public class WaveController : MonoBehaviour
                 isBetweenWaves = false;
                 isWaveActive = true;
                 waveEndTimer = 0f;
-
+                waveTimer = 0f;
                 //spawncoroutine = StartCoroutine(SpawnWave());
                 return;
             }
@@ -139,9 +139,9 @@ public class WaveController : MonoBehaviour
                 waveEndTimer += Time.deltaTime;
                 if (waveEndTimer >= waveEndThreshold)
                 {
-                    waveCount++;
-                    
-                    if (waveCount+1 > waves.Length)
+                    currentWave++;
+
+                    if (currentWave + 1 > waves.Length)
                     {
                         LevelManager.instance.LevelCompleted();
                         allWavesCleared = true;
@@ -161,31 +161,29 @@ public class WaveController : MonoBehaviour
 
     }
 
-    private bool CheckSpawn()
+    private void CheckSpawn()
     {
-        Wave currentWave = waves[waveCount];
-        foreach (Pack pack in currentWave.packs)
+        Wave wave = waves[currentWave];
+        foreach (Pack pack in wave.packs)
         {
             if (!pack.spawned && waveTimer >= pack.spawnTime)
             {
-                spawncoroutine = StartCoroutine(SpawnPack(currentWave,pack));
+                spawncoroutine = StartCoroutine(SpawnPack(wave, pack));
             }
         }
-
-        return false;
     }
 
     public void AddToActiveEnemies(EnemyBehaviour enemy)
     {
-        activeEnemies++;
+        //activeEnemies++;
         enemies.Add(enemy);
         //Debug.Log("Enemy added: " + activeEnemies);
     }
 
     public void ReduceActiveEnemies(EnemyBehaviour enemy)
     {
-        activeEnemies--;
-        activeEnemies= Mathf.Max(activeEnemies, 0);
+        //activeEnemies--;
+        //activeEnemies = Mathf.Max(activeEnemies, 0);
         enemies.Remove(enemy);
         //Debug.Log("Enemy reduced: " + activeEnemies);
 
@@ -226,11 +224,11 @@ public class WaveController : MonoBehaviour
         }
     }*/
 
-        /*void StopSpawning()
-        {
-            StopCoroutine("SpawnWave");
+    /*void StopSpawning()
+    {
+        StopCoroutine("SpawnWave");
 
-        }*/
+    }*/
 
     IEnumerator SpawnPack(Wave wave, Pack pack)
     {
@@ -248,7 +246,7 @@ public class WaveController : MonoBehaviour
             enemySpawner.SpawnEnemy(pack.enemyType, WorldManager.instance.paths[pathId]);
             waveEndTimer = 0;
 
-            yield return new WaitForSeconds(1f / pack.spawnRate); 
+            yield return new WaitForSeconds(1f / pack.spawnRate);
         }
     }
 
@@ -264,5 +262,14 @@ public class WaveController : MonoBehaviour
     {
         LevelManager.OnGameStart -= StartWaves;
         LevelManager.OnGameCompleted -= LevelCompleted;
+
+        foreach (Wave wave in waves)
+        {
+            foreach (Pack pack in wave.packs)
+            {
+                pack.spawned = false;
+            }
+        }
     }
+
 }

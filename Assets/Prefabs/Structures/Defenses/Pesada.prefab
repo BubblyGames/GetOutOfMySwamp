@@ -178,10 +178,11 @@ MonoBehaviour:
   structureName: heavyTower
   structureId: 2
   canHitSkyEnemies: 0
-  fireRate: 0.2
+  fireRate: 0.3
   damage: 30
   attackRange: 6
-  maintenanceCost: 12
+  maintenanceCost: 8
+  isWorking: 1
   notWorkingImage: {fileID: 1780616907919263034}
   firePoint: {fileID: 4351021548220090795}
   cannon: {fileID: 4856589584197966362}

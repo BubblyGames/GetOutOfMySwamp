@@ -64,7 +64,7 @@ MonoBehaviour:
   blockType: 1
   structureName: moneyGatherer
   structureId: 4
-  resourceGatheredEachCicle: 40
+  resourceGatheredEachCicle: 20
   timeToGatherResource: 1
   timerToGetResource: 0
   totalResourceGathered: 0
@@ -272,6 +272,10 @@ PrefabInstance:
     - target: {fileID: 3049428253405200621, guid: e62e775cb5c996a4c944ff20f3cec481, type: 3}
       propertyPath: m_Name
       value: FX_PowerUp_Coin_AA
+      objectReference: {fileID: 0}
+    - target: {fileID: 3049428253405200621, guid: e62e775cb5c996a4c944ff20f3cec481, type: 3}
+      propertyPath: m_Layer
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 3049428253405200658, guid: e62e775cb5c996a4c944ff20f3cec481, type: 3}
       propertyPath: m_RootOrder

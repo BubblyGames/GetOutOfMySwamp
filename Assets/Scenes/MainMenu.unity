@@ -691,50 +691,45 @@ MonoBehaviour:
   - packs:
     - spawnTime: 0
       enemyType: 0
-      enemyAmount: 8
-      spawnRate: 0.6
-      spawned: 0
-    - spawnTime: 3
-      enemyType: 2
-      enemyAmount: 2
-      spawnRate: 0.4
-      spawned: 0
-  - packs:
-    - spawnTime: 0
-      enemyType: 0
-      enemyAmount: 5
-      spawnRate: 0.6
-      spawned: 0
-    - spawnTime: 10
-      enemyType: 2
-      enemyAmount: 4
-      spawnRate: 0.4
-      spawned: 0
-    - spawnTime: 14
-      enemyType: 0
       enemyAmount: 10
       spawnRate: 0.6
       spawned: 0
   - packs:
     - spawnTime: 0
+      enemyType: 0
+      enemyAmount: 8
+      spawnRate: 0.6
+      spawned: 0
+    - spawnTime: 10
       enemyType: 2
-      enemyAmount: 5
+      enemyAmount: 2
+      spawnRate: 0.4
+      spawned: 0
+    - spawnTime: 35
+      enemyType: 0
+      enemyAmount: 8
+      spawnRate: 0.6
+      spawned: 0
+  - packs:
+    - spawnTime: 0
+      enemyType: 2
+      enemyAmount: 2
       spawnRate: 0.4
       spawned: 0
     - spawnTime: 3
       enemyType: 0
+      enemyAmount: 8
+      spawnRate: 0.6
+      spawned: 0
+    - spawnTime: 25
+      enemyType: 0
       enemyAmount: 5
       spawnRate: 0.6
       spawned: 0
-    - spawnTime: 14
-      enemyType: 0
-      enemyAmount: 5
-      spawnRate: 2
-      spawned: 0
-    - spawnTime: 16
+    - spawnTime: 20
       enemyType: 2
       enemyAmount: 3
-      spawnRate: 2
+      spawnRate: 0.4
       spawned: 0
   basicEn: 1
   HeavyEn: 1
@@ -1004,7 +999,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 85103255}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 100, y: 0, z: 0}
+  m_LocalPosition: {x: 150, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 849561349}
@@ -1050,207 +1045,106 @@ MonoBehaviour:
   - packs:
     - spawnTime: 0
       enemyType: 0
+      enemyAmount: 5
+      spawnRate: 0.6
+      spawned: 0
+    - spawnTime: 10
+      enemyType: 3
       enemyAmount: 6
-      spawnRate: 0
+      spawnRate: 2
+      spawned: 0
+    - spawnTime: 5
+      enemyType: 2
+      enemyAmount: 1
+      spawnRate: 0.4
+      spawned: 0
+  - packs:
+    - spawnTime: 0
+      enemyType: 0
+      enemyAmount: 5
+      spawnRate: 0.4
+      spawned: 0
+    - spawnTime: 10
+      enemyType: 3
+      enemyAmount: 5
+      spawnRate: 2
+      spawned: 0
+    - spawnTime: 10
+      enemyType: 2
+      enemyAmount: 2
+      spawnRate: 0.4
+      spawned: 0
+    - spawnTime: 15
+      enemyType: 0
+      enemyAmount: 8
+      spawnRate: 0.6
+      spawned: 0
+  - packs:
+    - spawnTime: 0
+      enemyType: 0
+      enemyAmount: 20
+      spawnRate: 0.3
       spawned: 0
     - spawnTime: 0
+      enemyType: 2
+      enemyAmount: 5
+      spawnRate: 0.1
+      spawned: 0
+    - spawnTime: 20
+      enemyType: 3
+      enemyAmount: 5
+      spawnRate: 2
+      spawned: 0
+    - spawnTime: 30
+      enemyType: 2
+      enemyAmount: 5
+      spawnRate: 0.2
+      spawned: 0
+    - spawnTime: 40
+      enemyType: 3
+      enemyAmount: 10
+      spawnRate: 2
+      spawned: 0
+  - packs:
+    - spawnTime: 0
+      enemyType: 0
+      enemyAmount: 10
+      spawnRate: 0.2
+      spawned: 0
+    - spawnTime: 5
       enemyType: 2
       enemyAmount: 3
       spawnRate: 0
       spawned: 0
-    - spawnTime: 0
+    - spawnTime: 20
       enemyType: 3
       enemyAmount: 10
-      spawnRate: 0
+      spawnRate: 0.5
       spawned: 0
-    - spawnTime: 0
-      enemyType: 0
-      enemyAmount: 10
-      spawnRate: 0
-      spawned: 0
-    - spawnTime: 0
-      enemyType: 5
-      enemyAmount: 5
-      spawnRate: 0
-      spawned: 0
-    - spawnTime: 0
-      enemyType: 2
-      enemyAmount: 6
-      spawnRate: 0
-      spawned: 0
-    - spawnTime: 0
-      enemyType: 3
-      enemyAmount: 15
-      spawnRate: 0
-      spawned: 0
-  - packs:
-    - spawnTime: 0
-      enemyType: 0
-      enemyAmount: 9
-      spawnRate: 0
-      spawned: 0
-    - spawnTime: 0
-      enemyType: 2
-      enemyAmount: 4
-      spawnRate: 0
-      spawned: 0
-    - spawnTime: 0
-      enemyType: 3
-      enemyAmount: 15
-      spawnRate: 0
-      spawned: 0
-    - spawnTime: 0
-      enemyType: 0
-      enemyAmount: 14
-      spawnRate: 0
-      spawned: 0
-    - spawnTime: 0
-      enemyType: 5
-      enemyAmount: 8
-      spawnRate: 0
-      spawned: 0
-    - spawnTime: 0
-      enemyType: 2
-      enemyAmount: 8
-      spawnRate: 0
-      spawned: 0
-    - spawnTime: 0
-      enemyType: 3
-      enemyAmount: 20
-      spawnRate: 0
-      spawned: 0
-  - packs:
-    - spawnTime: 0
-      enemyType: 0
-      enemyAmount: 10
-      spawnRate: 0
-      spawned: 0
-    - spawnTime: 0
+    - spawnTime: 20
       enemyType: 2
       enemyAmount: 5
-      spawnRate: 0
+      spawnRate: 0.1
       spawned: 0
-    - spawnTime: 0
-      enemyType: 3
-      enemyAmount: 20
-      spawnRate: 0
-      spawned: 0
-    - spawnTime: 0
+    - spawnTime: 25
       enemyType: 0
-      enemyAmount: 15
-      spawnRate: 0
-      spawned: 0
-    - spawnTime: 0
-      enemyType: 5
-      enemyAmount: 10
-      spawnRate: 0
-      spawned: 0
-    - spawnTime: 0
-      enemyType: 2
-      enemyAmount: 10
-      spawnRate: 0
-      spawned: 0
-    - spawnTime: 0
-      enemyType: 3
-      enemyAmount: 20
-      spawnRate: 0
-      spawned: 0
-  - packs:
-    - spawnTime: 0
-      enemyType: 0
-      enemyAmount: 10
-      spawnRate: 0
-      spawned: 0
-    - spawnTime: 0
-      enemyType: 2
       enemyAmount: 5
-      spawnRate: 0
+      spawnRate: 0.4
       spawned: 0
-    - spawnTime: 0
+    - spawnTime: 40
       enemyType: 3
-      enemyAmount: 20
-      spawnRate: 0
-      spawned: 0
-    - spawnTime: 0
-      enemyType: 0
-      enemyAmount: 15
-      spawnRate: 0
-      spawned: 0
-    - spawnTime: 0
-      enemyType: 5
       enemyAmount: 10
-      spawnRate: 0
+      spawnRate: 2
       spawned: 0
-    - spawnTime: 0
-      enemyType: 2
-      enemyAmount: 10
-      spawnRate: 0
-      spawned: 0
-    - spawnTime: 0
-      enemyType: 3
-      enemyAmount: 20
-      spawnRate: 0
-      spawned: 0
-  - packs:
-    - spawnTime: 0
-      enemyType: 0
-      enemyAmount: 15
-      spawnRate: 0
-      spawned: 0
-    - spawnTime: 0
-      enemyType: 2
-      enemyAmount: 10
-      spawnRate: 0
-      spawned: 0
-    - spawnTime: 0
-      enemyType: 3
-      enemyAmount: 20
-      spawnRate: 0
-      spawned: 0
-    - spawnTime: 0
-      enemyType: 0
-      enemyAmount: 10
-      spawnRate: 0
-      spawned: 0
-    - spawnTime: 0
-      enemyType: 5
-      enemyAmount: 10
-      spawnRate: 0
-      spawned: 0
-    - spawnTime: 0
-      enemyType: 2
-      enemyAmount: 10
-      spawnRate: 0
-      spawned: 0
-    - spawnTime: 0
-      enemyType: 5
-      enemyAmount: 20
-      spawnRate: 0
-      spawned: 0
-    - spawnTime: 0
-      enemyType: 2
-      enemyAmount: 15
-      spawnRate: 0
-      spawned: 0
-    - spawnTime: 0
-      enemyType: 0
-      enemyAmount: 20
-      spawnRate: 0
-      spawned: 0
-    - spawnTime: 0
-      enemyType: 3
-      enemyAmount: 20
-      spawnRate: 0
-      spawned: 0
-  basicEn: 0
-  HeavyEn: 0
-  HordeEn: 0
+  basicEn: 1
+  HeavyEn: 1
+  HordeEn: 1
   SkateEn: 0
   AerealEn: 0
-  basicDef: 0
-  HeavyDef: 0
-  MoneyDef: 0
-  PoisonDef: 0
+  basicDef: 1
+  HeavyDef: 1
+  MoneyDef: 1
+  PoisonDef: 1
   AerealDef: 0
   Bomb: 0
 --- !u!114 &85103264
@@ -1317,7 +1211,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 96266340}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 300, y: 0, z: 0}
+  m_LocalPosition: {x: 450, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 849561349}
@@ -1454,168 +1348,124 @@ MonoBehaviour:
   - packs:
     - spawnTime: 0
       enemyType: 0
-      enemyAmount: 15
-      spawnRate: 0
+      enemyAmount: 12
+      spawnRate: 0.5
+      spawned: 0
+    - spawnTime: 10
+      enemyType: 5
+      enemyAmount: 4
+      spawnRate: 0.5
+      spawned: 0
+    - spawnTime: 10
+      enemyType: 2
+      enemyAmount: 3
+      spawnRate: 0.5
+      spawned: 0
+  - packs:
+    - spawnTime: 0
+      enemyType: 3
+      enemyAmount: 12
+      spawnRate: 0.3
+      spawned: 0
+    - spawnTime: 5
+      enemyType: 0
+      enemyAmount: 6
+      spawnRate: 0.4
       spawned: 0
     - spawnTime: 0
       enemyType: 2
       enemyAmount: 3
-      spawnRate: 0
+      spawnRate: 0.6
       spawned: 0
-    - spawnTime: 0
-      enemyType: 3
-      enemyAmount: 15
-      spawnRate: 0
-      spawned: 0
-    - spawnTime: 0
+    - spawnTime: 5
       enemyType: 5
-      enemyAmount: 1
-      spawnRate: 0
-      spawned: 0
-  - packs:
-    - spawnTime: 0
-      enemyType: 0
-      enemyAmount: 21
-      spawnRate: 0
-      spawned: 0
-    - spawnTime: 0
-      enemyType: 2
       enemyAmount: 6
-      spawnRate: 0
+      spawnRate: 0.6
       spawned: 0
-    - spawnTime: 0
-      enemyType: 5
-      enemyAmount: 9
-      spawnRate: 0
-      spawned: 0
-    - spawnTime: 0
-      enemyType: 3
-      enemyAmount: 30
-      spawnRate: 0
-      spawned: 0
-    - spawnTime: 0
-      enemyType: 3
-      enemyAmount: 9
-      spawnRate: 0
-      spawned: 0
-  - packs:
-    - spawnTime: 0
+    - spawnTime: 10
       enemyType: 0
-      enemyAmount: 21
-      spawnRate: 0
-      spawned: 0
-    - spawnTime: 0
-      enemyType: 2
       enemyAmount: 6
-      spawnRate: 0
+      spawnRate: 0.6
       spawned: 0
-    - spawnTime: 0
-      enemyType: 3
-      enemyAmount: 30
-      spawnRate: 0
+    - spawnTime: 10
+      enemyType: 2
+      enemyAmount: 2
+      spawnRate: 0.4
       spawned: 0
-    - spawnTime: 0
-      enemyType: 5
-      enemyAmount: 18
-      spawnRate: 0
-      spawned: 0
+  - packs:
     - spawnTime: 0
       enemyType: 2
-      enemyAmount: 12
-      spawnRate: 0
+      enemyAmount: 4
+      spawnRate: 0.2
       spawned: 0
-    - spawnTime: 0
-      enemyType: 0
-      enemyAmount: 30
-      spawnRate: 0
-      spawned: 0
-    - spawnTime: 0
+    - spawnTime: 5
       enemyType: 5
-      enemyAmount: 15
-      spawnRate: 0
+      enemyAmount: 8
+      spawnRate: 0.4
       spawned: 0
-    - spawnTime: 0
+    - spawnTime: 10
+      enemyType: 0
+      enemyAmount: 10
+      spawnRate: 0.6
+      spawned: 0
+    - spawnTime: 15
       enemyType: 3
-      enemyAmount: 30
-      spawnRate: 0
+      enemyAmount: 10
+      spawnRate: 1
       spawned: 0
   - packs:
     - spawnTime: 0
       enemyType: 0
-      enemyAmount: 12
-      spawnRate: 0
+      enemyAmount: 10
+      spawnRate: 0.3
       spawned: 0
     - spawnTime: 0
       enemyType: 2
       enemyAmount: 4
-      spawnRate: 0
+      spawnRate: 0.3
       spawned: 0
-    - spawnTime: 0
+    - spawnTime: 10
+      enemyType: 5
+      enemyAmount: 10
+      spawnRate: 1
+      spawned: 0
+    - spawnTime: 15
       enemyType: 3
       enemyAmount: 15
-      spawnRate: 0
+      spawnRate: 2
       spawned: 0
-    - spawnTime: 0
-      enemyType: 5
-      enemyAmount: 6
-      spawnRate: 0
-      spawned: 0
+  - packs:
     - spawnTime: 0
       enemyType: 0
-      enemyAmount: 12
-      spawnRate: 0
-      spawned: 0
-    - spawnTime: 0
-      enemyType: 2
-      enemyAmount: 4
-      spawnRate: 0
-      spawned: 0
-    - spawnTime: 0
-      enemyType: 0
-      enemyAmount: 12
-      spawnRate: 0
+      enemyAmount: 10
+      spawnRate: 0.3
       spawned: 0
     - spawnTime: 0
       enemyType: 2
       enemyAmount: 6
-      spawnRate: 0
+      spawnRate: 0.2
       spawned: 0
     - spawnTime: 0
       enemyType: 5
-      enemyAmount: 12
-      spawnRate: 0
-      spawned: 0
-    - spawnTime: 0
-      enemyType: 0
-      enemyAmount: 12
-      spawnRate: 0
-      spawned: 0
-    - spawnTime: 0
-      enemyType: 2
-      enemyAmount: 12
-      spawnRate: 0
-      spawned: 0
-    - spawnTime: 0
-      enemyType: 5
-      enemyAmount: 15
-      spawnRate: 0
+      enemyAmount: 10
+      spawnRate: 0.25
       spawned: 0
     - spawnTime: 0
       enemyType: 3
-      enemyAmount: 30
-      spawnRate: 0
+      enemyAmount: 10
+      spawnRate: 0.25
       spawned: 0
-  basicEn: 0
-  HeavyEn: 0
-  HordeEn: 0
+  basicEn: 1
+  HeavyEn: 1
+  HordeEn: 1
   SkateEn: 0
-  AerealEn: 0
-  basicDef: 0
-  HeavyDef: 0
-  MoneyDef: 0
-  PoisonDef: 0
-  AerealDef: 0
-  Bomb: 0
+  AerealEn: 1
+  basicDef: 1
+  HeavyDef: 1
+  MoneyDef: 1
+  PoisonDef: 1
+  AerealDef: 1
+  Bomb: 1
 --- !u!114 &96266349
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1680,7 +1530,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 140904411}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 200, y: 0, z: 0}
+  m_LocalPosition: {x: 300, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 849561349}
@@ -1716,101 +1566,113 @@ MonoBehaviour:
     - spawnTime: 0
       enemyType: 0
       enemyAmount: 10
-      spawnRate: 0
+      spawnRate: 0.6
       spawned: 0
-    - spawnTime: 0
-      enemyType: 2
-      enemyAmount: 2
-      spawnRate: 0
-      spawned: 0
-    - spawnTime: 0
-      enemyType: 3
-      enemyAmount: 10
-      spawnRate: 0
-      spawned: 0
-    - spawnTime: 0
+    - spawnTime: 5
       enemyType: 5
-      enemyAmount: 1
-      spawnRate: 0
+      enemyAmount: 3
+      spawnRate: 0.4
       spawned: 0
   - packs:
     - spawnTime: 0
       enemyType: 0
       enemyAmount: 15
-      spawnRate: 0
+      spawnRate: 0.5
       spawned: 0
+    - spawnTime: 15
+      enemyType: 2
+      enemyAmount: 2
+      spawnRate: 0.4
+      spawned: 0
+    - spawnTime: 20
+      enemyType: 5
+      enemyAmount: 6
+      spawnRate: 0.6
+      spawned: 0
+  - packs:
+    - spawnTime: 0
+      enemyType: 2
+      enemyAmount: 3
+      spawnRate: 0.4
+      spawned: 0
+    - spawnTime: 8
+      enemyType: 0
+      enemyAmount: 8
+      spawnRate: 0.2
+      spawned: 0
+    - spawnTime: 12
+      enemyType: 3
+      enemyAmount: 6
+      spawnRate: 4
+      spawned: 0
+    - spawnTime: 12
+      enemyType: 5
+      enemyAmount: 5
+      spawnRate: 0.5
+      spawned: 0
+    - spawnTime: 12
+      enemyType: 2
+      enemyAmount: 3
+      spawnRate: 0.5
+      spawned: 0
+  - packs:
+    - spawnTime: 0
+      enemyType: 5
+      enemyAmount: 10
+      spawnRate: 0.4
+      spawned: 0
+    - spawnTime: 6
+      enemyType: 0
+      enemyAmount: 10
+      spawnRate: 0.6
+      spawned: 0
+    - spawnTime: 8
+      enemyType: 2
+      enemyAmount: 3
+      spawnRate: 0.2
+      spawned: 0
+    - spawnTime: 12
+      enemyType: 3
+      enemyAmount: 8
+      spawnRate: 1
+      spawned: 0
+    - spawnTime: 12
+      enemyType: 0
+      enemyAmount: 8
+      spawnRate: 1
+      spawned: 0
+  - packs:
     - spawnTime: 0
       enemyType: 2
       enemyAmount: 4
-      spawnRate: 0
+      spawnRate: 0.6
       spawned: 0
-    - spawnTime: 0
-      enemyType: 3
-      enemyAmount: 20
-      spawnRate: 0
-      spawned: 0
-    - spawnTime: 0
-      enemyType: 2
-      enemyAmount: 6
-      spawnRate: 0
-      spawned: 0
-    - spawnTime: 0
-      enemyType: 5
-      enemyAmount: 6
-      spawnRate: 0
-      spawned: 0
-  - packs:
-    - spawnTime: 0
+    - spawnTime: 5
       enemyType: 0
-      enemyAmount: 20
-      spawnRate: 0
+      enemyAmount: 8
+      spawnRate: 0.6
       spawned: 0
-    - spawnTime: 0
-      enemyType: 2
-      enemyAmount: 5
-      spawnRate: 0
-      spawned: 0
-    - spawnTime: 0
-      enemyType: 3
-      enemyAmount: 20
-      spawnRate: 0
-      spawned: 0
-    - spawnTime: 0
+    - spawnTime: 5
       enemyType: 5
-      enemyAmount: 15
-      spawnRate: 0
+      enemyAmount: 8
+      spawnRate: 0.6
       spawned: 0
-    - spawnTime: 0
-      enemyType: 2
-      enemyAmount: 10
-      spawnRate: 0
-      spawned: 0
-    - spawnTime: 0
-      enemyType: 0
-      enemyAmount: 20
-      spawnRate: 0
-      spawned: 0
-    - spawnTime: 0
-      enemyType: 5
-      enemyAmount: 20
-      spawnRate: 0
-      spawned: 0
-    - spawnTime: 0
+    - spawnTime: 15
       enemyType: 3
-      enemyAmount: 20
-      spawnRate: 0
+      enemyAmount: 8
+      spawnRate: 2
       spawned: 0
-  basicEn: 0
-  HeavyEn: 0
-  HordeEn: 0
+  basicEn: 1
+  HeavyEn: 1
+  HordeEn: 1
   SkateEn: 0
-  AerealEn: 0
-  basicDef: 0
-  HeavyDef: 0
-  MoneyDef: 0
-  PoisonDef: 0
-  AerealDef: 0
-  Bomb: 0
+  AerealEn: 1
+  basicDef: 1
+  HeavyDef: 1
+  MoneyDef: 1
+  PoisonDef: 1
+  AerealDef: 1
+  Bomb: 1
 --- !u!114 &140904415
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3927,7 +3789,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 504795240}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 400, y: 0, z: 0}
+  m_LocalPosition: {x: 600, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 849561349}
@@ -3962,173 +3824,119 @@ MonoBehaviour:
   - packs:
     - spawnTime: 0
       enemyType: 0
-      enemyAmount: 40
-      spawnRate: 0
+      enemyAmount: 15
+      spawnRate: 0.5
+      spawned: 0
+    - spawnTime: 10
+      enemyType: 2
+      enemyAmount: 3
+      spawnRate: 0.5
+      spawned: 0
+  - packs:
+    - spawnTime: 0
+      enemyType: 3
+      enemyAmount: 15
+      spawnRate: 0.3
+      spawned: 0
+    - spawnTime: 5
+      enemyType: 0
+      enemyAmount: 6
+      spawnRate: 0.4
       spawned: 0
     - spawnTime: 0
       enemyType: 2
       enemyAmount: 4
-      spawnRate: 0
+      spawnRate: 0.6
+      spawned: 0
+    - spawnTime: 5
+      enemyType: 5
+      enemyAmount: 6
+      spawnRate: 0.5
+      spawned: 0
+    - spawnTime: 10
+      enemyType: 0
+      enemyAmount: 6
+      spawnRate: 0.6
+      spawned: 0
+    - spawnTime: 10
+      enemyType: 2
+      enemyAmount: 2
+      spawnRate: 0.4
+      spawned: 0
+  - packs:
+    - spawnTime: 0
+      enemyType: 2
+      enemyAmount: 6
+      spawnRate: 0.2
+      spawned: 0
+    - spawnTime: 5
+      enemyType: 5
+      enemyAmount: 8
+      spawnRate: 0.4
+      spawned: 0
+    - spawnTime: 10
+      enemyType: 0
+      enemyAmount: 10
+      spawnRate: 0.6
+      spawned: 0
+    - spawnTime: 15
+      enemyType: 3
+      enemyAmount: 10
+      spawnRate: 1
+      spawned: 0
+  - packs:
+    - spawnTime: 0
+      enemyType: 0
+      enemyAmount: 12
+      spawnRate: 0.3
       spawned: 0
     - spawnTime: 0
+      enemyType: 2
+      enemyAmount: 6
+      spawnRate: 0.3
+      spawned: 0
+    - spawnTime: 10
+      enemyType: 5
+      enemyAmount: 10
+      spawnRate: 1
+      spawned: 0
+    - spawnTime: 15
       enemyType: 3
       enemyAmount: 20
-      spawnRate: 0
+      spawnRate: 2
+      spawned: 0
+  - packs:
+    - spawnTime: 0
+      enemyType: 0
+      enemyAmount: 12
+      spawnRate: 0.3
+      spawned: 0
+    - spawnTime: 0
+      enemyType: 2
+      enemyAmount: 8
+      spawnRate: 0.2
       spawned: 0
     - spawnTime: 0
       enemyType: 5
-      enemyAmount: 4
-      spawnRate: 0
-      spawned: 0
-    - spawnTime: 0
-      enemyType: 0
-      enemyAmount: 20
-      spawnRate: 0
+      enemyAmount: 10
+      spawnRate: 0.25
       spawned: 0
     - spawnTime: 0
       enemyType: 3
       enemyAmount: 10
-      spawnRate: 0
+      spawnRate: 0.25
       spawned: 0
-  - packs:
-    - spawnTime: 0
-      enemyType: 2
-      enemyAmount: 12
-      spawnRate: 0
-      spawned: 0
-    - spawnTime: 0
-      enemyType: 0
-      enemyAmount: 40
-      spawnRate: 0
-      spawned: 0
-    - spawnTime: 0
-      enemyType: 2
-      enemyAmount: 4
-      spawnRate: 0
-      spawned: 0
-    - spawnTime: 0
-      enemyType: 3
-      enemyAmount: 40
-      spawnRate: 0
-      spawned: 0
-    - spawnTime: 0
-      enemyType: 5
-      enemyAmount: 16
-      spawnRate: 0
-      spawned: 0
-  - packs:
-    - spawnTime: 0
-      enemyType: 0
-      enemyAmount: 40
-      spawnRate: 0
-      spawned: 0
-    - spawnTime: 0
-      enemyType: 2
-      enemyAmount: 12
-      spawnRate: 0
-      spawned: 0
-    - spawnTime: 0
-      enemyType: 5
-      enemyAmount: 24
-      spawnRate: 0
-      spawned: 0
-    - spawnTime: 0
-      enemyType: 0
-      enemyAmount: 40
-      spawnRate: 0
-      spawned: 0
-    - spawnTime: 0
-      enemyType: 2
-      enemyAmount: 4
-      spawnRate: 0
-      spawned: 0
-    - spawnTime: 0
-      enemyType: 3
-      enemyAmount: 40
-      spawnRate: 0
-      spawned: 0
-    - spawnTime: 0
-      enemyType: 5
-      enemyAmount: 16
-      spawnRate: 0
-      spawned: 0
-    - spawnTime: 0
-      enemyType: 2
-      enemyAmount: 24
-      spawnRate: 0
-      spawned: 0
-    - spawnTime: 0
-      enemyType: 3
-      enemyAmount: 40
-      spawnRate: 0
-      spawned: 0
-  - packs:
-    - spawnTime: 0
-      enemyType: 2
-      enemyAmount: 20
-      spawnRate: 0
-      spawned: 0
-    - spawnTime: 0
-      enemyType: 0
-      enemyAmount: 40
-      spawnRate: 0
-      spawned: 0
-    - spawnTime: 0
-      enemyType: 3
-      enemyAmount: 40
-      spawnRate: 0
-      spawned: 0
-    - spawnTime: 0
-      enemyType: 5
-      enemyAmount: 24
-      spawnRate: 0
-      spawned: 0
-    - spawnTime: 0
-      enemyType: 2
-      enemyAmount: 12
-      spawnRate: 0
-      spawned: 0
-    - spawnTime: 0
-      enemyType: 0
-      enemyAmount: 40
-      spawnRate: 0
-      spawned: 0
-    - spawnTime: 0
-      enemyType: 2
-      enemyAmount: 4
-      spawnRate: 0
-      spawned: 0
-    - spawnTime: 0
-      enemyType: 3
-      enemyAmount: 40
-      spawnRate: 0
-      spawned: 0
-    - spawnTime: 0
-      enemyType: 5
-      enemyAmount: 16
-      spawnRate: 0
-      spawned: 0
-    - spawnTime: 0
-      enemyType: 2
-      enemyAmount: 24
-      spawnRate: 0
-      spawned: 0
-    - spawnTime: 0
-      enemyType: 3
-      enemyAmount: 40
-      spawnRate: 0
-      spawned: 0
-  basicEn: 0
-  HeavyEn: 0
-  HordeEn: 0
+  basicEn: 1
+  HeavyEn: 1
+  HordeEn: 1
   SkateEn: 0
-  AerealEn: 0
-  basicDef: 0
-  HeavyDef: 0
-  MoneyDef: 0
-  PoisonDef: 0
-  AerealDef: 0
-  Bomb: 0
+  AerealEn: 1
+  basicDef: 1
+  HeavyDef: 1
+  MoneyDef: 1
+  PoisonDef: 1
+  AerealDef: 1
+  Bomb: 1
 --- !u!114 &504795244
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4314,11 +4122,11 @@ RectTransform:
   m_Father: {fileID: 461274310}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 40, y: 30}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 30, y: -30}
   m_SizeDelta: {x: 162, y: 123}
-  m_Pivot: {x: 0, y: 0}
+  m_Pivot: {x: 0, y: 1}
 --- !u!114 &610975887
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5215,7 +5023,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0.5}
   m_AnchorMax: {x: 1, y: 0.5}
-  m_AnchoredPosition: {x: 234.00005, y: -134.99998}
+  m_AnchoredPosition: {x: 234.00005, y: -140.00002}
   m_SizeDelta: {x: 124, y: 124}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &762935807
@@ -7134,6 +6942,17 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 5019994793483360252, guid: 809100f64aeef954a9fa36457977eee9, type: 3}
   m_PrefabInstance: {fileID: 4169412794221986153}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &991896027 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3033594766834045289, guid: 809100f64aeef954a9fa36457977eee9, type: 3}
+  m_PrefabInstance: {fileID: 4169412794221986153}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 991896026}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6fe89087958c44f428641850f0896c96, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!224 &991896029 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 5019994793483360251, guid: 809100f64aeef954a9fa36457977eee9, type: 3}
@@ -7672,7 +7491,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1108740207}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d1277ebb788401445bad88337a5cac9a, type: 3}
   m_Name: 
@@ -7698,6 +7517,7 @@ MonoBehaviour:
   upgradeCostText: {fileID: 0}
   numberOfWaves: {fileID: 0}
   currentWave: {fileID: 0}
+  lesson: {fileID: 0}
   basicTowerSprite: {fileID: 0}
   psiquicTowerSprite: {fileID: 0}
   heavyTowerSprite: {fileID: 0}
@@ -10006,7 +9826,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0.5}
   m_AnchorMax: {x: 1, y: 0.5}
-  m_AnchoredPosition: {x: 91.999954, y: -135}
+  m_AnchoredPosition: {x: 91.999954, y: -140}
   m_SizeDelta: {x: 124, y: 124}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1416404355
@@ -13394,7 +13214,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0.5}
   m_AnchorMax: {x: 1, y: 0.5}
-  m_AnchoredPosition: {x: 233.99997, y: -270}
+  m_AnchoredPosition: {x: 233.99997, y: -278}
   m_SizeDelta: {x: 124, y: 124}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1865583564
@@ -14048,7 +13868,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0.5}
   m_AnchorMax: {x: 1, y: 0.5}
-  m_AnchoredPosition: {x: 91.999954, y: -270}
+  m_AnchoredPosition: {x: 91.999954, y: -278}
   m_SizeDelta: {x: 124, y: 124}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1961055301
@@ -14703,7 +14523,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f6174b804f1249c4cac63a7acfd0e368, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  offset: {x: 20, y: 150, z: -300}
+  offset: {x: 21, y: 150, z: -300}
 --- !u!108 &3517679019175129668
 Light:
   m_ObjectHideFlags: 0
@@ -14902,12 +14722,20 @@ PrefabInstance:
       value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 5019994791990721947, guid: 809100f64aeef954a9fa36457977eee9, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 991896027}
+    - target: {fileID: 5019994791990721947, guid: 809100f64aeef954a9fa36457977eee9, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
       value: 
       objectReference: {fileID: 1474084401}
     - target: {fileID: 5019994791990721947, guid: 809100f64aeef954a9fa36457977eee9, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_CallState
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5019994791990721947, guid: 809100f64aeef954a9fa36457977eee9, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: previousLesson
       objectReference: {fileID: 0}
     - target: {fileID: 5019994791990721947, guid: 809100f64aeef954a9fa36457977eee9, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
@@ -14974,12 +14802,20 @@ PrefabInstance:
       value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 5019994793157094935, guid: 809100f64aeef954a9fa36457977eee9, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 991896027}
+    - target: {fileID: 5019994793157094935, guid: 809100f64aeef954a9fa36457977eee9, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
       value: 
       objectReference: {fileID: 1474084401}
     - target: {fileID: 5019994793157094935, guid: 809100f64aeef954a9fa36457977eee9, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_CallState
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5019994793157094935, guid: 809100f64aeef954a9fa36457977eee9, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: nextLesson
       objectReference: {fileID: 0}
     - target: {fileID: 5019994793157094935, guid: 809100f64aeef954a9fa36457977eee9, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName

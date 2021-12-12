@@ -16,8 +16,8 @@ public class Pack
     public float spawnTime;
     public EnemyType enemyType;
     public int enemyAmount; // Number of enemys will be spawned
-    public float spawnRate;
+    public float spawnRate = 1;
 
-    [HideInInspector]
+    //[HideInInspector]
     public bool spawned;
 }

@@ -23,19 +23,13 @@ public class TutorialMenu : MonoBehaviour
     public List<Sprite> lessonImages;
 
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         fixTextHeader = "lesson";
         fixTextDescription = "description";
         lesson = 1;
         UpdateKeys();
         UpdateImages();
-
-}
-
-    // Update is called once per frame
-    void Update()
-    {
 
     }
 
@@ -81,6 +75,14 @@ public class TutorialMenu : MonoBehaviour
 
     public void UpdateImages()
     {
-        imageContainer.sprite = lessonImages[lesson-1];
+        imageContainer.sprite = lessonImages[lesson - 1];
+    }
+
+    public void StartWithSpecificKey(int key)
+    {
+        lesson = key;
+        UpdateKeys();
+        UpdateImages();
+        UpdateTexts();
     }
 }

@@ -18,6 +18,7 @@ public class LevelManager : MonoBehaviour
 
     [HideInInspector]
     public bool ready = false;
+    public bool gameFinished;
 
     //References
     [HideInInspector]
@@ -78,6 +79,7 @@ public class LevelManager : MonoBehaviour
 
     private void Start()
     {
+        gameFinished = false;
         OnGameStart?.Invoke();
 
         Texture2D t = (Texture2D)GetComponent<MeshRenderer>().material.mainTexture;
