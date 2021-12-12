@@ -178,7 +178,7 @@ MonoBehaviour:
   structureName: heavyTower
   structureId: 2
   canHitSkyEnemies: 0
-  fireRate: 0.4
+  fireRate: 0.3
   damage: 30
   attackRange: 6
   maintenanceCost: 8

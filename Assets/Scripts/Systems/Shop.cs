@@ -25,7 +25,7 @@ public class Shop : MonoBehaviour
     public void setShopIndex(int newIndex)
     {
         shopIndex = newIndex;
-        selectedDefenseBlueprint = defenseBlueprints[shopIndex];
+        selectedDefenseBlueprint = defenseBlueprints[shopIndex-1];
         purchaseDefense();
     }
 

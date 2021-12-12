@@ -140,8 +140,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   size: 1
-  health: 100
-  canLoseHealth: 0
   level: 0
   blockType: 0
   structureName: bomb
@@ -149,8 +147,10 @@ MonoBehaviour:
   canHitSkyEnemies: 1
   fireRate: 0
   damage: 40
-  attackRange: 4
-  maintenanceCost: 5
+  attackRange: 3
+  maintenanceCost: 0
+  isWorking: 1
+  notWorkingImage: {fileID: 0}
   canBreakWorld: 1
   explosionParticles: {fileID: 4964779859338955144, guid: 8a2ab21b4543bb14ebee8f6ff1221879, type: 3}
   soundName: bombSound

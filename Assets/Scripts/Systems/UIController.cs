@@ -187,21 +187,21 @@ public class UIController : MonoBehaviour
                 Time.timeScale = 0;
                 break;
             case GameMenu.EndgameMenuLoose:
+                LevelManager.instance.gameFinished = true;
                 endgameMenuLoose.SetActive(true);
                 upgradeMenu.SetActive(false);
                 pauseMenu.SetActive(false);
                 pauseButton.SetActive(false);
-                Time.timeScale = 1;
-                LevelManager.instance.ready = false;
+                Time.timeScale = 0;
+
                 break;
             case GameMenu.EndgameMenuWin:
+                LevelManager.instance.gameFinished = true;
                 endgameMenuWin.SetActive(true);
                 upgradeMenu.SetActive(false);
                 pauseMenu.SetActive(false);
                 pauseButton.SetActive(false);
-                GameObject.Find("FinalScoreText").GetComponent<TextMeshProUGUI>().text = LevelStats.instance.currentScore.ToString();
-                Time.timeScale = 1;
-                LevelManager.instance.ready = false;
+                Time.timeScale =0;
                 break;
             case GameMenu.Game:
                 shopMenu.SetActive(true);
@@ -527,6 +527,11 @@ public class UIController : MonoBehaviour
         lesson.SetActive(true);
     }
 
+    public void ShowTowerData(int index)
+    {
+        lesson.SetActive(true);
+        lesson.GetComponent<TutorialMenu>().StartWithSpecificKey(index);
+    }
 }
 
 

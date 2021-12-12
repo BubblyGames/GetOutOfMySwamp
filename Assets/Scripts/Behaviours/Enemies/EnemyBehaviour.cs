@@ -55,9 +55,9 @@ public abstract class EnemyBehaviour : MonoBehaviour
 
     protected virtual void Update()
     {
-        if (!LevelManager.instance.ready) return;
         if (path == null)
             return;
+        if (LevelManager.instance.gameFinished) return;
 
         if (nextIndexPath >= path.Length) { Destroy(this.gameObject); return; }
 

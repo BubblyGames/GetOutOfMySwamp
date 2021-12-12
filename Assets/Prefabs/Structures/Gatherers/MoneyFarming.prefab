@@ -64,7 +64,7 @@ MonoBehaviour:
   blockType: 1
   structureName: moneyGatherer
   structureId: 4
-  resourceGatheredEachCicle: 26
+  resourceGatheredEachCicle: 20
   timeToGatherResource: 1
   timerToGetResource: 0
   totalResourceGathered: 0
