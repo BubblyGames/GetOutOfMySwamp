@@ -2534,7 +2534,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 562102009}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9302d0ed5395ab647837839704721711, type: 3}
   m_Name: 
@@ -6468,7 +6468,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1271018115}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9302d0ed5395ab647837839704721711, type: 3}
   m_Name: 
@@ -7134,7 +7134,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1377825646}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9302d0ed5395ab647837839704721711, type: 3}
   m_Name: 
@@ -12027,38 +12027,38 @@ PrefabInstance:
     - target: {fileID: 1748215720949626942, guid: fc31fd70b5945084fb72fefe99f91ba3, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 1271018117}
+      objectReference: {fileID: 1328887940}
     - target: {fileID: 1748215720949626942, guid: fc31fd70b5945084fb72fefe99f91ba3, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: ClickAnimation
+      value: Restart
       objectReference: {fileID: 0}
     - target: {fileID: 1748215720949626942, guid: fc31fd70b5945084fb72fefe99f91ba3, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: ClickButton, Assembly-CSharp
+      value: UIController, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 2950978136888730239, guid: fc31fd70b5945084fb72fefe99f91ba3, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 1377825648}
+      objectReference: {fileID: 1328887940}
     - target: {fileID: 2950978136888730239, guid: fc31fd70b5945084fb72fefe99f91ba3, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: ClickAnimation
+      value: GoToNextLevel
       objectReference: {fileID: 0}
     - target: {fileID: 2950978136888730239, guid: fc31fd70b5945084fb72fefe99f91ba3, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: ClickButton, Assembly-CSharp
+      value: UIController, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 5591948442884877452, guid: fc31fd70b5945084fb72fefe99f91ba3, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 562102011}
+      objectReference: {fileID: 1328887940}
     - target: {fileID: 5591948442884877452, guid: fc31fd70b5945084fb72fefe99f91ba3, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: ClickAnimation
+      value: Exit
       objectReference: {fileID: 0}
     - target: {fileID: 5591948442884877452, guid: fc31fd70b5945084fb72fefe99f91ba3, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: ClickButton, Assembly-CSharp
+      value: UIController, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 5772048937009351656, guid: fc31fd70b5945084fb72fefe99f91ba3, type: 3}
       propertyPath: m_Pivot.x
@@ -12201,9 +12201,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 3538565075234769580}
-        m_TargetAssemblyTypeName: ClickButton, Assembly-CSharp
-        m_MethodName: ClickAnimation
+      - m_Target: {fileID: 1328887940}
+        m_TargetAssemblyTypeName: UIController, Assembly-CSharp
+        m_MethodName: Exit
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -12261,7 +12261,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3538565075234769579}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9302d0ed5395ab647837839704721711, type: 3}
   m_Name: 
@@ -12706,9 +12706,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 3538565076641693522}
-        m_TargetAssemblyTypeName: ClickButton, Assembly-CSharp
-        m_MethodName: ClickAnimation
+      - m_Target: {fileID: 1328887940}
+        m_TargetAssemblyTypeName: UIController, Assembly-CSharp
+        m_MethodName: Restart
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -12766,7 +12766,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3538565076641693521}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9302d0ed5395ab647837839704721711, type: 3}
   m_Name: 
