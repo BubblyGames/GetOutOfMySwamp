@@ -81,7 +81,7 @@ public class LevelStats : MonoBehaviour
     public void receiveDamage(int damageTaken)
     {
         Sequence damage = DOTween.Sequence();
-        damage.Append(hpBarBG.DOColor(new Color(1, 0, 0), 0.5f));
+        damage.Append(hpBarBG.DOColor(InputManager.instance.wrongColor, 0.5f));
         damage.AppendCallback(() =>
         {
             currentBaseHealthPoints -= damageTaken;

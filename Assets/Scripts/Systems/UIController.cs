@@ -200,7 +200,7 @@ public class UIController : MonoBehaviour
                 pauseMenu.SetActive(false);
                 pauseButton.SetActive(false);
                 GameObject.Find("FinalScoreText").GetComponent<TextMeshProUGUI>().text = LevelStats.instance.currentScore.ToString();
-                Time.timeScale =0;
+                Time.timeScale = 0;
                 //LevelManager.instance.ready = false;
                 break;
             case GameMenu.Game:
@@ -512,7 +512,8 @@ public class UIController : MonoBehaviour
 
     public void SetUpgradeMenuActive(bool active)
     {
-        upgradeMenu.SetActive(active);
+        if (upgradeMenu)
+            upgradeMenu.SetActive(active);
     }
 
     private void OnDestroy()
