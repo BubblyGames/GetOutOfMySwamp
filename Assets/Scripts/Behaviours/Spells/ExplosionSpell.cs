@@ -15,11 +15,14 @@ public class ExplosionSpell : SpellBehaviour
         pos.y = (int)transform.position.y;
         pos.z = (int)transform.position.z;
 
-        LevelManager.instance.world.SoftExplode(pos, range);
+        LevelManager.instance.world.Explode(pos, range);
 
         GameObject p = GameObject.Instantiate(particles);
         p.transform.position = transform.position;
         p.transform.rotation = transform.rotation;
+
+        if (AudioManager.instance)
+            AudioManager.instance.Play("bombSound");
 
         Destroy(gameObject);
     }
