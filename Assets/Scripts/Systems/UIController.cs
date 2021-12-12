@@ -187,21 +187,22 @@ public class UIController : MonoBehaviour
                 Time.timeScale = 0;
                 break;
             case GameMenu.EndgameMenuLoose:
+                LevelManager.instance.gameFinished = true;
                 endgameMenuLoose.SetActive(true);
                 upgradeMenu.SetActive(false);
                 pauseMenu.SetActive(false);
                 pauseButton.SetActive(false);
                 Time.timeScale = 0;
-                //LevelManager.instance.ready = false;
+
                 break;
             case GameMenu.EndgameMenuWin:
+                LevelManager.instance.gameFinished = true;
                 endgameMenuWin.SetActive(true);
                 upgradeMenu.SetActive(false);
                 pauseMenu.SetActive(false);
                 pauseButton.SetActive(false);
                 GameObject.Find("FinalScoreText").GetComponent<TextMeshProUGUI>().text = LevelStats.instance.currentScore.ToString();
                 Time.timeScale =0;
-                //LevelManager.instance.ready = false;
                 break;
             case GameMenu.Game:
                 shopMenu.SetActive(true);
