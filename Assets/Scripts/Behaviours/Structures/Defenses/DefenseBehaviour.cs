@@ -36,12 +36,17 @@ public abstract class DefenseBehaviour : Structure
 
     [SerializeField]
     [Tooltip("How much gold will be spent each second in keeping this defense active")]
-    protected int maintenanceCost = 1;
+    public int maintenanceCost = 1;
     protected float maintenanceCountdown = 1f;
 
     public bool isWorking = true;
     [SerializeField]
     protected Image notWorkingImage;
+
+    private void Start()
+    {
+        LevelStats.instance.totalMaintenance += maintenanceCost;
+    }
 
     public override void UpgradeStrucrure()
     {
@@ -64,7 +69,9 @@ public abstract class DefenseBehaviour : Structure
                         break;
                 }
             }
+            LevelStats.instance.totalMaintenance -= maintenanceCost;
             maintenanceCost += Blueprint.upgrades[level].maintenanceCostIncrease;
+            LevelStats.instance.totalMaintenance += maintenanceCost;
         }
 
         base.UpgradeStrucrure();
@@ -118,6 +125,8 @@ public abstract class DefenseBehaviour : Structure
 
     private void OnDestroy()
     {
+        LevelStats.instance.totalMaintenance -= maintenanceCost;
+
         if (UIController.instance)
         {
             if (BuildManager.instance.SelectedStructure == this)
