@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
 
-public class ScrollCard : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragHandler, IPointerClickHandler
+public class ScrollCard : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragHandler
 {
     [SerializeField] GameObject cardToSpawn;
     //[SerializeField] Material cardMaterial;
@@ -67,7 +67,12 @@ public class ScrollCard : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDr
         InputManager.instance.MouseUp();
     }
 
-    public void OnPointerClick(PointerEventData eventData)
+    /*public void OnPointerClick(PointerEventData eventData)
+    {
+        UIController.instance.ShowTowerData(indexCard);
+    }*/
+
+    public void ShowTowerData()
     {
         if (!aux)
             UIController.instance.ShowTowerData(indexCard);

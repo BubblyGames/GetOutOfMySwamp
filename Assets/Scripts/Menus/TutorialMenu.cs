@@ -6,13 +6,13 @@ using TMPro;
 
 public class TutorialMenu : MonoBehaviour
 {
-    private string fixTextHeader;
-    private string fixTextDescription;
-    private int lesson;
-    private string keyHeader;
-    private string keyDesc;
-    private string lessonText;
-    private string headerText;
+    protected string fixTextHeader;
+    protected string fixTextDescription;
+    protected int lesson;
+    protected string keyHeader;
+    protected string keyDesc;
+    protected string lessonText;
+    protected string headerText;
 
     public GameObject headerTextReader;
     public GameObject descTextReader;
@@ -27,7 +27,7 @@ public class TutorialMenu : MonoBehaviour
     {
         fixTextHeader = "lesson";
         fixTextDescription = "description";
-        lesson = 1;
+        lesson = 0;
         UpdateKeys();
         UpdateImages();
 
@@ -40,9 +40,9 @@ public class TutorialMenu : MonoBehaviour
         UpdateTexts();
     }
 
-    public void nextLesson()
+    public virtual void nextLesson()
     {
-        if (lesson <= 9)
+        if (lesson <= 8)
         {
             lesson++;
             UpdateKeys();
@@ -50,9 +50,9 @@ public class TutorialMenu : MonoBehaviour
         }
     }
 
-    public void previousLesson()
+    public virtual void previousLesson()
     {
-        if (lesson >= 2)
+        if (lesson >= 1)
         {
             lesson--;
             UpdateKeys();
@@ -60,10 +60,10 @@ public class TutorialMenu : MonoBehaviour
         }
     }
 
-    public void UpdateKeys()
+    public virtual void UpdateKeys()
     {
-        keyHeader = fixTextHeader + lesson;
-        keyDesc = fixTextDescription + lesson;
+        keyHeader = fixTextHeader + (lesson+1);
+        keyDesc = fixTextDescription + (lesson+1);
         SetNewKeys(keyHeader, keyDesc);
     }
 
@@ -75,7 +75,7 @@ public class TutorialMenu : MonoBehaviour
 
     public void UpdateImages()
     {
-        imageContainer.sprite = lessonImages[lesson - 1];
+        imageContainer.sprite = lessonImages[lesson];
     }
 
     public void StartWithSpecificKey(int key)

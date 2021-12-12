@@ -29,6 +29,7 @@ public class MoneyGatherer : Gatherer
 
     private void OnDestroy()
     {
+        LevelStats.instance.moneyPTick -= resourceGatheredEachCicle;
         if (!Application.isPlaying)
             return;
         LevelStats.instance.numberOfSpeculios--;

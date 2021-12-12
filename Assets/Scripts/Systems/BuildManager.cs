@@ -226,6 +226,10 @@ public class BuildManager : MonoBehaviour
         structure.SetNormal(normal);
         structure.Blueprint = StructureBlueprint;
 
+        DefenseBehaviour aux = structureGO.GetComponentInChildren<DefenseBehaviour>();
+        if (aux != null)
+            LevelStats.instance.totalMaintenance += aux.maintenanceCost;
+
         //Sound
         if(AudioManager.instance)
             AudioManager.instance.Play("buildSound");
