@@ -65,7 +65,23 @@ public class ShootingDefenseBehaviour : DefenseBehaviour
             return;
 
         if (cannon != null)
-            cannon.transform.LookAt(enemyTarget.transform, normal);
+        {
+            Vector3 lookDir = enemyTarget.transform.position - transform.position;
+            cannon.transform.rotation = Quaternion.LookRotation(lookDir, normal);
+            if (normal.x != 0)
+            {
+                lookDir.x = 0;
+            }
+            if (normal.y != 0)
+            {
+                lookDir.y = 0;
+            }
+            if (normal.z != 0)
+            {
+                lookDir.z = 0;
+            }
+            transform.rotation = Quaternion.LookRotation(lookDir, normal);
+        }
         else
             transform.LookAt(enemyTarget.transform, normal);
 

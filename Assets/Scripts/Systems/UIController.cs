@@ -191,8 +191,8 @@ public class UIController : MonoBehaviour
                 upgradeMenu.SetActive(false);
                 pauseMenu.SetActive(false);
                 pauseButton.SetActive(false);
-                Time.timeScale = 1;
-                LevelManager.instance.ready = false;
+                Time.timeScale = 0;
+                //LevelManager.instance.ready = false;
                 break;
             case GameMenu.EndgameMenuWin:
                 endgameMenuWin.SetActive(true);
@@ -200,8 +200,8 @@ public class UIController : MonoBehaviour
                 pauseMenu.SetActive(false);
                 pauseButton.SetActive(false);
                 GameObject.Find("FinalScoreText").GetComponent<TextMeshProUGUI>().text = LevelStats.instance.currentScore.ToString();
-                Time.timeScale = 1;
-                LevelManager.instance.ready = false;
+                Time.timeScale =0;
+                //LevelManager.instance.ready = false;
                 break;
             case GameMenu.Game:
                 shopMenu.SetActive(true);

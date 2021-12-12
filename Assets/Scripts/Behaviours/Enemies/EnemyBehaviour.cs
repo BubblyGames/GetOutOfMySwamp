@@ -54,7 +54,6 @@ public abstract class EnemyBehaviour : MonoBehaviour
     private Vector3 _smoothVelocity = Vector3.zero;
     void Update()
     {
-        if (!LevelManager.instance.ready) return;
         if (path == null)
             return;
 
@@ -114,8 +113,8 @@ public abstract class EnemyBehaviour : MonoBehaviour
             {
                 //Damage
                 LevelManager.instance.dealDamageToBase(this.damage);
-                Destroy(this.gameObject);
                 WaveController.instance.ReduceActiveEnemies(this);
+                Destroy(this.gameObject);
             }
         }
     }

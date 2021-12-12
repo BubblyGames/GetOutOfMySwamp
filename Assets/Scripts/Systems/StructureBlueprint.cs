@@ -13,7 +13,7 @@ public class StructureBlueprint
         get
         {
             if (structurePrefab.TryGetComponent<MoneyGatherer>(out MoneyGatherer moneyGatherer))
-                return creationCost + Mathf.RoundToInt(0.5f * creationCost * LevelStats.instance.numberOfSpeculios);
+                return creationCost + Mathf.RoundToInt(0.65f * creationCost * LevelStats.instance.numberOfSpeculios * LevelStats.instance.numberOfSpeculios);
 
             return creationCost;
         }
