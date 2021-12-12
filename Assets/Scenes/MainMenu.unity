@@ -1443,7 +1443,17 @@ MonoBehaviour:
     - spawnTime: 0
       enemyType: 2
       enemyAmount: 8
-      spawnRate: 0.3
+      spawnRate: 0.2
+      spawned: 0
+    - spawnTime: 0
+      enemyType: 5
+      enemyAmount: 10
+      spawnRate: 0.25
+      spawned: 0
+    - spawnTime: 0
+      enemyType: 3
+      enemyAmount: 10
+      spawnRate: 0.25
       spawned: 0
   basicEn: 1
   HeavyEn: 1

@@ -10052,7 +10052,7 @@ MonoBehaviour:
       maintenanceCostIncrease: 3
       stats:
       - statToUpgrade: 0
-        upgradeAddedValue: 5
+        upgradeAddedValue: 10
     - cost: 200
       maintenanceCostIncrease: 3
       stats:
@@ -10063,6 +10063,8 @@ MonoBehaviour:
       stats:
       - statToUpgrade: 1
         upgradeAddedValue: 0.4
+      - statToUpgrade: 0
+        upgradeAddedValue: 10
     targetDescription: ground
     rangeDescription: large
     damageDescription: high
