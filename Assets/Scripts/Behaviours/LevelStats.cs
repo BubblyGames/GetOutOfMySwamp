@@ -95,7 +95,9 @@ public class LevelStats : MonoBehaviour
 
     public void SpendMoney(int quantity)
     {
-        Color colorMoneyText = moneyText.color;
+        currentMoney -= quantity;
+        moneyText.text = currentMoney.ToString();
+        /*Color colorMoneyText = moneyText.color;
         Sequence moneyS = DOTween.Sequence();
         moneyS.Append(moneyText.DOColor(new Color(1, 0, 0), 0.5f));
         moneyS.AppendCallback(() =>
@@ -103,13 +105,15 @@ public class LevelStats : MonoBehaviour
             currentMoney -= quantity;
             moneyText.text = currentMoney.ToString();
         });
-        moneyS.Append(moneyText.DOColor(colorMoneyText, 0.5f));
+        moneyS.Append(moneyText.DOColor(colorMoneyText, 0.5f));*/
         
     }
 
     public void EarnMoney(int quantity)
     {
-        Color colorMoneyText = moneyText.color;
+        currentMoney += quantity;
+        moneyText.text = currentMoney.ToString();
+        /*Color colorMoneyText = moneyText.color;
         Sequence moneyS = DOTween.Sequence();
         moneyS.Append(moneyText.DOColor(new Color(0, 0.7f, 0), 0.5f));
         moneyS.AppendCallback(() =>
@@ -117,7 +121,7 @@ public class LevelStats : MonoBehaviour
             currentMoney += quantity;
             moneyText.text = currentMoney.ToString();
         });
-        moneyS.Append(moneyText.DOColor(colorMoneyText, 0.5f));
+        moneyS.Append(moneyText.DOColor(colorMoneyText, 0.5f));*/
     }
 
     public void UpdateScoreText()
