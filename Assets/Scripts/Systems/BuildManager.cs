@@ -283,8 +283,8 @@ public class BuildManager : MonoBehaviour
     public void SellStructure()
     {
         Debug.Log("Selling: " + SelectedStructure.name);
-        UIController.instance.ShowMenu(UIController.GameMenu.Game);
         LevelStats.instance.EarnMoney(StructureBlueprint.sellValues[selectedStructure.GetLevel()]);
+        UIController.instance.ShowMenu(UIController.GameMenu.Game);
         SelectedStructure.Sell();
 
     }

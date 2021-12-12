@@ -486,8 +486,8 @@ public class UIController : MonoBehaviour
         }
         else
         {
-            upgradeButton.GetComponent<Button>().interactable = false;
             upgradeCostText.GetComponent<TextMeshProUGUI>().text = "MAX";
+            upgradeButton.GetComponent<Button>().interactable = false;
         }
 
         sellValueText.GetComponent<TextMeshProUGUI>().text = structures[structureId].sellValues[level].ToString();

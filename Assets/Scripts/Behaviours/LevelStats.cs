@@ -26,7 +26,7 @@ public class LevelStats : MonoBehaviour
     
     [SerializeField] public int currentScore; //Score the player has
 
-    [HideInInspector] public int numberOfSpeculios = 0; //Score the player has
+    [HideInInspector] public int numberOfSpeculios = 0;
 
     public int CurrentMoney { get => currentMoney; set => currentMoney = value; }
     public int CurrentBaseHealthPoints { get => currentBaseHealthPoints; set => currentBaseHealthPoints = value; }
