@@ -205,7 +205,7 @@ public class TextManager : MonoBehaviour
         englishDictionary.Add("tutorial5", "Move the cube II");
         englishDictionary.Add("Tdescription5", "You can also <b><color=#C27203>zoom in and out</color></b>, using the <b><color=#C27203>mouse wheel</color></b> on <b><color=#C27203>PC</color></b> or using <b><color=#C27203>two fingers</color></b> on <b><color=#C27203>mobile</color></b>.");
         englishDictionary.Add("tutorial6", "Reach the goal");
-        englishDictionary.Add("Tdescription6", "The <b><color=#C27203>game�s objective</color></b> is to <b><color=#C27203>defend your pond</color></b> from all the approching enemies. If they get in the pond, you'll lose some health. If you <b><color=#C27203>lose all of your health</color></b>, it's game over.");
+        englishDictionary.Add("Tdescription6", "The <b><color=#C27203>game's objective</color></b> is to <b><color=#C27203>defend your pond</color></b> from all the approching enemies. If they get in the pond, you'll lose some health. If you <b><color=#C27203>lose all of your health</color></b>, it's game over.");
         englishDictionary.Add("tutorial7", "Catapult");
         englishDictionary.Add("Tdescription7", "If you <b><color=#C27203>deploy your turrets</color></b> in a way that the enemies <b><color=#C27203>can't advance</color></b> in a route, they will throw a <b><color=#C27203>proyectile</color></b> to your towers, destroying them and also part of the cube.");
 
@@ -219,7 +219,7 @@ public class TextManager : MonoBehaviour
         spanishDictionary.Add("health", "Vida");
         spanishDictionary.Add("score", "Puntos");
         spanishDictionary.Add("money", "Dinero");
-        spanishDictionary.Add("settings", "Configuraci�n");
+        spanishDictionary.Add("settings", "Configuración");
         spanishDictionary.Add("language", "Idioma");
         spanishDictionary.Add("exit", "Salir");
         spanishDictionary.Add("finish", "Finalizar");
@@ -229,21 +229,21 @@ public class TextManager : MonoBehaviour
         spanishDictionary.Add("round", "RONDA");
         spanishDictionary.Add("nextLevel", "Siguiente nivel");
         spanishDictionary.Add("retry", "Reintentar");
-        spanishDictionary.Add("loose", "�Has perdido!");
-        spanishDictionary.Add("win", "�Has ganado!");
+        spanishDictionary.Add("loose", "¡Has perdido!");
+        spanishDictionary.Add("win", "¡Has ganado!");
         spanishDictionary.Add("level1", "Pantano");
         spanishDictionary.Add("level2", "Tundra");
-        spanishDictionary.Add("level3", "Oto�o");
+        spanishDictionary.Add("level3", "Otoño");
         spanishDictionary.Add("level4", "Cerezo");
         spanishDictionary.Add("level5", "Nevado");
         spanishDictionary.Add("sound", "Sonido");
         spanishDictionary.Add("lessons", "Lecciones");
-        spanishDictionary.Add("levelInfoText", "H�bitat natural de:");
+        spanishDictionary.Add("levelInfoText", "Hábitat natural de:");
 
         //upgrade texts in spanish
         spanishDictionary.Add("target", "Objetivo");
         spanishDictionary.Add("range", "Rango");
-        spanishDictionary.Add("damage", "Da�o");
+        spanishDictionary.Add("damage", "Daño");
         spanishDictionary.Add("fireRate", "Vel. Disparo");
         spanishDictionary.Add("moneyGathered", "Dinero +");
         spanishDictionary.Add("sell", "Vender");
@@ -258,16 +258,16 @@ public class TextManager : MonoBehaviour
         spanishDictionary.Add("medium", "Medio");
         spanishDictionary.Add("low", "Bajo");
         spanishDictionary.Add("slow", "Lento");
-        spanishDictionary.Add("fast", "R�pido");
+        spanishDictionary.Add("fast", "Rápido");
         spanishDictionary.Add("high", "Alto");
         spanishDictionary.Add("short", "Corto");
 
         //credits text in spanish
-        spanishDictionary.Add("credits", "Cr�ditos");
+        spanishDictionary.Add("credits", "Créditos");
         spanishDictionary.Add("developed", "Desarrollado por:");
-        spanishDictionary.Add("gonzalo", "Productor, Dise�ador, Publicidad");
+        spanishDictionary.Add("gonzalo", "Productor, Diseñador, Publicidad");
         spanishDictionary.Add("marta", "Artista");
-        spanishDictionary.Add("alberto", "Dise�ador");
+        spanishDictionary.Add("alberto", "Diseñador");
         spanishDictionary.Add("daniel", "Programador");
         spanishDictionary.Add("adrian", "Programador, Publicidad");
         spanishDictionary.Add("joy", "Programador");
@@ -283,42 +283,42 @@ public class TextManager : MonoBehaviour
         spanishDictionary.Add("mountainTower", "Albatro");
 
         //descriptions of lessons in Spanish
-        spanishDictionary.Add("lesson1", "Lecci�n 1");
-        spanishDictionary.Add("description1", "Las <b><color=#C27203>Hermanas Flor y Fleta</color></b> son la defensa m�s barata, pero no por ello la menos �til. Su nivel de <b><color=#C27203>ataque medio</color></b> combinado con su <b><color=#C27203>velocidad media de ataque</color></b> puede salvarte de muchos apuros.");
-        spanishDictionary.Add("lesson2", "Lecci�n 2");
-        spanishDictionary.Add("description2", "<b><color=#C27203>Beerhouse</color></b> es la defensa perfecta contra enemigos r�pidos. Aunque tiene poco rango y da�o, su <b><color=#C27203>efecto ralentizador</color></b>, combinado con otras defensas, puede darte la victoria.");
-        spanishDictionary.Add("lesson3", "Lecci�n 3");
-        spanishDictionary.Add("description3", "<b><color=#C27203>Batracius</color></b> cuenta con una <b><color=#C27203>velocidad de disparo muy lenta</color></b>, pero su alto alcance y su <b><color=#C27203>demoledor da�o</color></b> directo pueden ser decisivos. Y aunque no de en el blanco, no pasa nada. El impacto tambien hace <b><color=#C27203>da�o en �rea</color></b>.");
-        spanishDictionary.Add("lesson4", "Lecci�n 4");
-        spanishDictionary.Add("description4", "<b><color=#C27203>Especulio</color></b> rehuye de combatir. Prefiere estar centrado en <b><color=#C27203>recaudar dinero</color></b> para mantener en funcionamiento las defensas ya constru�das. �salo sabiamente.");
-        spanishDictionary.Add("lesson5", "Lecci�n 5");
-        spanishDictionary.Add("description5", "<b><color=#C27203>Albatro</color></b> espera, colocado <b><color=#C27203>sobre las rocas</color></b> y <b><color=#C27203>apuntando al cielo</color></b>. Los enemigos deber�n tener siempre los pies en la tierra cerca de �l o sufrir�n las consecuencias.");
-        spanishDictionary.Add("lesson6", "Lecci�n 6");
-        spanishDictionary.Add("description6", "�BUM! ser� lo �ltimo que escuchar�n tus enemigos. Adem�s <b><color=#C27203>Petaseta</color></b> trae un 2x1 porque dejar� a los enemigos <b><color=#C27203>aturdidos</color></b> y se mover�n m�s lento (si sobreviven).");
-        spanishDictionary.Add("lesson7", "Lecci�n 7");
-        spanishDictionary.Add("description7", "<b><color=#6100b4>Gepe</color></b> tiene una esperanza de <b><color=#6100b4>vida y velocidad promedias</color></b>, aunque no te conf�es. Veremos cuanto aguanta contra nuestras defensas.");
-        spanishDictionary.Add("lesson8", "Lecci�n 8");
-        spanishDictionary.Add("description8", "<b><color=#6100b4>Gunther</color></b> es <b><color=#6100b4>lento</color></b>, pesado, pero aguanta muy bien los golpes. Tiene <b><color=#6100b4>bastante vida</color></b> y sirve de escudo para el resto de enemigos, as� que ten cuidado.");
-        spanishDictionary.Add("lesson9", "Lecci�n 9");
-        spanishDictionary.Add("description9", "Dicen que los cobardes atacan en grupo. Los <b><color=#6100b4>Hermanos Zuleta</color></b> son esos cobardes. Tienen <b><color=#6100b4>poca vida</color></b>, pero son muy <b><color=#6100b4>escurridizas</color></b>. �Que no escape ni uno!");
-        spanishDictionary.Add("lesson10", "Lecci�n 10");
-        spanishDictionary.Add("description10", "Desde el <b><color=#6100b4>cielo</color></b> se acerca otro tipo de rana sucia, m�s dif�cil de alcanzar. Su nombre es <b><color=#6100b4>Doolittle</color></b>, que no Stuart. Pilla un <b><color=#6100b4>Albatro</color></b> r�pido, no las vayas a perder.");
+        spanishDictionary.Add("lesson1", "Lección 1");
+        spanishDictionary.Add("description1", "Las <b><color=#C27203>Hermanas Flor y Fleta</color></b> son la defensa más barata, pero no por ello la menos útil. Su nivel de <b><color=#C27203>ataque medio</color></b> combinado con su <b><color=#C27203>velocidad media de ataque</color></b> puede salvarte de muchos apuros.");
+        spanishDictionary.Add("lesson2", "Lección 2");
+        spanishDictionary.Add("description2", "<b><color=#C27203>Beerhouse</color></b> es la defensa perfecta contra enemigos rápidos. Aunque tiene poco rango y daño, su <b><color=#C27203>efecto ralentizador</color></b>, combinado con otras defensas, puede darte la victoria.");
+        spanishDictionary.Add("lesson3", "Lección 3");
+        spanishDictionary.Add("description3", "<b><color=#C27203>Batracius</color></b> cuenta con una <b><color=#C27203>velocidad de disparo muy lenta</color></b>, pero su alto alcance y su <b><color=#C27203>demoledor daño</color></b> directo pueden ser decisivos. Y aunque no de en el blanco, no pasa nada. El impacto tambien hace <b><color=#C27203>daño en área</color></b>.");
+        spanishDictionary.Add("lesson4", "Lección 4");
+        spanishDictionary.Add("description4", "<b><color=#C27203>Especulio</color></b> rehuye de combatir. Prefiere estar centrado en <b><color=#C27203>recaudar dinero</color></b> para mantener en funcionamiento las defensas ya construídas. Úsalo sabiamente.");
+        spanishDictionary.Add("lesson5", "Lección 5");
+        spanishDictionary.Add("description5", "<b><color=#C27203>Albatro</color></b> espera, colocado <b><color=#C27203>sobre las rocas</color></b> y <b><color=#C27203>apuntando al cielo</color></b>. Los enemigos deberán tener siempre los pies en la tierra cerca de él o sufrirán las consecuencias.");
+        spanishDictionary.Add("lesson6", "Lección 6");
+        spanishDictionary.Add("description6", "¡BUM! será lo último que escucharán tus enemigos. Además <b><color=#C27203>Petaseta</color></b> trae un 2x1 porque dejará a los enemigos <b><color=#C27203>aturdidos</color></b> y se moverán más lento (si sobreviven).");
+        spanishDictionary.Add("lesson7", "Lección 7");
+        spanishDictionary.Add("description7", "<b><color=#6100b4>Gepe</color></b> tiene una esperanza de <b><color=#6100b4>vida y velocidad promedias</color></b>, aunque no te confíes. Veremos cuanto aguanta contra nuestras defensas.");
+        spanishDictionary.Add("lesson8", "Lección 8");
+        spanishDictionary.Add("description8", "<b><color=#6100b4>Gunther</color></b> es <b><color=#6100b4>lento</color></b>, pesado, pero aguanta muy bien los golpes. Tiene <b><color=#6100b4>bastante vida</color></b> y sirve de escudo para el resto de enemigos, así que ten cuidado.");
+        spanishDictionary.Add("lesson9", "Lección 9");
+        spanishDictionary.Add("description9", "Dicen que los cobardes atacan en grupo. Los <b><color=#6100b4>Hermanos Zuleta</color></b> son esos cobardes. Tienen <b><color=#6100b4>poca vida</color></b>, pero son muy <b><color=#6100b4>escurridizas</color></b>. ¡Que no escape ni uno!");
+        spanishDictionary.Add("lesson10", "Lección 10");
+        spanishDictionary.Add("description10", "Desde el <b><color=#6100b4>cielo</color></b> se acerca otro tipo de rana sucia, más difícil de alcanzar. Su nombre es <b><color=#6100b4>Doolittle</color></b>, que no Stuart. Pilla un <b><color=#6100b4>Albatro</color></b> rápido, no las vayas a perder.");
 
         //tutorial spanish
         spanishDictionary.Add("tutorial1", "Construir defensas");
-        spanishDictionary.Add("Tdescription1", "<b><color=#C27203>Presiona y arrastra</color></b> una de las tarjetas del lateral derecho en la posici�n que quieras del cubo. Antes de hacerlo, podr�s observar su <b><color=#C27203>�rea de alcance</color></b>.");
+        spanishDictionary.Add("Tdescription1", "<b><color=#C27203>Presiona y arrastra</color></b> una de las tarjetas del lateral derecho en la posición que quieras del cubo. Antes de hacerlo, podrás observar su <b><color=#C27203>área de alcance</color></b>.");
         spanishDictionary.Add("tutorial2", "Mejorar defensas");
-        spanishDictionary.Add("Tdescription2", "Para <b><color=#C27203>mejorar una torre</color></b>, t�cala y presiona el <b><color=#C27203>bot�n de mejorar</color></b>. Al mejorar una torre aumentan las estad�sticas de esta, volvi�ndose m�s eficaz.");
+        spanishDictionary.Add("Tdescription2", "Para <b><color=#C27203>mejorar una torre</color></b>, tócala y presiona el <b><color=#C27203>botón de mejorar</color></b>. Al mejorar una torre aumentan las estadísticas de esta, volviéndose más eficaz.");
         spanishDictionary.Add("tutorial3", "El cubo");
-        spanishDictionary.Add("Tdescription3", "El Cubo y los caminos de los enemigos se <b><color=#C27203>generan procedimentalmente</color></b> en cada partida. Los enemigos siempre aparecer�n en la <b><color=#C27203>cara inferior</color></b> del cubo.");
+        spanishDictionary.Add("Tdescription3", "El Cubo y los caminos de los enemigos se <b><color=#C27203>generan procedimentalmente</color></b> en cada partida. Los enemigos siempre aparecerán en la <b><color=#C27203>cara inferior</color></b> del cubo.");
         spanishDictionary.Add("tutorial4", "Mover el cubo I");
-        spanishDictionary.Add("Tdescription4", "Para <b><color=#C27203>rotar el cubo, <b><color=#C27203>presiona y arrastra</color></b> usando el <b><color=#C27203>rat�n</color></b> en el <b><color=#C27203>PC</color></b> o usando un <b><color=#C27203>dedo</color></b> en el <b><color=#C27203>m�vil</color></b>.");
+        spanishDictionary.Add("Tdescription4", "Para <b><color=#C27203>rotar el cubo, <b><color=#C27203>presiona y arrastra</color></b> usando el <b><color=#C27203>ratón</color></b> en el <b><color=#C27203>PC</color></b> o usando un <b><color=#C27203>dedo</color></b> en el <b><color=#C27203>móvil</color></b>.");
         spanishDictionary.Add("tutorial5", "Mover el cubo II");
-        spanishDictionary.Add("Tdescription5", "Adem�s, tambi�n puedes <b><color=#C27203>ampliar</color></b> el cubo usando la <b><color=#C27203>rueda del rat�n</color></b> en el <b><color=#C27203>PC</color></b> o usando <b><color=#C27203>dos dedos</color></b> en el <b><color=#C27203>m�vil</color></b>.");
+        spanishDictionary.Add("Tdescription5", "Además, también puedes <b><color=#C27203>ampliar</color></b> el cubo usando la <b><color=#C27203>rueda del ratón</color></b> en el <b><color=#C27203>PC</color></b> o usando <b><color=#C27203>dos dedos</color></b> en el <b><color=#C27203>móvil</color></b>.");
         spanishDictionary.Add("tutorial6", "El objetivo");
         spanishDictionary.Add("Tdescription6", "El <b><color=#C27203>objetivo de la partida</color></b> consiste en <b><color=#C27203>evitar que tu vida llegue a 0</color></b> antes de acabar con todas las <b><color=#C27203>oleadas</color></b> de enemigos que se dirigen al estanque.");
         spanishDictionary.Add("tutorial7", "Catapulta");
-        spanishDictionary.Add("Tdescription7", "En el caso de que crear un <b><color=#C27203>tap�n de torres</color></b> de tal manera que los enemigos les cueste avanzar en un camino, estos lanzar�n desde su estanque un <b><color=#C27203>proyectil</color></b>, rompiendo tus defensas y destruyendo parte del cubo");
+        spanishDictionary.Add("Tdescription7", "En el caso de que crear un <b><color=#C27203>tapón de torres</color></b> de tal manera que los enemigos les cueste avanzar en un camino, estos lanzarán desde su estanque un <b><color=#C27203>proyectil</color></b>, rompiendo tus defensas y destruyendo parte del cubo");
     }
 
     public void emptyGameobjectsList(bool restart)

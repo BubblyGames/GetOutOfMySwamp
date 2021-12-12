@@ -62,8 +62,8 @@ public class TutorialMenu : MonoBehaviour
 
     public void UpdateKeys()
     {
-        keyHeader = fixTextHeader + lesson;
-        keyDesc = fixTextDescription + lesson;
+        keyHeader = fixTextHeader + (lesson+1);
+        keyDesc = fixTextDescription + (lesson+1);
         SetNewKeys(keyHeader, keyDesc);
     }
 
