@@ -27,7 +27,7 @@ public class GameTutorialMenu : MonoBehaviour
     {
         fixTextHeader = "tutorial";
         fixTextDescription = "Tdescription";
-        lesson = 1;
+        lesson = 0;
         UpdateKeys();
         UpdateImages();
 
@@ -48,7 +48,7 @@ public class GameTutorialMenu : MonoBehaviour
 
     public void nextLesson()
     {
-        if (lesson <= 5)
+        if (lesson <= 4)
         {
             lesson++;
             UpdateKeys();
@@ -58,7 +58,7 @@ public class GameTutorialMenu : MonoBehaviour
 
     public void previousLesson()
     {
-        if (lesson >= 2)
+        if (lesson >= 1)
         {
             lesson--;
             UpdateKeys();
@@ -81,7 +81,7 @@ public class GameTutorialMenu : MonoBehaviour
 
     public void UpdateImages()
     {
-        imageContainer.sprite = lessonImages[lesson - 1];
+        imageContainer.sprite = lessonImages[lesson];
     }
 }
 
