@@ -651,6 +651,7 @@ public class CubeWorldGenerator : MonoBehaviour
 
                             c.blockType = BlockType.Air;
                             c.canWalk = true;
+
                             if (c.structure)
                             {
                                 Destroy(c.structure.gameObject);
@@ -1369,7 +1370,7 @@ public class CubeWorldGenerator : MonoBehaviour
 
         foreach (CellInfo cell in cells)
         {
-            if (cell.normalInt != Vector3Int.zero)
+            if (cell.isPath)
             {
                 Handles.Label(new Vector3(cell.x, cell.y, cell.z), "1");
             }

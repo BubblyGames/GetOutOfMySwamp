@@ -19,10 +19,9 @@ public class Path
         }
     }
 
-    const int MAX_SEGMENT_LENGTH = 3;
+    const int MAX_SEGMENT_LENGTH = 10;
 
     public int id = -1;
-    bool firstTime = true;
     public bool dirty = true;
     public bool initiated = false;
     public Vector3Int start = new Vector3Int();
@@ -40,7 +39,6 @@ public class Path
 
     Node result;
 
-    int insertedMidpoints = 0;
     int currentStep = 1;
 
     public Path(CubeWorldGenerator world)
@@ -52,7 +50,6 @@ public class Path
     {
         //When this function is called, it's important that the midpoints have already been added
 
-        insertedMidpoints = 0;
         currentStep = 1;
 
         closedList = new List<Node>();
@@ -63,7 +60,7 @@ public class Path
             //Check if it's floating
             if (world.CheckIfFloating(m.cell))
             {
-                Debug.Log("Floating");
+                //Debug.Log("Floating");
                 CellInfo c;
                 c = world.GetCellUnderWithGravity(m.cell);
                 if (c == null)
@@ -89,8 +86,6 @@ public class Path
         end = midPoints[midPoints.Count() - 1].cell.GetPosInt();
 
         midpointsCopy = new List<Midpoint>(midPoints);
-        midPoints.Clear();
-        AddMidpoint(midpointsCopy[0]);
 
         result = new Node(world.GetCell(start));
         result.isMidpoint = true;
@@ -99,24 +94,19 @@ public class Path
 
     public bool FindPath()
     {
-        float startTime = Time.realtimeSinceStartup;
-
         Prepare();
 
         while (HasNextStep())
         {
             if (!GoToNextMidpoint())
             {
-                Debug.Log("Couldn't do step " + currentStep);
-                //return false;
-                //int a = 0;
+                
             }
         }
 
         SavePath();
-        //Debug.Log("Path " + id + " took: " + (Time.realtimeSinceStartup - startTime) + "s");
 
-        return result != null;
+        return true;
     }
 
     public bool SavePath()
@@ -136,6 +126,9 @@ public class Path
         List<CellInfo> pathCells = new List<CellInfo>();
         List<Midpoint> newMidpoints = new List<Midpoint>();
         //midPoints.Clear();
+
+        midPoints.Clear();
+        AddMidpoint(midpointsCopy[0]);
 
         int count = 0;
         while (result != null)
@@ -166,7 +159,7 @@ public class Path
                 newMidpoints.Add(result.midpoint);
                 count = 0;
             }
-            if (count > MAX_SEGMENT_LENGTH)
+            if (count > MAX_SEGMENT_LENGTH && !cell.endZone)
             {
                 newMidpoints.Add(new Midpoint(result.cell, false));
                 count = 0;
@@ -196,7 +189,6 @@ public class Path
         cells = pathCells.ToArray();
 
         dirty = false;
-        firstTime = false;
         initiated = true;
 
         return true;
@@ -204,14 +196,14 @@ public class Path
 
     public bool HasNextStep()
     {
-        return currentStep <= midpointsCopy.Count - 1;
+        return currentStep <= midPoints.Count - 1;
     }
 
     public bool GoToNextMidpoint()
     {
-        bool lastSept = currentStep == midpointsCopy.Count - 1 || currentStep == 1; //Is this the segment bewteen the last midpoint and the end?
+        bool lastSept = currentStep == midPoints.Count - 1 || currentStep == 1; //Is this the segment bewteen the last midpoint and the end?
 
-        Midpoint midpoint = midpointsCopy[currentStep];
+        Midpoint midpoint = midPoints[currentStep];
         Node current = Path.FindPathAstar(world, result, midpoint.cell, lastSept, world.canMergePaths, closedList);//
 
         if (current == null)
@@ -255,8 +247,8 @@ public class Path
         List<Node> openList = new List<Node>();
         List<Node> closedList = new List<Node>();
 
-        if (excludedNodes != null)
-            closedList.AddRange(excludedNodes);
+       /* if (excludedNodes != null)
+            closedList.AddRange(excludedNodes);*/
 
         //SortedSet<Node> sortedList = new SortedSet<Node>();
 
@@ -295,6 +287,7 @@ public class Path
                     if (neighbours[i].blockType != BlockType.Air || current.cell.endZone)
                     {
                         current.isFloating = false;
+                        break;
                     }
                 }
 
@@ -309,11 +302,8 @@ public class Path
                         (!canMergePaths && !neighbour.endZone && neighbour.isPath && current.cell.isPath))//||(neighbour.isPath && !neighbour.endZone)
                         continue;
 
-                    //if neighbour no esta en open
-                    if (openList.Any(node => node.cell == neighbour))
-                        continue;
-
-                    if (closedList.Any(node => node.cell == neighbour))
+                    //if neighbour is in open or closed lists go to next neighbour
+                    if (openList.Any(node => node.cell == neighbour) || closedList.Any(node => node.cell == neighbour))
                         continue;
 
                     Node n = new Node(neighbour);
@@ -389,7 +379,6 @@ public class Path
         cells = null;
         midPoints.Clear();
         midpointsCopy.Clear();
-        firstTime = true;
         dirty = true;
         initiated = false;
     }
