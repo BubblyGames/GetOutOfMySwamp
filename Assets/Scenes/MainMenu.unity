@@ -1064,7 +1064,7 @@ MonoBehaviour:
       enemyAmount: 5
       spawnRate: 0.4
       spawned: 0
-    - spawnTime: 5
+    - spawnTime: 10
       enemyType: 3
       enemyAmount: 5
       spawnRate: 2
