@@ -116,7 +116,7 @@ public class WaveController : MonoBehaviour
                 isBetweenWaves = false;
                 isWaveActive = true;
                 waveEndTimer = 0f;
-
+                waveTimer = 0f;
                 //spawncoroutine = StartCoroutine(SpawnWave());
                 return;
             }
