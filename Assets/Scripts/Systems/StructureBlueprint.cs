@@ -20,6 +20,7 @@ public class StructureBlueprint
     }
     public float upgradeMultiplicator;
     public Upgrade[] upgrades;
+    public int[] sellValues;
 
     public string targetDescription;
     public string rangeDescription;
