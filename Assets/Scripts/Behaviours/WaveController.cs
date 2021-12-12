@@ -264,5 +264,14 @@ public class WaveController : MonoBehaviour
     {
         LevelManager.OnGameStart -= StartWaves;
         LevelManager.OnGameCompleted -= LevelCompleted;
+
+        foreach (Wave wave in waves)
+        {
+            foreach (Pack pack in wave.packs)
+            {
+                pack.spawned = false;
+            }
+        }
     }
+
 }
