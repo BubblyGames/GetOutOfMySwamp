@@ -202,7 +202,7 @@ public class UIController : MonoBehaviour
                 upgradeMenu.SetActive(false);
                 pauseMenu.SetActive(false);
                 pauseButton.SetActive(false);
-                Time.timeScale =0;
+                Time.timeScale = 0;
                 break;
             case GameMenu.Game:
                 shopMenu.SetActive(true);
@@ -464,16 +464,8 @@ public class UIController : MonoBehaviour
         }
         upgradeButton.SetActive(true);
         sellButton.SetActive(true);
-       
 
-        if (structure.structureId == 3 || structure.structureId == 5)
-        {
-            UpdateUpgradeButton(3, structure.structureId);
-        }
-        else
-        {
-            UpdateUpgradeButton(structure.GetLevel(), structure.structureId);
-        }
+        UpdateUpgradeButton(structure.GetLevel(), structure.structureId);
     }
 
 
@@ -493,8 +485,9 @@ public class UIController : MonoBehaviour
             upgradeCostText.GetComponent<TextMeshProUGUI>().text = "MAX";
             upgradeButton.GetComponent<Button>().interactable = false;
         }
+
         sellValueText.GetComponent<TextMeshProUGUI>().text = structures[structureId].sellValues[level].ToString();
-       
+
     }
 
 
