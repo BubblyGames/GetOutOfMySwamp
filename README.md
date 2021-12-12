@@ -625,7 +625,89 @@ En general, en el grupo hay muy buen ambiente de trabajo, consiguen hacer todo e
 
 #### Autocríticas individuales
 
+##### Adrian
+
+Buena comunicación con el resto de los miembros y flujo constante. Trabajo realizado rápido y muy buena gestión del tiempo.
+
+
+##### A mejorar:
+
+- Seguir mejorando la comunicación e intentar hacerme oír más.
+- Seguir mejorando la gestión del tiempo para poder elaborar código más limpio de una vez en vez de tener que ponerlo bonito después de estar funcional.
+- Comentar más el código.
+- No retrasar las consultas de dudas.
+
+
+##### Alberto
+
+Tras la Alfa, mi papel fue terminar de definir las mecánicas finales y comenzar con el balanceo de las estadísticas para que fuese jugable. Pese a tener el rol de Game Designer nunca había hecho un juego, y menos de estrategia, que llegase a un público mayor que los profesores o un par de compañeros, así que me esperaba que hubiera “exploits” o una dificultad inestable, lo cual ocurrió. 
+Lo intenté evitar mirando artículos y vídeos sobre qué elementos componen un tower defense, qué experiencias se pueden intentar crear en el jugador y las distintas mecánicas que existen en el género. Aún así me di cuenta de que, como creador de la jugabilidad, mi perspectiva era muy diferente a la de un jugador externo al proyecto. También fue una mala idea intentar balancear las oleadas, el daño de las torres, su precio y todos los stats de los enemigos en tres días, ya que no daba tiempo a balancear, descansar y desconectar y volver a ello para ver más rápido posibles errores que hubieran. 
+Sin pausas uno se enfrasca en el proyecto y adquiere visión de túnel, en el que solo se ve lo que se tiene en la cabeza y no muchas más posibles variantes. Creo que el error en general fue la falta de experiencia, la cual ahora tengo un poco más y no habría hecho las cosas como las hice.
+
+
+##### Daniel
+
+Por lo general he seguido trabajando al mismo nivel que en la fase anterior, aunque he podido prestar algo más de atención a lo que estaban haciendo mis compañeros y he usado más el tablero de Trello para organizarme, que es algo que me había propuesto.
+
+
+##### Gonzalo
+
+Diría que he estado mejor. He estado más pendiente y activo en el Trello, igual que en Github. Aunque por toda la cantidad de trabajo que ha habido a parte de este proyecto, no he podido hacer el DevBlog de la Beta a tiempo. Eso sí, fue buena idea hacer que el equipo de arte se pusiera a full desde el minuto uno. De no ser por eso dudo que hubiéramos podido meter todo lo que a nivel de funcionamiento ya estaba preparado.
+
+Aunque noto que el tema publicidad no es lo mío.
+
+En verdad no me acuerdo de muchas más cosas de la etapa Beta. Gran parte de las cosas que dije para la Alfa se podrían aplicar para el post mortem de esta etapa: mantener la atención sobre cuando completan tareas, pre-asignar futuras tareas para que así mis compañeros sepan en qué trabajar después, recordatorios con un margen de tiempo para las reuniones, etc.
+
+
+##### Joy
+
+Comento lo mismo que en el Post Mortem de la Alfa: conocer mejor el código de mis compañeros y expresar mejor mis ideas.
+
+
+##### Marta
+
+Cosas que han funcionado bien:
+
+○ He sido capaz de expresar abiertamente mi opinión.
+
+○ He establecido buenos horarios de trabajo. Esto me ha hecho sentirme bien conmigo misma y con el proyecto y, en consecuencia, me ha permitido relacionarme adecuadamente con el resto del equipo y mantener un buen ritmo de trabajo.
+
+Cosas a mejorar:
+
+○ Creo que ampliar mis conocimientos y aprender otros programas como Adobe Illustrator y Adobe XD podría ser útil para futuros desarrollos. Debido a que Adobe Photoshop tiene sus limitaciones en el ámbito del desarrollo UX/UI.
+
+  
+
+
 #### Críticas de equipo
+
+##### Programador 1
+
+Para esta deadline creo que el equipo al completo nos hemos compenetrado bastante mejor que en la anterior y el juego ha mejorado drásticamente en consecuencia, al menos en lo que a game feel y aspecto visual se refiere.Sin embargo aún tenemos que mejorar la comunicación, puesto que nos ha ocurrido varias veces que varias personas solucionaban el mismo error por lo que se perdía tiempo o un error que ya se había solucionado, reaparecía debido a un puntual mal manejo del sistema de control de versiones.
+
+##### Artista
+
+
+Buen ambiente y asertividad. El ambiente de trabajo ha sido muy bueno, todo el mundo ha dado su opinión de manera asertiva y eso ha facilitado una correcta comunicación y exposición de las ideas, lo cual beneficia al desarrollo del proyecto.
+
+##### Diseño
+
+No ha variado mi opinión respecto a la Alfa, un grupo estupendo donde la única queja que podría haber son consecuencias de tener una jerarquía horizontal, la toma de decisiones.
+
+##### Programador 2
+
+
+El trabajo ha sido fluido y sale bien. Hay un buen ambiente de trabajo y se siente el progreso de cada uno del equipo como propio gracias al Trello y las reuniones. Las reuniones semanales son un acierto, aunque posteriormente se debatirán algunos detalles.Las reuniones deberían contar con un esquema previo y tratar sobre temas específicos en vez de tantas generales para hacerlas más útiles y concisas. También tener fechas de entrega de tareas, siempre teniendo en cuenta la disponibilidad de cada persona, pero tener plazos fijados.Respecto a la corrección del trabajo de otros miembros mejor que editarlo directamente se cree más conveniente que se le comuniquen las ideas de mejora al encargado de esa tarea y sea él o ella quien realice las modificaciones. Todo esto para ahorrar tiempo y evitar errores inesperados.
+
+##### Programador 3
+
+Hemos trabajado algo mejor en comparación a la Alfa y hemos tenido menos conflictos pero aún falla la cooperación y cometemos errores como no testear correctamente los cambios antes de hacer un pull request o no mirar el GDD antes de implementar algo.Me alegro de que nos esforzáramos tanto en la fase anterior, porque nos ha permitido relajarnos algo más en ésta.
+
+##### Scrum Master
+
+
+El juego ha salido bastante bien de la fase Beta. Casi todos los elementos que teníamos planeados para el juego al final acabaron pasando el corte, salvo la destrucción del cubo, que se aprovechó lo ya hecho de otra manera, y los enemigos ligero y especialista.En general el equipo ha prestado más atención al GDD, lo cual nos ha evitado algunos malentendidos y ha permitido ajustar más el comportamiento de algunos elementos del juego (estoy hablando de la torre pesada aka Batracius).Nos deberíamos de sentir bastante orgullosos de que, siendo uno menos, hayamos salido bien adelante con este proyecto.El equipo de arte ha estado fenomenal: no solo ha logrado a tiempo sacar todos los elementos visuales del juego, sino que encima son preciosos; encajando muy bien con el tono del juego, algo que ya nos han dejado claro que gusta.El equipo de diseño ha pasado por bastante peso en esta etapa, sobre todo hacia el final de la etapa, algo que le ha dejado con poco tiempo para ajustar correctamente todo. Por suerte ha salido con unos resultados divertidos, aunque queda trabajo por hacer.El equipo de publicidad ha estado bien, aunque por falta de tiempo en general su trabajo se ha concentrado al final de la etapa, en el anuncio de salida de la Beta del juego.  
+
 
 ### 8.3 Post-Mortem de la etapa Gold
 
