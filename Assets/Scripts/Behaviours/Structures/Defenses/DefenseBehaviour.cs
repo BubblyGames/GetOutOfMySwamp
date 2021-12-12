@@ -115,4 +115,15 @@ public abstract class DefenseBehaviour : Structure
                 notWorkingImage.enabled = false;
         }
     }
+
+    private void OnDestroy()
+    {
+        if (UIController.instance)
+        {
+            if (BuildManager.instance.SelectedStructure == this)
+            {
+                UIController.instance.SetUpgradeMenuActive(false);
+            }
+        }
+    }
 }
