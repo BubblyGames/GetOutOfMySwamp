@@ -10996,7 +10996,7 @@ MonoBehaviour:
         upgradeAddedValue: 0.2
       - statToUpgrade: 0
         upgradeAddedValue: 2
-    sellValues: 050000000a0000000f00000014000000
+    sellValues: 3c0000005500000087000000d2000000
     targetDescription: ground
     rangeDescription: medium
     damageDescription: medium
@@ -11020,7 +11020,7 @@ MonoBehaviour:
       stats:
       - statToUpgrade: 1
         upgradeAddedValue: 0.2
-    sellValues: 00000000000000000000000000000000
+    sellValues: 6400000096000000e100000045010000
     targetDescription: ground
     rangeDescription: low
     damageDescription: short
@@ -11044,7 +11044,7 @@ MonoBehaviour:
       stats:
       - statToUpgrade: 1
         upgradeAddedValue: 0.3
-    sellValues: 00000000000000000000000000000000
+    sellValues: 96000000e10000004501000081010000
     targetDescription: ground
     rangeDescription: high
     damageDescription: large
@@ -11053,7 +11053,7 @@ MonoBehaviour:
     creationCost: 250
     upgradeMultiplicator: 1
     upgrades: []
-    sellValues: 00000000
+    sellValues: 7d000000
     targetDescription: 
     rangeDescription: 
     damageDescription: 
@@ -11079,7 +11079,7 @@ MonoBehaviour:
         upgradeAddedValue: 1
       - statToUpgrade: 1
         upgradeAddedValue: 2
-    sellValues: 00000000000000000000000000000000
+    sellValues: 550000007d000000a000000004010000
     targetDescription: air
     rangeDescription: low
     damageDescription: large
