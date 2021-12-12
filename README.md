@@ -131,7 +131,7 @@ Las torres se pueden vender, consiguiendo un pequeño porcentaje de dinero a cam
 
 #### 4.2.4 Defensas y enemigos
 
-Existen dos tipos de defensas: Las torres y las trampas. Las torres tienen alcance, daño, velocidad de ataque y éstos pueden ser individuales o en área o tener efectos de estado sobre los enemigos. Se puede construir en cualquier lugar menos caminos y rocas, a excepción de Especulio, que solo se puede poner adyacente al camino y de Albatro, que solo puede ser construído sobre las rocas. Además, tienen tres niveles de mejoras para aumentar sus estadísticas, salvo Especulio. Luego están las trampas, las cuales se colocan en el camino del enemigo, tienen daño y pueden tener efecto. Éstas no se pueden mejorar.
+Existen dos tipos de defensas: Las torres y las trampas. Las torres tienen alcance, daño, velocidad de ataque y éstas pueden ser individuales o en área o tener efectos de estado sobre los enemigos. Se puede construir en cualquier lugar menos caminos y rocas, a excepción de Especulio, que solo se puede poner adyacente al camino y de Albatro, que solo puede ser construído sobre las rocas. Además, tienen tres niveles de mejoras para aumentar sus estadísticas, salvo Especulio. Luego están las trampas, las cuales se colocan en el camino del enemigo, tienen daño y pueden tener efecto. Éstas no se pueden mejorar.
 
 Por otro lado están los enemigos, con características de vida y velocidad de movimiento. Aparecen por oleadas y aumentan en número conforme avanzas en la partida, además de que su vida se incrementa. Tienen diferentes roles en función de sus estadísticas, siendo los roles unidad básica, tanque, horda y aéreo, explicadas más adelante en el apartado Enemigos.
 
@@ -140,7 +140,8 @@ Por otro lado están los enemigos, con características de vida y velocidad de m
 
 ### 4.3 Controles
 
-El jugador durante la partida tendrá dos tareas principales: vigilar el mapa para saber el estado de la partida y colocar y mejorar defensas. Para vigilar el mapa podrá rotarlo con click (pulsar en el caso de móvil) y arrastrar. Luego para poner las torres será exactamente el mismo input, click y arrastrar desde la tarjeta de la torre hasta la posición en la que desee ponerla, contando con un offset en la versión de mobiles para poder colocar mejor la torre.
+El jugador durante la partida tendrá dos tareas principales: vigilar el mapa para saber el estado de la partida y colocar y mejorar defensas. Para vigilar el mapa podrá rotarlo con click (pulsar en el caso de móvil) y arrastrar. Luego para poner las torres será exactamente el mismo input, click y arrastrar desde la tarjeta de la torre hasta la posición en la que desee ponerla, contando con un offset en la versión de mobiles para poder colocar mejor la torre. Si el jugador lo desea podrá vender una torre clickando primero sobre la torre y después dándole al botón de defender. Para mejorar una torre, primero debe seleccionarla y después darle al botón de mejora.
+El jugador puede acceder a las lecciones de las torres durante la partida dándole al botón con una I que aparece sobre cada carta antes de colocarla.
 
 ### 4.4 Enemigos
 
@@ -463,6 +464,8 @@ A su vez, la representación de las estadísticas de las torres se realiza media
 
 ![Aereo](https://user-images.githubusercontent.com/56488179/142773870-f647b0ed-0cb2-446b-b71a-fbb24b6bc1cd.png)
 
+Parte de los efectos de partículas han sido desarrollados por el equipo y otra parte sacados de los assets de Unity, cuyo autor es RetroVistas (https://assetstore.unity.com/packages/vfx/particles/cartoon-fx-free-pack-169179). 
+
 ### 6.3 Música
 
 El juego cuenta con una sola canción (autor: [Pascual Gázquez Compán](https://open.spotify.com/artist/7y2dfMVexZgClCIeiHd22f?si=Q2ch-_AVR8CC8a927irtxw&utm_source=copy-link)) la cual se reproduce tanto en los menúes como durante la partida.
@@ -470,10 +473,13 @@ El juego cuenta con una sola canción (autor: [Pascual Gázquez Compán](https:/
 
 ### 6.4 Ambiente sonoro
 
-Se cuentan con efectos de sonido para la interacción con los elementos de la interfaz.
+Se cuentan con distintos efectos de sonido para la interacción con los elementos de la interfaz.
 Estos son usados cuando:
-- jdi
-- 
+- Se interacciona con un botón de la interfaz para "avanzar"
+- Se interacciona con un botón de la interfaz para "dar marcha atrás"
+- Se coloca una torre
+
+Los efectos de sonido han sido sacados de Zapslat (https://www.zapsplat.com/)
 
 
 ## 7. Interfaz
@@ -743,8 +749,8 @@ El juego ha salido bastante bien de la fase Beta. Casi todos los elementos que t
 - Pulir la generación de caminos en el cubo: 9/12/2021
 - Dar nombres definitivos a las torres y enemigos: 29/11/2021
 - Cambiar modelo de puntuación: 10/12/2021
-- Aumentar la accesibilidad de los tutoriales: 
-- Ajustar curva de dificultad: 
+- Aumentar la accesibilidad de los tutoriales: 12/12/2021
+- Ajustar curva de dificultad: 12/12/2021
 - Proyectiles enemigos en tapones de enemigos: 7/12/2021
 - Añadir elementos restantes a la interfaz: 10/12/2021
 - Añadir animaciones a las torres: 11/12/2021
