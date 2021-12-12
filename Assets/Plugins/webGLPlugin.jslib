@@ -1,36 +1,27 @@
 var webGlPlugin = {
     ForceHorizontal: function () {
-        var orientation = screen.orientation;
-        if (orientation === "portrait"|| orientation === "portrait-secondary" || orientation === "portrait-primary") {
-            screen.orientation = 'landscape-primary';
-            screen.orientation.lock('landscape-primary');
-        }
+		var orientation = screen.orientation;
+		try{
+			console.log("La orientación: " + orientation.type);
+			screen.orientation.type = 'landscape-primary';
+			//ScreenOrientation.lock("landscape-primary");
+			console.log("La orientación nueva: " + screen.orientation.type);
+		} catch(e){
+				if(e.name !== 'SecurityError'){
+				  throw e;
+				}
+				console.log("Se puede continuar");
+				return;
+		}
+		/*screen.orientation.lock("landscape-primary");
+		console.log("La orientación nueva: " + orientation.type);
+			if (orientation.type == "portrait"|| orientation.type == "portrait-secondary" || orientation.type == "portrait-primary") {
+				screen.orientation = 'landscape-primary';
+				screen.orientation.lock('landscape-primary');
+			}*/
     },
 	
-	// Custom check function
-	function customCheck(unityInstance, onsuccess, onerror) {
-		console.log("Ejecuté customCheck");
-    // Check if the browser hasn't WebGL
-		if (!UnityLoader.SystemInfo.hasWebGL) {
-			unityInstance.popup("Your browser does not support WebGL.", [{ text: "Stop", callback: onerror }]);
-		}
-    // Check if mobile platform
-		else if (UnityLoader.SystemInfo.mobile) {
-			unityInstance.popup("Unity WebGL is not supported on mobile, but you can continue anyway.", [
-				{ text: "Stop", callback: onerror },
-				{ text: "Continue", callback: onsuccess },
-			]);
-		}
-		// Check if not supported browser
-		else if (["Edge", "Firefox", "Chrome", "Safari"].indexOf(UnityLoader.SystemInfo.browser) == -1) {
-			unityInstance.popup("Your browser is not supported, but you can continue anyway.", [
-				{ text: "Stop", callback: onerror },
-				{ text: "Continue", callback: onsuccess },
-			]);
-		} else {
-			onsuccess();
-		}
-}
+	
 
     IsMobile: function () {
 
