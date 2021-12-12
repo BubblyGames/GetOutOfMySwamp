@@ -33,6 +33,7 @@ public class UIController : MonoBehaviour
     public List<GameObject> statsTexts;
     public GameObject towerName;
     public GameObject upgradeCostText;
+    public GameObject sellValueText;
     public TextMeshProUGUI numberOfWaves;
     public TextMeshProUGUI currentWave;
     public GameObject lesson;
@@ -485,9 +486,11 @@ public class UIController : MonoBehaviour
         }
         else
         {
-            upgradeCostText.GetComponent<TextMeshProUGUI>().text = "MAX";
             upgradeButton.GetComponent<Button>().interactable = false;
+            upgradeCostText.GetComponent<TextMeshProUGUI>().text = "MAX";
         }
+
+        sellValueText.GetComponent<TextMeshProUGUI>().text = structures[structureId].sellValues[level].ToString();
     }
 
 
