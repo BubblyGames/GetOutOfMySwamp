@@ -426,6 +426,7 @@ GameObject:
   - component: {fileID: 8327201870911118399}
   - component: {fileID: 2685262137413674711}
   - component: {fileID: 4165739703014183546}
+  - component: {fileID: 2673574736852869626}
   m_Layer: 7
   m_Name: BasicEnemy
   m_TagString: Enemy
@@ -486,6 +487,29 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 0.5
   m_Center: {x: 0, y: 0.5, z: 0}
+--- !u!114 &2673574736852869626
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5803062399679311112}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b72c36df0c0980e41afc25113c5359e3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  startHealth: 40
+  healthPoints: 0
+  startSpeed: 2
+  currentSpeed: 0
+  damage: 10
+  moneyValue: 8
+  scoreValue: 100
+  isSlowed: 0
+  slowIntensity: 0.25
+  slowDuration: 0
+  slowTimer: 0
 --- !u!1001 &390387970961114943
 PrefabInstance:
   m_ObjectHideFlags: 0
