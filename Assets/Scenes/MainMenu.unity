@@ -13289,6 +13289,14 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7831402225389518314, guid: e9b4493230f3b574091c823e8b123e62, type: 3}
+      propertyPath: lessonImages.Array.size
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 7831402225389518314, guid: e9b4493230f3b574091c823e8b123e62, type: 3}
+      propertyPath: lessonImages.Array.data[6]
+      value: 
+      objectReference: {fileID: 21300000, guid: 68198552922d9bc4b9c2e1df298ef711, type: 3}
     - target: {fileID: 7831402225389518315, guid: e9b4493230f3b574091c823e8b123e62, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -15150,7 +15158,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5019994793284634206, guid: 809100f64aeef954a9fa36457977eee9, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -79.387
+      value: -6
       objectReference: {fileID: 0}
     - target: {fileID: 5019994793284634207, guid: 809100f64aeef954a9fa36457977eee9, type: 3}
       propertyPath: key
