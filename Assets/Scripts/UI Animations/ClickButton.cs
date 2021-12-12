@@ -17,7 +17,8 @@ public class ClickButton : MonoBehaviour
         animation.AppendCallback(() => {
             animationComplete.Invoke();
             transform.localScale = Vector3.one;
-        }); 
+        });
+        animation.Play();
     }
     // Update is called once per frame
     void Update()

@@ -2579,6 +2579,38 @@ Transform:
   m_Father: {fileID: 963194228}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &562102009 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5496092958849843685, guid: fc31fd70b5945084fb72fefe99f91ba3, type: 3}
+  m_PrefabInstance: {fileID: 981231995311414429}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &562102011
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 562102009}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9302d0ed5395ab647837839704721711, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  animationComplete:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1328887940}
+        m_TargetAssemblyTypeName: UIController, Assembly-CSharp
+        m_MethodName: Exit
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &591990865
 GameObject:
   m_ObjectHideFlags: 0
@@ -3892,7 +3924,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 1307362636}
   m_Direction: 2
   m_Value: 1
-  m_Size: 0.42149583
+  m_Size: 0.4214958
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -3948,6 +3980,7 @@ GameObject:
   - component: {fileID: 795210835}
   - component: {fileID: 795210834}
   - component: {fileID: 795210837}
+  - component: {fileID: 795210838}
   m_Layer: 5
   m_Name: Upgrade Button
   m_TagString: Untagged
@@ -3973,9 +4006,9 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
-  m_AnchoredPosition: {x: 0, y: 73}
+  m_AnchoredPosition: {x: 0, y: 149}
   m_SizeDelta: {x: 269, y: 152}
-  m_Pivot: {x: 0.5, y: 0}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &795210834
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4020,9 +4053,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1903685291}
-        m_TargetAssemblyTypeName: BuildManager, Assembly-CSharp
-        m_MethodName: UpgradeStructure
+      - m_Target: {fileID: 795210838}
+        m_TargetAssemblyTypeName: ClickButton, Assembly-CSharp
+        m_MethodName: ClickAnimation
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -4084,6 +4117,33 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   key: upgrade
   textContainer: {fileID: 1040095943}
+--- !u!114 &795210838
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 795210832}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9302d0ed5395ab647837839704721711, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  animationComplete:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1903685291}
+        m_TargetAssemblyTypeName: BuildManager, Assembly-CSharp
+        m_MethodName: UpgradeStructure
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &806991750
 GameObject:
   m_ObjectHideFlags: 0
@@ -4323,6 +4383,7 @@ GameObject:
   - component: {fileID: 883970910}
   - component: {fileID: 883970913}
   - component: {fileID: 883970914}
+  - component: {fileID: 883970915}
   m_Layer: 5
   m_Name: ExitButton
   m_TagString: Untagged
@@ -4471,6 +4532,33 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   soundName: closeSound
+--- !u!114 &883970915
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 883970908}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9302d0ed5395ab647837839704721711, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  animationComplete:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1328887940}
+        m_TargetAssemblyTypeName: UIController, Assembly-CSharp
+        m_MethodName: Exit
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &891366753
 GameObject:
   m_ObjectHideFlags: 0
@@ -4483,6 +4571,7 @@ GameObject:
   - component: {fileID: 891366757}
   - component: {fileID: 891366756}
   - component: {fileID: 891366755}
+  - component: {fileID: 891366758}
   m_Layer: 5
   m_Name: X
   m_TagString: Untagged
@@ -4553,9 +4642,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1328887940}
-        m_TargetAssemblyTypeName: UIController, Assembly-CSharp
-        m_MethodName: CloseUpgrade
+      - m_Target: {fileID: 891366758}
+        m_TargetAssemblyTypeName: ClickButton, Assembly-CSharp
+        m_MethodName: ClickAnimation
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -4603,6 +4692,33 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 891366753}
   m_CullTransparentMesh: 1
+--- !u!114 &891366758
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 891366753}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9302d0ed5395ab647837839704721711, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  animationComplete:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1328887940}
+        m_TargetAssemblyTypeName: UIController, Assembly-CSharp
+        m_MethodName: CloseUpgrade
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &957981273
 GameObject:
   m_ObjectHideFlags: 0
@@ -5462,6 +5578,7 @@ GameObject:
   - component: {fileID: 1144122696}
   - component: {fileID: 1144122699}
   - component: {fileID: 1144122700}
+  - component: {fileID: 1144122701}
   m_Layer: 5
   m_Name: ContinueButton
   m_TagString: Untagged
@@ -5610,6 +5727,33 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   soundName: clickSound
+--- !u!114 &1144122701
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1144122694}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9302d0ed5395ab647837839704721711, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  animationComplete:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1328887940}
+        m_TargetAssemblyTypeName: UIController, Assembly-CSharp
+        m_MethodName: Continue
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &1163818704
 GameObject:
   m_ObjectHideFlags: 0
@@ -6109,6 +6253,7 @@ GameObject:
   - component: {fileID: 1241069165}
   - component: {fileID: 1241069168}
   - component: {fileID: 1241069169}
+  - component: {fileID: 1241069170}
   m_Layer: 5
   m_Name: RestartButton
   m_TagString: Untagged
@@ -6257,6 +6402,33 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   soundName: clickSound
+--- !u!114 &1241069170
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1241069163}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9302d0ed5395ab647837839704721711, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  animationComplete:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1328887940}
+        m_TargetAssemblyTypeName: UIController, Assembly-CSharp
+        m_MethodName: Restart
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &1256509562
 GameObject:
   m_ObjectHideFlags: 0
@@ -6341,6 +6513,38 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_HorizontalFit: 0
   m_VerticalFit: 2
+--- !u!1 &1271018115 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1081511990285753090, guid: fc31fd70b5945084fb72fefe99f91ba3, type: 3}
+  m_PrefabInstance: {fileID: 981231995311414429}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1271018117
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1271018115}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9302d0ed5395ab647837839704721711, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  animationComplete:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1328887940}
+        m_TargetAssemblyTypeName: UIController, Assembly-CSharp
+        m_MethodName: Restart
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &1275494635
 GameObject:
   m_ObjectHideFlags: 0
@@ -6790,6 +6994,7 @@ MonoBehaviour:
   - {fileID: 423694798}
   towerName: {fileID: 1029310091}
   upgradeCostText: {fileID: 327890052}
+  sellValueText: {fileID: 1552551662}
   numberOfWaves: {fileID: 663822927}
   currentWave: {fileID: 1777606004}
   lesson: {fileID: 1361665839}
@@ -6974,6 +7179,38 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 5019994793483360251, guid: 809100f64aeef954a9fa36457977eee9, type: 3}
   m_PrefabInstance: {fileID: 1725704351}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1377825646 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1505922114930698388, guid: fc31fd70b5945084fb72fefe99f91ba3, type: 3}
+  m_PrefabInstance: {fileID: 981231995311414429}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1377825648
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1377825646}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9302d0ed5395ab647837839704721711, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  animationComplete:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1328887940}
+        m_TargetAssemblyTypeName: UIController, Assembly-CSharp
+        m_MethodName: GoToNextLevel
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &1387662650
 GameObject:
   m_ObjectHideFlags: 0
@@ -7944,6 +8181,140 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1545098166}
   m_CullTransparentMesh: 1
+--- !u!1 &1552551662
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1552551663}
+  - component: {fileID: 1552551665}
+  - component: {fileID: 1552551664}
+  m_Layer: 5
+  m_Name: sellValue
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1552551663
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1552551662}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1792218504}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: -18.201, y: -24.298416}
+  m_SizeDelta: {x: 97.239, y: 32.037}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1552551664
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1552551662}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_text: XXX
+  m_isRightToLeft: 0
+  m_fontAsset: {fileID: 11400000, guid: 34cc7629239c81543a565c2190949044, type: 2}
+  m_sharedMaterial: {fileID: 6307637555529785520, guid: 34cc7629239c81543a565c2190949044, type: 2}
+  m_fontSharedMaterials: []
+  m_fontMaterial: {fileID: 0}
+  m_fontMaterials: []
+  m_fontColor32:
+    serializedVersion: 2
+    rgba: 4280687448
+  m_fontColor: {r: 0.34509805, g: 0.105882354, b: 0.14901961, a: 1}
+  m_enableVertexGradient: 0
+  m_colorMode: 3
+  m_fontColorGradient:
+    topLeft: {r: 1, g: 1, b: 1, a: 1}
+    topRight: {r: 1, g: 1, b: 1, a: 1}
+    bottomLeft: {r: 1, g: 1, b: 1, a: 1}
+    bottomRight: {r: 1, g: 1, b: 1, a: 1}
+  m_fontColorGradientPreset: {fileID: 0}
+  m_spriteAsset: {fileID: 0}
+  m_tintAllSprites: 0
+  m_StyleSheet: {fileID: 0}
+  m_TextStyleHashCode: -1183493901
+  m_overrideHtmlColors: 0
+  m_faceColor:
+    serializedVersion: 2
+    rgba: 4294967295
+  m_fontSize: 30
+  m_fontSizeBase: 30
+  m_fontWeight: 400
+  m_enableAutoSizing: 0
+  m_fontSizeMin: 18
+  m_fontSizeMax: 72
+  m_fontStyle: 0
+  m_HorizontalAlignment: 4
+  m_VerticalAlignment: 512
+  m_textAlignment: 65535
+  m_characterSpacing: 0
+  m_wordSpacing: 0
+  m_lineSpacing: 0
+  m_lineSpacingMax: 0
+  m_paragraphSpacing: 0
+  m_charWidthMaxAdj: 0
+  m_enableWordWrapping: 1
+  m_wordWrappingRatios: 0.4
+  m_overflowMode: 0
+  m_linkedTextComponent: {fileID: 0}
+  parentLinkedComponent: {fileID: 0}
+  m_enableKerning: 1
+  m_enableExtraPadding: 0
+  checkPaddingRequired: 0
+  m_isRichText: 1
+  m_parseCtrlCharacters: 1
+  m_isOrthographic: 1
+  m_isCullingEnabled: 0
+  m_horizontalMapping: 0
+  m_verticalMapping: 0
+  m_uvLineOffset: 0
+  m_geometrySortingOrder: 0
+  m_IsTextObjectScaleStatic: 0
+  m_VertexBufferAutoSizeReduction: 0
+  m_useMaxVisibleDescender: 1
+  m_pageToDisplay: 1
+  m_margin: {x: 0, y: 0, z: 0, w: 0}
+  m_isUsingLegacyAnimationComponent: 0
+  m_isVolumetricText: 0
+  m_hasFontAssetChanged: 0
+  m_baseMaterial: {fileID: 0}
+  m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!222 &1552551665
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1552551662}
+  m_CullTransparentMesh: 1
 --- !u!1 &1557241888
 GameObject:
   m_ObjectHideFlags: 0
@@ -8431,6 +8802,7 @@ GameObject:
   - component: {fileID: 1732745671}
   - component: {fileID: 1732745674}
   - component: {fileID: 1732745675}
+  - component: {fileID: 1732745676}
   m_Layer: 5
   m_Name: PauseButton
   m_TagString: Untagged
@@ -8502,9 +8874,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1328887940}
-        m_TargetAssemblyTypeName: UIController, Assembly-CSharp
-        m_MethodName: Pause
+      - m_Target: {fileID: 1732745676}
+        m_TargetAssemblyTypeName: ClickButton, Assembly-CSharp
+        m_MethodName: ClickAnimation
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -8579,6 +8951,33 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   soundName: clickSound
+--- !u!114 &1732745676
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1732745669}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9302d0ed5395ab647837839704721711, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  animationComplete:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1328887940}
+        m_TargetAssemblyTypeName: UIController, Assembly-CSharp
+        m_MethodName: Pause
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &1738156960
 GameObject:
   m_ObjectHideFlags: 0
@@ -9281,6 +9680,7 @@ GameObject:
   - component: {fileID: 1792218506}
   - component: {fileID: 1792218505}
   - component: {fileID: 1792218508}
+  - component: {fileID: 1792218509}
   m_Layer: 5
   m_Name: Sell Button
   m_TagString: Untagged
@@ -9300,6 +9700,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1121659745}
+  - {fileID: 1552551663}
   m_Father: {fileID: 1766098233}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -9352,9 +9753,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1903685291}
-        m_TargetAssemblyTypeName: BuildManager, Assembly-CSharp
-        m_MethodName: SellStructure
+      - m_Target: {fileID: 1792218509}
+        m_TargetAssemblyTypeName: ClickButton, Assembly-CSharp
+        m_MethodName: ClickAnimation
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -9416,6 +9817,33 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   key: sell
   textContainer: {fileID: 1121659744}
+--- !u!114 &1792218509
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1792218503}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9302d0ed5395ab647837839704721711, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  animationComplete:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1903685291}
+        m_TargetAssemblyTypeName: BuildManager, Assembly-CSharp
+        m_MethodName: SellStructure
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &1818190456
 GameObject:
   m_ObjectHideFlags: 0
@@ -10097,6 +10525,7 @@ MonoBehaviour:
     creationCost: 0
     upgradeMultiplicator: 0
     upgrades: []
+    sellValues: 
     targetDescription: 
     rangeDescription: 
     damageDescription: 
@@ -10150,6 +10579,7 @@ MonoBehaviour:
       stats:
       - statToUpgrade: 1
         upgradeAddedValue: 0.2
+    sellValues: 050000000a0000000f00000014000000
     targetDescription: ground
     rangeDescription: medium
     damageDescription: medium
@@ -10173,6 +10603,7 @@ MonoBehaviour:
       stats:
       - statToUpgrade: 1
         upgradeAddedValue: 0.2
+    sellValues: 00000000000000000000000000000000
     targetDescription: ground
     rangeDescription: low
     damageDescription: low
@@ -10196,6 +10627,7 @@ MonoBehaviour:
       stats:
       - statToUpgrade: 1
         upgradeAddedValue: 0.3
+    sellValues: 00000000000000000000000000000000
     targetDescription: ground
     rangeDescription: large
     damageDescription: high
@@ -10203,7 +10635,11 @@ MonoBehaviour:
   - structurePrefab: {fileID: 2711408889448630410, guid: 4cdbff3b4cc893847ad0a47225cd137b, type: 3}
     creationCost: 250
     upgradeMultiplicator: 1
-    upgrades: []
+    upgrades:
+    - cost: 0
+      maintenanceCostIncrease: 0
+      stats: []
+    sellValues: 
     targetDescription: 
     rangeDescription: 
     damageDescription: 
@@ -10229,6 +10665,7 @@ MonoBehaviour:
         upgradeAddedValue: 1
       - statToUpgrade: 1
         upgradeAddedValue: 2
+    sellValues: 00000000000000000000000000000000
     targetDescription: air
     rangeDescription: large
     damageDescription: low
@@ -10237,6 +10674,7 @@ MonoBehaviour:
     creationCost: 50
     upgradeMultiplicator: 1
     upgrades: []
+    sellValues: 00000000
     targetDescription: ground
     rangeDescription: low
     damageDescription: high
@@ -10245,6 +10683,7 @@ MonoBehaviour:
     creationCost: 1
     upgradeMultiplicator: 1
     upgrades: []
+    sellValues: 
     targetDescription: 
     rangeDescription: 
     damageDescription: 
@@ -10254,6 +10693,7 @@ MonoBehaviour:
     creationCost: 0
     upgradeMultiplicator: 0
     upgrades: []
+    sellValues: 
     targetDescription: 
     rangeDescription: 
     damageDescription: 
@@ -11621,6 +12061,14 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 5.237
       objectReference: {fileID: 0}
+    - target: {fileID: 942130839594604656, guid: fc31fd70b5945084fb72fefe99f91ba3, type: 3}
+      propertyPath: m_Pivot.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 942130839594604656, guid: fc31fd70b5945084fb72fefe99f91ba3, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 148.5
+      objectReference: {fileID: 0}
     - target: {fileID: 981231996588346773, guid: fc31fd70b5945084fb72fefe99f91ba3, type: 3}
       propertyPath: m_text
       value: Reintentar
@@ -11637,14 +12085,54 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 1328887940}
+    - target: {fileID: 1748215720949626942, guid: fc31fd70b5945084fb72fefe99f91ba3, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: Restart
+      objectReference: {fileID: 0}
+    - target: {fileID: 1748215720949626942, guid: fc31fd70b5945084fb72fefe99f91ba3, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: UIController, Assembly-CSharp
+      objectReference: {fileID: 0}
     - target: {fileID: 2950978136888730239, guid: fc31fd70b5945084fb72fefe99f91ba3, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 1328887940}
+    - target: {fileID: 2950978136888730239, guid: fc31fd70b5945084fb72fefe99f91ba3, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: GoToNextLevel
+      objectReference: {fileID: 0}
+    - target: {fileID: 2950978136888730239, guid: fc31fd70b5945084fb72fefe99f91ba3, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: UIController, Assembly-CSharp
+      objectReference: {fileID: 0}
     - target: {fileID: 5591948442884877452, guid: fc31fd70b5945084fb72fefe99f91ba3, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 1328887940}
+    - target: {fileID: 5591948442884877452, guid: fc31fd70b5945084fb72fefe99f91ba3, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: Exit
+      objectReference: {fileID: 0}
+    - target: {fileID: 5591948442884877452, guid: fc31fd70b5945084fb72fefe99f91ba3, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: UIController, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 5772048937009351656, guid: fc31fd70b5945084fb72fefe99f91ba3, type: 3}
+      propertyPath: m_Pivot.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5772048937009351656, guid: fc31fd70b5945084fb72fefe99f91ba3, type: 3}
+      propertyPath: m_Pivot.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5772048937009351656, guid: fc31fd70b5945084fb72fefe99f91ba3, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 306.49997
+      objectReference: {fileID: 0}
+    - target: {fileID: 5772048937009351656, guid: fc31fd70b5945084fb72fefe99f91ba3, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -126.5
+      objectReference: {fileID: 0}
     - target: {fileID: 6143162169025983735, guid: fc31fd70b5945084fb72fefe99f91ba3, type: 3}
       propertyPath: m_SizeDelta.x
       value: 382
@@ -11652,6 +12140,22 @@ PrefabInstance:
     - target: {fileID: 6143162169025983735, guid: fc31fd70b5945084fb72fefe99f91ba3, type: 3}
       propertyPath: m_SizeDelta.y
       value: 154
+      objectReference: {fileID: 0}
+    - target: {fileID: 6596396271192453791, guid: fc31fd70b5945084fb72fefe99f91ba3, type: 3}
+      propertyPath: m_Pivot.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6596396271192453791, guid: fc31fd70b5945084fb72fefe99f91ba3, type: 3}
+      propertyPath: m_Pivot.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6596396271192453791, guid: fc31fd70b5945084fb72fefe99f91ba3, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -308.49997
+      objectReference: {fileID: 0}
+    - target: {fileID: 6596396271192453791, guid: fc31fd70b5945084fb72fefe99f91ba3, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -126.5
       objectReference: {fileID: 0}
     - target: {fileID: 7650059350171277356, guid: fc31fd70b5945084fb72fefe99f91ba3, type: 3}
       propertyPath: levelStats
@@ -11799,6 +12303,7 @@ GameObject:
   - component: {fileID: 3538565075234769576}
   - component: {fileID: 3538565075234769577}
   - component: {fileID: 4471435551474037848}
+  - component: {fileID: 3538565075234769580}
   m_Layer: 5
   m_Name: ExitButton
   m_TagString: Untagged
@@ -11806,6 +12311,33 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &3538565075234769580
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3538565075234769579}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9302d0ed5395ab647837839704721711, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  animationComplete:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1328887940}
+        m_TargetAssemblyTypeName: UIController, Assembly-CSharp
+        m_MethodName: Exit
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!222 &3538565075735689093
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -12276,6 +12808,7 @@ GameObject:
   - component: {fileID: 3538565076641693486}
   - component: {fileID: 3538565076641693487}
   - component: {fileID: 4471435553297465975}
+  - component: {fileID: 3538565076641693522}
   m_Layer: 5
   m_Name: RestartButton
   m_TagString: Untagged
@@ -12283,6 +12816,33 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &3538565076641693522
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3538565076641693521}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9302d0ed5395ab647837839704721711, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  animationComplete:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1328887940}
+        m_TargetAssemblyTypeName: UIController, Assembly-CSharp
+        m_MethodName: Restart
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!222 &3538565076807928472
 CanvasRenderer:
   m_ObjectHideFlags: 0

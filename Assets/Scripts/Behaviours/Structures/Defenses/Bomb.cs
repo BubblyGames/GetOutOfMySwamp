@@ -21,16 +21,15 @@ public class Bomb : DefenseBehaviour
         //Sound
         if (AudioManager.instance)
             AudioManager.instance.Play(soundName);
-        // ---
 
         RaycastHit[] hits = Physics.SphereCastAll(transform.position, attackRange, transform.forward, attackRange, layerMask);
         ////Debug.Log("Boom: " + hits.Length);
         for (int i = 0; i < hits.Length; i++)
         {
-            EnemyBehaviour eb;
-            if (hits[i].collider.TryGetComponent<EnemyBehaviour>(out eb))
+            GroundEnemy enemy;
+            if (hits[i].collider.TryGetComponent<GroundEnemy>(out enemy))
             {
-                eb.slowAndDamage(damage);
+                enemy.slowAndDamage(damage);
             }
         }
 
