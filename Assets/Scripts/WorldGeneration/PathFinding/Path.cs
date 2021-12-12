@@ -65,7 +65,7 @@ public class Path
                 c = world.GetCellUnderWithGravity(m.cell);
                 if (c == null)
                 {
-                    Debug.Log("fffffffffffff");
+                    //Debug.Log("fffffffffffff");
                     continue;
                 }
                 c.normalInt = m.cell.normalInt;
@@ -100,7 +100,7 @@ public class Path
         {
             if (!GoToNextMidpoint())
             {
-                
+
             }
         }
 
@@ -141,18 +141,10 @@ public class Path
 
             CellInfo cell = world.cells[result.x, result.y, result.z];
             cell.normalInt = GetNormalOf(cell);
-
-            CellInfo cellUnder = world.GetCellUnder(cell);
-            if (cell.endZone && cellUnder.blockType == BlockType.Air)
-            {
-                cellUnder.normalInt = cell.normalInt;
-                cell = cellUnder;
-            }
-
             cell.isPath = true;
+
             pathCells.Add(cell);
             cell.paths.Add(this);
-
 
             if (result.midpoint != null)
             {
@@ -247,8 +239,8 @@ public class Path
         List<Node> openList = new List<Node>();
         List<Node> closedList = new List<Node>();
 
-       /* if (excludedNodes != null)
-            closedList.AddRange(excludedNodes);*/
+        /* if (excludedNodes != null)
+             closedList.AddRange(excludedNodes);*/
 
         //SortedSet<Node> sortedList = new SortedSet<Node>();
 
@@ -284,7 +276,7 @@ public class Path
                 current.isFloating = true;
                 for (int i = 0; i < neighbours.Length; i++)
                 {
-                    if (neighbours[i].blockType != BlockType.Air || current.cell.endZone)
+                    if (!neighbours[i].canWalk)
                     {
                         current.isFloating = false;
                         break;
@@ -299,7 +291,7 @@ public class Path
                     if (neighbour == null ||
                         !neighbour.canWalk ||
                         (!lastStep && neighbour.endZone) ||
-                        (!canMergePaths && !neighbour.endZone && neighbour.isPath && current.cell.isPath))//||(neighbour.isPath && !neighbour.endZone)
+                        (!canMergePaths && neighbour.isPath && current.cell.isPath))//||(neighbour.isPath && !neighbour.endZone)
                         continue;
 
                     //if neighbour is in open or closed lists go to next neighbour
@@ -400,7 +392,7 @@ public class Path
             }
         }
 
-        Vector3Int result = Vector3Int.zero;
+        Vector3Int result;
         CellInfo[] neighbours = world.GetNeighbours(c);
         CellInfo[] _neigbours;
 
@@ -408,6 +400,14 @@ public class Path
         {
             if (n.blockType == BlockType.Air)
                 continue;
+
+            if (n == lastCell && n != c)
+            {
+                result = c.GetPosInt() - n.GetPosInt();
+                lastCell = n;
+                //GameObject.CreatePrimitive(PrimitiveType.Sphere).transform.position = lastCell.GetPos();
+                return result;
+            }
 
             _neigbours = world.GetNeighbours(n);
 
@@ -423,7 +423,7 @@ public class Path
             }
         }
 
-        result = c.GetPosInt() - lastCell.GetPosInt();
+        result = Vector3ToIntNormalized(c.GetPos() - lastCell.GetPos());
 
 
         neighbours = world.GetNeighbours(c, true);
@@ -453,6 +453,39 @@ public class Path
         lastCell = neighbours[best];
 
         return result;
+    }
+
+
+    Vector3Int GetNormalOff(CellInfo c)
+    {
+        if (lastCell == null)
+        {
+            if (c.y > world.size / 2)
+            {
+                lastCell = world.GetCell(c.GetPosInt() + Vector3Int.down);
+                return Vector3Int.up;
+            }
+            else
+            {
+                lastCell = world.GetCell(c.GetPosInt() + Vector3Int.up);
+                return Vector3Int.down;
+            }
+        }
+
+        Vector3 dir = c.GetPos() - lastCell.GetPos();
+
+        CellInfo[] neighbours = world.GetNeighbours(c);
+        foreach (CellInfo n in neighbours)
+        {
+            Vector3 dir2 = c.GetPos() - n.GetPos();
+            if (!n.canWalk && Vector3.Dot(dir, dir2) > 0)
+            {
+                lastCell = n;
+                return Vector3Int.RoundToInt(1.5f * dir2);
+            }
+        }
+
+        return Vector3Int.zero;
     }
 
     public static Vector3Int Vector3ToIntNormalized(Vector3 dir)
