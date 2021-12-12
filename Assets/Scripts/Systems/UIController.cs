@@ -201,7 +201,6 @@ public class UIController : MonoBehaviour
                 upgradeMenu.SetActive(false);
                 pauseMenu.SetActive(false);
                 pauseButton.SetActive(false);
-                GameObject.Find("FinalScoreText").GetComponent<TextMeshProUGUI>().text = LevelStats.instance.currentScore.ToString();
                 Time.timeScale =0;
                 break;
             case GameMenu.Game:
