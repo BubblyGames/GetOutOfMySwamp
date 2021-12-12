@@ -11088,7 +11088,7 @@ MonoBehaviour:
     creationCost: 50
     upgradeMultiplicator: 1
     upgrades: []
-    sellValues: 00000000
+    sellValues: 19000000
     targetDescription: ground
     rangeDescription: high
     damageDescription: short
