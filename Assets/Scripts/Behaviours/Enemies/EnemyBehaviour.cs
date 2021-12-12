@@ -31,7 +31,7 @@ public abstract class EnemyBehaviour : MonoBehaviour
     private Path path;
     private int nextIndexPath = 1;
     private float lerpProgression = 0.01f;
-    private CellInfo currentCell;
+    protected CellInfo currentCell;
 
 
     private void Awake()
@@ -52,7 +52,8 @@ public abstract class EnemyBehaviour : MonoBehaviour
         //path = null;
     }
     private Vector3 _smoothVelocity = Vector3.zero;
-    void Update()
+
+    protected virtual void Update()
     {
         if (!LevelManager.instance.ready) return;
         if (path == null)
@@ -89,20 +90,23 @@ public abstract class EnemyBehaviour : MonoBehaviour
         {
             if (nextIndexPath < path.Length - 1)
             {
-                //Look if the next position has an Structure
-                currentCell = path.GetCell(nextIndexPath);
-                if (currentCell.GetStructure() != null)
+                if (this.TryGetComponent<GroundEnemy>(out GroundEnemy groundEnemy))
                 {
-                    Structure currentCellStructure = currentCell.GetStructure();
-                    //If the structure is a bomb, it explodes, hurts enemies and destroys.
-                    //Then we set the structure of the cell to null for been able to put another.
-                    Bomb bomb;
-                    if (currentCellStructure.TryGetComponent<Bomb>(out bomb))
+                    //Look if the next position has an Structure
+                    currentCell = path.GetCell(nextIndexPath);
+                    if (currentCell.GetStructure() != null)
                     {
-                        bomb.Explode();
-                        currentCell.SetStructure(null);
-                    }
+                        Structure currentCellStructure = currentCell.GetStructure();
+                        //If the structure is a bomb, it explodes, hurts enemies and destroys.
+                        //Then we set the structure of the cell to null for been able to put another.
+                        Bomb bomb;
+                        if (currentCellStructure.TryGetComponent<Bomb>(out bomb))
+                        {
+                            bomb.Explode();
+                            currentCell.SetStructure(null);
+                        }
 
+                    }
                 }
                 nextIndexPath++;
                 lerpProgression = 0.01f;
