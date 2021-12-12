@@ -114,6 +114,9 @@ public class MeteorSpell : SpellBehaviour
 
             pa.transform.parent = null;
 
+            if (AudioManager.instance)
+                AudioManager.instance.Play("bombSound");
+
             Destroy(meteor);
             Destroy(gameObject);
 

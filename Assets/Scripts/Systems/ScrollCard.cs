@@ -69,6 +69,7 @@ public class ScrollCard : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDr
 
     public void OnPointerClick(PointerEventData eventData)
     {
-        UIController.instance.ShowLesson();
+        if (!aux)
+            UIController.instance.ShowLesson();
     }
 }

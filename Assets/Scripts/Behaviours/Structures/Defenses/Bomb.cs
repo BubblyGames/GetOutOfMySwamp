@@ -7,7 +7,7 @@ public class Bomb : DefenseBehaviour
     public bool canBreakWorld = false;
     public GameObject explosionParticles;
     [SerializeField] public string soundName;
-    private AudioManager audiomanager;
+
     private void Start()
     {
         //checks if is a mountainTower for only atacking flying enemies
@@ -19,11 +19,8 @@ public class Bomb : DefenseBehaviour
     public void Explode()
     {
         //Sound
-        if (audiomanager == null)
-        {
-            audiomanager = FindObjectOfType<AudioManager>();
-        }
-        audiomanager.Play(soundName);
+        if (AudioManager.instance)
+            AudioManager.instance.Play(soundName);
         // ---
 
         RaycastHit[] hits = Physics.SphereCastAll(transform.position, attackRange, transform.forward, attackRange, layerMask);
@@ -40,7 +37,7 @@ public class Bomb : DefenseBehaviour
         GameObject.Instantiate(explosionParticles,transform.position,Quaternion.identity);
 
         if (canBreakWorld)
-            LevelManager.instance.world.SoftExplode(Vector3Int.RoundToInt(transform.position), (int)attackRange);
+            LevelManager.instance.world.Explode(Vector3Int.RoundToInt(transform.position), (int)attackRange);
 
         Destroy(gameObject);
     }

@@ -615,7 +615,10 @@ public class CubeWorldGenerator : MonoBehaviour
             if (hits[i].collider.TryGetComponent<Structure>(out Structure structure))
             {
                 Vector3Int sPos = Vector3Int.FloorToInt(structure.transform.position);
-                //Neighbours
+                foreach (CellInfo cell in GetNeighbours(GetCell(sPos)))
+                {
+
+                }
             }
         }
 
@@ -661,49 +664,7 @@ public class CubeWorldGenerator : MonoBehaviour
         CallUpdateWorld();
     }
 
-    public void SoftExplode(Vector3Int pos, int radius)
-    {
-        List<Path> affectedPaths = new List<Path>();
-        List<CellInfo> affectedCells = new List<CellInfo>();
-
-
-        for (int i = -radius; i <= radius; i++)
-        {
-            for (int j = -radius; j <= radius; j++)
-            {
-                for (int k = -radius; k <= radius; k++)
-                {
-                    int x = pos.x + i;
-                    int y = pos.y + j;
-                    int z = pos.z + k;
-
-                    if (IsPosInBounds(x, y, z))
-                    {
-                        Vector3Int newPos = new Vector3Int(x, y, z);
-                        CellInfo c = cells[x, y, z];
-
-                        if (c.endZone || c.isCore || c.isPath || c.blockType == BlockType.Path || c.structure != null)// || cells[x, y, z].blockType == BlockType.Rock)
-                            continue;
-
-                        if (Vector3Int.Distance(pos, newPos) <= radius)
-                        {
-                            c.blockType = BlockType.Air;
-                            c.canWalk = true;
-                            if (c.structure)
-                            {
-                                Destroy(c.structure.gameObject);
-                                c.structure = null;
-                                c.hasStructure = false;
-                            }
-                        }
-                    }
-                }
-            }
-        }
-
-
-        UpdateMesh();
-    }
+   
     #endregion
 
     #region Getters
@@ -980,7 +941,7 @@ public class CubeWorldGenerator : MonoBehaviour
         }
 
         Debug.Log("Wtf fix this a$ap: " + cell.GetPos());
-        return GetCompletelyRandomCell();
+        return null;
     }
 
     internal CellInfo GetClosestWalkableCell(CellInfo cell)
@@ -1074,15 +1035,23 @@ public class CubeWorldGenerator : MonoBehaviour
             for (int i = 0; i < nPaths; i++)
             {
                 GameObject line = GameObject.Instantiate(lineRendererPrefab);
+                GameObject line2 = GameObject.Instantiate(lineRendererPrefab);
                 LineRenderer lr = line.GetComponent<LineRenderer>();
+                LineRenderer lr2 = line2.GetComponent<LineRenderer>();
                 debugStuff.Add(line);
+                debugStuff.Add(line2);
 
+                lr2.positionCount = paths[i].midPoints.Count;
+                int id = 0;
                 foreach (Midpoint m in paths[i].midPoints)
                 {
                     GameObject midSphere = GameObject.CreatePrimitive(PrimitiveType.Sphere);
                     midSphere.transform.position = new Vector3(m.cell.x, m.cell.y, m.cell.z);
                     midSphere.GetComponent<Collider>().enabled = false;
                     debugStuff.Add(midSphere);
+
+                    lr2.SetPosition(id, m.cell.GetPos());
+                    id++;
                 }
 
                 lr.positionCount = paths[i].Length;
@@ -1386,7 +1355,7 @@ public class CubeWorldGenerator : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.E))
         {
             Debug.Log("Random explosion");
-            SoftExplode(GetCompletelyRandomCell().GetPosInt(), 15);
+            Explode(GetCompletelyRandomCell().GetPosInt(), 15);
         }
 #endif
     }

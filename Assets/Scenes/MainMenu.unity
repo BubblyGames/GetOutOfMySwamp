@@ -7317,6 +7317,7 @@ MonoBehaviour:
   upgradeCostText: {fileID: 0}
   numberOfWaves: {fileID: 0}
   currentWave: {fileID: 0}
+  lesson: {fileID: 0}
   basicTowerSprite: {fileID: 0}
   psiquicTowerSprite: {fileID: 0}
   heavyTowerSprite: {fileID: 0}

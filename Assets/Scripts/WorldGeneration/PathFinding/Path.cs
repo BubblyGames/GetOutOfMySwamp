@@ -19,7 +19,7 @@ public class Path
         }
     }
 
-    const int MAX_SEGMENT_LENGTH = 100;
+    const int MAX_SEGMENT_LENGTH = 50;
 
     public int id = -1;
     bool firstTime = true;
