@@ -617,10 +617,17 @@ public class CubeWorldGenerator : MonoBehaviour
             if (hits[i].collider.TryGetComponent<Structure>(out Structure structure))
             {
                 Vector3Int sPos = Vector3Int.FloorToInt(structure.transform.position);
-                foreach (CellInfo cell in GetNeighbours(GetCell(sPos)))
-                {
 
+                if (IsPosInBounds(sPos))
+                {
+                    foreach (CellInfo cell in GetNeighbours(GetCell(sPos)))
+                    {
+                        if (cell.structure == structure)
+                            cell.structure = null;
+                    }
                 }
+
+                Destroy(structure.gameObject);
             }
         }
 
