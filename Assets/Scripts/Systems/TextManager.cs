@@ -127,6 +127,7 @@ public class TextManager : MonoBehaviour
         englishDictionary.Add("sound", "Sound");
         englishDictionary.Add("lessons", "Lessons");
         englishDictionary.Add("levelInfoText", "Natural habitat of:");
+        
 
 
         //upgrade texts in english
@@ -147,7 +148,10 @@ public class TextManager : MonoBehaviour
         englishDictionary.Add("daniel", "Programmer");
         englishDictionary.Add("adrian", "Programmer, Marketing");
         englishDictionary.Add("joy", "Programmer");
-        englishDictionary.Add("thanks", "Thanks to");
+        englishDictionary.Add("music", "Music by:");
+        englishDictionary.Add("resources", "Resources");
+        englishDictionary.Add("sounds", "SFX:");
+        englishDictionary.Add("VFX", "Base VFX by:");
 
 
         //defense stats in english
@@ -271,7 +275,10 @@ public class TextManager : MonoBehaviour
         spanishDictionary.Add("daniel", "Programador");
         spanishDictionary.Add("adrian", "Programador, Publicidad");
         spanishDictionary.Add("joy", "Programador");
-        spanishDictionary.Add("thanks", "Agradecimientos");
+        spanishDictionary.Add("music", "Musica por:");
+        spanishDictionary.Add("resources", "Recursos");
+        spanishDictionary.Add("sounds", "SFX:");
+        spanishDictionary.Add("VFX", "Base VFX por:");
 
         //structures names in spanish 
         spanishDictionary.Add("towerName", "Nombre Torre");
