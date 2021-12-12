@@ -31,12 +31,6 @@ public class TutorialMenu : MonoBehaviour
         UpdateKeys();
         UpdateImages();
 
-}
-
-    // Update is called once per frame
-    void Update()
-    {
-
     }
 
     private void SetNewKeys(string newKeyHeader, string newKeyDesc)
@@ -81,6 +75,6 @@ public class TutorialMenu : MonoBehaviour
 
     public void UpdateImages()
     {
-        imageContainer.sprite = lessonImages[lesson-1];
+        imageContainer.sprite = lessonImages[lesson - 1];
     }
 }
