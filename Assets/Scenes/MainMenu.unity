@@ -3383,7 +3383,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ed4c9917d9219d2408719abcb2b6c7cb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fullgame: 0
+  fullgame: 1
   freeWorlds: 3
   enemyLibrary:
     enemyPrefabs:
