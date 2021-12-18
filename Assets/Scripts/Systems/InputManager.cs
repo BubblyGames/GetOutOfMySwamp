@@ -28,7 +28,7 @@ public class InputManager : MonoBehaviour
     public GameObject cursor;
     private GameObject cursorBase;
 
-   
+
 
     private void Awake()
     {
@@ -59,7 +59,29 @@ public class InputManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (!LevelManager.instance.ready)
+        if (SceneController.instance && Input.GetKeyDown(KeyCode.R))
+        {
+            SceneController.instance.Reload();
+        }
+
+        if (Input.GetKeyDown(KeyCode.I))
+        {
+            UIController.instance.ToggleGameUI();
+        }
+
+        if (Input.GetKeyDown(KeyCode.C))
+        {
+            CameraBehaviour.instance.Reset();
+        }
+
+        if (Input.GetKeyDown(KeyCode.F))
+        {
+            CameraManager.instance.Toggle();
+        }
+
+        CameraBehaviour.instance.Rotate(-20f * Input.GetAxis("Horizontal") * mouseSensitivity * Time.deltaTime, -10f * Input.GetAxis("Vertical") * mouseSensitivity * Time.deltaTime);
+
+        if (!LevelManager.instance.ready || !Camera.main)
             return;
 
         lastMousePosition = mousePosition;

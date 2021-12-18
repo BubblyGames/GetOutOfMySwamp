@@ -181,6 +181,11 @@ public abstract class EnemyBehaviour : MonoBehaviour
         Destroy(gameObject);
     }
 
+    private void OnMouseDown()
+    {
+        CameraManager.instance.EnableFollowCamera(transform);
+    }
+
 #if UNITY_EDITOR
     private void OnDrawGizmos()
     {

@@ -250,7 +250,7 @@ public class Path
         openList.Add(firstNode);
 
         int count = 0;
-        while (openList.Count > 0 && count < 1000)
+        while (openList.Count > 0 && count < 10000)
         {
             count++;
             //Sorting the list in "h" in increasing order

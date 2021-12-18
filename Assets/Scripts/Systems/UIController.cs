@@ -21,6 +21,7 @@ public class UIController : MonoBehaviour
 
 
     [Header("GameScene Menus")]
+    public Canvas gameUI;
     public GameObject upgradeMenu;
     public GameObject upgradeButton;
     public GameObject sellButton;
@@ -532,6 +533,16 @@ public class UIController : MonoBehaviour
     {
         lesson.SetActive(true);
         lesson.GetComponent<TutorialMenu>().StartWithSpecificKey(index);
+    }
+
+    public void ToggleGameUI()
+    {
+        gameUI.enabled = !gameUI.enabled;
+        Canvas[] canvases = FindObjectsOfType<Canvas>();
+        foreach (Canvas c in canvases)
+        {
+            c.enabled = gameUI.enabled;
+        }
     }
 }
 

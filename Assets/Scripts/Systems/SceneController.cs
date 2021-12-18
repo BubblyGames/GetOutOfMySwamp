@@ -32,6 +32,11 @@ public class SceneController : MonoBehaviour
         fader.enabled = false;
     }
 
+    public void Reload()
+    {
+        SceneManager.LoadScene(1);
+    }
+
     public void LoadScene(int index)
     {
         StartCoroutine(FadeScene(index, faderDuration, waitTime));

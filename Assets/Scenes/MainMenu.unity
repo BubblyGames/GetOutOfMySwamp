@@ -691,13 +691,38 @@ MonoBehaviour:
   - packs:
     - spawnTime: 0
       enemyType: 0
-      enemyAmount: 10
-      spawnRate: 0.6
+      enemyAmount: 15
+      spawnRate: 0.5
+      spawned: 0
+    - spawnTime: 10
+      enemyType: 2
+      enemyAmount: 3
+      spawnRate: 0.5
       spawned: 0
   - packs:
     - spawnTime: 0
+      enemyType: 3
+      enemyAmount: 15
+      spawnRate: 0.3
+      spawned: 0
+    - spawnTime: 5
       enemyType: 0
-      enemyAmount: 8
+      enemyAmount: 6
+      spawnRate: 0.4
+      spawned: 0
+    - spawnTime: 0
+      enemyType: 2
+      enemyAmount: 4
+      spawnRate: 0.6
+      spawned: 0
+    - spawnTime: 5
+      enemyType: 5
+      enemyAmount: 6
+      spawnRate: 0.5
+      spawned: 0
+    - spawnTime: 10
+      enemyType: 0
+      enemyAmount: 6
       spawnRate: 0.6
       spawned: 0
     - spawnTime: 10
@@ -705,43 +730,80 @@ MonoBehaviour:
       enemyAmount: 2
       spawnRate: 0.4
       spawned: 0
-    - spawnTime: 35
-      enemyType: 0
-      enemyAmount: 8
-      spawnRate: 0.6
-      spawned: 0
   - packs:
     - spawnTime: 0
       enemyType: 2
-      enemyAmount: 2
-      spawnRate: 0.4
+      enemyAmount: 6
+      spawnRate: 0.2
       spawned: 0
-    - spawnTime: 3
-      enemyType: 0
+    - spawnTime: 5
+      enemyType: 5
       enemyAmount: 8
-      spawnRate: 0.6
-      spawned: 0
-    - spawnTime: 25
-      enemyType: 0
-      enemyAmount: 5
-      spawnRate: 0.6
-      spawned: 0
-    - spawnTime: 20
-      enemyType: 2
-      enemyAmount: 3
       spawnRate: 0.4
+      spawned: 0
+    - spawnTime: 10
+      enemyType: 0
+      enemyAmount: 10
+      spawnRate: 0.6
+      spawned: 0
+    - spawnTime: 15
+      enemyType: 3
+      enemyAmount: 10
+      spawnRate: 1
+      spawned: 0
+  - packs:
+    - spawnTime: 0
+      enemyType: 0
+      enemyAmount: 12
+      spawnRate: 0.3
+      spawned: 0
+    - spawnTime: 0
+      enemyType: 2
+      enemyAmount: 6
+      spawnRate: 0.3
+      spawned: 0
+    - spawnTime: 10
+      enemyType: 5
+      enemyAmount: 10
+      spawnRate: 1
+      spawned: 0
+    - spawnTime: 15
+      enemyType: 3
+      enemyAmount: 20
+      spawnRate: 2
+      spawned: 0
+  - packs:
+    - spawnTime: 0
+      enemyType: 0
+      enemyAmount: 12
+      spawnRate: 0.3
+      spawned: 0
+    - spawnTime: 0
+      enemyType: 2
+      enemyAmount: 8
+      spawnRate: 0.2
+      spawned: 0
+    - spawnTime: 0
+      enemyType: 5
+      enemyAmount: 10
+      spawnRate: 0.25
+      spawned: 0
+    - spawnTime: 0
+      enemyType: 3
+      enemyAmount: 10
+      spawnRate: 0.25
       spawned: 0
   basicEn: 1
   HeavyEn: 1
-  HordeEn: 0
+  HordeEn: 1
   SkateEn: 0
-  AerealEn: 0
+  AerealEn: 1
   basicDef: 1
-  HeavyDef: 0
+  HeavyDef: 1
   MoneyDef: 1
-  PoisonDef: 0
-  AerealDef: 0
-  Bomb: 0
+  PoisonDef: 1
+  AerealDef: 1
+  Bomb: 1
 --- !u!114 &63313641
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -779,15 +841,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   size: 31
-  wallDensity: 0.286
+  wallDensity: 0.4
   rocksVisualReduction: 0.9
-  rockSize: 26
-  waterDensity: 0.3
-  nPaths: 1
+  rockSize: 14.82
+  waterDensity: 0.15
+  nPaths: 4
   canMergePaths: 0
-  numberOfMidpoints: 2
-  seed: 3246
-  waterMaterial: {fileID: 2100000, guid: f2bfe60c202150547be22d486a012286, type: 2}
+  numberOfMidpoints: 1
+  seed: 6172
+  waterMaterial: {fileID: 0}
   demo: 1
   sphere: 0
   debugMidpoints: 0
@@ -7839,6 +7901,7 @@ MonoBehaviour:
   gameTutorialMenu: {fileID: 817289834}
   creditsMenu: {fileID: 1933972565}
   creditsButton: {fileID: 1968075974}
+  gameUI: {fileID: 0}
   upgradeMenu: {fileID: 0}
   upgradeButton: {fileID: 0}
   sellButton: {fileID: 0}
@@ -11542,7 +11605,7 @@ MonoBehaviour:
   sounds:
   - name: mainMenuSong
     clip: {fileID: 8300000, guid: 6b2e887ba5e80bb4da465cc419280feb, type: 3}
-    volume: 0.675
+    volume: 0
     pitch: 1
     loop: 1
     source: {fileID: 0}
