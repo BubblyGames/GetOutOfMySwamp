@@ -10,7 +10,6 @@ public class TextManager : MonoBehaviour
 
     private List<GameObject> subscribersMainScene;
     private List<GameObject> subscribersGameScene;
-    private bool english = true;
 
     public Dictionary<string, string> englishDictionary = new Dictionary<string, string>();
     public Dictionary<string, string> spanishDictionary = new Dictionary<string, string>();
@@ -31,12 +30,24 @@ public class TextManager : MonoBehaviour
         InitializeDictionaries();
         /*if(subscribersGameScene==null && subscribersMainScene == null)
         {*/
-            subscribersMainScene = new List<GameObject>();
-            subscribersGameScene = new List<GameObject>();
+        subscribersMainScene = new List<GameObject>();
+        subscribersGameScene = new List<GameObject>();
         //}
-        currentDictionary = spanishDictionary;
-        currentLanguage = 1;
-        english = false;
+        switch (currentLanguage)
+        {
+            case 0:
+                currentDictionary = englishDictionary;
+                break;
+            case 1:
+                currentDictionary = spanishDictionary;
+                break;
+            default:
+                currentDictionary = englishDictionary;
+
+                break;
+        }
+
+
     }
 
     public void UpdateSubscribers()
@@ -55,6 +66,13 @@ public class TextManager : MonoBehaviour
                 t.GetComponent<TextReader>().Read();
             }
         }
+    }
+
+    private IEnumerator Start()
+    {
+        yield return new WaitForSeconds(1);
+        UpdateSubscribers();
+        yield return null;
     }
 
     public void Subscribe(GameObject reader, string sceneName)
@@ -127,7 +145,7 @@ public class TextManager : MonoBehaviour
         englishDictionary.Add("sound", "Sound");
         englishDictionary.Add("lessons", "Lessons");
         englishDictionary.Add("levelInfoText", "Natural habitat of:");
-        
+
 
 
         //upgrade texts in english
@@ -330,8 +348,8 @@ public class TextManager : MonoBehaviour
 
     public void emptyGameobjectsList(bool restart)
     {
-     
-        if (SceneManager.GetActiveScene().name.Equals("MainMenu")||restart)
+
+        if (SceneManager.GetActiveScene().name.Equals("MainMenu") || restart)
         {
             subscribersGameScene.Clear();
         }
