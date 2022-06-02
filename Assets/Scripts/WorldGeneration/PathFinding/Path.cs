@@ -191,17 +191,19 @@ public class Path
         return currentStep <= midPoints.Count - 1;
     }
 
+    bool previousSuccess = true;
     public bool GoToNextMidpoint()
     {
         bool lastSept = currentStep == midPoints.Count - 1 || currentStep == 1; //Is this the segment bewteen the last midpoint and the end?
 
         Midpoint midpoint = midPoints[currentStep];
-        Node current = Path.FindPathAstar(world, result, midpoint.cell, lastSept, world.canMergePaths, closedList);//
+        Node current = Path.FindPathAstar(world, result, midpoint.cell, lastSept, world.canMergePaths && previousSuccess, closedList);//
 
         if (current == null)
         {
             //current = Path.FindPathAstar(world, result, midpoint.cell, lastSept, world.canMergePaths, closedList);//
             //result = null;
+            previousSuccess = false;
             currentStep++;
             return false;
         }
@@ -224,6 +226,7 @@ public class Path
         //The end of this segment will become the start of the next one
         currentStep++;
         result = current;
+        previousSuccess = true;
         return true;
     }
 
